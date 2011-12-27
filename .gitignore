@@ -1,0 +1,38 @@
+#local settings
+# TODO: standarize and clean up
+local.settings.php
+local.settings.sh
+local.backup.sh
+local.restore.sh
+local.credentials.sh
+
+#eclipse specific files
+.project
+.classpath
+.buildpath
+
+#netbeans specific files
+nbproject/
+htdocs/nbproject/
+
+#drupal specific files
+#TO REVIEW: exclude all files?
+htdocs/sites/default/files/
+htdocs/backup/
+*.thumb.jpg
+
+#temp files
+*~
+
+#mac files
+.DS_Store
+
+#svn folders
+.svn/
+
+#window files
+Thumbs.db
+thumbs.db
+htdocs/tmp/*
+.settings/
+mydocs/
