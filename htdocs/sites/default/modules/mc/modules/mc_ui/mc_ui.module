@@ -1,0 +1,169 @@
+<?php
+
+/**
+ * Implementation of hook_theme
+ */
+function mc_ui_theme($existing, $type, $theme, $path){
+	  return array(
+	  	  'ghh_user_picture' => array('variables' => array('uid' => NULL,'imagecache' => null, 'imageComment' => TRUE)),
+	  	  'ghh_article_thumbnail' => array('variables' => array('img' => NULL,'imagecache' => null)),
+        'ghh_browse_menu' => array('variables' => array('mid' => NULL)),
+        'ghh_see_all' => array('title' => null, 'url' => null,'icon' => null),
+        'ghh_post_date' => array('variables' => array('date' => NULL)),
+        'ghh_authoring_info' => array('variables' => array('uid' => NULL, 'uname' => NULL,'gnid' => NULL, 'gtitle' => NULL, 'picture' => NULL)),
+        'ghh_node_categories' => array('variables' => array('nid' => NULL, 'vocabulary_id' => NULL)),
+    	);
+} 
+
+
+/**
+ * Implementation of theme_ghh_see_all area
+ */
+ 
+function theme_ghh_see_all($title,$url,$icon = "ico-small ico-see-all"){
+    $icon = '<span class="'.$icon.'">';
+    $title = "<span>$title</span>$icon</span>";
+    return '<div class="see-all">' . l($title, $url, array('html' => TRUE)).'</div>';
+}
+
+/**
+ * Implementation of theme_ghh_user_picture
+ */
+function theme_ghh_user_picture($uid = NULL,$imagecache, $imageComment = TRUE){
+    if($uid == NULL){
+        global $user;
+    }else{
+        $user = user_load($uid);        
+    }
+    
+    $picture = $user->picture;
+    
+    if(!$picture){
+      //Bring Facebook Picture profile if the user has associated the accounts.
+      if(_fbconnect_get_user_fbuid($user->uid) == fbconnect_get_fbuid()){
+                 
+       $pictureUrl = "https://graph.facebook.com/" . fbconnect_get_fbuid() . "/picture?type=large";
+       $image=_mc_api_save_facebook_user_image($pictureUrl, "fb-" . fbconnect_get_fbuid() . '.jpg' );
+       $user->picture = $image['filepath'];
+       $update['picture'] = $image['filepath'];
+       user_save($user, $update);
+       $picture = $user->picture;
+        
+      }else{
+        $picture = path_to_theme() . "/media/common/pic-user-default-avatar.jpg";
+      }
+    }
+    
+    $picture = imagecache_create_url($imagecache, $picture);
+    $picture = '<img src="' . $picture . '" alt="' . $user->name . '" title="' . $user->name . '" />';
+    
+    $output .= "<div class=\"image\">";
+    $output .= l($picture, 'user/' . $user->uid, array('html' => TRUE));
+    if ($imageComment){
+      $output .= "<span class=\"image-comment\"></span>";
+    }
+    $output .= "</div>";
+    
+    return $output;
+}
+
+/**
+ * Implementation of theme_ghh_article_thumbnail
+ */
+function theme_ghh_article_thumbnail($img = NULL,$imagecache){
+      
+    if (!$img){
+      $img = drupal_get_path('module', 'mc') . '/mc_default_images' . '/generic.png';
+      $img = imagecache_create_url($imagecache, $img);
+      $img = '<img src="' . $img . '" />';
+    }
+    return $img;
+}
+
+/**
+ * Implementation of theme_ghh_browse_menu
+ */
+
+function theme_ghh_browse_menu($mid){
+    return '<div class="ghh-menu-items">'.theme('links', menu_navigation_links($mid)).'</div>';
+}
+
+
+/**
+ * Implementation of theme_ghh_post_date
+ */
+function theme_ghh_post_date($date){
+  $output = '';
+  $today = mktime(0, 0, 0);
+  $oneWeekAgo = $today - 24*3600*7;
+  $difference = time() - $date;
+  $firstDayOfYear = mktime(0,0,0,1,1);
+  
+  if ($difference < 600){
+    $output = t("moments ago");
+  }elseif ($difference < 3600){
+    $mins = intval(floor($difference / 60)); 
+    $output = "$mins minutes ago";
+  }elseif ($difference < 3600*24){
+    $hours = intval(floor($difference / 3600));
+    if ($hours == 1){
+      $output = "$hours hour ago";
+    }else{
+      $output = "$hours hours ago";
+    }
+  }elseif ($date > $oneWeekAgo){
+    $days = intval(floor($difference / 86400));
+    if ($days == 1){
+      $output = "$days day ago";
+    }else{
+      $output = "$days days ago";
+    }
+  }elseif ($date > $firstDayOfYear){
+    $output = date('F jS', $date);
+  }else{
+    $output = date('F jS, Y', $date);
+  }
+  return ($output);
+}
+
+function theme_ghh_authoring_info($uid, $uname, $gnid = 0, $gtitle = '', $picture = NULL){
+  $output = '';
+  if ($gnid){
+    $output = t('from ') . l($gtitle, 'node/' . $gnid);
+  }else{
+    $output = t('by ');
+    if ($uid){
+      $pictureTag = '';
+      if ($picture){
+        $pictureTag = _mc_api_get_image_tag($picture, 'header_mini_avatar', $uname);
+      }
+      $output .= l($pictureTag . $uname, 'user/' . $uid, array('attributes' => array('class' => 'username'), 'html' => TRUE));
+    }else{
+      $output .= t('Anonymous');
+    }
+  }
+  return $output;
+}
+
+function theme_ghh_node_categories($nid, $vocabulary_id){
+  $output = '';
+  $node = node_load($nid);
+  $terms = taxonomy_node_get_terms($node);
+  $termsCount = 0;
+  
+  foreach ($terms as $term){
+    if ($term->vid == $vocabulary_id){
+      $termsCount++;
+      if ($termsCount == 1){
+        $output .= ' in ';
+      }
+      $output .= l($term->name, 'latest/category/' . $term->tid, array('attributes' => array('class' => 'term-' . $term->tid)));
+      $output .= ', ';
+    }
+  }
+  if ($termsCount > 0){
+    // remove trailing slash
+    $output = substr($output, 0, -2);
+  }
+  return $output;
+}

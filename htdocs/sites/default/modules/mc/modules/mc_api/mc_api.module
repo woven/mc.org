@@ -1,0 +1,412 @@
+<?php
+
+/**
+ * Returns the groups that the user is subscribed to.
+ */
+function _mc_api_user_subscribed_groups(){
+	$uid=arg(1);
+	if(!is_numeric($uid) || arg(0)!='user'){
+		global $user;
+	}
+	elseif(is_numeric($uid) && arg(0)=='user') {
+		$user=user_load($uid);
+	}
+  else{
+    return array();
+  }
+	$user_groups=$user->og_groups;
+	$groups_nids=array();
+	foreach ($user_groups as $nid => $value) {
+    $group_node=node_load($nid);
+    if($group_node->field_enable_discussions['0']['value']=='1'){
+		  array_push($groups_nids, $nid);
+    }
+	}
+	if(empty($groups_nids)){
+		return array();
+	}
+	$placeholders=db_placeholders($groups_nids);
+	$result=db_query("SELECT og_fr.tid FROM {og_forum_reference} og_fr WHERE og_fr.nid IN ($placeholders)", $groups_nids);
+	$groups_tids=array();
+	while ($row = db_fetch_object($result)) {
+		$groups_tids[] = $row->tid;
+	}
+	$result=array();
+	foreach ($groups_tids as $tid) {
+		$result[]=taxonomy_get_term($tid);
+	}
+	return $result;
+}
+
+/**
+ * Returns the emails of the users that want to recieve all the notifications
+ */
+function _mc_api_users_receive_all_notifications($tid, $account, $nid){
+	// We'll let our SQL do the magic
+	$results = db_query("SELECT DISTINCT u.uid FROM {users} u, {femail_ext_user_subscription} f WHERE u.uid = f.uid AND (tid = %d OR tid = 0) AND u.uid != %d AND f.setting=%d", $tid, $account->uid, '0');
+	$node = node_load($nid);
+	$emails = array();
+	while($row = db_fetch_array($results)){
+	  $account = user_load(array('uid' => $row['uid']));
+	  if(node_access('view', $node, $account)){
+	    $emails[] = "<{$account->mail}>";
+	  }
+	}
+	return $emails;
+}
+
+
+/**
+ * Helper function to determine the users that have commented or started a disccusion.
+ * @param Term id of the forum $tid
+ *        Node id of the node that belongs the comment.
+ * @return string
+ */
+function _mc_api_users_receive_notifications_when_started_commented_discussions($tid, $nid, $cid = 0){
+  $node = node_load($nid);
+  if ($cid != 0){
+    $uid_user_created_comment = db_result(db_query("SELECT uid FROM comments WHERE cid = ".$cid));
+    $results = db_query("SELECT DISTINCT c.uid FROM {comments} c, {femail_ext_user_subscription} f WHERE (c.uid = f.uid AND f.tid = %d) AND (c.nid = %d AND c.uid != %d AND c.uid != %d AND f.setting = %d) AND (c.uid != %d)", $tid, $nid, $GLOBALS['user']->uid, $node->uid, SOME_NOTIFICATIONS, $uid_user_created_comment);
+  }else{
+    $results = db_query("SELECT DISTINCT c.uid FROM {comments} c, {femail_ext_user_subscription} f WHERE (c.uid = f.uid AND f.tid = %d) AND (c.nid = %d AND c.uid != %d AND c.uid != %d AND f.setting = %d)", $tid, $nid, $GLOBALS['user']->uid, $node->uid, SOME_NOTIFICATIONS);
+  }
+  $uid = array();
+  $emails = array();
+  while($row = db_fetch_array($results)){
+    $account = user_load(array('uid' => $row['uid']));
+    if(node_access('view', $node, $account)){
+      $uid[] = $row['uid'];
+      if (!isset($uid_user_created_comment)){
+        $emails[] = "<{$account->mail}>";
+      }elseif($row['uid']!=$uid_user_created_comment){
+        $emails[] = "<{$account->mail}>";
+      }
+    }
+  }
+  if (($cid != 0) && !in_array($node->uid, $uid) && ($node->uid != $uid_user_created_comment)){
+    $account = user_load(array('uid' => $node->uid));
+    $emails[] = "<{$account->mail}>";
+  }
+  return $emails;
+}
+
+
+/**
+ * Helper function to determine if a user belongs to a group.
+ * @param Term id of the forum $tid
+ *        User id $uid
+ * @return boolean
+ */
+
+function _mc_api_user_belongs_to_a_group($uid, $tid){
+  //Get the group id, given a tid.
+  $group = _get_group_or_forum($tid);
+  $belong_to_a_group = db_result(db_query("SELECT COUNT(*) FROM {og_uid} WHERE nid = %d AND uid = %d", $group, $uid));
+  
+  if ($belong_to_a_group>0){
+    return TRUE;
+  }else{
+    return FALSE;
+  }
+}
+
+
+/**
+ * Helper function for giving a nid of group get the forum term id and viceversa.
+ * @param Term id of the forum $tid or 
+ *        Group id $nid
+ * @return string
+ */
+
+function _get_group_or_forum($tid = '', $nid= ''){
+  $result = '';
+  if ($tid != ''){
+    $result = db_result(db_query("SELECT nid FROM og_forum_reference WHERE tid = " . $tid));
+  }elseif($nid != ''){
+    $result = db_result(db_query("SELECT tid FROM og_forum_reference WHERE nid = " . $nid));
+  }
+  return $result;
+}
+
+
+/**
+ * Helper function for giving a group name get the nid of the group.
+ * @param Group name 
+ *        
+ * @return string
+ */
+
+function _get_group_id($group_name){
+  
+  $uid_user_created_comment = db_result(db_query("SELECT nid FROM content_type_group c WHERE c.field_small_name_value = %d", $group_name));
+  return $uid_user_created_comment;
+}
+
+
+/**
+ * Helper function for giving a Email body, verify if it is a comment, if yes return the comment and add all the history until the comment.
+ * @param Message Body $body
+ *        Comment id $cid
+ *        $Discussion id $nid 
+ *        
+ * @return string
+ */
+function _mc_api_add_comments_history($body, $cid, $nid){
+ 
+  if ($cid != 0){
+    $result = db_query('SELECT timestamp, name, comment FROM {comments} WHERE nid=%d', $nid);
+    $new_body = '';
+    $comments_history = array();
+    while ($row = db_fetch_array($result)) {
+      $created = (string)(date("M d, h:i A", $row["timestamp"]));
+      $author_object = user_load(array('name'=> $row['name']));
+      $author = _mc_api_get_user_name($author_object);
+      $comment = (string)($row['comment']);      
+      $old_comment = "<blockquote style='margin:0;padding:0'><table style='font-family:Helvetica Neue,Arial,sans-serif;font-size:12px;line-height:1.4;color:#212f40;width:600px' border=0 cellspacing=0 cellpadding=0><tbody><tr style='text-align:left;vertical-align:baseline'><td style='width:10px;font-family:Verdana,sans-serif;font-size:12px;font-weight:bold;text-align:right;padding-right:10px;padding-top:10px;vertical-align:top'>»</td><td style='padding-bottom:10px;padding-top:10px'><div style='font-weight:bold;margin-bottom:4px'>" . $author . "</div><span style='white-space:nowrap'> " . check_markup($comment) . "
+      </span></td></tr></tbody></table></blockquote>";
+      $comments_history[] = $old_comment;
+    }
+  }else{
+    $forum_node = node_load($nid);
+    $user_object = user_load($forum_node->uid);
+    $author = _mc_api_get_user_name($user_object); 
+    $discussion = "<blockquote style='margin:0;padding:0'><table style='font-family:Helvetica Neue,Arial,sans-serif;font-size:12px;line-height:1.4;color:#212f40;width:600px;border:1px solid #ced7e0;margin:0;padding:0' border=0 cellspacing=0 cellpadding=0><tbody><tr style='text-align:left;vertical-align:baseline'><td style='padding:10px;padding-left:20px;font-size:14px;font-weight:bold;background-color:#ced7e0;color:#596573'>" . check_markup($forum_node->title) . "</td></tr><tr style='text-align:left;vertical-align:baseline'><td style='padding:0 10px;padding-left:20px'><table style='font-family:Helvetica Neue,Arial,sans-serif;font-size:12px;line-height:1.4;color:#212f40;width:590px;border-bottom:1px solid #e5e5e5' border=0 cellspacing=0 cellpadding=0><tbody><tr style='text-align:left;vertical-align:baseline'><td style='padding:10px 0px;'>" . check_markup($forum_node->body) ."</td></tr><tr style='min-height:7px;text-align:left;vertical-align:baseline'><td style='padding:0'></td></tr></tbody></table><table style='font-family:Helvetica Neue,Arial,sans-serif;font-size:12px;line-height:1.4;color:#212f40;width:590px' border=0 cellspacing=0 cellpadding=0><tbody><tr style=min-height:7px;text-align:left;vertical-align:baseline><td style=padding:0></td><td style=padding:0></td></tr><tr style=text-align:left;vertical-align:baseline><td style=padding:10px 0px;width:90px;color:#999999;font-size:11px;font-weight:bold;padding-bottom:0px;vertical-align:top>Author</td><td style=padding:10px 0px><span style=font-weight:bold;white-space:nowrap>" . $author . "</span></td></tr><tr style=text-align:left;vertical-align:baseline><td style=padding:10px 0px;width:90px;color:#999999;font-size:11px;font-weight:bold;padding-bottom:0px;vertical-align:top>Date</td><td style=padding:9px 0px><span style=font-weight:bold;white-space:nowrap>" . (string)(date("M d, h:i A", $forum_node->created)) . "</span> </td></tr><tr style='min-height:7px;text-align:left;vertical-align:baseline'><td style='padding:0'></td><td style='padding:0'></td></tr></tbody></table></td></tr></tbody></table></blockquote>";
+    return $discussion;
+  }
+  $comments_counter = 0;
+  for ($index = (count($comments_history)-1); $index >= 0 ; $index--) {
+    $forum_node = node_load($nid);
+    
+    if ($comments_counter<6){
+      $new_body = $new_body . $comments_history[$index];
+      $comments_counter+=1;
+    }else{
+      $group_nid = _get_group_or_forum($forum_node->forum_tid, '');
+      $group_object = node_load($group_nid);
+      //Generate link to the discussion.
+      $web_topic_link = l('View this topic on the web.' ,'node/' . $nid);
+      $plural = 'There are ' . (count($comments_history) - $comments_counter) . ' more previous comments. ';
+      $singular = 'There is ' . (count($comments_history) - $comments_counter) . ' more previous comment. ';
+      $web_topic = format_plural((count($comments_history) - $comments_counter), $singular, $plural);
+      $text = "<blockquote style='margin:0;padding:0'><table style='font-family:Helvetica Neue,Arial,sans-serif;font-size:12px;line-height:1.4;color:#212f40;width:600px' border=0 cellspacing=0 cellpadding=0><tbody><tr style='text-align:left;vertical-align:baseline'><td style='padding-bottom:10px;padding-top:10px'><div style='font-weight:bold;margin-bottom:4px;font-style: italic'> <span style='font-weight: bold;'>" . $web_topic . "</span>" . $web_topic_link . "</div><span style='white-space:nowrap'> " . '' . "
+      </span></td></tr></tbody></table></blockquote>";
+      $new_body = $new_body . $text;
+      break;
+    }
+  }
+  if ($cid != 0){
+    $user_object = user_load($forum_node->uid);
+    $author = _mc_api_get_user_name($user_object); 
+    $discussion = "<blockquote style='margin:0;padding:0'><table style='font-family:Helvetica Neue,Arial,sans-serif;font-size:12px;line-height:1.4;color:#212f40;width:600px;border:1px solid #ced7e0;margin:0;padding:0' border=0 cellspacing=0 cellpadding=0><tbody><tr style='text-align:left;vertical-align:baseline'><td style='padding:10px;padding-left:20px;font-size:14px;font-weight:bold;background-color:#ced7e0;color:#596573'>" . $forum_node->title . "</td></tr><tr style='text-align:left;vertical-align:baseline'><td style='padding:0 10px;padding-left:20px'><table style='font-family:Helvetica Neue,Arial,sans-serif;font-size:12px;line-height:1.4;color:#212f40;width:590px;border-bottom:1px solid #e5e5e5' border=0 cellspacing=0 cellpadding=0><tbody><tr style='text-align:left;vertical-align:baseline'><td style='padding:10px 0px;'>" . check_markup($forum_node->body) ."</td></tr><tr style='min-height:7px;text-align:left;vertical-align:baseline'><td style='padding:0'></td></tr></tbody></table><table style='font-family:Helvetica Neue,Arial,sans-serif;font-size:12px;line-height:1.4;color:#212f40;width:590px' border=0 cellspacing=0 cellpadding=0><tbody><tr style=min-height:7px;text-align:left;vertical-align:baseline><td style=padding:0></td><td style=padding:0></td></tr><tr style=text-align:left;vertical-align:baseline><td style=padding:10px 0px;width:90px;color:#999999;font-size:11px;font-weight:bold;padding-bottom:0px;vertical-align:top>Author</td><td style=padding:10px 0px><span style=font-weight:bold;white-space:nowrap>" . $author . "</span></td></tr><tr style=text-align:left;vertical-align:baseline><td style=padding:10px 0px;width:90px;color:#999999;font-size:11px;font-weight:bold;padding-bottom:0px;vertical-align:top>Date</td><td style=padding:9px 0px><span style=font-weight:bold;white-space:nowrap>" . (string)(date("M d, h:i A", $forum_node->created)) . "</span> </td></tr><tr style='min-height:7px;text-align:left;vertical-align:baseline'><td style='padding:0'></td><td style='padding:0'></td></tr></tbody></table></td></tr></tbody></table></blockquote>";
+    return $new_body . $discussion;
+  }else{
+    return $new_body;
+  }
+  
+}
+
+
+
+/**
+ * Helper function to generate an email address based on the domain of the site.
+ * @param First part of the email.
+ *        
+ * @return string
+ */
+
+function _mc_api_generate_email_based_on_domain($first_part, $email = ''){
+  $email_parts = explode('@', $email);
+  $email_generated = $first_part . '@' . $email_parts[1];
+  return $email_generated;
+}
+
+/**
+ * Helper function to get the user name.
+ * @param User Object.
+ *        
+ * @return string
+ */
+function _mc_api_get_user_name($user){
+  $name = ($user->profile_real_name != '') ? $user->profile_real_name : $user->name;
+  return $name;
+}
+
+
+
+/**
+ * Helper function to save the Facebook picture of the user.
+ * @param 
+ *        
+ * @return array
+ */
+function _mc_api_save_facebook_user_image($picture_path, $filename = ''){
+  if (!function_exists('mime_content_type')) { 
+   function mime_content_type($f) { 
+       $f = escapeshellarg($f); 
+       return trim( `file -bi $f` ); 
+   } 
+  } 
+  $file_temp = file_get_contents($picture_path);
+  if($filename==''){
+    $filename=basename($picture_path);
+  }
+  $file_temp = file_save_data($file_temp, file_directory_path(). '/user_profile_pictures/' . basename($filename), FILE_EXISTS_RENAME);
+  $file            = new stdClass();
+  $file->filename  = basename($file_temp);
+  $file->filepath  = $file_temp;
+  $file->filemime  = mime_content_type($file_temp);
+  $file->filesize  = filesize($file_temp);
+  $file->uid       = $user->uid;
+  $file->timestamp = time();
+  drupal_write_record('files', $file);
+
+  $image=array(
+    'fid' => $file->fid,
+    'title' => basename($file_temp),
+    'filename' => basename($file_temp),
+    'filepath' => $file_temp,
+    'filesize' => filesize($file_temp),
+    'data' => array('desc' => array('body'=> $texts[$i])),
+  );
+  return $image;
+}
+
+
+/**
+ * Get image for the node, if it doesn't exist, insert it
+ */
+function _mc_api_default_images_get_image($path){
+  
+  // verify if it existes
+  
+  $sql = "SELECT fid, uid, filename, filepath, filemime, filesize, status, timestamp FROM {files} WHERE filepath LIKE '%s' ";
+  $file = db_fetch_object(db_query($sql, $path));
+  
+  // insert if it does not exist
+  if (!$file){
+    $file = _mc_api_default_images_insert_image($path);
+  }
+  
+  return $file;
+}
+
+
+
+/**
+ * Inserts an image in the database, for the given path
+ */
+function _mc_api_default_images_insert_image($path){
+  $mime = 'image/png';
+
+  $file = new stdClass();
+  $file->filename = basename($path);
+  $file->filepath = $path;
+  $file->filemime = $mime;
+  $file->filesize = filesize($path);
+
+  $file->uid = 1;
+  $file->status = FILE_STATUS_PERMANENT;
+  $file->timestamp = time();
+  drupal_write_record('files', $file);
+  
+  return $file;
+  
+}
+
+/**
+ * Return a date with a specific format time.
+ */
+
+function mc_api_format_day($unix_date){
+
+  $today = mktime(0, 0, 0);
+  $tomorrow = $today + 24 * 3600;
+  $yesterday = $today - 24 * 3600;
+  $afterTomorrow = $tomorrow + 24 * 3600;
+  $dayOfWeek = (int)date('w', $today);
+  $thisSunday = $today + (7 - $dayOfWeek) * 24 * 3600;
+  $output = '';
+  $printDay = TRUE;
+
+  if ($unix_date < $today){
+    $printDay = FALSE;
+  }
+  if ($unix_date >= $yesterday && $unix_date < $today){
+    $output .= t('Yesterday');
+  }elseif ($unix_date >= $today && $unix_date < $tomorrow){
+    $output .= t('Today');
+  }elseif ($unix_date >= $tomorrow && $unix_date < $afterTomorrow){
+    $output .= t('Tomorrow');
+  }elseif ($unix_date >= $afterTomorrow && $unix_date < $thisSunday){
+    $output .= date('l', $unix_date);
+  }else{
+    if (date('Y') == date('Y', $unix_date)){ // same year
+      if ($printDay){
+        $output .= date('l F jS', $unix_date);
+      }else{
+        $output .= date('F jS', $unix_date);
+      }
+    }else{ // different year
+      if ($printDay){
+        $output .= date('l F jS, Y', $unix_date);
+      }else{
+        $output .= date('F jS, Y', $unix_date);
+      }
+    }
+  }
+  return $output;
+}
+
+
+/**
+ * Return a date with a specific format time.
+ */
+function _mc_api_get_formatted_time($time, $printAMPM = true){
+  if (date('i', $time) != '00'){
+    if ($printAMPM){
+      $timeFormat = "g:ia";
+    }else{
+      $timeFormat = "g:i";
+    }
+  }else{
+    if ($printAMPM){
+      $timeFormat = "ga";
+    }else{
+      $timeFormat = "g";
+    }
+  }
+  return date($timeFormat, $time);
+}
+
+
+/**
+ * Return a date with a specific format time.
+ */
+function mc_api_format_time($start, $end = NULL){
+  
+  if (!$end){
+    // start date only
+    return _mc_api_get_formatted_time($start, true);
+  }
+    
+  if (date('a', $start) == date('a', $end)){
+    // do not print AM/PM in start date
+    $startDate = _mc_api_get_formatted_time($start, false);
+  }else{
+    $startDate = _mc_api_get_formatted_time($start, true);
+  }
+  $endDate = _mc_api_get_formatted_time($end, true);
+  
+  return $startDate . '-' . $endDate;
+  
+}
+
+
+/**
+ * Return the a image with the html format.
+ */
+function _mc_api_get_image_tag($image, $preset, $title){
+  $picture = imagecache_create_url($preset, $image);
+  $picture = '<img src="' . $picture . '" alt="' . $title . '" title="' . $title . '" />';
+  return $picture;
+}

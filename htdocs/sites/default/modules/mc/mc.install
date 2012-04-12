@@ -1,0 +1,30 @@
+<?php
+
+function mc_update_6001() {
+  // disable modules
+  module_disable(array('simplemenu'));
+  drupal_uninstall_module('simplemenu');
+  // enable modules
+  drupal_install_modules(array(
+    'sections', 
+    'admin', 
+    'ctools', 
+    'admin_menu', 
+    'strongarm', 
+    'features', 
+    'adminrole', 
+    'jquery_ui', 
+    'spaces',
+    'context',
+    'purl',
+    'context_ui',
+    'spaces_og',
+    'spaces_ui',
+    'conditional_styles',
+    'og'
+  ));
+  // enable admin interface feature
+  features_install_modules(array('admin_interface', 'harlem_theme'));
+  return array();
+  
+}

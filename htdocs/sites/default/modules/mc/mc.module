@@ -1,0 +1,849 @@
+<?php
+
+define("VID_CATEGORY", 2);
+/**
+ * Implementation of hook_block()
+ *
+ * Implements one block: the 'Related Content' of a node.
+ */
+function mc_block($op = 'list', $delta =   0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks[0] = array(
+        'info' => t('Related Content'),
+        'weight' => 0,
+        'status' => 1,
+        'region' => 'right',
+        'cache' => BLOCK_CACHE_PER_PAGE
+      );
+      return $blocks;
+    case 'view':
+      // only display on node pages
+      if ($delta == 0 && arg(0) == 'node' && is_numeric(arg(1))) {
+        if ($node = node_load(arg(1))) {
+          // only display if the current node has related content
+          if (is_array($node->field_related) && count($node->field_related) > 0) {
+            $items = array();
+            foreach ($node->field_related as $related) {
+              // display links to each related node
+              if ($related_node = node_load($related['nid'])) {
+                $items[] = l($related_node->title, 'node/' . $related_node->nid);
+              }
+            }
+            if (count($items) > 0) {
+              return array(
+                'subject' => t('Related Content'),
+                'content' => theme('item_list', $items));
+            }
+          }
+        }
+      }
+      break;
+  }
+}
+
+function is_publisher() {
+  global $user;
+  return in_array('Publisher', $user->roles);
+}
+
+
+function mc_redirect_when_session_variable_set($form, &$form_state) {
+  unset($_REQUEST['destination']);
+  unset($form['#redirect']);
+  $form_state['redirect']  = "node/".$_SESSION['anonymous_group'];
+  unset($_SESSION['anonymous_group']);
+}
+
+
+/**
+ * Implementation of hook_form_alter()
+ *
+ * Alterations to node creation forms and comment forms.
+ */
+function mc_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if($form['form_id']['#value']=='page_node_form' || $form['form_id']['#value']=='audio_node_form'){
+    $form['og_nodeapi']['#access']=false;
+  }
+  if(count($form['og_nodeapi']['visible']['og_groups']['#options'])==1 && $form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
+    $form['og_nodeapi']['#access']=false; 
+  }
+  if($form_id=='comment_form' && arg(0)=='node' && is_numeric(arg(1)) ){
+    $nid = arg(1);
+    $node=node_load($nid);
+    if($node->type=='forum'){
+      $group_nid=array_pop($node->og_groups);
+      $group_node=node_load($group_nid);
+      if($group_node->field_enable_discussions['0']['value']!=1){
+        $form['#access']=false;
+      }
+    }
+  }
+  if(isset($_SESSION['anonymous_group']) && $user->uid!=0 && $form_id=='user_profile_form'){
+    $form['#submit'][]="mc_redirect_when_session_variable_set";
+  }
+  if($form['form_id']['#value']=='audio_node_form' && in_array("Publisher", $user->roles)){
+    $form['field_media']['0']['#upload_validators']['filefield_validate_size']['0']=52428800;
+  }
+  if($form['form_id']['#value']=='forum_node_form'){
+    $form['field_list_image']['#access']=false;
+  }
+  if($form['form_id']['#value']=='group_node_form'){
+    if($user->uid!=1){
+      $form['og_register']['#access']=false;
+    }
+  }
+
+  if($form['form_id']['#value']=='file_node_form'){
+    $form['field_upload_file']['0']['#required']=true;
+  }
+
+  if ($form['#id'] == 'node-form') {
+    unset($form['revision_information']);
+    unset($form['options']['promote']);
+
+    // move the 'Editorial Content' checkbox into the 'Publishing options'
+    if (isset($form['field_editorial'])) {
+      $form['options']['field_editorial'] = $form['field_editorial'];
+      unset($form['field_editorial']);
+    }
+
+    // disable the 'Menu settings' section for content other than pages.
+    if ($form['type']['#value'] != 'page') {
+      $form['menu']['#type'] = 'hidden';
+    }
+
+    // disable extraneous settings on File content type
+    if ($form['type']['#value'] == 'file') {
+      //TODO: How do we hide these but still have them work?
+      $form['comment_settings']['#type'] = 'hidden';
+    }
+
+    // Select some reasonable defaults for locations
+    if (isset($form['locations'][0]) && is_null($form['locations'][0]['#default_value'])) {
+      $form['locations'][0]['#default_value'] = array(
+        'city' => 'Harlem',
+        'province' => 'NY',
+        'country' => 'us'
+      );
+    }
+  }
+
+  // disabling wysiwyg for comment form
+  if ($form_id == 'comment_form') {
+    //$form['comment_filter']['comment']['#wysiwyg'] = false;
+    $form['comment_filter']['format'] = array();
+    unset($form['preview']);    
+  }
+
+  // theme the comment form
+  if ($form_id == 'comment_form' && isset($form['_author'])) {
+    
+    $form['head']['#tree'] = true;
+    $form['head']['#weight'] = -10;
+    $form['head']['#prefix'] = '<div id="comment_form_header">';
+    $form['head']['#suffix'] = "</div>";
+
+    $form['head']['note']['#id'] = "approve_note";
+    $form['head']['note']['#value'] = t("Share your thoughts with the community!  Comments will appear immediately.");
+    $form['head']['note']['#prefix'] = '<p class="approve_note">';
+    $form['head']['note']['#suffix'] = "</p>";
+    
+    //comment field
+    unset($form['comment_filter']['comment']['#title']);
+    
+    //submit button
+    $form['submit']['#value'] = 'POST';
+
+    if ($user->uid) {
+        
+      profile_load_profile($user);
+      
+      $options = array('html' => TRUE);
+      unset($form['_author']['#title']);
+      $userPath = 'user/' . $user->uid;
+      $userContent = '<div class="new-comment-author">';
+      $userContent .= '<div class="image">';
+      if ($user->picture){
+        $userContent .= l(theme('imagecache', 'user_comment_image', $user->picture), $userPath, $options);
+      }else{
+        $userContent .= theme('imagecache', 'user_comment_image', drupal_get_path('module', 'ghh_ui') . '/media/common/pic-user-default-avatar.jpg');
+      }
+      $userContent .= '</div>';
+      $userContent .= '<div class="comment"><p class="author-link"><cite>' . l($user->name, $userPath) . '</cite></p></div>';
+      $userContent .= '</div>'; 
+      $form['_author']['#value'] = $userContent;
+    }
+  } 
+    
+  // alter image form
+  if ($form_id == 'image_node_form' && $user->uid != 1) {
+    unset($form['rebuild_images']);
+    unset($form['path']);
+    unset($form['comment_settings']);
+    unset($form['print']);
+    unset($form['options']);
+  }
+  
+  if ($form_id == 'user_register'){
+    $form['#action'] = url('user/register');
+  }
+
+/* Update the sign in form */
+ if ($form['#id'] == 'user-login-form'){
+   $form['name']['#description'] = 'Enter your username or e-mail address.';
+   $form['name']['#title'] = 'Username';
+   $form['#validate'][]= "mc_validate_user_send_eror";
+   $form['submit']['#value']="Sign in";
+ }
+ 
+  // TODO: Function brough from the module _content_disclaimers
+ 
+ 	if($form['#id']=='node-form'){
+   $form['body_field']['teaser_include']['#access']=false;
+   if(isset($form['field_disclaimer_markup'])){
+    $form['field_disclaimer_markup']['#access']=false;
+   }
+   if(isset($form['field_disclaimer_markup_top'])){
+    $form['field_disclaimer_markup_top']['#access']=false;
+   }
+   $node_url=drupal_get_normal_path("disclaimer-0");
+   $pieces=explode("/", $node_url);
+   $nid=$pieces[count($pieces)-1];
+   $node=node_load($nid);
+   $form['body_field']['#prefix']="<div class=\"form-item\">By adding content, you agree to <a id=\"disclaimer-link\">these policies</a>.</div>".$form['body_field']['#prefix'];
+		$form['#suffix']=" <div style=\"display: none;\">
+      <div id=\"disclaimer\" class=\"block block-overlay\">
+        <div class=\"block-content\">
+          <div class=\"block block-login clear-block\">".
+            $node->body .
+            "<span class=\"submit-wrapper\">
+            	<button type=\"submit\" name=\"ok\" id=\"ok-button\" value=\"OK\" class=\"form-submit\">
+            		<span>OK</span>
+            	</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      </div>";
+	}
+ 
+ 
+ 
+ 
+}
+
+function mc_validate_user_send_eror($form, &$form_state){
+  global $user;
+  if (!$user->uid) {
+    drupal_goto($form['#action']);
+  }
+}
+
+/**
+ * Implementation of hook_form_user_register_alter()
+ */
+function mc_form_user_register_alter(&$form, &$form_state){
+  unset($form['Personal information']);
+  unset($form['account']['#title']);
+  unset($form['account']['#type']);
+  unset($form['account']['mail']['#description']);
+  unset($form['terms_of_use']['terms_of_use_text']);
+  unset($form['terms_of_use']['#type']);
+  unset($form['terms_of_use']['#title']);
+  $terms_link = l('Terms of Service', 'disclaimer', array('attributes'=> array('target' => '_blank')));
+  $form['terms_of_use']['terms_of_use']['#title'] = "I agree to the $terms_link";
+  
+  $form['account']['mail']['#size'] = 40;
+  //Functionality to add the Facebook Connect button in the register form.
+  $form['facebook-button'] = array(
+    '#type' => 'markup',  
+    '#value' => "<div class='mc-facebook-button'>
+                  " . fbconnect_render_button(array('scope' => 'email', 'text'=> 'Sign up with Facebook')) . "
+                </div>",
+    '#weight' => -31,  
+  );
+  
+  $form['facebook-share'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Spread the love! Share to Facebook',
+    '#weight' => -30,
+    '#value' => 1,
+  );
+  
+  $form['submit']['#value'] = 'Join';
+  $form['submit']['#attributes']['class'] = 'orange';
+  
+}
+
+/**
+ * Implementation of hook_link_alter()
+ *
+ * Alterations to links that appear at the bottom of nodes and node teasers.
+ */
+function mc_link_alter(&$links, $node) {
+  // Make 'Read more' the first link, if it exists.
+  if (isset($links['node_read_more'])) {
+    $read_more = $links['node_read_more'];
+    unset($links['node_read_more']);
+    $links = array('node_read_more' => $read_more) + $links;
+  }
+
+  // Change the wording of 'flag this'
+  if (isset($links['flag_content_add'])) {
+    $links['flag_content_add']['title'] = 'Flag as inappropriate';
+    if (arg(0) == 'node')
+      $links['flag_content_add']['attributes']['class'] = 'flag';
+  }
+
+  // Change the wording of 'unflag'
+  if (isset($links['flag_content_remove_flag'])) {
+    $links['flag_content_remove_flag']['title'] = t('This content has been flagged as inappropriate, and is pending review by a moderator.');
+    $links['flag_content_remove_flag']['attributes'] = array('class' => 'flagged');
+  }
+  if (isset($links['flag_content_unflag'])) {
+    $links['flag_content_unflag']['title'] = t('This content has been flagged as inappropriate. Click here to unflag.');
+    $links['flag_content_unflag']['attributes']['class'] .= ' flagged';
+  }
+
+  unset($links['print_mail']); // replaced by E-mail this tab
+}
+
+/**
+ * Implementation of hook_nodeapi()
+ */
+function mc_nodeapi(&$node, $op, $teaser, $page) {
+  switch ($op) {
+    case 'view':
+      if ($teaser) {
+        // Remove the fivestar widget from the content so that we can put it
+        // where we like. This works because 'MyCommunity.org' comes after
+        // 'fivestar' alphabetically. Were this not the case we would need to
+        // define a weight for our module.
+        $node->fivestar = $node->content['fivestar_widget'];
+        unset($node->content['fivestar_widget']);
+      }
+      break;
+  }
+  
+  //TODO: Code brought from the module _default_images module.
+  //Functionality to save default images in the Content Types if the user doesn't upload one.
+  if($node->type!='page'){
+    switch ($op){
+      case 'prepare':
+
+        // remove default image before presenting the form
+
+        $module_path = drupal_get_path('module', 'mc');
+        if ( $node->field_list_image && count($node->field_list_image) == 1 &&
+            strpos($node->field_list_image[0]['filepath'], $module_path) === 0){
+
+          unset($node->field_list_image[0]);
+
+        }
+
+        break;
+
+      case 'presave':
+        if ( $node->field_list_image && ( empty($node->field_list_image[0]) || empty($node->field_list_image[0]['fid']))){
+
+          // add default image
+
+          $use_generic_image = TRUE;
+
+          // get category terms
+
+          if (is_array($node->taxonomy) && !empty($node->taxonomy[VID_CATEGORY])){
+            foreach ($node->taxonomy[VID_CATEGORY] as $tid){
+              $term = taxonomy_get_term($tid);
+              $name = strtolower($term->name);
+              $name = str_replace(' ', '-', $name);
+              $name = str_replace('&', 'and', $name);
+              $filename = drupal_get_path('module', 'mc') . '/mc_default_images' . '/' . $name . '.png';
+              if (file_exists( $filename )){
+                $use_generic_image = FALSE;
+                break;
+              }
+            }
+          }
+
+          // if no term found, add generic one
+          if ($use_generic_image){
+            $filename = drupal_get_path('module', 'mc') . '/mc_default_images' . '/generic.png';
+            if($node->type=='forum'){
+              $filename = drupal_get_path('module', 'mc') . '/mc_default_images' . '/forum_default.png';
+            }
+          }
+
+          // TODO: Verify if file is not already added
+          $file = _mc_api_default_images_get_image($filename);
+
+          $node->field_list_image = array(
+            array(
+              'fid' => $file->fid,
+              'title' => basename($file->filename),
+              'filename' => $file->filename,
+              'filepath' => $file->filepath,
+              'filesize' => $file->filesize,
+              'mimetype' => $mime,
+              'data' => array(
+                'description' => basename($file->filename),
+              ),
+              'list' => 1,
+            ),
+          );
+
+        }
+        break;
+    }
+  }
+}
+/**
+ * Intended to be called by the PHP Validator code from a "Global: Null"
+ * argument in the 'categories' view.
+ *
+ * This implements the different sorting tabs on pages such as category/food.
+ */
+function mc_arg_handler($argument, &$view) {
+  switch ($argument) {
+    case 'most_recent':
+      // Sort by created date only. Ignore sticky.
+      unset($view->sort['sticky']);
+      break;
+    case 'most_viewed':
+      unset($view->sort['sticky']);
+      unset($view->sort['created']);
+      $sort_options = array(
+        'id' => 'totalcount',
+        'table' => 'node_counter',
+        'field' => 'totalcount',
+        'order' => 'DESC',
+        'relationship' => 'none'
+      );
+      $view->sort['totalcount'] = views_get_handler('node_counter', 'totalcount', 'sort');
+      $view->sort['totalcount']->init($view, $sort_options);
+      break;
+    case 'recently_popular':
+      unset($view->sort['sticky']);
+      unset($view->sort['created']);
+      $sort_options = array(
+        'id' => 'daycount',
+        'table' => 'node_counter',
+        'field' => 'daycount',
+        'order' => 'DESC',
+        'relationship' => 'none',
+      );
+      $view->sort['daycount'] = views_get_handler('node_counter', 'daycount', 'sort');
+      $view->sort['daycount']->init($view, $sort_options);
+      break;
+    case 'featured':
+      break;
+  }
+  return true;
+}
+
+/* put in the header region of the 'categories' view */
+function mc_sort_header() {
+  $path = arg(0) . '/' . arg(1);
+  $links = array(
+    'featured' => 'Featured',
+    'most_recent' => 'Most Recent',
+    'most_viewed' => 'Most Viewed',
+    'recently_popular' => 'Recently Popular'
+  );
+  if (arg(2) != '')
+    $path .= '/' . arg(2);
+  else
+    $path .= '/all';
+
+  $current = arg(3);
+
+  if ($current == '')
+    $current = 'featured';
+
+  foreach ($links as $arg => $name) {
+    $item = array('data' => l($name, $path . '/' . $arg));
+    if ($arg == $current)
+      $item['class'] = 'current';
+    $items[] = $item;
+  }
+  return theme('item_list', $items, NULL, 'ul', array('class' => 'filter'));
+}
+
+/**
+ * Make paths with special characters have tidier urls in the category view
+ */
+function mc_category_redirect($category_name) {
+  switch ($category_name) {
+    case 'health-info':
+      return "Health Info";
+    case 'spirit-and-mind':
+      return 'Spirit & Mind';
+    case 'around-harlem':
+      return 'Around Harlem';
+    default:
+      return $category_name;
+  }
+}
+
+function mc_form_simplenews_block_form_809_alter(&$form, &$form_state){ 
+  global $user;
+  if ($user->uid){
+    unset($form['display_mail']);  
+  }else{
+    $form['action']['#prefix'] = '<div style="display:none">';
+    $form['action']['#suffix'] = '</div>';
+    $form['submit']['#value'] = 'Subscribe';
+    unset($form['mail']['#title']);
+  }
+
+}
+
+/**
+ * Custom CKEditor Settings
+ */
+function mc_wysiwyg_editor_settings_alter(&$settings, $context){
+  $settings['forcePasteAsPlainText'] = TRUE;
+}
+
+/**
+ * Displays events grouped by dates. It's intelligent to call more views until max_items are displayed
+ */
+function mc_events_grouped_by_dates($view_name, $display_id, $max_items){
+  
+  // variable to count how many events are being displayed
+  $items_count = 0; $items_count_today = 0; $items_count_tomorrow = 0; $items_count_this_week = 0; $items_count_next_week = 0;
+  // variable to exclude nids (to avoid displaying repeated events)
+  $exclude_nids = array();
+  // the rendered output
+  $output = '';
+  
+  // GET TOTAL NUMBER OF ELEMENTS
+  
+  // today
+  $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'today', $max_items);
+  mc_events_grouped_by_dates_process_view($view, $display_id, $items_count_today, $exclude_nids);
+
+  // tomorrow
+  $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'tomorrow', $max_items);
+  mc_events_grouped_by_dates_process_view($view, $display_id, $items_count_tomorrow, $exclude_nids);
+
+  // this week
+  $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'this-week', $max_items);
+  if ($view){
+    mc_events_grouped_by_dates_process_view($view, $display_id, $items_count_this_week, $exclude_nids);
+  }
+
+  // next week
+  $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'next-week', $max_items);
+  if ($view){
+    mc_events_grouped_by_dates_process_view($view, $display_id, $items_count_next_week, $exclude_nids);
+  }
+  
+  // calculate how many I should display in each group
+  $items_count = $items_count_today + $items_count_tomorrow + $items_count_this_week + $items_count_next_week;
+  
+  if ($items_count > $max_items){
+    $i = 0;
+    while($items_count > $max_items){
+      $j = $i % 4;
+      switch($j){
+        case 0:
+          if ($items_count_today > 1){
+            $items_count_today--;
+            $items_count--;
+          }
+          break;
+        case 1:
+          if ($items_count_tomorrow > 1){
+            $items_count_tomorrow--;
+            $items_count--;
+          }
+          break;
+        case 2:
+          if ($items_count_this_week > 2){
+            $items_count_this_week--;
+            $items_count--;
+          }
+          break;
+        case 3:
+          if ($items_count_next_week > 2){
+            $items_count_next_week--;
+            $items_count--;
+          }
+          break;
+      }
+      $i++;
+      // to avoid infinite loops
+      if ($i > 1000){
+        break;
+      }
+    }
+  }
+  $exclude_nids = array();
+  
+  if ($items_count_today){
+	 
+    $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'today', $items_count_today);
+	$output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_count_today);
+  }
+  if ($items_count_tomorrow){
+    $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'tomorrow', $items_count_tomorrow);
+    $output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_count_tomorrow, $exclude_nids);
+  }
+  if ($items_count_this_week){
+    $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'this-week', $items_count_this_week);
+    if ($view){
+      $output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_count_this_week, $exclude_nids);
+    }
+  }
+  if ($items_count_next_week){
+    $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'next-week', $items_count_next_week);
+    $output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_count_next_week, $exclude_nids);
+  }
+  
+  // upcoming
+  $items_to_display = $max_items - $items_count;
+  if ($items_to_display){
+    $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'upcoming', $items_to_display);
+    if ($view){
+      $output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_count, $exclude_nids);
+    }
+  }
+  
+  if ($items_count < 1){
+    $link = l(t('add an event'), 'node/add/event');
+    $output = t("<p>It's quiet around here. Why not $link ?</p>");
+  }
+  
+  print $output;
+  
+}
+
+function mc_events_grouped_by_dates_process_view($view, $display_id, &$items_count, &$exclude_nids){
+   
+  $args = array(implode('+', $exclude_nids));
+
+  
+  if ($args && !empty($args[0])){
+    $output = $view->preview($display_id, $args);
+  }else{
+    $output = $view->preview();
+  }
+  
+  foreach($view->result as $result){
+    $items_count++;
+    $exclude_nids[] = $result->nid;
+  }
+   
+  return $output;
+}
+
+function mc_events_grouped_by_dates_process_view2($view, $display_id, $count){	
+	$output = $view->preview($display_id);
+	$i=0;
+	foreach($view->result as $result){
+    if ($i >= $count)
+    unset($view->result[$i]);
+	$i++;
+  }
+	//drupal_set_message("<pre>".print_r($view, true)."</pre>");
+	return $view->preview();
+}
+
+function mc_events_grouped_by_dates_set_dates(&$view, $display_id, $time_key){
+  
+  // calc unix time
+  $today = mktime(0, 0, 0);
+  $tomorrow = $today + 24 * 3600;
+  $afterTomorrow = $tomorrow + 24 * 3600;
+  $dayOfWeek = (int)date('w', $today);
+  
+  if ($dayOfWeek == 0){
+    $thisSunday = $today;
+  }else{
+    $thisSunday = $today + (7 - $dayOfWeek) * 24 * 3600;
+  }
+  
+  $nextSunday = $thisSunday + 7 * 24 * 3600;
+  
+  // start date
+  $item = $view->get_item($display_id, 'filter', 'unix_event_start');
+  $item['value']['type'] = 'date';
+  
+  if ($time_key == 'today'){
+    // today will not display only events that start today, but also the ones that has already
+    // started and haven't finished yet
+    $item['operator'] = '<';
+    $item['value']['value'] = date('Y-m-d', $tomorrow);
+  }elseif ($time_key == 'tomorrow'){
+    $item['operator'] = 'between';
+    $item['value']['min'] = date('Y-m-d', $tomorrow);
+    $item['value']['max'] = date('Y-m-d', $afterTomorrow);
+  }elseif ($time_key == 'this-week'){
+    $item['operator'] = 'between';
+    $item['value']['min'] = date('Y-m-d', $afterTomorrow);
+    $item['value']['max'] = date('Y-m-d', $thisSunday);
+  }elseif ($time_key == 'next-week'){
+    $item['operator'] = 'between';
+    $item['value']['min'] = date('Y-m-d', $thisSunday);
+    $item['value']['max'] = date('Y-m-d', $nextSunday);
+  }elseif ($time_key == 'upcoming'){
+    $item['operator'] = '>';
+    $item['value']['value'] = date('Y-m-d', $nextSunday);
+  }
+  
+  $view->set_item($display_id, 'filter', 'unix_event_start', $item);
+  
+  $item = $view->get_item($display_id, 'filter', 'unix_event_end');
+  $item['value']['type'] = 'date';
+  $item['operator'] = '>=';
+  $item['value']['value'] = date('Y-m-d', $today);
+  
+  $view->set_item($display_id, 'filter', 'unix_event_end', $item);
+}
+
+/**
+ * Returns a more accurate events view, by passing exact dates
+ * to the view filters
+ */
+function mc_events_grouped_by_dates_view($view_name, $display_id, $time_key, $items_to_display = 1){
+  
+  $title = '';
+  
+  $view = views_get_view($view_name);
+  $view->is_cacheable = FALSE;
+  
+  $view->set_display($display_id);
+  
+  // titles
+  switch($time_key){
+    case 'today':
+      $title = 'Today';
+      $view->hide_day = TRUE;
+      break;
+    case 'tomorrow':
+      $title = 'Tomorrow';
+      $view->hide_day = TRUE;
+      break;
+    case 'this-week':
+      $title = 'This Week';
+      break;
+    case 'next-week':
+      $title = 'Next Week';
+      break;
+    case 'upcoming':
+      $title = 'Upcoming';
+      break;
+  }
+  
+  $view->display[$display_id]->display_title = $title;
+  
+  // set start and end date
+  mc_events_grouped_by_dates_set_dates($view, $display_id, $time_key);
+  
+  $view->display[$display_id]->handler->options['defaults']['items_per_page'] = FALSE;
+  $view->display[$display_id]->handler->options['items_per_page'] = $items_to_display;
+  
+  // we add a custom variable into the view in order to know where the link should go to
+  if ($time_key != 'upcoming'){
+    $view->see_all_link = 'latest/events/' . $time_key;
+  }else{
+    $view->see_all_link = 'latest/events';
+  }
+  
+  return $view;
+  
+}
+
+/**
+ * Implementation of hook_init()
+ */
+function mc_init(){
+  //TODO: Function brought from module _content_disclaimers
+  if(arg(0)=="node" && (arg(1)=="add" || arg(2)=="edit")){
+		drupal_add_js(drupal_get_path('module', 'mc') . '/js/mc_content_disclaimers.js', 'theme', 'footer');
+	}
+}
+
+/**
+ * Implementation of hook_views_pre_view()
+ */
+function mc_views_pre_view(&$view, &$display_id, &$args){
+  
+  if (arg(0) == 'latest' && arg(1) == 'events' && arg(2)){
+    $time_key = arg(2);
+    $title = '';
+    
+    // titles
+    switch($time_key){
+      case 'today':
+        $title = 'Events - Today';
+        break;
+      case 'tomorrow':
+        $title = 'Events - Tomorrow';
+        break;
+      case 'this-week':
+        $title = 'Events - This Week';
+        break;
+      case 'next-week':
+        $title = 'Events - Next Week';
+        break;
+      case 'upcoming':
+        $title = 'Events - Upcoming';
+        break;
+    }
+    
+    $view->display_handler->set_option('title', $title);
+    
+    if ($time_key != 'upcoming' || empty($time_key)){
+      mc_events_grouped_by_dates_set_dates($view, $display_id, $time_key);
+    }
+    
+  }
+}
+
+/**
+ * Implementation of hook_menu_alter()
+ */
+function mc_menu_alter(&$items){
+  $items['og/users/%node/faces']['type'] = MENU_CALLBACK;
+  $items['search/advanced_help']['type'] = MENU_CALLBACK;
+  $items['node/%node/og_menu/add']['type'] = MENU_CALLBACK;
+}
+
+//TODO: Facebook Likes. It is gonna be moved to the feature for activities.
+/**
+ * Implementation of hook_menu()
+ */
+function mc_menu(){
+  $items['facebook/like/%'] = array(
+     'type' => MENU_CALLBACK,
+     'page callback' => 'mc_facebook_like',
+     'access callback' => true,
+     'page arguments' => array(2),
+     'title' => 'Facebook like'
+  );
+  return $items;
+}
+
+function mc_facebook_like($nid){
+  global $user;
+  $node=node_load($nid);
+  if(isset($node->og_groups) and count($node->og_groups)>0){
+    $gid=array_pop($node->og_groups);
+  }
+  else{
+    $gid=0;
+  }
+  // Heartbeat record activity
+  $variables = array(
+    '@username' => l(_mc_api_get_user_name($user), 'user/' . $user->uid),
+    '@node_type' => strtolower(node_get_types('name', $node->type)),
+    '@node_title' => l($node->title, 'node/' . $nid),
+  );
+  heartbeat_api_log('mc_facebook_like', $user->uid, 0, $nid, $gid, $variables);
+}
+
+
