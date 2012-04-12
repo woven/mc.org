@@ -1,0 +1,8 @@
+name = "Feature Taxonomy Topic"
+description = "Feature that contains the Taxonomy Topic."
+core = "6.x"
+package = "Features"
+dependencies[] = "features"
+dependencies[] = "strongarm"
+dependencies[] = "taxonomy"
+features[taxonomy][] = "topic"
