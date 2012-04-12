@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Force OG to make the gallery and image a group post type.
+ * For some reason it won't turn on without forcing it here.
+ */
+function views_gallery_og_enable() {
+  variable_set('og_content_type_usage_gallery', 'group_post_standard');
+  variable_set('og_content_type_usage_gallery_image', 'group_post_standard');
+}

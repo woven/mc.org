@@ -1,0 +1,50 @@
+<?php
+/**
+ * @file
+ * Creates photo gallery feature, including image and gallery content types.
+ */
+ 
+include_once('views_gallery.features.inc');
+
+/**
+* Implementation of hook_help().
+*/
+function views_gallery_help($path) {
+  // Central help page content.
+  if ($path == 'admin/help#views_gallery') {
+    $help = '<h3>'. t('Views Gallery') .'</h3>';
+    $help .= '<p>'. t("Views Gallery lets you post photos which will show up in a gallery.") .'</p>';
+    $help .= '<p>'. t("Add either galleries or images. To add photos, navigate to a gallery and click the \"Add image\" button.  Then click \"Save\".") .'</p>';
+    return $help;
+  }
+}
+
+/**
+ * Implementation of hook_init().
+ */
+function views_gallery_init() {
+  if (user_access('administer site configuration') && module_exists('imageapi') && !module_exists('imageapi_gd') && !module_exists('imageapi_imagemagick')) {
+    drupal_set_message(t('Image API requires that an image toolkit be enabled before it will work! Please enable an image toolkit on the <a href="!link">modules page</a>.', array('!link' => url('admin/build/modules'))), 'error');
+  }
+  drupal_add_css(drupal_get_path('module', 'views_gallery') .'/views_gallery.css');
+}
+
+/**
+ * Alter the Views Gallery default view
+ */
+function views_gallery_views_default_views_alter(&$cache) {
+
+  // If lightbox is installed, change the image
+  // formatter to a link to the image node and
+  // add the 'View slideshow' link in the header.   
+  if (module_exists('lightbox2')) {
+    $view = $cache['gallery'];
+    $display = $view->display['default']->display_options;
+    $display['fields']['field_gallery_image_fid']['format'] = 'imagefield__lightshow2__thumb__original'; 
+    $view->display['default']->display_options = $display;
+    $display = $view->display['node_content_1']->display_options;
+    $display['header'] = '<a href="#" onclick="Lightbox.triggerLightbox(\'lightshow\', \'field_gallery_image\');">Start Slideshow</a>';
+    $view->display['node_content_1']->display_options = $display;
+    $cache['gallery'] = $view;
+  }
+}
