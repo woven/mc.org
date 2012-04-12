@@ -1,0 +1,3 @@
+<?php
+
+include_once('mc_node_ui.features.inc');

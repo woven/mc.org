@@ -1,0 +1,3 @@
+<?php
+
+include_once('ft_profile_ui.features.inc');

@@ -1,0 +1,98 @@
+<?php
+
+include_once('ft_event.features.inc');
+
+
+/**
+ * Implementation of hook_theme()
+ *
+ */
+
+function ft_event_theme($existing, $type, $theme, $path){
+	  return array(
+        'mc_event_view_header' => array('variables' => array('view' => NULL)),
+        'mc_event_header' => array('title' => null,'count' => null,'url' => null),
+        'mc_event_date' => array('variables' => array('unix_date_start' => NULL, 'unix_date_end' => NULL, 'has_end_date' => NULL, 'has_time' => NULL, 'hide_day' => NULL)),
+    	);
+}
+
+
+/**
+ * Implementation of theme_mcc_event_header
+ */
+
+function theme_mc_event_view_header($view){
+  // Important: Pager should be turned on, otherwise count will not work.
+  $display = $view->current_display;
+  $itemsDisplayed = $view->display[$display]->handler->options['items_per_page'];
+
+  if (isset ($view->total_rows)){
+    $count = $view->total_rows - $itemsDisplayed;
+  }else{
+    $count = count($view->result) - $itemsDisplayed;
+  }
+  $title = $view->display[$display]->display_title;
+  return theme("mc_event_header",$title,$count, $view->see_all_link);
+}
+
+/**
+ * Implementation of theme_mc_event_header
+ */
+
+function theme_mc_event_header($title,$count,$url){
+    $output = '<div class="block more-head">';
+    $output .= '<div class="block-title">';
+    $output .= '<h3>'.$title.'</h3>';
+    if($count > 0){
+        $output .= l ("<span>+$count more</span><span class=\"ico-small ico-see-all\"></span>", $url,array('html' => TRUE));
+    }
+    $output .= '<span class="arrow"></span>';
+    $output .= '</div></div>';
+    
+    return $output;
+}
+
+
+/**
+ * Implementation of theme_mc_event_date()
+ */
+function theme_mc_event_date($unix_date_start = NULL, $unix_date_end = NULL, $has_end_date = NULL, $has_time = NULL, $hide_day = FALSE){
+  
+  $output = '';
+  $occurring = FALSE;
+  
+  if ($unix_date_start < time()){
+    if ($unix_date_end < time()){
+      $output .= t('Happened ');
+    }else{
+      // it's still ocuring today
+      $occurring = TRUE;
+    }
+  }
+  
+  $output .= '<span class="event-time">';
+  if (!$hide_day){
+    if ($occurring){
+      $output .= t('Today');
+    }else{
+      $output .= mc_api_format_day($unix_date_start);
+    }
+  }
+  
+  // if it has a time, and it's not a past date
+  if ($has_time && ($unix_date_start > time() || $occurring)){
+    // if it has an end time, different than start time
+    if ($has_end_date && (date('Hi', $unix_date_start) != date('Hi', $unix_date_end))){
+      $time = mc_api_format_time($unix_date_start, $unix_date_end);
+    }else{
+      $time = mc_api_format_time($unix_date_start);
+    }
+    if (!$hide_day){
+      $output .= ', ';
+    } 
+    $output .= $time;
+  }
+
+  $output .= '</span>';
+  return $output;
+}

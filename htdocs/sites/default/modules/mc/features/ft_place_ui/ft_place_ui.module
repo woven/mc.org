@@ -1,0 +1,3 @@
+<?php
+
+include_once('ft_place_ui.features.inc');

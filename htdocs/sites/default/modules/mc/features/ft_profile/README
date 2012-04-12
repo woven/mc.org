@@ -1,0 +1,13 @@
+ Info
+------
+
+This feature contains profile fields that are only exportable after applying a patch.
+
+To install this feature you need to apply the patch "features-profile-fields-912716-23.patch". 
+
+ Install
+---------
+
+To do apply the patch you can follow this procedure:
+	- Go to the features module folder htdocs/sites/default/modules/features
+	- Run the following command: git apply path_to_repo/patches/patches-mc.org/features-profile-fields-912716-23.patch

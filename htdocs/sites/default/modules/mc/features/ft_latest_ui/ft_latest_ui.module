@@ -1,0 +1,38 @@
+<?php
+
+include_once('ft_latest_ui.features.inc');
+
+/**
+ * post render views
+ *  *** at Larest views: optimize/edit titles.
+ */
+
+function ft_latest_ui_views_post_render(&$view,&$output,&$cache){
+    if($view->name == "latest" and arg(0) == 'latest'){
+            
+            if(arg(1) == 'vid' AND arg(2) > 0 AND arg(2) == 7){
+                drupal_set_title(t('All from HHPC'));
+            }
+            
+            if(arg(1) AND is_null(arg(2))){
+                if(count($view->build_info['substitutions'])){
+                    require_once(dirname(__FILE__) . "/Inflector.php");
+                    $vtitle = $view->build_info['substitutions']['%1'];
+                    if($vtitle == 'Audio'){
+                        drupal_set_title($vtitle);   
+                    }else{
+                        drupal_set_title(Inflector::pluralize($vtitle));
+                    }
+                }
+            }
+    }
+}
+
+/**
+ * Implementation of hook_init()
+ */
+function ft_latest_ui_init(){
+  if (arg(0) == 'latest' && arg(1) == 'event'){
+    drupal_goto('latest/events');
+  }
+}
