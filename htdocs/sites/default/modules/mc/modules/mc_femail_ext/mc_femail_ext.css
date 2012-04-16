@@ -1,0 +1,88 @@
+#femail-user-subscribe table .form-item label, #femail-user-subscribe table .form-item .form-radios {
+	display: inline-block;
+}
+
+#femail-user-subscribe table .form-item .form-radios .form-option{
+	display: inline-block;
+}
+
+table .odd{
+	background: #FFFAEB;
+}
+
+h2.title{
+	font-size: 2em;
+	margin-top: 25px;
+	color: #ff6600;
+	padding-bottom: 10px;
+  clear: both;
+  padding-left: 2.3%;
+}
+
+table{
+	text-align: center;
+}
+
+thead {
+	text-align: center;
+}
+
+.form-hold-container{
+	width: 95%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-bottom: 25px;
+}
+
+span.submit-wrapper{
+	display: block;
+	padding-bottom: 25px;
+}
+
+#main .tableHeader-processed tr th, .tableHeader-processed tr th, #main table th{
+	text-align: center;
+	/*background: #fdd471 url(/sites/default/themes/harlem2/images/common/bg-navigation.png) 0 0 repeat-x;*/
+	height: 30px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+}
+
+#main table tbody tr td{
+	border-left: none;
+	border-right: none;
+	height: 54px;
+}
+
+#page #main .form-hold-container .sticky-header th{
+	border-left: none;
+	border-right: none;
+}
+
+.block form input#radioNone{
+  margin-left: -31px;
+}
+
+.block form input#radioSome{
+  margin-left: -49px;
+}
+
+.block form input#radioAll{
+  margin-left: -48px;
+}
+
+.block form span  .submit-wrapper{
+  float: left;
+}
+
+.block form .submit-wrapper{
+  float: left;
+  padding-left: 0px;
+}
+.submit-wrapper {
+  padding-left: 0px;
+}
+
+h1.title{
+  padding-left: 2.3%;
+}

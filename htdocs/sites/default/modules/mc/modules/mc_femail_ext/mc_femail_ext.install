@@ -1,0 +1,98 @@
+<?php
+
+
+/**
+ * Implementation of hook_install
+ */
+function mc_femail_ext_install(){
+  // Add the femail table (which simply stores message IDs
+  drupal_install_schema('mc_femail_ext');
+  // Changes the femail_emails variable to use the -discuss sufix and also removes the 'www' part of the domain 
+  $emails = variable_get('femail_emails', array());
+  $new_emails=array();
+  foreach ($emails as $tid => $email) {
+    $email_pieces=explode("@", $email);
+    $email_pieces['0'].='-discuss';
+    $email_pieces['1']=str_replace('www.', '', $email_pieces['1']);
+    $new_emails[$tid]=$email_pieces['0']."@".$email_pieces['1'];
+  }
+  variable_set('femail_emails', $new_emails);
+}
+
+
+/**
+ * Implements hook_schema().
+ */
+function mc_femail_ext_schema() {
+  $schema['og_forum_reference'] = array(
+    'description' => 'Saves forum vocabulary id (tid - Term id)  and group node id (), for having reference between each other.',
+    'fields' => array(
+      'tid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Term id of the vocabulary.',
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Node id of the group.',
+      ),   
+    ),
+    'primary key' => array('tid', 'nid'),
+    'foreign keys' => array(
+      'tid' => array(
+        'table' => 'term_data',
+        'columns' => array('tid' => 'tid'),
+      ),
+      'nid' => array(
+        'table' => 'og',
+        'columns' => array('nid' => 'nid'),
+      ),
+    ),
+  );
+  //TAble for saving relationship between user, forum and user's settins for the forum.
+  $schema['femail_ext_user_subscription'] = array(
+    'description' => 'Saves relationship between user, term forum and the setting that the user selected for a group the belpongs to the forum term.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'User id of the user.',
+      ),
+      'tid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Term id of the forum that belongs to a group.',
+      ),
+      'setting' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Setting option that the user selected for the group that belong to the term id.',
+      ),   
+    ),
+    'primary key' => array('uid', 'tid', 'setting'),
+    'foreign keys' => array(
+      'tid' => array(
+        'table' => 'term_data',
+        'columns' => array('tid' => 'tid'),
+      ),
+      'uid' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+    ),
+  );
+  return $schema;   
+}
+
+/**
+ * Implementation of hook_uninstall
+ */
+function mc_femail_ext_uninstall(){
+  drupal_uninstall_schema('og_forum_reference');
+}

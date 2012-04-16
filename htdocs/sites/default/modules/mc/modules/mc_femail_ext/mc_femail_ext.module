@@ -1,0 +1,558 @@
+<?php
+
+/*
+ * Define 3 Constant values for use inside this module
+ */
+define('ALL_NOTIFICATIONS', '0');
+define('SOME_NOTIFICATIONS', '1');
+define('NO_NOTIFICATIONS', '2');
+/**
+ * Implementation of hook_menu_alter
+ */
+function mc_femail_ext_menu_alter(&$items) {
+	$new_title="Forum options";
+	$items['user/%user/femail']['title']=$new_title;
+	$items['user/%user/femail']['access callback']='_mc_femail_ext_user_edit_access';
+	$items['femail/verify/%/%']['title']=$new_title;
+	$items['femail/remove/%user/%']['title']=$new_title;
+}
+
+
+/**
+ * Implementation of hook_nodeapi
+ */
+function mc_femail_ext_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  //We have to create a new forum taxonomy term when a new group is created and associate them.
+  if ($node->type == 'group'){
+    switch ($op) {
+      case 'insert':
+        //Query the vid (vocabulary id) of the forum vocabulary.
+        $vid = db_result(db_query("SELECT vid FROM {vocabulary} WHERE name = 'Forums'"));
+        //Create a new taxonomy term of type forum.
+        $term = array(
+         'name' => $node->field_small_name['0']['value'],
+         'vid' => $vid,
+         'description' => $node->field_small_name['0']['value'], // Not required
+        );
+        taxonomy_save_term($term);
+        $term = taxonomy_get_term_by_name($node->field_small_name['0']['value']);
+        $term = end($term);
+        // Create the new mapping. og forum and Forum Taxonomy term.
+        $result = db_result(db_query("SELECT tid FROM og_forum_reference WHERE tid = ".$term->tid." AND nid = ".$node->nid));
+        if ($result == 0){
+          db_query("INSERT INTO og_forum_reference (tid , nid) VALUES (".$term->tid.", ".$node->nid.")");
+        }
+        break;
+      case 'update':
+        // If not exist a mapping row in the table og_forum_reference in DB create anew one.
+        if ($node->path !=$node->field_small_name['0']['value']){
+          $node_group_name = $node->path;
+        }else{
+          $node_group_name = $node->field_small_name['0']['value'];
+        }
+        
+        $term = taxonomy_get_term_by_name($node_group_name);
+        if (!empty($term)){
+          $term = end($term);
+          //Update name of taxonomy term of type forum.
+          $updated_term = array(
+           'tid' => $term->tid,   
+           'name' => $node->field_small_name['0']['value'],
+           'description' => $node->field_small_name['0']['value'], // Not required
+          );
+          taxonomy_save_term($updated_term);
+        }else{
+          //Query the vid (vocabulary id) of the forum vocabulary.
+          $vid = db_result(db_query("SELECT vid FROM {vocabulary} WHERE name = 'Forums'"));
+          //Create a new taxonomy term of type forum.
+          $term = array(
+           'name' => $node->field_small_name['0']['value'],
+           'vid' => $vid,
+           'description' => $node->field_small_name['0']['value'], // Not required
+          );
+          taxonomy_save_term($term);
+          $term = taxonomy_get_term_by_name($node->field_small_name['0']['value']);
+          $term = end($term);
+        }
+        //Verify if there is a row in the table og_forum_reference.
+        $result = db_result(db_query("SELECT tid FROM og_forum_reference WHERE tid = ".$term->tid." AND nid = ".$node->nid));
+        if ($result == 0){
+          // Create the new mapping. og forum and Forum Taxonomy term.
+          db_query("INSERT INTO og_forum_reference (tid , nid) VALUES (".$term->tid.", ".$node->nid.")");
+        }
+        break;
+    }
+  }
+  
+  if ($node->type == 'forum'){
+    switch ($op) {
+      case 'presave':
+      $node->og_public=true;
+        //This part allow to post discussions automatically.
+        $format_id = db_result(db_query("SELECT format FROM {filter_formats} WHERE name = '%s'", "Femail mail message"));
+        if($node->format==$format_id){
+          _mc_femail_ext_cut($node->body, "<!-- FOOTNOTE-BEGIN -->", "");
+          _mc_femail_ext_cut($node->body, "\n--\n");
+          _mc_femail_ext_fix_newlines($node->body);
+        }
+        if (!isset($node->og_groups) || empty($node->og_groups)){
+          $result = db_result(db_query("SELECT nid FROM og_forum_reference WHERE tid = ".$node->taxonomy[1]));
+          $node->og_groups = $result;
+        }
+        //If a user no belong to a group, don't save the discussion.
+        if (!_mc_api_user_belongs_to_a_group($node->uid, $node->taxonomy[1]) || ($node->uid == 0)){
+          global $base_url;
+          $subject = $node->title;
+          $body = check_markup("Hi there!
+
+Sorry, but it doesn't look like you are allowed to post to this address.  Please be sure to send from the email address associated with your account, be sure you're following the group you tried to post to, and contact us (". $base_url."/contact) if you're still having trouble.
+        
+-- The ".variable_get('site_name', ' '));
+          $group = _get_group_or_forum($node->taxonomy[1]);
+          $user = user_load();
+          _ft_group_send_message($user, $group, $subject, $body, 'bounceback-message', $node->from);
+          drupal_goto();
+        }else{
+          unset($node->from);
+        }
+        //Avoid to create new discussions if the discussions are disabled for the group.
+        $group = node_load($node->og_groups);
+        if ($group->field_enable_discussions['0']['value'] == '0'){
+          drupal_goto();
+        }
+        break;
+      case 'update':
+        //Update Term id for groups that exist in the site with the new term id.
+        $term_in_og_forum_reference = db_result(db_query("SELECT tid FROM og_forum_reference WHERE nid = ".$node->og_groups['0']));
+        if (($term_in_og_forum_reference) && ($node->taxonomy[1]!=$term_in_og_forum_reference)){
+          $node->taxonomy[1] = $term_in_og_forum_reference;
+        }
+    }
+  }
+}
+
+//Helpers access function.
+function _mc_femail_ext_user_edit_access($account){
+  $original_value=user_edit_access($account);
+  global $user;
+  if(count($user->og_groups)>=1){
+    return TRUE && $original_value;
+  }
+  else{
+    return FALSE;
+  }
+}
+
+/**
+ * Implementation of hook_form_alter
+ */
+function mc_femail_ext_form_alter(&$form, &$form_state, $form_id){
+  global $user;
+  if($form_id=='group_node_form'){
+    $form['field_list_image']['field_list_image_add_more']['#access'] = 0;
+    if(strlen($form['field_small_name']['0']['#default_value']['value'])>0){
+      //Get all the emails for the groups in the site.
+      $from_emails = variable_get('femail_emails', array());
+      //Get the term if for the group.
+      $tid = _get_group_or_forum('', $form['nid']['#value']);
+      $form['field_small_name']['0']['#description'].="<br/> The email address for your group's Discussion Forum is set to "._mc_api_generate_email_based_on_domain($form['field_small_name']['0']['#default_value']['value'], $from_emails[$tid]);
+    }
+    else {
+      $form['field_small_name']['0']['#description']="A short name to be used for generating the friendly urls and email for this group. Be careful choosing this name, it cannot be changed later.";
+    }
+    //If the admin has not modified the welcome email, the system hast to use the default one.
+    if (empty($form['field_welcome_email']['0']['#default_value']['value']) || !isset($form['field_welcome_email']['0']['#default_value']['value'])){
+      $form['field_welcome_email']['0']['#default_value']['value'] = check_markup("Hi there,
+
+Thanks for following [large_name] on [site_name]!
+
+By following us, you're demonstrating your support for our vital work.  You also get access to a variety of ways to participate and even contribute!
+
+You can now add your comments to anything we post, and you can even use the Add Stuff menu to post your own articles, videos and other content in support of our group.  Get involved!
+
+You're now also eligible to participate in our group's discussion forum.  We've tried to make it real easy for you to participate however you prefer -- via the website or email.
+
+Website: Visit [group_discussion] to browse and post topics. Be sure you're signed in to the website.
+
+Email:  Email [email_group] to start a new topic, or just reply to existing topics from your inbox. Be sure you're sending from an email address associated with your account.
+
+Please note: You're automatically set to receive emails when there is new activity in the discussion forum, but you can always change this.  You can find options for your account at [user_profile].
+
+Please contact [small_name] through our group page at [group_address] with any questions, and don't hesitate to let us know how this works for you.
+
+See you around!
+
+--The [small_name] team");
+      
+      
+    }
+    //Discussions are on by default when a new group is created.  
+    if ($_GET['q'] == 'node/add/group'){
+      $form['field_enable_discussions']['#default_value']['0']['value'] = 1;
+    }
+    
+  }
+  if($form_id=='femail_user_add'){
+    $form['submit']['#value']='Add';
+    $form['femail_email']['#title'] = 'Add another email address';
+  }
+  if($form_id=='femail_user_subscribe'){
+    $form['user_notification_no_groups'] = array(
+      '#type' => 'markup',  
+      '#value' => "<div class='femail-user-notifications-description'>
+                    Manage your email notifications per group. Choose to receive notifications for all topics, just those you've commented on, or none at all.
+                  </div>",
+      '#weight' => -5,  
+    );
+    $form['femail_subscribe_all']['#access']=false;
+    $form['submit']['#value']='Save';
+    drupal_add_css((drupal_get_path('module', 'mc_femail_ext') .'/mc_femail_ext.css'));
+    drupal_add_js((drupal_get_path('module', 'mc_femail_ext') .'/mc_femail_ext.js'));
+    foreach ($form['femail_subscribe'] as $value) {
+      unset($value);
+    }
+    $header = array(
+          array('data' => t('')),
+          array('data' => '<input type="radio" name="headeroption" value="0" id="radioAll">' .t('')),
+          array('data' => '<input type="radio" name="headeroption" value="1" id="radioSome">'.t('')),
+          array('data' => '<input type="radio" name="headeroption" value="2" id="radioNone">'.t('')),
+        );
+
+    $rows=null;
+    
+    $forum_tree = _mc_api_user_subscribed_groups();
+    $forum_containers = variable_get('forum_containers', array());
+    $is_odd = TRUE;
+    $results = db_query("SELECT tid, setting FROM {femail_ext_user_subscription} WHERE uid = %d", arg(1));
+    $subscriptions = array();
+    while($row = db_fetch_array($results)){
+      $subscriptions[$row['tid']]['tid'] = $row['tid'];
+      $subscriptions[$row['tid']]['setting'] = $row['setting'];
+    }
+    foreach($forum_tree as $branch){
+      if($class == "odd"){
+        $class = "even";
+      }else{
+        $class = "odd";
+      }
+      if(in_array($branch->tid, $forum_containers)){
+        // Container
+        $form['femail_subscribe'][$branch->tid] = array(
+          '#value' => '<tr class="' . $class . '"><td style="padding-left:' . (($branch->depth * 10) + 5) . 'px;">' . check_plain($branch->name) . '</td></tr>'
+        );
+      }else{
+        // Forum
+        $nid=_get_group_or_forum($branch->tid);
+        $node=node_load($nid);
+        $form['femail_subscribe'][$branch->tid]['0'] = array(
+          '#type' => 'radio',
+          '#title' => 'All topics',
+          '#name'=>'femail_subscribe['.$branch->tid .']',
+          '#id'=>'edit-femail-subscribe-'.$branch->tid.'-0',
+          '#return_value'=>'0',
+        );
+        $form['femail_subscribe'][$branch->tid]['1'] = array(
+          '#type' => 'radio',
+          '#title' => 'My topics',
+          '#name'=>'femail_subscribe['.$branch->tid .']',
+          '#id'=>'edit-femail-subscribe-'.$branch->tid.'-1',
+          '#return_value'=>'1',
+        );
+        $form['femail_subscribe'][$branch->tid]['2'] = array(
+          '#type' => 'radio',
+          '#title' => 'None',
+          '#name'=>'femail_subscribe['.$branch->tid .']',
+          '#id'=>'edit-femail-subscribe-'.$branch->tid.'-2',
+          '#return_value'=>'2',
+        );
+
+        $form['femail_subscribe'][$branch->tid][$subscriptions[$branch->tid]['setting']]['#attributes']['checked']=1;
+        $row['data'][0] = l(check_plain($node->title), 'node/' . $node->nid);
+        $row['data'][1] = drupal_render($form['femail_subscribe'][$branch->tid][0]);
+        $row['data'][2] = drupal_render($form['femail_subscribe'][$branch->tid][1]);
+        $row['data'][3] = drupal_render($form['femail_subscribe'][$branch->tid][2]);
+        $rows[]=$row;
+      }
+
+    }
+    $form['femail_subscribe'] = array(
+    '#type' => 'markup',
+    '#value' => theme('table', $header, $rows),
+    );
+    $form['#submit']=array();
+    $form['#submit'][]="_mc_femail_ext_subscribe_submit";
+  }
+  if ($form_id=='forum_node_form'){
+
+    $form['taxonomy'][1]['#value'] = '1';
+    $form['taxonomy'][1]['#type'] = 'value';
+    unset($form['taxonomy'][1]['#required']);
+    unset($form['taxonomy'][1]['#theme']);
+    unset($form['taxonomy'][1]['#options']);
+    array_unshift($form['#validate'], '_mc_femail_ext_assign_forum_taxonomy_to_a_group');
+    //Verify if an user belongs to a group, for avoid or allow to publish a new topic.
+    $user_groups = _mc_api_user_subscribed_groups();
+    if (empty($user_groups)){
+      unset($form['body_field']);
+      $form['buttons']['submit']['#access'] = 0;
+      $form['buttons']['preview']['#access'] = 0;
+      unset($form['title']);
+      unset($form['field_disclaimer_markup_top']);
+      unset($form['field_disclaimer_markup']);
+      drupal_set_title(' ');
+      $form['user_notification_no_groups'] = array(
+        '#type' => 'markup',  
+        '#value' => "<div class='user_notification_no_groups'>
+                      Glad you're ready to get involved!  Please " .  l('follow a group', 'groups') . " and try posting again!
+                    </div>",
+      );
+    }
+  }
+}
+
+//Sumbit function.
+function _mc_femail_ext_subscribe_submit($form, $form_state){
+  // Lets delete everything from the femail_user_subscriptions for this user
+  db_query("DELETE FROM {femail_ext_user_subscription} WHERE uid = %d", $form_state['values']['femail_uid']);
+  // TODO: NEEDS TO CHECK THIS FUNCTIONALITY IS WORKING!!!
+  // STARTING FROM HERE
+  if($form_state['values']['femail_subscribe_all']){
+    db_query("INSERT INTO {femail_user_subscriptions} (uid, tid) VALUES (%d, 0)", $form_state['values']['femail_uid']);
+  }
+  // TO HERE
+  else{
+    foreach($form_state['clicked_button']['#post']['femail_subscribe'] as $tid => $value){
+      if(isset($value)){
+        db_query("INSERT INTO {femail_ext_user_subscription} (uid, tid, setting) VALUES (%d, %d, %d)", $form_state['values']['femail_uid'], $tid, $value);
+      }
+    }
+  }
+  drupal_set_message("Subscription updated");
+}
+
+//Helper function to assign the forum taxonomy term to a disscusion. VALIDATE FUNCTION
+function _mc_femail_ext_assign_forum_taxonomy_to_a_group($form, &$form_state){
+  if (isset($form_state['values']['og_groups'])){
+    $result = db_result(db_query("SELECT tid FROM og_forum_reference WHERE nid = ".$form_state['values']['og_groups']));
+  }else{
+     $result = db_result(db_query("SELECT tid FROM og_forum_reference WHERE nid = ".$form_state['values']['og_groups']));
+  }
+  
+  if ($result){
+    $form_state['values']['taxonomy'][1] = $result;
+    $form['taxonomy'][1]['#value'] = $result;
+  }else{
+    form_set_error('og_groups', 'Select a valid group.');
+  }
+  $users_group = _mc_api_user_subscribed_groups();
+  if (empty($users_group)){
+    form_set_error('title', "You don't belong to any group. Please, join a group to post a Discussion.");
+  }
+}
+
+/**
+ * Implementation of hook_comment
+ */
+function mc_femail_ext_comment(&$a1, $op){
+  if ($op == 'insert' ) {
+    //Avoid to create new comments if the discussions are disabled for the group.
+    $discussion_object = node_load($a1['nid']);
+    $group_object = node_load($discussion_object->og_groups['5129']);
+    if ($group_object->field_enable_discussions['0']['value'] == '0'){
+      //Avoid o create the comment when it has been created from the email.
+      $r = db_query("SELECT comment FROM {comments} WHERE cid = '%d'", $a1['cid']);
+      if ($r){
+        $result = db_query("DELETE FROM {comments} WHERE cid = %d", $a1['cid']);
+        drupal_goto();
+      }else{
+        drupal_goto();
+      }
+    }
+    _mc_femail_ext_cut($a1['comment'], "<!-- FOOTNOTE-BEGIN -->", "");
+    _mc_femail_ext_cut($a1['comment'], "\n--\n");
+    _mc_femail_ext_fix_newlines($a1['comment']);
+    db_query("UPDATE {comments} SET comment = '%s' WHERE cid = %d", $a1['comment'], $a1['cid']);
+    // Not using the following line because that causes to send two email notifications
+    //comment_save($a1);
+  }
+}
+
+//Helper function
+function _mc_femail_ext_cut(&$msg, $pivot = " ", $glue = null) {
+  $glue = ($glue === null) ? $pivot : $glue;
+  $t = explode($pivot, $msg);
+  if (count($t) > 1) {
+    array_pop($t); 
+    $msg = implode($glue, $t);
+    return true;
+  } 
+  return false;
+}
+
+//Helper function to removed quoted text.
+function _mc_femail_ext_remove_quoted_text(&$msg){
+  $body_array = explode("\n",$msg['body']); 
+  $fromEmail=$msg['from'];
+  $toEmail=$msg['to'];
+
+  // Simple regex
+  $spacers="[\s,\/.-]";
+  $timePattern="(?:[0-2])?[0-9]:[0-5][0-9](?::[0-5][0-9])?(?:(?:\s)?[AP]M)?";
+  $dayPattern="(?:(?:Mon(?:day)?)|(?:Tue(?:sday)?)|(?:Wed(?:nesday)?)|(?:Thu(?:rsday)?)|(?:Fri(?:day)?)|(?:Sat(?:urday)?)|(?:Sun(?:day)?))";
+  $dayOfMonthPattern="[0-3]?[0-9]" . $spacers . "*(?:(?:th)|(?:st)|(?:nd)|(?:rd))?";
+  $monthPattern="(?:(?:Jan(?:uary)?)|(?:Feb(?:uary)?)|(?:Mar(?:ch)?)|(?:Apr(?:il)?)|(?:May)|(?:Jun(?:e)?)|(?:Jul(?:y)?) |(?:Aug(?:ust)?)|(?:Sep(?:tember)?)|(?:Oct(?:ober)?)|(?:Nov(?:ember)?)|(?:Dec(?:ember)?)|(?:[0-1]?[0-9]))";
+  $yearPattern="(?:[1-2]?[0-9])[0-9][0-9]";
+  $datePattern="(?:" . $dayPattern . $spacers . "+)?(?:(?:" . $dayOfMonthPattern . $spacers . "+" . $monthPattern . ")|" . "(?:" . $monthPattern . $spacers . "+" . $dayOfMonthPattern . "))" . $spacers . "+" . $yearPattern;
+  $dateTimePattern = "(?:" . $datePattern . "[\s,]*(?:(?:at)|(?:@))?\s*" . $timePattern . ")|" . "(?:" . $timePattern . "[\s,]*(?:on)?\s*" . $datePattern . ")";
+  
+  // Compound regex
+
+  $leadInLine = "/-+\s*(?:Original(?:\sMessage)?)?\s*-+/";
+  $dateLine = "/(?:(?:date)|(?:sent)|(?:time)):\s*". $dateTimePattern . ".*/";
+  $gmailQuotedTextBeginning = "/(On\s+" . $dateTimePattern . ".*wrote:)/";
+  $yahooSignature="/________________________________/";
+
+  $another_datePattern="^". $yearPattern. $spacers. "+(?:(?:". $dayOfMonthPattern. $spacers. "+" . $monthPattern.")|(?:". $monthPattern. $spacers ."+". $dayOfMonthPattern ."))";
+
+  // End of regex
+
+  $regexs=array();
+  $regexs[]="/^-*(.*)Original Message(.*)-*/i";
+  $regexs[]="/^On(.*)wrote:(.*)/i";
+  $regexs[]="/^(.*)$toEmail(.*)wrote:(.*)/i";
+  $regexs[]="/^(.*)$fromEmail(.*)wrote:(.*)/i";
+  $regexs[]="/^>(.*)/i";
+  $regexs[]="/^---(.*)On(.*)wrote:(.*)/i";
+  $regexs[]=$leadInLine;
+  $regexs[]=$dateLine;
+  $regexs[]=$gmailQuotedTextBeginning;
+  $regexs[]="/".$another_datePattern."/";
+  $regexs[]=$yahooSignature;
+
+  $message = "";  
+  foreach($body_array as $line){  
+    $matches_regexs=FALSE;
+    foreach ($regexs as $regex) {
+      if(preg_match($regex, $line)){
+        $matches_regexs=TRUE;
+        break;
+      }
+    }
+    if(!$matches_regexs){
+      $message .= "$line\n";
+    }
+    else{
+      break;
+    }
+  } 
+  $msg['body']=$message;
+}  
+
+/**
+ * Implementation of hook_og
+ */
+function mc_femail_ext_og($op, $gid, $uid, $args) {
+  if($op=='user delete'){
+    $tid = db_result(db_query("SELECT tid FROM {og_forum_reference} WHERE nid = %d", $gid));
+    db_query("DELETE FROM {femail_ext_user_subscription} WHERE uid = %d AND tid = %d", $uid, $tid);
+  }
+}
+
+//Helper function to detect new lines.
+function _mc_femail_ext_fix_newlines(&$text){
+  $other_string="";
+  $new_string=check_markup($text);
+  $array=explode("</p>",$new_string);
+  foreach($array as $paragraph){
+    $paragraph=str_replace("<p>","",$paragraph);
+    $lines=explode("<br />\n",$paragraph);
+    $lines_length=array();
+    foreach($lines as $line){
+      $line_length=strlen($line);
+      $lines_length[]=$line_length;
+    }
+    $average_length=array_sum($lines_length)/count($lines_length);
+    if($average_length>30){
+      $paragraph=str_replace("<br />\n","",$paragraph);
+      $paragraph=strip_tags($paragraph);
+      $paragraph=str_replace("\n", "\n\n", $paragraph);
+    }
+    else {
+      $paragraph=str_replace("<br />\n","\n",$paragraph);
+      $paragraph = "\n" .$paragraph;
+    }
+    $other_string.=$paragraph;
+  }
+
+  $text=$other_string;
+}
+
+/**
+ * Implementation of hook_taxonomy
+ */
+function mc_femail_ext_taxonomy($op, $type, $array = NULL){
+  if($type == 'term'){
+    if($op != 'delete'){
+      $emails = variable_get('femail_emails', array());
+      if($array['vid'] == variable_get('forum_nav_vocabulary', 0)){
+        $email = $emails[$array['tid']];
+        unset($emails[$array['tid']]);
+        $email_pieces=explode("@", $email);
+        $email_pieces['0'].='-discuss';
+        $email_pieces['1']=str_replace('www.', '', $email_pieces['1']);
+        $emails[$array['tid']] = $email_pieces['0'] . "@" .$email_pieces['1'];
+        variable_set('femail_emails', $emails);
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of MODULE_preprocess_HOOK(&$variables) 
+ * This is for modules that want to alter or provide extra variables for theming 
+ * hooks not registered to itself.
+ */
+
+function mc_femail_ext_preprocess_mimemail_message(&$variables) {
+  $variables['template_files'][] = "mimemail-message--" . str_replace("-", "_", $variables['mailkey']);
+  if ($variables['mailkey'] == 'mail-femail-message') {
+    $femail_emails = variable_get('femail_emails', array());
+    if (!empty($femail_emails)) {
+      $sitename = variable_get('site_name', "Default site name");
+      $myaccount = l('account', 'http://' . $_SERVER['HTTP_HOST'] . '/user');
+      $site_email = variable_get('site_mail', '');
+
+      $tid = array_search($variables['recipient'], $femail_emails);
+      $nid = db_result(db_query("SELECT nid FROM {og_forum_reference} WHERE tid = %d", $tid));
+      $node = node_load($nid);
+
+      $commentID_and_discussionID = explode("/", $_SESSION['element_created_id']);
+      if (count($commentID_and_discussionID) > 2) {
+        $comment_id = $commentID_and_discussionID[1];
+        $discussion_id = $commentID_and_discussionID[3];
+        $discussion_object = node_load($discussion_id);
+        $variables['body'] = _mc_api_add_comments_history($variables['body'], $comment_id, $discussion_id);
+        $web_topic = l('this topic on the web', 'node/' . $discussion_object->nid);
+      } else {
+        $discussion_id = $commentID_and_discussionID[1];
+        $discussion_object = node_load($discussion_id);
+        $variables['body'] = _mc_api_add_comments_history($variables['body'], 0, $discussion_id);
+        $web_topic = l('this topic on the web', 'node/' . $discussion_object->nid);
+      }
+      $forum_group_page = l('participate via the group page', 'http://' . $_SERVER['HTTP_HOST'] . '/groups/' . $node->field_small_name['0']['value'] . '/discussions');
+      $group = l($node->title, 'http://' . $_SERVER['HTTP_HOST'] . '/' . $node->field_small_name['0']['value']);
+      $footer = "<!-- FOOTNOTE-BEGIN -->";
+      $footer .= "\n\n\n---\n" . $node->title . "
+
+  You are receiving this because you are following " . $group . " on " . $sitename . ". You may change your notification settings on your " . $myaccount . " page.
+
+  Simply reply to this email to add a comment or email " . $variables['recipient'] . " to start a new topic. You can see " . $web_topic . " and " . $forum_group_page . " as well. " . ".
+
+  If you're having trouble or would like to provide feedback, please email " . $site_email . ".";
+      $footer .= "<!-- FOOTNOTE-END -->";
+      //_mc_femail_ext_fix_newlines($variables['body']);
+      //$variables['body']=check_markup($variables['body']);
+      $variables['footer'] = nl2br($footer);
+    }
+  }
+}
