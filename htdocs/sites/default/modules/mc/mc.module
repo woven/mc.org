@@ -257,13 +257,15 @@ function mc_form_user_register_alter(&$form, &$form_state){
   
   $form['account']['mail']['#size'] = 40;
   //Functionality to add the Facebook Connect button in the register form.
-  $form['facebook-button'] = array(
-    '#type' => 'markup',  
-    '#value' => "<div class='mc-facebook-button'>
-                  " . fbconnect_render_button(array('scope' => 'email', 'text'=> 'Sign up with Facebook')) . "
-                </div>",
-    '#weight' => -31,  
-  );
+  if(function_exists('fbconnect_render_button')){
+    $form['facebook-button'] = array(
+      '#type' => 'markup',  
+      '#value' => "<div class='mc-facebook-button'>
+                    " . fbconnect_render_button(array('scope' => 'email', 'text'=> 'Sign up with Facebook')) . "
+                  </div>",
+      '#weight' => -31,  
+    );
+  }
   
   $form['facebook-share'] = array(
     '#type' => 'checkbox',
