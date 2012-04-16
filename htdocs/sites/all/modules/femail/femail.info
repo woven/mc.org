@@ -1,0 +1,11 @@
+name = "Forum e-mail (femail)"
+description = "Adds e-mail messages to the forum"
+dependencies[] = forum
+core = 6.x
+
+; Information added by drupal.org packaging script on 2011-07-16
+version = "6.x-1.9"
+core = "6.x"
+project = "femail"
+datestamp = "1310810216"
+
