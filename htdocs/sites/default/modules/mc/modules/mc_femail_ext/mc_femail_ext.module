@@ -134,8 +134,7 @@ Sorry, but it doesn't look like you are allowed to post to this address.  Please
 //Helpers access function.
 function _mc_femail_ext_user_edit_access($account){
   $original_value=user_edit_access($account);
-  global $user;
-  if(count($user->og_groups)>=1){
+  if(count($account->og_groups)>=1){
     return TRUE && $original_value;
   }
   else{
