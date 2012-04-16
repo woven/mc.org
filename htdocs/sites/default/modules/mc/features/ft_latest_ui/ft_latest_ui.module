@@ -16,7 +16,7 @@ function ft_latest_ui_views_post_render(&$view,&$output,&$cache){
             
             if(arg(1) AND is_null(arg(2))){
                 if(count($view->build_info['substitutions'])){
-                    require_once(dirname(__FILE__) . "/Inflector.php");
+                    require_once(drupal_get_path('module', 'mc_ui') . "/Inflector.php");
                     $vtitle = $view->build_info['substitutions']['%1'];
                     if($vtitle == 'Audio'){
                         drupal_set_title($vtitle);   
