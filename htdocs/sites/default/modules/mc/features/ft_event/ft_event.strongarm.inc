@@ -243,13 +243,6 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_event';
-  $strongarm->value = 'form-9c6679f1994b2a9963862b572a7b0238';
-  $export['form_build_id_event'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'forward_display_event';
   $strongarm->value = 1;
   $export['forward_display_event'] = $strongarm;
