@@ -243,20 +243,6 @@ function ft_group_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_group';
-  $strongarm->value = 'form-f789ea80886824297414857d4940dd42';
-  $export['form_build_id_group'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_group_page';
-  $strongarm->value = 'form-15428e8bb9043a8816d84d044dc661b5';
-  $export['form_build_id_group_page'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'heartbeat_activity_grouping_how_many';
   $strongarm->value = '5';
   $export['heartbeat_activity_grouping_how_many'] = $strongarm;
