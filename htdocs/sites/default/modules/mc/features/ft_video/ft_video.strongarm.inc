@@ -498,13 +498,6 @@ function ft_video_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_video';
-  $strongarm->value = 'form-04336b4c95724486d57776316e2eb3c2';
-  $export['form_build_id_video'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'forward_display_video';
   $strongarm->value = 1;
   $export['forward_display_video'] = $strongarm;
