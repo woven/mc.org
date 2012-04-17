@@ -185,13 +185,6 @@ function ft_page_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_npage';
-  $strongarm->value = 'form-8156be3a38be80faa5c55924a4efd6a7';
-  $export['form_build_id_npage'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'location_defaultnum_npage';
   $strongarm->value = '0';
   $export['location_defaultnum_npage'] = $strongarm;
