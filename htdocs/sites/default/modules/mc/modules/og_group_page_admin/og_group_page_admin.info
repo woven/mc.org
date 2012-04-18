@@ -1,0 +1,6 @@
+name = OG Group Page Admin
+description = Provides an interface to enable/disable modules on the group page.
+dependencies[] = og
+package = "Organic groups"
+core = 6.x
+version = "6.x-1.0"
