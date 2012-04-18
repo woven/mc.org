@@ -1,0 +1,327 @@
+<?php
+
+/**
+ * Implementation of hook_perm()
+ */
+function og_audience_url_perm(){
+  $perms = array();
+  $perms[] = 'add group content';
+  $types = node_get_types();
+  foreach($types as $type){
+    $t = $type->type;
+    $perms[] = "create $t sitewide";
+  }
+  return $perms;
+}
+
+function og_audience_url_block($op = 'list', $delta = 0, $edit = array()) {
+    
+  if ($op == 'list') {
+    
+    $blocks[0] = array(
+      'info' => t('Add Stuff block'), 
+      'weight' => 0, 
+      'status' => 1,
+      'cache' => BLOCK_CACHE_PER_ROLE | BLOCK_CACHE_PER_PAGE
+    );
+    return $blocks;
+    
+  }else if ($op == 'view') {
+    switch ($delta) {
+      case 0:
+        $block = array(
+          'subject' => '', 
+          'content' => og_audience_url_display_block_add_stuff(),
+        );
+        break;
+    }
+    return $block;
+  }
+  
+}
+
+/**
+ * Implementation of hook_form_alter()
+ */
+function og_audience_url_form_alter(&$form, &$form_state, $form_id){
+  
+  global $user;
+  
+  if ($form['#id'] != 'node-form' || !is_object($form['#node'])){
+    //it's not a node form
+    return;
+  }
+  
+  $type = node_get_types('type', $form['#node']);
+  
+  $usage = variable_get('og_content_type_usage_'. $type->type, 'omitted');
+	
+  $gid = arg(3);
+  $setGroup = FALSE;
+  
+  // check if has permissions to post sitewide
+  $postSitewide = user_access("create " . $type->type . " sitewide");
+  
+  if (!empty($gid)){
+      
+    // first try: group node is the third argument
+    $group_node = node_load($gid);
+    if ($group_node->type == 'group'){
+      $setGroup = TRUE;
+    }
+    
+    // secont try: find the ancestor of the third argument
+    // (Required for image-gallery, since we are using the third argument to define the photo gallery not the group)
+    if (is_object($group_node) && !empty($group_node->og_groups)){
+      foreach ($group_node->og_groups as $g => $group){
+        $gid = $g;
+        break;
+      }
+      $group_node = node_load($gid);
+      if ($group_node->type == 'group'){
+        $setGroup = TRUE;
+      }
+    }
+    
+  }else{
+    
+    // third try: the user belongs to 1 group, and they can't post sitewide
+    if (count($user->og_groups) == 1 && !$postSitewide){
+      $gid = key($user->og_groups); // get the key of the first element
+      $setGroup = TRUE; 
+    }
+    
+  }
+  
+	// If it has an audience field
+	if ( $usage == 'group_post_standard' ){
+	  
+    // set default group
+	  if ($setGroup){
+	    $form['og_nodeapi']['visible']['og_groups']['#default_value'] = array($gid);
+	  }
+		//$group_node = node_load($gid);
+		/*drupal_set_title(t('Create !name for !group_name', 
+		  array('!name' => $type->name, '!group_name' => $group_node->title)));*/
+		
+    // always public
+    $form['og_nodeapi']['visible']['og_public']['#default_value'] = 1; 
+    $form['og_nodeapi']['visible']['og_public']['#prefix'] = '<div style="display:none;">';
+    $form['og_nodeapi']['visible']['og_public']['#suffix'] = '</div>';
+    
+    // do not allow multiple values, change description
+    $form['og_nodeapi']['visible']['og_groups']['#multiple'] = FALSE;
+    $form['og_nodeapi']['visible']['og_groups']['#description'] = 'You may choose to post this in one of your groups.';
+    
+    // change options (display only the groups this user belongs to)
+    $form['og_nodeapi']['visible']['og_groups']['#options'] = array();
+    if ($postSitewide){
+      $form['og_nodeapi']['visible']['og_groups']['#options'][0] = '- None -';
+    }
+    foreach($user->og_groups as $g){
+      $form['og_nodeapi']['visible']['og_groups']['#options'][$g['nid']] = $g['title'];
+    }
+    
+    // force it to be a required select input
+    $form['og_nodeapi']['visible']['og_groups']['#type'] = 'select';
+    $form['og_nodeapi']['visible']['og_groups']['#required'] = TRUE;
+    
+    // hide when less than one option or when it's a gallery_image node
+    if (count($form['og_nodeapi']['visible']['og_groups']['#options']) < 1 ||
+        $type->type == 'gallery_image'){
+      $form['og_nodeapi']['#prefix'] = '<div style="display:none;">';
+      $form['og_nodeapi']['#suffix'] = '</div>';
+    }
+    
+	}
+  
+  
+  
+}
+
+/***** CUSTOM ACCESS ******/
+function _og_audience_url_access($perm, $node){
+  //$node = node_load(arg(1));
+  if(og_is_group_type($node->type) && user_access($perm)){
+    return TRUE;
+  }
+  return FALSE;
+}
+
+
+/**
+ * Menu callback. Retrieves the list of content types that are group posts and display them in a group.
+ */
+function og_audience_url_display_block_add_stuff(){
+  global $user;
+  
+  // check if og is configured properly
+  $is_configured = count(og_get_types('group')) && count(og_get_types('group_post'));
+  if (!$is_configured) {
+    form_set_error('content_types_table', t('You must designate at least one content type to act as a group node and another as a group post. <a href="!create">Create new content type</a> if needed.', array('!create' => url('admin/content/types/add', array('query' => drupal_get_destination())))));
+  }
+  
+  $map = og_types_map();
+  
+  $rows = array();
+  
+  // get node types and sort them by name
+  $types = node_get_types();
+  usort($types, '_og_audience_url_sort_by_name');
+  //$types = node_get_types();
+  
+  // if in a node page, load node
+  $node = NULL;
+  if (arg(0) == 'node' && is_numeric(arg(1))){
+    $node = node_load(arg(1));
+  }
+  
+  $add_stuff_types = array('article', 'event', 'gallery_image', 'gallery', 'audio', 'video', 'place', 'file', 'page', 'group', 'forum');
+  
+  foreach ($types as $type) {
+    
+    if (!in_array($type->type, $add_stuff_types)){
+      continue;
+    }
+    
+    $type_url_str = str_replace('_', '-', $type->type);
+    $usage = variable_get('og_content_type_usage_'. $type->type, 'omitted');
+    
+    $addLink = FALSE;
+    $addLinkDestination = FALSE;
+    $addLinkOptions = array();
+    
+    // Check if we should add to a group
+    $group = og_get_group_context();
+    if ($group == NULL){
+      if (arg(0) == 'node' && is_numeric(arg(1))){
+        $group = og_determine_context_get_group(node_load(arg(1)));
+      }elseif (arg(0) == 'node' && arg(1) == 'add' && is_numeric(arg(3))){
+        $group = og_determine_context_get_group(node_load(arg(3)));
+      }
+    }
+    
+    // Anonymous, will see add stuff containing links to the register page
+    if (!$user->uid){
+      // show them only the types that can be posted in a group (except page and album)
+      if($usage == 'group_post_standard' && $type->type != 'page' && $type->type != 'gallery'){
+        //$addLink = 'user/register';
+        $addLink = "node/add/$type_url_str";
+        $addLinkOptions['query']['type'] = $type_url_str;
+        if (is_object($group)){
+          $addLinkDestination = "node/add/$type_url_str/" . $group->nid;
+        }else{
+          $addLinkDestination = "node/add/$type_url_str";
+        }
+        if ($type->type != 'gallery_image'){
+          $addLinkOptions['query']['destination'] = $addLinkDestination;
+          //$addLinkOptions['query']['destination'] = $_GET['destination'];
+        } 
+        $addLinkOptions['query']['message'] = 'register-first';  
+      }
+    
+    // check if the user has permissions to create this type of node
+    }elseif (user_access("create " . $type->type . " content") || ($type->type=='forum' && user_access("create forum topics"))){
+      
+      // TODO: Fix this hack, it's really ugly 
+      // Since we are using nodereference_url alread for the gallery-image type, 
+      // we need to find a way for the user to choose the gallery, so we redirect
+      // them to the galleries page, and just display a messsage with instructions
+      if ($type->type == 'gallery_image'){
+      
+        if ($node && $node->type == 'gallery'){
+          $addLink = "node/add/$type_url_str/" . $node->nid;
+        }elseif ($node && $node->type == 'gallery_image'){
+          $addLink = "node/add/$type_url_str/" . $node->field_gallery[0]['nid'];
+        }else{
+          
+          if($usage == 'group_post_standard' && is_object($group)){
+            $addLink = $group->path . '/photos';
+          }else{
+            $addLink = $_GET['q'];
+          }
+                    
+          $addLinkOptions['query']['message'] = 'choose-gallery';
+            
+        }
+      
+      }else{
+        
+        if($usage == 'group_post_standard' && is_object($group)){
+          $addLink = "node/add/$type_url_str/" . $group->nid;
+        }else{
+          $addLink = "node/add/$type_url_str";
+        }
+        
+        
+      }
+      
+    // No anonymous, no permissions, continue with next content type
+    }else{
+      continue;
+    }
+    
+    if ($addLink){
+      
+      $rows[$type->name] = array(
+        'title' => '<span class="ico-add-stuff ico-'. $type->type .'" ></span><span class="add-stuff-name">' . $type->name . '</span>',
+        'html' => true,
+        'href' => $addLink,
+      );
+      if (!empty($addLinkOptions)){
+        $rows[$type->name] += $addLinkOptions;
+      }
+    }
+  }
+
+  $output = theme('links', $rows);
+  return $output;
+
+}
+
+function og_audience_url_init(){
+  $message = $_GET['message'];
+  if ($message == 'choose-gallery'){
+    drupal_set_message(t('To add a photo, please first find an album and then try again. We try to keep things organized around here!'), 'strong-status');
+  }elseif ($message == 'register-first'){
+    $login_link = l(t('sign in'), 'user/login', array( 'query' => array('destination' => $_GET['destination']) ) );
+    $join_link = l(t('join now'), 'user/register', array( 'query' => array('destination' => $_GET['destination']) ) );
+    drupal_set_message(t("We're just thrilled that you'd like to add stuff, but please first $login_link or join now below."), 'strong-status');
+  }
+}
+
+function _og_audience_url_sort_by_name($a, $b) {
+  if ($a->name == $b->name) {
+    return 0;
+  } else {
+    return $a->name < $b->name ? -1 : 1;
+  }
+}
+
+
+/**
+ * Implementation of hook_boot()
+ */
+function og_audience_url_boot(){
+  global $user;
+  
+  if ($user->uid != 0 && isset($_GET['message'])){
+    unset($_GET['message']);
+  }
+  if(isset($_GET['q'])){
+    $arg = explode('/', $_GET['q']);
+    if((!isset($user->uid) || $user->uid=='0') && $arg[0]=='node' && $arg[1]=='add' ){
+      if (isset($_GET['type'])){
+        if ($_GET['message']=='register-first'){
+          header('Location: http://' .$_SERVER['HTTP_HOST'] .'/user/register?type=' . $_GET['type'] . '&message=register-first');
+        }else{
+          header('Location: http://' .$_SERVER['HTTP_HOST'] .'/user/register?type=' . $_GET['type']);
+        }
+      }else{
+        header('Location: http://' .$_SERVER['HTTP_HOST'] .'/user/register?message=register-first');
+      }
+      exit();
+    }
+  }
+}
+ 
