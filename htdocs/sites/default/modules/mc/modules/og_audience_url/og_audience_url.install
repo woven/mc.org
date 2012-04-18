@@ -1,0 +1,1 @@
+<?php/** * Implementation of hook_install() */function og_audience_url_install(){  db_query("UPDATE {system} SET weight = 20 WHERE name = 'og_audience_url'");}/** * Implementation of hook_uninstall() */function og_audience_url_uninstall(){  //TODO: Do something fancy here}

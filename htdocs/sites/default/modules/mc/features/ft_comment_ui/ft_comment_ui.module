@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Implementation of hook_form_alter()
+ *
+ */
+function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
+  
+  // disabling wysiwyg for comment form
+  if ($form_id == 'comment_form') {
+    //$form['comment_filter']['comment']['#wysiwyg'] = false;
+    $form['comment_filter']['format'] = array();
+    unset($form['preview']);    
+  }
+
+  // theme the comment form
+  if ($form_id == 'comment_form' && isset($form['_author'])) {
+    
+    $form['head']['#tree'] = true;
+    $form['head']['#weight'] = -10;
+    $form['head']['#prefix'] = '<div id="comment_form_header">';
+    $form['head']['#suffix'] = "</div>";
+
+    $form['head']['note']['#id'] = "approve_note";
+    $form['head']['note']['#value'] = t("Share your thoughts with the community!  Comments will appear immediately.");
+    $form['head']['note']['#prefix'] = '<p class="approve_note">';
+    $form['head']['note']['#suffix'] = "</p>";
+    
+    //comment field
+    unset($form['comment_filter']['comment']['#title']);
+    
+    //submit button
+    $form['submit']['#value'] = 'POST';
+
+    if ($user->uid) {
+        
+      profile_load_profile($user);
+      
+      $options = array('html' => TRUE);
+      unset($form['_author']['#title']);
+      $userPath = 'user/' . $user->uid;
+      $userContent = '<div class="new-comment-author">';
+      $userContent .= '<div class="image">';
+      if ($user->picture){
+        $userContent .= l(theme('imagecache', 'user_comment_image', $user->picture), $userPath, $options);
+      }else{
+        $userContent .= theme('imagecache', 'user_comment_image', drupal_get_path('module', 'mc_ui') . '/media/common/pic-user-default-avatar.jpg');
+      }
+      $userContent .= '</div>';
+      $userContent .= '<div class="comment"><p class="author-link"><cite>' . l($user->name, $userPath) . '</cite></p></div>';
+      $userContent .= '</div>'; 
+      $form['_author']['#value'] = $userContent;
+    }
+  } 
+}

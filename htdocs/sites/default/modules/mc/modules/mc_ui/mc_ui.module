@@ -167,3 +167,25 @@ function theme_ghh_node_categories($nid, $vocabulary_id){
   }
   return $output;
 }
+
+
+function mc_ui_theme_registry_alter(&$theme_registry) {
+  $theme_registry['box']['function']='_mc_ui_box_theme';
+  
+}
+
+function _mc_ui_box_theme($title, $content, $region = 'main') {
+  if(function_exists('_ft_comment_box_theme')){
+    _ft_comment_box_theme($title, $content, $region);
+  }
+
+  if(function_exists('_ft_discussion_box_theme')){
+    _ft_discussion_box_theme($title, $content, $region);
+  }
+
+  if(empty($content)){
+    return;
+  }
+  
+  return theme_box($title, $content, $region);
+}

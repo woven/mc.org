@@ -343,27 +343,6 @@ function ft_place_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_place';
-  $strongarm->value = 'form-d7a73cb9f2b4e3e0c7906b098f7ce473';
-  $export['form_build_id_place'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_place_to_get_food';
-  $strongarm->value = 'form-c08f6c64701cd4aaf486ef62ba243804';
-  $export['form_build_id_place_to_get_food'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_place_to_get_online';
-  $strongarm->value = 'form-958825509b93b13a5746a7a806be88ef';
-  $export['form_build_id_place_to_get_online'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'hidetitle_place';
   $strongarm->value = '0';
   $export['hidetitle_place'] = $strongarm;

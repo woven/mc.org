@@ -1,0 +1,5 @@
+name = "Comment Feature"
+description = "Customises Drupal for Comments in MyCommunity.org."
+package = "mc"
+core = 6.x
+version = "6.x-1.0"

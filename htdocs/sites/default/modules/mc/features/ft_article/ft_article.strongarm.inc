@@ -242,13 +242,6 @@ function ft_article_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_article';
-  $strongarm->value = 'form-2b9cd7e72a7c52cf9dc3617c315d3846';
-  $export['form_build_id_article'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'forward_display_article';
   $strongarm->value = 1;
   $export['forward_display_article'] = $strongarm;
@@ -259,13 +252,6 @@ function ft_article_strongarm() {
   $strongarm->name = 'hidetitle_article';
   $strongarm->value = '0';
   $export['hidetitle_article'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'hs_form_build_id_article';
-  $strongarm->value = 'hs_form_0f9c71126528adb92265a0bf5e552544';
-  $export['hs_form_build_id_article'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

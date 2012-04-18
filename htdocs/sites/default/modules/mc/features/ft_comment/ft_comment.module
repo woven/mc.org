@@ -1,0 +1,45 @@
+<?php
+
+
+/**
+ * Implementation of hook_form_alter()
+ *
+ */
+function ft_comment_form_alter(&$form, &$form_state, $form_id) {
+  //Disable the form for adding comments in the Conten Type Discussions if they are disabled in the groups.
+  if($form_id=='comment_form' && arg(0)=='node' && is_numeric(arg(1)) ){
+    $nid = arg(1);
+    $node=node_load($nid);
+    if($node->type=='forum'){
+      $group_nid=array_pop($node->og_groups);
+      $group_node=node_load($group_nid);
+      if($group_node->field_enable_discussions['0']['value']!=1){
+        $form['#access']=false;
+      }
+    }
+  }
+}
+
+function _ft_comment_box_theme(&$title, &$content, &$region = 'main') {
+  if ($title == t('Post new comment')) {
+    if(empty($content)){
+      return;
+    }
+    $node=node_load(arg(1));
+    $result = "result"; 
+    if(!empty($node->og_groups_both)){
+      global $user;
+    
+      $grupo = array_pop($node->og_groups);
+      //echo $grupo[0];
+    
+      $result = db_result(db_query("SELECT * FROM og_uid WHERE nid=".$grupo." AND uid = ".$user->uid));
+      //drupal_set_message("<pre>".print_r($node, true)."</pre>"); 
+    }
+    $title = t('Leave a Comment');
+    if ($result==""){
+      return "<div id=\"comment-form\" style=\"display: none;\">" . theme_box($title, $content, $region) ."</div>";
+    }
+
+  }
+}

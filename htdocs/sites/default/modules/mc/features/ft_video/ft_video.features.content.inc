@@ -143,6 +143,10 @@ function ft_video_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'file_extensions' => 'png gif jpg jpeg',
       'file_path' => '',
       'progress_indicator' => 'bar',
@@ -168,10 +172,6 @@ function ft_video_content_default_fields() {
         'fid' => '51253',
       ),
       'use_default_image' => 1,
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
       'label' => 'Images',
       'weight' => '9',
       'description' => 'Upload an image to be displayed on the lists of content',
@@ -252,6 +252,8 @@ function ft_video_content_default_fields() {
     'advanced_view' => '--',
     'advanced_view_args' => '',
     'widget' => array(
+      'autocomplete_match' => 'contains',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'nid' => NULL,
@@ -320,6 +322,8 @@ function ft_video_content_default_fields() {
       'thumbnail_width' => '120',
       'thumbnail_height' => '90',
       'thumbnail_default_path' => '',
+      'thumbnail_link_title' => NULL,
+      'meta_fields' => NULL,
       'providers' => array(
         'bliptv' => 0,
         'brightcove' => 0,

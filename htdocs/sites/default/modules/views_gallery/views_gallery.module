@@ -48,3 +48,33 @@ function views_gallery_views_default_views_alter(&$cache) {
     $cache['gallery'] = $view;
   }
 }
+
+
+/**
+ * Preprocess function for custom pager
+ * Overrides the function template_preprocess_custom_pager from the module 
+ * custom_pager. It's used in the output of the image-gallery content type.
+ * 
+ */
+function views_gallery_preprocess_custom_pager(&$vars){
+  if ($vars['nav_array']['prev']){
+    $options = array(
+      'html'=>TRUE,
+      'attributes' => array(
+        'class' => 'browse left'
+      )
+    );
+    $vars['previous'] = l(' ', 'node/'. $vars['nav_array']['prev'], $options);
+  }
+  
+  if ($vars['nav_array']['next']){
+    $options = array(
+      'html'=>TRUE,
+      'attributes' => array(
+        'class' => 'browse right'
+      )
+    );
+    $vars['next'] = l(' ', 'node/'. $vars['nav_array']['next'], $options);
+  }
+  
+}

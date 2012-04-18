@@ -185,13 +185,6 @@ function ft_audio_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'form_build_id_audio';
-  $strongarm->value = 'form-f19756de0ded7ec076f38fb3d944952a';
-  $export['form_build_id_audio'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'location_defaultnum_audio';
   $strongarm->value = '0';
   $export['location_defaultnum_audio'] = $strongarm;

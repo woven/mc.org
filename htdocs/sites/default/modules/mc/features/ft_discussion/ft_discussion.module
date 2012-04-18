@@ -1,3 +1,42 @@
 <?php
 
 include_once('ft_discussion.features.inc');
+
+
+function _ft_discussion_box_theme(&$title, &$content, &$region = 'main') {
+	if($title=='Subscriptions'){
+    $title="<h1 class='title'>Email Notifications</h1>";
+    $content = '<div class="form-hold-container">' . $content . '</div>';
+  }
+  
+  if($title=='Your additional email addresses'){
+    $user=user_load(arg(1));
+    $account=$user;
+    $title="Your email addresses";
+    $content="You can post to discussion forums only from these email addresses.";
+
+    $header = array(
+      t('Email'),
+      t('Status'),
+      t('Operations')
+    );
+    $rows = array();
+    $result = db_query("SELECT * FROM {femail_user_emails} WHERE uid = %d", $account->uid);
+    while($mail_bits = db_fetch_array($result)){
+      $status = $mail_bits['status'] ? t('Verified') : t('Not verified');
+      $rows[] = array(
+        check_plain($mail_bits['email']),
+        $status,
+        l(t('Remove'), 'femail/remove/' . $account->uid . '/' . $mail_bits['email'])
+      );
+    }
+    $main_email=array(
+      $user->mail,
+      'This is your primary email address.',
+      '',
+    );
+    array_unshift($rows, $main_email);
+    $content .=  theme('table', $header, $rows) . drupal_get_form('femail_user_add', $account);
+    $content = '<div class="form-hold-container">' . $content . '</div>';
+  }
+}
