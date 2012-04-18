@@ -182,6 +182,10 @@ function _mc_ui_box_theme($title, $content, $region = 'main') {
   if(function_exists('_ft_discussion_box_theme')){
     _ft_discussion_box_theme($title, $content, $region);
   }
+
+  if(empty($content)){
+    return;
+  }
   
   return theme_box($title, $content, $region);
 }
