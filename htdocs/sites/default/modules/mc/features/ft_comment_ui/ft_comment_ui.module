@@ -5,7 +5,7 @@
  *
  */
 function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
-  
+  global $user;
   // disabling wysiwyg for comment form
   if ($form_id == 'comment_form') {
     //$form['comment_filter']['comment']['#wysiwyg'] = false;
