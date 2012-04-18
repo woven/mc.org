@@ -17,7 +17,7 @@ function og_group_page_admin_manage_group_blocks($form, $node){
   $options = array(
     'og_block|views-og_details-block_4|'.$node->nid => t('Follow Block'),
     'og_block|views-og_community-block_1|'.$node->nid => t('Community Block'),
-    'og_block|quicktabs-1|'.$node->nid => t('Latest, Most Popular and Featured')
+    //'og_block|quicktabs-1|'.$node->nid => t('Latest, Most Popular and Featured')
   );
   
   $default_values = array();
