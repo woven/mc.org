@@ -1,5 +1,10 @@
 <?php
+/**
+ * @file
+ * Code for the Feature Comment Functionality feature.
+ */
 
+include_once 'ft_comment.features.inc';
 
 /**
  * Implementation of hook_form_alter()
