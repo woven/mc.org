@@ -73,6 +73,10 @@ function ft_discussion_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'file_extensions' => 'png gif jpg jpeg',
       'file_path' => '',
       'progress_indicator' => 'bar',
@@ -98,10 +102,6 @@ function ft_discussion_content_default_fields() {
         'fid' => '51253',
       ),
       'use_default_image' => 1,
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
       'label' => 'Images',
       'weight' => '17',
       'description' => 'Upload an image to be displayed on the lists of content',
@@ -110,7 +110,7 @@ function ft_discussion_content_default_fields() {
     ),
   );
 
-// Exported field: field_enable_discussions
+  // Exported field: field_enable_discussions
   $fields['group-field_enable_discussions'] = array(
     'field_name' => 'field_enable_discussions',
     'type_name' => 'group',
@@ -285,8 +285,8 @@ function ft_discussion_content_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Images');
   t('Enable or Disable Discussions');
+  t('Images');
   t('Welcome Email');
 
   return $fields;
