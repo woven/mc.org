@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Admin User Experience feature.
+ */
+
+include_once 'ft_admin.features.inc';

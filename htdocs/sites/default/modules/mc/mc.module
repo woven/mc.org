@@ -69,17 +69,6 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
   if(count($form['og_nodeapi']['visible']['og_groups']['#options'])==1 && $form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
     $form['og_nodeapi']['#access']=false; 
   }
-  if($form_id=='comment_form' && arg(0)=='node' && is_numeric(arg(1)) ){
-    $nid = arg(1);
-    $node=node_load($nid);
-    if($node->type=='forum'){
-      $group_nid=array_pop($node->og_groups);
-      $group_node=node_load($group_nid);
-      if($group_node->field_enable_discussions['0']['value']!=1){
-        $form['#access']=false;
-      }
-    }
-  }
   if(isset($_SESSION['anonymous_group']) && $user->uid!=0 && $form_id=='user_profile_form'){
     $form['#submit'][]="mc_redirect_when_session_variable_set";
   }
@@ -130,53 +119,6 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 
-  // disabling wysiwyg for comment form
-  if ($form_id == 'comment_form') {
-    //$form['comment_filter']['comment']['#wysiwyg'] = false;
-    $form['comment_filter']['format'] = array();
-    unset($form['preview']);    
-  }
-
-  // theme the comment form
-  if ($form_id == 'comment_form' && isset($form['_author'])) {
-    
-    $form['head']['#tree'] = true;
-    $form['head']['#weight'] = -10;
-    $form['head']['#prefix'] = '<div id="comment_form_header">';
-    $form['head']['#suffix'] = "</div>";
-
-    $form['head']['note']['#id'] = "approve_note";
-    $form['head']['note']['#value'] = t("Share your thoughts with the community!  Comments will appear immediately.");
-    $form['head']['note']['#prefix'] = '<p class="approve_note">';
-    $form['head']['note']['#suffix'] = "</p>";
-    
-    //comment field
-    unset($form['comment_filter']['comment']['#title']);
-    
-    //submit button
-    $form['submit']['#value'] = 'POST';
-
-    if ($user->uid) {
-        
-      profile_load_profile($user);
-      
-      $options = array('html' => TRUE);
-      unset($form['_author']['#title']);
-      $userPath = 'user/' . $user->uid;
-      $userContent = '<div class="new-comment-author">';
-      $userContent .= '<div class="image">';
-      if ($user->picture){
-        $userContent .= l(theme('imagecache', 'user_comment_image', $user->picture), $userPath, $options);
-      }else{
-        $userContent .= theme('imagecache', 'user_comment_image', drupal_get_path('module', 'ghh_ui') . '/media/common/pic-user-default-avatar.jpg');
-      }
-      $userContent .= '</div>';
-      $userContent .= '<div class="comment"><p class="author-link"><cite>' . l($user->name, $userPath) . '</cite></p></div>';
-      $userContent .= '</div>'; 
-      $form['_author']['#value'] = $userContent;
-    }
-  } 
-    
   // alter image form
   if ($form_id == 'image_node_form' && $user->uid != 1) {
     unset($form['rebuild_images']);
@@ -227,11 +169,7 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
         </div>
       </div>
       </div>";
-	}
- 
- 
- 
- 
+  }
 }
 
 function mc_validate_user_send_eror($form, &$form_state){
