@@ -14,11 +14,9 @@ function og_group_page_admin_manage_group_blocks($form, $node){
     
   drupal_set_title( t('Manage blocks for !group_name group', array('!group_name'=>$node->title)));
   
-  $options = array(
-    'og_block|views-og_details-block_4|'.$node->nid => t('Follow Block'),
-    'og_block|views-og_community-block_1|'.$node->nid => t('Community Block'),
-    //'og_block|quicktabs-1|'.$node->nid => t('Latest, Most Popular and Featured')
-  );
+  $options = array();
+  
+  drupal_alter("og_home_blocks",$options,$node);
   
   $default_values = array();
   foreach($options as $option => $title){
