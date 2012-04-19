@@ -71,34 +71,62 @@ function ft_admin_strongarm() {
   $strongarm->name = 'node_admin_theme';
   $strongarm->value = 1;
   $export['node_admin_theme'] = $strongarm;
-    
+
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'admin_menu_margin_top';
   $strongarm->value = 1;
   $export['admin_menu_margin_top'] = $strongarm;
-  
+
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'admin_menu_position_fixed';
   $strongarm->value = 0;
   $export['admin_menu_position_fixed'] = $strongarm;
-  
+
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'admin_menu_tweak_modules';
   $strongarm->value = 0;
   $export['admin_menu_tweak_modules'] = $strongarm;
-  
+
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'admin_menu_tweak_tabs';
   $strongarm->value = 0;
   $export['admin_menu_tweak_tabs'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'module_filter_tabs';
+  $strongarm->value = 1;
+  $export['module_filter_tabs'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'module_filter_count_enabled';
+  $strongarm->value = 1;
+  $export['module_filter_count_enabled'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'module_filter_visual_aid';
+  $strongarm->value = 1;
+  $export['module_filter_visual_aid'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'module_filter_dynamic_save_position';
+  $strongarm->value = 1;
+  $export['module_filter_dynamic_save_position'] = $strongarm;
 
   return $export;
 }
