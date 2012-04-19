@@ -7,8 +7,5 @@ function mc_base_helper_preprocess_page(){
 	if(!module_exists('advagg')){
 		drupal_set_message('The module advagg must be enabled for the theme to work properly.');
 	}
-}
-
-function mc_base_helper_preprocess_page(&$variables){
 	drupal_add_js('https://apis.google.com/js/plusone.js', 'external');
 }
