@@ -36,3 +36,6 @@ thumbs.db
 htdocs/tmp/*
 .settings/
 mydocs/
+
+
+*.tar.gz
