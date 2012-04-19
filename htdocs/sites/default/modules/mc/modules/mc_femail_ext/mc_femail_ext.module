@@ -116,14 +116,16 @@ Sorry, but it doesn't look like you are allowed to post to this address.  Please
           unset($node->from);
         }
         //Avoid to create new discussions if the discussions are disabled for the group.
-        $group = node_load($node->og_groups);
+        $og_groups=$node->og_groups;
+        $group = node_load(array_pop($og_groups));
         if ($group->field_enable_discussions['0']['value'] == '0'){
           drupal_goto();
         }
         break;
       case 'update':
         //Update Term id for groups that exist in the site with the new term id.
-        $term_in_og_forum_reference = db_result(db_query("SELECT tid FROM og_forum_reference WHERE nid = ".$node->og_groups['0']));
+        $og_groups=$node->og_groups;
+        $term_in_og_forum_reference = db_result(db_query("SELECT tid FROM og_forum_reference WHERE nid = ".array_pop($og_groups)));
         if (($term_in_og_forum_reference) && ($node->taxonomy[1]!=$term_in_og_forum_reference)){
           $node->taxonomy[1] = $term_in_og_forum_reference;
         }
@@ -331,6 +333,13 @@ function _mc_femail_ext_subscribe_submit($form, $form_state){
 
 //Helper function to assign the forum taxonomy term to a disscusion. VALIDATE FUNCTION
 function _mc_femail_ext_assign_forum_taxonomy_to_a_group($form, &$form_state){
+  $temp=$form_state['values']['og_groups'];
+  foreach ($form_state['values']['og_groups'] as $key => $value) {
+    if($key==$value){
+      $form_state['values']['og_groups']=$key;
+      break;
+    }
+  }
   if (isset($form_state['values']['og_groups'])){
     $result = db_result(db_query("SELECT tid FROM og_forum_reference WHERE nid = ".$form_state['values']['og_groups']));
   }else{
@@ -347,6 +356,7 @@ function _mc_femail_ext_assign_forum_taxonomy_to_a_group($form, &$form_state){
   if (empty($users_group)){
     form_set_error('title', "You don't belong to any group. Please, join a group to post a Discussion.");
   }
+  $form_state['values']['og_groups']=$temp;
 }
 
 /**
