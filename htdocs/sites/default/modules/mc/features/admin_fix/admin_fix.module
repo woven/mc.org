@@ -1,0 +1,12 @@
+<?php
+
+/*
+ * hook_init()
+ * Add css file to fix the overlap between admin and admin_menu.
+ */
+function admin_fix_init(){
+  // add css
+  if (module_exists('admin') && module_exists('admin_menu')){
+    drupal_add_css(drupal_get_path('module', 'admin_fix') . '/admin_fix.css');
+  }
+}

@@ -1,0 +1,5 @@
+name = Admin Fix
+description = "Fix the overlap between admin and admin_menu"
+package = mc
+version = VERSION
+core = 6.x
