@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * Following the Drush 2.x conventions, all commands are now
+ * implemented in the drush_views.drush.inc file.
+ */

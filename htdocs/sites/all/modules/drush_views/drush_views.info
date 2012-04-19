@@ -1,0 +1,12 @@
+name = Drush Views
+description = List, import, export and delete views from Drush.
+package = Drush
+dependencies[] = views
+core = 6.x
+
+; Information added by drupal.org packaging script on 2012-04-08
+version = "6.x-3.0"
+core = "6.x"
+project = "drush_views"
+datestamp = "1333918849"
+
