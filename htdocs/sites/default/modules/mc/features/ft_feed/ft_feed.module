@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Content Type Feed feature.
+ */
+
+include_once 'ft_feed.features.inc';
