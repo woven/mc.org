@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Search Drupal UI feature.
+ */
+
+include_once 'ft_search_drupal_ui.features.inc';

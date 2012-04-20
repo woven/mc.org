@@ -1,0 +1,5 @@
+name = "Feature Search Drupal UI"
+description = "Feature that contains the UI elements for the Drupal Search functionality"
+core = "6.x"
+package = "Features"
+features[imagecache][] = "search_result_image"

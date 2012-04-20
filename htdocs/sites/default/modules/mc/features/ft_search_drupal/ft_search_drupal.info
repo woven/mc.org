@@ -1,0 +1,3 @@
+name = "Feature Search Drupal"
+description = "Contains all the hooks for the Drupal Search Functionality"
+core = 6.x
