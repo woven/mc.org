@@ -7,9 +7,9 @@ function ft_news_content_default_fields() {
   $fields = array();
 
   // Exported field: field_list_image
-  $fields['news-field_list_image'] = array(
+  $fields['nnews-field_list_image'] = array(
     'field_name' => 'field_list_image',
-    'type_name' => 'news',
+    'type_name' => 'nnews',
     'display_settings' => array(
       'label' => array(
         'format' => 'hidden',
@@ -83,10 +83,6 @@ function ft_news_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
       'file_extensions' => 'png gif jpg jpeg',
       'file_path' => '',
       'progress_indicator' => 'bar',
@@ -112,6 +108,10 @@ function ft_news_content_default_fields() {
         'fid' => '51253',
       ),
       'use_default_image' => 1,
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'label' => 'Images',
       'weight' => '35',
       'description' => 'Upload an image to be displayed on the lists of content',

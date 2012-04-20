@@ -15,7 +15,7 @@ function ft_news_ctools_plugin_api() {
  */
 function ft_news_node_info() {
   $items = array(
-    'news' => array(
+    'nnews' => array(
       'name' => t('News'),
       'module' => 'features',
       'description' => '',
