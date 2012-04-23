@@ -40,7 +40,7 @@ function theme_ghh_user_picture($uid = NULL,$imagecache, $imageComment = TRUE){
     
     if(!$picture){
       //Bring Facebook Picture profile if the user has associated the accounts.
-      if(_fbconnect_get_user_fbuid($user->uid) == fbconnect_get_fbuid()){
+      if(function_exists('_fbconnect_get_user_fbuid') && _fbconnect_get_user_fbuid($user->uid) == fbconnect_get_fbuid()){
                  
        $pictureUrl = "https://graph.facebook.com/" . fbconnect_get_fbuid() . "/picture?type=large";
        $image=_mc_api_save_facebook_user_image($pictureUrl, "fb-" . fbconnect_get_fbuid() . '.jpg' );
