@@ -1,0 +1,5 @@
+name = GHH OG Menu Trails
+description = Sets the menu trail based on the group information of a post/page
+package = "GHH"
+core = 6.x
+version = "6.x-1.0"
