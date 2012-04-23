@@ -423,7 +423,7 @@ Latest post: <?php print l($post->title, \'node/\' . $post->nid); ?>
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
-  $handler->override_option('title', 'Featured Group');
+  $handler->override_option('title', 'Featured Group|Community groups making a difference');
   $handler->override_option('css_class', 'featured-group');
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'More Groups\', \'groups\' )); ?>');
   $handler->override_option('row_options', array(
@@ -1106,7 +1106,7 @@ Latest post: <?php print l($post->title, \'node/\' . $post->nid); ?>
       'empty_zero' => 0,
       'value' => '<?php 
   if ($data->event_unix_event_start){
-    print theme_ghh_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
+    print theme_mc_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
   }
 ?>',
       'exclude' => 1,
@@ -2337,7 +2337,7 @@ print theme_ghh_node_categories($data->nid, 2);
       'empty_zero' => 0,
       'value' => '<?php 
   if ($data->event_unix_event_start){
-    print theme_ghh_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
+    print theme_mc_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
   }
 ?>',
       'exclude' => 1,
