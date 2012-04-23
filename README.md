@@ -16,4 +16,6 @@ Contains files and folders like:
 * Go through the regular drupal installer at /install.php
 * Select "My Community" install profile
 * Follow the regular install steps
-* Once you are done.. you have to clear cache using drupal interface or drush cc all
+* Once you are done.. you have to clear cache TWICE with either:
+** admin/settings/performance
+** drush cc all
