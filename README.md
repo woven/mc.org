@@ -17,5 +17,6 @@ Contains files and folders like:
 * Select "My Community" install profile
 * Follow the regular install steps
 * Once you are done.. you have to clear cache TWICE with either:
+
 ** admin/settings/performance
 ** drush cc all
