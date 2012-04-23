@@ -6,9 +6,9 @@
 function ft_latest_ui_views_default_views() {
   $views = array();
 
-  // Exported view: latest
+  // Exported view: latest_pages
   $view = new view;
-  $view->name = 'latest';
+  $view->name = 'latest_pages';
   $view->description = 'Latest Stuff';
   $view->tag = '';
   $view->base_table = 'node';
