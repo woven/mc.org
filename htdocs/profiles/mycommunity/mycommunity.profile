@@ -99,8 +99,6 @@ function mycommunity_profile_tasks(&$task, $url) {
 
   variable_set('theme_default', 'mc_base');
   variable_set('theme_settings', $theme_settings);
-
-  //cache_clear_all();
 }
 
 /**
