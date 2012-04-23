@@ -1265,9 +1265,9 @@ else {
 
   $views[$view->name] = $view;
 
-  // Exported view: related_stuff
+  // Exported view: node_related
   $view = new view;
-  $view->name = 'related_stuff';
+  $view->name = 'node_related';
   $view->description = 'Related Stuff';
   $view->tag = '';
   $view->base_table = 'node';
