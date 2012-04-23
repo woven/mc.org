@@ -137,9 +137,9 @@ function ft_event_ui_views_default_views() {
 
   $views[$view->name] = $view;
 
-  // Exported view: events_grouped_by_dates
+  // Exported view: events_by_dates
   $view = new view;
-  $view->name = 'events_grouped_by_dates';
+  $view->name = 'events_by_dates';
   $view->description = 'Events grouped by dates (today, tomorrow, next week, etc..)';
   $view->tag = 'Events';
   $view->base_table = 'node';
@@ -972,9 +972,9 @@ echo theme("mc_event_view_header",$view, \'latest/events/this-week\');
 
   $views[$view->name] = $view;
 
-  // Exported view: group_events_grouped_by_dates
+  // Exported view: events_by_dates_groups
   $view = new view;
-  $view->name = 'group_events_grouped_by_dates';
+  $view->name = 'events_by_dates_groups';
   $view->description = 'Events from a Group, grouped by dates (today, tomorrow, next week, etc..)';
   $view->tag = 'Events';
   $view->base_table = 'node';
@@ -1591,7 +1591,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/current\');
   $handler->override_option('title', 'Today');
   $handler->override_option('header', '<?php
   // Important: Pager should be turned on, otherwise count will not work.
-$view = views_get_view(\'events_grouped_by_dates\');
+$view = views_get_view(\'events_by_dates\');
 $view->set_display(\'block_2\');
 $view->execute();
 echo theme("mc_event_view_header",$view, \'latest/events/today\');
@@ -1645,7 +1645,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/today\');
   $handler->override_option('title', 'Tomorrow');
   $handler->override_option('header', '<?php
   // Important: Pager should be turned on, otherwise count will not work.
-$view = views_get_view(\'events_grouped_by_dates\');
+$view = views_get_view(\'events_by_dates\');
 $view->set_display(\'block_3\');
 $view->execute();
 echo theme("mc_event_view_header",$view, \'latest/events/tomorrow\');
@@ -1699,7 +1699,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/tomorrow\');
   $handler->override_option('title', 'This Week');
   $handler->override_option('header', '<?php
   // Important: Pager should be turned on, otherwise count will not work.
-$view = views_get_view(\'events_grouped_by_dates\');
+$view = views_get_view(\'events_by_dates\');
 $view->set_display(\'block_4\');
 $view->execute();
 echo theme("mc_event_view_header",$view, \'latest/events/this-week\');
