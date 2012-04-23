@@ -107,7 +107,7 @@ function mc_base_preprocess_page(&$variables){
   if (is_object($variables['node'])){
     $node = $variables['node'];
     
-    if ($node->type == 'page'){
+    if ($node->type == 'npage'){
       
       if ($node->field_page_type[0]['value'] == 'landing' ){
         $page_mode = arg(2);
