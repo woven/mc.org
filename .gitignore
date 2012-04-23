@@ -6,6 +6,10 @@ local.backup.sh
 local.restore.sh
 local.credentials.sh
 
+#phpstorm
+.idea/*
+atlassian-ide-plugin.xml
+
 #eclipse specific files
 .project
 .classpath
@@ -39,3 +43,5 @@ mydocs/
 
 
 *.tar.gz
+
+
