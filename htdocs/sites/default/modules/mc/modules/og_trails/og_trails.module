@@ -1,0 +1,39 @@
+<?php
+
+function og_trails_nodeapi(&$node, $op, $a3 = NULL, $page = FALSE) {
+  if ($op == 'view' && $page == TRUE && !empty($node->og_groups)) {
+    
+    foreach($node->og_groups as $gid){
+      $group = node_load($gid);
+      $small_path = $node->field_small_name[0]['value'];
+      break;
+    }
+    
+    $path = 'groups/' . $group->path . '/';
+    
+    if ($node->type == 'event'){
+      $path .= 'events';
+    }elseif ($node->type == 'article'){
+      $path .= 'articles';
+    }elseif ($node->type == 'file'){
+      $path .= 'files';
+    }elseif ($node->type == 'gallery_image' || $node->type == 'gallery'){
+      $path .= 'photos';
+    }elseif ($node->type == 'video'){
+      $path .= 'videos';
+    }elseif ($node->type == 'forum'){
+      $path .= 'discussions';
+    }else{
+      $path .= 'latest';
+    }
+    
+    $path = url($path);
+    
+    $groupsPath = url('groups');
+    
+    // it was almost imposible to do it via PHP, using a JS hack to do it
+    drupal_add_js(array('og_trails' => array('path' => $path)), 'setting');
+    drupal_add_js(array('og_trails' => array('groupsPath' => $groupsPath)), 'setting');
+    drupal_add_js(drupal_get_path('module', 'og_trails') . '/og_trails.js');
+  }
+}
