@@ -1,4 +1,4 @@
-name = "Feature Latest"
+name = "Feature Latest UI"
 description = "Feature that contains contexts, views, boxes and menu related to the Latest Section"
 core = "6.x"
 package = "Features"
