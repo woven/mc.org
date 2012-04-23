@@ -87,7 +87,7 @@ function mycommunity_profile_task_list() {
  * @return
  *   An optional HTML string to display to the user. Only used if you
  *   modify the $task, otherwise discarded.
- */
+*/
 function mycommunity_profile_tasks(&$task, $url) {
   // Default page to not be promoted and have comments disabled.
   variable_set('node_options_page', array('status'));
@@ -96,10 +96,11 @@ function mycommunity_profile_tasks(&$task, $url) {
   // Don't display date and author information for page nodes by default.
   $theme_settings = variable_get('theme_settings', array());
   $theme_settings['toggle_node_info_page'] = FALSE;
+
+  variable_set('theme_default', 'mc_base');
   variable_set('theme_settings', $theme_settings);
 
-  // Update the menu router information.
-  menu_rebuild();
+  cache_clear_all();
 }
 
 /**
@@ -111,6 +112,6 @@ function mycommunity_profile_tasks(&$task, $url) {
 function mycommunity_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'install_configure') {
     // Set default for site name field.
-    $form['site_information']['site_name']['#mycommunity_value'] = $_SERVER['SERVER_NAME'];
+    $form['site_information']['site_name']['#default_value'] = 'My Community Base';
   }
 }
