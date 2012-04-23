@@ -499,7 +499,7 @@ dsm($object);
 // display only on nodes that are part of a group
 if (!empty($object->og_groups)){
   $display_id = \'block_2\';
-  $view = views_get_view(\'related_stuff\');
+  $view = views_get_view(\'node_related\');
   if (!$view || !$view->access($display_id)) {
     return;
   }
