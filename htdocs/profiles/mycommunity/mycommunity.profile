@@ -7,7 +7,7 @@
  *   An array of modules to enable.
  */
 function mycommunity_profile_modules() {
-  return array('content','comment', 'menu', 'taxonomy','dblog','ctools','ds','nd','context','views','fieldgroup','features','ft_admin');
+  return array('content','admin_theme','comment', 'menu', 'taxonomy','dblog','ctools','imageapi','imageapi_gd','ds','nd','context','views','fieldgroup','features','ft_admin','imagecache');
 }
 
 /**
@@ -100,7 +100,7 @@ function mycommunity_profile_tasks(&$task, $url) {
   variable_set('theme_default', 'mc_base');
   variable_set('theme_settings', $theme_settings);
 
-  cache_clear_all();
+  //cache_clear_all();
 }
 
 /**
