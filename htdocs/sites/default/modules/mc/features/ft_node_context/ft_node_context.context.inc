@@ -9,6 +9,48 @@ function ft_node_context_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'node_ingroup';
+  $context->description = 'Any page inside a group.';
+  $context->tag = 'Node';
+  $context->conditions = array(
+    'context_og_condition_group_type' => array(
+      'values' => array(
+        'group' => 'group',
+      ),
+      'options' => array(
+        'node_form' => 0,
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-og_details-block_1' => array(
+          'module' => 'views',
+          'delta' => 'og_details-block_1',
+          'region' => 'group_logo',
+          'weight' => 0,
+        ),
+        'og_menu-0' => array(
+          'module' => 'og_menu',
+          'delta' => 0,
+          'region' => 'left',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Any page inside a group.');
+  t('Node');
+  $export['node_ingroup'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'node_outgroup';
   $context->description = 'Content nodes (article, audio, etc...), that are outside a group';
   $context->tag = 'Node';
