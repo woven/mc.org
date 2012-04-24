@@ -9,6 +9,96 @@ function ft_landing_contexts_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'landing_audiovideo';
+  $context->description = 'Context that contains the reactions to display the Audio & Video Landing Page properly';
+  $context->tag = 'Landing';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'audio-and-video' => 'audio-and-video',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-og_community-block_4' => array(
+          'module' => 'views',
+          'delta' => 'og_community-block_4',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+        'views-featured_blocks-block_1' => array(
+          'module' => 'views',
+          'delta' => 'featured_blocks-block_1',
+          'region' => 'right',
+          'weight' => 1,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Context that contains the reactions to display the Audio & Video Landing Page properly');
+  t('Landing');
+  $export['landing_audiovideo'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'landing_community';
+  $context->description = 'Context that contains the reactions to display the Community Landing Page properly';
+  $context->tag = 'Landing';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'community' => 'community',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-featured_members-block_1' => array(
+          'module' => 'views',
+          'delta' => 'featured_members-block_1',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+        'views-community_popular-block_1' => array(
+          'module' => 'views',
+          'delta' => 'community_popular-block_1',
+          'region' => 'right',
+          'weight' => 1,
+        ),
+        'views-featured_blocks-block_1' => array(
+          'module' => 'views',
+          'delta' => 'featured_blocks-block_1',
+          'region' => 'right',
+          'weight' => 2,
+        ),
+        'views-og_community-block_5' => array(
+          'module' => 'views',
+          'delta' => 'og_community-block_5',
+          'region' => 'below_content',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Context that contains the reactions to display the Community Landing Page properly');
+  t('Landing');
+  $export['landing_community'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'landing_events';
   $context->description = 'Context that contains the reactions to display the Events Landing Page properly';
   $context->tag = 'Landing';
