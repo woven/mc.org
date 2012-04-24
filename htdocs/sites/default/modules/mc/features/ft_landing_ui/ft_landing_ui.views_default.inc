@@ -56,7 +56,7 @@ function ft_landing_ui_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-featured-item_linked',
+      'format' => 'featured_item_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -244,7 +244,7 @@ function ft_landing_ui_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-featured-item_linked',
+      'format' => 'featured_item_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -494,7 +494,7 @@ Latest post: <?php print l($post->title, \'node/\' . $post->nid); ?>
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-featured-photo_linked',
+      'format' => 'featured_photo_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -645,7 +645,7 @@ Latest post: <?php print l($post->title, \'node/\' . $post->nid); ?>
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -1607,7 +1607,7 @@ Latest post: <?php print l($post->title, \'node/\' . $post->nid); ?>
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'value' => '<?php return theme("ghh_user_picture",$data->users_node_data_field_featured_members_uid,"article_thumbnail", FALSE); ?>',
+      'value' => '<?php return theme("ghh_user_picture",$data->users_node_data_field_featured_members_uid,"thumbnail", FALSE); ?>',
       'exclude' => 0,
       'id' => 'phpcode_1',
       'table' => 'customfield',
@@ -1915,7 +1915,7 @@ if ($count){
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
