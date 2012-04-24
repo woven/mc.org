@@ -61,7 +61,7 @@ function ft_discussion_ui_views_default_views() {
       'label' => '',
       'alter' => array(
         'alter_text' => 0,
-        'text' => '<img src="/sites/default/files/imagecache/article_thumbnail/imagefield_default_images/forum_default.png" />',
+        'text' => '<img src="/sites/default/files/imagecache/thumbnail/imagefield_default_images/forum_default.png" />',
         'make_link' => 1,
         'path' => '[path]',
         'link_class' => '',
@@ -82,7 +82,7 @@ function ft_discussion_ui_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',

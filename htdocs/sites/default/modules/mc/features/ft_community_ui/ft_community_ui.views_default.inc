@@ -53,7 +53,7 @@ function ft_community_ui_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -91,7 +91,7 @@ function ft_community_ui_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',

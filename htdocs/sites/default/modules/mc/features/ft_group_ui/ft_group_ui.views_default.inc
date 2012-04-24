@@ -97,7 +97,7 @@ function ft_group_ui_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -138,7 +138,7 @@ function ft_group_ui_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -973,7 +973,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -1014,7 +1014,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -6601,7 +6601,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -6642,7 +6642,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -7330,7 +7330,7 @@ print theme_ghh_authoring_info($data->node_node_data_field_group_featured_items_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -7371,7 +7371,7 @@ print theme_ghh_authoring_info($data->node_node_data_field_group_featured_items_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -7945,7 +7945,7 @@ print (theme_ghh_see_all(\'See All\', \'groups/\' . $small_name . \'/latest\' ))
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -7986,7 +7986,7 @@ print (theme_ghh_see_all(\'See All\', \'groups/\' . $small_name . \'/latest\' ))
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',

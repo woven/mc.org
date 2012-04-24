@@ -2196,7 +2196,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -2237,7 +2237,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -2614,7 +2614,7 @@ echo theme("mc_event_view_header",$view, \'latest/audio/all\');
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -2655,7 +2655,7 @@ echo theme("mc_event_view_header",$view, \'latest/audio/all\');
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_linked',
+      'format' => 'thumbnail_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
