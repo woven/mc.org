@@ -1,3 +1,4 @@
 name = "mc.org api module"
 description = "Holds general functions that can be called from other modules"
 core = 6.x
+package = mc
