@@ -50,7 +50,7 @@ $myUrl = $_SERVER[\'HTTP_HOST\'];
 ?>
 
 <fb:like send="false" width="450" show_faces="false"></fb:like>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['facebook_like'] = $box;
 
