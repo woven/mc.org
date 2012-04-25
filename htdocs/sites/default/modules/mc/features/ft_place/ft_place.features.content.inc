@@ -61,6 +61,7 @@ function ft_place_content_default_fields() {
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => 5,
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -68,7 +69,6 @@ function ft_place_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'size' => '60',
       'label' => 'Cost (computer)',
       'weight' => '23',
       'description' => '',
@@ -203,6 +203,7 @@ function ft_place_content_default_fields() {
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => NULL,
+      'size' => NULL,
       'label' => 'Contact name',
       'weight' => '24',
       'description' => '',
@@ -340,6 +341,7 @@ function ft_place_content_default_fields() {
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => 1,
+      'size' => NULL,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -410,6 +412,7 @@ function ft_place_content_default_fields() {
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => NULL,
+      'size' => NULL,
       'label' => 'Fax number',
       'weight' => '26',
       'description' => '',
@@ -473,6 +476,7 @@ function ft_place_content_default_fields() {
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => '15',
+      'size' => 60,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -481,7 +485,6 @@ function ft_place_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'size' => 60,
       'label' => 'Insurance',
       'weight' => '30',
       'description' => '',
@@ -545,6 +548,7 @@ function ft_place_content_default_fields() {
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => '15',
+      'size' => 60,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -553,7 +557,6 @@ function ft_place_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'size' => 60,
       'label' => 'Services',
       'weight' => '29',
       'description' => '',
@@ -617,6 +620,7 @@ function ft_place_content_default_fields() {
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => 1,
+      'size' => NULL,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -695,6 +699,10 @@ function ft_place_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'file_extensions' => 'png gif jpg jpeg',
       'file_path' => '',
       'progress_indicator' => 'bar',
@@ -720,10 +728,6 @@ function ft_place_content_default_fields() {
         'fid' => '51253',
       ),
       'use_default_image' => 1,
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
       'label' => 'Images',
       'weight' => '13',
       'description' => 'Upload an image to be displayed on the lists of content',
@@ -787,15 +791,23 @@ function ft_place_content_default_fields() {
     'widget' => array(
       'file_extensions' => 'jpg jpeg png gif',
       'file_path' => 'logos',
+      'progress_indicator' => 'bar',
       'max_filesize_per_file' => '500K',
       'max_filesize_per_node' => '',
-      'file_widgets' => NULL,
       'max_resolution' => '640x480',
       'min_resolution' => '0',
       'alt' => '',
       'custom_alt' => 0,
       'title' => '',
       'custom_title' => 0,
+      'title_type' => 'textfield',
+      'default_image' => NULL,
+      'use_default_image' => 0,
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
+      'file_widgets' => NULL,
       'label' => 'Logo',
       'weight' => '12',
       'description' => '',
@@ -999,6 +1011,7 @@ Open on weekends',
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => NULL,
+      'size' => NULL,
       'label' => 'Phone number',
       'weight' => '25',
       'description' => '',
@@ -1143,6 +1156,7 @@ spirit_and_mind|Place for the Spirit and Mind',
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => '15',
+      'size' => NULL,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -1368,6 +1382,7 @@ other|Other',
     'allowed_values_php' => '',
     'widget' => array(
       'rows' => 5,
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -1375,7 +1390,6 @@ other|Other',
         ),
       ),
       'default_value_php' => NULL,
-      'size' => '60',
       'label' => 'Cost (wireless)',
       'weight' => '21',
       'description' => '',

@@ -23,7 +23,7 @@ function mc_node_ui_default_box() {
 <?php print theme(\'ghh_browse_menu\',\'menu-by-editorial-content\'); ?>
 </div>
 </div>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['browse_by_type'] = $box;
 
