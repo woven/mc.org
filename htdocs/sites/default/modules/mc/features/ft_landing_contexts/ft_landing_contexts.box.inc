@@ -32,6 +32,36 @@ function ft_landing_contexts_default_box() {
   $box = new stdClass;
   $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
   $box->api_version = 1;
+  $box->delta = 'audiovideo_add';
+  $box->plugin_key = 'simple';
+  $box->title = 'Add Audio or Video ';
+  $box->description = 'Audio Video - Add new';
+  $box->options = array(
+    'body' => '<p>Do you know of a health related video the community might find helpful? First find it on YouTube or another video site, then click the green Add Stuff button at the top of the page, choose Video and share some details. Your video will be posted immediately.</p>
+<?php echo theme(\'ghh_see_all\',\'More Help\',\'help\'); ?>',
+    'format' => '3',
+  );
+  $export['audiovideo_add'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'audiovideo_latest';
+  $box->plugin_key = 'simple';
+  $box->title = 'Latest';
+  $box->description = 'Latest Audio and Video';
+  $box->options = array(
+    'body' => '<?php
+print views_embed_view(\'latest\', \'block_3\');
+print views_embed_view(\'latest\', \'block_2\');
+?>',
+    'format' => '3',
+  );
+  $export['audiovideo_latest'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
   $box->delta = 'footer_hon_logo';
   $box->plugin_key = 'simple';
   $box->title = '';

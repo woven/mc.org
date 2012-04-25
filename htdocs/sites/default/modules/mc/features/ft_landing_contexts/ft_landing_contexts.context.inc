@@ -22,17 +22,29 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'boxes-audiovideo_add' => array(
+          'module' => 'boxes',
+          'delta' => 'audiovideo_add',
+          'region' => 'right',
+          'weight' => 0,
+        ),
         'views-og_community-block_4' => array(
           'module' => 'views',
           'delta' => 'og_community-block_4',
           'region' => 'right',
-          'weight' => 0,
+          'weight' => 1,
         ),
         'views-featured_blocks-block_1' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_1',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
+        ),
+        'boxes-audiovideo_latest' => array(
+          'module' => 'boxes',
+          'delta' => 'audiovideo_latest',
+          'region' => 'below_content',
+          'weight' => 0,
         ),
       ),
     ),
@@ -67,17 +79,23 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'boxes-community_getinvolved' => array(
+          'module' => 'boxes',
+          'delta' => 'community_getinvolved',
+          'region' => 'right',
+          'weight' => 1,
+        ),
         'views-community_popular-block_1' => array(
           'module' => 'views',
           'delta' => 'community_popular-block_1',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
         ),
         'views-featured_blocks-block_1' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_1',
           'region' => 'right',
-          'weight' => 2,
+          'weight' => 3,
         ),
         'views-og_community-block_5' => array(
           'module' => 'views',
@@ -251,6 +269,18 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'boxes-latest_by_topic' => array(
+          'module' => 'boxes',
+          'delta' => 'latest_by_topic',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+        'boxes-latest_by_type' => array(
+          'module' => 'boxes',
+          'delta' => 'latest_by_type',
+          'region' => 'right',
+          'weight' => 1,
+        ),
         'boxes-latest_page_title' => array(
           'module' => 'boxes',
           'delta' => 'latest_page_title',
@@ -290,17 +320,23 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'boxes-places_add_a_place' => array(
+          'module' => 'boxes',
+          'delta' => 'places_add_a_place',
+          'region' => 'right',
+          'weight' => 0,
+        ),
         'views-og_community-block_3' => array(
           'module' => 'views',
           'delta' => 'og_community-block_3',
           'region' => 'right',
-          'weight' => 0,
+          'weight' => 1,
         ),
         'views-featured_blocks-block_1' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_1',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
         ),
         'views-popular_places-block_1' => array(
           'module' => 'views',
