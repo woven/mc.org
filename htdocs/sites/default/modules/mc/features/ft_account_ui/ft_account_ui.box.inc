@@ -26,7 +26,9 @@ function ft_account_ui_default_box() {
                 <?php  
                 }
                 ?>
+                <?php if(function_exists(\'fbconnect_render_button\')): ?>
                 <li><a href="#" id="fbconnect"> <?php print fbconnect_render_button(array(\'scope\' => \'email\', \'text\'=> \'Connect to Facebook\', \'size\' => \'small\'));?> </a></li>
+                <?php endif; ?>
                 <li><a href="#" id="register-button">Join</a></li>
                 <li><a href="#" id="login-button">Sign in</a></li>
               </ul>
