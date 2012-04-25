@@ -22,6 +22,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-featured_slideshow-block_5' => array(
+          'module' => 'views',
+          'delta' => 'featured_slideshow-block_5',
+          'region' => 'featured',
+          'weight' => 0,
+        ),
         'boxes-audiovideo_add' => array(
           'module' => 'boxes',
           'delta' => 'audiovideo_add',
@@ -130,6 +136,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-featured_slideshow-block_3' => array(
+          'module' => 'views',
+          'delta' => 'featured_slideshow-block_3',
+          'region' => 'featured',
+          'weight' => 0,
+        ),
         'boxes-events_add_an_event' => array(
           'module' => 'boxes',
           'delta' => 'events_add_an_event',
