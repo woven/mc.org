@@ -21,7 +21,7 @@ function ft_account_ui_default_box() {
             global $user;
             if (!$user->uid){ ?>
               <ul>
-                <?php if (_ghh_social_post_get_fbuid() && count(_ghh_social_post_count_friends_that_are_in_the_site())>0){ ?>
+                <?php if (function_exists(\'_ghh_social_post_get_fbuid\') && _ghh_social_post_get_fbuid() && count(_ghh_social_post_count_friends_that_are_in_the_site())>0){ ?>
                   <li><a href="fb-friends-ghh" class="colorbox-load" id="fb-friends"> <?php print count(_ghh_social_post_count_friends_that_are_in_the_site()) . \' of your friends are here!\';?> </a></li>
                 <?php  
                 }
@@ -35,12 +35,12 @@ function ft_account_ui_default_box() {
                      
               <ul>
                 
-                <?php if (_ghh_social_post_get_fbuid() && count(_ghh_social_post_count_friends_that_are_in_the_site())>0){ ?>
+                <?php if (function_exists(\'_ghh_social_post_get_fbuid\') && _ghh_social_post_get_fbuid() && count(_ghh_social_post_count_friends_that_are_in_the_site())>0){ ?>
                   <li><a href="fb-friends-ghh" class="colorbox-load" id="fb-friends"> <?php print count(_ghh_social_post_count_friends_that_are_in_the_site()) . \' of your friends are here!\';?> </a></li>
                 <?php  
                 }
                 ?>
-                <?php if (!fbconnect_get_fbuid()){ ?>
+                <?php if (function_exists(\'fbconnect_get_fbuid\') && !fbconnect_get_fbuid()){ ?>
                   <li><a href="#" id="fbconnect"> <?php print fbconnect_render_button(array(\'text\'=> \'Connect to Facebook\', \'size\' => \'small\'));?> </a></li>
                 <?php  
                 }
@@ -48,7 +48,7 @@ function ft_account_ui_default_box() {
                 <li class="first">
                   <?php if ($user->picture && file_exists($user->picture)){
                     print theme(\'imagecache\', \'header_mini_avatar\', $user->picture);
-                  }elseif(_fbconnect_get_user_fbuid($user->uid) == fbconnect_get_fbuid()){
+                  }elseif(function_exists(\'_fbconnect_get_user_fbuid\') && function_exists(\'fbconnect_get_fbuid\') &&  _fbconnect_get_user_fbuid($user->uid) == fbconnect_get_fbuid()){
                     $pictureUrl = "https://graph.facebook.com/" . fbconnect_get_fbuid() . "/picture?type=square"; ?>
                     <img src="<?php print $pictureUrl; ?>" width="13" height="13" alt="<?php print ucfirst($user->name); ?>\'s avatar" />
                   <?php }else{
