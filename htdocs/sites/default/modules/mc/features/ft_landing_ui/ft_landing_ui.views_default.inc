@@ -172,7 +172,7 @@ function ft_landing_ui_views_default_views() {
     'output_lifespan' => '3600',
   ));
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'See All\', \'latest/news\' )); ?>');
-  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
   $handler->override_option('items_per_page', 1);
   $handler->override_option('style_plugin', 'semanticviews_default');

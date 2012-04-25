@@ -218,6 +218,8 @@ function ft_link_content_default_fields() {
     'advanced_view' => '--',
     'advanced_view_args' => '',
     'widget' => array(
+      'autocomplete_match' => 'contains',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'nid' => NULL,
