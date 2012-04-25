@@ -181,6 +181,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-featured_slideshow-block_2' => array(
+          'module' => 'views',
+          'delta' => 'featured_slideshow-block_2',
+          'region' => 'featured',
+          'weight' => 0,
+        ),
         'boxes-home_about' => array(
           'module' => 'boxes',
           'delta' => 'home_about',
