@@ -63,7 +63,7 @@ $myUrl = $_SERVER[\'HTTP_HOST\'];
   $box->description = 'Google Plus One';
   $box->options = array(
     'body' => '<g:plusone size="medium"></g:plusone>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['google_plusone'] = $box;
 

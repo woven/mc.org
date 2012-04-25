@@ -33,7 +33,7 @@ function ft_latest_ui_default_box() {
   <?php print theme(\'ghh_browse_menu\',\'menu-browse-by-type\'); ?>
   <?php print theme(\'ghh_browse_menu\',\'menu-by-editorial-content\'); ?>
 </div>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['latest_by_type'] = $box;
 
