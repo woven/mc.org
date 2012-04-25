@@ -16,7 +16,7 @@ function ft_event_ui_default_box() {
   $box->options = array(
     'body' => '<p>Do you know of an upcoming event that you\'d like to share with others? Click the green Add Stuff button at the top of the page, choose Event, and tell us about it. Your event will be posted immediately.</p>
 <?php echo theme(\'ghh_see_all\',\'Read More\',\'help\'); ?>',
-    'format' => '7',
+    'format' => '3',
   );
   $export['events_add_an_event'] = $box;
 
@@ -29,9 +29,9 @@ function ft_event_ui_default_box() {
   $box->description = 'Events blocks';
   $box->options = array(
     'body' => '<?php
-print  mc_events_grouped_by_dates(\'events_grouped_by_dates\', \'block_5\', 6);
+print  mc_events_grouped_by_dates(\'events_by_dates\', \'block_5\', 6);
 ?>',
-    'format' => '7',
+    'format' => '3',
   );
   $export['upcoming_events_blocks'] = $box;
 
