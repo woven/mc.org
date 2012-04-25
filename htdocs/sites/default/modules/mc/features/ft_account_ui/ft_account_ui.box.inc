@@ -71,7 +71,7 @@ function ft_account_ui_default_box() {
         </div>
       </div>
     </div>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['header_links'] = $box;
 
@@ -112,7 +112,7 @@ function ft_account_ui_default_box() {
       </div>
       </div>
   <?php endif; ?>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['join_overlay_box'] = $box;
 
@@ -137,7 +137,7 @@ function ft_account_ui_default_box() {
       </div>
       </div>
   <?php endif; ?>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['login_overlay_box'] = $box;
 

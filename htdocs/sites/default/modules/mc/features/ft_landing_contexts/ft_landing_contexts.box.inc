@@ -25,7 +25,7 @@ function ft_landing_contexts_default_box() {
             ?>
           </div>
         </div>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['add_stuff'] = $box;
 
@@ -40,7 +40,7 @@ function ft_landing_contexts_default_box() {
     'body' => '<div class="logo hon">
           <p><a href="https://www.healthonnet.org/HONcode/Conduct.html?HONConduct915495" onclick="window.open(this.href); return false;" > <img src="http://www.honcode.ch/HONcode/Seal/HONConduct915495_s1.gif" hspace="2" vspace="2" align="left" width="43" height="60" style="border:0px" title="This website is certified by Health On the Net Foundation. Click to verify." alt="This website is certified by Health On the Net Foundation. Click to verify." /></a> This site complies with the <a href="http://www.healthonnet.org/HONcode/Conduct.html" onclick="window.open(this.href); return false;"> HONcode standard for trustworthy health</a> information. <a href="https://www.healthonnet.org/HONcode/Conduct.html?HONConduct915495" onclick="window.open(this.href); return false;">Verify here</a>. </p>
         </div>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['footer_hon_logo'] = $box;
 
@@ -53,7 +53,7 @@ function ft_landing_contexts_default_box() {
   $box->description = 'Join us on your favorite social network';
   $box->options = array(
     'body' => '<p>Join us on your favorite social network.</p><p><a href="http://www.facebook.com/GetHealthyHarlem">Facebook</a></p><p><a href="http://twitter.com/#!/healthyharlem">Twitter</a></p>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['footer_joinus_box'] = $box;
 
@@ -77,7 +77,7 @@ function ft_landing_contexts_default_box() {
             </p>
           </div>
           </div>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['footer_prc_logo'] = $box;
 
@@ -105,7 +105,7 @@ function ft_landing_contexts_default_box() {
           <?php print $search_box ?>
         <?php endif; ?>
         </div>',
-    'format' => '4',
+    'format' => '3',
   );
   $export['google_search_box'] = $box;
 
