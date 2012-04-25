@@ -320,6 +320,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-featured_slideshow-block_4' => array(
+          'module' => 'views',
+          'delta' => 'featured_slideshow-block_4',
+          'region' => 'featured',
+          'weight' => 0,
+        ),
         'boxes-places_add_a_place' => array(
           'module' => 'boxes',
           'delta' => 'places_add_a_place',
