@@ -295,5 +295,93 @@ function ft_landing_contexts_context_default_contexts() {
   t('Landing');
   $export['landing_places'] = $context;
 
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'sitewide';
+  $context->description = '';
+  $context->tag = '';
+  $context->conditions = array(
+    'sitewide' => array(
+      'values' => array(
+        1 => 1,
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'boxes-header_links' => array(
+          'module' => 'boxes',
+          'delta' => 'header_links',
+          'region' => 'header',
+          'weight' => 0,
+        ),
+        'boxes-google_search_box' => array(
+          'module' => 'boxes',
+          'delta' => 'google_search_box',
+          'region' => 'branding',
+          'weight' => 0,
+        ),
+        'boxes-add_stuff' => array(
+          'module' => 'boxes',
+          'delta' => 'add_stuff',
+          'region' => 'branding',
+          'weight' => 1,
+        ),
+        'boxes-footer_hon_logo' => array(
+          'module' => 'boxes',
+          'delta' => 'footer_hon_logo',
+          'region' => 'footer',
+          'weight' => 0,
+        ),
+        'boxes-footer_prc_logo' => array(
+          'module' => 'boxes',
+          'delta' => 'footer_prc_logo',
+          'region' => 'footer',
+          'weight' => 1,
+        ),
+        'menu-menu-categories' => array(
+          'module' => 'menu',
+          'delta' => 'menu-categories',
+          'region' => 'footer_above',
+          'weight' => 0,
+        ),
+        'menu-menu-footer-links' => array(
+          'module' => 'menu',
+          'delta' => 'menu-footer-links',
+          'region' => 'footer_above',
+          'weight' => 1,
+        ),
+        'menu-secondary-links' => array(
+          'module' => 'menu',
+          'delta' => 'secondary-links',
+          'region' => 'footer_above',
+          'weight' => 2,
+        ),
+        'boxes-footer_joinus_box' => array(
+          'module' => 'boxes',
+          'delta' => 'footer_joinus_box',
+          'region' => 'footer_above',
+          'weight' => 3,
+        ),
+        'boxes-join_overlay_box' => array(
+          'module' => 'boxes',
+          'delta' => 'join_overlay_box',
+          'region' => 'overlay',
+          'weight' => 0,
+        ),
+        'boxes-login_overlay_box' => array(
+          'module' => 'boxes',
+          'delta' => 'login_overlay_box',
+          'region' => 'overlay',
+          'weight' => 1,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+  $export['sitewide'] = $context;
+
   return $export;
 }
