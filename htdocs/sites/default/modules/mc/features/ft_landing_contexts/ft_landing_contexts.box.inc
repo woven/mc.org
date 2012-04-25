@@ -109,5 +109,34 @@ function ft_landing_contexts_default_box() {
   );
   $export['google_search_box'] = $box;
 
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'home_about';
+  $box->plugin_key = 'simple';
+  $box->title = '';
+  $box->description = 'Home - about';
+  $box->options = array(
+    'body' => '<div class="important">
+<p>GetHealthyHarlem.org is a website where Northern Manhattan residents, families, businesses and organizations can find and share local information about getting and staying healthy.</p>
+<?php echo theme(\'ghh_see_all\',\'Read More\',\'about\'); ?>
+</div>',
+    'format' => '3',
+  );
+  $export['home_about'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'home_joinus';
+  $box->plugin_key = 'simple';
+  $box->title = 'Like us, follow us!';
+  $box->description = 'Join us - homepage';
+  $box->options = array(
+    'body' => '<?php print theme(\'ghh_browse_menu\', \'menu-join-us\'); ?>',
+    'format' => '3',
+  );
+  $export['home_joinus'] = $box;
+
   return $export;
 }

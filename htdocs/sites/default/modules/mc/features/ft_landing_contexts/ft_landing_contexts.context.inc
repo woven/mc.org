@@ -112,17 +112,29 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'boxes-events_add_an_event' => array(
+          'module' => 'boxes',
+          'delta' => 'events_add_an_event',
+          'region' => 'right',
+          'weight' => 0,
+        ),
         'views-popular_places-block_2' => array(
           'module' => 'views',
           'delta' => 'popular_places-block_2',
           'region' => 'right',
-          'weight' => 0,
+          'weight' => 1,
         ),
         'views-featured_blocks-block_1' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_1',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
+        ),
+        'boxes-upcoming_events_blocks' => array(
+          'module' => 'boxes',
+          'delta' => 'upcoming_events_blocks',
+          'region' => 'below_content',
+          'weight' => 0,
         ),
       ),
     ),
@@ -151,23 +163,29 @@ function ft_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'boxes-home_about' => array(
+          'module' => 'boxes',
+          'delta' => 'home_about',
+          'region' => 'right',
+          'weight' => 0,
+        ),
         'views-featured_blocks-block_4' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_4',
           'region' => 'right',
-          'weight' => 0,
+          'weight' => 1,
         ),
         'views-featured_blocks-block_5' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_5',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
         ),
         'views-og_community-block_2' => array(
           'module' => 'views',
           'delta' => 'og_community-block_2',
           'region' => 'right',
-          'weight' => 2,
+          'weight' => 3,
         ),
         'views-featured_blocks-block_1' => array(
           'module' => 'views',
@@ -186,6 +204,12 @@ function ft_landing_contexts_context_default_contexts() {
           'delta' => 'featured_blocks-block_3',
           'region' => 'below_content',
           'weight' => 2,
+        ),
+        'boxes-home_joinus' => array(
+          'module' => 'boxes',
+          'delta' => 'home_joinus',
+          'region' => 'below_content',
+          'weight' => 3,
         ),
       ),
     ),
