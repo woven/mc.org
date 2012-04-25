@@ -11,10 +11,9 @@ function ft_community_ui_views_default_views() {
   $view->name = 'community_popular';
   $view->description = 'Community Popular Stuff';
   $view->tag = '';
-  $view->view_php = '';
   $view->base_table = 'node';
-  $view->is_cacheable = FALSE;
-  $view->api_version = 2;
+  $view->core = 0;
+  $view->api_version = '2';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
   $handler = $view->new_display('default', 'Defaults', 'default');
   $handler->override_option('relationships', array(
@@ -194,12 +193,12 @@ function ft_community_ui_views_default_views() {
       'link_to_taxonomy' => 1,
       'limit' => 1,
       'vids' => array(
-        '2' => 2,
-        '1' => 0,
-        '7' => 0,
-        '5' => 0,
-        '6' => 0,
-        '3' => 0,
+        2 => 2,
+        1 => 0,
+        7 => 0,
+        5 => 0,
+        6 => 0,
+        3 => 0,
       ),
       'exclude' => 1,
       'id' => 'tid',
