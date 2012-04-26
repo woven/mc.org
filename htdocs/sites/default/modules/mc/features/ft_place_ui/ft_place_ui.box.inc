@@ -16,7 +16,7 @@ function ft_place_ui_default_box() {
   $box->options = array(
     'body' => '<p>Do you have a favorite place that you\'d like to tell others about? Click the green Add Stuff button at the top of the page, choose Place and share some details. Your place will be posted immediately.</p>
 <?php echo theme(\'ghh_see_all\',\'More Help\',\'help\'); ?>',
-    'format' => '7',
+    'format' => '3',
   );
   $export['places_add_a_place'] = $box;
 

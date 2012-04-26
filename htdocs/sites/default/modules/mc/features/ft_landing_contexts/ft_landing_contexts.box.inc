@@ -32,6 +32,36 @@ function ft_landing_contexts_default_box() {
   $box = new stdClass;
   $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
   $box->api_version = 1;
+  $box->delta = 'audiovideo_add';
+  $box->plugin_key = 'simple';
+  $box->title = 'Add Audio or Video ';
+  $box->description = 'Audio Video - Add new';
+  $box->options = array(
+    'body' => '<p>Do you know of a health related video the community might find helpful? First find it on YouTube or another video site, then click the green Add Stuff button at the top of the page, choose Video and share some details. Your video will be posted immediately.</p>
+<?php echo theme(\'ghh_see_all\',\'More Help\',\'help\'); ?>',
+    'format' => '3',
+  );
+  $export['audiovideo_add'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'audiovideo_latest';
+  $box->plugin_key = 'simple';
+  $box->title = 'Latest';
+  $box->description = 'Latest Audio and Video';
+  $box->options = array(
+    'body' => '<?php
+print views_embed_view(\'latest\', \'block_3\');
+print views_embed_view(\'latest\', \'block_2\');
+?>',
+    'format' => '3',
+  );
+  $export['audiovideo_latest'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
   $box->delta = 'footer_hon_logo';
   $box->plugin_key = 'simple';
   $box->title = '';
@@ -80,34 +110,6 @@ function ft_landing_contexts_default_box() {
     'format' => '3',
   );
   $export['footer_prc_logo'] = $box;
-
-  $box = new stdClass;
-  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
-  $box->api_version = 1;
-  $box->delta = 'google_search_box';
-  $box->plugin_key = 'simple';
-  $box->title = '';
-  $box->description = 'Google Custom Search Box';
-  $box->options = array(
-    'body' => '<div class="block block-theme">
-        <?php if (module_exists(\'google_cse\')) : ?>
-          <form action="<?php echo url(\'search/google\') ?>" accept-charset="UTF-8" method="get" id="google-cse-searchbox-form">
-            <div id="search" class="container-inline">
-              <input type="text" name="query" id="edit-query" title="Enter the terms you wish to search for." class="form-text"/>
-              <button type="submit" name="op" id="edit-sa" class="form-submit">Search</button>
-              <input type="hidden" name="cx" id="edit-cx" value="005966219626966707237:yfcijke9wao"  />
-              <input type="hidden" name="cof" id="edit-cof" value="FORID:11"  />
-              <input type="hidden" name="form_token" id="edit-google-cse-searchbox-form-form-token" value="<?php print drupal_get_token(\'search_theme_form\'); ?>"  />
-              <input type="hidden" name="form_id" id="edit-google-cse-searchbox-form" value="google_cse_searchbox_form"  />
-            </div>
-          </form>
-        <?php else : ?>
-          <?php print $search_box ?>
-        <?php endif; ?>
-        </div>',
-    'format' => '3',
-  );
-  $export['google_search_box'] = $box;
 
   $box = new stdClass;
   $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
