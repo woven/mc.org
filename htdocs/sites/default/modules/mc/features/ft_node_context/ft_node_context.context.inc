@@ -13,6 +13,12 @@ function ft_node_context_context_default_contexts() {
   $context->description = 'Any page inside a group, except the group page itself.';
   $context->tag = 'Node';
   $context->conditions = array(
+    'context' => array(
+      'values' => array(
+        '~group_homepage' => '~group_homepage',
+        '~group_manage_pages' => '~group_manage_pages',
+      ),
+    ),
     'context_og_condition_group_type' => array(
       'values' => array(
         'group' => 'group',
@@ -35,6 +41,7 @@ function ft_node_context_context_default_contexts() {
         'npage' => 'npage',
         'place' => 'place',
         'video' => 'video',
+        'webform' => 'webform',
       ),
       'options' => array(
         'node_form' => '0',
