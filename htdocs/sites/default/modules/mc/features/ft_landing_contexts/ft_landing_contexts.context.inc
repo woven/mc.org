@@ -249,6 +249,80 @@ function ft_landing_contexts_context_default_contexts() {
         ),
       ),
     ),
+    'block_class' => array(
+      'header' => array(
+        'class' => '',
+      ),
+      'branding' => array(
+        'class' => '',
+      ),
+      'featured' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-featured_slideshow-block_2' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-home_about' => array(
+            'class' => 'block-help important',
+          ),
+          'views-featured_blocks-block_4' => array(
+            'class' => '',
+          ),
+          'views-featured_blocks-block_5' => array(
+            'class' => '',
+          ),
+          'views-og_community-block_2' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'below_content' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-featured_blocks-block_1' => array(
+            'class' => '',
+          ),
+          'views-featured_blocks-block_2' => array(
+            'class' => '',
+          ),
+          'views-featured_blocks-block_3' => array(
+            'class' => '',
+          ),
+          'boxes-home_joinus' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+      ),
+      'overlay' => array(
+        'class' => '',
+      ),
+    ),
   );
   $context->condition_mode = 0;
 
