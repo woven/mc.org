@@ -28,15 +28,7 @@
 ?>
 <div class="comment-block <?php print ($comment->new) ? ' comment-new' : ''; print ' '. $status ?> clear-block">
   <div class="image">
-    <?php $account = user_load($comment->uid); ?>
-    <?php 
-      if ($account->picture){
-        $img = '<img width="49" height="49" src="/'.$account->picture.'" />';
-      }else{
-        $img = '<img width="49" height="49" src="/' . $directory . '/media/profile/pic-user-default-avatar.jpg" />';
-      }
-    ?>
-    <?php print l($img, 'user/'.$comment->uid, array('html' => TRUE)); ?>
+    <?php print $picture ?>
   </div>
   <div class="comment">
     <p class="author-link">
@@ -46,8 +38,6 @@
 	  <?php print $date ?>
 	</p>
     <?php print $flag ?>
-
-    <?php print $picture; ?>
 
     <div class='cite'><?php print $content ?></div>
 
