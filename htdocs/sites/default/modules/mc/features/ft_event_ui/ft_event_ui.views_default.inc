@@ -93,7 +93,7 @@ function ft_event_ui_views_default_views() {
 </ol>
 </div>
 <div style="clear:both"></div>');
-  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 1);
   $handler->override_option('use_ajax', TRUE);
   $handler->override_option('use_pager', '1');
