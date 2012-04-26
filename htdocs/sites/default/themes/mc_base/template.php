@@ -274,7 +274,7 @@ function mc_base_pager($tags = array(), $limit = 10, $element = 0, $parameters =
 
 
 function mc_base_boxes_box($block) {
-  //$output = "<div id='boxes-box-" . $block['delta'] . "' class='boxes-box" . (!empty($block['editing']) ? ' boxes-box-editing' : '') . "'>";
+  $output = "<div id='boxes-box-" . $block['delta'] . "' class='boxes-box" . (!empty($block['editing']) ? ' boxes-box-editing' : '') . "'>";
   $output .= $block['content'];
   if (!empty($block['controls'])) {
     $output .= '<div class="boxes-box-controls">';
@@ -284,6 +284,6 @@ function mc_base_boxes_box($block) {
   if (!empty($block['editing'])) {
     $output .= '<div class="box-editor">' . $block['editing'] . '</div>';
   }
-  //$output .= '</div>';
+  $output .= '</div>';
   return $output;
 }
