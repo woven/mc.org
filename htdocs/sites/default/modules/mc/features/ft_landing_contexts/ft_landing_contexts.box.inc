@@ -114,6 +114,42 @@ print views_embed_view(\'latest_pages\', \'block_2\');
   $box = new stdClass;
   $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
   $box->api_version = 1;
+  $box->delta = 'groups_events';
+  $box->plugin_key = 'simple';
+  $box->title = 'Upcoming Events|Upcoming events from groups';
+  $box->description = 'Groups - Events blocks';
+  $box->options = array(
+    'body' => '<?php
+print  mc_events_grouped_by_dates(\'events_by_dates_groups\', \'block_5\', 6);
+?>',
+    'format' => '3',
+  );
+  $export['groups_events'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'groups_making_difference';
+  $box->plugin_key = 'simple';
+  $box->title = 'Making a difference';
+  $box->description = 'Groups - Making a difference';
+  $box->options = array(
+    'body' => '<?php if (arg(0) == \'node\' && is_numeric( arg(1) ) ) : ?>
+<?php
+$node = node_load(arg(1));
+print \'<div class="prose">\'.$node->body.\'</div>\';
+?>
+<div class="see-all">
+<?php print ( l(\'<span>More Help</span><span class="ico-small ico-see-all"></span>\', \'help\', array(\'html\' => TRUE) ) ); ?>
+</div>
+<?php endif; ?>',
+    'format' => '3',
+  );
+  $export['groups_making_difference'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
   $box->delta = 'home_about';
   $box->plugin_key = 'simple';
   $box->title = 'Making a difference';

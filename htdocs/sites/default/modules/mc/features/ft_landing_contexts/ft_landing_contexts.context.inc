@@ -370,6 +370,56 @@ function ft_landing_contexts_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'landing_groups';
+  $context->description = '';
+  $context->tag = 'Landing';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'groups' => 'groups',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-featured_slideshow-block_1' => array(
+          'module' => 'views',
+          'delta' => 'featured_slideshow-block_1',
+          'region' => 'featured',
+          'weight' => 0,
+        ),
+        'boxes-groups_making_difference' => array(
+          'module' => 'boxes',
+          'delta' => 'groups_making_difference',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+        'boxes-groups_events' => array(
+          'module' => 'boxes',
+          'delta' => 'groups_events',
+          'region' => 'right',
+          'weight' => 1,
+        ),
+        'views-groups-block_2' => array(
+          'module' => 'views',
+          'delta' => 'groups-block_2',
+          'region' => 'above_content',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Landing');
+  $export['landing_groups'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'landing_homepage';
   $context->description = 'Context that contains the reactions to display the homepage properly';
   $context->tag = 'Landing';
