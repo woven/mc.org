@@ -52,8 +52,8 @@ function ft_landing_contexts_default_box() {
   $box->description = 'Latest Audio and Video';
   $box->options = array(
     'body' => '<?php
-print views_embed_view(\'latest\', \'block_3\');
-print views_embed_view(\'latest\', \'block_2\');
+print views_embed_view(\'latest_pages\', \'block_3\');
+print views_embed_view(\'latest_pages\', \'block_2\');
 ?>',
     'format' => '3',
   );
