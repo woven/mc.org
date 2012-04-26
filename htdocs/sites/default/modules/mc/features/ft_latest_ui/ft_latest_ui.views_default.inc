@@ -2540,6 +2540,7 @@ $view = views_get_current_view();
 $view->see_all_link = \'latest/audio/all\';
 echo theme("mc_event_view_header",$view, \'latest/audio/all\');
 ?>');
+  $handler->override_option('header_format', '3');
   $handler->override_option('items_per_page', 3);
   $handler->override_option('use_pager', 'mini');
   $handler->override_option('style_options', array(
