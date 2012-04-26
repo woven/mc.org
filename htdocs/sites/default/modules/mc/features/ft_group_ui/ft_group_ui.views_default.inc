@@ -1427,6 +1427,7 @@ return $alias_array[2];',
   $handler->override_option('title', 'Latest Stuff');
   $handler->override_option('css_class', 'view-items-list');
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'See All\', \'latest/group-stuff\' )); ?>');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('items_per_page', 7);
   $handler->override_option('link_display', 'page_1');
   $handler->override_option('style_plugin', 'semanticviews_default');
