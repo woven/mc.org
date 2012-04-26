@@ -14,7 +14,9 @@ function ft_community_ui_default_box() {
   $box->title = 'Get involved!';
   $box->description = 'Get involved - Community';
   $box->options = array(
-    'body' => '<p>GetHealthyHarlem.org helps you find and share local information about getting and staying healthy. See what others are up to and get involved!</p>
+    'body' => '<div class="prose">
+<p>GetHealthyHarlem.org helps you find and share local information about getting and staying healthy. See what others are up to and get involved!</p>
+</div>
 <?php echo theme(\'ghh_see_all\',\'More Help\',\'help\'); ?>',
     'format' => '3',
   );

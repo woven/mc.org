@@ -3099,7 +3099,7 @@ $date = strtotime($node->event[\'start\']);
     ),
   ));
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'See All\', \'community\' )); ?>');
-  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', '8');

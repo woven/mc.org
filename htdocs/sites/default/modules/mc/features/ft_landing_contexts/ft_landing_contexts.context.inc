@@ -173,6 +173,69 @@ function ft_landing_contexts_context_default_contexts() {
         ),
       ),
     ),
+    'block_class' => array(
+      'header' => array(
+        'class' => '',
+      ),
+      'branding' => array(
+        'class' => '',
+      ),
+      'featured' => array(
+        'class' => '',
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-featured_members-block_1' => array(
+            'class' => '',
+          ),
+          'boxes-community_getinvolved' => array(
+            'class' => 'important',
+          ),
+          'views-community_popular-block_1' => array(
+            'class' => '',
+          ),
+          'views-featured_blocks-block_1' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'below_content' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-og_community-block_5' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+      ),
+      'overlay' => array(
+        'class' => '',
+      ),
+    ),
+    'debug' => array(
+      'debug' => 1,
+    ),
   );
   $context->condition_mode = 0;
 
