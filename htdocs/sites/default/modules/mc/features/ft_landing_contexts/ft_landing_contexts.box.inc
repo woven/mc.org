@@ -116,10 +116,10 @@ print views_embed_view(\'latest\', \'block_2\');
   $box->api_version = 1;
   $box->delta = 'home_about';
   $box->plugin_key = 'simple';
-  $box->title = '';
+  $box->title = 'Making a difference';
   $box->description = 'Home - about';
   $box->options = array(
-    'body' => '<div class="important">
+    'body' => '<div class="prose">
 <p>GetHealthyHarlem.org is a website where Northern Manhattan residents, families, businesses and organizations can find and share local information about getting and staying healthy.</p>
 <?php echo theme(\'ghh_see_all\',\'Read More\',\'about\'); ?>
 </div>',
