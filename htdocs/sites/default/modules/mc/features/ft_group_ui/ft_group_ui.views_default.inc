@@ -2815,8 +2815,10 @@ $date = strtotime($node->event[\'start\']);
         'text' => '[name] commented on [title]',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -2831,6 +2833,7 @@ $date = strtotime($node->event[\'start\']);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 0,
       'value' => '',
       'format' => '3',
       'exclude' => 0,
@@ -3216,8 +3219,10 @@ $date = strtotime($node->event[\'start\']);
         'text' => '[name] commented on [title]',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -3232,6 +3237,7 @@ $date = strtotime($node->event[\'start\']);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 0,
       'value' => '',
       'format' => '3',
       'exclude' => 0,
@@ -3239,7 +3245,7 @@ $date = strtotime($node->event[\'start\']);
       'table' => 'customfield',
       'field' => 'markup',
       'override' => array(
-        'button' => 'Override',
+        'button' => 'Use default',
       ),
       'relationship' => 'none',
     ),
@@ -3363,6 +3369,19 @@ return $usuario->name;',
   $handler->override_option('filters', array());
   $handler->override_option('title', 'Recent Activity');
   $handler->override_option('items_per_page', 10);
+  $handler->override_option('row_options', array(
+    'semantic_html' => array(
+      'markup' => array(
+        'element_type' => 'p',
+        'class' => 'comment-link',
+      ),
+      'timestamp' => array(
+        'element_type' => 'div',
+        'class' => 'field-author',
+      ),
+    ),
+    'skip_blank' => 0,
+  ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
 
