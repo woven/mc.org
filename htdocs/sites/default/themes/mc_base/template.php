@@ -228,6 +228,15 @@ function mc_base_preprocess(&$vars){
  * 
  */
 function mc_base_preprocess_block(&$vars){
+
+        //support sub title feature TITLE | SUB TITLE
+        if(isset($vars['title'])){
+            if(strstr($vars['title'],'|')){
+                $titles = explode("|",$vars['title']);
+                $vars['title'] = $titles[0]."<span>".$titles[1]."</span>";
+            }
+        }
+
   if(isset($vars['block']->module) && $vars['block']->module=='boxes' && $vars['block']->delta=='latest_page_title'){
     $vars['attr']['class'] .= " display-title-only";
   }
