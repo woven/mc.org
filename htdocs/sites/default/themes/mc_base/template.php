@@ -237,9 +237,9 @@ function mc_base_preprocess_block(&$vars){
             }
         }
 
-  if(isset($vars['block']->module) && $vars['block']->module=='boxes' && $vars['block']->delta=='latest_page_title'){
-    $vars['attr']['class'] .= " display-title-only";
-  }
+      if(isset($vars['block']->module) && $vars['block']->module=='boxes' && $vars['block']->delta=='latest_page_title'){
+        $vars['attr']['class'] .= " display-title-only";
+      }
 /*
   if ($vars['block']->module == 'views' && $vars['block']->region == 'featured'){
     $vars['post_object'] .= '<a class="prev browse left"></a>';
