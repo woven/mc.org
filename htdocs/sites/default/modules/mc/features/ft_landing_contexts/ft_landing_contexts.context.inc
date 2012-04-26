@@ -54,6 +54,68 @@ function ft_landing_contexts_context_default_contexts() {
         ),
       ),
     ),
+    'block_class' => array(
+      'header' => array(
+        'class' => '',
+      ),
+      'branding' => array(
+        'class' => '',
+      ),
+      'featured' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-featured_slideshow-block_5' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-audiovideo_add' => array(
+            'class' => 'important',
+          ),
+          'views-og_community-block_4' => array(
+            'class' => '',
+          ),
+          'views-featured_blocks-block_1' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'below_content' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-audiovideo_latest' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+      ),
+      'overlay' => array(
+        'class' => '',
+      ),
+    ),
   );
   $context->condition_mode = 0;
 
@@ -205,45 +267,51 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'quicktabs-browse_by' => array(
+          'module' => 'quicktabs',
+          'delta' => 'browse_by',
+          'region' => 'right',
+          'weight' => 1,
+        ),
         'views-featured_blocks-block_4' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_4',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
         ),
         'views-featured_blocks-block_5' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_5',
           'region' => 'right',
-          'weight' => 2,
+          'weight' => 3,
         ),
         'views-og_community-block_2' => array(
           'module' => 'views',
           'delta' => 'og_community-block_2',
           'region' => 'right',
-          'weight' => 3,
+          'weight' => 4,
+        ),
+        'quicktabs-home_tabs' => array(
+          'module' => 'quicktabs',
+          'delta' => 'home_tabs',
+          'region' => 'below_content',
+          'weight' => 0,
         ),
         'views-featured_blocks-block_1' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_1',
           'region' => 'below_content',
-          'weight' => 0,
+          'weight' => 1,
         ),
         'views-featured_blocks-block_2' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_2',
           'region' => 'below_content',
-          'weight' => 1,
+          'weight' => 2,
         ),
         'views-featured_blocks-block_3' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_3',
-          'region' => 'below_content',
-          'weight' => 2,
-        ),
-        'boxes-home_joinus' => array(
-          'module' => 'boxes',
-          'delta' => 'home_joinus',
           'region' => 'below_content',
           'weight' => 3,
         ),
@@ -279,6 +347,9 @@ function ft_landing_contexts_context_default_contexts() {
           'boxes-home_about' => array(
             'class' => 'block-help important',
           ),
+          'quicktabs-browse_by' => array(
+            'class' => '',
+          ),
           'views-featured_blocks-block_4' => array(
             'class' => '',
           ),
@@ -293,6 +364,9 @@ function ft_landing_contexts_context_default_contexts() {
       'below_content' => array(
         'class' => '',
         'blocks' => array(
+          'quicktabs-home_tabs' => array(
+            'class' => '',
+          ),
           'views-featured_blocks-block_1' => array(
             'class' => '',
           ),
@@ -300,9 +374,6 @@ function ft_landing_contexts_context_default_contexts() {
             'class' => '',
           ),
           'views-featured_blocks-block_3' => array(
-            'class' => '',
-          ),
-          'boxes-home_joinus' => array(
             'class' => '',
           ),
         ),
@@ -322,6 +393,9 @@ function ft_landing_contexts_context_default_contexts() {
       'overlay' => array(
         'class' => '',
       ),
+    ),
+    'debug' => array(
+      'debug' => 1,
     ),
   );
   $context->condition_mode = 0;
@@ -475,23 +549,23 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'header',
           'weight' => 0,
         ),
+        'boxes-join_overlay_box' => array(
+          'module' => 'boxes',
+          'delta' => 'join_overlay_box',
+          'region' => 'header',
+          'weight' => 1,
+        ),
+        'boxes-login_overlay_box' => array(
+          'module' => 'boxes',
+          'delta' => 'login_overlay_box',
+          'region' => 'header',
+          'weight' => 2,
+        ),
         'boxes-add_stuff' => array(
           'module' => 'boxes',
           'delta' => 'add_stuff',
           'region' => 'branding',
           'weight' => 0,
-        ),
-        'boxes-footer_hon_logo' => array(
-          'module' => 'boxes',
-          'delta' => 'footer_hon_logo',
-          'region' => 'footer',
-          'weight' => 0,
-        ),
-        'boxes-footer_prc_logo' => array(
-          'module' => 'boxes',
-          'delta' => 'footer_prc_logo',
-          'region' => 'footer',
-          'weight' => 1,
         ),
         'menu-menu-categories' => array(
           'module' => 'menu',
@@ -517,16 +591,16 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'footer_above',
           'weight' => 3,
         ),
-        'boxes-join_overlay_box' => array(
+        'boxes-footer_hon_logo' => array(
           'module' => 'boxes',
-          'delta' => 'join_overlay_box',
-          'region' => 'overlay',
+          'delta' => 'footer_hon_logo',
+          'region' => 'footer',
           'weight' => 0,
         ),
-        'boxes-login_overlay_box' => array(
+        'boxes-footer_prc_logo' => array(
           'module' => 'boxes',
-          'delta' => 'login_overlay_box',
-          'region' => 'overlay',
+          'delta' => 'footer_prc_logo',
+          'region' => 'footer',
           'weight' => 1,
         ),
       ),

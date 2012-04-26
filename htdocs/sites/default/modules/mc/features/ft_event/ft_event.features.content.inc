@@ -36,7 +36,7 @@ function ft_event_content_default_fields() {
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'node_view_thumbnail_default',
+        'format' => 'node_image_default',
         'css-class' => '',
         'region' => 'right',
         'type' => 'filefield',

@@ -37,7 +37,7 @@ function ft_landing_contexts_default_box() {
   $box->title = 'Add Audio or Video ';
   $box->description = 'Audio Video - Add new';
   $box->options = array(
-    'body' => '<p>Do you know of a health related video the community might find helpful? First find it on YouTube or another video site, then click the green Add Stuff button at the top of the page, choose Video and share some details. Your video will be posted immediately.</p>
+    'body' => '<div class="prose"><p>Do you know of a health related video the community might find helpful? First find it on YouTube or another video site, then click the green Add Stuff button at the top of the page, choose Video and share some details. Your video will be posted immediately.</p></div>
 <?php echo theme(\'ghh_see_all\',\'More Help\',\'help\'); ?>',
     'format' => '3',
   );

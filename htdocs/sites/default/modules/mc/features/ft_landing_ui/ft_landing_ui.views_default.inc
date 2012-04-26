@@ -1469,7 +1469,7 @@ Latest post: <?php print l($post->title, \'node/\' . $post->nid); ?>
     'type' => array(
       'operator' => 'in',
       'value' => array(
-        'news' => 'news',
+        'nnews' => 'nnews',
       ),
       'group' => '0',
       'exposed' => FALSE,

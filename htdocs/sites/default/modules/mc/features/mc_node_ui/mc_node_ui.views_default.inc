@@ -538,7 +538,7 @@ else {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'node_view_thumbnail_ife',
+      'format' => 'node_image_ife',
       'multiple' => array(
         'group' => 0,
         'multiple_number' => '',

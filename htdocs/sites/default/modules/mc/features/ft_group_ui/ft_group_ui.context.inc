@@ -21,11 +21,6 @@ function ft_group_ui_context_default_contexts() {
         'node_form' => '0',
       ),
     ),
-    'user' => array(
-      'values' => array(
-        'authenticated user' => 'authenticated user',
-      ),
-    ),
   );
   $context->reactions = array(
     'block' => array(
