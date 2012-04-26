@@ -10,7 +10,7 @@ function ft_node_context_context_default_contexts() {
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'node_ingroup';
-  $context->description = 'Any page inside a group.';
+  $context->description = 'Any page inside a group, except the group page itself.';
   $context->tag = 'Node';
   $context->conditions = array(
     'context_og_condition_group_type' => array(
@@ -19,6 +19,25 @@ function ft_node_context_context_default_contexts() {
       ),
       'options' => array(
         'node_form' => 0,
+      ),
+    ),
+    'node' => array(
+      'values' => array(
+        'article' => 'article',
+        'audio' => 'audio',
+        'event' => 'event',
+        'file' => 'file',
+        'forum' => 'forum',
+        'gallery' => 'gallery',
+        'gallery_image' => 'gallery_image',
+        'link' => 'link',
+        'nnews' => 'nnews',
+        'npage' => 'npage',
+        'place' => 'place',
+        'video' => 'video',
+      ),
+      'options' => array(
+        'node_form' => '0',
       ),
     ),
   );
@@ -44,7 +63,7 @@ function ft_node_context_context_default_contexts() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Any page inside a group.');
+  t('Any page inside a group, except the group page itself.');
   t('Node');
   $export['node_ingroup'] = $context;
 
