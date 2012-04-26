@@ -475,17 +475,11 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'header',
           'weight' => 0,
         ),
-        'boxes-google_search_box' => array(
-          'module' => 'boxes',
-          'delta' => 'google_search_box',
-          'region' => 'branding',
-          'weight' => 0,
-        ),
         'boxes-add_stuff' => array(
           'module' => 'boxes',
           'delta' => 'add_stuff',
           'region' => 'branding',
-          'weight' => 1,
+          'weight' => 0,
         ),
         'boxes-footer_hon_logo' => array(
           'module' => 'boxes',
