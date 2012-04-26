@@ -557,7 +557,7 @@ print theme_ghh_node_categories($data->nid, 2);
       'empty_zero' => 0,
       'value' => '<?php 
   if ($data->event_unix_event_start){
-    print theme_ghh_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
+    print theme_mc_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
   }
 ?>',
       'exclude' => 1,
