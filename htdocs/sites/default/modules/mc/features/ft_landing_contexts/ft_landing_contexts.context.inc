@@ -267,23 +267,29 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'quicktabs-browse_by' => array(
+          'module' => 'quicktabs',
+          'delta' => 'browse_by',
+          'region' => 'right',
+          'weight' => 1,
+        ),
         'views-featured_blocks-block_4' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_4',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
         ),
         'views-featured_blocks-block_5' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_5',
           'region' => 'right',
-          'weight' => 2,
+          'weight' => 3,
         ),
         'views-og_community-block_2' => array(
           'module' => 'views',
           'delta' => 'og_community-block_2',
           'region' => 'right',
-          'weight' => 3,
+          'weight' => 4,
         ),
         'quicktabs-home_tabs' => array(
           'module' => 'quicktabs',
@@ -341,6 +347,9 @@ function ft_landing_contexts_context_default_contexts() {
           'boxes-home_about' => array(
             'class' => 'block-help important',
           ),
+          'quicktabs-browse_by' => array(
+            'class' => '',
+          ),
           'views-featured_blocks-block_4' => array(
             'class' => '',
           ),
@@ -355,7 +364,7 @@ function ft_landing_contexts_context_default_contexts() {
       'below_content' => array(
         'class' => '',
         'blocks' => array(
-          'quicktabs-latest_right_blocks' => array(
+          'quicktabs-home_tabs' => array(
             'class' => '',
           ),
           'views-featured_blocks-block_1' => array(
@@ -384,6 +393,9 @@ function ft_landing_contexts_context_default_contexts() {
       'overlay' => array(
         'class' => '',
       ),
+    ),
+    'debug' => array(
+      'debug' => 1,
     ),
   );
   $context->condition_mode = 0;

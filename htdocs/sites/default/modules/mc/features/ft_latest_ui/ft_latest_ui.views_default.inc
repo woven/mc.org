@@ -875,7 +875,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_medium_linked',
+      'format' => 'medium_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -916,7 +916,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'article_thumbnail_medium_linked',
+      'format' => 'medium_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
