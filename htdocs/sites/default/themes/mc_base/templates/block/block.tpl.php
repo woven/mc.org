@@ -26,11 +26,13 @@
  */
 ?>
 <div id="block-<?php print $block->module .'-'. $block->delta; ?>" class="block block-<?php print $block->module ?> <?php print $context_block_classes ?>">
-<?php if ($block->subject): ?>
-  <h2><?php print $block->subject ?></h2>
-<?php endif;?>
+	<div class="block-title">
+		<?php if ($block->subject): ?>
+		  <h2><?php print $block->subject ?></h2>
+		<?php endif;?>
+	</div>
 
-  <div class="content">
+  <div class="block-content clear-block prose">
     <?php print $block->content ?>
   </div>
 </div>
