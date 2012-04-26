@@ -509,6 +509,7 @@ else {
     'skip_blank' => 0,
   ));
   $handler = $view->new_display('block', 'Node Header', 'block_1');
+  $handler->override_option('items_per_page', 1);
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', '4');
   $handler = $view->new_display('block', 'Images Slideshow', 'block_2');
