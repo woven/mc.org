@@ -24,6 +24,20 @@ function mc_node_ui_ctools_plugin_api() {
  */
 function mc_node_ui_imagecache_default_presets() {
   $items = array(
+    'medium' => array(
+      'presetname' => 'medium',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '124',
+            'height' => '124',
+          ),
+        ),
+      ),
+    ),
     'submitted_avatar' => array(
       'presetname' => 'submitted_avatar',
       'actions' => array(
