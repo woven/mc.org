@@ -2683,7 +2683,7 @@ $date = strtotime($node->event[\'start\']);
   $handler->override_option('block_caching', -1);
 
   $views[$view->name] = $view;
-  
+
   // Exported view: og_community
   $view = new view;
   $view->name = 'og_community';
@@ -3041,7 +3041,7 @@ $date = strtotime($node->event[\'start\']);
   $handler = $view->new_display('block', 'Community Block - Homepage', 'block_2');
   $handler->override_option('title', 'Community|What our members are up to');
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'See All\', \'community\' )); ?>');
-  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
   $handler->override_option('use_more', 1);
   $handler->override_option('use_more_always', 0);

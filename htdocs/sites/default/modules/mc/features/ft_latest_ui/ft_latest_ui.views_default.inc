@@ -735,8 +735,9 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
+  $handler->override_option('css_class', 'view-ghh-default');
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'See All\', \'latest\' )); ?>');
-  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
   $handler->override_option('items_per_page', 3);
   $handler->override_option('style_plugin', 'semanticviews_default');
