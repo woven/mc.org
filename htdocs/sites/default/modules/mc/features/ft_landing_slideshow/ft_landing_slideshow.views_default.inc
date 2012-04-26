@@ -58,7 +58,7 @@ function ft_landing_slideshow_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-spot_linked',
+      'format' => 'featured_slideshow_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -747,7 +747,7 @@ function ft_landing_slideshow_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-spot_linked',
+      'format' => 'featured_slideshow_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -788,7 +788,7 @@ function ft_landing_slideshow_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-spot_linked',
+      'format' => 'featured_slideshow_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -829,7 +829,7 @@ function ft_landing_slideshow_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-spot_linked',
+      'format' => 'featured_slideshow_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -881,7 +881,7 @@ elseif($data->node_node_data_field_featured_items_node_data_field_gallery_image_
   $file=field_file_load($data->node_node_data_field_featured_items_node_data_field_gallery_image_field_gallery_image_fid);
   $details=unserialize($data->node_node_data_field_featured_items_node_data_field_gallery_image_field_gallery_image_data);
 }
-$image=theme(\'imagecache\', "home-spot" ,$file[\'filepath\'], $details[\'alt\'], $details[\'title\']); 
+$image=theme(\'imagecache\', "featured_slideshow" ,$file[\'filepath\'], $details[\'alt\'], $details[\'title\']); 
 $link=l($image,\'node/\'.$data-> node_node_data_field_featured_items_nid, array(\'html\'=>TRUE));
 print $link;
 ?>',
@@ -1396,7 +1396,7 @@ if ($name){
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-spot_linked',
+      'format' => 'featured_slideshow_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -1877,7 +1877,7 @@ if ($name){
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-spot_linked',
+      'format' => 'featured_slideshow_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -2102,7 +2102,7 @@ if ($name){
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'home-spot_linked',
+      'format' => 'featured_slideshow_linked',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
