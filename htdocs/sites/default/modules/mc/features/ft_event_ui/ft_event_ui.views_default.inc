@@ -93,7 +93,7 @@ function ft_event_ui_views_default_views() {
 </ol>
 </div>
 <div style="clear:both"></div>');
-  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 1);
   $handler->override_option('use_ajax', TRUE);
   $handler->override_option('use_pager', '1');
@@ -540,7 +540,7 @@ function ft_event_ui_views_default_views() {
 $view = views_get_current_view();
 echo theme("mc_event_view_header",$view, \'latest/events/current\');
 ?>');
-  $handler->override_option('header_format', '4');
+  $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
   $handler->override_option('items_per_page', 1);
   $handler->override_option('use_pager', 'mini');
@@ -1428,7 +1428,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/this-week\');
 $view = views_get_current_view();
 echo theme("mc_event_view_header",$view, \'latest/events/current\');
 ?>');
-  $handler->override_option('header_format', '4');
+  $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
   $handler->override_option('items_per_page', 1);
   $handler->override_option('use_pager', 'mini');
