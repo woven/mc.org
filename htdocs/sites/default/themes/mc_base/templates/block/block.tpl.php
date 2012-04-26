@@ -32,7 +32,7 @@
 		<?php endif;?>
 	</div>
 
-  <div class="block-content clear-block prose">
+  <div class="block-content clear-block">
     <?php print $block->content ?>
   </div>
 </div>
