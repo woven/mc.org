@@ -863,11 +863,17 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'header',
           'weight' => 2,
         ),
+        'boxes-google_search_box' => array(
+          'module' => 'boxes',
+          'delta' => 'google_search_box',
+          'region' => 'branding',
+          'weight' => 0,
+        ),
         'boxes-add_stuff' => array(
           'module' => 'boxes',
           'delta' => 'add_stuff',
           'region' => 'branding',
-          'weight' => 0,
+          'weight' => 1,
         ),
         'menu-menu-categories' => array(
           'module' => 'menu',
