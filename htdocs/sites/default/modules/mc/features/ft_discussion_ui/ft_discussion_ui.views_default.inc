@@ -748,7 +748,7 @@ $follows=true;
 </div>
 </div>
 ');
-  $handler->override_option('header_format', '4');
+  $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
   $handler->override_option('empty', '<?php 
 $sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
@@ -767,7 +767,7 @@ global $user;
   Not discussions yet. <?php echo $link; ?> now!
 </div>
 ');
-  $handler->override_option('empty_format', '4');
+  $handler->override_option('empty_format', '3');
   $handler->override_option('use_pager', '1');
   $handler->override_option('path', 'groups/%/discussions');
   $handler->override_option('menu', array(
@@ -1039,7 +1039,7 @@ if (is_numeric($nid)){
 </div>
 </div>
 ');
-  $handler->override_option('header_format', '7');
+  $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
   $handler->override_option('path', 'groups/%/discussions/top');
   $handler->override_option('menu', array(
