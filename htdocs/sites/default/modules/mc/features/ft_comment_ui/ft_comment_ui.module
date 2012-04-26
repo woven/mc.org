@@ -44,7 +44,7 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
       if ($user->picture){
         $userContent .= l(theme('imagecache', 'user_comment_image', $user->picture), $userPath, $options);
       }else{
-        $userContent .= theme('imagecache', 'user_comment_image', drupal_get_path('module', 'mc_ui') . '/media/common/pic-user-default-avatar.jpg');
+        $userContent .= theme('imagecache', 'user_comment_image', drupal_get_path('module', 'ft_account') . '/default_profile.gif');
       }
       $userContent .= '</div>';
       $userContent .= '<div class="comment"><p class="author-link"><cite>' . l($user->name, $userPath) . '</cite></p></div>';

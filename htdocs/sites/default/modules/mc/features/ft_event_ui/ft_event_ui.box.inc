@@ -14,7 +14,9 @@ function ft_event_ui_default_box() {
   $box->title = 'Add an event';
   $box->description = 'Events - Add an event';
   $box->options = array(
-    'body' => '<p>Do you know of an upcoming event that you\'d like to share with others? Click the green Add Stuff button at the top of the page, choose Event, and tell us about it. Your event will be posted immediately.</p>
+    'body' => '<div class="prose">
+<p>Do you know of an upcoming event that you\'d like to share with others? Click the green Add Stuff button at the top of the page, choose Event, and tell us about it. Your event will be posted immediately.</p>
+</div>
 <?php echo theme(\'ghh_see_all\',\'Read More\',\'help\'); ?>',
     'format' => '3',
   );
