@@ -173,6 +173,69 @@ function ft_landing_contexts_context_default_contexts() {
         ),
       ),
     ),
+    'block_class' => array(
+      'header' => array(
+        'class' => '',
+      ),
+      'branding' => array(
+        'class' => '',
+      ),
+      'featured' => array(
+        'class' => '',
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-featured_members-block_1' => array(
+            'class' => '',
+          ),
+          'boxes-community_getinvolved' => array(
+            'class' => 'important',
+          ),
+          'views-community_popular-block_1' => array(
+            'class' => '',
+          ),
+          'views-featured_blocks-block_1' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'below_content' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-og_community-block_5' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+      ),
+      'overlay' => array(
+        'class' => '',
+      ),
+    ),
+    'debug' => array(
+      'debug' => 1,
+    ),
   );
   $context->condition_mode = 0;
 
@@ -230,6 +293,71 @@ function ft_landing_contexts_context_default_contexts() {
         ),
       ),
     ),
+    'block_class' => array(
+      'header' => array(
+        'class' => '',
+      ),
+      'branding' => array(
+        'class' => '',
+      ),
+      'featured' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-featured_slideshow-block_3' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-events_add_an_event' => array(
+            'class' => 'important',
+          ),
+          'views-popular_places-block_2' => array(
+            'class' => '',
+          ),
+          'views-featured_blocks-block_1' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'below_content' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-upcoming_events_blocks' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+      ),
+      'overlay' => array(
+        'class' => '',
+      ),
+    ),
+    'debug' => array(
+      'debug' => 1,
+    ),
   );
   $context->condition_mode = 0;
 
@@ -238,6 +366,56 @@ function ft_landing_contexts_context_default_contexts() {
   t('Context that contains the reactions to display the Events Landing Page properly');
   t('Landing');
   $export['landing_events'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'landing_groups';
+  $context->description = '';
+  $context->tag = 'Landing';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'groups' => 'groups',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-featured_slideshow-block_1' => array(
+          'module' => 'views',
+          'delta' => 'featured_slideshow-block_1',
+          'region' => 'featured',
+          'weight' => 0,
+        ),
+        'boxes-groups_making_difference' => array(
+          'module' => 'boxes',
+          'delta' => 'groups_making_difference',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+        'boxes-groups_events' => array(
+          'module' => 'boxes',
+          'delta' => 'groups_events',
+          'region' => 'right',
+          'weight' => 1,
+        ),
+        'views-groups-block_2' => array(
+          'module' => 'views',
+          'delta' => 'groups-block_2',
+          'region' => 'above_content',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Landing');
+  $export['landing_groups'] = $context;
 
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -517,6 +695,71 @@ function ft_landing_contexts_context_default_contexts() {
           'weight' => 0,
         ),
       ),
+    ),
+    'block_class' => array(
+      'header' => array(
+        'class' => '',
+      ),
+      'branding' => array(
+        'class' => '',
+      ),
+      'featured' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-featured_slideshow-block_4' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-places_add_a_place' => array(
+            'class' => 'important',
+          ),
+          'views-og_community-block_3' => array(
+            'class' => '',
+          ),
+          'views-featured_blocks-block_1' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'below_content' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-popular_places-block_1' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+      ),
+      'overlay' => array(
+        'class' => '',
+      ),
+    ),
+    'debug' => array(
+      'debug' => 1,
     ),
   );
   $context->condition_mode = 0;
