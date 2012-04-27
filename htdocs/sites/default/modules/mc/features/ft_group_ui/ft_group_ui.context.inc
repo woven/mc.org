@@ -87,11 +87,6 @@ function ft_group_ui_context_default_contexts() {
         'node_form' => 0,
       ),
     ),
-    'path' => array(
-      'values' => array(
-        'groups/*/*' => 'groups/*/*',
-      ),
-    ),
   );
   $context->reactions = array(
     'block' => array(
