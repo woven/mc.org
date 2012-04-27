@@ -1,0 +1,5 @@
+name = MC Album Permissions
+description = "MC Define permissions for an album"
+package = MC
+core = 6.x
+

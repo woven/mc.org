@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * Implementation of hook_form_alter()
+ */
+function mc_album_permissions_form_alter(&$form, &$form_state, $form_id){
+  
+  global $user;
+  
+  if ($form['#id'] != 'node-form' || !is_object($form['#node'])){
+    //it's not a node form
+    return;
+  }
+  
+  $type = node_get_types('type', $form['#node']);
+  
+  if ($type->type != 'gallery'){
+    // not an album
+    return;
+  }
+  
+  
+  
+}
+  
+  
+function _mc_album_permissions_access_callback(){
+  global $user;
+  $user = user_load($user->uid); // for some reason og_groups is not loaded unless we explicitly load the user
+  
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'gallery-image'){
+    if (arg(3)){
+      $album = node_load(arg(3));
+    }else{
+      // no album argument
+      return false;
+    }
+    if ( !is_object($album) || $album->type != 'gallery'){
+      // invalid argument
+      return false;
+    }
+    
+    $group_manager = FALSE;
+    
+    foreach ($album->og_groups as $gnid => $group){
+      $group = node_load($gnid);
+      if ($group->field_group_manager[0]['uid'] == $user->uid){
+        // it's the group manager
+        $group_manager = TRUE;
+      }
+    }
+    
+    if ( $album->field_public_album[0]['value'] ){ // public
+      if ( user_access('add photos in any album') ||
+           user_access('add photos in any public album') ||
+          ($group_manager && user_access('add photos in any album of the groups I manage')) ||
+          ($album->uid == $user->uid && user_access('edit own gallery_image content')) ){
+        // access granted
+        return true;
+      }else{
+        return false;
+      }
+    }else{ // not public
+      if ( user_access('add photos in any album') ||
+          ($group_manager && user_access('add photos in any album of the groups I manage')) ||
+          ($album->uid == $user->uid && user_access('edit own gallery_image content')) ){
+        // access granted
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
+  }
+  return true;
+}
+
+function mc_album_permissions_perm(){
+  return array('add photos in any album', 
+               'add photos in any public album', 
+               'add photos in any album of the groups I manage');
+}
+
+function mc_album_permissions_menu_alter(&$items){
+  $items['node/add/gallery-image']['access callback']='_mc_album_permissions_access_callback';
+}
