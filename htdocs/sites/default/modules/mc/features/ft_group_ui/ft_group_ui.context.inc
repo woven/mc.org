@@ -66,5 +66,58 @@ function ft_group_ui_context_default_contexts() {
   t('groups');
   $export['group_homepage'] = $context;
 
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'page_ingroup';
+  $context->description = 'Any page inside a group, except the group node page';
+  $context->tag = 'groups';
+  $context->conditions = array(
+    'context' => array(
+      'values' => array(
+        '~group_homepage' => '~group_homepage',
+        '~group_manage_pages' => '~group_manage_pages',
+      ),
+    ),
+    'context_og_condition_group_type' => array(
+      'values' => array(
+        'group' => 'group',
+      ),
+      'options' => array(
+        'node_form' => 0,
+      ),
+    ),
+    'path' => array(
+      'values' => array(
+        'groups/*/*' => 'groups/*/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-og_details-block_1' => array(
+          'module' => 'views',
+          'delta' => 'og_details-block_1',
+          'region' => 'group_logo',
+          'weight' => 0,
+        ),
+        'og_menu-0' => array(
+          'module' => 'og_menu',
+          'delta' => 0,
+          'region' => 'left',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Any page inside a group, except the group node page');
+  t('groups');
+  $export['page_ingroup'] = $context;
+
   return $export;
 }
