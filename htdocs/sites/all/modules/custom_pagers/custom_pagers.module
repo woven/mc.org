@@ -259,7 +259,9 @@ function custom_pagers_get_list_from_view($pager, $node) {
     if (!empty($pager->args)) {
       $args = array_map('trim', explode("\n", $pager->args));
       if (module_exists('token')) {
-        $args = token_replace($args, 'node', $node);
+        foreach($args as $key => $value) {
+          $args[$key] = token_replace($value, 'node', $node);
+        }
       }
     }
     else {
