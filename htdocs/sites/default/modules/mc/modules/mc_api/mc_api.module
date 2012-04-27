@@ -138,7 +138,7 @@ function _get_group_or_forum($tid = '', $nid= ''){
 
 function _get_group_id($group_name){
   
-  $uid_user_created_comment = db_result(db_query("SELECT nid FROM content_type_group c WHERE c.field_small_name_value = %d", $group_name));
+  $uid_user_created_comment = db_result(db_query("SELECT nid FROM content_type_group c WHERE c.field_small_name_value = '%s'", $group_name));
   return $uid_user_created_comment;
 }
 

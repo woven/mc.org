@@ -187,5 +187,19 @@ function views_gallery_strongarm() {
   );
   $export['node_options_gallery_image'] = $strongarm;
 
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_gallery_image_pattern';
+  $strongarm->value = '[group-short-name-raw]/photos/[field_gallery-title-raw]/[title-raw]';
+  $export['pathauto_node_gallery_image_pattern'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_gallery_pattern';
+  $strongarm->value = '[group-short-name-raw]/photos/[title-raw]';
+  $export['pathauto_node_gallery_pattern'] = $strongarm;
+
   return $export;
 }
