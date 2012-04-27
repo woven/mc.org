@@ -11,10 +11,9 @@ function views_gallery_views_default_views() {
   $view->name = 'gallery';
   $view->description = 'Photos belonging to a selected gallery';
   $view->tag = '';
-  $view->view_php = '';
   $view->base_table = 'node';
-  $view->is_cacheable = FALSE;
-  $view->api_version = 2;
+  $view->core = 0;
+  $view->api_version = '2';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
   $handler = $view->new_display('default', 'Defaults', 'default');
   $handler->override_option('relationships', array(
@@ -174,7 +173,7 @@ function views_gallery_views_default_views() {
       'field' => 'field_gallery_nid',
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
-        '2' => 0,
+        2 => 0,
       ),
       'relationship' => 'none',
       'default_options_div_prefix' => '',
@@ -221,6 +220,10 @@ function views_gallery_views_default_views() {
     'type' => 'none',
   ));
   $handler->override_option('css_class', 'ghh-gallery');
+  $handler->override_option('header_format', '1');
+  $handler->override_option('header_empty', 0);
+  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_empty', 0);
   $handler->override_option('empty', 'No photos have been added to this gallery.');
   $handler->override_option('empty_format', '1');
   $handler->override_option('use_ajax', TRUE);
@@ -233,15 +236,11 @@ function views_gallery_views_default_views() {
     'alignment' => 'horizontal',
   ));
   $handler = $view->new_display('node_content', 'Full gallery', 'node_content_1');
-  $handler->override_option('header_format', '1');
-  $handler->override_option('header_empty', 0);
-  $handler->override_option('footer_format', '4');
-  $handler->override_option('footer_empty', 0);
   $handler->override_option('types', array(
     'gallery' => 'gallery',
   ));
   $handler->override_option('modes', array(
-    '0' => 'full',
+    0 => 'full',
   ));
   $handler->override_option('argument_mode', 'nid');
   $handler->override_option('default_argument', 'nid');
@@ -295,7 +294,7 @@ function views_gallery_views_default_views() {
     'gallery' => 'gallery',
   ));
   $handler->override_option('modes', array(
-    '0' => 'teaser',
+    0 => 'teaser',
   ));
   $handler->override_option('argument_mode', 'nid');
   $handler->override_option('default_argument', 'nid');
@@ -486,10 +485,10 @@ function views_gallery_views_default_views() {
       'field' => 'field_gallery_nid',
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
-        '2' => 0,
-        '5' => 0,
-        '3' => 0,
-        '4' => 0,
+        2 => 0,
+        5 => 0,
+        3 => 0,
+        4 => 0,
       ),
       'relationship' => 'none',
       'default_options_div_prefix' => '',
@@ -502,7 +501,7 @@ function views_gallery_views_default_views() {
       'validate_argument_node_access' => 1,
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
-        '2' => 0,
+        2 => 0,
       ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
@@ -565,10 +564,9 @@ function views_gallery_views_default_views() {
   $view->name = 'gallery_list';
   $view->description = 'A teaser list of all galleries.';
   $view->tag = '';
-  $view->view_php = '';
   $view->base_table = 'node';
-  $view->is_cacheable = FALSE;
-  $view->api_version = 2;
+  $view->core = 0;
+  $view->api_version = '2';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
   $handler = $view->new_display('default', 'Defaults', 'default');
   $handler->override_option('sorts', array(

@@ -17,7 +17,7 @@ function views_gallery_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-96',
+      'ds_weight' => '-85',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -30,7 +30,7 @@ function views_gallery_content_default_fields() {
         'field_id' => 'field_addphoto',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-96',
+        'weight' => '-85',
       ),
       'teaser' => array(
         'format' => 'default',
@@ -88,7 +88,9 @@ function views_gallery_content_default_fields() {
     'module' => 'markup',
     'active' => '1',
     'markup' => '',
+    'markup_php' => '',
     'widget' => array(
+      'display_style' => NULL,
       'label' => 'Add New Photo',
       'weight' => '9',
       'description' => '',
@@ -108,12 +110,12 @@ function views_gallery_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-95',
+      'ds_weight' => '-79',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'photo_gallery_thumbnail_default',
+        'format' => 'default',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -121,7 +123,7 @@ function views_gallery_content_default_fields() {
         'field_id' => 'field_gallery_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-95',
+        'weight' => '-79',
       ),
       'weight' => '-3',
       'parent' => '',
@@ -149,6 +151,10 @@ function views_gallery_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'file_extensions' => 'jpg jpeg png gif',
       'file_path' => 'photos',
       'progress_indicator' => 'bar',
@@ -163,10 +169,6 @@ function views_gallery_content_default_fields() {
       'title_type' => 'textfield',
       'default_image' => NULL,
       'use_default_image' => 0,
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
       'label' => 'Album Cover',
       'weight' => '-3',
       'description' => 'Upload an image to be the cover art for your gallery',
@@ -186,7 +188,7 @@ function views_gallery_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-83',
+      'ds_weight' => '-84',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -199,7 +201,7 @@ function views_gallery_content_default_fields() {
         'field_id' => 'field_public_album',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-83',
+        'weight' => '-84',
       ),
       'teaser' => array(
         'format' => 'default',
@@ -421,6 +423,10 @@ function views_gallery_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'file_extensions' => 'jpg jpeg png gif',
       'file_path' => 'photos',
       'progress_indicator' => 'bar',
@@ -435,10 +441,6 @@ function views_gallery_content_default_fields() {
       'title_type' => 'textfield',
       'default_image' => NULL,
       'use_default_image' => 0,
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
       'label' => 'Image',
       'weight' => '-9',
       'description' => '',
