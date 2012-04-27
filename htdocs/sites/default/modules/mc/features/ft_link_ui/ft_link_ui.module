@@ -1,0 +1,3 @@
+<?php
+
+include_once('ft_link_ui.features.inc');
