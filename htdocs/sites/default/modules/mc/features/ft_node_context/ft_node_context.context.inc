@@ -10,7 +10,7 @@ function ft_node_context_context_default_contexts() {
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'node_ingroup';
-  $context->description = 'Any page inside a group, except the group page itself.';
+  $context->description = 'Any page inside a group, except the group node page';
   $context->tag = 'Node';
   $context->conditions = array(
     'context' => array(
@@ -66,11 +66,11 @@ function ft_node_context_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Any page inside a group, except the group page itself.');
+  t('Any page inside a group, except the group node page');
   t('Node');
   $export['node_ingroup'] = $context;
 
