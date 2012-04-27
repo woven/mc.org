@@ -17,6 +17,7 @@ function ft_node_context_context_default_contexts() {
       'values' => array(
         '~group_homepage' => '~group_homepage',
         '~group_manage_pages' => '~group_manage_pages',
+        '~page_ingroup' => '~page_ingroup',
       ),
     ),
     'context_og_condition_group_type' => array(
