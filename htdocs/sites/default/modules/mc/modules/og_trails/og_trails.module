@@ -8,8 +8,12 @@ function og_trails_nodeapi(&$node, $op, $a3 = NULL, $page = FALSE) {
       $small_path = $node->field_small_name[0]['value'];
       break;
     }
+    if (!isset($group->path) || empty($group->path)){
+      $path = 'groups/' . $group->field_small_name[0]['value'] . '/';
+    }else{
+      $path = 'groups/' . $group->path . '/';
+    }
     
-    $path = 'groups/' . $group->path . '/';
     
     if ($node->type == 'event'){
       $path .= 'events';
