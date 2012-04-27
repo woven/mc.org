@@ -358,6 +358,8 @@ function og_prepopulate_menu_init() {
     $group = node_load($group_uid);
     if (isset($group) && $group->field_enable_discussions['0']['value'] == '0'){
       drupal_access_denied();
+      module_invoke_all('exit');
+      exit();
     }
   }
 }
