@@ -272,7 +272,7 @@ Your account on !site has been deleted.';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_picture_imagecache_comments';
-  $strongarm->value = '0';
+  $strongarm->value = 'user_comment_image';
   $export['user_picture_imagecache_comments'] = $strongarm;
 
   $strongarm = new stdClass;
