@@ -51,12 +51,6 @@ function ft_node_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-og_details-block_1' => array(
-          'module' => 'views',
-          'delta' => 'og_details-block_1',
-          'region' => 'group_logo',
-          'weight' => 0,
-        ),
         'og_menu-0' => array(
           'module' => 'og_menu',
           'delta' => 0,
