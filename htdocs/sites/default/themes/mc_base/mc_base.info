@@ -11,6 +11,7 @@ regions[branding] = Branding
 regions[featured] = Featured
 regions[group_logo] = Group Logo
 regions[footer] = Footer
+regions[content] = Content
 regions[left] = Left
 regions[right] = Right
 regions[below_content] = Below Content
