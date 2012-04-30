@@ -217,6 +217,11 @@ div.two-columns-left #left{
 
 }
 
+#block-quicktabs-og_gposts .quicktabs_tabpage .view{
+	margin: 15px 20px;
+	padding: 10px 10px 0;
+}
+
 #page .block-quicktabs .block-content .block-title a, #page .block-quicktabs .block-content .block-title a:visited {
     color: #595959;
     float: none;
