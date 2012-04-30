@@ -98,7 +98,7 @@ print views_embed_view(\'latest_pages\', \'block_2\');
     'body' => '<div class="logo prc">
           <div class="logo-image">
             <a href="http://www.cdc.gov/prc">
-              <img src="/sites/default/themes/harlem2/images/logos/prc_logo.jpg">
+              <img src="http://www.cdc.gov/prc/images/prc_logo.jpg">
             </a>
           </div>
           <div class="info">
