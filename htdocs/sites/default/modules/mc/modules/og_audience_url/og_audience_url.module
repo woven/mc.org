@@ -123,8 +123,8 @@ function og_audience_url_form_alter(&$form, &$form_state, $form_id){
     }
     
     // force it to be a required select input
-    //$form['og_nodeapi']['visible']['og_groups']['#type'] = 'select';
-    //$form['og_nodeapi']['visible']['og_groups']['#required'] = TRUE;
+    $form['og_nodeapi']['visible']['og_groups']['#type'] = 'select';
+    $form['og_nodeapi']['visible']['og_groups']['#required'] = TRUE;
     
     // hide when less than one option or when it's a gallery_image node
     if (count($form['og_nodeapi']['visible']['og_groups']['#options']) < 1 ||
@@ -132,12 +132,20 @@ function og_audience_url_form_alter(&$form, &$form_state, $form_id){
       $form['og_nodeapi']['#prefix'] = '<div style="display:none;">';
       $form['og_nodeapi']['#suffix'] = '</div>';
     }
-    
+    array_unshift($form['#validate'],'_og_audience_url_node_form_validate');
 	}
   
   
   
 }
+
+function _og_audience_url_node_form_validate($form, &$form_state){
+  $group = $form_state['values']['og_groups'];
+  $form_state['values']['og_groups'] = array(
+      $group => $group,
+    );
+}
+
 
 /***** CUSTOM ACCESS ******/
 function _og_audience_url_access($perm, $node){
