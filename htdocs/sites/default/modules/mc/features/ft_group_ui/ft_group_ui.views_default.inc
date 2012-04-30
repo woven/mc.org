@@ -7908,7 +7908,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
 $sql = "SELECT field_small_name_value from {content_type_group} WHERE nid = %d";
 $small_name = db_result(db_query($sql, arg(1)));
 print (theme_ghh_see_all(\'See All\', \'groups/\' . $small_name . \'/latest\' )); ?>');
-  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
   $handler->override_option('link_display', 'page_1');
   $handler->override_option('row_options', array(
@@ -8522,7 +8522,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
 $sql = "SELECT field_small_name_value from {content_type_group} WHERE nid = %d";
 $small_name = db_result(db_query($sql, arg(1)));
 print (theme_ghh_see_all(\'See All\', \'groups/\' . $small_name . \'/most-popular\' )); ?>');
-  $handler->override_option('footer_format', '4');
+  $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
   $handler->override_option('link_display', 'page_2');
   $handler->override_option('row_options', array(
@@ -10188,7 +10188,7 @@ $node = node_load($nid);
 <?php //drupal_set_message("<pre>".print_r($node, true)."</pre>test"); ?>
 
 Check out photos from <?php echo $node->title; ?>.  Please choose an album.');
-  $handler->override_option('header_format', '4');
+  $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
   $handler->override_option('empty', 'There are no photos in this group.');
   $handler->override_option('items_per_page', 12);
