@@ -43,22 +43,18 @@ function mc_node_ui_quicktabs_default_quicktabs() {
   $quicktabs->title = 'Latest Right Blocks';
   $quicktabs->tabs = array(
     0 => array(
-      'vid' => 'latest_block',
-      'display' => 'block_1',
-      'args' => '',
-      'get_displays' => 'vdisp_0',
+      'bid' => 'views_delta_latest_block-block_1',
+      'hide_title' => 1,
       'title' => 'Latest',
       'weight' => '-100',
-      'type' => 'view',
+      'type' => 'block',
     ),
     1 => array(
-      'vid' => 'latest_block',
-      'display' => 'block_2',
-      'args' => '',
-      'get_displays' => 'vdisp_1',
+      'bid' => 'views_delta_latest_block-block_2',
+      'hide_title' => 1,
       'title' => 'Popular',
       'weight' => '-99',
-      'type' => 'view',
+      'type' => 'block',
     ),
   );
   $quicktabs->style = 'default';
