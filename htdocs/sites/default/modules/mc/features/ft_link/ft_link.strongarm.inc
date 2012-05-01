@@ -123,16 +123,14 @@ function ft_link_strongarm() {
   $strongarm->name = 'content_extra_weights_link';
   $strongarm->value = array(
     'title' => '33',
-    'body_field' => '36',
-    'revision_information' => '41',
+    'body_field' => '35',
+    'revision_information' => '42',
     'author' => '40',
-    'options' => '42',
-    'comment_settings' => '45',
-    'menu' => '35',
+    'options' => '43',
+    'comment_settings' => '44',
+    'menu' => '45',
     'taxonomy' => '34',
-    'path' => '44',
-    'attachments' => '46',
-    'print' => '43',
+    'path' => '41',
   );
   $export['content_extra_weights_link'] = $strongarm;
 
@@ -227,7 +225,7 @@ function ft_link_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'form_build_id_link';
-  $strongarm->value = 'form-c14a6ead6b80cdba22935c4b0b79a30d';
+  $strongarm->value = 'form-7fe0941ee597e390836e953ebfb5ffca';
   $export['form_build_id_link'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -299,7 +297,7 @@ function ft_link_strongarm() {
   $strongarm->name = 'location_settings_node_link';
   $strongarm->value = array(
     'multiple' => array(
-      'min' => 1,
+      'min' => '1',
       'max' => '0',
       'add' => '0',
     ),
@@ -308,37 +306,65 @@ function ft_link_strongarm() {
       'collapsible' => 1,
       'collapsed' => 1,
       'fields' => array(
-        'location_country' => array(
-          'collect' => '1',
-        ),
         'name' => array(
           'collect' => '1',
+          'default' => '',
+          'weight' => '2',
         ),
         'street' => array(
           'collect' => '1',
+          'default' => '',
+          'weight' => '4',
+        ),
+        'additional' => array(
+          'collect' => '0',
+          'default' => '',
+          'weight' => '6',
         ),
         'city' => array(
           'collect' => '0',
+          'default' => '',
+          'weight' => '8',
         ),
         'province' => array(
           'collect' => '0',
+          'default' => '',
+          'weight' => '10',
         ),
         'postal_code' => array(
           'collect' => '0',
+          'default' => '',
+          'weight' => '12',
         ),
         'country' => array(
           'collect' => '1',
+          'default' => 'us',
+          'weight' => '14',
         ),
-        'additional' => array(
-          'collect' => '',
+        'locpick' => array(
+          'collect' => '1',
+          'weight' => '20',
         ),
       ),
     ),
     'display' => array(
+      'weight' => '0',
+      'hide' => array(
+        'name' => 0,
+        'street' => 0,
+        'additional' => 0,
+        'city' => 0,
+        'province' => 0,
+        'postal_code' => 0,
+        'country' => 0,
+        'locpick' => 0,
+        'province_name' => 0,
+        'country_name' => 0,
+        'map_link' => 0,
+        'coords' => 0,
+      ),
       'teaser' => 1,
       'full' => 1,
-      'weight' => '0',
-      'hide' => array(),
     ),
     'rss' => array(
       'mode' => 'w3c',
