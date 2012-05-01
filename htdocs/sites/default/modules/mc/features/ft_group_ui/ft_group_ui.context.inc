@@ -31,12 +31,6 @@ function ft_group_ui_context_default_contexts() {
           'region' => 'group_logo',
           'weight' => 0,
         ),
-        'quicktabs-og_gposts' => array(
-          'module' => 'quicktabs',
-          'delta' => 'og_gposts',
-          'region' => 'content',
-          'weight' => 0,
-        ),
         'og_menu-0' => array(
           'module' => 'og_menu',
           'delta' => 0,
@@ -60,6 +54,12 @@ function ft_group_ui_context_default_contexts() {
           'delta' => 'og_posts-block_4',
           'region' => 'right',
           'weight' => 2,
+        ),
+        'quicktabs-og_gposts' => array(
+          'module' => 'quicktabs',
+          'delta' => 'og_gposts',
+          'region' => 'below_content',
+          'weight' => 0,
         ),
       ),
     ),
