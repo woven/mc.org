@@ -1867,7 +1867,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
   $handler->override_option('footer_format', '4');
   $handler->override_option('footer_empty', 0);
   $handler->override_option('empty', 'There\'s no content in this category yet. Please try again using the filters in the right. Or see <?php print l( t(\'all the latest content\'), \'latest\' ); ?>. ');
-  $handler->override_option('empty_format', '1');
+  $handler->override_option('empty_format', '3');
   $handler->override_option('items_per_page', 5);
   $handler->override_option('use_pager', '1');
   $handler->override_option('style_plugin', 'semanticviews_default');
