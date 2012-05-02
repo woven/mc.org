@@ -1,0 +1,5 @@
+name = OG Single Group
+description = Forces nodes to belong to only one group.
+dependencies[] = og
+package = "Organic groups"
+core = 6.x

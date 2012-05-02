@@ -1,7 +1,0 @@
-name = OG Audience URL
-description = Provides automatic selection of group audience by passing the group node id through the url.
-dependencies[] = menu
-dependencies[] = og
-package = "Organic groups"
-core = 6.x
-version = "6.x-1.0"

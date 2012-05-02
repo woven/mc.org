@@ -1,0 +1,5 @@
+name = MyCommunity.org Add Stuff functionality
+description = Contains the Add Stuff functionality for the MyCommunity.org
+dependencies[] = og
+package = "Organic groups"
+core = 6.x

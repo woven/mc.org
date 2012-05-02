@@ -1,0 +1,5 @@
+name = OG Sitewide Permissions
+description = This module contains implements permissions to post content sitewide
+dependencies[] = og
+package = "Organic groups"
+core = 6.x
