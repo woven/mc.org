@@ -294,7 +294,7 @@ function mc_nodeapi(&$node, $op, $teaser, $page) {
 
           // get category terms
 
-          if (is_array($node->taxonomy) && !empty($node->taxonomy[VID_CATEGORY])){
+          if (is_array($node->taxonomy) && !empty($node->taxonomy[VID_CATEGORY]) && $node->taxonomy[VID_CATEGORY] != ''){
             foreach ($node->taxonomy[VID_CATEGORY] as $tid){
               $term = taxonomy_get_term($tid);
               $name = strtolower($term->name);

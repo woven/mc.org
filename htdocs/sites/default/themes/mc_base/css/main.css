@@ -2384,3 +2384,10 @@ border-width: 1px 0 !important;
 .node-type-article .field-file-view{width: 69%; float: left; clear: right;}
 
 #page .node-type-article .view .view-content {clear: none;}
+
+
+#page .node-type-event .field-nodes-event-dates {float: left;}
+
+#page .node-type-event .field-body {clear: both;}
+
+#page .node-type-event .field-file-view {float: left;}
