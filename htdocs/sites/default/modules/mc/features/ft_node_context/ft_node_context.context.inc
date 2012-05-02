@@ -96,6 +96,8 @@ function ft_node_context_context_default_contexts() {
         'audio' => 'audio',
         'event' => 'event',
         'file' => 'file',
+        'link' => 'link',
+        'nnews' => 'nnews',
         'place' => 'place',
         'video' => 'video',
       ),
