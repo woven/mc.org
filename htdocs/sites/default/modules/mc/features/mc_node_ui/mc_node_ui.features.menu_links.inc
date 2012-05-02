@@ -217,24 +217,6 @@ function mc_node_ui_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-43',
   );
-  // Exported menu link: menu-browse-by-type:latest/news
-  $menu_links['menu-browse-by-type:latest/news'] = array(
-    'menu_name' => 'menu-browse-by-type',
-    'link_path' => 'latest/news',
-    'router_path' => 'latest/%',
-    'link_title' => 'News',
-    'options' => array(
-      'attributes' => array(
-        'class' => 'ico-news',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-44',
-  );
   // Exported menu link: menu-browse-by-type:latest/place
   $menu_links['menu-browse-by-type:latest/place'] = array(
     'menu_name' => 'menu-browse-by-type',
@@ -283,7 +265,6 @@ function mc_node_ui_menu_default_menu_links() {
   t('Fitness');
   t('Food');
   t('Health Info');
-  t('News');
   t('Photo');
   t('Place');
   t('Spirit & Mind');

@@ -17,7 +17,7 @@ function ft_link_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-90',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -30,7 +30,7 @@ function ft_link_content_default_fields() {
         'field_id' => 'field_editorial',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-90',
+        'weight' => '-19',
       ),
       'teaser' => array(
         'format' => 'hidden',
@@ -71,7 +71,7 @@ function ft_link_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Editorial Content',
-      'weight' => '38',
+      'weight' => '39',
       'description' => '',
       'type' => 'optionwidgets_onoff',
       'module' => 'optionwidgets',
@@ -141,10 +141,110 @@ function ft_link_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Link',
-      'weight' => '39',
+      'weight' => '36',
       'description' => '',
       'type' => 'link',
       'module' => 'link',
+    ),
+  );
+
+  // Exported field: field_list_image
+  $fields['link-field_list_image'] = array(
+    'field_name' => 'field_list_image',
+    'type_name' => 'link',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'filefield',
+        'parent_id' => '',
+        'field_id' => 'field_list_image',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
+      ),
+      'weight' => '7',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'hidden',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'filefield',
+    'required' => '0',
+    'multiple' => '1',
+    'module' => 'filefield',
+    'active' => '1',
+    'list_field' => '0',
+    'list_default' => 1,
+    'description_field' => '0',
+    'widget' => array(
+      'file_extensions' => 'png gif jpg jpeg',
+      'file_path' => '',
+      'progress_indicator' => 'bar',
+      'max_filesize_per_file' => '',
+      'max_filesize_per_node' => '',
+      'max_resolution' => '0',
+      'min_resolution' => '0',
+      'alt' => '',
+      'custom_alt' => 1,
+      'title' => '',
+      'custom_title' => 1,
+      'title_type' => 'textfield',
+      'default_image' => array(
+        'filename' => 'default_list_image.JPG',
+        'filepath' => 'sites/default/files/imagefield_default_images/default_list_image.JPG',
+        'filemime' => 'image/jpeg',
+        'source' => 'default_image_upload',
+        'destination' => 'sites/default/files/imagefield_default_images/default_list_image.JPG',
+        'filesize' => 9568,
+        'uid' => '1',
+        'status' => 1,
+        'timestamp' => 1297655448,
+        'fid' => '51253',
+      ),
+      'use_default_image' => 1,
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
+      'label' => 'Images',
+      'weight' => '37',
+      'description' => 'Upload an image to be displayed on the lists of content',
+      'type' => 'imagefield_crop_widget',
+      'module' => 'imagefield_crop',
     ),
   );
 
@@ -159,7 +259,7 @@ function ft_link_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-89',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -172,7 +272,7 @@ function ft_link_content_default_fields() {
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-89',
+        'weight' => '-19',
       ),
       'teaser' => array(
         'format' => 'hidden',
@@ -210,10 +310,10 @@ function ft_link_content_default_fields() {
       'file' => 0,
       'group' => 0,
       'image' => 0,
+      'news' => 0,
       'simplenews' => 0,
+      'page' => 0,
       'webform' => 0,
-      'npage' => 0,
-      'nnews' => 0,
     ),
     'advanced_view' => '--',
     'advanced_view_args' => '',
@@ -228,7 +328,7 @@ function ft_link_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Related Content',
-      'weight' => '37',
+      'weight' => '38',
       'description' => '',
       'type' => 'nodereference_autocomplete',
       'module' => 'nodereference',
@@ -238,6 +338,7 @@ function ft_link_content_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Editorial Content');
+  t('Images');
   t('Link');
   t('Related Content');
 
