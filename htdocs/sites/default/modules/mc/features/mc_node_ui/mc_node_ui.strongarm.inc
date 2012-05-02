@@ -752,7 +752,7 @@ if ( !empty($object->feedapi_node->feed_nids) ){
         'webform' => 0,
       ),
       'properties' => array(
-        'block' => 'views|files-block_1',
+        'block' => 'views|node_files-block_1', 
         'render' => '1',
       ),
     ),
