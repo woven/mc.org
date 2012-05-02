@@ -37,9 +37,9 @@ function ft_group_ui_context_default_contexts() {
           'region' => 'left',
           'weight' => 0,
         ),
-        'views-og_details-block_4' => array(
-          'module' => 'views',
-          'delta' => 'og_details-block_4',
+        'boxes-group_follow_box' => array(
+          'module' => 'boxes',
+          'delta' => 'group_follow_box',
           'region' => 'right',
           'weight' => 0,
         ),

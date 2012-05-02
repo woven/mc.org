@@ -20,7 +20,7 @@ function ft_landing_contexts_default_box() {
             <?php
               // invoke and print directly
               // not a best practice, but it\'s ok since we don\'t really need a region here
-              $block = module_invoke(\'og_audience_url\', \'block\', \'view\', "0");
+              $block = module_invoke(\'mc_addstuff\', \'block\', \'view\', "0");
               print $block[\'content\'];
             ?>
           </div>

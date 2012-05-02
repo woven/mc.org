@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implementation of hook_install()
+ */
+function og_sitewide_perm_install(){
+  db_query("UPDATE {system} SET weight = 20 WHERE name = 'og_sitewide_perm'");
+}
