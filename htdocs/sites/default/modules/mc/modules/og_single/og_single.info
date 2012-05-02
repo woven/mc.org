@@ -3,3 +3,4 @@ description = Forces nodes to belong to only one group.
 dependencies[] = og
 package = "Organic groups"
 core = 6.x
+dependencies[] = "og_sitewide_perm"
