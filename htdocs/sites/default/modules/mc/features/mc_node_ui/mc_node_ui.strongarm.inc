@@ -752,12 +752,31 @@ if ( !empty($object->feedapi_node->feed_nids) ){
         'webform' => 0,
       ),
       'properties' => array(
-        'block' => 'views|node_files-block_1', 
+        'block' => 'views|node_files-block_1',
         'render' => '1',
       ),
     ),
   );
   $export['nd_fields'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nd_plugin_settings';
+  $strongarm->value = array(
+    'regiontoblock' => array(
+      'title' => 'Region to block',
+      'class' => 'ds_regiontoblock',
+      'description' => 'Render a display suite region into a theme region. That region will be made available as a block.',
+      'file' => 'ds_regiontoblock.inc',
+      'path' => 'sites/all/modules/ds/plugins',
+      'target' => 'all',
+      'key' => 'regiontoblock',
+      'filename' => 'sites/all/modules/ds/plugins/ds_regiontoblock.inc',
+      'status' => '1',
+    ),
+  );
+  $export['nd_plugin_settings'] = $strongarm;
 
   return $export;
 }

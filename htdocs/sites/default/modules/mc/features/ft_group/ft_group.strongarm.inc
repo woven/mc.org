@@ -571,6 +571,44 @@ function ft_group_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_admin_email_body';
+  $strongarm->value = '@body
+
+--
+This message was sent by an administrator in the \'@group\' group at @site. To visit this group, browse to !url_group. To unsubscribe from this group, visit !url_unsubscribe';
+  $export['og_admin_email_body'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_approve_user_body';
+  $strongarm->value = 'You may now post messages in this group located at !group_url';
+  $export['og_approve_user_body'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_approve_user_subject';
+  $strongarm->value = 'Membership request approved for \'@title\'';
+  $export['og_approve_user_subject'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_audience_checkboxes';
+  $strongarm->value = 0;
+  $export['og_audience_checkboxes'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_audience_required';
+  $strongarm->value = '0';
+  $export['og_audience_required'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'og_block_group_posts_4672';
   $strongarm->value = 1;
   $export['og_block_group_posts_4672'] = $strongarm;
@@ -592,9 +630,91 @@ function ft_group_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_content_type_usage_feedapi_node';
+  $strongarm->value = 'omitted';
+  $export['og_content_type_usage_feedapi_node'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_content_type_usage_forum';
+  $strongarm->value = 'group_post_standard';
+  $export['og_content_type_usage_forum'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'og_content_type_usage_group';
   $strongarm->value = 'group';
   $export['og_content_type_usage_group'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_content_type_usage_image';
+  $strongarm->value = 'group_post_standard';
+  $export['og_content_type_usage_image'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_content_type_usage_news';
+  $strongarm->value = 'omitted';
+  $export['og_content_type_usage_news'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_content_type_usage_simplenews';
+  $strongarm->value = 'omitted';
+  $export['og_content_type_usage_simplenews'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_content_type_usage_webform';
+  $strongarm->value = 'group_post_standard';
+  $export['og_content_type_usage_webform'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_deny_user_body';
+  $strongarm->value = 'Sorry, your membership request was denied.';
+  $export['og_deny_user_body'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_deny_user_subject';
+  $strongarm->value = 'Membership request denied for \'@title\'';
+  $export['og_deny_user_subject'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_email_notification_pattern';
+  $strongarm->value = '@user_name  <@site_mail>';
+  $export['og_email_notification_pattern'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_invite_user_body';
+  $strongarm->value = 'Hi. I\'m a member of \'@group\' and I welcome you to join this group as well. Please see the link and message below.
+
+@group
+@description
+Join: !group_url
+@body';
+  $export['og_invite_user_body'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_invite_user_subject';
+  $strongarm->value = 'Invitation to join the group \'@group\' at @site';
+  $export['og_invite_user_subject'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -655,9 +775,90 @@ function ft_group_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_new_admin_body';
+  $strongarm->value = '@username, you are now an administrator for the group \'@group\'.
+
+You can administer this group by logging in here:
+ !group_url';
+  $export['og_new_admin_body'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_new_admin_subject';
+  $strongarm->value = 'You are now an administrator for the group \'@group\'';
+  $export['og_new_admin_subject'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_new_node_body';
+  $strongarm->value = '@type \'@subject\' by @username
+
+@node_teaser
+
+!read_more: !content_url
+Post reply: !reply_url
+
+--
+You are subscribed from the group \'@group\' at @site.
+To manage your subscription, visit !group_url';
+  $export['og_new_node_body'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_new_node_subject';
+  $strongarm->value = '@group: \'@title\' at @site';
+  $export['og_new_node_subject'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'og_private_groups';
   $strongarm->value = '0';
   $export['og_private_groups'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_request_user_body';
+  $strongarm->value = 'To instantly approve this request, visit !approve_url.
+You may deny this request or manage members at !group_url. 
+
+Personal message from @username:
+------------------
+
+@request';
+  $export['og_request_user_body'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_request_user_subject';
+  $strongarm->value = 'Membership request for \'@group\' from \'@username\'';
+  $export['og_request_user_subject'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility';
+  $strongarm->value = '1';
+  $export['og_visibility'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility_directory';
+  $strongarm->value = '0';
+  $export['og_visibility_directory'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility_registration';
+  $strongarm->value = '0';
+  $export['og_visibility_registration'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -843,207 +1044,6 @@ function ft_group_strongarm() {
   $strongarm->name = 'upload_group_page';
   $strongarm->value = '1';
   $export['upload_group_page'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_admin_email_body';
-  $strongarm->value = '@body
-
---
-This message was sent by an administrator in the \'@group\' group at @site. To visit this group, browse to !url_group. To unsubscribe from this group, visit !url_unsubscribe';
-  $export['og_admin_email_body'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_approve_user_body';
-  $strongarm->value = 'You may now post messages in this group located at !group_url';
-  $export['og_approve_user_body'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_approve_user_subject';
-  $strongarm->value = 'Membership request approved for \'@title\'';
-  $export['og_approve_user_subject'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_audience_checkboxes';
-  $strongarm->value = 0;
-  $export['og_audience_checkboxes'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_audience_required';
-  $strongarm->value = '0';
-  $export['og_audience_required'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_content_type_usage_feedapi_node';
-  $strongarm->value = 'omitted';
-  $export['og_content_type_usage_feedapi_node'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_content_type_usage_forum';
-  $strongarm->value = 'group_post_standard';
-  $export['og_content_type_usage_forum'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_content_type_usage_image';
-  $strongarm->value = 'group_post_standard';
-  $export['og_content_type_usage_image'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_content_type_usage_news';
-  $strongarm->value = 'omitted';
-  $export['og_content_type_usage_news'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_content_type_usage_simplenews';
-  $strongarm->value = 'omitted';
-  $export['og_content_type_usage_simplenews'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_content_type_usage_webform';
-  $strongarm->value = 'group_post_standard';
-  $export['og_content_type_usage_webform'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_deny_user_body';
-  $strongarm->value = 'Sorry, your membership request was denied.';
-  $export['og_deny_user_body'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_deny_user_subject';
-  $strongarm->value = 'Membership request denied for \'@title\'';
-  $export['og_deny_user_subject'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_email_notification_pattern';
-  $strongarm->value = '@user_name  <@site_mail>';
-  $export['og_email_notification_pattern'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_invite_user_body';
-  $strongarm->value = 'Hi. I\'m a member of \'@group\' and I welcome you to join this group as well. Please see the link and message below.
-
-@group
-@description
-Join: !group_url
-@body';
-  $export['og_invite_user_body'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_invite_user_subject';
-  $strongarm->value = 'Invitation to join the group \'@group\' at @site';
-  $export['og_invite_user_subject'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_new_admin_body';
-  $strongarm->value = '@username, you are now an administrator for the group \'@group\'.
-
-You can administer this group by logging in here:
- !group_url';
-  $export['og_new_admin_body'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_new_admin_subject';
-  $strongarm->value = 'You are now an administrator for the group \'@group\'';
-  $export['og_new_admin_subject'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_new_node_body';
-  $strongarm->value = '@type \'@subject\' by @username
-
-@node_teaser
-
-!read_more: !content_url
-Post reply: !reply_url
-
---
-You are subscribed from the group \'@group\' at @site.
-To manage your subscription, visit !group_url';
-  $export['og_new_node_body'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_new_node_subject';
-  $strongarm->value = '@group: \'@title\' at @site';
-  $export['og_new_node_subject'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_request_user_body';
-  $strongarm->value = 'To instantly approve this request, visit !approve_url.
-You may deny this request or manage members at !group_url. 
-
-Personal message from @username:
-------------------
-
-@request';
-  $export['og_request_user_body'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_request_user_subject';
-  $strongarm->value = 'Membership request for \'@group\' from \'@username\'';
-  $export['og_request_user_subject'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_visibility';
-  $strongarm->value = '1';
-  $export['og_visibility'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_visibility_directory';
-  $strongarm->value = '0';
-  $export['og_visibility_directory'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_visibility_registration';
-  $strongarm->value = '0';
-  $export['og_visibility_registration'] = $strongarm;
 
   return $export;
 }
