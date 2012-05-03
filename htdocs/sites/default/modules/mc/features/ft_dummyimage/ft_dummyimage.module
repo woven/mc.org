@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MC Dummy Images feature.
+ */
+
+include_once 'ft_dummyimage.features.inc';
