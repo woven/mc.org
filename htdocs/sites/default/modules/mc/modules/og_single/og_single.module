@@ -93,12 +93,8 @@ function og_single_form_alter(&$form, &$form_state, $form_id){
       $form['og_nodeapi']['#suffix'] = '</div>';
     }
     array_unshift($form['#validate'],'_og_single_node_form_validate');
-    if(arg(0)=='node' && is_numeric(arg(1)) && arg(2)=='edit'){
-      $form['og_nodeapi']['#collapsed']=FALSE;
-    }
-    elseif(arg(0)=='node' && arg(1)=='add'){
-      $form['og_nodeapi']['#collapsed']=TRUE;
-    }
+    $form['og_nodeapi']['#collapsed']=FALSE;
+    $form['#content_extra_fields']['og_nodeapi']['weight']=-100;
 	}
   
   
