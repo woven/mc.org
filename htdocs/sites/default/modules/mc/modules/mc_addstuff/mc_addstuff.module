@@ -31,7 +31,7 @@ function mc_addstuff_block($op = 'list', $delta = 0, $edit = array()) {
 
 
 /**
- * Menu callback. Retrieves the list of content types that are group posts and display them in a group.
+ * Block content callback. Retrieves the list of content types that are group posts and display them in a group.
  */
 function mc_addstuff_display_block_add_stuff(){
   global $user;
@@ -49,7 +49,6 @@ function mc_addstuff_display_block_add_stuff(){
   // get node types and sort them by name
   $types = node_get_types();
   usort($types, '_mc_addstuff_sort_by_name');
-  //$types = node_get_types();
   
   // if in a node page, load node
   $node = NULL;
