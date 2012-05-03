@@ -1,0 +1,117 @@
+<?php
+
+
+/**
+ * Implementation of hook_nodeapi
+ */
+function mc_default_images_nodeapi(&$node, $op){
+  if($node->type!='page'){
+  $vid = db_result(db_query("select vid from vocabulary where module='features_topic'"));
+  switch ($op){
+    case 'prepare':
+      
+      // remove default image before presenting the form
+      
+      $module_path = drupal_get_path('module', 'mc_default_images');
+      if ( $node->field_list_image && count($node->field_list_image) == 1 &&
+          strpos($node->field_list_image[0]['filepath'], $module_path) === 0){
+        
+        unset($node->field_list_image[0]);
+        
+      }
+      
+      break;
+      
+    case 'presave':
+      if ( $node->field_list_image && ( empty($node->field_list_image[0]) || empty($node->field_list_image[0]['fid']))){
+        
+        // add default image
+        
+        $use_generic_image = TRUE;
+
+        // get category terms
+        
+        if (is_array($node->taxonomy) && !empty($node->taxonomy[$vid])){
+          foreach ($node->taxonomy[$vid] as $tid){
+            $term = taxonomy_get_term($tid);
+            $name = strtolower($term->name);
+            $name = str_replace(' ', '-', $name);
+            $name = str_replace('&', 'and', $name);
+            $filename = drupal_get_path('module', 'mc_default_images') . '/images/' . $name . '.png';
+            if (file_exists( $filename )){
+              $use_generic_image = FALSE;
+              break;
+            }
+          }
+        }
+        
+        // if no term found, add generic one
+        if ($use_generic_image){
+          $filename = drupal_get_path('module', 'mc_default_images') . '/images/generic.png';
+          if($node->type=='forum'){
+            $filename = drupal_get_path('module', 'mc_default_images') . '/images/forum_default.png';
+          }
+        }
+        
+        // TODO: Verify if file is not already added
+        $file = _mc_default_images_get_image($filename);
+        
+        $node->field_list_image = array(
+          array(
+            'fid' => $file->fid,
+            'title' => basename($file->filename),
+            'filename' => $file->filename,
+            'filepath' => $file->filepath,
+            'filesize' => $file->filesize,
+            'mimetype' => $mime,
+            'data' => array(
+              'description' => basename($file->filename),
+            ),
+            'list' => 1,
+          ),
+        );
+        
+      }
+      break;
+  }
+  }
+}
+
+/**
+ * Get image for the node, if it doesn't exist, insert it
+ */
+function _mc_default_images_get_image($path){
+  
+  // verify if it existes
+  
+  $sql = "SELECT fid, uid, filename, filepath, filemime, filesize, status, timestamp FROM {files} WHERE filepath LIKE '%s' ";
+  $file = db_fetch_object(db_query($sql, $path));
+  
+  // insert if it does not exist
+  if (!$file){
+    $file = _mc_default_images_insert_image($path);
+  }
+  
+  return $file;
+}
+
+/**
+ * Inserts an image in the database, for the given path
+ */
+function _mc_default_images_insert_image($path){
+  $mime = 'image/png';
+
+  $file = new stdClass();
+  $file->filename = basename($path);
+  $file->filepath = $path;
+  $file->filemime = $mime;
+  $file->filesize = filesize($path);
+
+  $file->uid = 1;
+  $file->status = FILE_STATUS_PERMANENT;
+  $file->timestamp = time();
+  drupal_write_record('files', $file);
+  
+  return $file;
+  
+}

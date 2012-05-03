@@ -1,0 +1,5 @@
+name = MC Default Images
+description = Provides a default image depending on the vocabulary associated with the node when no images have been uploaded.
+package = "MC"
+core = 6.x
+version = "6.x-1.0"

@@ -273,47 +273,6 @@ function _mc_api_save_facebook_user_image($picture_path, $filename = ''){
 
 
 /**
- * Get image for the node, if it doesn't exist, insert it
- */
-function _mc_api_default_images_get_image($path){
-  
-  // verify if it existes
-  
-  $sql = "SELECT fid, uid, filename, filepath, filemime, filesize, status, timestamp FROM {files} WHERE filepath LIKE '%s' ";
-  $file = db_fetch_object(db_query($sql, $path));
-  
-  // insert if it does not exist
-  if (!$file){
-    $file = _mc_api_default_images_insert_image($path);
-  }
-  
-  return $file;
-}
-
-
-
-/**
- * Inserts an image in the database, for the given path
- */
-function _mc_api_default_images_insert_image($path){
-  $mime = 'image/png';
-
-  $file = new stdClass();
-  $file->filename = basename($path);
-  $file->filepath = $path;
-  $file->filemime = $mime;
-  $file->filesize = filesize($path);
-
-  $file->uid = 1;
-  $file->status = FILE_STATUS_PERMANENT;
-  $file->timestamp = time();
-  drupal_write_record('files', $file);
-  
-  return $file;
-  
-}
-
-/**
  * Return a date with a specific format time.
  */
 
