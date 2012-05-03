@@ -166,6 +166,9 @@ function _og_prepopulate_menu_create_links($node){
     $webform_node->body = 'You can leave a message to the group administrator using the contact form below.';
     $webform_node->webform['roles'] = array();
     
+    //Add the node to the group.
+    $webform_node->og_groups = array($node->nid => $node->nid);
+    $webform_node->og_groups_both = array($node->nid => $node->title);
     // setup path
     $webform_node->path = $small_path . '/contact';
     $webform_node->pathauto_perform_alias = 0;
@@ -246,11 +249,7 @@ function _og_prepopulate_menu_create_links($node){
         'customized' => 0,
       );
       
-      // Add the node to the group
-       
-      $sql = "INSERT INTO {og_ancestry} (nid, group_nid) VALUES (%d, %d)";
-      db_query($sql,$webform_node->nid, $node->nid);
-	  
+  
 	  // Add permissions to submit
 	  
 	  db_query("INSERT INTO webform_roles (nid, rid) VALUES (".$webform_node->nid." , 1)");
