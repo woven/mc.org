@@ -102,8 +102,10 @@ function og_single_form_alter(&$form, &$form_state, $form_id){
 }
 
 function _og_single_node_form_validate($form, &$form_state){
-  $group = $form_state['values']['og_groups'];
-  $form_state['values']['og_groups'] = array(
-      $group => $group,
-    );
+  if(is_string($form_state['values']['og_groups'])){
+    $group = $form_state['values']['og_groups'];
+    $form_state['values']['og_groups'] = array(
+        $group => $group,
+      );
+  }
 }
