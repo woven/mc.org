@@ -350,7 +350,7 @@ function mc_base_preprocess_comment_wrapper(&$vars) {
         //Only must allow to comment in nodes inside a group to followers users.
         $link = '<div class="block-content clear-block">
                   <div class="subscribe">
-                    "<a href="javascript: void(0);" onClick="follow_group_comments(' .$group->nid. ');" class="button" style="width: 200px;"><span>Follow</span></a>"
+                    <a href="javascript: void(0);" onClick="follow_group_comments(' .$group->nid. ');" class="button" style="width: 200px; clear: both;"><span>Follow</span></a>
                     <p>Follow us in order to post a comment.</p>
                   </div>
                  </div>';

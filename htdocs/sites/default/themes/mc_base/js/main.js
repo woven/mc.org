@@ -198,8 +198,9 @@ function follow_group(uid)
 
 function follow_group_comments(uid)
 {
-  $.get('/follow/'+uid);
-  $("#comment-form").show();
-  $('#follow-comments').hide();
-  
+  node = window.location;
+  $.get( '/follow/'+uid, null,function(response){
+    $('.subscribe').remove();
+    window.location = node;
+  });
 }
