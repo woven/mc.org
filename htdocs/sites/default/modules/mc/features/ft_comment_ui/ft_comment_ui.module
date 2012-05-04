@@ -51,5 +51,17 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
       $userContent .= '</div>'; 
       $form['_author']['#value'] = $userContent;
     }
-  } 
+  }
+  
+  
+  if ($form_id == 'comment_form'){
+    //Anonymous users shouldn't create comments.
+    $group = og_get_group_context();
+    if (($user->uid == 0) || (($group) && !og_is_group_member($group->nid, TRUE, NULL))){
+      $form['comment_filter'] = array();
+      $form['submit'] = array();
+    }
+  }
+  
 }
+
