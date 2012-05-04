@@ -2,6 +2,6 @@ name = mc.org
 description = Customises Drupal for MyCommunity.org.
 core = 6.x
 version = "6.x-1.0"
-package = "MyCommunity.org"
+package = "MC.org"
 dependencies[] = mc_ui
 dependencies[] = mc_api

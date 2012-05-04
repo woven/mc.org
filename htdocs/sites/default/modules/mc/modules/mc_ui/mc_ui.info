@@ -1,5 +1,5 @@
 name = MyCommunity UI
 description = "MyCommunity theming functions and general UI tasks"
-package = mc
+package = MC.org
 version = VERSION
 core = 6.x
