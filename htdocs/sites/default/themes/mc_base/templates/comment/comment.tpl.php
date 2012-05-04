@@ -46,7 +46,5 @@
       <?php print $signature ?>
     </div>
     <?php endif; ?>
-
-    <?php //print $links ?>
   </div>
 </div>

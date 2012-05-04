@@ -216,6 +216,7 @@ function mc_base_preprocess(&$vars){
       $vars['element']['#collapsed'] = FALSE;
     }
   }
+  $vars['$content_bottom'] = '';
 }
 
 
@@ -295,4 +296,71 @@ function mc_base_boxes_box($block) {
   }
   $output .= '</div>';
   return $output;
+}
+
+
+/**
+ * Add a "Comments" heading above comments except on forum pages.
+ */
+function mc_base_preprocess_comment_wrapper(&$vars) {
+
+  /*Comment functionality*/
+  
+  //Comment funcltionality only is applied in Nodes that allow to comment.
+  if ($vars['node']->comment == 2){
+    //Anonymous users should see the login and register links.
+    if ($vars['logged_in'] == 0){
+      
+      //Sign in link
+      $sign = l(
+        t('sign in'),
+        'user',
+        array(
+          'attributes' => array(
+            'class' => 'overlay',
+            'rel' => '#login',
+          )
+        )
+      );
+      
+      //Join Link.
+      $join = l(
+        t('join now'),
+        'user/register',
+        array(
+          'attributes' => array(
+            'class' => 'overlay',
+            'rel' => '#register',
+          )
+        )
+      );
+      
+      //Only must should this text to Anoymous user. 
+      $vars['content'] = $vars['content'] . "Please $sign or $join to comment. Get involved!";
+      
+      //For nodes inside a group only followers users can post comments.
+    }else{
+      
+      //Verify if the node is inside a group.
+      $group = og_get_group_context();
+      
+      //If the node is inside a group, verify if the current user is or not following it.
+      if ((($group) && !og_is_group_member($group->nid, TRUE, NULL))){
+        
+        //Only must allow to comment in nodes inside a group to followers users.
+        $link = '<div class="block-content clear-block">
+                  <div class="subscribe">
+                    "<a href="javascript: void(0);" onClick="follow_group_comments(' .$group->nid. ');" class="button" style="width: 200px;"><span>Follow</span></a>"
+                    <p>Follow us in order to post a comment.</p>
+                  </div>
+                 </div>';
+        //Added the logic for not followers users.
+        $vars['content'] = $vars['content'] . $link;
+        }
+    }
+    
+  }else{
+    
+    
+  }  
 }
