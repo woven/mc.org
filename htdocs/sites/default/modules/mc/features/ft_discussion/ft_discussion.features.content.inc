@@ -265,7 +265,7 @@ function ft_discussion_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '200',
+      'rows' => '20',
       'size' => 60,
       'default_value' => array(
         '0' => array(
