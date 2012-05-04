@@ -59,11 +59,16 @@
             <?php if ($content_top) : ?>
               <div id="content-top"><?php print $content_top ?></div>
             <?php endif; ?>
+            
             <?php if ( $title && !( isset($node) && is_null(arg(2)) ) ): ?><h1 class='page-title'><?php print $title ?></h1><?php endif; ?>
+            
+            <?php if($content){ ?>
             <div class="clear-block">
                 <?php print $content ?>       
                 <?php print $feed_icons ?>
             </div>
+           	<?php } ?>
+
             <?php if ($content_bottom) : ?>
               <div id="content-bottom"><?php print $content_bottom ?></div>
             <?php endif; ?>

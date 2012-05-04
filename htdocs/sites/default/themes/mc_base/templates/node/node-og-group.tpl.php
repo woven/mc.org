@@ -51,6 +51,7 @@
  * @see template_preprocess_node()
  */
 ?>
+<?php if(!empty($content)){ ?>
 <div id="node-<?php print $node->nid; ?>" class="node<?php if ($sticky) { print ' sticky'; } ?><?php if (!$status) { print ' node-unpublished'; } ?> clear-block">
 
   <div class="meta">
@@ -68,3 +69,4 @@
   </div>
 
 </div> 
+<?php } ?>
