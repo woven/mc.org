@@ -4,7 +4,7 @@
 /**
  * Implementation of hook_nodeapi
  */
-function mc_default_images_nodeapi(&$node, $op){
+function mc_defaultimg_nodeapi(&$node, $op){
   if($node->type!='page'){
   $vid = db_result(db_query("select vid from vocabulary where module='features_topic'"));
   switch ($op){
@@ -12,7 +12,7 @@ function mc_default_images_nodeapi(&$node, $op){
       
       // remove default image before presenting the form
       
-      $module_path = drupal_get_path('module', 'mc_default_images');
+      $module_path = drupal_get_path('module', 'mc_defaultimg');
       if ( $node->field_list_image && count($node->field_list_image) == 1 &&
           strpos($node->field_list_image[0]['filepath'], $module_path) === 0){
         
@@ -37,7 +37,7 @@ function mc_default_images_nodeapi(&$node, $op){
             $name = strtolower($term->name);
             $name = str_replace(' ', '-', $name);
             $name = str_replace('&', 'and', $name);
-            $filename = drupal_get_path('module', 'mc_default_images') . '/images/' . $name . '.png';
+            $filename = drupal_get_path('module', 'mc_defaultimg') . '/images/' . $name . '.png';
             if (file_exists( $filename )){
               $use_generic_image = FALSE;
               break;
@@ -47,14 +47,14 @@ function mc_default_images_nodeapi(&$node, $op){
         
         // if no term found, add generic one
         if ($use_generic_image){
-          $filename = drupal_get_path('module', 'mc_default_images') . '/images/generic.png';
+          $filename = drupal_get_path('module', 'mc_defaultimg') . '/images/generic.png';
           if($node->type=='forum'){
-            $filename = drupal_get_path('module', 'mc_default_images') . '/images/forum_default.png';
+            $filename = drupal_get_path('module', 'mc_defaultimg') . '/images/forum_default.png';
           }
         }
         
         // TODO: Verify if file is not already added
-        $file = _mc_default_images_get_image($filename);
+        $file = _mc_defaultimg_get_image($filename);
         
         $node->field_list_image = array(
           array(
@@ -80,7 +80,7 @@ function mc_default_images_nodeapi(&$node, $op){
 /**
  * Get image for the node, if it doesn't exist, insert it
  */
-function _mc_default_images_get_image($path){
+function _mc_defaultimg_get_image($path){
   
   // verify if it existes
   
@@ -89,7 +89,7 @@ function _mc_default_images_get_image($path){
   
   // insert if it does not exist
   if (!$file){
-    $file = _mc_default_images_insert_image($path);
+    $file = _mc_defaultimg_insert_image($path);
   }
   
   return $file;
@@ -98,7 +98,7 @@ function _mc_default_images_get_image($path){
 /**
  * Inserts an image in the database, for the given path
  */
-function _mc_default_images_insert_image($path){
+function _mc_defaultimg_insert_image($path){
   $mime = 'image/png';
 
   $file = new stdClass();
