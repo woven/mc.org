@@ -115,3 +115,11 @@ function _mc_defaultimg_insert_image($path){
   return $file;
   
 }
+
+function mc_defaultimg_file_references($file){
+  $module_path = drupal_get_path('module', 'mc_defaultimg');
+  $belongs_to_module = strstr($file->filepath, $module_path);
+  if ($belongs_to_module) {
+    return array('mc_defaultimg' => 1);
+  }
+}
