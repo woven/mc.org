@@ -109,23 +109,29 @@ function ft_node_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'boxes-join_mc' => array(
+          'module' => 'boxes',
+          'delta' => 'join_mc',
+          'region' => 'right',
+          'weight' => 0,
+        ),
         'quicktabs-browse_by' => array(
           'module' => 'quicktabs',
           'delta' => 'browse_by',
           'region' => 'right',
-          'weight' => 0,
+          'weight' => 1,
         ),
         'views-node_related-block_1' => array(
           'module' => 'views',
           'delta' => 'node_related-block_1',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
         ),
         'quicktabs-latest_right_blocks' => array(
           'module' => 'quicktabs',
           'delta' => 'latest_right_blocks',
           'region' => 'right',
-          'weight' => 2,
+          'weight' => 3,
         ),
       ),
     ),
