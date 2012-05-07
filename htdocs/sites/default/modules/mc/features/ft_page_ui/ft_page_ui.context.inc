@@ -29,7 +29,7 @@ function ft_page_ui_context_default_contexts() {
         'phpcode' => 'if ( arg(0) == \'node\' && is_numeric(arg(1)) ){
   $node = node_load(arg(1));
   // if it\'s not a landing page
-  if ($node->type == \'npage\' && $node->field_page_type[0][\'value\'] != \'landing\'){
+  if (($node->type == \'npage\' || $node->type == \'page\') && $node->field_page_type[0][\'value\'] != \'landing\'){
     return TRUE;
   }
 }
