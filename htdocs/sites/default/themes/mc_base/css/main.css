@@ -2390,7 +2390,7 @@ border-width: 1px 0 !important;
 
 #page .node-type-event .field-body {clear: both;}
 
-#page .node-type-event .field-file-view {float: left;}
+#page .node-type-event .field-file-view {float: left; width: 500px;}
 
 #page #main #content-wrapper #content .node .groups {display: none;}
 
