@@ -471,11 +471,11 @@ a .ico-small {
 	margin: 30px 0 0 0;
 }
 
-#search-bar #block-boxes-google_search_box, #search-bar .block-search {
+#search-bar #block-google_cse-0, #search-bar .block-search {
 	float: left;
 }
 
-#search-block-form #search .form-item{
+#search-block-form #search .form-item, #block-google_cse-0 #search .form-item {
 	margin: 0px;
 }
 
