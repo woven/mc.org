@@ -2395,3 +2395,11 @@ border-width: 1px 0 !important;
 #page #main #content-wrapper #content .node .groups {display: none;}
 
 #page #main #content-wrapper #content .node .meta {display: none;}
+
+#right #block-boxes-join_mc #boxes-box-join_mc p{margin-bottom: 10px;}
+
+#right #block-boxes-join_mc #boxes-box-join_mc ul{margin-bottom: 10px;}
+
+#right #block-boxes-join_mc #boxes-box-join_mc ul li{list-style: disc; margin: 8px 0px 8px 15px; height: 20px;}
+
+#right #block-boxes-join_mc #boxes-box-join_mc a span{text-align: center;}
