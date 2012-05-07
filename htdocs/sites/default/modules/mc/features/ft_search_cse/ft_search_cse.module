@@ -1,3 +1,17 @@
 <?php
 
 include_once('ft_search_cse.features.inc');
+
+function ft_search_cse_form_alter(&$form, &$form_state, $form_id){
+	if($form_id=='google_cse_searchbox_form'){
+		$form['#prefix']='<div id="search">';
+		$form['#suffix']='</div>';
+	}
+}
+
+function ft_search_cse_preprocess_block(&$vars){
+	if($vars['block']->module=='google_cse' && $vars['block']->delta==0){
+		$vars['block']->title='<none>';
+		$vars['block']->subject='';
+	}
+}
