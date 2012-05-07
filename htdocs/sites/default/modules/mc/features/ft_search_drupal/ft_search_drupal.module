@@ -4,18 +4,16 @@ function ft_search_drupal_theme_registry_alter(&$theme_registry) {
   $modulepath = drupal_get_path('module', 'ft_search_drupal');
   
   // Alter search_result theme paths
-  array_unshift($theme_registry['search_result']['theme paths'], $modulepath);
-  $theme_registry['search_result']['theme path']=$modulepath;
-  $theme_registry['search_result']['template']=$modulepath . '/search-result';
+  $originalpath = array_shift($theme_registry['search_result']['theme paths']);
+  array_unshift($theme_registry['search_result']['theme paths'], $originalpath, $modulepath);
 
   // Alter search_result theme paths
-  array_unshift($theme_registry['search_block_form']['theme paths'], $modulepath);
-  $theme_registry['search_block_form']['theme path']=$modulepath;
-  $theme_registry['search_block_form']['template']=$modulepath . '/search-block-form';
-
+  $originalpath = array_shift($theme_registry['search_block_form']['theme paths']);
+  array_unshift($theme_registry['search_block_form']['theme paths'], $originalpath, $modulepath);
 }
 
 function ft_search_drupal_preprocess_search_result(&$variables){
+  $variables['template_files'][]='search-result';
   if(function_exists('ft_search_drupal_ui_imagecache_default_presets')){
     $file=$variables['result']['node']->field_list_image['0'];
     $image=theme('imagecache', "search_result_image" ,$file['filepath']); 
@@ -25,6 +23,7 @@ function ft_search_drupal_preprocess_search_result(&$variables){
 }
 
 function ft_search_drupal_preprocess_search_block_form(&$variables) {
+  $variables['template_files'][]='search-block-form';
   unset($variables['form']['search_block_form']['#title']);
   unset($variables['form']['search_block_form']['#printed']);
   $variables['search']['search_block_form'] = drupal_render($variables['form']['search_block_form']);
