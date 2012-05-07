@@ -606,22 +606,6 @@ function ft_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: create feeds content
-  $permissions['create feeds content'] = array(
-    'name' => 'create feeds content',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
-  // Exported permission: create feeds sitewide
-  $permissions['create feeds sitewide'] = array(
-    'name' => 'create feeds sitewide',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: create file content
   $permissions['create file content'] = array(
     'name' => 'create file content',
@@ -880,14 +864,6 @@ function ft_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: delete any feeds content
-  $permissions['delete any feeds content'] = array(
-    'name' => 'delete any feeds content',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: delete any file content
   $permissions['delete any file content'] = array(
     'name' => 'delete any file content',
@@ -1024,14 +1000,6 @@ function ft_perms_user_default_permissions() {
       '1' => 'administrator',
       '2' => 'authenticated user',
       '3' => 'group manager',
-    ),
-  );
-
-  // Exported permission: delete own feeds content
-  $permissions['delete own feeds content'] = array(
-    'name' => 'delete own feeds content',
-    'roles' => array(
-      '0' => 'administrator',
     ),
   );
 
@@ -1228,15 +1196,6 @@ function ft_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: edit any feeds content
-  $permissions['edit any feeds content'] = array(
-    'name' => 'edit any feeds content',
-    'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-    ),
-  );
-
   // Exported permission: edit any file content
   $permissions['edit any file content'] = array(
     'name' => 'edit any file content',
@@ -1362,17 +1321,6 @@ function ft_perms_user_default_permissions() {
   // Exported permission: edit own event content
   $permissions['edit own event content'] = array(
     'name' => 'edit own event content',
-    'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
-    ),
-  );
-
-  // Exported permission: edit own feeds content
-  $permissions['edit own feeds content'] = array(
-    'name' => 'edit own feeds content',
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
@@ -1595,7 +1543,8 @@ function ft_perms_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-      '2' => 'authenticated user',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
     ),
   );
 
