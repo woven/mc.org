@@ -6,6 +6,7 @@
  */
 function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+  $group = og_get_group_context();
   // disabling wysiwyg for comment form
   if ($form_id == 'comment_form') {
     //$form['comment_filter']['comment']['#wysiwyg'] = false;
@@ -14,8 +15,8 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // theme the comment form
-  if ($form_id == 'comment_form' && isset($form['_author'])) {
-    
+  if ($form_id == 'comment_form' && isset($form['_author']) && (($group) && og_is_group_member($group->nid, TRUE, NULL))) {
+       
     $form['head']['#tree'] = true;
     $form['head']['#weight'] = -10;
     $form['head']['#prefix'] = '<div id="comment_form_header">';
@@ -56,7 +57,7 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
   
   if ($form_id == 'comment_form'){
     //Anonymous users shouldn't create comments.
-    $group = og_get_group_context();
+    
     if (($user->uid == 0) || (($group) && !og_is_group_member($group->nid, TRUE, NULL))){
       $form['comment_filter'] = array();
       $form['submit'] = array();
