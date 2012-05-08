@@ -11,4 +11,6 @@ The default is assigned depending on the taxonomy term that's associated with.
 
 If no image is provided, the module will look for a image inside path_to_module/images folder, which should have the same name as the taxonomy term, and png as its extension. 
 
-If the module can't find a image with the same name as the taxonomy, then it will assign 'generic.png' as the default image
+If the module can't find a image with the same name as the taxonomy, then it will assign 'generic.png' as the default image.
+
+This action will be performed when the node is about to be inserted in the DB. But it is also removing the default image when the edit form is displayed, that way this process will remain transparent for the end user.
