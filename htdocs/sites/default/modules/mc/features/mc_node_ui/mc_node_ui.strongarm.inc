@@ -190,12 +190,12 @@ if ($name){
           'ds_eval_code' => 'Default',
         ),
         'code' => '<?php 
-  $module_path = drupal_get_path(\'module\', \'ghh_default_images\');
+  $module_path = drupal_get_path(\'module\', \'mc_defaultimg\');
   if ( $object->field_list_image && count($object->field_list_image) == 1 && strpos($object->field_list_image[0][\'filepath\'], $module_path) === 0){
     // only default image found, do not show slideshow
     return \'\';
   }
-  return views_embed_view("node_details","block_2",$object->nid);
+    return views_embed_view("node_details","block_2",$object->nid);
 ?>',
         'token' => 0,
       ),
