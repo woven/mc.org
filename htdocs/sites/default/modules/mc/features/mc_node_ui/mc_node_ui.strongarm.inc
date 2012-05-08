@@ -79,7 +79,10 @@ function mc_node_ui_strongarm() {
         'formatters' => array(
           'ds_eval_code' => 'Default',
         ),
-        'code' => '<?php echo $object->content[\'custom_pager_top\'][1]["#value"]; ?>',
+        'code' => '<?php 
+$custom_pager_id=array_shift($object->custom_pagers);
+echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"]; 
+?>',
         'token' => 0,
       ),
     ),
