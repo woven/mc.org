@@ -1,0 +1,14 @@
+ Info
+------
+
+This module assigns a default image, if no image is provided, for any kind of node. 
+
+The default is assigned depending on the taxonomy term that's associated with.
+
+
+ Technical Details
+-------------------
+
+If no image is provided, the module will look for a image inside path_to_module/images folder, which should have the same name as the taxonomy term, and png as its extension. 
+
+If the module can't find a image with the same name as the taxonomy, then it will assign 'generic.png' as the default image
