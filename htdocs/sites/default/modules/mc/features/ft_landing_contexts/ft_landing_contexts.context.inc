@@ -863,9 +863,9 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'header',
           'weight' => 2,
         ),
-        'boxes-google_search_box' => array(
-          'module' => 'boxes',
-          'delta' => 'google_search_box',
+        'google_cse-0' => array(
+          'module' => 'google_cse',
+          'delta' => 0,
           'region' => 'branding',
           'weight' => 0,
         ),
