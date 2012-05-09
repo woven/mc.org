@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Webform UI feature.
+ */
+
+include_once 'ft_webform_ui.features.inc';
