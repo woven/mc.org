@@ -5,3 +5,10 @@
  */
 
 include_once 'ft_node_context.features.inc';
+
+
+function ft_node_context_preprocess_block(&$vars){
+	if($vars['block']->module=='boxes' && $vars['block']->delta=='join_mc' && array_search('anonymous user',$vars['user']->roles)===false){
+		unset($vars['block']);
+	}
+}
