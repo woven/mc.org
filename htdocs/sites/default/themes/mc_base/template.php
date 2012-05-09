@@ -154,19 +154,21 @@ function mc_base_quicktabs_tabs($quicktabs, $active_tab = 'none') {
   }
   $output .= '<ul class="clear-block quicktabs_tabs quicktabs-style-'. drupal_strtolower($quicktabs['style']) .'">';
   foreach ($quicktabs['tabs'] as $tabkey => $tab) {
-    $class = 'qtab-'. $tabkey;
-    // Add first, last and active classes to the list of tabs to help out themers.
-    $class .= ($tabkey == $active_tab ? ' active' : '');
-    $class .= ($index == 1 ? ' first' : '');
-    $class .= ($index == $tabs_count ? ' last': '');
-    $attributes_li = drupal_attributes(array('class' => $class));
-    $options = _quicktabs_construct_link_options($quicktabs, $tabkey);
-    // Support for translatable tab titles with i18nstrings.module.
-    if (module_exists('i18nstrings')) {
-      $tab['title'] = tt("quicktabs:tab:$quicktabs[qtid]--$tabkey:title", $tab['title']);
+    if(!empty($tab)) {
+      $class = 'qtab-'. $tabkey;
+      // Add first, last and active classes to the list of tabs to help out themers.
+      $class .= ($tabkey == $active_tab ? ' active' : '');
+      $class .= ($index == 1 ? ' first' : '');
+      $class .= ($index == $tabs_count ? ' last': '');
+      $attributes_li = drupal_attributes(array('class' => $class));
+      $options = _quicktabs_construct_link_options($quicktabs, $tabkey);
+      // Support for translatable tab titles with i18nstrings.module.
+      if (module_exists('i18nstrings')) {
+        $tab['title'] = tt("quicktabs:tab:$quicktabs[qtid]--$tabkey:title", $tab['title']);
+      }
+      $output .= '<li'. $attributes_li .'><h2>'. l($tab['title'], $_GET['q'], $options) .'</h2></li>';
+      $index++;
     }
-    $output .= '<li'. $attributes_li .'><h2>'. l($tab['title'], $_GET['q'], $options) .'</h2></li>';
-    $index++;
   }
   $output .= '</ul>';
   $output .= '</div>';
