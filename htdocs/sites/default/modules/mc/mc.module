@@ -639,6 +639,13 @@ function mc_init(){
       drupal_goto();
     }
   }
+  
+  //Code to Add css and javascripts for hiding/showing boxes edit link.
+  if (function_exists('drupal_get_path')) {
+    $path = drupal_get_path('module', 'mc');
+    drupal_add_js($path .'/boxes_edit_link.js', 'module', 'header', FALSE, TRUE, FALSE);
+    drupal_add_css($path .'/boxes_edit_link.css', 'module');
+  }
 }
 
 /**

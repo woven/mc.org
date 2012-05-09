@@ -2400,7 +2400,7 @@ border-width: 1px 0 !important;
 
 #right #block-boxes-join_mc #boxes-box-join_mc ul{margin-bottom: 10px;}
 
-#right #block-boxes-join_mc #boxes-box-join_mc ul li{list-style: disc; margin: 8px 0px 8px 15px; height: 20px;}
+#right #block-boxes-join_mc #boxes-box-join_mc ul.li-join-mc li{list-style: disc; margin: 8px 0px 8px 15px; height: 20px;}
 
 #right #block-boxes-join_mc #boxes-box-join_mc a span{text-align: center;}
 

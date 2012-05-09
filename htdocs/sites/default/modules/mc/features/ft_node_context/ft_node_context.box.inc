@@ -16,7 +16,7 @@ function ft_node_context_default_box() {
   $box->options = array(
     'body' => '<h5>Joining is quick, easy and free.</h5>
 <p>Once you\'ve joined, you can enjoy the full benefits of the site. Get involved!</p>
-<ul>
+<ul class="li-join-mc">
   <li>Share your tips and comments</li>
   <li>Add stuff like articles, videos and more</li>
   <li>Follow groups to show your support</li>
