@@ -1,3 +1,13 @@
 <?php
 
 include_once('ft_place.features.inc');
+
+function ft_place_preprocess($vars,$hook){
+    if($hook == 'block'){
+        $cblock = $vars['block'];
+        if($cblock->module == 'ds' && $cblock->bid == 'ds-bf71adff8bdebc9c46bf7e6772aa3eca'){
+            $cblock->subject = t("Where it's at"); 
+        }
+    }
+    
+}
