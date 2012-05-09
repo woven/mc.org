@@ -15,7 +15,7 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // theme the comment form
-  if ($form_id == 'comment_form' && isset($form['_author']) && (($group) && og_is_group_member($group->nid, TRUE, NULL))) {
+  if ($form_id == 'comment_form' && isset($form['_author'])) {
        
     $form['head']['#tree'] = true;
     $form['head']['#weight'] = -10;
@@ -61,6 +61,8 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
     if (($user->uid == 0) || (($group) && !og_is_group_member($group->nid, TRUE, NULL))){
       $form['comment_filter'] = array();
       $form['submit'] = array();
+      $form['_author'] = array();
+      $form['author'] = array();
     }
   }
   
