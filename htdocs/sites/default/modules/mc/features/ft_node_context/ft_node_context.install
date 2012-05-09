@@ -1,0 +1,13 @@
+<?php
+
+
+/**
+ * Implementation of hook_install
+ */
+function ft_node_context_install(){
+	$record = new stdClass();
+	$record->module = 'boxes';
+	$record->delta = 'join_mc';
+	$record->rid = '1';
+	drupal_write_record('blocks_roles', $record);
+}
