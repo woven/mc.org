@@ -1,0 +1,14 @@
+/* 
+    Document   : boxes_edit_link
+    Created on : May 8, 2012, 6:21:02 PM
+    Author     : MyCommunity.org
+    Description:
+        Allow to add styles to boxes edit links.
+*/
+
+.boxes-box-controls li.edit a {
+  padding: 12px 3px 1px 0;
+  position: absolute;
+  z-index: 20;
+  margin-top: -23px;
+}
