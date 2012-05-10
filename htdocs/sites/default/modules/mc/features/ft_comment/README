@@ -1,0 +1,22 @@
+ Info
+------
+
+This module holds the comments functionality for any kind of node.
+
+
+ Technical Details
+-------------------
+
+This module dependecies are: ft_comment_ui, og and imagecache_profiles.
+
+Some logic is inside template.php in a preprocess function called "mc_base_preprocess_comment_wrapper".
+
+Basic Functionality:
+
+1) Anonymous users should see a text which invites them to login or register instead of the comments form.
+
+2) Authenticated users must see the normal comment form (Nodes outside a group):
+
+3) Authenticated users not following a group should see a text which invites them to follow the group(Nodes inside a group): 
+
+4) If the Content Type has disabled the comments, the comment form must not appear.
