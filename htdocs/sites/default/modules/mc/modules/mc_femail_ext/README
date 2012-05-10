@@ -10,6 +10,13 @@ It lets the user subscribe to a group's discussions with the following options:
 
 The module also improves the user interface to display a more elegant list of Groups/Forums.
 
+ Installation
+--------------
+
+The file mc_femail_ext_procmail_drush needs to be copied and edit it to make it point to the current drupal path installation.
+
+This file shouldn't be included in the GitHub repo.
+
 
  Technical Details
 -------------------

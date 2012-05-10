@@ -62,7 +62,15 @@ $myUrl = $_SERVER[\'HTTP_HOST\'];
   $box->title = '';
   $box->description = 'Google Plus One';
   $box->options = array(
-    'body' => '<g:plusone size="medium"></g:plusone>',
+    'body' => '<g:plusone size="medium"></g:plusone>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;
+    po.src = \'https://apis.google.com/js/plusone.js\';
+    var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+    ',
     'format' => '3',
   );
   $export['google_plusone'] = $box;
