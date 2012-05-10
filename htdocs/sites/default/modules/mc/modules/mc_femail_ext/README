@@ -13,9 +13,9 @@ The module also improves the user interface to display a more elegant list of Gr
  Installation
 --------------
 
-The file mc_femail_ext_procmail_drush needs to be copied and edit it to make it point to the current drupal path installation.
+The module has a file called mc_femail_ext.sh, which should be copied and renamed to local.mc_femail_ext.sh. The newly created file (local.mc_femail_ext.sh) should be updated to point to the appropiate drupal installation path. 
 
-This file shouldn't be included in the GitHub repo.
+local.mc_femail_ext.sh needs to be called through procmail when a new incoming message arrives. Finally, local.mc_femail_ext.sh won't be included in the GitHub repo.
 
 
  Technical Details
@@ -23,13 +23,11 @@ This file shouldn't be included in the GitHub repo.
 
 The module needs the Femail module and all of its dependencies (like the mailparse php extension) in order to work properly.
 
-The module also has a file called mc_femail_ext_procmail_drush, which should be called through procmail when a new incoming message arrives. This file should also be updated to point to the appropiate drupal installation path.
-
 The flow of how the whole process works is something like this:
  - Mail Transfer Agent MTA (i.e. postfix) gets a incoming email
  - Postfix passes the incoming mail to procmail, which is a Media Delivery Agent (MDA).
- - Procmail should be configured (i.e. by the .procmailrc file in the home folder of a user) to call the mc_femail_ext_procmail_drush file, which is actually a script.
- - mc_femail_ext_procmail_drush script performs a series of functions and calls that include a drush call, in which it parses the contentes of the incoming mail
+ - Procmail should be configured (i.e. by the .procmailrc file in the home folder of a user) to call the mc_femail_ext.sh file, which is actually a script.
+ - mc_femail_ext.sh script performs a series of functions and calls that include a drush call, in which it parses the contentes of the incoming mail
  - Drush, by using the mailparse php extension, parses the contents of the incoming mail to drupal.
  - Drupal performs all the validations and creates a node of the type forum in the DB.
 

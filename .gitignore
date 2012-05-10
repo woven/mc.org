@@ -45,3 +45,5 @@ mydocs/
 *.tar.gz
 *.gz
 
+#mc_femail_ext local file
+local.mc_femail_ext.sh

@@ -18,4 +18,4 @@ Contains files and folders like:
 * Follow the regular install steps
 * Once you are done.. you have to clear cache TWICE with admin/settings/performance OR drush cc all
 * Review features and make sure evertyhing is reverted. (revert manually or use drush)
-* To make Group Forums/Discussions work properly, modules femail, mc_femail_ext ft_discussion and ft_discussion_ui need to be enabled. The file mc_femail_ext_procmail_drush needs to be copied and edit it to make it point to the drupal installation path. (The newly created file shouldn't be added to git)
+* To make Group Forums/Discussions work properly, modules femail, mc_femail_ext ft_discussion and ft_discussion_ui need to be enabled. The file mc_femail_ext.sh needs to be copied, renamed to local.mc_femail_ext.sh and edit it to make it point to the drupal installation path (For more details please look at the mc_femail_ext Readme file).
