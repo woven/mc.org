@@ -369,3 +369,15 @@ function _mc_api_get_image_tag($image, $preset, $title){
   $picture = '<img src="' . $picture . '" alt="' . $title . '" title="' . $title . '" />';
   return $picture;
 }
+
+
+/**
+ * Helper function to grt the vid from a Vocabulary Machine Name.
+ * @param Vocabulary machine name
+ *        
+ * @return string
+ */
+function _mc_api_get_vid_from_name($name){
+  $vid = db_result(db_query("SELECT vid FROM {vocabulary} v WHERE v.module = '%s'", $name));
+  return $vid;
+}

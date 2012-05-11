@@ -16,34 +16,37 @@ function ft_tx_feature_theme($existing, $type, $theme, $path){
  * Implementation of theme_feature_badge
  */
  
-function theme_feature_badge($element, $badge, $view = false){
-  
+function theme_feature_badge($element, $badge){
+ 
   //The type of $element depends if the function is called from Display suite or s view.
-  if ($view == false){
+  if (is_object($element)){
     $node = $element;
   }else{
-    $node = node_load($element->node_node_data_field_featured_items_nid);
+    $node = node_load($element);
   }
    
   //Get all the taxonomies associated to the node.
   $taxonomies_node = $node->taxonomy;
   
+  //Get the vid for features_feature.
+  $taxonomy_feature_vid = _mc_api_get_vid_from_name('features_feature');
+  
   //Figure out if at least of the taxonomies belong to the features vocabulary.
   foreach($taxonomies_node as $taxonomy_term){
-    //Get the vocabulary and verify if the taxonomy term belongs to feature vocabulary.
-    $vocabulary = taxonomy_vocabulary_load($taxonomy_term->vid);
     
-    if ($vocabulary->module == 'features_feature'){
+    //Get the vocabulary and verify if the taxonomy term belongs to feature vocabulary.
+    if ($taxonomy_feature_vid == $taxonomy_term->vid){
       $term = $taxonomy_term;
       //Get the node asociatd to the term to take the picture.
       $node_associated_term = node_load(_taxonomynode_get_nid_from_tid($term->tid));
       if ($node_associated_term->field_taxonomy_image[0]['filepath']){
-        $image_url = $GLOBALS['base_url'] . '/' . $node_associated_term->field_taxonomy_image[0]['filepath'];
+        $image_url = file_create_url($node_associated_term->field_taxonomy_image[0]['filepath']);
       }
       break;
     }
   }
   
+  //Create the html output and return it.
   $output .= '<span class="badge-'. $badge . ' ' . $term->name .'" style="background:url(' . $image_url . ')">';
   $output .= '</span>';
   
