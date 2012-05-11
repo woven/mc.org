@@ -1,5 +1,7 @@
 <?php
 
+include_once('ft_tx_feature.features.inc');
+
 /**
  * Implementation of hook_theme
  */
