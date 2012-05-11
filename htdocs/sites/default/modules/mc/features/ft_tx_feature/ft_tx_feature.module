@@ -61,3 +61,51 @@ function ft_tx_feature_init(){
   $path = drupal_get_path('module', 'ft_tx_feature');
   drupal_add_css($path .'/feature_badge.css', 'theme'); 
 }
+
+
+/**
+ * Implementation of hook_ds_fields
+ * Custom Display Suite field.
+ */
+
+function ft_tx_feature_ds_fields($type_name, $build_mode, $extra) {
+  $fields = array(
+      'corner_peel' => array(
+      'title' => t('Corner Peel'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php 
+          print theme("feature_badge", $object, 1);
+        ?>',
+        'token' => 0,
+      ),
+    ),
+  );
+  
+  return array('nd' => $fields);
+}
+
+
+

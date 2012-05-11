@@ -86,38 +86,6 @@ echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"];
         'token' => 0,
       ),
     ),
-    'corner_peel' => array(
-      'title' => 'Corner Peel',
-      'exclude' => array(
-        'group' => 'group',
-        'link' => 'link',
-        'webform' => 'webform',
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'feeds' => 0,
-        'file' => 0,
-        'nnews' => 0,
-        'npage' => 0,
-        'place' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-        'taxonomy_feature' => 0,
-      ),
-      'type' => 5,
-      'status' => 3,
-      'properties' => array(
-        'formatters' => array(
-          'ds_eval_code' => 'Default',
-        ),
-        'code' => '<?php 
-print theme_feature_badge($object, 1);
-?>',
-        'token' => 0,
-      ),
-    ),
     'nodes_header' => array(
       'title' => 'Nodes Header',
       'exclude' => array(
