@@ -12,3 +12,7 @@
   z-index: 20;
   margin-top: -23px;
 }
+
+#page .block-boxes .boxes-box-controls .links li {
+	list-style: none;
+}

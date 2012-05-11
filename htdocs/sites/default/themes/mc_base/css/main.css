@@ -1505,7 +1505,9 @@ a .ico-small {
 }
 
 .block-browse .block-content a,
-.block-browse .block-content a:visited {
+.block-browse .block-content a:visited,
+.block-browse a,
+.block-browse a:visited {
 	color: #232323;
 	text-decoration: none;
 }

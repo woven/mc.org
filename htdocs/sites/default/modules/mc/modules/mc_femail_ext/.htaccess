@@ -1,0 +1,11 @@
+# prevent viewing of mc_femail_ext.sh
+<files mc_femail_ext.sh>
+ order allow,deny
+ deny from all
+</files>
+
+# prevent viewing of local.mc_femail_ext.sh
+<files local.mc_femail_ext.sh>
+ order allow,deny
+ deny from all
+</files>
