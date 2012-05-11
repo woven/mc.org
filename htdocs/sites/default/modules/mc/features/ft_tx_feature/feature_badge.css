@@ -1,0 +1,19 @@
+.badge-1 {
+  display: block;
+  position: absolute;
+  width: 66px;
+  height: 64px;
+  top: -43px;
+  left: -34px;
+  z-index: 2;
+}
+
+.badge-2 {
+  display: block;
+  position: absolute;
+  width: 66px;
+  height: 64px;
+  top: -3px;
+  right: -11px;
+  z-index: 2;
+}

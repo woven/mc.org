@@ -89,28 +89,22 @@ echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"];
     'corner_peel' => array(
       'title' => 'Corner Peel',
       'exclude' => array(
-        'image' => 'image',
-        'feature_spot' => 'feature_spot',
-        'front_picture' => 'front_picture',
         'group' => 'group',
         'link' => 'link',
-        'news' => 'news',
         'webform' => 'webform',
-        'gallery' => 0,
-        'gallery_image' => 0,
         'article' => 0,
         'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
         'event' => 0,
-        'feedapi_node' => 0,
+        'feeds' => 0,
         'file' => 0,
-        'healthcare_facility' => 0,
-        'page' => 0,
+        'nnews' => 0,
+        'npage' => 0,
         'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
         'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
       ),
       'type' => 5,
       'status' => 3,
@@ -119,19 +113,7 @@ echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"];
           'ds_eval_code' => 'Default',
         ),
         'code' => '<?php 
-$node = $object;
-$terms = taxonomy_node_get_terms_by_vocabulary($node, 7);
-$name = NULL;
-foreach($terms as $term){
-  $name = $term->name;
-  break;
-}
-if ($name){
-  $name = strtolower($name);
-  $name = str_replace(\'?\', \'\', $name);
-  $name = str_replace(\' \', \'-\', $name);
-  print (\'<span class="corner-left \' . $name  .\'-l"></span>\');
-}
+print theme_feature_badge($object, 1);
 ?>',
         'token' => 0,
       ),
