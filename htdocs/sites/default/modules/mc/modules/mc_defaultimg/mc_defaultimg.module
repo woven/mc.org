@@ -3,45 +3,50 @@
 /**
  *  Implementation of hook_menu
  */
-
-function mc_defaultimg_menu(){
+function mc_defaultimg_menu() {
   $items = array();
   $items['admin/settings/defaultimg'] = array(
-    'title' => 'Default Image Config',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('mc_defaultimg_admin_settings'),
-    'access arguments' => array('administer users'),
+      'title' => 'Default Image Config',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('mc_defaultimg_admin_settings'),
+      'access arguments' => array('administer users'),
   );
 
   return $items;
 }
 
-function mc_defaultimg_admin_settings(&$form_state){
-  module_load_include('inc', 'content', 'includes/content.node_form');
+function mc_defaultimg_admin_settings(&$form_state) {
   $form = array();
   $form['#attributes'] = array('enctype' => 'multipart/form-data');
-  $content_types= node_get_types();
+  $content_types = node_get_types();
+  $generic = new stdClass();
+  $generic->name = 'Generic';
+  $generic->type = 'generic';
+  $temp_array = array(
+      'generic' => $generic,
+  );
+  $content_types = $temp_array + $content_types;
   foreach ($content_types as $content_type) {
     $form[$content_type->type] = array(
-      '#type' => 'fieldset',
-      '#title' => $content_type->name . ' Default Image Settings',
-      '#collapsible' => TRUE,
-      '#collapsed' => FALSE,
+        '#type' => 'fieldset',
+        '#title' => $content_type->name . ' Default Image Settings',
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
     );
     $existing_variable = variable_get('default_img_' . $content_type->type, '');
-    if(!empty($existing_variable)){
+    if (!empty($existing_variable)) {
       $file = field_file_load($existing_variable);
-      $image=theme('imagecache', "medium" ,$file['filepath']); 
-      $form[$content_type->type]['existing_img_'. $content_type->type]= array(
-        '#type' => 'markup',  
-        '#value' => $image,
+      $image = theme('imagecache', "medium", $file['filepath']);
+      $form[$content_type->type]['existing_img_' . $content_type->type] = array(
+          '#type' => 'markup',
+          '#value' => $image,
       );
-      $form[$content_type->type]['delete_existing_img_'. $content_type->type] = array('#type' => 'checkbox', '#title' => t('Delete picture'), 
-        '#description' => t('Check this box to delete your current picture.'));
+      $form[$content_type->type]['delete_existing_img_' . $content_type->type] = array('#type' => 'checkbox', '#title' => t('Delete picture'),
+          '#description' => t('Check this box to delete your current picture.'));
     }
     $form[$content_type->type]['default_img_' . $content_type->type] = array(
-    '#type' => 'file',
-    '#title' => t('Default image for ' . $content_type->name),
+        '#type' => 'file',
+        '#title' => t('Default image for ' . $content_type->name),
     );
   }
   $form = system_settings_form($form);
@@ -51,153 +56,182 @@ function mc_defaultimg_admin_settings(&$form_state){
 }
 
 function _mc_defaultimg_admin_settings_submit($form, &$form_state) {
-  dpm($form_state);
+  $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
+  if (!function_exists('mime_content_type')) { 
+   function mime_content_type($f) { 
+       $f = escapeshellarg($f); 
+       return trim( `file -bi $f` ); 
+   } 
+  } 
   foreach ($_FILES['files']['tmp_name'] as $key => $path) {
-    if(!empty($path)){
+    if (!empty($path)) {
       $file_temp = file_get_contents($path);
-      $file_temp = file_save_data($file_temp, file_directory_path(). '/topic-default-images/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
-      $file            = new stdClass();
-      $file->filename  = basename($file_temp);
-      $file->filepath  = $file_temp;
-      $file->filemime  = mime_content_type($file_temp);
-      $file->filesize  = filesize($file_temp);
-      $file->uid       = $user->uid;
+      $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_taxonomy_default_image['file_path'] . '/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
+      $file = new stdClass();
+      $file->filename = basename($file_temp);
+      $file->filepath = $file_temp;
+      $file->filemime = mime_content_type($file_temp);
+      $file->filesize = filesize($file_temp);
+      $file->uid = $user->uid;
       $file->timestamp = time();
+      $file->status = FILE_STATUS_PERMANENT;
       drupal_write_record('files', $file);
-      $existing_variable = variable_get($key,'');
-      if(!empty($existing_variable)){
-        db_query('DELETE FROM files WHERE fid=' . $existing_variable);
+      $existing_variable = variable_get($key, '');
+      if (!empty($existing_variable)) {
+        $old_file=field_file_load($existing_variable);
+        $count_node = db_result(db_query("SELECT COUNT(*) FROM {content_field_list_image} WHERE field_list_image_fid=%d", $old_file['fid']));
+        if($count_node=='0'){
+          file_delete($old_file['filepath']);
+          db_query('DELETE FROM files WHERE fid=' . $existing_variable);
+        }
       }
       variable_set($key, $file->fid);
     }
   }
   foreach ($form_state['values'] as $key => $value) {
-    # code...
+    if (strstr($key, 'delete_existing_img')) {
+      if ($value == 1) {
+        $variable = str_replace('delete_existing_img_', '', $key);
+        $variable = "default_img_" . $variable;
+        $existing_variable = variable_get($variable, '');
+        if (!empty($existing_variable)) {
+          $old_file=field_file_load($existing_variable);
+          $count_node = db_result(db_query("SELECT COUNT(*) FROM {content_field_list_image} WHERE field_list_image_fid=%d", $old_file['fid']));
+          if($count_node=='0'){
+            file_delete($old_file['filepath']);
+            db_query('DELETE FROM files WHERE fid=' . $existing_variable);
+          }
+        }
+        variable_set($variable, '');
+      }
+    }
   }
 }
-
 
 /**
  * Implementation of hook_nodeapi
  */
-function mc_defaultimg_nodeapi(&$node, $op){
-  if($node->type!='page'){
-  $vid = db_result(db_query("select vid from vocabulary where module='features_topic'"));
-  switch ($op){
-    case 'prepare':
-      
-      // remove default image before presenting the form
-      $field_taxonomy_default_image=_mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
-      $default_path = 'sites/default/files/' . $field_taxonomy_default_image['file_path'];
-      if ( $node->field_list_image && count($node->field_list_image) == 1 &&
-          strpos($node->field_list_image[0]['filepath'], $default_path) === 0){
-        
-        unset($node->field_list_image[0]);
-        
-      }
-      
-      break;
-      
-    case 'presave':
-      if ( $node->field_list_image && ( empty($node->field_list_image[0]) || empty($node->field_list_image[0]['fid']))){
-        
-        // add default image
-        
-        $use_generic_image = TRUE;
+function mc_defaultimg_nodeapi(&$node, $op) {
+  if ($node->type != 'page' || $node->type!='taxonomy_feature' || $node->type!='taxonomy_topic' ) {
+    $vid = db_result(db_query("select vid from vocabulary where module='features_topic'"));
+    switch ($op) {
+      case 'prepare':
 
-        // get category terms
-        
-        if (is_array($node->taxonomy) && !empty($node->taxonomy[$vid])){
-          foreach ($node->taxonomy[$vid] as $tid){
-            $nid=_taxonomynode_get_nid_from_tid($tid);
-            $node_taxonomy=$node_load($nid);
-            if (isset($node->field_taxonomy_default_image['0']['fid'])){
-              $use_generic_image = FALSE;
-              break;
+        // remove default image before presenting the form
+        $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
+        $default_path = 'sites/default/files/' . $field_taxonomy_default_image['file_path'];
+        if ($node->field_list_image && count($node->field_list_image) == 1 &&
+                strpos($node->field_list_image[0]['filepath'], $default_path) === 0) {
+
+          unset($node->field_list_image[0]);
+        }
+
+        break;
+      case 'delete':
+        $a=4;
+      break;
+      case 'presave':
+        if ($node->field_list_image && ( empty($node->field_list_image[0]) || empty($node->field_list_image[0]['fid']))) {
+
+          // add default image
+
+          $use_generic_image = TRUE;
+
+          // get category terms
+
+          if (is_array($node->taxonomy) && !empty($node->taxonomy[$vid])) {
+            foreach ($node->taxonomy[$vid] as $tid) {
+              $nid = _taxonomynode_get_nid_from_tid($tid);
+              $node_taxonomy = node_load($nid);
+              if (isset($node_taxonomy->field_taxonomy_default_image['0']['fid'])) {
+                $file = field_file_load($node_taxonomy->field_taxonomy_default_image['0']['fid']);
+                $filename = $file['filepath'];
+                $use_generic_image = FALSE;
+                break;
+              }
             }
           }
-        }
-        
-        // if no term found, add generic one
-        if ($use_generic_image){
-          $filename = drupal_get_path('module', 'mc_defaultimg') . '/images/generic.png';
-          if($node->type=='forum'){
-            $filename = drupal_get_path('module', 'mc_defaultimg') . '/images/forum_default.png';
+
+          // if no term found, add generic one
+          if ($use_generic_image) {
+            $type_default_image_fid = variable_get("default_img_" . $node->type, '');
+            if ($type_default_image_fid != '') {
+              $file = field_file_load($type_default_image_fid);
+              $filename = $file['filepath'];
+            } else {
+              $generic_default_image_fid = variable_get("default_img_generic", '');
+              if ($generic_default_image_fid != '') {
+                $file = field_file_load($generic_default_image_fid);
+                $filename = $file['filepath'];
+              } else {
+                return;
+              }
+            }
           }
+
+          $node->field_list_image = array(
+              array(
+                  'fid' => $file['fid'],
+                  'title' => basename($file['filename']),
+                  'filename' => $file['filename'],
+                  'filepath' => $file['filepath'],
+                  'filesize' => $file['filesize'],
+                  'mimetype' => $file['filemime'],
+                  'data' => array(
+                      'description' => basename($file['filename']),
+                  ),
+                  'list' => 1,
+              ),
+          );
         }
-        
-        // TODO: Verify if file is not already added
-        $file = _mc_defaultimg_get_image($filename);
-        
-        $node->field_list_image = array(
-          array(
-            'fid' => $file->fid,
-            'title' => basename($file->filename),
-            'filename' => $file->filename,
-            'filepath' => $file->filepath,
-            'filesize' => $file->filesize,
-            'mimetype' => $mime,
-            'data' => array(
-              'description' => basename($file->filename),
-            ),
-            'list' => 1,
-          ),
-        );
-        
-      }
-      break;
-  }
+        break;
+    }
   }
 }
 
-/**
- * Get image for the node, if it doesn't exist, insert it
- */
-function _mc_defaultimg_get_image($path){
-  
-  // verify if it existes
-  
-  $sql = "SELECT fid, uid, filename, filepath, filemime, filesize, status, timestamp FROM {files} WHERE filepath LIKE '%s' ";
-  $file = db_fetch_object(db_query($sql, $path));
-  
-  // insert if it does not exist
-  if (!$file){
-    $file = _mc_defaultimg_insert_image($path);
+
+function mc_defaultimg_file_references($file) {
+  $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
+  if(arg(0)=='node' && arg(2)=='delete'){
+    $node=node_load(arg(1));
   }
-  
-  return $file;
-}
-
-/**
- * Inserts an image in the database, for the given path
- */
-function _mc_defaultimg_insert_image($path){
-  $mime = 'image/png';
-
-  $file = new stdClass();
-  $file->filename = basename($path);
-  $file->filepath = $path;
-  $file->filemime = $mime;
-  $file->filesize = filesize($path);
-
-  $file->uid = 1;
-  $file->status = FILE_STATUS_PERMANENT;
-  $file->timestamp = time();
-  drupal_write_record('files', $file);
-  
-  return $file;
-  
-}
-
-function mc_defaultimg_file_references($file){
-  $default_path = drupal_get_path('module', 'mc_defaultimg');
-  $belongs_to_module = strstr($file->filepath, $default_path);
+  else {
+    $node=new stdClass();
+    $node->type = 'taxonomy_term';
+  }
+  $path = 'sites/default/files/' . $field_taxonomy_default_image['file_path'];
+  $belongs_to_module = strstr($file->filepath, $path);
   if ($belongs_to_module) {
-    return array('mc_defaultimg' => 1);
+    $count_node = db_result(db_query("SELECT COUNT(*) FROM {content_field_list_image} WHERE field_list_image_fid=%d", $file->fid));
+    $count_terms = db_result(db_query("SELECT COUNT(*) FROM {content_type_taxonomy_topic} WHERE field_taxonomy_default_image_fid=%d", $file->fid));
+    
+    $content_types = node_get_types();
+    $generic = new stdClass();
+    $generic->name = 'Generic';
+    $generic->type = 'generic';
+    $temp_array = array(
+        'generic' => $generic,
+    );
+    $content_types = $temp_array + $content_types;
+    $count_defaults=0;
+    foreach ($content_types as $content_type) {
+      $variable = variable_get('default_img_' . $content_type->type, '');
+      if($variable==$file->fid){
+        $count_defaults++;
+      }
+    }
+    if($node->type=='taxonomy_term'){
+      $count_terms--;
+    }
+    else{
+      $count_node--;
+    }
+    $total_count=$count_defaults+$count_node+$count_terms;
+    return array('mc_defaultimg' => $total_count);
   }
 }
 
-function _mc_defaultimg_nodefield_widget_settings ($field_name) {
+function _mc_defaultimg_nodefield_widget_settings($field_name) {
   $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
-  return unserialize(db_result(db_query($sql,$field_name)));
+  return unserialize(db_result(db_query($sql, $field_name)));
 }
