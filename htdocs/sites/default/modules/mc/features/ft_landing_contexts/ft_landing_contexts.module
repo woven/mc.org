@@ -5,3 +5,12 @@
  */
 
 include_once 'ft_landing_contexts.features.inc';
+
+
+function ft_landing_contexts_theme_registry_alter(&$theme_registry) {
+  $modulepath = drupal_get_path('module', 'ft_landing_contexts');
+  
+  // Alter block theme paths
+  $originalpath = array_shift($theme_registry['block']['theme paths']);
+  array_unshift($theme_registry['block']['theme paths'], $originalpath, $modulepath);
+}
