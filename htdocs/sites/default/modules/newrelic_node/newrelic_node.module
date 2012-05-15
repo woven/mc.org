@@ -1,0 +1,41 @@
+<?php
+
+//https://newrelic.com/docs/php/the-php-api Newrelic API
+
+function newrelic_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+	global $user;
+
+	//Newrelic calls these pages node_page_view
+	if($op == "view" && $a4){
+		//append node type to the default name
+		$ntype = 'node_page_view.'.$node->type;
+
+        newrelic_name_transaction($ntype);
+
+        //add custom node parameters
+		newrelic_add_custom_parameter('node_type', $node->type);
+		newrelic_add_custom_parameter('node_nid', $node->nid);
+
+        //indicate if the node belongs to a group or not
+		if(isset($node->og_groups)){
+            //just added some dump logic for now..
+            if(!empty($node->og_groups)){
+              newrelic_add_custom_parameter ('node_og', 1);
+            }else{
+              newrelic_add_custom_parameter ('node_og', 0);
+            }
+		}else{
+          newrelic_add_custom_parameter ('node_og', 0);
+        }
+
+		//add current user info (if he is logged in or not and what user is this)
+        //if the user is admin, ignore and make it as background jobthe whole transaction, else log in the user name and passord
+		if($user->uid == 1){
+		  newrelic_background_job(true);
+		}
+
+        //add current user.id and user.name
+		newrelic_add_custom_parameter ('user_id', $user->uid);
+		newrelic_add_custom_parameter ('user_name', $user->name);
+	}
+}

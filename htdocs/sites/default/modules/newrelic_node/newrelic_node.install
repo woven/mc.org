@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implement hook_install().
+ */
+function newrelic_node_install() {
+  // Set New Relic Node module's weight to very low so we can trigger job state and below the main new_relic_rpm
+  db_query("UPDATE {system} SET weight = -18 WHERE name = 'newrelic_node'");
+}

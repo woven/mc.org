@@ -23,7 +23,6 @@ function ft_tx_feature_taxonomy_default_vocabularies() {
         'event' => 'event',
         'audio' => 'audio',
         'article' => 'article',
-        'taxonomy_feature' => 'taxonomy_feature',
       ),
     ),
   );
