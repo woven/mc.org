@@ -17,12 +17,11 @@ function ft_tx_topic_taxonomy_default_vocabularies() {
       'module' => 'features_topic',
       'weight' => '0',
       'nodes' => array(
+        'taxonomy_topic' => 'taxonomy_topic',
         'video' => 'video',
         'place' => 'place',
-        'news' => 'news',
         'link' => 'link',
         'file' => 'file',
-        'feedapi_node' => 'feedapi_node',
         'event' => 'event',
         'audio' => 'audio',
         'article' => 'article',

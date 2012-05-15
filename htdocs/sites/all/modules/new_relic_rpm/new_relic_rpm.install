@@ -1,0 +1,63 @@
+<?php
+/**
+ * @file
+ * Install and uninstall functions as well as schema definition for the Mollom module.
+ */
+
+/**
+ * Implement hook_install().
+ */
+function new_relic_rpm_install() {
+  // Set New Relic RPM module's weight to very low so we can trigger job state
+  // changes early. This can be important in cases like hook_cron().
+  db_query("UPDATE {system} SET weight = -20 WHERE name = 'new_relic_rpm'");
+}
+
+/**
+ * Implemenation of hook enable().
+ *
+ * This checks for the existence of the New Relic RPM PHP extension by checking
+ * for functions. If it is not found, the module is uninstalled.
+ */
+function new_relic_rpm_enable() {
+  if (!function_exists('newrelic_background_job')) {
+    drupal_set_message('The New Relic RPM PHP extension is missing. This extension must be installed and functional on your server before this module can be enabled. Visit '.l('the New Relic RPM installation guide','http://support.newrelic.com/kb/docs/php-agent').' for assistance','error');
+    module_disable(array('new_relic_rpm'));
+  }
+}
+
+/**
+ * Implement hook_uninstall().
+ */
+function new_relic_rpm_uninstall() {
+
+  // Remove variables.
+  variable_del('new_relic_rpm_track_cron');
+  variable_del('new_relic_rpm_ignore_urls');
+  variable_del('new_relic_rpm_bg_urls');
+  variable_del('new_relic_rpm_exclusive_urls');
+  variable_del('new_relic_rpm_api_key');
+  variable_del('new_relic_rpm_module_deployment');
+  variable_del('new_relic_rpm_app_name');
+}
+
+/**
+ * Set New Relic RPM module's weight to very low.
+ *
+ * @see new_relic_rpm_install()
+ */
+function new_relic_rpm_update_6001() {
+  db_query("UPDATE {system} SET weight = -20 WHERE name = 'new_relic_rpm'");
+}
+
+/**
+ * Remove variable based app name and use the hard coded ini value.
+ *
+ * Since the ini value is required for newrelic to function correctly anyways,
+ * it only makes sense that we go ahead and use it for our deployments as well.
+ * This is doubly true since we document requiring this to be the same as the
+ * value used by the rest of the monitoring.
+ */
+function new_relic_rpm_update_6002() {
+  variable_del('new_relic_rpm_app_name');
+}
