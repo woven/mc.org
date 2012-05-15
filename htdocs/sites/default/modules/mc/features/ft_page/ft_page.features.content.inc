@@ -6,6 +6,213 @@
 function ft_page_content_default_fields() {
   $fields = array();
 
+  // Exported field: field_block_body
+  $fields['npage-field_block_body'] = array(
+    'field_name' => 'field_block_body',
+    'type_name' => 'npage',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'secondary_page' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '1',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => '5',
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => '',
+          'format' => '1',
+          '_error_element' => 'default_value_widget][field_block_body][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Block Body',
+      'weight' => '26',
+      'description' => '',
+      'type' => 'text_textarea',
+      'module' => 'text',
+    ),
+  );
+
+  // Exported field: field_block_link
+  $fields['npage-field_block_link'] = array(
+    'field_name' => 'field_block_link',
+    'type_name' => 'npage',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'secondary_page' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'link',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'link',
+    'active' => '1',
+    'attributes' => array(
+      'target' => 'default',
+      'rel' => '',
+      'class' => '',
+      'title' => '',
+    ),
+    'display' => array(
+      'url_cutoff' => '80',
+    ),
+    'url' => 0,
+    'title' => 'optional',
+    'title_value' => '',
+    'enable_tokens' => 0,
+    'validate_url' => 1,
+    'widget' => array(
+      'default_value' => array(
+        '0' => array(
+          'title' => '',
+          'url' => '',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Block Link ',
+      'weight' => '27',
+      'description' => '',
+      'type' => 'link',
+      'module' => 'link',
+    ),
+  );
+
+  // Exported field: field_block_title
+  $fields['npage-field_block_title'] = array(
+    'field_name' => 'field_block_title',
+    'type_name' => 'npage',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'secondary_page' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => 5,
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_block_title][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Block Title',
+      'weight' => '25',
+      'description' => '',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
   // Exported field: field_featured_audio_video_items
   $fields['npage-field_featured_audio_video_items'] = array(
     'field_name' => 'field_featured_audio_video_items',
@@ -1124,6 +1331,10 @@ function ft_page_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'file_extensions' => 'png gif jpg jpeg',
       'file_path' => '',
       'progress_indicator' => 'bar',
@@ -1149,10 +1360,6 @@ function ft_page_content_default_fields() {
         'fid' => '51253',
       ),
       'use_default_image' => 1,
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
       'label' => 'Images',
       'weight' => '5',
       'description' => 'Upload an image to be displayed on the lists of content',
@@ -1342,6 +1549,9 @@ secondary|Secondary Page',
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Block Body');
+  t('Block Link ');
+  t('Block Title');
   t('Featured Audio and Video Items');
   t('Featured Events');
   t('Featured Group');
