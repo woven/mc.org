@@ -1,0 +1,4 @@
+* adds the content type to the transcation name "node_page_view.CONTENTTYPE" and custom paramenter "node.type/node.nid".
+* adds user.uid and user.name to newrelic transcations for better debugging.
+* adds custom parameter "node.og" indicates if the current node belongs to og group or not.
+* mark the current transcations as background if the uid = 1 (admin), so it would not affect on performance rank.

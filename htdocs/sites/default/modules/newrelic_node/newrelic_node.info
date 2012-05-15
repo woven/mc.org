@@ -1,0 +1,5 @@
+name = "NewRelic Node Info"
+description = "adds Drupal node and user info to newrelic transcations for better visibility on newrelic interface"
+version = VERSION
+core = 6.x
+dependencies[] = new_relic_rpm

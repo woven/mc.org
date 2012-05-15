@@ -1,0 +1,12 @@
+; $Id:
+name = New Relic RPM
+description = Integration with the New Relic RPM reporting and optimization system.
+version = "6.x-1.0"
+core = 6.x
+project = "new_relic_rpm"
+; Information added by drupal.org packaging script on 2011-11-18
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "new_relic_rpm"
+datestamp = "1321576201"
+
