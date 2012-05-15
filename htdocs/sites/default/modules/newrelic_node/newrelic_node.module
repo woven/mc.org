@@ -13,19 +13,19 @@ function newrelic_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
         newrelic_name_transaction($ntype);
 
         //add custom node parameters
-		newrelic_add_custom_parameter('node.type', $node->type);
-		newrelic_add_custom_parameter('node.nid', $node->nid);
+		newrelic_add_custom_parameter('node_type', $node->type);
+		newrelic_add_custom_parameter('node_nid', $node->nid);
 
         //indicate if the node belongs to a group or not
 		if(isset($node->og_groups)){
             //just added some dump logic for now..
             if(!empty($node->og_groups)){
-              newrelic_add_custom_parameter ('node.og', 1);
+              newrelic_add_custom_parameter ('node_og', 1);
             }else{
-              newrelic_add_custom_parameter ('node.og', 0);
+              newrelic_add_custom_parameter ('node_og', 0);
             }
 		}else{
-          newrelic_add_custom_parameter ('node.og', 0);
+          newrelic_add_custom_parameter ('node_og', 0);
         }
 
 		//add current user info (if he is logged in or not and what user is this)
@@ -35,7 +35,7 @@ function newrelic_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
 		}
 
         //add current user.id and user.name
-		newrelic_add_custom_parameter ('user.id', $user->uid);
-		newrelic_add_custom_parameter ('user.name', $user->name);
+		newrelic_add_custom_parameter ('user_id', $user->uid);
+		newrelic_add_custom_parameter ('user_name', $user->name);
 	}
 }
