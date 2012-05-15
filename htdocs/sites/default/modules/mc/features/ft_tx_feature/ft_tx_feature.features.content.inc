@@ -6,9 +6,9 @@
 function ft_tx_feature_content_default_fields() {
   $fields = array();
 
-  // Exported field: field_taxonomy_image
-  $fields['taxonomy_feature-field_taxonomy_image'] = array(
-    'field_name' => 'field_taxonomy_image',
+  // Exported field: field_taxonomy_badge
+  $fields['taxonomy_feature-field_taxonomy_badge'] = array(
+    'field_name' => 'field_taxonomy_badge',
     'type_name' => 'taxonomy_feature',
     'display_settings' => array(
       'label' => array(
@@ -87,8 +87,8 @@ function ft_tx_feature_content_default_fields() {
       'label' => 'Taxonomy image',
       'weight' => '31',
       'description' => '',
-      'type' => 'imagefield_crop_widget',
-      'module' => 'imagefield_crop',
+      'type' => 'imagefield_widget',
+      'module' => 'imagefield',
     ),
   );
 
