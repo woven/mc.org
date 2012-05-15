@@ -12,3 +12,12 @@ function ft_landing_contexts_ctools_plugin_api() {
     return array("version" => 3);
   }
 }
+
+/**
+ * Implementation of hook_views_api().
+ */
+function ft_landing_contexts_views_api() {
+  return array(
+    'api' => '2',
+  );
+}
