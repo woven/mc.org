@@ -39,8 +39,8 @@ function theme_feature_badge($element, $badge){
       $term = $taxonomy_term;
       //Get the node asociatd to the term to take the picture.
       $node_associated_term = node_load(_taxonomynode_get_nid_from_tid($term->tid));
-      if ($node_associated_term->field_taxonomy_image[0]['filepath']){
-        $image_url = file_create_url($node_associated_term->field_taxonomy_image[0]['filepath']);
+      if ($node_associated_term->field_taxonomy_badge[0]['filepath']){
+        $image_url = file_create_url($node_associated_term->field_taxonomy_badge[0]['filepath']);
       }
       break;
     }
