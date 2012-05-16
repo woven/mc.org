@@ -1,0 +1,13 @@
+a#disclaimer-link {
+	cursor: pointer;
+}
+
+#disclaimer.block{
+	border: none;
+	padding: 15px;
+}
+
+#disclaimer .submit-wrapper{
+	text-align: center;
+	padding-top: 25px;
+}
