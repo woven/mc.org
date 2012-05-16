@@ -11,7 +11,7 @@ function ft_page_fieldgroup_default_groups() {
     'group_type' => 'standard',
     'type_name' => 'npage',
     'group_name' => 'group_block',
-    'label' => 'Block',
+    'label' => 'Help Block',
     'settings' => array(
       'form' => array(
         'style' => 'fieldset',
@@ -19,7 +19,6 @@ function ft_page_fieldgroup_default_groups() {
       ),
       'display' => array(
         'description' => '',
-        'label' => 'above',
         'teaser' => array(
           'format' => 'fieldset',
           'exclude' => 0,
@@ -48,6 +47,7 @@ function ft_page_fieldgroup_default_groups() {
           'format' => 'fieldset',
           'exclude' => 0,
         ),
+        'label' => 'above',
       ),
     ),
     'weight' => '24',
@@ -60,7 +60,7 @@ function ft_page_fieldgroup_default_groups() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Block');
+  t('Help Block');
 
   return $groups;
 }
