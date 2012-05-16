@@ -3,6 +3,9 @@
 function mc_disclaimer_form_alter(&$form, &$form_state, $form_id){
   if($form['#id']=='node-form'){
    drupal_add_js(drupal_get_path('module', 'mc_disclaimer') . '/js/mc_disclaimer.js', 'theme', 'footer');
+
+   drupal_add_css(drupal_get_path('theme', 'mc_base') . '/js/colorbox/colorbox.css');
+
    $form['body_field']['teaser_include']['#access']=false;
    if(isset($form['field_disclaimer_markup'])){
     $form['field_disclaimer_markup']['#access']=false;
