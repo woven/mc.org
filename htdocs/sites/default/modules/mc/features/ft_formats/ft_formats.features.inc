@@ -8,4 +8,7 @@ function ft_formats_ctools_plugin_api() {
   if ($module == "input_formats" && $api == "input_formats") {
     return array("version" => 1);
   }
+  elseif ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => 1);
+  }
 }
