@@ -17,3 +17,31 @@
   right: -11px;
   z-index: 2;
 }
+
+/* Specific styles for Badges on GethealthyHarlem.  It must be changed in each sites.*/
+
+/*RIGHT BADGE*/
+
+span.badge-2.term-harlem-word {
+	background-position: 0 0 !important;
+}
+
+span.badge-2.term-did-you-know-{
+	background-position: 0 -64px !important;
+}
+
+span.badge-2.term-profiles-of-hope {
+	background-position: 0 -128px !important;
+}
+
+/*LEFT BADGE*/
+
+span.badge-1.term-harlem-word {
+	background-position: -66px 0 !important;
+}
+span.badge-1.term-did-you-know- {
+	background-position: -66px -64px !important;
+}
+span.badge-1.term-profiles-of-hope {
+	background-position: -66px -128px !important;
+}

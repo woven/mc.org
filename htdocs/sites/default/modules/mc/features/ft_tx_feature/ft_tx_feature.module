@@ -45,7 +45,7 @@ function theme_feature_badge($element, $badge){
       break;
     }
   }
-  $term_class = str_replace(array('][', '_', ' '), '-', $term->name);
+  $term_class = strtolower(str_replace(array('][', '_', ' ', '?'), '-', $term->name));
   //Create the html output and return it.
   $output .= '<span class="badge-'. $badge . ' term-' . $term_class .'" style="background:url(' . $image_url . ')">';
   $output .= '</span>';
