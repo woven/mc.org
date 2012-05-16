@@ -9,6 +9,15 @@ function mc_node_ui_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'colorbox_pages';
+  $strongarm->value = 'admin*
+img_assist*
+imce*';
+  $export['colorbox_pages'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nd_fields';
   $strongarm->value = array(
     'gallary_images' => array(
