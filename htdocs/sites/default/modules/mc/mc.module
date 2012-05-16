@@ -139,37 +139,6 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
    $form['#validate'][]= "mc_validate_user_send_eror";
    $form['submit']['#value']="Sign in";
  }
- 
-  // TODO: Function brough from the module _content_disclaimers
- 
- 	if($form['#id']=='node-form'){
-   $form['body_field']['teaser_include']['#access']=false;
-   if(isset($form['field_disclaimer_markup'])){
-    $form['field_disclaimer_markup']['#access']=false;
-   }
-   if(isset($form['field_disclaimer_markup_top'])){
-    $form['field_disclaimer_markup_top']['#access']=false;
-   }
-   $node_url=drupal_get_normal_path("disclaimer-0");
-   $pieces=explode("/", $node_url);
-   $nid=$pieces[count($pieces)-1];
-   $node=node_load($nid);
-   $form['body_field']['#prefix']="<div class=\"form-item\">By adding content, you agree to <a id=\"disclaimer-link\">these policies</a>.</div>".$form['body_field']['#prefix'];
-		$form['#suffix']=" <div style=\"display: none;\">
-      <div id=\"disclaimer\" class=\"block block-overlay\">
-        <div class=\"block-content\">
-          <div class=\"block block-login clear-block\">".
-            $node->body .
-            "<span class=\"submit-wrapper\">
-            	<button type=\"submit\" name=\"ok\" id=\"ok-button\" value=\"OK\" class=\"form-submit\">
-            		<span>OK</span>
-            	</button>
-            </span>
-          </div>
-        </div>
-      </div>
-      </div>";
-  }
 }
 
 function mc_validate_user_send_eror($form, &$form_state){
@@ -629,10 +598,6 @@ function mc_events_grouped_by_dates_view($view_name, $display_id, $time_key, $it
  * Implementation of hook_init()
  */
 function mc_init(){
-  //TODO: Function brought from module _content_disclaimers
-  if(arg(0)=="node" && (arg(1)=="add" || arg(2)=="edit")){
-		drupal_add_js(drupal_get_path('module', 'mc') . '/js/mc_content_disclaimers.js', 'theme', 'footer');
-	}
   //Avoid 404 page in user/register for authenticated users.
   if ($GLOBALS['user']->uid != 0){
     if ($_GET['q'] == 'user/register'){

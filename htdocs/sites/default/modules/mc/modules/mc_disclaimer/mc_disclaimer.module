@@ -1,0 +1,40 @@
+<?php
+
+function mc_disclaimer_form_alter(&$form, &$form_state, $form_id){
+  if($form['#id']=='node-form'){
+   drupal_add_js(drupal_get_path('module', 'mc_disclaimer') . '/js/mc_disclaimer.js', 'theme', 'footer');
+   $form['body_field']['teaser_include']['#access']=false;
+   if(isset($form['field_disclaimer_markup'])){
+    $form['field_disclaimer_markup']['#access']=false;
+   }
+   if(isset($form['field_disclaimer_markup_top'])){
+    $form['field_disclaimer_markup_top']['#access']=false;
+   }
+    $box = boxes_load('mc_disclaimer');
+    $block = $box->render();
+    dpm($block);
+
+   $form['body_field']['#prefix']="<div class=\"form-item\">By adding content, you agree to <a id=\"disclaimer-link\">these policies</a>.</div>".$form['body_field']['#prefix'];
+    $form['#suffix']=" 
+    <div style=\"display: none;\">
+      <div id=\"disclaimer\" class=\"block block-overlay\">
+        <div class=\"block-content\">
+          <div class=\"block block-login clear-block\">".
+            $block['content'] .
+            "<span class=\"submit-wrapper\">
+              <button type=\"submit\" name=\"ok\" id=\"ok-button\" value=\"OK\" class=\"form-submit\">
+                <span>OK</span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>";
+  }
+}
+
+function mc_disclaimer_init(){
+  if(arg(0)=="node" && (arg(1)=="add" || arg(2)=="edit")){
+    
+  }
+}
