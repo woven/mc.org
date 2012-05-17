@@ -6,60 +6,6 @@
 function ft_formats_filter_default_formats() {
   $formats = array();
 
-  // Exported format: Filtered HTML
-  $formats['Filtered HTML'] = array(
-    'name' => 'Filtered HTML',
-    'roles' => array(
-      '0' => 'anonymous user',
-      '1' => 'authenticated user',
-    ),
-    'filters' => array(
-      '0' => array(
-        'module' => 'filter',
-        'delta' => '2',
-        'weight' => '0',
-      ),
-      '1' => array(
-        'module' => 'filter',
-        'delta' => '0',
-        'weight' => '1',
-      ),
-      '2' => array(
-        'module' => 'filter',
-        'delta' => '1',
-        'weight' => '2',
-      ),
-      '3' => array(
-        'module' => 'filter',
-        'delta' => '3',
-        'weight' => '10',
-      ),
-    ),
-  );
-
-  // Exported format: Full HTML
-  $formats['Full HTML'] = array(
-    'name' => 'Full HTML',
-    'roles' => array(),
-    'filters' => array(
-      '0' => array(
-        'module' => 'filter',
-        'delta' => '2',
-        'weight' => '0',
-      ),
-      '1' => array(
-        'module' => 'filter',
-        'delta' => '1',
-        'weight' => '1',
-      ),
-      '2' => array(
-        'module' => 'filter',
-        'delta' => '3',
-        'weight' => '10',
-      ),
-    ),
-  );
-
   // Exported format: Femail mail message
   $formats['Femail mail message'] = array(
     'name' => 'Femail mail message',
@@ -104,6 +50,60 @@ function ft_formats_filter_default_formats() {
         'module' => 'php',
         'delta' => '0',
         'weight' => '0',
+      ),
+    ),
+  );
+
+  // Exported format: Full HTML
+  $formats['Full HTML'] = array(
+    'name' => 'Full HTML',
+    'roles' => array(),
+    'filters' => array(
+      '0' => array(
+        'module' => 'filter',
+        'delta' => '2',
+        'weight' => '0',
+      ),
+      '1' => array(
+        'module' => 'filter',
+        'delta' => '1',
+        'weight' => '1',
+      ),
+      '2' => array(
+        'module' => 'filter',
+        'delta' => '3',
+        'weight' => '10',
+      ),
+    ),
+  );
+
+  // Exported format: Filtered HTML
+  $formats['Filtered HTML'] = array(
+    'name' => 'Filtered HTML',
+    'roles' => array(
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
+    ),
+    'filters' => array(
+      '0' => array(
+        'module' => 'filter',
+        'delta' => '2',
+        'weight' => '0',
+      ),
+      '1' => array(
+        'module' => 'filter',
+        'delta' => '0',
+        'weight' => '1',
+      ),
+      '2' => array(
+        'module' => 'filter',
+        'delta' => '1',
+        'weight' => '2',
+      ),
+      '3' => array(
+        'module' => 'filter',
+        'delta' => '3',
+        'weight' => '10',
       ),
     ),
   );

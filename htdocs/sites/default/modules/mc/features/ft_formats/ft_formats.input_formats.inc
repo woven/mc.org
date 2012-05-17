@@ -17,19 +17,14 @@ function ft_formats_input_formats() {
   $input_format->settings = array(
     // Settings for: filter module
     'filter' => array(
-      // Filter HTML tags
       'filter_html' => 1,
     ),
   );
   $input_format->filters = array(
     'filter' => array(
-      // Delta => Weight for: URL filter
       '2' => '0',
-      // Delta => Weight for: HTML filter
       '0' => '1',
-      // Delta => Weight for: Line break converter
       '1' => '2',
-      // Delta => Weight for: HTML corrector
       '3' => '10',
     ),
   );
@@ -45,11 +40,8 @@ function ft_formats_input_formats() {
   );
   $input_format->filters = array(
     'filter' => array(
-      // Delta => Weight for: URL filter
       '2' => '0',
-      // Delta => Weight for: Line break converter
       '1' => '1',
-      // Delta => Weight for: HTML corrector
       '3' => '10',
     ),
   );
@@ -66,23 +58,17 @@ function ft_formats_input_formats() {
   $input_format->settings = array(
     // Settings for: filter module
     'filter' => array(
-      // Maximum link text length
       'filter_url_length' => '72',
     ),
   );
   $input_format->filters = array(
     'filter' => array(
-      // Delta => Weight for: HTML filter
       '0' => '-10',
-      // Delta => Weight for: Line break converter
       '1' => '-9',
-      // Delta => Weight for: URL filter
       '2' => '-8',
     ),
     'femail' => array(
-      // Delta => Weight for: Femail: Remove signature
       '0' => '-7',
-      // Delta => Weight for: Femail: Blockquote reply text
       '1' => '-6',
     ),
   );
@@ -98,7 +84,6 @@ function ft_formats_input_formats() {
   );
   $input_format->filters = array(
     'php' => array(
-      // Delta => Weight for: PHP evaluator
       '0' => '0',
     ),
   );
