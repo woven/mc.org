@@ -260,13 +260,6 @@ function ft_file_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'flowplayer3_mediaplayer_file';
-  $strongarm->value = 'flowplayer-3.0.7.swf';
-  $export['flowplayer3_mediaplayer_file'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'googleanalytics_trackfiles';
   $strongarm->value = 1;
   $export['googleanalytics_trackfiles'] = $strongarm;
@@ -624,13 +617,6 @@ function ft_file_strongarm() {
     5 => 'c_pub',
   );
   $export['subscriptions_workflow_file'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'swftools_grant_access_to_private_files';
-  $strongarm->value = 0;
-  $export['swftools_grant_access_to_private_files'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
