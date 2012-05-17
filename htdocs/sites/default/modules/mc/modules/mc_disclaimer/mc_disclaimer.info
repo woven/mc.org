@@ -2,3 +2,5 @@ name = MC Content Disclaimers
 description = "MC popup for showing information about the disclaimers"
 package = MC
 core = 6.x
+
+dependencies[] = "colorbox"
