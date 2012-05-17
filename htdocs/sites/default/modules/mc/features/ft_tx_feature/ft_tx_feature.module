@@ -8,6 +8,7 @@ include_once('ft_tx_feature.features.inc');
 function ft_tx_feature_theme($existing, $type, $theme, $path){
 	  return array(
 	  	  'feature_badge' => array('variables' => array('element' => NULL,'badge' => null)),
+        'badge_image' => array('variables' => array('term' => NULL,'badge' => null, 'image_url' => null,)),
     	);
 }
 
@@ -45,12 +46,7 @@ function theme_feature_badge($element, $badge){
       break;
     }
   }
-  $term_class = str_replace(array('][', '_', ' '), '-', $term->name);
-  //Create the html output and return it.
-  $output .= '<span class="badge-'. $badge . ' term-' . $term_class .'" style="background:url(' . $image_url . ')">';
-  $output .= '</span>';
-  
-  return $output;
+  return theme('badge_image', $term, $badge, $image_url);
 }
 
 
@@ -108,4 +104,14 @@ function ft_tx_feature_ds_fields($type_name, $build_mode, $extra) {
 }
 
 
+/**
+ * Implementation of theme_badget_image
+ */
 
+function theme_badge_image ($term, $badge, $image_url){
+  $term_class = strtolower(str_replace(array('][', '_', ' ', '?'), '-', $term->name));
+  //Create the html output and return it.
+  $output .= '<span class="badge-'. $badge . ' badge-term-' . $term->tid  . ' badge-term-' . $term_class .'" style="background:url(' . $image_url . ')">';
+  $output .= '</span>';
+  return $output;
+}

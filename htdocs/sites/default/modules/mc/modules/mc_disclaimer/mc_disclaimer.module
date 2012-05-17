@@ -1,8 +1,54 @@
 <?php
 
+function mc_disclaimer_menu() {
+  $items = array();
+  $items['admin/settings/mcdisclaimer'] = array(
+      'title' => 'MC Disclaimer Config',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('mc_disclaimer_admin_settings'),
+      'access arguments' => array('administer users'),
+  );
+
+  return $items;
+}
+
+function mc_disclaimer_admin_settings(&$form_state) {
+  $form = array();
+  $boxes = boxes_load();
+  $boxes_array = array();
+
+  foreach ($boxes as $box) {
+    $boxes_array[$box->delta] = $box->description;
+  }
+
+  $form['mc_disclaimer_box']=array(
+        '#type' => 'select',
+        '#title' => t('Select the box that holds the content for the disclaimer popup'),
+        '#default_value' => variable_get('mc_disclaimer_box',''),
+        '#options' => $boxes_array,
+    );
+  
+  $form = system_settings_form($form);
+  unset($form['#submit']);
+  $form['#submit'] = array('_mc_disclaimer_admin_settings_submit');
+  return $form;
+}
+
+function _mc_disclaimer_admin_settings_submit($form, &$form_state) {
+  $value=$form_state['values']['mc_disclaimer_box'];
+  variable_set('mc_disclaimer_box', $value);
+}
+
+
+
 function mc_disclaimer_form_alter(&$form, &$form_state, $form_id){
-  if($form['#id']=='node-form'){
+  $delta=variable_get('mc_disclaimer_box','');
+  if($form['#id']=='node-form' && $delta!=''){
    drupal_add_js(drupal_get_path('module', 'mc_disclaimer') . '/js/mc_disclaimer.js', 'theme', 'footer');
+   drupal_add_css(drupal_get_path('module', 'mc_disclaimer') . '/css/mc_disclaimer.css');
+
+   drupal_add_css(drupal_get_path('theme', 'mc_base') . '/js/colorbox/colorbox.css');
+
    $form['body_field']['teaser_include']['#access']=false;
    if(isset($form['field_disclaimer_markup'])){
     $form['field_disclaimer_markup']['#access']=false;
@@ -10,23 +56,18 @@ function mc_disclaimer_form_alter(&$form, &$form_state, $form_id){
    if(isset($form['field_disclaimer_markup_top'])){
     $form['field_disclaimer_markup_top']['#access']=false;
    }
-    $box = boxes_load('mc_disclaimer');
+    $box = boxes_load($delta);
     $block = $box->render();
-    dpm($block);
 
    $form['body_field']['#prefix']="<div class=\"form-item\">By adding content, you agree to <a id=\"disclaimer-link\">these policies</a>.</div>".$form['body_field']['#prefix'];
     $form['#suffix']=" 
     <div style=\"display: none;\">
-      <div id=\"disclaimer\" class=\"block block-overlay\">
-        <div class=\"block-content\">
-          <div class=\"block block-login clear-block\">".
-            $block['content'] .
-            "<span class=\"submit-wrapper\">
-              <button type=\"submit\" name=\"ok\" id=\"ok-button\" value=\"OK\" class=\"form-submit\">
-                <span>OK</span>
-              </button>
-            </span>
-          </div>
+      <div id=\"disclaimer\" class=\"block block-overlay\">".
+        $block['content'] .
+        "<div class=\"submit-wrapper\">
+          <button type=\"submit\" name=\"ok\" id=\"ok-button\" value=\"OK\" class=\"form-submit\">
+            <span>OK</span>
+          </button>
         </div>
       </div>
     </div>";

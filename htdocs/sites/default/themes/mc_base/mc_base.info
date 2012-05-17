@@ -22,7 +22,6 @@ regions[footer_above] = Footer Above - Sitemap
 regions[overlay] = Overlay
 
 ; Scripts
-scripts[] = "js/colorbox/jquery.colorbox.js"
 scripts[] = "js/jcarousel/lib/jquery.jcarousel.js"
 scripts[] = "js/main.js"
 scripts[] = "js/jquery.tools.min.js"
