@@ -11,6 +11,29 @@ function ft_tx_feature_ctools_plugin_api() {
 }
 
 /**
+ * Implementation of hook_imagecache_default_presets().
+ */
+function ft_tx_feature_imagecache_default_presets() {
+  $items = array(
+    'tagline_ico' => array(
+      'presetname' => 'tagline_ico',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '40',
+            'height' => '32',
+          ),
+        ),
+      ),
+    ),
+  );
+  return $items;
+}
+
+/**
  * Implementation of hook_node_info().
  */
 function ft_tx_feature_node_info() {

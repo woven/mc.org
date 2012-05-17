@@ -9,6 +9,7 @@ function ft_tx_feature_theme($existing, $type, $theme, $path){
 	  return array(
 	  	  'feature_badge' => array('variables' => array('element' => NULL,'badge' => null)),
         'badge_image' => array('variables' => array('term' => NULL,'badge' => null, 'image_url' => null,)),
+        'feature_tagline' => array('variables' => array('element' => NULL)),
     	);
 }
 
@@ -99,6 +100,40 @@ function ft_tx_feature_ds_fields($type_name, $build_mode, $extra) {
       ),
     ),
   );
+
+  $fields['editorial_content_tagline'] = array(
+      'title' => t('Editorial Content Tagline'),
+      'exclude' => array(
+        'image' => 'image',
+        'feedapi_node' => 'feedapi_node',
+        'group' => 'group',
+        'link' => 'link',
+        'npage' => 'npage',
+        'webform' => 'webform',
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'place' => 0,
+        'simplenews' => 0,
+        'video' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'editorial-tagline',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php 
+          print theme("feature_tagline", $object);
+        ?>',
+        'token' => 0,
+      )
+  );
   
   return array('nd' => $fields);
 }
@@ -113,5 +148,33 @@ function theme_badge_image ($term, $badge, $image_url){
   //Create the html output and return it.
   $output .= '<span class="badge-'. $badge . ' badge-term-' . $term->tid  . ' badge-term-' . $term_class .'" style="background:url(' . $image_url . ')">';
   $output .= '</span>';
+  return $output;
+}
+
+
+/**
+ * Implementation of theme_feature_tagline
+ */
+ 
+function theme_feature_tagline($object){
+  $taxonomy_feature_vid = _mc_api_get_vid_from_name('features_feature');
+  foreach ($object->taxonomy as $term){
+    if ($term->vid == $taxonomy_feature_vid){
+      $taxonomy_nid = _taxonomynode_get_nid_from_tid($term->tid);
+      $taxonomy_node = node_load($taxonomy_nid);
+      $output = '';
+      if(isset($taxonomy_node->field_taxonomy_tagline_icon['0']['fid'])){
+        $file = field_file_load($taxonomy_node->field_taxonomy_tagline_icon['0']['fid']);
+        $image = file_create_url(imagecache_create_path('tagline_ico', $file['filepath']));
+        $iconClass = 'ico-big';
+        $link = l (' ', 'latest/category/' . $term->tid, array('attributes'=>array('class'=>$iconClass, 'style' => 'background:url(' . $image . ')',)) );
+        $output .= '<span class="tagline-icon">' . $link . '</span>';
+      }
+      if(isset($taxonomy_node->field_taxonomy_tagline_text['0']['value'])){
+        $tagline = $taxonomy_node->field_taxonomy_tagline_text['0']['value'];
+        $output .= '<span class="tagline-text">' . $tagline . '</span>';
+      }
+    }
+  }
   return $output;
 }
