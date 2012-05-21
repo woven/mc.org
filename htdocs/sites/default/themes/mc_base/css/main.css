@@ -2407,3 +2407,24 @@ border-width: 1px 0 !important;
 #right #block-boxes-join_mc #boxes-box-join_mc a span{text-align: center;}
 
 .node-type-page #page #main #content .node-page .field-page-type{display: none;}
+
+#page .ghh-menu-items .views-admin-links a{
+	background: none;
+	line-height: 0;
+	padding-left: 0;
+	width: initial;
+}
+
+#page .ghh-menu-items .views-admin-links li {
+	padding: 0;
+	width: initial;
+}
+
+#page #block-quicktabs-browse_by .ghh-menu-items .view-content .odd, #page #block-quicktabs-browse_by .ghh-menu-items .view-content .even {
+margin: 0 0 0;
+}
+
+#page #block-quicktabs-browse_by .view-header {
+margin: 0;
+clear: initial;
+}

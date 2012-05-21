@@ -600,7 +600,7 @@ function ft_landing_contexts_context_default_contexts() {
             'class' => 'block-help important about-block',
           ),
           'quicktabs-browse_by' => array(
-            'class' => '',
+            'class' => 'block-split2',
           ),
           'views-featured_blocks-block_4' => array(
             'class' => '',

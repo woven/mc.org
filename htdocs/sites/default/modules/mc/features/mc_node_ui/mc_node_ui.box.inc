@@ -20,7 +20,7 @@ function mc_node_ui_default_box() {
 </div>
 
 <div class="second">
-<?php print theme(\'ghh_browse_menu\',\'menu-by-editorial-content\'); ?>
+<?php print views_embed_view(\'list_tx_features\', \'block_1\'); ?>
 </div>
 </div>',
     'format' => '3',

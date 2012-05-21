@@ -178,3 +178,77 @@ function theme_feature_tagline($object){
   }
   return $output;
 }
+
+function ft_tx_feature_menu(){
+  $items = array();
+  $items['admin/settings/mcfeatures'] = array(
+      'title' => 'MC Features Config',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('ft_tx_feature_admin_settings'),
+      'access arguments' => array('administer users'),
+  );
+  return $items;
+}
+
+function ft_tx_feature_admin_settings(&$form_state) {
+  $form = array();
+  $form['#attributes'] = array('enctype' => 'multipart/form-data');
+  $form['mc_ft_maintitle']=array(
+        '#type' => 'textfield',
+        '#title' => t('Title of the Features Vocabulary'),
+        '#default_value' => variable_get('mc_ft_maintitle',''),
+  );
+
+  $existing_variable = variable_get('mc_ft_mainimage', '');
+  if (!empty($existing_variable)) {
+    $file = field_file_load($existing_variable);
+    $image = theme('imagecache', "medium", $file['filepath']);
+    $form['mc_ft_existingimg'] = array(
+        '#type' => 'markup',
+        '#value' => $image,
+    );
+  }
+
+  $form['mc_ft_mainimage'] = array(
+        '#type' => 'file',
+        '#title' => t('Image for the Features Vocabulary'),
+  );
+
+
+  
+  $form = system_settings_form($form);
+  unset($form['#submit']);
+  $form['#submit'] = array('_ft_tx_feature_admin_settings_submit');
+  return $form;
+}
+
+function _ft_tx_feature_admin_settings_submit($form, &$form_state) {
+  $value=$form_state['values']['mc_ft_maintitle'];
+  variable_set('mc_ft_maintitle', $value);
+
+  foreach ($_FILES['files']['tmp_name'] as $key => $path) {
+    if (!empty($path)) {
+      $file_temp = file_get_contents($path);
+      $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_taxonomy_default_image['file_path'] . '/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
+      $file = new stdClass();
+      $file->filename = basename($file_temp);
+      $file->filepath = $file_temp;
+      $file->filemime = mime_content_type($file_temp);
+      $file->filesize = filesize($file_temp);
+      $file->uid = $user->uid;
+      $file->timestamp = time();
+      $file->status = FILE_STATUS_PERMANENT;
+      drupal_write_record('files', $file);
+      $existing_variable = variable_get($key, '');
+      if (!empty($existing_variable)) {
+        $old_file=field_file_load($existing_variable);
+        $count_node = db_result(db_query("SELECT COUNT(*) FROM {content_field_list_image} WHERE field_list_image_fid=%d", $old_file['fid']));
+        if($count_node=='0'){
+          file_delete($old_file['filepath']);
+          db_query('DELETE FROM files WHERE fid=' . $existing_variable);
+        }
+      }
+      variable_set($key, $file->fid);
+    }
+  }
+}
