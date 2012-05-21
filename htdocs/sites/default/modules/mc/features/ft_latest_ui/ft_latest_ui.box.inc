@@ -15,7 +15,9 @@ function ft_latest_ui_default_box() {
   $box->description = 'Latest - By Topic';
   $box->options = array(
     'body' => '<div class="block-browse browse-topic">
+<div class="block-content">
   <?php echo theme("ghh_browse_menu","menu-browse-by-topic"); ?>
+</div>
 </div>',
     'format' => '3',
   );
