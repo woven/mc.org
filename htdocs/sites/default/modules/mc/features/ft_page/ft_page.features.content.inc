@@ -130,7 +130,7 @@ function ft_page_content_default_fields() {
     'title' => 'optional',
     'title_value' => '',
     'enable_tokens' => 0,
-    'validate_url' => 1,
+    'validate_url' => 0,
     'widget' => array(
       'default_value' => array(
         '0' => array(
