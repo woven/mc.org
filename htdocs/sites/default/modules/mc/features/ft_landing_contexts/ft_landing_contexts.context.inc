@@ -564,6 +564,12 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'below_content',
           'weight' => 3,
         ),
+        'boxes-home_joinus' => array(
+          'module' => 'boxes',
+          'delta' => 'home_joinus',
+          'region' => 'below_content',
+          'weight' => 4,
+        ),
       ),
     ),
     'block_class' => array(
