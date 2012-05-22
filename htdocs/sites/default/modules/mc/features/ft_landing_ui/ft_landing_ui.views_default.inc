@@ -2851,5 +2851,177 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
 
   $views[$view->name] = $view;
 
+  // Exported view: list_tx_features
+  $view = new view;
+  $view->name = 'list_tx_features';
+  $view->description = '';
+  $view->tag = '';
+  $view->base_table = 'node';
+  $view->core = 6;
+  $view->api_version = '2';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+  $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->override_option('fields', array(
+    'field_taxonomy_tagline_icon_fid' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'label_type' => 'none',
+      'format' => 'tagline_ico_url',
+      'multiple' => array(
+        'group' => TRUE,
+        'multiple_number' => '',
+        'multiple_from' => '',
+        'multiple_reversed' => FALSE,
+      ),
+      'exclude' => 1,
+      'id' => 'field_taxonomy_tagline_icon_fid',
+      'table' => 'node_data_field_taxonomy_tagline_icon',
+      'field' => 'field_taxonomy_tagline_icon_fid',
+      'relationship' => 'none',
+    ),
+    'phpcode' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 0,
+      'value' => '<?php
+$node = node_load($data->nid);
+$tid = _taxonomynode_get_tid_from_nid($data->nid);
+$url = "/latest/category/" . $tid;
+$title = $node->title;
+
+if(isset($node->field_taxonomy_tagline_icon[\'0\'][\'fid\'])){
+  $file = field_file_load($node->field_taxonomy_tagline_icon[\'0\'][\'fid\']);
+  $image = file_create_url(imagecache_create_path(\'tagline_ico\', $file[\'filepath\']));
+  $additional = \'style="background:url(\' . $image . \') no-repeat scroll 0 0 transparent;"\';
+}
+
+print "<a href=\\"$url\\" $additional >$title</a>";
+?>
+',
+      'exclude' => 0,
+      'id' => 'phpcode',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'taxonomy_feature' => 'taxonomy_feature',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('access', array(
+    'type' => 'none',
+  ));
+  $handler->override_option('cache', array(
+    'type' => 'none',
+  ));
+  $handler->override_option('css_class', 'ghh-menu-items');
+  $handler->override_option('header', '<?php 
+$title = variable_get(\'mc_ft_maintitle\',\'\');
+$vid = _mc_api_get_vid_from_name(\'features_feature\');
+$fid = variable_get(\'mc_ft_mainimage\', \'\');
+if($fid!=\'\'){
+  $file = field_file_load($fid);
+  $image = file_create_url(imagecache_create_path(\'tagline_ico\', $file[\'filepath\']));
+  $additional = \'style="background:url(\' . $image . \') no-repeat scroll 0 0 transparent;"\';
+}
+if($title!=\'\' && isset($vid)){
+?>
+  <ul class="links">
+  <li><a href="/latest/vid/<?php echo $vid; ?>" <?php echo $additional; ?>><?php echo $title; ?></a></li>
+  </ul>
+
+<?php
+}
+?>
+');
+  $handler->override_option('header_format', '3');
+  $handler->override_option('header_empty', 0);
+  $handler->override_option('style_plugin', 'semanticviews_default');
+  $handler->override_option('style_options', array(
+    'group' => array(
+      'element_type' => 'h3',
+      'class' => 'title',
+    ),
+    'list' => array(
+      'element_type' => 'ul',
+      'class' => 'links',
+    ),
+    'row' => array(
+      'element_type' => 'li',
+      'class' => '',
+      'last_every_nth' => '0',
+      'first_class' => 'first',
+      'last_class' => 'last',
+      'striping_classes' => 'odd even',
+    ),
+  ));
+  $handler->override_option('row_plugin', 'semanticviews_fields');
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
+
+  $views[$view->name] = $view;
+
   return $views;
 }

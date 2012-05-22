@@ -239,9 +239,6 @@ function ft_landing_contexts_context_default_contexts() {
         'class' => '',
       ),
     ),
-    'debug' => array(
-      'debug' => 1,
-    ),
   );
   $context->condition_mode = 0;
 
@@ -363,9 +360,6 @@ function ft_landing_contexts_context_default_contexts() {
       'overlay' => array(
         'class' => '',
       ),
-    ),
-    'debug' => array(
-      'debug' => 1,
     ),
   );
   $context->condition_mode = 0;
@@ -564,6 +558,12 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'below_content',
           'weight' => 3,
         ),
+        'boxes-home_joinus' => array(
+          'module' => 'boxes',
+          'delta' => 'home_joinus',
+          'region' => 'below_content',
+          'weight' => 4,
+        ),
       ),
     ),
     'block_class' => array(
@@ -600,7 +600,7 @@ function ft_landing_contexts_context_default_contexts() {
             'class' => 'block-help important about-block',
           ),
           'quicktabs-browse_by' => array(
-            'class' => '',
+            'class' => 'block-split2',
           ),
           'views-featured_blocks-block_4' => array(
             'class' => '',
@@ -645,9 +645,6 @@ function ft_landing_contexts_context_default_contexts() {
       'overlay' => array(
         'class' => '',
       ),
-    ),
-    'debug' => array(
-      'debug' => 1,
     ),
   );
   $context->condition_mode = 0;
@@ -834,9 +831,6 @@ function ft_landing_contexts_context_default_contexts() {
       'overlay' => array(
         'class' => '',
       ),
-    ),
-    'debug' => array(
-      'debug' => 1,
     ),
   );
   $context->condition_mode = 0;

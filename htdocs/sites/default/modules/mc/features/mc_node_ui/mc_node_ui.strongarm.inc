@@ -382,55 +382,6 @@ dsm($object);
         'token' => 0,
       ),
     ),
-    'editorial_content_tagline' => array(
-      'title' => 'Editorial Content Tagline',
-      'exclude' => array(
-        'image' => 'image',
-        'feedapi_node' => 'feedapi_node',
-        'group' => 'group',
-        'link' => 'link',
-        'page' => 'page',
-        'webform' => 'webform',
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'news' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'video' => 0,
-      ),
-      'type' => 5,
-      'status' => 3,
-      'properties' => array(
-        'formatters' => array(
-          'ds_eval_code' => 'Default',
-        ),
-        'code' => '<?php
-  foreach ($object->taxonomy as $term){
-    if ($term->vid == 7){
-       if ($term->name == \'Did You Know?\'){
-         $tagline = t(\'Did you know? is a series of health articles written by HHPC and approved by our Health Advisory Board.\');
-         $iconClass = \'ico-big ico-dyk\';
-       }elseif($term->name == \'Harlem Word\'){
-         $tagline = t(\'Harlem Word is a series of interviews with Northern Manhattan health experts, written by HHPC and reviewed by our Health Advisory Board.\');
-         $iconClass = \'ico-big ico-hw\';
-       }elseif($term->name == \'Profiles of Hope\'){
-         $tagline = t(\'Profiles of Hope are health testimonials with Northern Manhattan community members written by HHPC and reviewed by our Health Advisory Board.\');
-         $iconClass = \'ico-big ico-poh\';
-       }
-       $link = l (\' \', \'latest/category/\' . $term->tid, array(\'attributes\'=>array(\'class\'=>$iconClass)) );
-       print \'<span class="tagline-icon">\' . $link .\'</span>\';
-       print \'<span class="tagline-text">\' . $tagline . \'</span>\';
-    }
-  }
-?>',
-        'token' => 0,
-        'css-class' => 'editorial-tagline',
-      ),
-    ),
     'related_stuff' => array(
       'title' => 'Related Stuff',
       'exclude' => array(
