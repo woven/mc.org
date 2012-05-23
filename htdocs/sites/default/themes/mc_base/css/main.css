@@ -2429,7 +2429,7 @@ margin: 0;
 clear: initial;
 }
 
-#page .block-quicktabs #block-boxes-latest_by_topic .block-browse .block-content{
+#page #block-boxes-latest_by_topic .block-browse .block-content{
 	margin: 0px;
 	padding: 0px;
 }
