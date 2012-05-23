@@ -424,7 +424,7 @@ Latest post: <?php print l($post->title, \'node/\' . $post->nid); ?>
     'type' => 'none',
   ));
   $handler->override_option('title', 'Featured Group|Community groups making a difference');
-  $handler->override_option('css_class', 'featured-group');
+  $handler->override_option('css_class', 'featured-group view-center');
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'More Groups\', \'groups\' )); ?>');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
