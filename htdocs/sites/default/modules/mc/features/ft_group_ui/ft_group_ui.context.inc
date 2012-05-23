@@ -43,9 +43,9 @@ function ft_group_ui_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
-        'views-activity_stream-block_2' => array(
+        'views-og_community-block_1' => array(
           'module' => 'views',
-          'delta' => 'activity_stream-block_2',
+          'delta' => 'og_community-block_1',
           'region' => 'right',
           'weight' => 1,
         ),
