@@ -291,7 +291,7 @@ return true;',
     'type' => 'none',
   ));
   $handler->override_option('header', '<?php
-echo ghh_sort_header();
+echo mc_sort_header();
 ?>');
   $handler->override_option('header_format', '4');
   $handler->override_option('header_empty', 0);
