@@ -6,6 +6,322 @@
 function ft_landing_ui_views_default_views() {
   $views = array();
 
+  // Exported view: categories
+  $view = new view;
+  $view->name = 'categories';
+  $view->description = 'Explore content in categories such as Fitness, Environment, etc.';
+  $view->tag = '';
+  $view->base_table = 'node';
+  $view->core = 0;
+  $view->api_version = '2';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+  $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->override_option('sorts', array(
+    'sticky' => array(
+      'order' => 'DESC',
+      'id' => 'sticky',
+      'table' => 'node',
+      'field' => 'sticky',
+      'relationship' => 'none',
+    ),
+    'created' => array(
+      'order' => 'DESC',
+      'granularity' => 'second',
+      'id' => 'created',
+      'table' => 'node',
+      'field' => 'created',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+  ));
+  $handler->override_option('arguments', array(
+    'name' => array(
+      'default_action' => 'not found',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '%1',
+      'breadcrumb' => '',
+      'default_argument_type' => 'php',
+      'default_argument' => '',
+      'validate_type' => 'php',
+      'validate_fail' => 'not found',
+      'glossary' => 0,
+      'ignorecase' => 0,
+      'limit' => '0',
+      'case' => 'ucwords',
+      'path_case' => 'none',
+      'transform_dash' => 0,
+      'add_table' => 0,
+      'require_value' => 0,
+      'id' => 'name',
+      'table' => 'term_data',
+      'field' => 'name',
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_argument_user' => 0,
+      'default_argument_fixed' => '',
+      'default_argument_php' => 'drupal_set_message("no argument given");
+return seo_category_link(arg(1));',
+      'validate_argument_node_type' => array(
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'webform' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        2 => 2,
+        1 => 0,
+        3 => 0,
+      ),
+      'validate_argument_type' => 'name',
+      'validate_argument_php' => '$term_name = mc_category_redirect($argument);
+$handler->argument = $term_name;
+return TRUE;',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        2 => 0,
+      ),
+      'default_argument_image_size' => '_original',
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'image_size' => array(
+        '_original' => '_original',
+        'thumbnail' => 'thumbnail',
+        'preview' => 'preview',
+      ),
+      'validate_argument_is_member' => '0',
+      'validate_argument_group_node_type' => array(
+        'group' => 0,
+      ),
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
+    ),
+    'type' => array(
+      'default_action' => 'ignore',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '%1 %2s',
+      'default_argument_type' => 'fixed',
+      'default_argument' => '',
+      'validate_type' => 'none',
+      'validate_fail' => 'not found',
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_argument_user' => 0,
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'blog' => 'blog',
+        'forum' => 'forum',
+        'article' => 'article',
+        'event' => 'event',
+        'link' => 'link',
+        'video' => 'video',
+        'image' => 0,
+        'around_harlem_resource' => 0,
+        'feedapi_node' => 0,
+        'page' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        1 => 0,
+        2 => 0,
+      ),
+      'validate_argument_type' => 'tid',
+      'validate_argument_php' => 'dsm($argument);
+dsm($view);
+return true;',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+    'null' => array(
+      'default_action' => 'ignore',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '',
+      'breadcrumb' => '',
+      'default_argument_type' => 'fixed',
+      'default_argument' => '',
+      'validate_type' => 'php',
+      'validate_fail' => 'not found',
+      'must_not_be' => 0,
+      'id' => 'null',
+      'table' => 'views',
+      'field' => 'null',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_argument_user' => 0,
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'webform' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
+      'validate_argument_type' => 'tid',
+      'validate_argument_php' => 'return mc_arg_handler($argument, $view);',
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        2 => 0,
+      ),
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'validate_argument_is_member' => '0',
+      'validate_argument_group_node_type' => array(
+        'group' => 0,
+      ),
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'status_extra' => array(
+      'operator' => '=',
+      'value' => '',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status_extra',
+      'table' => 'node',
+      'field' => 'status_extra',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'blog' => 'blog',
+        'forum' => 'forum',
+        'article' => 'article',
+        'event' => 'event',
+        'link' => 'link',
+        'video' => 'video',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('access', array(
+    'type' => 'none',
+    'role' => array(),
+    'perm' => 'view advanced help topic',
+  ));
+  $handler->override_option('cache', array(
+    'type' => 'none',
+  ));
+  $handler->override_option('header', '<?php
+echo ghh_sort_header();
+?>');
+  $handler->override_option('header_format', '4');
+  $handler->override_option('header_empty', 0);
+  $handler->override_option('empty', '<br><br><br>No content posted.  Please click here to <a href=/node/add>post</a>');
+  $handler->override_option('empty_format', '2');
+  $handler->override_option('use_pager', '1');
+  $handler->override_option('row_plugin', 'node');
+  $handler->override_option('row_options', array(
+    'teaser' => 1,
+    'links' => 1,
+  ));
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->override_option('path', 'category');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+
+  $views[$view->name] = $view;
+
   // Exported view: featured_blocks
   $view = new view;
   $view->name = 'featured_blocks';
