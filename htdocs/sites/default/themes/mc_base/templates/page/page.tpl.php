@@ -93,6 +93,10 @@
 
  <?php include_once ('inc/page.footer.inc'); ?> 
   
-  <?php print $overlay ?>
+  <?php if (!empty($overlay)): ?>
+  <div id="overlay">
+    <?php print $overlay ?>
+  </div>
+  <?php endif;?>
  
   <?php include_once ('inc/page.closure.inc'); ?>

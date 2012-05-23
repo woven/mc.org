@@ -866,14 +866,14 @@ function ft_landing_contexts_context_default_contexts() {
         'boxes-join_overlay_box' => array(
           'module' => 'boxes',
           'delta' => 'join_overlay_box',
-          'region' => 'header',
-          'weight' => 1,
+          'region' => 'overlay',
+          'weight' => 0,
         ),
         'boxes-login_overlay_box' => array(
           'module' => 'boxes',
           'delta' => 'login_overlay_box',
-          'region' => 'header',
-          'weight' => 2,
+          'region' => 'overlay',
+          'weight' => 1,
         ),
         'google_cse-0' => array(
           'module' => 'google_cse',

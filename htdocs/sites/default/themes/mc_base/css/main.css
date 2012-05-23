@@ -2433,3 +2433,7 @@ clear: initial;
 	margin: 0px;
 	padding: 0px;
 }
+
+#overlay{
+	display: none;
+}
