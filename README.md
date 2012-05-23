@@ -19,3 +19,7 @@ Contains files and folders like:
 * Once you are done.. you have to clear cache TWICE with admin/settings/performance OR drush cc all
 * Review features and make sure evertyhing is reverted. (revert manually or use drush)
 * To make Group Forums/Discussions work properly, modules femail, mc_femail_ext ft_discussion and ft_discussion_ui need to be enabled. The file mc_femail_ext.sh needs to be copied, renamed to local.mc_femail_ext.sh and edit it to make it point to the drupal installation path (For more details please look at the mc_femail_ext Readme file).
+
+### Mollom Installation:
+* drush en mollom
+* drush sql-cli < ../db/mollom_backup_mc.sql
