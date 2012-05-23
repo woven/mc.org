@@ -1342,7 +1342,7 @@ print theme_ghh_node_categories($data->node_node_data_field_featured_items_nid, 
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php 
-print theme("feature_badge",$data->node_node_data_field_featured_items_nid, 2);
+print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
 ?>',
       'exclude' => 1,
       'id' => 'phpcode',
