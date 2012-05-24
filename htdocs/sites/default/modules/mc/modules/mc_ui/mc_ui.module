@@ -15,6 +15,13 @@ function mc_ui_theme($existing, $type, $theme, $path){
     	);
 } 
 
+function mc_ui_preprocess_block(&$vars){
+  if($vars['block']->module=='menu' && (
+    $vars['block']->delta=='secondary-links' || $vars['block']->delta=='menu-footer-links' || $vars['block']->delta=='menu-categories'
+    )){
+    $vars['block']->subject = '';
+  }
+}
 
 /**
  * Implementation of theme_ghh_see_all area
