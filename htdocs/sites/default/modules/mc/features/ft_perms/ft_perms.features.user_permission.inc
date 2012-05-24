@@ -1543,8 +1543,7 @@ function ft_perms_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
+      '2' => 'authenticated user',
     ),
   );
 
