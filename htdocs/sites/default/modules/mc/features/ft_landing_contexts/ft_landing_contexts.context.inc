@@ -628,6 +628,9 @@ function ft_landing_contexts_context_default_contexts() {
           'views-featured_blocks-block_3' => array(
             'class' => '',
           ),
+          'boxes-home_joinus' => array(
+            'class' => 'join-block',
+          ),
         ),
       ),
       'above_content' => array(
