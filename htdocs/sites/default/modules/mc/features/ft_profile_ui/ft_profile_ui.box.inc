@@ -17,7 +17,7 @@ function ft_profile_ui_default_box() {
     'body' => '<?php //if (arg(0) == \'user\' && is_numeric(arg(1)) ) : ?>
   <?php
     $user = user_load(arg(1)); 
-    print theme_ghh_user_picture($user->uid, \'article_thumbnail_medium\', FALSE); 
+    print theme_ghh_user_picture($user->uid, \'medium\', FALSE); 
   ?>
   <div class="short">
     <h1><?php print $user->name; ?></h1>
