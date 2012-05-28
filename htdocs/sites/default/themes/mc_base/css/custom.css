@@ -545,3 +545,7 @@ ul.tips{
 .quicktabs_tabpage .block .block-title{
 	display: none;
 }
+
+#quicktabs-profile_qt .quicktabs_tabpage .block .block-title{
+  display: block;
+}
