@@ -54,7 +54,7 @@ function ft_account_ui_default_box() {
                     $pictureUrl = "https://graph.facebook.com/" . fbconnect_get_fbuid() . "/picture?type=square"; ?>
                     <img src="<?php print $pictureUrl; ?>" width="13" height="13" alt="<?php print ucfirst($user->name); ?>\'s avatar" />
                   <?php }else{
-                     $pictureUrl = \'/\' . drupal_get_path(\'theme\', \'harlem2\') . "/media/common/pic-user-avatar.jpg"; ?>
+                     $pictureUrl = \'/\' . drupal_get_path(\'theme\', \'mc_base\') . "/images/common/pic-user-default-avatar.jpg"; ?>
                     <img src="<?php print $pictureUrl; ?>" width="13" height="13" alt="<?php print ucfirst($user->name); ?>\'s avatar" />
                   <?php  
                   }
