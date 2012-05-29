@@ -2251,6 +2251,8 @@ border-width: 1px 0 !important;
 
 .page-user .user-profile #content.block-content {margin: 30px !important;}
 
+.page-user #page.user-profile #main .block #content.block-content {margin: 0 !important;}
+
 .page-user .view-og-community .views-row{min-height: 0 !important;}
 .field-facebook-like{clear: both;}
 .field-facebook-like , .field-facebook-like .block, .field-facebook-like .block-content, .block-google_plusone, .field-google-plus .block-content{margin:0 !important;}
