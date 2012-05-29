@@ -5582,8 +5582,10 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -5598,20 +5600,9 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'value' => '<?php 
-$node = (object) array(\'nid\' => $data->nid , \'vid\' => $data->node_vid );
-$terms = taxonomy_node_get_terms_by_vocabulary($node, 7);
-$name = NULL;
-foreach($terms as $term){
-  $name = $term->name;
-  break;
-}
-if ($name){
-  $name = strtolower($name);
-  $name = str_replace(\'?\', \'\', $name);
-  $name = str_replace(\' \', \'-\', $name);
-  print (\'<span class="corner \' . $name  .\'"></span>\');
-}
+print theme("feature_badge",$data->nid, 2);
 ?>',
       'exclude' => 1,
       'id' => 'phpcode',
