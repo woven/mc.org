@@ -672,32 +672,27 @@ function ft_landing_contexts_context_default_contexts() {
         'latest/*/*' => 'latest/*/*',
       ),
     ),
-    'php' => array(
-      'values' => array(
-        0 => TRUE,
-      ),
-      'options' => array(
-        'phpcode' => 'if (arg(0)=="latest" && arg(1)!="events")
-{
-	return "all";
-}',
-      ),
-    ),
   );
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'menu-menu-browse-by-date' => array(
+          'module' => 'menu',
+          'delta' => 'menu-browse-by-date',
+          'region' => 'right',
+          'weight' => 0,
+        ),
         'boxes-latest_by_topic' => array(
           'module' => 'boxes',
           'delta' => 'latest_by_topic',
           'region' => 'right',
-          'weight' => 0,
+          'weight' => 1,
         ),
         'boxes-latest_by_type' => array(
           'module' => 'boxes',
           'delta' => 'latest_by_type',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
         ),
         'boxes-latest_page_title' => array(
           'module' => 'boxes',
@@ -929,89 +924,89 @@ function ft_landing_contexts_context_default_contexts() {
       ),
     ),
     'block_class' => array(
-     'header' => array(
-       'class' => '',
-       'blocks' => array(
-         'boxes-header_links' => array(
-           'class' => '',
-         ),
-       ),
-     ),
-     'branding' => array(
-       'class' => '',
-       'blocks' => array(
-         'google_cse-0' => array(
-           'class' => '',
-         ),
-         'boxes-add_stuff' => array(
-           'class' => '',
-         ),
-       ),
-     ),
-     'featured' => array(
-       'class' => '',
-     ),
-     'group_logo' => array(
-       'class' => '',
-     ),
-     'footer' => array(
-       'class' => '',
-       'blocks' => array(
-         'boxes-footer_hon_logo' => array(
-           'class' => '',
-         ),
-         'boxes-footer_prc_logo' => array(
-           'class' => '',
-         ),
-       ),
-     ),
-     'content' => array(
-       'class' => '',
-     ),
-     'left' => array(
-       'class' => '',
-     ),
-     'right' => array(
-       'class' => '',
-     ),
-     'below_content' => array(
-       'class' => '',
-     ),
-     'above_content' => array(
-       'class' => '',
-     ),
-     'content_top' => array(
-       'class' => '',
-     ),
-     'content_bottom' => array(
-       'class' => '',
-     ),
-     'footer_above' => array(
-       'class' => '',
-       'blocks' => array(
-         'menu-menu-categories' => array(
-           'class' => '',
-         ),
-         'menu-menu-footer-links' => array(
-           'class' => '',
-         ),
-         'menu-secondary-links' => array(
-           'class' => '',
-         ),
-         'boxes-footer_joinus_box' => array(
-           'class' => 'prose',
-         ),
-       ),
-     ),
-     'overlay' => array(
-       'class' => '',
-       'blocks' => array(
-         'boxes-join_overlay_box' => array(
-           'class' => '',
-         ),
-         'boxes-login_overlay_box' => array(
-           'class' => '',
-         ),
+      'header' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-header_links' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'branding' => array(
+        'class' => '',
+        'blocks' => array(
+          'google_cse-0' => array(
+            'class' => '',
+          ),
+          'boxes-add_stuff' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'featured' => array(
+        'class' => '',
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-footer_hon_logo' => array(
+            'class' => '',
+          ),
+          'boxes-footer_prc_logo' => array(
+            'class' => '',
+          ),
+        ),
+      ),
+      'content' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+      ),
+      'below_content' => array(
+        'class' => '',
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+        'blocks' => array(
+          'menu-menu-categories' => array(
+            'class' => '',
+          ),
+          'menu-menu-footer-links' => array(
+            'class' => '',
+          ),
+          'menu-secondary-links' => array(
+            'class' => '',
+          ),
+          'boxes-footer_joinus_box' => array(
+            'class' => 'prose',
+          ),
+        ),
+      ),
+      'overlay' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-join_overlay_box' => array(
+            'class' => '',
+          ),
+          'boxes-login_overlay_box' => array(
+            'class' => '',
+          ),
         ),
       ),
     ),
