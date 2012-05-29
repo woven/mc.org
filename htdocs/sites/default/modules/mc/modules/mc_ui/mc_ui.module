@@ -1,5 +1,10 @@
 <?php
 
+function mc_ui_init(){
+  $path = drupal_get_path('module', 'mc_ui');
+  drupal_add_js($path .'/js/mc_ui.js', 'module', 'header', FALSE, TRUE, FALSE);
+}
+
 /**
  * Implementation of hook_theme
  */
