@@ -28,3 +28,7 @@ function mc_update_6001() {
   return array();
   
 }
+
+function mc_install() {
+  db_query("UPDATE {system} SET weight = 20 WHERE name = 'mc'");
+}

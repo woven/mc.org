@@ -63,7 +63,7 @@ function mc_redirect_when_session_variable_set($form, &$form_state) {
  */
 function mc_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  if($form['form_id']['#value']=='page_node_form' || $form['form_id']['#value']=='audio_node_form'){
+  if($form['form_id']['#value']=='npage_node_form' || $form['form_id']['#value']=='audio_node_form'){
     $form['og_nodeapi']['#access']=false;
   }
   if(count($form['og_nodeapi']['visible']['og_groups']['#options'])==1 && $form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){

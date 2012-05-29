@@ -20,6 +20,7 @@ function ft_tx_topic_taxonomy_default_vocabularies() {
         'taxonomy_topic' => 'taxonomy_topic',
         'video' => 'video',
         'place' => 'place',
+        'nnews' => 'nnews',
         'link' => 'link',
         'file' => 'file',
         'event' => 'event',
