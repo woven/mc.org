@@ -27,8 +27,14 @@
     $size = 124;
   }
   if (strpos($output, 'img') === FALSE){
-    $img = '<img width="' . $size . '" height="'. $size .'" class="imagecache imagecache-article_thumbnail_medium" title="" alt="" src="/sites/default/files/imagecache/article_thumbnail_medium/sites/default/modules/mc/mc_default_images/generic.png">';
-    print l($img, 'node/'. $row->nid, array('html' => TRUE));
+    $generic_fid = variable_get('default_img_generic','');
+
+    if($generic_fid!=''){
+      $file = field_file_load($generic_fid);
+      $image = file_create_url(imagecache_create_path('medium', $file['filepath']));
+      $img = '<img width="' . $size . '" height="'. $size .'" class="imagecache imagecache-article_thumbnail_medium" title="" alt="" src="' . $image . '">';
+      print l($img, 'node/'. $row->nid, array('html' => TRUE));
+    }
   }else{
     print $output;
   }

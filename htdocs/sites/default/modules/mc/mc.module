@@ -173,14 +173,15 @@ function mc_form_user_register_alter(&$form, &$form_state){
       '#weight' => -31,  
     );
   }
-  
+  /* TODO: this code snipsset needs to be moved to the appropiate module.
+  This is adding the checkbox called Spread the love to the Join Page
   $form['facebook-share'] = array(
     '#type' => 'checkbox',
     '#title' => 'Spread the love! Share to Facebook',
     '#weight' => -30,
     '#value' => 1,
   );
-  
+  */
   $form['submit']['#value'] = 'Join';
   $form['submit']['#attributes']['class'] = 'orange';
   

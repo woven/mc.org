@@ -68,3 +68,18 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
   
 }
 
+
+function ft_comment_ui_preprocess_comment(&$variables){
+  if(empty($variables['picture'])){
+    $user = user_load($variables['comment']->uid);
+    if($user->picture){
+      $variables['picture'] = theme('imagecache', "comment_image", $user->picture);
+    }
+    else {
+      $default_pic = drupal_get_path('module', 'ft_account') . '/pic-user-default-avatar.jpg';
+      if(file_exists($default_pic)){
+        $variables['picture'] = theme('imagecache', "comment_image", $default_pic);
+      }
+    }
+  }
+}

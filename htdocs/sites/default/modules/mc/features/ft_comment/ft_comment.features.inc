@@ -15,6 +15,20 @@ function ft_comment_ctools_plugin_api() {
  */
 function ft_comment_imagecache_default_presets() {
   $items = array(
+    'comment_image' => array(
+      'presetname' => 'comment_image',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '49',
+            'height' => '49',
+          ),
+        ),
+      ),
+    ),
     'user_comment_image' => array(
       'presetname' => 'user_comment_image',
       'actions' => array(

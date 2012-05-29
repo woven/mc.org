@@ -1296,6 +1296,42 @@ function ft_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit field_block_body
+  $permissions['edit field_block_body'] = array(
+    'name' => 'edit field_block_body',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_block_link
+  $permissions['edit field_block_link'] = array(
+    'name' => 'edit field_block_link',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_block_title
+  $permissions['edit field_block_title'] = array(
+    'name' => 'edit field_block_title',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
   // Exported permission: edit own article content
   $permissions['edit own article content'] = array(
     'name' => 'edit own article content',
@@ -1543,8 +1579,7 @@ function ft_perms_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
+      '2' => 'authenticated user',
     ),
   );
 
@@ -1686,6 +1721,42 @@ function ft_perms_user_default_permissions() {
   // Exported permission: view advanced help topic
   $permissions['view advanced help topic'] = array(
     'name' => 'view advanced help topic',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_block_body
+  $permissions['view field_block_body'] = array(
+    'name' => 'view field_block_body',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_block_link
+  $permissions['view field_block_link'] = array(
+    'name' => 'view field_block_link',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_block_title
+  $permissions['view field_block_title'] = array(
+    'name' => 'view field_block_title',
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',

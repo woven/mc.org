@@ -47,8 +47,19 @@ function ft_profile_ui_strongarm() {
       'title' => 'Profile',
       'exclude' => array(),
       'properties' => array(
-        'block' => 'quicktabs|5',
+        'block' => 'quicktabs|profile_qt',
         'render' => '1',
+      ),
+    ),
+    'user_header' => array(
+      'type' => 6,
+      'status' => 3,
+      'title' => 'User Header',
+      'exclude' => array(),
+      'properties' => array(
+        'block' => 'boxes|user_header',
+        'render' => '1',
+        'css-class' => 'profile-overview-block',
       ),
     ),
   );
