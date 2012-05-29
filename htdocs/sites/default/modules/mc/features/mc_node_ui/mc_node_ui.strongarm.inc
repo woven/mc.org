@@ -40,7 +40,7 @@ imce*';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'mimemail_format';
-  $strongarm->value = '7';
+  $strongarm->value = '2';
   $export['mimemail_format'] = $strongarm;
 
   $strongarm = new stdClass;
