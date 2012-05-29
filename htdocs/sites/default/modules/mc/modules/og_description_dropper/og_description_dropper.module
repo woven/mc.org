@@ -1,0 +1,15 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_form_alter
+ */
+function og_description_dropper_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form') {
+    $node = $form['#node'];
+    if (og_is_group_type($node->type)) {
+      $form['og_description']['#type'] = 'value';
+      $form['og_description']['#value'] = '';
+    }
+  }
+}

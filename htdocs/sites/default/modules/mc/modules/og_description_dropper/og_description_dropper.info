@@ -1,0 +1,7 @@
+; $Id$
+name = OG Description Dropper
+description = Hides OG description field to avoid user confusion
+core = 6.x
+package = Organic groups
+dependencies[] = og
+version = "6.x-0.1"
