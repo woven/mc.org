@@ -2228,9 +2228,9 @@ a.orange span {
 	float: left;
 }
 
-.by-date li a{font-size:15px; color:#000;}
-.by-date li{margin:10px 0;}
-.by-date li .active, .by-date li a:hover{color:#FF7F00 !important; text-decoration:none !important;}
+#block-menu-menu-browse-by-date li a{font-size:15px; color:#000;}
+#block-menu-menu-browse-by-date li{margin:10px 0;}
+#block-menu-menu-browse-by-date li .active, .by-date li a:hover{color:#FF7F00 !important; text-decoration:none !important;}
 
 .page-user .views-row div{clear:both;}
 .page-user .views-row div label{float:left; color:#777; width:200px; text-transform:none !important; font-size:12px; font-weight:normal !important;}
