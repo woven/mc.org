@@ -45,7 +45,7 @@ function ft_profile_ui_context_default_contexts() {
         'class' => '',
         'blocks' => array(
           'boxes-user_header' => array(
-            'class' => 'profile-overview-block',
+            'class' => 'profile-overview-block prose',
           ),
         ),
       ),
