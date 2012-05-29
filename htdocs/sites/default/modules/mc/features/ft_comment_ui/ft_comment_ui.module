@@ -57,12 +57,13 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
   
   if ($form_id == 'comment_form'){
     //Anonymous users shouldn't create comments.
-    
+
     if (($user->uid == 0) || (($group) && !og_is_group_member($group->nid, TRUE, NULL))){
       $form['comment_filter'] = array();
       $form['submit'] = array();
       $form['_author'] = array();
       $form['author'] = array();
+      $form['mollom'] = array();
     }
   }
   
