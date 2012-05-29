@@ -33,7 +33,7 @@ function ft_latest_ui_default_box() {
   $box->options = array(
     'body' => '<div class="block-browse">
   <?php print theme(\'ghh_browse_menu\',\'menu-browse-by-type\'); ?>
-  <?php print theme(\'ghh_browse_menu\',\'menu-by-editorial-content\'); ?>
+  <?php print views_embed_view(\'list_tx_features\', \'block_1\'); ?>
 </div>',
     'format' => '3',
   );
