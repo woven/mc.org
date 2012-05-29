@@ -94,6 +94,17 @@ function ft_group_ui_context_default_contexts() {
         'node_form' => 0,
       ),
     ),
+    'php' => array(
+      'values' => array(
+        0 => TRUE,
+      ),
+      'options' => array(
+        'phpcode' => '$object = menu_get_object();
+if (!is_object($object)){
+  return true;
+}',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
