@@ -28,7 +28,7 @@
     <td>
        <div id="center">
       <div id="main" style="margin: 12px;">
-      <div><img src="/sites/default/themes/harlem2/images/common/logo.png"></div>
+      <div><img src=<?php echo $GLOBALS['base_url'] . '/' . $GLOBALS['theme_path'] . '/images/common/logo.png';?>"/sites/default/themes/harlem2/images/common/logo.png"></div>
         <div style="margin-top: 10px; background: #fff; padding: 10px;">
         <?php print $body ?>
         </div>
