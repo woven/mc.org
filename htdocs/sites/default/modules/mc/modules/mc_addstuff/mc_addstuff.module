@@ -56,7 +56,7 @@ function mc_addstuff_display_block_add_stuff(){
     $node = node_load(arg(1));
   }
   
-  $add_stuff_types = array('article', 'event', 'gallery_image', 'gallery', 'audio', 'video', 'place', 'file', 'page', 'group', 'forum');
+  $add_stuff_types = array('article', 'event', 'gallery_image', 'gallery', 'audio', 'video', 'place', 'file', 'npage', 'group', 'forum');
   
   foreach ($types as $type) {
     

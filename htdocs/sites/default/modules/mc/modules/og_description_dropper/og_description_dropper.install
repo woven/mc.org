@@ -1,0 +1,10 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_install().
+ */
+function og_description_dropper_install() {
+  // Increase module weight to 10 to make sure it's higher than og
+  db_query("UPDATE {system} SET weight = 10 WHERE name = 'og_description_dropper'");
+}
