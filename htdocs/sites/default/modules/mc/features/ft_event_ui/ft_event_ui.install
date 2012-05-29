@@ -6,5 +6,5 @@
  * Settings for displaying menu-browse-by-date block only in latest/events
  */
 function ft_event_ui_install(){
-  mysql_query("UPDATE blocks SET pages='latest/events \n latest/events/*' WHERE delta='menu-browse-by-date' AND module='menu'");
+  mysql_query("UPDATE blocks SET pages='latest/events\nlatest/events/*' WHERE delta='menu-browse-by-date' AND module='menu'");
 }
