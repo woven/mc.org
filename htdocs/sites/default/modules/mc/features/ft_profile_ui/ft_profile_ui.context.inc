@@ -34,6 +34,55 @@ function ft_profile_ui_context_default_contexts() {
         ),
       ),
     ),
+    'block_class' => array(
+      'header' => array(
+        'class' => '',
+      ),
+      'branding' => array(
+        'class' => '',
+      ),
+      'featured' => array(
+        'class' => '',
+        'blocks' => array(
+          'boxes-user_header' => array(
+            'class' => 'profile-overview-block',
+          ),
+        ),
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+      ),
+      'content' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+      ),
+      'below_content' => array(
+        'class' => '',
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+      ),
+      'overlay' => array(
+        'class' => '',
+      ),
+    ),
   );
   $context->condition_mode = 0;
 
