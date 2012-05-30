@@ -71,7 +71,6 @@ function ft_comment_ui_form_alter(&$form, &$form_state, $form_id) {
 
 
 function ft_comment_ui_preprocess_comment(&$variables){
-  if(empty($variables['picture'])){
     $user = user_load($variables['comment']->uid);
     if($user->picture){
       $variables['picture'] = theme('imagecache', "comment_image", $user->picture);
@@ -82,5 +81,4 @@ function ft_comment_ui_preprocess_comment(&$variables){
         $variables['picture'] = theme('imagecache', "comment_image", $default_pic);
       }
     }
-  }
 }
