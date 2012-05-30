@@ -185,7 +185,7 @@ function _mc_addstuff_sort_by_name($a, $b) {
 function mc_addstuff_boot(){
   global $user;
   
-  if ($user->uid != 0 && isset($_GET['message'])){
+  if ($user->uid != 0 && isset($_GET['message']) && $_GET['message']=='register-first'){
     unset($_GET['message']);
   }
   if(isset($_GET['q'])){
