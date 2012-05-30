@@ -6,5 +6,28 @@
  * Settings for displaying menu-browse-by-date block only in latest/events
  */
 function ft_event_ui_install(){
-  mysql_query("UPDATE blocks SET pages='latest/events\nlatest/events/*' WHERE delta='menu-browse-by-date' AND module='menu'");
+    
+  //Verify if already exist one record.
+  $result=mysql_query("select bid from blocks WHERE delta='menu-browse-by-date' and theme='mc_base'");
+  
+  //Values to store in the DB.
+  $record = array(
+    'module' => "menu",
+    'delta' => "menu-browse-by-date",
+    'theme' => "mc_base",
+    'visibility' => 1,
+    'pages' => "latest/events\nlatest/events/*",
+  );
+	
+  $row = db_fetch_object($result);
+  if ($row->bid) {
+    //Update
+    $record['bid'] = $row->bid;
+    drupal_write_record('blocks', $record, 'bid');
+  }
+  else {
+    //Insert.
+    drupal_write_record('blocks', $record);
+  }
+  
 }
