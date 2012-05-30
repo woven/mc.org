@@ -205,7 +205,7 @@ function ft_landing_contexts_context_default_contexts() {
             'class' => '',
           ),
           'views-help_block-block_1' => array(
-            'class' => 'important',
+            'class' => '',
           ),
           'views-community_popular-block_1' => array(
             'class' => '',
