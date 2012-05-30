@@ -2443,3 +2443,7 @@ clear: initial;
 #boxes-box-latest_by_type .block-browse .view-id-list_tx_features .view-header {
 	margin: 0 0 5px;
 }
+
+.node-type-article #page .nd-region-middle .field-body ol {
+  list-style: decimal;
+}
