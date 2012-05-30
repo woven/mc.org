@@ -68,7 +68,7 @@ function mc_drush_command() {
  * @return
  *   A string with the help text for your command.
  */
-function sandwich_drush_help($section) {
+function mc_drush_help($section) {
   switch ($section) {
     case 'drush:update-mc-dfimg':
       return dt("This command will update the files table in the database (This is targeted for GHH, for now)");
