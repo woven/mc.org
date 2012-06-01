@@ -67,7 +67,7 @@ function _taxonomynode_node_get_vids($node) {
   // find if node is mapped to some vocabulary
   $vocabularies = taxonomy_get_vocabularies();
   foreach ($vocabularies as $vocab) {
-    $taxonomynode_settings = variable_get("taxonomynode_{$vocab->vid}", array());
+    $taxonomynode_settings = variable_get("taxonomynode_{$vocab->module}", array());
     if ($taxonomynode_settings['content_type'] == $node->type) {
       $vocabs[] = $vocab->vid;
     }
@@ -80,7 +80,9 @@ function _taxonomynode_create_term($node) {
   $terms = array();
   // find if node is mapped to some vocabulary
   foreach (_taxonomynode_node_get_vids($node) as $vid) {
-    $taxonomynode_settings = variable_get("taxonomynode_{$vid}", array());
+    $vocabulary = taxonomy_vocabulary_load($vid);
+    $machine_name = $vocabulary->module;
+    $taxonomynode_settings = variable_get("taxonomynode_{$machine_name}", array());
     if ($taxonomynode_settings['content_type'] == $node->type) {
       $term['vid'] = $vid;
       $term['name'] = $node->title;
@@ -98,7 +100,9 @@ function _taxonomynode_create_term($node) {
 }
 
 function _taxonomynode_create_node($tid, $vid, $term_name, $parents, $new_nid = null) {
-  $taxonomynode_settings = variable_get("taxonomynode_{$vid}", array());
+  $vocabulary = taxonomy_vocabulary_load($vid);
+  $machine_name = $vocabulary->module;
+  $taxonomynode_settings = variable_get("taxonomynode_{$machine_name}", array());
   if ($taxonomynode_settings['content_type']) {
     $nid = _taxonomynode_get_nid_from_tid($tid);
     if ($nid) {
@@ -184,6 +188,7 @@ function taxonomynode_menu() {
  */
 function taxonomynode_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'taxonomy_form_vocabulary') {
+    $machine_name = $form['module']['#value'];
     $form['taxonomynode'] = array(
       '#type' => 'fieldset',
       '#title' => t('Taxonomy Node'),
@@ -198,7 +203,7 @@ function taxonomynode_form_alter(&$form, &$form_state, $form_id) {
 
     $vid = $form['vid']['#value'];
     if ($vid) {
-      $taxonomynode_settings = variable_get("taxonomynode_{$vid}", array());
+      $taxonomynode_settings = variable_get('taxonomynode_' . $machine_name , array());
     }
     $form['taxonomynode']['taxonomynode_content_type'] = array(
       '#type' => 'select',
@@ -217,8 +222,9 @@ function taxonomynode_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'taxonomy_form_term') {
     $tid = $form['tid']['#value'];
     $vid = $form['vid']['#value'];
+    $machine_name = $form['#vocabulary']['module'];
 
-    $taxonomynode_settings = variable_get("taxonomynode_{$vid}", array());
+    $taxonomynode_settings = variable_get('taxonomynode_' . $machine_name, array());
     if ($taxonomynode_settings['content_type'] && $tid) {
       $nid = db_result(db_query("SELECT nid FROM {taxonomynode} tn WHERE tn.tid = %d", $tid));
 
@@ -312,16 +318,17 @@ function taxonomynode_taxonomy($op, $type, $array = NULL) {
 
   if ($type == 'vocabulary' && isset($array['taxonomynode_content_type'])) {
     $vid = $array['vid'];
+    $machine_name = $array['module'];
     $content_type = $array['taxonomynode_content_type'];
     if ($op == 'insert' || $op == 'update') {
       // store settings
-      $taxonomynode_settings_old = variable_get("taxonomynode_{$vid}", array());
+      $taxonomynode_settings_old = variable_get('taxonomynode_' . $machine_name, array());
       if ($taxonomynode_settings_old['content_type'] && $taxonomynode_settings_old['content_type'] != $content_type) {
         db_query("DELETE FROM {taxonomynode} WHERE vid = %d", $vid);
         drupal_set_message(t('Taxonomy Node: You have changed your content type selection. If nodes have been created with the old content type, you will have to manually remove the already created nodes for each of the terms of this vocabulary as well as unset the old content type from the <i>Types</i> associated to this vocabulary.'));
       }
       $taxonomynode_settings['content_type'] = $content_type;
-      variable_set("taxonomynode_{$vid}", $taxonomynode_settings);
+      variable_set('taxonomynode_' . $machine_name, $taxonomynode_settings);
       // force vocabulary to have the assigned content as Type
       if ($content_type) {
         db_query("DELETE FROM {vocabulary_node_types} WHERE vid = %d AND type = '%s'", $vid, $content_type);
@@ -347,14 +354,16 @@ function taxonomynode_taxonomy($op, $type, $array = NULL) {
     }
 
     if ($op == 'delete') {
-      variable_del("taxonomynode_{$vid}");
+      variable_del('taxonomynode_' . $machine_name);
     }
   }
 
   if ($type == 'term') {
     $vid = $array['vid'];
+    $vocabulary = taxonomy_vocabulary_load($vid);
+    $machine_name = $vocabulary->module;
     $tid = $array['tid'];
-    $taxonomynode_settings = variable_get("taxonomynode_{$vid}", array());
+    $taxonomynode_settings = variable_get('taxonomynode_' . $machine_name, array());
     if ($taxonomynode_settings['content_type']) {
       $nid = _taxonomynode_get_nid_from_tid($tid);
       if ($op == 'insert' || $op == 'update' && ($nid || isset($array['taxonomynode_new_nid']) && is_numeric($array['taxonomynode_new_nid']))) {
