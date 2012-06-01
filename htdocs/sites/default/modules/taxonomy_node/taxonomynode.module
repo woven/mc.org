@@ -488,7 +488,7 @@ function taxonomynode_views_data_alter(&$data) {
 
 function taxonomynode_views_data() {
    
-  $data['taxonomynode']['table']['group'] = t('Taxonomynode table');
+  $data['taxonomynode']['table']['group'] = t('Taxonomynode');
   
   $data['taxonomynode']['table']['join']['node'] = array(
     'left_field' => 'nid',
@@ -507,11 +507,11 @@ function taxonomynode_views_data() {
 
   // Node ID field.
   $data['taxonomynode']['tid'] = array(
-    'title' => t('Some title'),
-    'help' => t('A bit of help here'),  
+    'title' => t('Taxonomynode relationship'),
+    'help' => t('Adds a relationship between the term and the node that is associated with the taxonomynode module'),  
     'relationship' => array(
       'label' => t('Some label'),
-      'help' => t('Performs a double join'),
+      'help' => t('Performs a join of the following tables: term_data, taxonomynode and node'),
       'base' => 'node',
       'base field' => 'nid',
       'second table' => 'term_data',
