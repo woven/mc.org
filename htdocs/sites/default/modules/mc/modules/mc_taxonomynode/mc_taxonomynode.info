@@ -1,4 +1,0 @@
-name = MC Taxonomy Node
-description = "Extends the functionality of the module taxonomynode"
-package = MC
-core = 6.x
