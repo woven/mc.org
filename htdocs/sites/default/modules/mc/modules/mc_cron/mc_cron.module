@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MyCommunity.org Cron feature.
+ */
+
+include_once 'mc_cron.features.inc';
