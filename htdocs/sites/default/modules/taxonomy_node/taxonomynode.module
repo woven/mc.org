@@ -481,3 +481,58 @@ function taxonomynode_settings() {
 
   return system_settings_form($form);
 }
+
+function taxonomynode_views_data_alter(&$data) {
+  dpm($data);
+}
+
+function taxonomynode_views_data() {
+   
+  $data['taxonomynode']['table']['group'] = t('Taxonomynode table');
+  
+  $data['taxonomynode']['table']['join']['node'] = array(
+    'left_field' => 'nid',
+    'field' => 'nid',
+  );
+  $data['taxonomynode']['table']['join']['term_data'] = array(
+    'left_field' => 'tid',
+    'field' => 'tid',
+  );
+  
+
+  // Next, describe each of the individual fields in this table to Views. For
+  // each field, you may define what field, sort, argument, and/or filter
+  // handlers it supports. This will determine where in the Views interface you
+  // may use the field.
+
+  // Node ID field.
+  $data['taxonomynode']['tid'] = array(
+    'title' => t('Some title'),
+    'help' => t('A bit of help here'),  
+    'relationship' => array(
+      'label' => t('Some label'),
+      'help' => t('Performs a double join'),
+      'base' => 'node',
+      'base field' => 'nid',
+      'second table' => 'term_data',
+      'second field' => 'tid',
+      'second join field' => 'nid',
+      'handler' => 'views_handler_relationship_taxonomynode',
+    ),
+  );
+  return $data;
+}
+
+
+function taxonomynode_views_handlers() {
+  return array(
+    'info' => array(
+      'path' => drupal_get_path('module', 'taxonomynode'),
+    ),
+    'handlers' => array(
+      'views_handler_relationship_taxonomynode' => array(
+        'parent' => 'views_handler_relationship',
+      ),
+    ),
+  );
+}
