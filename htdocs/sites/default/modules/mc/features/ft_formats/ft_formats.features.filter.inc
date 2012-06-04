@@ -51,38 +51,33 @@ function ft_formats_filter_default_formats() {
         'delta' => '0',
         'weight' => '0',
       ),
-    ),
-  );
-
-  // Exported format: Full HTML
-  $formats['Full HTML'] = array(
-    'name' => 'Full HTML',
-    'roles' => array(),
-    'filters' => array(
-      '0' => array(
-        'module' => 'filter',
-        'delta' => '2',
-        'weight' => '0',
-      ),
       '1' => array(
-        'module' => 'filter',
-        'delta' => '1',
-        'weight' => '1',
-      ),
-      '2' => array(
-        'module' => 'filter',
-        'delta' => '3',
+        'module' => 'swftools',
+        'delta' => '0',
         'weight' => '10',
       ),
     ),
   );
 
-  // Exported format: Filtered HTML
-  $formats['Filtered HTML'] = array(
-    'name' => 'Filtered HTML',
+  // Exported format: Rich
+  $formats['Rich'] = array(
+    'name' => 'Rich',
     'roles' => array(
-      '0' => 'anonymous user',
-      '1' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'Publisher',
+    ),
+    'filters' => array(),
+  );
+
+  // Exported format: Basic
+  $formats['Basic'] = array(
+    'name' => 'Basic',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'Publisher',
     ),
     'filters' => array(
       '0' => array(
@@ -104,6 +99,25 @@ function ft_formats_filter_default_formats() {
         'module' => 'filter',
         'delta' => '3',
         'weight' => '10',
+      ),
+    ),
+  );
+
+  // Exported format: Plain
+  $formats['Plain'] = array(
+    'name' => 'Plain',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'Publisher',
+    ),
+    'filters' => array(
+      '0' => array(
+        'module' => 'filter',
+        'delta' => '1',
+        'weight' => '2',
       ),
     ),
   );
