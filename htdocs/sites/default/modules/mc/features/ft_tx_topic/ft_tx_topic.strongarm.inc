@@ -96,5 +96,14 @@ function ft_tx_topic_strongarm() {
   );
   $export['node_options_taxonomy_topic'] = $strongarm;
 
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomynode_features_topic';
+  $strongarm->value = array(
+    'content_type' => 'taxonomy_topic',
+  );
+  $export['taxonomynode_features_topic'] = $strongarm;
+
   return $export;
 }
