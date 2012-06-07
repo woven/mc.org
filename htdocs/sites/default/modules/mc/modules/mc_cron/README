@@ -1,0 +1,48 @@
+INSTALLATION 
+-------------
+
+For the basic install you only need to enable the module and mc_cron and Elysia 
+Cron will be up and running.
+
+You can stop here if you don't need a great precision over task execution and
+you don't have to execute a task more often than once an hour.  
+For example, if you need only the "Once a day", "Once a week" or "Once a month" 
+schedule rules the basic install is fine.
+
+Instead, if you need:
+- to run some tasks more often than once an hour (eg: you have a function that
+  should be executed every 5 minutes)
+- to execute a task at an exact time (eg:you must run a function at exactly 
+  "17:23") 
+... you must follow Step B
+
+
+STEP B: CHANGE SYSTEM CRONTAB (OPTIONAL)
+-----------------------------------------
+
+To get the full potential out of elysia cron and have the full control over you
+tasks a further step is needed: you need to configure the system crontab to
+execute drupal cron every minute.
+
+To do this refer to the section "Configuring cron jobs" of drupal documentation:
+http://drupal.org/cron
+
+While you're editing the system crontab, it's also recommended to replace the
+"/cron.php" part with "/sites/all/modules/elysia_cron/cron.php" (default installation 
+path of Elysia Cron). This is an optional step (you can leave "/cron.php" if you want), 
+doing it will result in a better performance in bigger sites (elysia_cron's cron.php 
+handles cache in a better way).
+
+For example: 
+* * * * * wget -O - -q -t 1 http://www.example.com/sites/all/modules/elysia_cron/cron.php
+
+IF YOU WANT TO ENABLE CRON KEY SECURITY...
+
+... you should also add the choosen cron key (from elysia_cron setup) to the
+call.
+
+Example: 
+* * * * * wget -O - -q -t 1 http://www.example.com/sites/all/modules/elysia_cron/cron.php?cron_key=12345678
+
+That's all, now you can go the the cron administration page to configure your
+tasks.
