@@ -5,7 +5,16 @@
   <?php include_once ('inc/page.head.inc'); ?>
     
   <div id='branding'><div class='limiter clear-block'>
-    <?php if ($site_name): ?><h1 class='site-name'><?php print $site_name ?></h1><?php endif; ?>
+    
+    <?php 
+      if ($logo || $site_title) {
+        print '<h1 class="site-name"><a href="'. check_url($front_page) .'" title="'. $site_title .'">';
+        if ($logo) {
+          print '<img src="'. check_url($logo) .'" alt="'. $site_title .'" id="logo" />';
+        }
+        print $site_html .'</a></h1>';
+      }
+    ?>
     <div id="search-bar">
         <?php print $branding ?>
     </div>

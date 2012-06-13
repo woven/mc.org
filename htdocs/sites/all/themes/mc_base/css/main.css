@@ -445,7 +445,7 @@ a .ico-small {
 
 /* Site name */
 #branding .site-name,
-#branding .site-name a {
+#branding .site-name a, #branding .site-name a img {
 	display: block;
 	width: 259px;
 	height: 67px;
@@ -457,11 +457,7 @@ a .ico-small {
 }
 
 #branding .site-name a {
-	position: absolute;
-	top: 0;
-	left: 0;
-	text-indent: -999em;
-	background: url(../images/common/logo.png) no-repeat;
+	
 }
 
 /* Search */
