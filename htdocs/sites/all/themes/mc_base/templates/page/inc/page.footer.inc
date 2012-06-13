@@ -11,10 +11,11 @@
     </div>
     
     <div class="prose">
-      <div class="logos">
-        <?php print $footer ?>
-        
-      </div>
+      <?php if($footer): ?>
+        <div class="logos">
+          <?php print $footer ?>
+        </div>
+      <?php endif; ?>
       <?php print $footer_message ?>
     </div>
     
