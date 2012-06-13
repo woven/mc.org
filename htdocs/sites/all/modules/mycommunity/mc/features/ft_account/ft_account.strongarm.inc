@@ -251,7 +251,7 @@ Your account on !site has been deleted.';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_picture_default';
-  $strongarm->value = 'sites/default/modules/mc/features/ft_account/default_profile.gif';
+  $strongarm->value = 'sites/all/modules/mycommunity/mc/features/ft_account/default_profile.gif';
   $export['user_picture_default'] = $strongarm;
 
   $strongarm = new stdClass;
