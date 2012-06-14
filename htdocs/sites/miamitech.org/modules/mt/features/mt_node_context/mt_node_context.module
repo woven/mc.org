@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Node Context feature.
+ */
+
+include_once 'mt_node_context.features.inc';
