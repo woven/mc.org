@@ -9,3 +9,52 @@ function mt_preprocess($vars,$hook){
     }
     
 }
+
+function mt_ds_fields($type_name, $build_mode, $extra) {
+  $fields = array(
+    'mt_event_image' => array(
+      'title' => t('Image'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php 
+          print mt_event_image($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
+  );
+
+  return array('nd' => $fields);
+}
+
+function mt_event_image($node){
+  if(count($node->field_list_image)>0 && isset($node->field_list_image['0']['fid'])){
+    return views_embed_view("node_details","block_2", $node->nid);
+  }
+  else{
+    $gid = array_pop($node->og_groups);
+    return views_embed_view("node_details","block_2", $gid);
+  }
+}
