@@ -1,0 +1,3 @@
+<?php
+
+include_once('mt_node_ui.features.inc');
