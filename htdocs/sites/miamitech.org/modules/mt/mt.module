@@ -35,6 +35,7 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
       'type' => DS_FIELD_TYPE_CODE,
       'status' => DS_FIELD_STATUS_CUSTOM,
       'properties' => array(
+        'css-class' => 'field-nodes-slideshow',
         'formatters' => array(
           'ds_eval_code' => 'Default',
         ),
