@@ -1,0 +1,3 @@
+<?php
+
+include_once('mt_group_ui.features.inc');
