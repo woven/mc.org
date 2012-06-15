@@ -1,0 +1,14 @@
+; $Id: views_autocomplete_filters.info,v 1 vasike Exp $
+name = Views Autocomplete Filters
+description = Views Autocomplete Filters
+package = Views
+core = 6.x
+dependencies[] = views
+dependencies[] = text
+
+; Information added by drupal.org packaging script on 2011-04-18
+version = "6.x-1.2"
+core = "6.x"
+project = "views_autocomplete_filters"
+datestamp = "1303111617"
+
