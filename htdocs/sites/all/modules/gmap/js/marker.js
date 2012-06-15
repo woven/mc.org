@@ -61,7 +61,7 @@ Drupal.gmap.addHandler('gmap', function (elem) {
   obj.bind('clickmarker', function (marker) {
     // Local/stored content
     if (marker.text) {
-      marker.marker.openInfoWindowHtml(marker.text);
+      //marker.marker.openInfoWindowHtml(marker.text);
     }
     // AJAX content
     if (marker.rmt) {
