@@ -17,12 +17,12 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-80',
+      'ds_weight' => '-69',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'default',
+        'format' => 'comment_image__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -30,7 +30,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-80',
+        'weight' => '-69',
       ),
       '5' => array(
         'label' => array(
@@ -79,6 +79,10 @@ function ft_event_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'file_extensions' => 'png gif jpg jpeg',
       'file_path' => '',
       'progress_indicator' => 'bar',
@@ -103,11 +107,7 @@ function ft_event_content_default_fields() {
         'timestamp' => 1297655448,
         'fid' => '51253',
       ),
-      'use_default_image' => 1,
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
+      'use_default_image' => 0,
       'label' => 'Images',
       'weight' => '9',
       'description' => 'Upload an image to be displayed on the lists of content',
@@ -127,7 +127,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-90',
+      'ds_weight' => '-71',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -138,9 +138,9 @@ function ft_event_content_default_fields() {
         'type' => 'nodereference',
         'parent_id' => '',
         'field_id' => 'field_place',
-        'label_value' => 'Place',
+        'label_value' => '',
         'exclude' => 1,
-        'weight' => '-90',
+        'weight' => '-71',
       ),
       '5' => array(
         'label' => array(
@@ -262,7 +262,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-88',
+      'ds_weight' => '-70',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -275,7 +275,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-88',
+        'weight' => '-70',
       ),
       '5' => array(
         'label' => array(
@@ -337,6 +337,8 @@ function ft_event_content_default_fields() {
     'advanced_view' => '--',
     'advanced_view_args' => '',
     'widget' => array(
+      'autocomplete_match' => 'contains',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'nid' => NULL,
@@ -344,8 +346,6 @@ function ft_event_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'autocomplete_match' => 'contains',
-      'size' => '60',
       'label' => 'Reference Related Content',
       'weight' => '12',
       'description' => '',
@@ -365,12 +365,12 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-74',
+      'ds_weight' => '-80',
       'full' => array(
         'label' => array(
           'format' => 'inline',
         ),
-        'format' => 'default',
+        'format' => 'comment_image__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -378,7 +378,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_upload_file',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-74',
+        'weight' => '-80',
       ),
       'teaser' => array(
         'format' => 'default',

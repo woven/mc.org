@@ -258,14 +258,14 @@ function ft_event_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'location_defaultnum_event';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['location_defaultnum_event'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'location_maxnum_event';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['location_maxnum_event'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -275,13 +275,13 @@ function ft_event_strongarm() {
   $strongarm->value = array(
     'multiple' => array(
       'min' => '1',
-      'max' => '0',
-      'add' => '0',
+      'max' => '1',
+      'add' => '1',
     ),
     'form' => array(
       'weight' => '9',
-      'collapsible' => 1,
-      'collapsed' => 1,
+      'collapsible' => 0,
+      'collapsed' => 0,
       'fields' => array(
         'name' => array(
           'collect' => '1',
@@ -299,17 +299,17 @@ function ft_event_strongarm() {
           'weight' => '6',
         ),
         'city' => array(
-          'collect' => '0',
-          'default' => '',
+          'collect' => '1',
+          'default' => ' ',
           'weight' => '8',
         ),
         'province' => array(
-          'collect' => '0',
+          'collect' => '1',
           'default' => '',
           'weight' => '10',
         ),
         'postal_code' => array(
-          'collect' => '0',
+          'collect' => '1',
           'default' => '',
           'weight' => '12',
         ),
