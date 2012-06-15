@@ -65,7 +65,7 @@ function mt_form_alter(&$form, &$form_state, $form_id){
     if($form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
       unset($form['og_nodeapi']['visible']['og_groups']['#options']['0']);
     }
-    if (isset($form['locations'][0]) && is_null($form['locations'][0]['#default_value'])) {
+    if (isset($form['locations'][0])) {
       $form['locations'][0]['#default_value'] = array(
         'city' => '',
         'province' => 'FL',
