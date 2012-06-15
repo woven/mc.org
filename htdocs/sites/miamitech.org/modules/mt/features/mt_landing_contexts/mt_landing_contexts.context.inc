@@ -498,71 +498,17 @@ function mt_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-featured_slideshow-block_2' => array(
-          'module' => 'views',
-          'delta' => 'featured_slideshow-block_2',
-          'region' => 'featured',
-          'weight' => 0,
-        ),
         'views-help_block-block_1' => array(
           'module' => 'views',
           'delta' => 'help_block-block_1',
           'region' => 'right',
           'weight' => 0,
         ),
-        'quicktabs-browse_by' => array(
-          'module' => 'quicktabs',
-          'delta' => 'browse_by',
-          'region' => 'right',
-          'weight' => 1,
-        ),
-        'views-featured_blocks-block_4' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_4',
-          'region' => 'right',
-          'weight' => 2,
-        ),
-        'views-featured_blocks-block_5' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_5',
-          'region' => 'right',
-          'weight' => 3,
-        ),
-        'views-og_community-block_2' => array(
-          'module' => 'views',
-          'delta' => 'og_community-block_2',
-          'region' => 'right',
-          'weight' => 4,
-        ),
-        'quicktabs-home_tabs' => array(
-          'module' => 'quicktabs',
-          'delta' => 'home_tabs',
-          'region' => 'below_content',
-          'weight' => 0,
-        ),
-        'views-featured_blocks-block_1' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_1',
-          'region' => 'below_content',
-          'weight' => 1,
-        ),
-        'views-featured_blocks-block_2' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_2',
-          'region' => 'below_content',
-          'weight' => 2,
-        ),
-        'views-featured_blocks-block_3' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_3',
-          'region' => 'below_content',
-          'weight' => 3,
-        ),
-        'boxes-home_joinus' => array(
+        'boxes-upcoming_events_blocks' => array(
           'module' => 'boxes',
-          'delta' => 'home_joinus',
-          'region' => 'below_content',
-          'weight' => 4,
+          'delta' => 'upcoming_events_blocks',
+          'region' => 'above_content',
+          'weight' => 0,
         ),
       ),
     ),
@@ -575,11 +521,6 @@ function mt_landing_contexts_context_default_contexts() {
       ),
       'featured' => array(
         'class' => '',
-        'blocks' => array(
-          'views-featured_slideshow-block_2' => array(
-            'class' => '',
-          ),
-        ),
       ),
       'group_logo' => array(
         'class' => '',
@@ -589,6 +530,11 @@ function mt_landing_contexts_context_default_contexts() {
       ),
       'content' => array(
         'class' => '',
+        'blocks' => array(
+          'boxes-upcoming_events_blocks' => array(
+            'class' => '',
+          ),
+        ),
       ),
       'left' => array(
         'class' => '',
@@ -599,39 +545,10 @@ function mt_landing_contexts_context_default_contexts() {
           'views-help_block-block_1' => array(
             'class' => 'block-help important about-block',
           ),
-          'quicktabs-browse_by' => array(
-            'class' => 'block-split2',
-          ),
-          'views-featured_blocks-block_4' => array(
-            'class' => '',
-          ),
-          'views-featured_blocks-block_5' => array(
-            'class' => '',
-          ),
-          'views-og_community-block_2' => array(
-            'class' => '',
-          ),
         ),
       ),
       'below_content' => array(
         'class' => '',
-        'blocks' => array(
-          'quicktabs-home_tabs' => array(
-            'class' => '',
-          ),
-          'views-featured_blocks-block_1' => array(
-            'class' => '',
-          ),
-          'views-featured_blocks-block_2' => array(
-            'class' => '',
-          ),
-          'views-featured_blocks-block_3' => array(
-            'class' => '',
-          ),
-          'boxes-home_joinus' => array(
-            'class' => 'join-block',
-          ),
-        ),
       ),
       'above_content' => array(
         'class' => '',
@@ -682,17 +599,11 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
-        'boxes-latest_by_topic' => array(
-          'module' => 'boxes',
-          'delta' => 'latest_by_topic',
+        'views--exp-latest_pages-page_7' => array(
+          'module' => 'views',
+          'delta' => '-exp-latest_pages-page_7',
           'region' => 'right',
           'weight' => 1,
-        ),
-        'boxes-latest_by_type' => array(
-          'module' => 'boxes',
-          'delta' => 'latest_by_type',
-          'region' => 'right',
-          'weight' => 2,
         ),
         'boxes-latest_page_title' => array(
           'module' => 'boxes',
@@ -861,18 +772,6 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'header',
           'weight' => 0,
         ),
-        'boxes-join_overlay_box' => array(
-          'module' => 'boxes',
-          'delta' => 'join_overlay_box',
-          'region' => 'overlay',
-          'weight' => 0,
-        ),
-        'boxes-login_overlay_box' => array(
-          'module' => 'boxes',
-          'delta' => 'login_overlay_box',
-          'region' => 'overlay',
-          'weight' => 1,
-        ),
         'google_cse-0' => array(
           'module' => 'google_cse',
           'delta' => 0,
@@ -885,40 +784,28 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'branding',
           'weight' => 1,
         ),
-        'menu-menu-categories' => array(
-          'module' => 'menu',
-          'delta' => 'menu-categories',
-          'region' => 'footer_above',
-          'weight' => 0,
-        ),
-        'menu-menu-footer-links' => array(
-          'module' => 'menu',
-          'delta' => 'menu-footer-links',
-          'region' => 'footer_above',
-          'weight' => 1,
-        ),
         'menu-secondary-links' => array(
           'module' => 'menu',
           'delta' => 'secondary-links',
           'region' => 'footer_above',
-          'weight' => 2,
+          'weight' => 0,
         ),
         'boxes-footer_joinus_box' => array(
           'module' => 'boxes',
           'delta' => 'footer_joinus_box',
           'region' => 'footer_above',
-          'weight' => 3,
+          'weight' => 1,
         ),
-        'boxes-footer_hon_logo' => array(
+        'boxes-join_overlay_box' => array(
           'module' => 'boxes',
-          'delta' => 'footer_hon_logo',
-          'region' => 'footer',
+          'delta' => 'join_overlay_box',
+          'region' => 'overlay',
           'weight' => 0,
         ),
-        'boxes-footer_prc_logo' => array(
+        'boxes-login_overlay_box' => array(
           'module' => 'boxes',
-          'delta' => 'footer_prc_logo',
-          'region' => 'footer',
+          'delta' => 'login_overlay_box',
+          'region' => 'overlay',
           'weight' => 1,
         ),
       ),

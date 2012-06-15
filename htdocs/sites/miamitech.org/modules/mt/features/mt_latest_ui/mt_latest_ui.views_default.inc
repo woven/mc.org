@@ -1035,7 +1035,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'relationship' => 'none',
     ),
     'nothing_2' => array(
-      'label' => 'Custom text',
+      'label' => '',
       'alter' => array(
         'text' => ' <div class="calendar dtstart"><span><span>[unix_event_start_1]</span> [unix_event_start_2]</span><div>[unix_event_start_3]</div></div>',
         'make_link' => 0,
@@ -1064,6 +1064,9 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'table' => 'views',
       'field' => 'nothing',
       'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
     ),
     'phpcode' => array(
       'label' => '',
@@ -1222,8 +1225,10 @@ print theme_ghh_node_categories($data->nid, 2);
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -1238,12 +1243,13 @@ print theme_ghh_node_categories($data->nid, 2);
       'empty' => '',
       'hide_empty' => 1,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 1,
       'spaces' => array(
         'type' => NULL,
         'frontpage' => FALSE,
       ),
-      'exclude' => 1,
+      'exclude' => 0,
       'id' => 'title',
       'table' => 'node',
       'field' => 'title',
@@ -1669,14 +1675,17 @@ print theme_ghh_node_categories($data->nid, 2);
       ),
       'relationship' => 'field_place_nid',
     ),
-    'nothing_1' => array(
-      'label' => '',
+    'name' => array(
+      'label' => 'Name',
       'alter' => array(
-        'text' => '[phpcode_1][title_4]',
+        'alter_text' => 1,
+        'text' => ' at <span class="location">[name]</span>',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -1691,6 +1700,41 @@ print theme_ghh_node_categories($data->nid, 2);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 1,
+      'id' => 'name',
+      'table' => 'location',
+      'field' => 'name',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'nothing_1' => array(
+      'label' => '',
+      'alter' => array(
+        'text' => '[phpcode_1][name]',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'exclude' => 0,
       'id' => 'nothing_1',
       'table' => 'views',
@@ -1739,8 +1783,10 @@ print theme_ghh_node_categories($data->nid, 2);
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -1755,12 +1801,13 @@ print theme_ghh_node_categories($data->nid, 2);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'value' => '<?php 
 print theme_ghh_post_date($data->node_created);
 print \' \';
 print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_og_ancestry_nid, $data->node_og_ancestry_title, $data->users_picture);
 ?>',
-      'exclude' => 0,
+      'exclude' => 1,
       'id' => 'phpcode_2',
       'table' => 'customfield',
       'field' => 'phpcode',
@@ -2045,21 +2092,17 @@ if ($type == \'news\'){
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
-      'nothing' => array(
+      'nothing_2' => array(
         'element_type' => 'div',
-        'class' => 'field-view-image',
+        'class' => '',
       ),
-      'nothing_3' => array(
+      'title' => array(
         'element_type' => 'div',
-        'class' => 'field-nodeinfo',
+        'class' => 'field-author',
       ),
       'title_1' => array(
         'element_type' => 'h5',
         'class' => '',
-      ),
-      'nothing_2' => array(
-        'element_type' => 'div',
-        'class' => 'field-author',
       ),
       'nothing_1' => array(
         'element_type' => 'p',
@@ -2068,10 +2111,6 @@ if ($type == \'news\'){
       'body' => array(
         'element_type' => 'div',
         'class' => 'field-body',
-      ),
-      'phpcode_2' => array(
-        'element_type' => 'div',
-        'class' => 'field-author',
       ),
     ),
     'skip_blank' => 0,
@@ -3999,6 +4038,28 @@ echo theme("mc_event_view_header",$view);
         'button' => 'Override',
       ),
       'relationship' => 'none',
+    ),
+    'title' => array(
+      'operator' => 'contains',
+      'value' => '',
+      'group' => '0',
+      'exposed' => TRUE,
+      'expose' => array(
+        'use_operator' => 0,
+        'operator' => 'title_op',
+        'identifier' => 'title',
+        'label' => '',
+        'autocomplete_filter' => 1,
+        'remember' => 0,
+      ),
+      'case' => 1,
+      'id' => 'title',
+      'table' => 'node',
+      'field' => 'title',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'group_nid',
     ),
   ));
   $handler->override_option('title', 'Events');

@@ -31,29 +31,11 @@ function mt_group_ui_context_default_contexts() {
           'region' => 'group_logo',
           'weight' => 0,
         ),
-        'og_menu-0' => array(
-          'module' => 'og_menu',
-          'delta' => 0,
-          'region' => 'left',
-          'weight' => 0,
-        ),
-        'boxes-group_follow_box' => array(
-          'module' => 'boxes',
-          'delta' => 'group_follow_box',
-          'region' => 'right',
-          'weight' => 0,
-        ),
-        'views-og_community-block_1' => array(
-          'module' => 'views',
-          'delta' => 'og_community-block_1',
-          'region' => 'right',
-          'weight' => 1,
-        ),
         'views-og_posts-block_4' => array(
           'module' => 'views',
           'delta' => 'og_posts-block_4',
           'region' => 'right',
-          'weight' => 2,
+          'weight' => 0,
         ),
         'quicktabs-og_gposts' => array(
           'module' => 'quicktabs',
@@ -113,12 +95,6 @@ if (!is_object($object)){
           'module' => 'views',
           'delta' => 'og_details-block_1',
           'region' => 'group_logo',
-          'weight' => 0,
-        ),
-        'og_menu-0' => array(
-          'module' => 'og_menu',
-          'delta' => 0,
-          'region' => 'left',
           'weight' => 0,
         ),
       ),
