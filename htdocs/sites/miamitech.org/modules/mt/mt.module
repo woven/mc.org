@@ -59,3 +59,11 @@ function mt_event_image($node){
     return views_embed_view("node_details","block_2", $gid);
   }
 }
+
+function mt_form_alter(&$form, &$form_state, $form_id){
+  if ($form['#id'] == 'node-form') {
+    if($form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
+      unset($form['og_nodeapi']['visible']['og_groups']['#options']['0']);
+    }
+  }
+}
