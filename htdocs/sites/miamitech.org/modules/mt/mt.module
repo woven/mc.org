@@ -7,7 +7,7 @@ function mt_preprocess($vars,$hook){
             $cblock->subject = t("Where it's at"); 
         }
 	if($cblock->module == 'views' && $cblock->delta == '-exp-latest_pages-page_7'){
-            $cblock->subject = t("Browse by group"); 
+            $cblock->subject = t("By group"); 
         }
     }
     
