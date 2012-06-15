@@ -2444,7 +2444,7 @@ clear: initial;
   list-style: decimal;
 }
 
-#block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit {
+#block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit, #block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit span {
 	height: 37px;
 	line-height: 37px;
 	background-image: url(/sites/default/themes/harlem2/images/common/btn-gray.png);
