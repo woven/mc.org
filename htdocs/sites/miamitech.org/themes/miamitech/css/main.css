@@ -2454,3 +2454,7 @@ clear: initial;
 	-moz-text-shadow: none;
 	text-shadow: none;
 }
+
+#block-views--exp-latest_pages-page_7 .views-submit-button {
+	float: right;
+}
