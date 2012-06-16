@@ -77,3 +77,38 @@ function mt_form_alter(&$form, &$form_state, $form_id){
     }
   }
 }
+
+
+
+function mt_feedapi_mapper($op, $node, $feed_element = array(), $field_name = '', $sub_field = '') {
+  if ($op == 'describe') {
+    return t('Maps a string or an array of strings to myfields.');
+  }
+  else if ($op == 'list') {
+    $myfields = array('event' => array(
+      'start' => 'start',
+      'end' => 'end',
+    ));
+    return $myfields;
+  }
+  else if ($op == 'map') {
+      if ($field_name == 'event') {
+        if (is_string($feed_element)) {
+          $node->event[$sub_field] = $feed_element;
+          $node->event['has_time'] = '1';
+          $node->event['dst_region'] = '115';
+          $node->event['has_end_date'] = '1';
+          $node->event['offset'] = ' -05:00:00';
+          $node->event['offset_dst'] = '-04:00:00';
+          $node->event['timezone'] = '119';
+          $node->event[$sub_field . '_exploded']['year'] = date('Y', strtotime($feed_element));
+          $node->event[$sub_field . '_exploded']['month'] = date('m', strtotime($feed_element));
+          $node->event[$sub_field . '_exploded']['day'] = date('d', strtotime($feed_element));
+          $node->event[$sub_field . '_exploded']['hour'] = date('G', strtotime($feed_element));
+          $node->event[$sub_field . '_exploded']['minute'] = date('i', strtotime($feed_element));
+          $node->event[$sub_field . '_exploded']['second'] = date('s', strtotime($feed_element));
+        }
+      return $node;
+    }
+  }
+}
