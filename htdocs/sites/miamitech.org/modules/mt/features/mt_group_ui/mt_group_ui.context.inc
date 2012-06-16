@@ -31,15 +31,9 @@ function mt_group_ui_context_default_contexts() {
           'region' => 'group_logo',
           'weight' => 0,
         ),
-        'views-og_posts-block_4' => array(
+        'views-og_posts-block_5' => array(
           'module' => 'views',
-          'delta' => 'og_posts-block_4',
-          'region' => 'right',
-          'weight' => 0,
-        ),
-        'quicktabs-og_gposts' => array(
-          'module' => 'quicktabs',
-          'delta' => 'og_gposts',
+          'delta' => 'og_posts-block_5',
           'region' => 'below_content',
           'weight' => 0,
         ),

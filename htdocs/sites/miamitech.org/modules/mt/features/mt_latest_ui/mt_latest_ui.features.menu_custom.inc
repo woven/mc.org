@@ -9,12 +9,12 @@ function mt_latest_ui_menu_default_menu_custom() {
   // Exported menu: menu-browse-by-date
   $menus['menu-browse-by-date'] = array(
     'menu_name' => 'menu-browse-by-date',
-    'title' => 'Events By Date',
+    'title' => 'By Date',
     'description' => '',
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Events By Date');
+  t('By Date');
 
 
   return $menus;

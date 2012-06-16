@@ -2447,10 +2447,14 @@ clear: initial;
 #block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit, #block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit span {
 	height: 37px;
 	line-height: 37px;
-	background-image: url(/sites/default/themes/harlem2/images/common/btn-gray.png);
+	background-image: url(/sites/miamitech.org/themes/miamitech/images/common/btn-gray.png);
 	color: 
 	#797979;
 	-webkit-text-shadow: none;
 	-moz-text-shadow: none;
 	text-shadow: none;
+}
+
+#block-views--exp-latest_pages-page_7 .views-submit-button {
+	float: right;
 }

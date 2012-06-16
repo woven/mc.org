@@ -504,6 +504,12 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'boxes-join_mc' => array(
+          'module' => 'boxes',
+          'delta' => 'join_mc',
+          'region' => 'right',
+          'weight' => 1,
+        ),
         'boxes-upcoming_events_blocks' => array(
           'module' => 'boxes',
           'delta' => 'upcoming_events_blocks',
@@ -530,11 +536,6 @@ function mt_landing_contexts_context_default_contexts() {
       ),
       'content' => array(
         'class' => '',
-        'blocks' => array(
-          'boxes-upcoming_events_blocks' => array(
-            'class' => '',
-          ),
-        ),
       ),
       'left' => array(
         'class' => '',
@@ -552,6 +553,11 @@ function mt_landing_contexts_context_default_contexts() {
       ),
       'above_content' => array(
         'class' => '',
+        'blocks' => array(
+          'boxes-upcoming_events_blocks' => array(
+            'class' => '',
+          ),
+        ),
       ),
       'content_top' => array(
         'class' => '',
