@@ -11,7 +11,7 @@ function ft_location_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'gmap_default';
   $strongarm->value = array(
-    'width' => '202px',
+    'width' => '231px',
     'height' => '225px',
     'latlong' => '40.753499070431374,-73.99223327636719',
     'zoom' => '11',
