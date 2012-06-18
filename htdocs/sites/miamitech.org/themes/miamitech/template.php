@@ -12,11 +12,15 @@
 function miamitech_links($links, $attributes = array('class' => 'links')){
     
   if (strpos($attributes['class'], 'primary-links') !== FALSE){
+  	  $id = 0;
     foreach($links as $lkey => &$link){
+	$id++;
       if ($link['href'] == '<front>'){
         $link['html'] = TRUE;
         $link['title'] = '<span class="ico-menu ico-home">'.$link['title'].'</span>';
-      }elseif ($link['title'] == 'Help'){
+        
+      //It it's the last time at the primary links.. add it as help
+      }elseif (count($links) == $id){
         $link['html'] = TRUE;
         $link['title'] = '<span class="ico-menu ico-help">Site Help</span>';
       }
