@@ -48,9 +48,47 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
         'token' => 0,
       ),
     ),
+
+    'mt_add_ical' => array(
+      'title' => t('Add to Calendar'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'field-ical',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php 
+          print mt_add_ical($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
   );
 
   return array('nd' => $fields);
+}
+
+function mt_add_ical($node){
+  return '<span class="ical-ico"></span><a href="/node/' . $node->nid . '/ical> Add to my calendar</a>';
 }
 
 function mt_event_image($node){
