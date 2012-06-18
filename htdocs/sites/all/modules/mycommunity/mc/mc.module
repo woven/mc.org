@@ -521,7 +521,7 @@ function mc_events_grouped_by_dates_set_dates(&$view, $display_id, $time_key){
     $minsago = $now - (60 * 30);
     $item['operator'] = 'between';
     $item['value']['min'] = date('Y-m-d G:i:s', $minsago);
-    $item['value']['max'] = date('Y-m-d', $afterTomorrow);
+    $item['value']['max'] = date('Y-m-d', $tomorrow);
   }elseif ($time_key == 'tomorrow'){
     $item['operator'] = 'between';
     $item['value']['min'] = date('Y-m-d', $tomorrow);
