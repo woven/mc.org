@@ -382,6 +382,7 @@ function mc_events_grouped_by_dates($view_name, $display_id, $max_items){
   // calculate how many I should display in each group
   $items_count = $items_count_today + $items_count_tomorrow + $items_count_this_week + $items_count_next_week;
   
+  if($max_items != 0){
   if ($items_count > $max_items){
     $i = 0;
     while($items_count > $max_items){
@@ -419,6 +420,7 @@ function mc_events_grouped_by_dates($view_name, $display_id, $max_items){
       }
     }
   }
+  } 
   $exclude_nids = array();
   
   if ($items_count_today){
@@ -589,7 +591,9 @@ function mc_events_grouped_by_dates_view($view_name, $display_id, $time_key, $it
   mc_events_grouped_by_dates_set_dates($view, $display_id, $time_key);
   
   $view->display[$display_id]->handler->options['defaults']['items_per_page'] = FALSE;
-  $view->display[$display_id]->handler->options['items_per_page'] = $items_to_display;
+  if($items_to_display>0){
+    $view->display[$display_id]->handler->options['items_per_page'] = $items_to_display;
+  }
   
   // we add a custom variable into the view in order to know where the link should go to
   if ($time_key != 'upcoming'){
