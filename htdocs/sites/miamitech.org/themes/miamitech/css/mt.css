@@ -67,7 +67,7 @@ body {
 #navigation .primary-links .active-trail a:visited {
 	color: #FF9;
 	background-position: 0 -38px;
-	background-color: #09F;
+	background-color: #0CF;
 	-webkit-text-shadow: 0 1px 0 #333;
 	-moz-text-shadow: 0 1px 0 #333;
 	text-shadow: 0 1px 0 #333;
@@ -86,6 +86,11 @@ body {
 #navigation .primary-links li {
 	padding-left: 3px;
 	background: none;
+}
+
+#navigation .primary-links a:hover {
+	color: #FF9;
+	text-decoration: none;
 }
 
 
