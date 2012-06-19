@@ -494,6 +494,7 @@ function mc_events_grouped_by_dates_set_dates(&$view, $display_id, $time_key){
   
   // calc unix time
   $today = mktime(0, 0, 0);
+  $now = time();
   $tomorrow = $today + 24 * 3600;
   $afterTomorrow = $tomorrow + 24 * 3600;
   $dayOfWeek = (int)date('w', $today);
@@ -513,8 +514,14 @@ function mc_events_grouped_by_dates_set_dates(&$view, $display_id, $time_key){
   if ($time_key == 'today'){
     // today will not display only events that start today, but also the ones that has already
     // started and haven't finished yet
-    $item['operator'] = '<';
-    $item['value']['value'] = date('Y-m-d', $tomorrow);
+    //$item['operator'] = '<';
+    //$item['value']['value'] = date('Y-m-d', $tomorrow);
+
+    //display events that happened last 30mins to events thats is going to be started after that
+    $minsago = $now - (60 * 30);
+    $item['operator'] = 'between';
+    $item['value']['min'] = date('Y-m-d G:i:s', $minsago);
+    $item['value']['max'] = date('Y-m-d', $afterTomorrow);
   }elseif ($time_key == 'tomorrow'){
     $item['operator'] = 'between';
     $item['value']['min'] = date('Y-m-d', $tomorrow);
