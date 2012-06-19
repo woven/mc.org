@@ -31,6 +31,12 @@ function mt_event_ui_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'ds-5c755d31699c072160e29da9599e28f3' => array(
+          'module' => 'ds',
+          'delta' => '5c755d31699c072160e29da9599e28f3',
+          'region' => 'right',
+          'weight' => 1,
+        ),
       ),
     ),
   );
