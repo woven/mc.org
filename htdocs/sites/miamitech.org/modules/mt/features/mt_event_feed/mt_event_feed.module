@@ -5,3 +5,35 @@
  */
 
 include_once 'mt_event_feed.features.inc';
+
+function mt_event_feed_menu(){
+  $items = array();
+  $event_path = drupal_get_path('module', 'event');
+  $items['group/%/ical'] = array(
+    'title' => 'Group iCal feed',
+    'page callback' => 'mt_event_feed_ical',
+    'access callback' => true,
+  );
+  return $items;
+}
+
+function mt_event_feed_ical() {
+  $gid = arg(1);
+  $group = node_load($gid);
+  if($group->type!='group'){
+    return;
+  }
+  $nids = og_group_child_nids($gid);
+  $events = array();
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    if($node->type=='event'){
+      $event = _event_node_ical($node);
+      $events[] = $event;
+    }
+  }
+
+  drupal_set_header('Content-Type: text/calendar; charset=utf-8');
+  drupal_set_header('Content-Disposition: attachment; filename="calendar.ics"; ');
+  print ical_export($events, $group->title);
+}
