@@ -145,6 +145,7 @@ function mt_event_image($node){
 
 function mt_form_alter(&$form, &$form_state, $form_id){
 
+  //remove the og_register from user registration form.
   if($form_id == "user_register"){
     if($form['og_register']){
       unset($form['og_register']);
