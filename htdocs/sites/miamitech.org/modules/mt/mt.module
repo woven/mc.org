@@ -130,7 +130,7 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
 }
 
 function mt_add_ical($node){
-  return '<span class="ical-ico"></span> <a href="/node/' . $node->nid . '/ical">Just this event (iCal)</a>';
+  return '<span class="ical-ico">Image</span><a class="ical-link" href="webcal://'. $_SERVER["SERVER_NAME"] .'/node/' . $node->nid . '/ical">Just this event (iCal)</a>';
 }
 
 function mt_event_image($node){

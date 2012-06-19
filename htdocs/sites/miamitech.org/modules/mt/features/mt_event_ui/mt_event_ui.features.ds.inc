@@ -9,6 +9,20 @@ function mt_event_ui_ds_default_settings() {
       'event' => array(
         'full' => array(
           'fields' => array(
+            'mt_event_image' => array(
+              'region' => 'middle',
+              'weight' => '-99',
+              'format' => 'ds_eval_code',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'mt_add_ical' => array(
+              'region' => 'left',
+              'weight' => '-19',
+              'format' => 'ds_eval_code',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
             'nd_location_gmap' => array(
               'region' => 'right',
               'weight' => '-95',
@@ -20,13 +34,6 @@ function mt_event_ui_ds_default_settings() {
               'region' => 'right',
               'weight' => '-94',
               'format' => 'nd_location_textfield',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-            ),
-            'mt_event_image' => array(
-              'region' => 'middle',
-              'weight' => '-99',
-              'format' => 'ds_eval_code',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
@@ -97,7 +104,7 @@ function mt_event_ui_ds_default_settings() {
           'regiontoblock' => array(
             'block' => array(
               'header' => 0,
-              'left' => 0,
+              'left' => 1,
               'middle' => 0,
               'right' => 1,
               'footer' => 0,
