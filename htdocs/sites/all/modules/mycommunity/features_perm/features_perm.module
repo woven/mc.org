@@ -1,0 +1,26 @@
+<?php
+
+function features_perm_settings_form(){
+    $form['features_perm_module'] = array(
+        '#title' => t('Export all permissions and roles to this module'),
+        '#type' => 'textfield',
+        '#description' => t('enter the module name here'),
+        '#default_value' =>  variable_get("features_perm_module","")
+    );
+
+    return system_settings_form($form);
+}
+
+function features_perm_menu(){
+
+    $items['admin/structure/features/feature_permissions'] = array(
+        'title' => 'Features Permission Helper',
+        'type' => MENU_NORMAL_ITEM,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array("features_perm_settings_form"),
+        'access arguments' => array('administer features'),
+        'weight' => 100
+    );
+
+    return $items;
+}

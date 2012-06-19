@@ -1,0 +1,5 @@
+name = "Features: User Role and Permissions hepler"
+description = "allows you to specificy a module name where it will always contain all roles and permissions"
+core = "6.x"
+php = "5.2.4"
+dependencies[] = "features"
