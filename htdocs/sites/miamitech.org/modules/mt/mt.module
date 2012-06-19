@@ -88,17 +88,17 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
 }
 
 function mt_add_ical($node){
-  return '<span class="ical-ico"></span><a href="/node/' . $node->nid . '/ical> Add to my calendar</a>';
+  return '<span class="ical-ico"></span><a href="/node/' . $node->nid . '/ical"> Add to my calendar</a>';
 }
 
 function mt_event_image($node){
   if(count($node->field_list_image)>0 && isset($node->field_list_image['0']['fid'])){
     return views_embed_view("node_details","block_2", $node->nid);
   }
-  else{
-    $gid = array_pop($node->og_groups);
-    return views_embed_view("node_details","block_2", $gid);
-  }
+  //else{
+  //  $gid = array_pop($node->og_groups);
+  //  return views_embed_view("node_details","block_2", $gid);
+  //}
 }
 
 function mt_form_alter(&$form, &$form_state, $form_id){
@@ -113,6 +113,9 @@ function mt_form_alter(&$form, &$form_state, $form_id){
         'country' => 'us'
       );
     }
+  }
+  if($form['#id']=='views-exposed-form-latest-pages-page-7'){
+    $form['title']['#attributes']['placeholder']= "Start typing a group's name...";
   }
 }
 
@@ -188,5 +191,11 @@ function mt_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     $record->nid = $node->nid;
     $record->mapping = $mapping;
     drupal_write_record('feedapi_mapper', $record);
+  }
+}
+
+function mt_preprocess_page(&$vars){
+  if(arg(0)=='latest' && isset($_GET['title'])){
+    $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
   }
 }
