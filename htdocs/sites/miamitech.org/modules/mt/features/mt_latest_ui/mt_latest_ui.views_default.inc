@@ -2241,7 +2241,7 @@ return true;
       ),
     ),
   ));
-  $handler->override_option('path', 'latest/%');
+  $handler->override_option('path', 'anotherlatest/%');
   $handler->override_option('menu', array(
     'type' => 'none',
     'title' => '',
@@ -2355,7 +2355,7 @@ return true;
   ));
   $handler = $view->new_display('page', 'Page: latest', 'page_2');
   $handler->override_option('arguments', array());
-  $handler->override_option('path', 'latest');
+  $handler->override_option('path', 'anotherlatest');
   $handler->override_option('menu', array(
     'type' => 'none',
     'title' => '',
@@ -4063,7 +4063,7 @@ echo theme("mc_event_view_header",$view);
     ),
   ));
   $handler->override_option('title', 'Events');
-  $handler->override_option('path', 'latest/events');
+  $handler->override_option('path', 'latest');
   $handler->override_option('menu', array(
     'type' => 'none',
     'title' => '',

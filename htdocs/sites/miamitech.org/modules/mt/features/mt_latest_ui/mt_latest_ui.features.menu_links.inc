@@ -10,7 +10,7 @@ function mt_latest_ui_menu_default_menu_links() {
   $menu_links['menu-browse-by-date:latest/events'] = array(
     'menu_name' => 'menu-browse-by-date',
     'link_path' => 'latest/events',
-    'router_path' => 'latest/events',
+    'router_path' => 'latest',
     'link_title' => 'View All',
     'options' => array(
       'attributes' => array(),
