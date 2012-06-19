@@ -13,6 +13,45 @@ function mt_preprocess($vars,$hook){
     
 }
 
+function mt_count_user_ct($type){
+      global $user;
+      return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
+}
+
+function mt_init(){
+        global $user;
+
+        if($user->uid > 1){
+          $cgroups = mt_count_user_ct("group");
+          $cevents = mt_count_user_ct("event");
+          $glink = l("Add a Group","node/add/group");
+          $elink = l("Add an Event","node/add/event");
+          $icallink = l("Import an iCal Feed","node/add/event");
+          $profilelink = l("Update your personal profile","user/$user->uid/edit/Personal%20information");
+          $hasprofile = db_result(db_query("SELECT count(fid) FROM profile_values WHERE uid = %d AND fid = 1",$user->uid));
+
+          if(!$hasprofile){
+            $actions[]="<li><b>$profilelink</b></li>";
+          }else{
+            $actions[]="<li>$profilelink</li>";
+          }
+
+          if($cgroups > 0){
+              $actions[]="<li>$glink</li>";
+          }else{
+              $actions[]="<li><b>$glink</b></li>";
+          }
+
+          if(!$cevents && $cgroups){
+            $actions[]="<li><b>$elink OR $icallink</b></li>";
+          }elseif($cevents){
+            $actions[]="<li>$elink OR $icallink</li>";
+          }
+
+          drupal_set_message("<div class=\"wizard\"><p>Please do the following to complete your MiamiTech.org Expierince</p>"."<ul>".implode($actions,"")."</ul></div>");
+        }
+}
+
 function mt_ds_fields($type_name, $build_mode, $extra) {
   $fields = array(
     'mt_event_image' => array(
