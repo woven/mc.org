@@ -34,6 +34,7 @@ stylesheets[screen][] = "css/base.css"
 stylesheets[screen][] = "css/main.css"
 stylesheets[screen][] = "css/custom.css"
 stylesheets[screen][] = "css/custom.less"
+stylesheets[screen][] = "css/mt.css"
 stylesheets[screen][] = "js/colorbox/colorbox.css"
 stylesheets[all][] = "views_gallery.css"
 
