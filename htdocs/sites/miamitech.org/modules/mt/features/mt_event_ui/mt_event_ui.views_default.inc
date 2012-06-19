@@ -227,7 +227,7 @@ function mt_event_ui_views_default_views() {
       'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'group_logo__colorbox',
+      'format' => 'mt_home_event_linked',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',

@@ -17,6 +17,29 @@ function mt_event_ui_ctools_plugin_api() {
 }
 
 /**
+ * Implementation of hook_imagecache_default_presets().
+ */
+function mt_event_ui_imagecache_default_presets() {
+  $items = array(
+    'mt_home_event' => array(
+      'presetname' => 'mt_home_event',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '83',
+            'height' => '83',
+          ),
+        ),
+      ),
+    ),
+  );
+  return $items;
+}
+
+/**
  * Implementation of hook_views_api().
  */
 function mt_event_ui_views_api() {
