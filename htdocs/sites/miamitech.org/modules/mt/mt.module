@@ -213,3 +213,9 @@ function mt_preprocess_page(&$vars){
     $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
   }
 }
+
+
+function mt_ds_fields_alter(&$fields) {
+  $fields['nd_location_name'] = $fields['name'];
+  unset($fields['name']);
+}
