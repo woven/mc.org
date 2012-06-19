@@ -21,7 +21,7 @@ function mt_count_user_ct($type){
       return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
 }
 
-function mt_init(){
+function mt_init_(){
         global $user;
 
         if($user->uid > 1){
@@ -51,7 +51,7 @@ function mt_init(){
             $actions[]="<li>$elink OR $icallink</li>";
           }
 
-          drupal_set_message("<div class=\"wizard\"><p>Please do the following to complete your MiamiTech.org Expierince</p>"."<ul>".implode($actions,"")."</ul></div>");
+          drupal_set_message("<div class=\"wizard\"><p>Please do the following to complete your MiamiTech.org Experience</p>"."<ul>".implode($actions,"")."</ul></div>");
         }
 }
 
