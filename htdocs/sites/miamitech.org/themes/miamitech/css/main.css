@@ -2471,3 +2471,7 @@ span.ical-ico {
 a.ical-link {
   padding-left: 20px;
 }
+
+#views-exposed-form-latest-pages-page-7 .views-exposed-widget, #views-exposed-form-latest-pages-page-7 .form-item {
+  padding: 0px;
+}
