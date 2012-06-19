@@ -31,7 +31,7 @@ function mt_event_ui_default_box() {
   $box->description = 'Events blocks';
   $box->options = array(
     'body' => '<?php
-print  mc_events_grouped_by_dates(\'events_by_dates\', \'block_5\', 6);
+print  mc_events_grouped_by_dates(\'events_by_dates\', \'block_5\', 0);
 ?>',
     'format' => '3',
   );
