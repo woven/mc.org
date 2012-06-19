@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MiamiTech Event Feed feature.
+ */
+
+include_once 'mt_event_feed.features.inc';

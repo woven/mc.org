@@ -6,6 +6,9 @@ function mt_preprocess($vars,$hook){
         if($cblock->module == 'ds' && $cblock->bid == 'ds-0b596e3199de270de74a2f6e8f0d1525'){
             $cblock->subject = t("Where it's at"); 
         }
+        if($cblock->module == 'ds' && $cblock->bid == 'ds-5c755d31699c072160e29da9599e28f3'){
+            $cblock->subject = t("Add to calendar");
+        }
 	if($cblock->module == 'views' && $cblock->delta == '-exp-latest_pages-page_7'){
             $cblock->subject = t("By group"); 
         }
@@ -87,19 +90,57 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
         'token' => 0,
       ),
     ),
+
+    'mt_add_ical' => array(
+      'title' => t('Add to Calendar'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'field-ical',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php 
+          print mt_add_ical($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
   );
 
   return array('nd' => $fields);
+}
+
+function mt_add_ical($node){
+  return '<span class="ical-ico"></span><a href="/node/' . $node->nid . '/ical"> Add to my calendar</a>';
 }
 
 function mt_event_image($node){
   if(count($node->field_list_image)>0 && isset($node->field_list_image['0']['fid'])){
     return views_embed_view("node_details","block_2", $node->nid);
   }
-  else{
-    $gid = array_pop($node->og_groups);
-    return views_embed_view("node_details","block_2", $gid);
-  }
+  //else{
+  //  $gid = array_pop($node->og_groups);
+  //  return views_embed_view("node_details","block_2", $gid);
+  //}
 }
 
 function mt_form_alter(&$form, &$form_state, $form_id){
@@ -115,6 +156,9 @@ function mt_form_alter(&$form, &$form_state, $form_id){
       );
     }
   }
+  if($form['#id']=='views-exposed-form-latest-pages-page-7'){
+    $form['title']['#attributes']['placeholder']= "Start typing a group's name...";
+  }
 }
 
 
@@ -127,27 +171,73 @@ function mt_feedapi_mapper($op, $node, $feed_element = array(), $field_name = ''
     $myfields = array('event' => array(
       'start' => 'start',
       'end' => 'end',
+      'timezone' => 'timezone',
+      'location' => 'location',
+      'geo' => 'geo',
     ));
     return $myfields;
   }
   else if ($op == 'map') {
       if ($field_name == 'event') {
+        $group = node_load($node->feedapi->feed_nid);
+        $node->og_groups = $group->og_groups;
+        $node->og_groups_both = $group->og_groups_both;
         if (is_string($feed_element)) {
-          $node->event[$sub_field] = $feed_element;
-          $node->event['has_time'] = '1';
-          $node->event['dst_region'] = '115';
-          $node->event['has_end_date'] = '1';
-          $node->event['offset'] = ' -05:00:00';
-          $node->event['offset_dst'] = '-04:00:00';
-          $node->event['timezone'] = '119';
-          $node->event[$sub_field . '_exploded']['year'] = date('Y', strtotime($feed_element));
-          $node->event[$sub_field . '_exploded']['month'] = date('m', strtotime($feed_element));
-          $node->event[$sub_field . '_exploded']['day'] = date('d', strtotime($feed_element));
-          $node->event[$sub_field . '_exploded']['hour'] = date('G', strtotime($feed_element));
-          $node->event[$sub_field . '_exploded']['minute'] = date('i', strtotime($feed_element));
-          $node->event[$sub_field . '_exploded']['second'] = date('s', strtotime($feed_element));
+          if($sub_field=='start' || $sub_field=='end'){
+            $node->event[$sub_field] = $feed_element;
+            if($sub_field=='start'){
+              $node->event['has_time'] = '1';
+            }
+            if($sub_field=='end'){
+              $node->event['has_end_date'] = '1';
+            }
+            $node->event[$sub_field . '_exploded']['year'] = date('Y', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['month'] = date('m', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['day'] = date('d', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['hour'] = date('G', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['minute'] = date('i', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['second'] = date('s', strtotime($feed_element));
+          }
+          if($sub_field=='timezone'){
+            $timezone = event_zone_by_name(str_replace('_', ' ',$feed_element));
+            $node->event['dst_region'] = $timezone['dst_region'];;
+            $node->event['offset'] = $timezone['offset'];
+            $node->event['offset_dst'] = $timezone['offset_dst'];
+            $node->event['timezone'] = $timezone['timezone'];
+          }
+          if($sub_field=='location'){
+            $parts = explode('(', $feed_element);
+            $node->locations['0']['name'] = $parts['0'];
+            $parts = explode(',', $parts['1']);
+            $node->locations['0']['street'] = $parts['0'];
+            $node->locations['0']['city'] = $parts['1'];
+            $parts = explode(' ' ,$parts['2']);
+            $node->locations['0']['province'] = $parts['1'];
+            $node->locations['0']['postal_code'] = str_replace(')', '' ,$parts['2']);
+          }
+          if($sub_field=='geo'){
+            $parts = explode(';', $feed_element);
+            $node->locations['0']['latitude'] = $parts['0'];
+            $node->locations['0']['longitude'] = $parts['1'];
+          }
         }
       return $node;
     }
+  }
+}
+
+function mt_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  if($node->type=='event_feed' && $op=='insert'){
+    $mapping = 'a:5:{s:91:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:5:"DTEND";i:4;s:8:"datetime";}";s:49:"a:3:{i:0;s:2:"mt";i:1;s:5:"event";i:2;s:3:"end";}";s:93:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:8:"datetime";}";s:51:"a:3:{i:0;s:2:"mt";i:1;s:5:"event";i:2;s:5:"start";}";s:87:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:2:"tz";}";s:54:"a:3:{i:0;s:2:"mt";i:1;s:5:"event";i:2;s:8:"timezone";}";s:60:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:8:"LOCATION";}";s:54:"a:3:{i:0;s:2:"mt";i:1;s:5:"event";i:2;s:8:"location";}";s:55:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:3:"GEO";}";s:49:"a:3:{i:0;s:2:"mt";i:1;s:5:"event";i:2;s:3:"geo";}";}';
+    $record = new stdClass();
+    $record->nid = $node->nid;
+    $record->mapping = $mapping;
+    drupal_write_record('feedapi_mapper', $record);
+  }
+}
+
+function mt_preprocess_page(&$vars){
+  if(arg(0)=='latest' && isset($_GET['title'])){
+    $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
   }
 }
