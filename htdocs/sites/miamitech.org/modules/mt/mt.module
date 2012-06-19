@@ -6,6 +6,9 @@ function mt_preprocess($vars,$hook){
         if($cblock->module == 'ds' && $cblock->bid == 'ds-0b596e3199de270de74a2f6e8f0d1525'){
             $cblock->subject = t("Where it's at"); 
         }
+        if($cblock->module == 'ds' && $cblock->bid == 'ds-5c755d31699c072160e29da9599e28f3'){
+            $cblock->subject = t("Add to calendar");
+        }
 	if($cblock->module == 'views' && $cblock->delta == '-exp-latest_pages-page_7'){
             $cblock->subject = t("By group"); 
         }
