@@ -4789,8 +4789,8 @@ echo theme("mc_event_view_header",$view);
       ),
       'relationship' => 'none',
     ),
-    'body' => array(
-      'label' => 'Body',
+    'created' => array(
+      'label' => 'Post date',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -4814,20 +4814,17 @@ echo theme("mc_event_view_header",$view);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'hide_alter_empty' => 1,
+      'hide_alter_empty' => 0,
+      'date_format' => 'small',
+      'custom_date_format' => '',
       'exclude' => 0,
-      'id' => 'body',
-      'table' => 'node_revisions',
-      'field' => 'body',
+      'id' => 'created',
+      'table' => 'node',
+      'field' => 'created',
       'override' => array(
         'button' => 'Use default',
       ),
       'relationship' => 'none',
-    ),
-    'created' => array(
-      'id' => 'created',
-      'table' => 'node',
-      'field' => 'created',
     ),
     'unix_event_start' => array(
       'label' => 'Event Start',
@@ -4854,7 +4851,7 @@ echo theme("mc_event_view_header",$view);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'hide_alter_empty' => 1,
+      'hide_alter_empty' => 0,
       'date_format' => 'small',
       'custom_date_format' => '',
       'exclude' => 0,
@@ -4891,7 +4888,7 @@ echo theme("mc_event_view_header",$view);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'hide_alter_empty' => 1,
+      'hide_alter_empty' => 0,
       'date_format' => 'small',
       'custom_date_format' => '',
       'exclude' => 0,
@@ -4928,7 +4925,7 @@ echo theme("mc_event_view_header",$view);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'hide_alter_empty' => 1,
+      'hide_alter_empty' => 0,
       'hide' => array(
         'country' => 'country',
         'locpick' => 'locpick',
@@ -4952,10 +4949,11 @@ echo theme("mc_event_view_header",$view);
       ),
       'relationship' => 'none',
     ),
-    'nothing' => array(
-      'label' => 'Custom text',
+    'body' => array(
+      'label' => 'Body',
       'alter' => array(
-        'text' => 'When: [unix_event_start] [unix_event_end]
+        'alter_text' => 1,
+        'text' => 'When: [unix_event_start] [unix_event_end] <br/>
 Where: [address]
 
 [body]',
@@ -4981,9 +4979,9 @@ Where: [address]
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'exclude' => 0,
-      'id' => 'nothing',
-      'table' => 'views',
-      'field' => 'nothing',
+      'id' => 'body',
+      'table' => 'node_revisions',
+      'field' => 'body',
       'override' => array(
         'button' => 'Use default',
       ),
