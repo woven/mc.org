@@ -563,9 +563,7 @@ function mt_access_user_default_permissions() {
   $permissions['create article content'] = array(
     'name' => 'create article content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -573,8 +571,7 @@ function mt_access_user_default_permissions() {
   $permissions['create article sitewide'] = array(
     'name' => 'create article sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -582,9 +579,7 @@ function mt_access_user_default_permissions() {
   $permissions['create audio content'] = array(
     'name' => 'create audio content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -592,8 +587,7 @@ function mt_access_user_default_permissions() {
   $permissions['create audio sitewide'] = array(
     'name' => 'create audio sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -614,6 +608,8 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
     ),
   );
 
@@ -621,7 +617,10 @@ function mt_access_user_default_permissions() {
   $permissions['create event_feed content'] = array(
     'name' => 'create event_feed content',
     'roles' => array(
-      '0' => 'authenticated user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
     ),
   );
 
@@ -629,7 +628,10 @@ function mt_access_user_default_permissions() {
   $permissions['create event_feed sitewide'] = array(
     'name' => 'create event_feed sitewide',
     'roles' => array(
-      '0' => 'administrator',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
     ),
   );
 
@@ -637,9 +639,7 @@ function mt_access_user_default_permissions() {
   $permissions['create file content'] = array(
     'name' => 'create file content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -647,8 +647,7 @@ function mt_access_user_default_permissions() {
   $permissions['create file sitewide'] = array(
     'name' => 'create file sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -674,9 +673,7 @@ function mt_access_user_default_permissions() {
   $permissions['create gallery content'] = array(
     'name' => 'create gallery content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -684,8 +681,7 @@ function mt_access_user_default_permissions() {
   $permissions['create gallery sitewide'] = array(
     'name' => 'create gallery sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -693,9 +689,7 @@ function mt_access_user_default_permissions() {
   $permissions['create gallery_image content'] = array(
     'name' => 'create gallery_image content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -703,8 +697,7 @@ function mt_access_user_default_permissions() {
   $permissions['create gallery_image sitewide'] = array(
     'name' => 'create gallery_image sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -726,6 +719,7 @@ function mt_access_user_default_permissions() {
       '0' => 'Publisher',
       '1' => 'administrator',
       '2' => 'authenticated user',
+      '3' => 'group manager',
     ),
   );
 
@@ -733,9 +727,7 @@ function mt_access_user_default_permissions() {
   $permissions['create link content'] = array(
     'name' => 'create link content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -743,8 +735,7 @@ function mt_access_user_default_permissions() {
   $permissions['create link sitewide'] = array(
     'name' => 'create link sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -760,8 +751,7 @@ function mt_access_user_default_permissions() {
   $permissions['create nnews sitewide'] = array(
     'name' => 'create nnews sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -769,9 +759,7 @@ function mt_access_user_default_permissions() {
   $permissions['create npage content'] = array(
     'name' => 'create npage content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -779,8 +767,7 @@ function mt_access_user_default_permissions() {
   $permissions['create npage sitewide'] = array(
     'name' => 'create npage sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -788,9 +775,7 @@ function mt_access_user_default_permissions() {
   $permissions['create place content'] = array(
     'name' => 'create place content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -798,8 +783,7 @@ function mt_access_user_default_permissions() {
   $permissions['create place sitewide'] = array(
     'name' => 'create place sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -815,9 +799,7 @@ function mt_access_user_default_permissions() {
   $permissions['create video content'] = array(
     'name' => 'create video content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -825,8 +807,7 @@ function mt_access_user_default_permissions() {
   $permissions['create video sitewide'] = array(
     'name' => 'create video sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -843,8 +824,7 @@ function mt_access_user_default_permissions() {
   $permissions['create webform sitewide'] = array(
     'name' => 'create webform sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
