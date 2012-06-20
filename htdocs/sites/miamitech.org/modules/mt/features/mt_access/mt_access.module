@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the mt_access feature.
+ */
+
+include_once 'mt_access.features.inc';
