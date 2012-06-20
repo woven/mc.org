@@ -57,9 +57,13 @@ function mc_addstuff_display_block_add_stuff(){
   }
   
   $add_stuff_types = array('article', 'event', 'gallery_image', 'gallery', 'audio', 'video', 'place', 'file', 'npage', 'group', 'forum','event_feed');
-  
+  $add_stuff_types = array_keys(node_get_types('types'));
+  //dsm($add_stuff_types);
+  //dsm(node_get_types('types'));
+
+
   foreach ($types as $type) {
-    
+
     if (!in_array($type->type, $add_stuff_types)){
       continue;
     }
