@@ -2477,6 +2477,15 @@ span.ical-group-ico {
   margin-top: -2px;
 }
 
+span.rss-group-ico {
+  background: url(/sites/miamitech.org/themes/miamitech/images/mt/rss.png);
+  position: absolute;
+  text-indent: -99999px;
+  height: 14px;
+  width: 14px;
+  margin-top: -2px;
+}
+
 a.ical-link {
   padding-left: 20px;
 }
@@ -2486,10 +2495,6 @@ a.ical-link {
 }
 
 
-.block .field-ical {
-	padding-bottom: 20px;
-}
-
-.block .field-group-ical {
-	padding-bottom: 20px;
+#block-ds-5c755d31699c072160e29da9599e28f3 .field {
+	padding-bottom: 25px;
 }
