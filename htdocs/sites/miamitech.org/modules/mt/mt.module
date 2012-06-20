@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * Code for the mt feature.
+ */
+
+include_once 'mt.features.inc';
 
 function mt_preprocess($vars,$hook){
     if($hook == 'block'){
