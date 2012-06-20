@@ -1,7 +1,7 @@
 name = "mt_access"
 description = "permissions and role package"
 core = "6.x"
-package = "Features"
+package = "MiamiTech.org"
 dependencies[] = "admin"
 dependencies[] = "admin_menu"
 dependencies[] = "admin_theme"
