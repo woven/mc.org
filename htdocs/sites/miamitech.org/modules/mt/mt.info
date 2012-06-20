@@ -1,5 +1,0 @@
-name = "MiamiTech"
-description = "Module for MiamiTech"
-core = "6.x"
-package = "MiamiTech"
-dependencies[] = "mt_access"
