@@ -89,7 +89,7 @@ function mc_addstuff_display_block_add_stuff(){
     if (!$user->uid){
       if(user_access('add stuff ' . $type->type )){
         // show them only the types that can be posted in a group (except page and album)
-        if($usage == 'group_post_standard' && $type->type != 'page' && $type->type != 'gallery'){
+        
           //$addLink = 'user/register';
           $addLink = "node/add/$type_url_str";
           $addLinkOptions['query']['type'] = $type_url_str;
@@ -103,7 +103,7 @@ function mc_addstuff_display_block_add_stuff(){
             //$addLinkOptions['query']['destination'] = $_GET['destination'];
           } 
           $addLinkOptions['query']['message'] = 'register-first';  
-        }
+        
       }
     
     // check if the user has permissions to create this type of node
