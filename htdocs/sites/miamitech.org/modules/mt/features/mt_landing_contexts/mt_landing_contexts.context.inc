@@ -611,6 +611,12 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 1,
         ),
+        'boxes-mt_group_calendar' => array(
+          'module' => 'boxes',
+          'delta' => 'mt_group_calendar',
+          'region' => 'right',
+          'weight' => 2,
+        ),
         'boxes-latest_page_title' => array(
           'module' => 'boxes',
           'delta' => 'latest_page_title',

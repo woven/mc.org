@@ -176,5 +176,27 @@ print \'<div class="prose">\'.$node->body.\'</div>\';
   );
   $export['home_joinus'] = $box;
 
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'mt_group_calendar';
+  $box->plugin_key = 'simple';
+  $box->title = 'Add to calendar';
+  $box->description = 'Calendar group box';
+  $box->options = array(
+    'body' => '<?php 
+$sql = "SELECT nid from {node} WHERE title LIKE \'%s\' and type=\'group\' ";
+$group_title = $_GET[\'title\'];
+if($group_title){
+$gid = db_result(db_query($sql, $group_title));
+if($gid){
+print \'<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://\'. $_SERVER["SERVER_NAME"] .\'/group/\' . $gid . \'/ical">All events from this group (iCal)</a>\';
+}
+}
+?>',
+    'format' => '3',
+  );
+  $export['mt_group_calendar'] = $box;
+
   return $export;
 }

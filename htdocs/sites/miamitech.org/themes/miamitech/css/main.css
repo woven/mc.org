@@ -2468,10 +2468,28 @@ span.ical-ico {
   margin-top: -2px;
 }
 
+span.ical-group-ico {
+  background: url(/sites/miamitech.org/themes/miamitech/images/mt/calendar-group.png);
+  position: absolute;
+  text-indent: -99999px;
+  height: 16px;
+  width: 15px;
+  margin-top: -2px;
+}
+
 a.ical-link {
   padding-left: 20px;
 }
 
 #views-exposed-form-latest-pages-page-7 .views-exposed-widget, #views-exposed-form-latest-pages-page-7 .form-item {
   padding: 0px;
+}
+
+
+.block .field-ical {
+	padding-bottom: 20px;
+}
+
+.block .field-group-ical {
+	padding-bottom: 20px;
 }

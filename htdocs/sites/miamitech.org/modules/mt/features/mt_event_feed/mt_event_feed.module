@@ -17,6 +17,20 @@ function mt_event_feed_menu(){
   return $items;
 }
 
+function mt_event_feed_menu_alter(&$items){
+  $items['node/%/ical']['page callback'] = 'mt_event_feed_event_node_ical';
+}
+
+function mt_event_feed_event_node_ical() {
+  $node = node_load(arg(1));
+  $event = _event_node_ical($node);
+  $location = $node->locations['0'];
+  $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
+  drupal_set_header('Content-Type: text/calendar; charset=utf-8');
+  drupal_set_header('Content-Disposition: attachment; filename="calendar.ics"; ');
+  print ical_export(array($event), $event['summary']);
+}
+
 function mt_event_feed_ical() {
   $gid = arg(1);
   $group = node_load($gid);
@@ -29,6 +43,7 @@ function mt_event_feed_ical() {
     $node = node_load($nid);
     if($node->type=='event'){
       $event = _event_node_ical($node);
+      $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
       $events[] = $event;
     }
   }
