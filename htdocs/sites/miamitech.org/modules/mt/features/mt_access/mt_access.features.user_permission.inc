@@ -389,8 +389,7 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '2' => 'group manager',
     ),
   );
 
@@ -1129,7 +1128,8 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-      '2' => 'group manager',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
     ),
   );
 
@@ -1742,8 +1742,7 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '2' => 'group manager',
     ),
   );
 
@@ -2474,11 +2473,7 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache group-page-logo'] = array(
     'name' => 'view imagecache group-page-logo',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
