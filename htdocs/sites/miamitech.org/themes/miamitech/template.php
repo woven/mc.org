@@ -10,7 +10,7 @@
  * 
  */
 function miamitech_links($links, $attributes = array('class' => 'links')){
-    
+    /*
   if (strpos($attributes['class'], 'primary-links') !== FALSE){
   	  $id = 0;
     foreach($links as $lkey => &$link){
@@ -26,7 +26,7 @@ function miamitech_links($links, $attributes = array('class' => 'links')){
       }
     }
   }
-  
+  */
   return theme_links($links, $attributes);
   
 }
