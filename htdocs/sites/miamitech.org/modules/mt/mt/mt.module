@@ -263,5 +263,52 @@ function mt_preprocess_page(&$vars){
 
 function mt_ds_fields_alter(&$fields) {
   $fields['nd_location_name'] = $fields['name'];
-  unset($fields['name']);
+  $fields['nd_location_name']['properties']['formatters']['mt_location_textfield'] = t('MT Textfield');
+  unset($fields['name']); 
+}
+
+function theme_mt_location_textfield($field) {
+  if($field['key']=='nd_location_name'){
+    $field['key']='name';
+  }
+  if (!empty($field['object']->location[$field['key']])) {
+    $value = $field['object']->location[$field['key']];
+    if ($field['key'] == 'country') {
+      $value = $field['object']->location['country_name'];
+    }
+    if ($field['key'] == 'province') {
+      $value = $field['object']->location['province_name'];
+    }
+    if ($field['key'] == 'locpick') {
+      // Latitude.
+      $value  = '';
+      list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($field['object']->location['latitude']);
+      $value .= "${degrees}° ${minutes}' ${seconds}\" ";
+      if (!$negative) {
+        $value .= 'N';
+      }
+      else {
+        $value .= 'S';
+      }
+      // Longitude
+      list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($field['object']->location['longitude']);
+      $value .= ", ${degrees}° ${minutes}' ${seconds}\" ";
+      if (!$negative) {
+        $value .= 'E';
+      }
+      else {
+        $value .= 'W';
+      }
+    }
+    return check_plain($value);
+  }
+}
+
+function mt_theme() {
+  $theme_functions = array(
+  'mt_location_textfield' => array(
+      'arguments' => array('field' => NULL),
+    ),
+  );
+  return $theme_functions;
 }
