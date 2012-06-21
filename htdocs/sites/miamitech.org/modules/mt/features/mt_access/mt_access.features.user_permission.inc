@@ -209,6 +209,114 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: add stuff article
+  $permissions['add stuff article'] = array(
+    'name' => 'add stuff article',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff audio
+  $permissions['add stuff audio'] = array(
+    'name' => 'add stuff audio',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff event
+  $permissions['add stuff event'] = array(
+    'name' => 'add stuff event',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
+  // Exported permission: add stuff event_feed
+  $permissions['add stuff event_feed'] = array(
+    'name' => 'add stuff event_feed',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
+  // Exported permission: add stuff file
+  $permissions['add stuff file'] = array(
+    'name' => 'add stuff file',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff forum
+  $permissions['add stuff forum'] = array(
+    'name' => 'add stuff forum',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff gallery
+  $permissions['add stuff gallery'] = array(
+    'name' => 'add stuff gallery',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff gallery_image
+  $permissions['add stuff gallery_image'] = array(
+    'name' => 'add stuff gallery_image',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff group
+  $permissions['add stuff group'] = array(
+    'name' => 'add stuff group',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+    ),
+  );
+
+  // Exported permission: add stuff link
+  $permissions['add stuff link'] = array(
+    'name' => 'add stuff link',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff nnews
+  $permissions['add stuff nnews'] = array(
+    'name' => 'add stuff nnews',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff npage
+  $permissions['add stuff npage'] = array(
+    'name' => 'add stuff npage',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff place
+  $permissions['add stuff place'] = array(
+    'name' => 'add stuff place',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff video
+  $permissions['add stuff video'] = array(
+    'name' => 'add stuff video',
+    'roles' => array(),
+  );
+
+  // Exported permission: add stuff webform
+  $permissions['add stuff webform'] = array(
+    'name' => 'add stuff webform',
+    'roles' => array(),
+  );
+
   // Exported permission: administer actions
   $permissions['administer actions'] = array(
     'name' => 'administer actions',
@@ -298,6 +406,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: administer first login
+  $permissions['administer first login'] = array(
+    'name' => 'administer first login',
+    'roles' => array(),
   );
 
   // Exported permission: administer flash
@@ -1012,7 +1126,12 @@ function mt_access_user_default_permissions() {
   // Exported permission: delete own event_feed content
   $permissions['delete own event_feed content'] = array(
     'name' => 'delete own event_feed content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: delete own file content
@@ -1888,17 +2007,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: post by femail
-  $permissions['post by femail'] = array(
-    'name' => 'post by femail',
-    'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
-    ),
-  );
-
   // Exported permission: post comments
   $permissions['post comments'] = array(
     'name' => 'post comments',
@@ -2508,18 +2616,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: view imagecache comment_image
-  $permissions['view imagecache comment_image'] = array(
-    'name' => 'view imagecache comment_image',
-    'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
-    ),
-  );
-
   // Exported permission: view imagecache featured_item
   $permissions['view imagecache featured_item'] = array(
     'name' => 'view imagecache featured_item',
@@ -2703,18 +2799,6 @@ function mt_access_user_default_permissions() {
   // Exported permission: view imagecache tiny
   $permissions['view imagecache tiny'] = array(
     'name' => 'view imagecache tiny',
-    'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
-    ),
-  );
-
-  // Exported permission: view imagecache user_comment_image
-  $permissions['view imagecache user_comment_image'] = array(
-    'name' => 'view imagecache user_comment_image',
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
