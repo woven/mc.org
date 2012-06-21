@@ -87,26 +87,28 @@ function mc_addstuff_display_block_add_stuff(){
     
     // Anonymous, will see add stuff containing links to the register page
     if (!$user->uid){
-      // show them only the types that can be posted in a group (except page and album)
-      if($usage == 'group_post_standard' && $type->type != 'page' && $type->type != 'gallery'){
-        //$addLink = 'user/register';
-        $addLink = "node/add/$type_url_str";
-        $addLinkOptions['query']['type'] = $type_url_str;
-        if (is_object($group)){
-          $addLinkDestination = "node/add/$type_url_str/" . $group->nid;
-        }else{
-          $addLinkDestination = "node/add/$type_url_str";
-        }
-        if ($type->type != 'gallery_image'){
-          $addLinkOptions['query']['destination'] = $addLinkDestination;
-          //$addLinkOptions['query']['destination'] = $_GET['destination'];
-        } 
-        $addLinkOptions['query']['message'] = 'register-first';  
+      if(user_access('add stuff ' . $type->type )){
+        // show them only the types that can be posted in a group (except page and album)
+        
+          //$addLink = 'user/register';
+          $addLink = "node/add/$type_url_str";
+          $addLinkOptions['query']['type'] = $type_url_str;
+          if (is_object($group)){
+            $addLinkDestination = "node/add/$type_url_str/" . $group->nid;
+          }else{
+            $addLinkDestination = "node/add/$type_url_str";
+          }
+          if ($type->type != 'gallery_image'){
+            $addLinkOptions['query']['destination'] = $addLinkDestination;
+            //$addLinkOptions['query']['destination'] = $_GET['destination'];
+          } 
+          $addLinkOptions['query']['message'] = 'register-first';  
+        
       }
     
     // check if the user has permissions to create this type of node
     }elseif (user_access("create " . $type->type . " content") || ($type->type=='forum' && user_access("create forum topics"))){
-      
+      if(user_access('add stuff ' . $type->type )){
       // TODO: Fix this hack, it's really ugly 
       // Since we are using nodereference_url alread for the gallery-image type, 
       // we need to find a way for the user to choose the gallery, so we redirect
@@ -139,6 +141,7 @@ function mc_addstuff_display_block_add_stuff(){
         
         
       }
+    }
       
     // No anonymous, no permissions, continue with next content type
     }else{
@@ -209,3 +212,12 @@ function mc_addstuff_boot(){
   }
 }
  
+
+function mc_addstuff_perm(){
+  $perms = array();
+  $types = node_get_types();
+  foreach ($types as $type) {
+    $perms[] = 'add stuff ' . $type->type;
+  }
+  return $perms;
+}
