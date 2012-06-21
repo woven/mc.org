@@ -80,9 +80,10 @@ function mt_userflow_rules_defaults() {
         ),
         '#actions' => array(
           '0' => array(
+            '#weight' => 0,
             '#type' => 'action',
             '#settings' => array(
-              'message' => 'Nice group. Now, <a href="node/add/event">add an event</a> or <a href="node/add/event_feed">import your events feed</a>',
+              'message' => 'Nice group. Now, <a href="/node/add/event">add an event</a> or <a href="/node/add/event-feed">import your events feed</a>',
               'error' => 0,
               '#eval input' => array(
                 'token_rules_input_evaluator' => array(
@@ -100,7 +101,6 @@ function mt_userflow_rules_defaults() {
                 '0' => 'message',
               ),
             ),
-            '#weight' => 0,
           ),
         ),
         '#version' => 6003,
