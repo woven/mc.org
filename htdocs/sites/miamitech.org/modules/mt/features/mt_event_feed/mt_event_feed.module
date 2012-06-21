@@ -43,6 +43,7 @@ function mt_event_feed_ical() {
     $node = node_load($nid);
     if($node->type=='event'){
       $event = _event_node_ical($node);
+      $location = $node->locations['0'];
       $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
       $events[] = $event;
     }
