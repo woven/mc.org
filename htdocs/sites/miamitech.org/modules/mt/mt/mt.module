@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * Code for the mt feature.
+ */
+
+include_once 'mt.features.inc';
 
 function mt_preprocess($vars,$hook){
     if($hook == 'block'){
@@ -126,7 +132,7 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
     ),
 
     'mt_add_group_ical' => array(
-      'title' => t('Add Group to Calendar'),
+      'title' => t('Add Group to Calendar iCal'),
       'exclude' => array(
         'group' => 'group',
         'link' => 'link',
@@ -158,9 +164,49 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
         'token' => 0,
       ),
     ),
+
+
+    'mt_add_group_rss' => array(
+      'title' => t('Add Group to Calendar RSS'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'field-group-ical',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php 
+          print mt_add_group_rss($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
   );
 
   return array('nd' => $fields);
+}
+
+function mt_add_group_rss($node){
+  $gid = array_pop($node->og_groups);
+  return '<span class="rss-group-ico"> </span><a class="ical-link" href="http://'. $_SERVER["SERVER_NAME"] .'/groups/' . $gid . '/rss">All events from this group (RSS)</a>';
 }
 
 function mt_add_group_ical($node){
@@ -212,4 +258,57 @@ function mt_preprocess_page(&$vars){
   if(arg(0)=='latest' && isset($_GET['title'])){
     $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
   }
+}
+
+
+function mt_ds_fields_alter(&$fields) {
+  $fields['nd_location_name'] = $fields['name'];
+  $fields['nd_location_name']['properties']['formatters']['mt_location_textfield'] = t('MT Textfield');
+  unset($fields['name']); 
+}
+
+function theme_mt_location_textfield($field) {
+  if($field['key']=='nd_location_name'){
+    $field['key']='name';
+  }
+  if (!empty($field['object']->location[$field['key']])) {
+    $value = $field['object']->location[$field['key']];
+    if ($field['key'] == 'country') {
+      $value = $field['object']->location['country_name'];
+    }
+    if ($field['key'] == 'province') {
+      $value = $field['object']->location['province_name'];
+    }
+    if ($field['key'] == 'locpick') {
+      // Latitude.
+      $value  = '';
+      list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($field['object']->location['latitude']);
+      $value .= "${degrees}° ${minutes}' ${seconds}\" ";
+      if (!$negative) {
+        $value .= 'N';
+      }
+      else {
+        $value .= 'S';
+      }
+      // Longitude
+      list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($field['object']->location['longitude']);
+      $value .= ", ${degrees}° ${minutes}' ${seconds}\" ";
+      if (!$negative) {
+        $value .= 'E';
+      }
+      else {
+        $value .= 'W';
+      }
+    }
+    return check_plain($value);
+  }
+}
+
+function mt_theme() {
+  $theme_functions = array(
+  'mt_location_textfield' => array(
+      'arguments' => array('field' => NULL),
+    ),
+  );
+  return $theme_functions;
 }

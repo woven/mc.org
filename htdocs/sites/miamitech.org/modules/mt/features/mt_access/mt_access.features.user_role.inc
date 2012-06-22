@@ -3,7 +3,7 @@
 /**
  * Implementation of hook_user_default_roles().
  */
-function mt_perms_user_default_roles() {
+function mt_access_user_default_roles() {
   $roles = array();
 
   // Exported role: Publisher

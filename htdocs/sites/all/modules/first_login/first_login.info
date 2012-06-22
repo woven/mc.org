@@ -1,0 +1,11 @@
+name = "First login"
+description = "Marks users first login(s). This information can then be used in other modules to present content on first logins only."
+core = 6.x
+dependencies[] = user
+
+; Information added by drupal.org packaging script on 2012-02-25
+version = "6.x-1.0"
+core = "6.x"
+project = "first_login"
+datestamp = "1330203942"
+

@@ -611,6 +611,12 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 1,
         ),
+        'boxes-mt_group_calendar' => array(
+          'module' => 'boxes',
+          'delta' => 'mt_group_calendar',
+          'region' => 'right',
+          'weight' => 2,
+        ),
         'boxes-latest_page_title' => array(
           'module' => 'boxes',
           'delta' => 'latest_page_title',
@@ -778,17 +784,11 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'header',
           'weight' => 0,
         ),
-        'google_cse-0' => array(
-          'module' => 'google_cse',
-          'delta' => 0,
-          'region' => 'branding',
-          'weight' => 0,
-        ),
         'boxes-add_stuff' => array(
           'module' => 'boxes',
           'delta' => 'add_stuff',
           'region' => 'branding',
-          'weight' => 1,
+          'weight' => 0,
         ),
         'menu-secondary-links' => array(
           'module' => 'menu',
@@ -844,14 +844,6 @@ function mt_landing_contexts_context_default_contexts() {
       ),
       'footer' => array(
         'class' => '',
-        'blocks' => array(
-          'boxes-footer_hon_logo' => array(
-            'class' => '',
-          ),
-          'boxes-footer_prc_logo' => array(
-            'class' => '',
-          ),
-        ),
       ),
       'content' => array(
         'class' => '',
@@ -877,12 +869,6 @@ function mt_landing_contexts_context_default_contexts() {
       'footer_above' => array(
         'class' => '',
         'blocks' => array(
-          'menu-menu-categories' => array(
-            'class' => '',
-          ),
-          'menu-menu-footer-links' => array(
-            'class' => '',
-          ),
           'menu-secondary-links' => array(
             'class' => '',
           ),
