@@ -9,3 +9,14 @@
 	border-radius: 0;
 	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
 }
+
+
+/* kill the extra spacing on the color field */
+#edit-field-header-color-0-value-wrapper{
+	height: auto;
+}
+
+
+#edit-field-header-color-0-value{
+	height: auto;
+}
