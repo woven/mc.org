@@ -1,3 +1,11 @@
+/* Changes for the last primary menu item styles (help or LAST)*/
 #navigation .primary-links li.last {
 	float: none !important;
+}
+
+#navigation .primary-links li.last a {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
 }
