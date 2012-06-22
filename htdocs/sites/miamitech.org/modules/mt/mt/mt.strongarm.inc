@@ -16,6 +16,9 @@ function mt_strongarm() {
       'theme_select|themes' => '1',
       'timezone' => '1',
     ),
+    'event_feed_node_form' => array(
+      'title' => '1',
+    ),
   );
   $export['formfilter'] = $strongarm;
 
