@@ -1,0 +1,39 @@
+/* Custom styles specific to MiamiTech.org */
+
+body {
+	background: #E2E2E2;
+	font: 75%/1.25 Georgia, Helvetica, sans-serif;
+}
+
+#highlight {
+	display: none;
+}
+
+#page .block-title a span {
+	color: #39F;
+}
+
+#page h1 {
+	font-size: 2.5em;
+	color: #39F;
+}
+
+#page h4 {
+	margin-bottom: 5px;
+	font-size: 1.45em;
+	color: #ff6600;
+}
+
+#page h5 {
+	margin-bottom: 5px;
+	font-size: 1.1em;
+	color: #39F;
+}
+
+#page h4 a,
+#page h4 a:visited,
+#page h5 a,
+#page h5 a:visited {
+	text-decoration: none;
+	color: #39F;
+}
