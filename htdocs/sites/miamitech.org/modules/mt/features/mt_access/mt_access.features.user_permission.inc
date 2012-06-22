@@ -1909,10 +1909,7 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_related'] = array(
     'name' => 'edit field_related',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -2921,11 +2918,7 @@ function mt_access_user_default_permissions() {
   $permissions['view field_related'] = array(
     'name' => 'view field_related',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
