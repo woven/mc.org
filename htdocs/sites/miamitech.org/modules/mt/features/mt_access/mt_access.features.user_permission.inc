@@ -1441,13 +1441,23 @@ function mt_access_user_default_permissions() {
   // Exported permission: edit field_about
   $permissions['edit field_about'] = array(
     'name' => 'edit field_about',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_addphoto
   $permissions['edit field_addphoto'] = array(
     'name' => 'edit field_addphoto',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_block_body
@@ -1486,283 +1496,518 @@ function mt_access_user_default_permissions() {
   // Exported permission: edit field_computer_cost
   $permissions['edit field_computer_cost'] = array(
     'name' => 'edit field_computer_cost',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_computers_with_internet
   $permissions['edit field_computers_with_internet'] = array(
     'name' => 'edit field_computers_with_internet',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_contact_name
   $permissions['edit field_contact_name'] = array(
     'name' => 'edit field_contact_name',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_cost_per_session
   $permissions['edit field_cost_per_session'] = array(
     'name' => 'edit field_cost_per_session',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_editorial
   $permissions['edit field_editorial'] = array(
     'name' => 'edit field_editorial',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_email
   $permissions['edit field_email'] = array(
     'name' => 'edit field_email',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_embedtest
   $permissions['edit field_embedtest'] = array(
     'name' => 'edit field_embedtest',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_fax
   $permissions['edit field_fax'] = array(
     'name' => 'edit field_fax',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_audio_video_items
   $permissions['edit field_featured_audio_video_items'] = array(
     'name' => 'edit field_featured_audio_video_items',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_events
   $permissions['edit field_featured_events'] = array(
     'name' => 'edit field_featured_events',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_group
   $permissions['edit field_featured_group'] = array(
     'name' => 'edit field_featured_group',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_groups
   $permissions['edit field_featured_groups'] = array(
     'name' => 'edit field_featured_groups',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_items
   $permissions['edit field_featured_items'] = array(
     'name' => 'edit field_featured_items',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_members
   $permissions['edit field_featured_members'] = array(
     'name' => 'edit field_featured_members',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_photo
   $permissions['edit field_featured_photo'] = array(
     'name' => 'edit field_featured_photo',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_place
   $permissions['edit field_featured_place'] = array(
     'name' => 'edit field_featured_place',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_featured_places
   $permissions['edit field_featured_places'] = array(
     'name' => 'edit field_featured_places',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_gallery
   $permissions['edit field_gallery'] = array(
     'name' => 'edit field_gallery',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_gallery_image
   $permissions['edit field_gallery_image'] = array(
     'name' => 'edit field_gallery_image',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_group_featured_items
   $permissions['edit field_group_featured_items'] = array(
     'name' => 'edit field_group_featured_items',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_group_manager
   $permissions['edit field_group_manager'] = array(
     'name' => 'edit field_group_manager',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_header_color
   $permissions['edit field_header_color'] = array(
     'name' => 'edit field_header_color',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_header_title_color
   $permissions['edit field_header_title_color'] = array(
     'name' => 'edit field_header_title_color',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_health_insurance
   $permissions['edit field_health_insurance'] = array(
     'name' => 'edit field_health_insurance',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_health_services
   $permissions['edit field_health_services'] = array(
     'name' => 'edit field_health_services',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_hours
   $permissions['edit field_hours'] = array(
     'name' => 'edit field_hours',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_link
   $permissions['edit field_link'] = array(
     'name' => 'edit field_link',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_list_image
   $permissions['edit field_list_image'] = array(
     'name' => 'edit field_list_image',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_logo
   $permissions['edit field_logo'] = array(
     'name' => 'edit field_logo',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_media
   $permissions['edit field_media'] = array(
     'name' => 'edit field_media',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_open_in_evening
   $permissions['edit field_open_in_evening'] = array(
     'name' => 'edit field_open_in_evening',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_open_on_weekends
   $permissions['edit field_open_on_weekends'] = array(
     'name' => 'edit field_open_on_weekends',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_page_subtype
   $permissions['edit field_page_subtype'] = array(
     'name' => 'edit field_page_subtype',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_page_type
   $permissions['edit field_page_type'] = array(
     'name' => 'edit field_page_type',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_phone_number
   $permissions['edit field_phone_number'] = array(
     'name' => 'edit field_phone_number',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_place
   $permissions['edit field_place'] = array(
     'name' => 'edit field_place',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_place_type
   $permissions['edit field_place_type'] = array(
     'name' => 'edit field_place_type',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_public_album
   $permissions['edit field_public_album'] = array(
     'name' => 'edit field_public_album',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_related
   $permissions['edit field_related'] = array(
     'name' => 'edit field_related',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_small_name
   $permissions['edit field_small_name'] = array(
     'name' => 'edit field_small_name',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_special_features
   $permissions['edit field_special_features'] = array(
     'name' => 'edit field_special_features',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_tech_center_type
   $permissions['edit field_tech_center_type'] = array(
     'name' => 'edit field_tech_center_type',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_upload_file
   $permissions['edit field_upload_file'] = array(
     'name' => 'edit field_upload_file',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_video
   $permissions['edit field_video'] = array(
     'name' => 'edit field_video',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_website
   $permissions['edit field_website'] = array(
     'name' => 'edit field_website',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_wireless_cost
   $permissions['edit field_wireless_cost'] = array(
     'name' => 'edit field_wireless_cost',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit field_wireless_hotspot
   $permissions['edit field_wireless_hotspot'] = array(
     'name' => 'edit field_wireless_hotspot',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: edit own article content
@@ -2174,7 +2419,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_about'] = array(
     'name' => 'view field_about',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2182,7 +2431,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_addphoto'] = array(
     'name' => 'view field_addphoto',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2226,7 +2479,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_computer_cost'] = array(
     'name' => 'view field_computer_cost',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2234,7 +2491,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_computers_with_internet'] = array(
     'name' => 'view field_computers_with_internet',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2242,7 +2503,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_contact_name'] = array(
     'name' => 'view field_contact_name',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2250,7 +2515,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_cost_per_session'] = array(
     'name' => 'view field_cost_per_session',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2258,7 +2527,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_editorial'] = array(
     'name' => 'view field_editorial',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2266,7 +2539,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_email'] = array(
     'name' => 'view field_email',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2274,7 +2551,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_embedtest'] = array(
     'name' => 'view field_embedtest',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2282,7 +2563,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_fax'] = array(
     'name' => 'view field_fax',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2290,7 +2575,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_audio_video_items'] = array(
     'name' => 'view field_featured_audio_video_items',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2298,7 +2587,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_events'] = array(
     'name' => 'view field_featured_events',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2306,7 +2599,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_group'] = array(
     'name' => 'view field_featured_group',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2314,7 +2611,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_groups'] = array(
     'name' => 'view field_featured_groups',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2322,7 +2623,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_items'] = array(
     'name' => 'view field_featured_items',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2330,7 +2635,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_members'] = array(
     'name' => 'view field_featured_members',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2338,7 +2647,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_photo'] = array(
     'name' => 'view field_featured_photo',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2346,7 +2659,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_place'] = array(
     'name' => 'view field_featured_place',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2354,7 +2671,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_places'] = array(
     'name' => 'view field_featured_places',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2362,7 +2683,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_gallery'] = array(
     'name' => 'view field_gallery',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2370,7 +2695,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_gallery_image'] = array(
     'name' => 'view field_gallery_image',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2378,7 +2707,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_group_featured_items'] = array(
     'name' => 'view field_group_featured_items',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2386,7 +2719,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_group_manager'] = array(
     'name' => 'view field_group_manager',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2394,7 +2731,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_header_color'] = array(
     'name' => 'view field_header_color',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2402,7 +2743,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_header_title_color'] = array(
     'name' => 'view field_header_title_color',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2410,7 +2755,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_health_insurance'] = array(
     'name' => 'view field_health_insurance',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2418,7 +2767,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_health_services'] = array(
     'name' => 'view field_health_services',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2426,7 +2779,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_hours'] = array(
     'name' => 'view field_hours',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2434,7 +2791,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_link'] = array(
     'name' => 'view field_link',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2442,7 +2803,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_list_image'] = array(
     'name' => 'view field_list_image',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2450,7 +2815,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_logo'] = array(
     'name' => 'view field_logo',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2458,7 +2827,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_media'] = array(
     'name' => 'view field_media',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2466,7 +2839,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_open_in_evening'] = array(
     'name' => 'view field_open_in_evening',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2474,7 +2851,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_open_on_weekends'] = array(
     'name' => 'view field_open_on_weekends',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2482,7 +2863,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_page_subtype'] = array(
     'name' => 'view field_page_subtype',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2490,7 +2875,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_page_type'] = array(
     'name' => 'view field_page_type',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2498,7 +2887,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_phone_number'] = array(
     'name' => 'view field_phone_number',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2506,7 +2899,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_place'] = array(
     'name' => 'view field_place',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2514,7 +2911,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_place_type'] = array(
     'name' => 'view field_place_type',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2522,7 +2923,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_public_album'] = array(
     'name' => 'view field_public_album',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2530,7 +2935,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_related'] = array(
     'name' => 'view field_related',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2538,7 +2947,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_small_name'] = array(
     'name' => 'view field_small_name',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2546,7 +2959,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_special_features'] = array(
     'name' => 'view field_special_features',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2554,7 +2971,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_tech_center_type'] = array(
     'name' => 'view field_tech_center_type',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2562,7 +2983,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_upload_file'] = array(
     'name' => 'view field_upload_file',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2570,7 +2995,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_video'] = array(
     'name' => 'view field_video',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2578,7 +3007,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_website'] = array(
     'name' => 'view field_website',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2586,7 +3019,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_wireless_cost'] = array(
     'name' => 'view field_wireless_cost',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
@@ -2594,7 +3031,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_wireless_hotspot'] = array(
     'name' => 'view field_wireless_hotspot',
     'roles' => array(
-      '0' => 'anonymous user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
