@@ -1,3 +1,22 @@
+/* Changes for the last primary menu item styles (help or LAST)*/
 #navigation .primary-links li.last {
 	float: none !important;
+}
+
+#navigation .primary-links li.last a {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
+}
+
+
+/* kill the extra spacing on the color field */
+#edit-field-header-color-0-value-wrapper{
+	height: auto;
+}
+
+
+#edit-field-header-color-0-value{
+	height: auto;
 }
