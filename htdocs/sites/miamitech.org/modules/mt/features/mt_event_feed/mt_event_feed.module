@@ -26,6 +26,7 @@ function mt_event_feed_event_node_ical() {
   $event = _event_node_ical($node);
   $location = $node->locations['0'];
   $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
+  $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
   drupal_set_header('Content-Type: text/calendar; charset=utf-8');
   drupal_set_header('Content-Disposition: attachment; filename="calendar.ics"; ');
   print ical_export(array($event), $event['summary']);
@@ -43,7 +44,9 @@ function mt_event_feed_ical() {
     $node = node_load($nid);
     if($node->type=='event'){
       $event = _event_node_ical($node);
+      $location = $node->locations['0'];
       $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
+      $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
       $events[] = $event;
     }
   }
@@ -119,7 +122,7 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
 
 function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   if($node->type=='event_feed' && $op=='insert'){
-    $mapping = 'a:5:{s:91:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:5:"DTEND";i:4;s:8:"datetime";}";s:49:"a:3:{i:0;s:2:"mt_event_feed";i:1;s:5:"event";i:2;s:3:"end";}";s:93:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:8:"datetime";}";s:51:"a:3:{i:0;s:2:"mt_event_feed";i:1;s:5:"event";i:2;s:5:"start";}";s:87:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:2:"tz";}";s:54:"a:3:{i:0;s:2:"mt_event_feed";i:1;s:5:"event";i:2;s:8:"timezone";}";s:60:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:8:"LOCATION";}";s:54:"a:3:{i:0;s:2:"mt_event_feed";i:1;s:5:"event";i:2;s:8:"location";}";s:55:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:3:"GEO";}";s:49:"a:3:{i:0;s:2:"mt_event_feed";i:1;s:5:"event";i:2;s:3:"geo";}";}';
+    $mapping = 'a:5:{s:91:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:5:"DTEND";i:4;s:8:"datetime";}";s:61:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:3:"end";}";s:93:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:8:"datetime";}";s:63:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:5:"start";}";s:87:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:2:"tz";}";s:66:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:8:"timezone";}";s:60:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:8:"LOCATION";}";s:66:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:8:"location";}";s:55:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:3:"GEO";}";s:61:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:3:"geo";}";}';
     $record = new stdClass();
     $record->nid = $node->nid;
     $record->mapping = $mapping;

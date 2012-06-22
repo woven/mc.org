@@ -110,7 +110,7 @@ function mt_event_ui_ds_default_settings() {
             'nd_location_name' => array(
               'region' => 'right',
               'weight' => '-91',
-              'format' => 'nd_location_textfield',
+              'format' => 'mt_location_textfield',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
