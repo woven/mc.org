@@ -2,7 +2,7 @@
 
 body {
 	background: #E2E2E2;
-	font: 75%/1.25 Georgia, Helvetica, sans-serif;
+	font: 75%/1.25 Arial, Helvetica, sans-serif;
 }
 
 #highlight {
@@ -35,8 +35,62 @@ body {
 #page h5 a,
 #page h5 a:visited {
 	text-decoration: none;
-	color: #39F;
+	color: #09F;
 }
+
+#page .field-author a {
+	color: green;
+}
+
+/* Navigation */
+
+#navigation .primary-links {
+	background: #09F repeat-x;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
+	color: #fff;
+}
+
+#navigation .primary-links a:visited {
+	background: #09C 0 0 repeat-x;
+	-webkit-text-shadow: 0 1px 0 #fff;
+	-moz-text-shadow: 0 1px 0 #fff;
+	text-shadow: 0 1px 0 #fff;
+	background-image: none;
+}
+
+#navigation .primary-links .active a,
+#navigation .primary-links .active a:visited,
+#navigation .primary-links .active-trail a,
+#navigation .primary-links .active-trail a:visited {
+	color: #FF9;
+	background-position: 0 -38px;
+	background-color: #09F;
+	-webkit-text-shadow: 0 1px 0 #333;
+	-moz-text-shadow: 0 1px 0 #333;
+	text-shadow: 0 1px 0 #333;
+	background-image: none;
+}
+
+#navigation .primary-links a,
+#navigation .primary-links a:visited {
+	background: none;
+	color: #fff;
+	-webkit-text-shadow: 0 1px 0 #333;
+	-moz-text-shadow: 0 1px 0 #333;
+	text-shadow: 0 1px 0 #333;
+}
+
+#navigation .primary-links li {
+	padding-left: 3px;
+	background: none;
+}
+
+
+
+
 
 /* Changes for the last primary menu item styles (help or LAST)*/
 #navigation .primary-links li.last {
