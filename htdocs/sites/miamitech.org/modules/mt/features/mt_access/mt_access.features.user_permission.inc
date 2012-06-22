@@ -1706,10 +1706,7 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_group_featured_items'] = array(
     'name' => 'edit field_group_featured_items',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -1717,10 +1714,7 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_group_manager'] = array(
     'name' => 'edit field_group_manager',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -2707,11 +2701,7 @@ function mt_access_user_default_permissions() {
   $permissions['view field_group_featured_items'] = array(
     'name' => 'view field_group_featured_items',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -2719,11 +2709,7 @@ function mt_access_user_default_permissions() {
   $permissions['view field_group_manager'] = array(
     'name' => 'view field_group_manager',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
