@@ -426,7 +426,7 @@ function mc_events_grouped_by_dates($view_name, $display_id, $max_items){
   if ($items_count_today){
 	 
     $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'today', $items_count_today);
-	$output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_count_today);
+	$output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_count_today, $exclude_nids);
   }
   if ($items_count_tomorrow){
     $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'tomorrow', $items_count_tomorrow);
@@ -444,11 +444,22 @@ function mc_events_grouped_by_dates($view_name, $display_id, $max_items){
   }
   
   // upcoming
-  $items_to_display = $max_items - $items_count;
+  if($max_items!=0){
+    $items_to_display = $max_items - $items_count;
+  }
+  else {
+    $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'upcoming', $max_items);
+    $items_to_display = 0;
+    if ($view){
+      $temp = array();
+      mc_events_grouped_by_dates_process_view($view, $display_id, $items_to_display, $temp);
+    }
+  }
+
   if ($items_to_display){
     $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'upcoming', $items_to_display);
     if ($view){
-      $output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_count, $exclude_nids);
+      $output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_to_display, $exclude_nids);
     }
   }
   
@@ -480,10 +491,18 @@ function mc_events_grouped_by_dates_process_view($view, $display_id, &$items_cou
   return $output;
 }
 
-function mc_events_grouped_by_dates_process_view2($view, $display_id, $count){	
-	$output = $view->preview($display_id);
+function mc_events_grouped_by_dates_process_view2($view, $display_id, $count, &$exclude_nids){	
+  $args = array(implode('+', $exclude_nids));
+
+	if ($args && !empty($args[0])){
+    $output = $view->preview($display_id, $args);
+  }else{
+    $output = $view->preview();
+  }
+
 	$i=0;
 	foreach($view->result as $result){
+    $exclude_nids[] = $result->nid;
     if ($i >= $count)
     unset($view->result[$i]);
 	$i++;
