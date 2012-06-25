@@ -502,10 +502,7 @@ function mt_access_user_default_permissions() {
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -1225,10 +1222,7 @@ function mt_access_user_default_permissions() {
   $permissions['delete own npage content'] = array(
     'name' => 'delete own npage content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -1408,8 +1402,7 @@ function mt_access_user_default_permissions() {
   $permissions['edit any npage content'] = array(
     'name' => 'edit any npage content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
     ),
   );
 
@@ -2129,10 +2122,7 @@ function mt_access_user_default_permissions() {
   $permissions['edit own npage content'] = array(
     'name' => 'edit own npage content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
