@@ -165,3 +165,5 @@ ini_set('display_errors',        '1');
 #   'anonymous' => 'Visitor',
 # );
 
+### MC.org Settings ###
+ini_set('memory_limit','150M');
