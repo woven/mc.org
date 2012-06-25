@@ -842,9 +842,7 @@ print \'<img src="http://www.dummyimage.com/83x83/b3b3b3/fff&text=\' . $title . 
     'type' => 'none',
   ));
   $handler->override_option('cache', array(
-    'type' => 'time',
-    'results_lifespan' => '3600',
-    'output_lifespan' => '3600',
+    'type' => 'none',
   ));
   $handler->override_option('header', '<?php
   // Important: Pager should be turned on, otherwise count will not work.

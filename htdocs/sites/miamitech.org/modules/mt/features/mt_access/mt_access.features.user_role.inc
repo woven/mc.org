@@ -31,5 +31,10 @@ function mt_access_user_default_roles() {
     'name' => 'group manager',
   );
 
+  // Exported role: unverified
+  $roles['unverified'] = array(
+    'name' => 'unverified',
+  );
+
   return $roles;
 }

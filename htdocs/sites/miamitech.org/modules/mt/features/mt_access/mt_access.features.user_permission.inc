@@ -644,8 +644,11 @@ function mt_access_user_default_permissions() {
   $permissions['change own username'] = array(
     'name' => 'change own username',
     'roles' => array(
-      '0' => 'administrator',
-      '1' => 'authenticated user',
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
     ),
   );
 
