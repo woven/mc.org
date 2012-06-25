@@ -646,9 +646,9 @@ black',
         ),
       ),
       'default_value_php' => NULL,
-      'label' => 'Small Name',
+      'label' => 'Short Name',
       'weight' => '5',
-      'description' => 'A short name to be used for generating the friendly urls for this group. Be careful choosing this name, it cannot be changed later.',
+      'description' => 'We\'ll use this short name in friendly URLs. Only letters and numbers, and no spaces.',
       'type' => 'text_textfield',
       'module' => 'text',
     ),
@@ -663,7 +663,7 @@ black',
   t('Header Title Color');
   t('Images');
   t('Logo');
-  t('Small Name');
+  t('Short Name');
 
   return $fields;
 }
