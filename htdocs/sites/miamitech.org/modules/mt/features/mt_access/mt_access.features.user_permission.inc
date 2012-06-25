@@ -502,7 +502,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
     'roles' => array(
-      '0' => 'administrator',
+      '0' => 'Publisher',
+      '1' => 'administrator',
     ),
   );
 
