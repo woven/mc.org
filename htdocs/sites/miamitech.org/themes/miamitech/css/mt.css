@@ -114,3 +114,11 @@ body {
 #edit-field-header-color-0-value{
 	height: auto;
 }
+
+.category-link a{
+	color: green;
+}
+
+#comments {
+	display: none;
+}
