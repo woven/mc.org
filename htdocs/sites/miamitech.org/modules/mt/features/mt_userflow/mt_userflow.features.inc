@@ -29,14 +29,7 @@ function mt_userflow_rules_defaults() {
         '#conditions' => array(
           '0' => array(
             '#weight' => 0,
-            '#info' => array(
-              'label' => 'Execute custom PHP code',
-              'module' => 'PHP',
-              'eval input' => array(
-                '0' => 'code',
-              ),
-            ),
-            '#name' => 'rules_condition_custom_php',
+            '#type' => 'condition',
             '#settings' => array(
               'code' => '//check if the acting user is the same as the updated user
 if($account->uid == $user->uid AND $_POST[\'form_id\']==\'user_profile_form\'){
@@ -45,6 +38,7 @@ if($account->uid == $user->uid AND $_POST[\'form_id\']==\'user_profile_form\'){
 	
 	if(!$udata[\'updatedprofile\']){
 		//the user has never updated his profile profile, continue to the next step.
+                 $_POST[\'hidemsg\'] = true;
 		user_save($account,array("updatedprofile"=>1));
 		return true;
 	}
@@ -62,12 +56,27 @@ return false;',
                 ),
               ),
             ),
-            '#type' => 'condition',
+            '#name' => 'rules_condition_custom_php',
+            '#info' => array(
+              'label' => 'Execute custom PHP code',
+              'module' => 'PHP',
+              'eval input' => array(
+                '0' => 'code',
+              ),
+            ),
           ),
         ),
         '#actions' => array(
           '0' => array(
-            '#type' => 'action',
+            '#weight' => 0,
+            '#info' => array(
+              'label' => 'Show a configurable message on the site',
+              'module' => 'System',
+              'eval input' => array(
+                '0' => 'message',
+              ),
+            ),
+            '#name' => 'rules_action_drupal_message',
             '#settings' => array(
               'message' => 'Ok, your account is created. Now, <a href="/node/add/group">tell us about your group</a>.',
               'error' => 0,
@@ -79,40 +88,7 @@ return false;',
                 ),
               ),
             ),
-            '#name' => 'rules_action_drupal_message',
-            '#info' => array(
-              'label' => 'Show a configurable message on the site',
-              'module' => 'System',
-              'eval input' => array(
-                '0' => 'message',
-              ),
-            ),
-            '#weight' => 0,
-          ),
-          '1' => array(
-            '#weight' => 0,
             '#type' => 'action',
-            '#settings' => array(
-              'code' => 'global $hidemsg;
-$hidemsg = true;',
-              'vars' => array(),
-              '#eval input' => array(
-                'token_rules_input_evaluator' => array(
-                  'code' => array(
-                    '0' => ':global',
-                  ),
-                ),
-              ),
-            ),
-            '#name' => 'rules_action_custom_php',
-            '#info' => array(
-              'label' => 'hide message',
-              'label callback' => FALSE,
-              'module' => 'PHP',
-              'eval input' => array(
-                '0' => 'code',
-              ),
-            ),
           ),
         ),
         '#version' => 6003,
