@@ -8,7 +8,9 @@ include_once 'mt_userflow.features.inc';
 
 
 function mt_userflow_message_alter(&$messages){
-		if($_POST['hidemsg'] == true){
+		global $user;
+		$udata = unserialize($user->data);
+		if($udata['updatedprofile'] == 1){
 			$matches = $messages->contains('The changes have been saved','status');
 			$messages->remove($matches);
 		}
