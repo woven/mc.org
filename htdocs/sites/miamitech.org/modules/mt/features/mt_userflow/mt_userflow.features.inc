@@ -276,12 +276,17 @@ return first_login_get_data($account,\'status\');',
         '#status' => 'default',
         '#conditions' => array(
           '0' => array(
-            '#type' => 'OR',
-            '0' => array(
-              '#weight' => 0,
-              '#type' => 'condition',
-              '#settings' => array(
-                'code' => '//check if the acting user is the same as the updated user
+            '#weight' => 0,
+            '#info' => array(
+              'label' => 'Execute custom PHP code',
+              'module' => 'PHP',
+              'eval input' => array(
+                '0' => 'code',
+              ),
+            ),
+            '#name' => 'rules_condition_custom_php',
+            '#settings' => array(
+              'code' => '//check if the acting user is the same as the updated user
 if($account->uid == $user->uid AND $_POST[\'form_id\']==\'user_profile_form\'){
 	//get the user data
 	$udata = unserialize($account->data);
@@ -293,41 +298,24 @@ if($account->uid == $user->uid AND $_POST[\'form_id\']==\'user_profile_form\'){
 	}
 }
 return false;',
-                'vars' => array(
-                  '0' => 'account',
-                  '1' => 'user',
-                ),
-                '#eval input' => array(
-                  'token_rules_input_evaluator' => array(
-                    'code' => array(
-                      '0' => ':global',
-                    ),
+              'vars' => array(
+                '0' => 'account',
+                '1' => 'user',
+              ),
+              '#eval input' => array(
+                'token_rules_input_evaluator' => array(
+                  'code' => array(
+                    '0' => ':global',
                   ),
                 ),
               ),
-              '#name' => 'rules_condition_custom_php',
-              '#info' => array(
-                'label' => 'Execute custom PHP code',
-                'module' => 'PHP',
-                'eval input' => array(
-                  '0' => 'code',
-                ),
-              ),
             ),
-            '#weight' => 0,
+            '#type' => 'condition',
           ),
         ),
         '#actions' => array(
           '0' => array(
-            '#weight' => 0,
-            '#info' => array(
-              'label' => 'Show a configurable message on the site',
-              'module' => 'System',
-              'eval input' => array(
-                '0' => 'message',
-              ),
-            ),
-            '#name' => 'rules_action_drupal_message',
+            '#type' => 'action',
             '#settings' => array(
               'message' => 'Ok, your account is created. Now, <a href="/node/add/group">tell us about your group</a>.',
               'error' => 0,
@@ -339,7 +327,15 @@ return false;',
                 ),
               ),
             ),
-            '#type' => 'action',
+            '#name' => 'rules_action_drupal_message',
+            '#info' => array(
+              'label' => 'Show a configurable message on the site',
+              'module' => 'System',
+              'eval input' => array(
+                '0' => 'message',
+              ),
+            ),
+            '#weight' => 0,
           ),
         ),
         '#version' => 6003,
