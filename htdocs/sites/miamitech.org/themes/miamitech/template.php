@@ -370,3 +370,20 @@ function miamitech_preprocess_comment_wrapper(&$vars) {
     
   }  
 }
+
+
+function miamitech_nd_location_gmap($field, $latitude, $longitude, $width, $height, $zoom, $autoclick = FALSE) {
+  $map = array();
+  $bubble_content = _nd_location_theme_bubble($field);
+  if (!empty($bubble_content)) {
+    $map['markers'][] = array(
+      'latitude' => $latitude,
+      'longitude' => $longitude,
+      'text' => $bubble_content,
+      'autoclick' => $autoclick,
+      'link' => 'http://maps.google.com/?q=' . theme('nd_location_address', $field),
+    );
+  }
+
+  return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
+}
