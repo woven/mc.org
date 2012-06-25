@@ -113,30 +113,30 @@ After logging in, you will be redirected to !edit_uri so you can change your pas
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_no_approval_required_body';
-  $strongarm->value = '!username,
+  $strongarm->value = 'Hey there!
 
-Thank you for registering at !site. You may now log in to !login_uri using the following username and password:
+Thank you for joining MiamiTech.org.
 
-username: !username
-password: !password
-
-You may also log in by clicking on this link or copying and pasting it in your browser:
+Please verify your email address by going to this link:
 
 !login_url
 
-This is a one-time login, so it can be used only once.
+This link can only be used once.
 
-After logging in, you will be redirected to !edit_uri so you can change your password.
+You\'ll then be able to choose your username and password and tell us about your awesome group.
 
+We\'re listening hard to your feedback, so please don\'t hesitate to be in touch.
 
---  !site team';
+See you around, 
+
+-- MiamiTech.org';
   $export['user_mail_register_no_approval_required_body'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_no_approval_required_subject';
-  $strongarm->value = 'Account details at !site';
+  $strongarm->value = 'Thanks for joining! Please verify your email.';
   $export['user_mail_register_no_approval_required_subject'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -272,7 +272,7 @@ Your account on !site has been deleted.';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_picture_imagecache_comments';
-  $strongarm->value = 'user_comment_image';
+  $strongarm->value = '0';
   $export['user_picture_imagecache_comments'] = $strongarm;
 
   $strongarm = new stdClass;

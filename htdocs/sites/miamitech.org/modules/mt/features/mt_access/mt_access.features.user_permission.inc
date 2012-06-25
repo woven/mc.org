@@ -482,6 +482,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: administer messages alter settings
+  $permissions['administer messages alter settings'] = array(
+    'name' => 'administer messages alter settings',
+    'roles' => array(),
+  );
+
   // Exported permission: administer module filter
   $permissions['administer module filter'] = array(
     'name' => 'administer module filter',
@@ -571,6 +577,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: administer string overrides
+  $permissions['administer string overrides'] = array(
+    'name' => 'administer string overrides',
+    'roles' => array(),
   );
 
   // Exported permission: administer styles
@@ -1721,8 +1733,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
     ),
   );
 
@@ -1732,8 +1742,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
     ),
   );
 

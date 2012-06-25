@@ -12,6 +12,7 @@ function og_group_page_admin_perm(){
  */
 function og_group_page_admin_menu(){
   $items = array();
+/*
   $items['node/%node/manage_group_blocks'] = array(
     'title' => 'Manage Blocks',
     'page callback' => 'drupal_get_form',
@@ -21,6 +22,7 @@ function og_group_page_admin_menu(){
     'type' => MENU_LOCAL_TASK,
     'file' => 'og_group_page_admin.pages.inc',
   );
+*/
   // AHAH callback
   $items['og_group_page_admin/js/%/%'] = array(
     'page callback' => '_og_group_page_admin_set_fetured',
