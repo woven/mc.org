@@ -2247,7 +2247,7 @@ border-width: 1px 0 !important;
 
 .page-user .user-profile #content.block-content {margin: 30px !important;}
 
-.page-user #page.user-profile #main .block #content.block-content {margin: 0 !important;}
+/* .page-user #page.user-profile #main .block #content.block-content {margin: 0 !important;} */
 
 .page-user .view-og-community .views-row{min-height: 0 !important;}
 .field-facebook-like{clear: both;}
