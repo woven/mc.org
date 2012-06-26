@@ -14,7 +14,7 @@ function ft_location_strongarm() {
     'width' => '231px',
     'height' => '225px',
     'latlong' => '40.753499070431374,-73.99223327636719',
-    'zoom' => '11',
+    'zoom' => '15',
     'maxzoom' => '17',
     'styles' => array(
       'line_default' => array(
