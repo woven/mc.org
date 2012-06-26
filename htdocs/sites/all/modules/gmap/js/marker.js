@@ -94,7 +94,7 @@ Drupal.gmap.addHandler('gmap', function (elem) {
     }
     // No content -- marker is a link
     else if (marker.link) {
-      open(marker.link, '_self');
+      open(marker.link, '_blank');
     }
   });
 

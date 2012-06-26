@@ -312,3 +312,12 @@ function mt_theme() {
   );
   return $theme_functions;
 }
+
+function mt_init(){
+  if(arg(0)=='node' && is_numeric(arg(1))){
+    $node = node_load(arg(1));
+    if($node->type=='event'){
+      drupal_add_js((drupal_get_path('module', 'mt') .'/js/mt.js'));
+    }
+  }
+}
