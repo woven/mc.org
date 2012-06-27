@@ -78,6 +78,82 @@ function mt_userflow_rules_defaults() {
         ),
         '#version' => 6003,
       ),
+      'rules_node_new_saved' => array(
+        '#type' => 'rule',
+        '#set' => 'event_node_insert',
+        '#label' => 'Node: New Saved',
+        '#active' => 1,
+        '#weight' => '0',
+        '#categories' => array(
+          '0' => 'mt_userflow',
+        ),
+        '#status' => 'default',
+        '#conditions' => array(
+          '0' => array(
+            '#info' => array(
+              'label' => 'Content has type: all except Group',
+              'label callback' => FALSE,
+              'arguments' => array(
+                'node' => array(
+                  'type' => 'node',
+                  'label' => 'Content',
+                ),
+              ),
+              'module' => 'Node',
+            ),
+            '#name' => 'rules_condition_content_is_type',
+            '#settings' => array(
+              'type' => array(
+                'gallery' => 'gallery',
+                'article' => 'article',
+                'audio' => 'audio',
+                'event' => 'event',
+                'event_feed' => 'event_feed',
+                'file' => 'file',
+                'forum' => 'forum',
+                'link' => 'link',
+                'nnews' => 'nnews',
+                'npage' => 'npage',
+                'gallery_image' => 'gallery_image',
+                'place' => 'place',
+                'video' => 'video',
+              ),
+              '#argument map' => array(
+                'node' => 'node',
+              ),
+            ),
+            '#type' => 'condition',
+            '#weight' => 0,
+          ),
+        ),
+        '#actions' => array(
+          '0' => array(
+            '#weight' => 0,
+            '#type' => 'action',
+            '#settings' => array(
+              'message' => '[node:type-name] "[node:title]" has been created.',
+              'error' => 0,
+              '#eval input' => array(
+                'token_rules_input_evaluator' => array(
+                  'message' => array(
+                    '0' => 'node',
+                    '1' => ':global',
+                  ),
+                ),
+              ),
+            ),
+            '#name' => 'rules_action_drupal_message',
+            '#info' => array(
+              'label' => 'Show a configurable message on the site',
+              'module' => 'System',
+              'eval input' => array(
+                '0' => 'message',
+              ),
+            ),
+          ),
+        ),
+        '#version' => 6003,
+      ),
       'rules_userflow_viewpage' => array(
         '#type' => 'rule',
         '#set' => 'event_init',

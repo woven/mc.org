@@ -579,12 +579,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: administer string overrides
-  $permissions['administer string overrides'] = array(
-    'name' => 'administer string overrides',
-    'roles' => array(),
-  );
-
   // Exported permission: administer styles
   $permissions['administer styles'] = array(
     'name' => 'administer styles',
@@ -2359,14 +2353,6 @@ function mt_access_user_default_permissions() {
   // Exported permission: use php in custom pagers
   $permissions['use php in custom pagers'] = array(
     'name' => 'use php in custom pagers',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
-  // Exported permission: use realname
-  $permissions['use realname'] = array(
-    'name' => 'use realname',
     'roles' => array(
       '0' => 'administrator',
     ),

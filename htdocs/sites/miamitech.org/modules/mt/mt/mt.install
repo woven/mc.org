@@ -1,0 +1,8 @@
+<?php
+
+function mt_update_6000(&$sandbox) {
+	module_disable(array('terms_of_use'));
+	module_uninstall(array('terms_of_use'));
+
+	return array();
+}
