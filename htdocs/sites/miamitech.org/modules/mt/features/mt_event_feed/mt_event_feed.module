@@ -135,7 +135,6 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
       $node->event['offset'] = $timezone['offset'];
       $node->event['offset_dst'] = $timezone['offset_dst'];
       $node->event['timezone'] = $timezone['timezone'];
-      dpm($node);
     }
   }
 }
