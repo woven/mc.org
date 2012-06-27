@@ -30,7 +30,7 @@ function mt_account_ds_default_settings() {
             'picture' => array(
               'region' => 'header',
               'weight' => '-100',
-              'format' => 'user_account_thum_default',
+              'format' => 'user_account_thum_linked',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),

@@ -5,4 +5,3 @@ version = VERSION
 core = 6.x
 
 dependencies[] = email_registration
-dependencies[] = terms_of_use
