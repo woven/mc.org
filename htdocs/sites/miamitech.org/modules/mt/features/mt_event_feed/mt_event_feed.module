@@ -100,14 +100,12 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
             $node->event['timezone'] = $timezone['timezone'];
           }
           if($sub_field=='location'){
-            $parts = explode('(', $feed_element);
-            $node->locations['0']['name'] = $parts['0'];
-            $parts = explode(',', $parts['1']);
-            $node->locations['0']['street'] = $parts['0'];
-            $node->locations['0']['city'] = $parts['1'];
-            $parts = explode(' ' ,$parts['2']);
-            $node->locations['0']['province'] = $parts['1'];
-            $node->locations['0']['postal_code'] = str_replace(')', '' ,$parts['2']);
+            $parts = mt_event_feed_getAddressParts($feed_element);
+            $node->locations['0']['name'] = $parts['name'];
+            $node->locations['0']['street'] = $parts['address'];
+            $node->locations['0']['city'] = $parts['city'];
+            $node->locations['0']['province'] = $parts['state'];
+            $node->locations['0']['postal_code'] = $parts['zip'];
           }
           if($sub_field=='geo'){
             $parts = explode(';', $feed_element);
@@ -138,3 +136,51 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     }
   }
 }
+
+
+function mt_event_feed_getAddressParts($address){ 
+  $address_encoded = urlencode($address);
+  $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $address_encoded . '&sensor=false');
+  $results = json_decode($json);
+  if($results->status=='OK'){
+    $parts = array( 
+          'name'=>array('point_of_interest','establishment'),   
+          'address'=>array('street_number','route'), 
+          'city'=>array('locality'), 
+          'state'=>array('administrative_area_level_1'), 
+          'zip'=>array('postal_code'), 
+        ); 
+        if (!empty($results->results['0']->address_components)){ 
+          $ac = $results->results['0']->address_components; 
+          foreach($parts as $need=>&$types) { 
+            foreach($ac as &$a) { 
+              if (in_array($a->types['0'],$types)){
+                if(!empty($address_out[$need])){
+                  $address_out[$need] .= ' ' . $a->short_name; 
+                }
+                else {
+                  $address_out[$need] = $a->short_name; 
+                }
+              }
+              elseif (empty($address_out[$need])){
+                $address_out[$need] = ''; 
+              }
+            } 
+          } 
+        }
+
+    if(empty($address_out['name'])){
+      $address_parts = explode(' ', $address_out['address']);
+      $address_start = $address_parts['0'];
+      if(!empty($address_start)){
+        $address_parts = explode($address_start, $address);
+      }
+      $address_out['name'] = ereg_replace("[^A-Za-z0-9 ]", "", $address_parts['0']);
+    }
+    return $address_out;
+  }
+  else {
+    return array();
+  }
+}
+
