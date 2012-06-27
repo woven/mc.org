@@ -809,6 +809,17 @@ print \'<img src="http://www.dummyimage.com/83x83/b3b3b3/fff&text=\' . $title . 
     ),
   ));
   $handler->override_option('sorts', array(
+    'unix_event_start' => array(
+      'order' => 'ASC',
+      'granularity' => 'second',
+      'id' => 'unix_event_start',
+      'table' => 'event',
+      'field' => 'unix_event_start',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'random' => array(
       'order' => 'ASC',
       'id' => 'random',
