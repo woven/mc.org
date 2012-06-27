@@ -12,7 +12,6 @@ function mt_strongarm() {
   $strongarm->name = 'formfilter';
   $strongarm->value = array(
     'user_profile_form' => array(
-      'picture' => '1',
       'theme_select|themes' => '1',
       'timezone' => '1',
     ),
