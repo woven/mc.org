@@ -63,6 +63,7 @@
     
         <?php if ( !(is_array($node->field_page_type) && $node->field_page_type[0]['value'] == 'landing' && ( arg(2) == 'view' || arg(2) == '') ) ) : ?>
     
+        <?php if(!empty($content_top) || !empty($content) || !empty($content_bottom)): ?>
         <div id="content-wrapper" class="block-content block clear-block">
           <div id='content' class='clear-block block-content'>
             <?php if ($content_top) : ?>
@@ -83,6 +84,7 @@
             <?php endif; ?>
           </div>
         </div>
+        <?php endif; ?>
         
         <?php endif; ?>
         
