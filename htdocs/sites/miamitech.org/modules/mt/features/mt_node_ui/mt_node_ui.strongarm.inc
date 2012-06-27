@@ -364,7 +364,7 @@ dsm($object);
         'code' => '<?php if(isset($object->location[\'street\']) && !empty($object->location[\'street\'])): ?>
    [location-street_0]<br/>
    <?php endif; ?>
-   <?php if(isset($object->location[\'city\']) && !empty($object->location[\'city\'])): ?>[location-city_0], <?php endif; ?><?php if(isset($object->location[\'province\']) && !empty($object->location[\'province\'])): ?>[location-province_name_0] <?php endif; ?><?php if(isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])): ?>[location-postal_code_0]<?php endif; ?>',
+   <?php if(isset($object->location[\'city\']) && !empty($object->location[\'city\'])): ?>[location-city_0]<?php if((isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\']))): ?>,<?php endif; ?> <?php endif; ?><?php if(isset($object->location[\'province\']) && !empty($object->location[\'province\'])): ?>[location-province_name_0] <?php endif; ?><?php if(isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])): ?>[location-postal_code_0]<?php endif; ?>',
         'token' => 1,
       ),
     ),
