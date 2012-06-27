@@ -4508,8 +4508,10 @@ if (is_numeric($nid)){
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -4524,12 +4526,17 @@ if (is_numeric($nid)){
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'value' => '<?php
 $image = "";
 if ($data->node_data_field_logo_field_logo_fid!="")
 {
 $imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->node_data_field_logo_field_logo_fid));
 $image= theme_imagecache("group_logo", $imagepath, false, false);
+}
+else{
+$title = $data->node_title;
+$image = \'<img src="http://www.dummyimage.com/63x66/b3b3b3/fff&text=\' . $title . \'" >\';
 }
 //drupal_set_message("<pre>".$imagepath."</pre>"); 
 //drupal_set_message("<pre>".print_r($data, true)."</pre>"); 
