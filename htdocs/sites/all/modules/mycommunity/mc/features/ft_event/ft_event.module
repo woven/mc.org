@@ -8,7 +8,7 @@ include_once('ft_event.features.inc');
  */
  
 function ft_event_form_alter(&$form, &$form_state, $form_id){
-	if($form_id == "event_node_form"){
+	if($form_id == "event_node_form" && arg(0) == "node" && arg(1) == "add" ){
 
 		$ctime = &$form['event']['start_exploded']['#default_value'];
 		if($ctime['minute'] > 30){
