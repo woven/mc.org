@@ -3891,7 +3891,7 @@ $imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->
 $image= theme_imagecache("group_logo", $imagepath, false, false);
 }
 else{
-$title = $data->node_title;
+$title = $data->node_og_ancestry_title;
 $image = \'<img src="http://placehold.it/63x66&text=\' . $title . \'" >\';
 }
 //drupal_set_message("<pre>".$imagepath."</pre>"); 
