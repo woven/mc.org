@@ -228,7 +228,7 @@ function mt_event_ui_views_default_views() {
       'value' => '<?php
 if(empty($data->node_og_ancestry_node_data_field_logo_field_logo_fid) || $data->node_og_ancestry_node_data_field_logo_field_logo_fid==null ){
 $title = $data->node_og_ancestry_title;
-print \'<img src="http://www.dummyimage.com/83x83/b3b3b3/fff&text=\' . $title . \'" >\';
+print \'<img src="http://placehold.it/83x83&text=\' . $title . \'" >\';
 }
 ?>',
       'exclude' => 1,

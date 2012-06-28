@@ -3892,7 +3892,7 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
 }
 else{
 $title = $data->node_title;
-$image = \'<img src="http://www.dummyimage.com/63x66/b3b3b3/fff&text=\' . $title . \'" >\';
+$image = \'<img src="http://placehold.it/63x66&text=\' . $title . \'" >\';
 }
 //drupal_set_message("<pre>".$imagepath."</pre>"); 
 //drupal_set_message("<pre>".print_r($data, true)."</pre>"); 
@@ -4543,7 +4543,7 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
 }
 else{
 $title = $data->node_title;
-$image = \'<img src="http://www.dummyimage.com/63x66/b3b3b3/fff&text=\' . $title . \'" >\';
+$image = \'<img src="http://placehold.it/63x66&text=\' . $title . \'" >\';
 }
 //drupal_set_message("<pre>".$imagepath."</pre>"); 
 //drupal_set_message("<pre>".print_r($data, true)."</pre>"); 
