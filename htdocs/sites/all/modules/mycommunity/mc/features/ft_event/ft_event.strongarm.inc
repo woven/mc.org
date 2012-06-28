@@ -178,9 +178,72 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'enable_revisions_page_event';
+  $strongarm->value = 1;
+  $export['enable_revisions_page_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'event_ampm';
+  $strongarm->value = '1';
+  $export['event_ampm'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'event_nodeapi_event';
   $strongarm->value = 'all';
   $export['event_nodeapi_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'event_nodeapi_user_profile';
+  $strongarm->value = 'never';
+  $export['event_nodeapi_user_profile'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'event_range_next';
+  $strongarm->value = array(
+    'year' => 2012,
+    'month' => '10',
+    'day' => '14',
+    'hour' => '22',
+    'minute' => '07',
+    'second' => '00',
+  );
+  $export['event_range_next'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'event_range_prev';
+  $strongarm->value = array(
+    'year' => 0,
+    'month' => '00',
+    'day' => '00',
+    'hour' => '00',
+    'minute' => '00',
+    'second' => '00',
+  );
+  $export['event_range_prev'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'event_timezone_display';
+  $strongarm->value = 'event';
+  $export['event_timezone_display'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'event_timezone_input';
+  $strongarm->value = 'site';
+  $export['event_timezone_input'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

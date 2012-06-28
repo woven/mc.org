@@ -2,17 +2,30 @@
 
 include_once('ft_event.features.inc');
 
-
 /**
  * Implementation of hook_theme()
  *
  */
+ 
+function ft_event_form_alter(&$form, &$form_state, $form_id){
+	if($form_id == "event_node_form" && arg(0) == "node" && arg(1) == "add" ){
+
+		$ctime = &$form['event']['start_exploded']['#default_value'];
+		if($ctime['minute'] > 30){
+			$ctime['hour']++;
+		}
+		$ctime['minute'] = 0;
+		$ctime['second'] = 0;
+		
+		$form['event']['end_exploded'] = $form['event']['start_exploded'];
+	}
+}
 
 function ft_event_theme($existing, $type, $theme, $path){
 	  return array(
-        'mc_event_view_header' => array('variables' => array('view' => NULL)),
-        'mc_event_header' => array('title' => null,'count' => null,'url' => null),
-        'mc_event_date' => array('variables' => array('unix_date_start' => NULL, 'unix_date_end' => NULL, 'has_end_date' => NULL, 'has_time' => NULL, 'hide_day' => NULL)),
+	        'mc_event_view_header' => array('variables' => array('view' => NULL)),
+	        'mc_event_header' => array('title' => null,'count' => null,'url' => null),
+	        'mc_event_date' => array('variables' => array('unix_date_start' => NULL, 'unix_date_end' => NULL, 'has_end_date' => NULL, 'has_time' => NULL, 'hide_day' => NULL)),
     	);
 }
 

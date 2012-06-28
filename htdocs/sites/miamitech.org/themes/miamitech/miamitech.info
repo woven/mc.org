@@ -26,6 +26,8 @@ scripts[] = "js/jcarousel/lib/jquery.jcarousel.js"
 scripts[] = "js/main.js"
 scripts[] = "js/jquery.tools.min.js"
 scripts[] = "js/custom.js"
+scripts[] = "js/jquery.elastic.source.js"
+scripts[] = "js/elastic.js"
 
 ; Stylesheets
 stylesheets[screen][] = "css/reset.css"

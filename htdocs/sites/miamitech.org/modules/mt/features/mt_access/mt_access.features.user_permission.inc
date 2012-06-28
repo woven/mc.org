@@ -305,6 +305,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: add stuff profile
+  $permissions['add stuff profile'] = array(
+    'name' => 'add stuff profile',
+    'roles' => array(),
+  );
+
   // Exported permission: add stuff video
   $permissions['add stuff video'] = array(
     'name' => 'add stuff video',
@@ -596,6 +602,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: administer ud
+  $permissions['administer ud'] = array(
+    'name' => 'administer ud',
+    'roles' => array(),
+  );
+
   // Exported permission: administer url aliases
   $permissions['administer url aliases'] = array(
     'name' => 'administer url aliases',
@@ -678,6 +690,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: configure layout for ud
+  $permissions['configure layout for ud'] = array(
+    'name' => 'configure layout for ud',
+    'roles' => array(),
   );
 
   // Exported permission: create article content
@@ -908,6 +926,18 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: create profile content
+  $permissions['create profile content'] = array(
+    'name' => 'create profile content',
+    'roles' => array(),
+  );
+
+  // Exported permission: create profile sitewide
+  $permissions['create profile sitewide'] = array(
+    'name' => 'create profile sitewide',
+    'roles' => array(),
+  );
+
   // Exported permission: create url aliases
   $permissions['create url aliases'] = array(
     'name' => 'create url aliases',
@@ -1070,6 +1100,12 @@ function mt_access_user_default_permissions() {
       '0' => 'Publisher',
       '1' => 'administrator',
     ),
+  );
+
+  // Exported permission: delete any profile content
+  $permissions['delete any profile content'] = array(
+    'name' => 'delete any profile content',
+    'roles' => array(),
   );
 
   // Exported permission: delete any video content
@@ -1242,6 +1278,12 @@ function mt_access_user_default_permissions() {
       '2' => 'authenticated user',
       '3' => 'group manager',
     ),
+  );
+
+  // Exported permission: delete own profile content
+  $permissions['delete own profile content'] = array(
+    'name' => 'delete own profile content',
+    'roles' => array(),
   );
 
   // Exported permission: delete own video content
@@ -1420,6 +1462,12 @@ function mt_access_user_default_permissions() {
       '0' => 'Publisher',
       '1' => 'administrator',
     ),
+  );
+
+  // Exported permission: edit any profile content
+  $permissions['edit any profile content'] = array(
+    'name' => 'edit any profile content',
+    'roles' => array(),
   );
 
   // Exported permission: edit any video content
@@ -2138,6 +2186,12 @@ function mt_access_user_default_permissions() {
       '2' => 'authenticated user',
       '3' => 'group manager',
     ),
+  );
+
+  // Exported permission: edit own profile content
+  $permissions['edit own profile content'] = array(
+    'name' => 'edit own profile content',
+    'roles' => array(),
   );
 
   // Exported permission: edit own video content
@@ -3214,6 +3268,12 @@ function mt_access_user_default_permissions() {
       '3' => 'authenticated user',
       '4' => 'group manager',
     ),
+  );
+
+  // Exported permission: view imagecache user_account_thum
+  $permissions['view imagecache user_account_thum'] = array(
+    'name' => 'view imagecache user_account_thum',
+    'roles' => array(),
   );
 
   // Exported permission: view location directory
