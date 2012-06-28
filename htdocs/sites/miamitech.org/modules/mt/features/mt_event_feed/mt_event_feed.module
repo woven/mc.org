@@ -93,6 +93,9 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
             $node->event[$sub_field . '_exploded']['second'] = date('s', strtotime($feed_element));
           }
           if($sub_field=='timezone'){
+            if($feed_element=='UTC'){
+              $feed_element = 'Etc/GMT';
+            }
             $timezone = event_zone_by_name(str_replace('_', ' ',$feed_element));
             $node->event['dst_region'] = $timezone['dst_region'];;
             $node->event['offset'] = $timezone['offset'];
@@ -127,7 +130,7 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     drupal_write_record('feedapi_mapper', $record);
   }
   if($node->type=='event' && ($op=='presave')){
-    if(empty($node->event['dst_region']) || $node->event['dst_region']==NULL ){
+    if((empty($node->event['dst_region']) || $node->event['dst_region']==NULL) && (empty($node->event['timezone']) || $node->event['timezone']==NULL)){
       $timezone = event_zone_by_name(str_replace('_', ' ', 'America/New_York'));
       $node->event['dst_region'] = $timezone['dst_region'];;
       $node->event['offset'] = $timezone['offset'];
