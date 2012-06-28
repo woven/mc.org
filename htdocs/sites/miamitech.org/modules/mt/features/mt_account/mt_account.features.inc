@@ -5,7 +5,10 @@
  */
 function mt_account_ctools_plugin_api() {
   list($module, $api) = func_get_args();
-  if ($module == "strongarm" && $api == "strongarm") {
+  if ($module == "quicktabs" && $api == "quicktabs") {
+    return array("version" => 1);
+  }
+  elseif ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }
@@ -31,4 +34,13 @@ function mt_account_imagecache_default_presets() {
     ),
   );
   return $items;
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function mt_account_views_api() {
+  return array(
+    'api' => '2',
+  );
 }

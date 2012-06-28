@@ -122,3 +122,78 @@ body {
 #comments {
 	display: none;
 }
+
+
+/* styling user profile page */
+body.page-user .ud-region-header{
+	margin: 15px 20px;
+	padding: 10px 10px 0;
+	width: auto;
+	overflow: hidden;
+	position: relative;
+	line-height: 20px;
+}
+
+body.page-user .ud-region-header .field{
+	float: left;
+}
+
+body.page-user .ud-region-header .field-picture{
+	position: relative;
+	padding: 4px;
+	margin: 0 20px 20px 0;
+	float: left;
+	border: 1px solid #D0D0D0;
+	background: white;
+}
+
+body.page-user .ud-region-header .field-nd-location-name{
+	margin-top: 10px;
+}
+
+body.page-user .ud-region-header .field-profile-shortbyline{
+	margin-top: 44px;
+	margin-left: -122px;
+}
+
+body.page-user .ud-region-middle{
+	display: block;
+	float: none;
+	margin-right: 0;
+	width: auto;
+}
+
+body.page-user .ud-region-middle .field-group{
+
+}
+
+body.page-user .ud-region-middle .field-group{
+	border: 1px solid 
+	#E5E5E5;
+	border-bottom: 0;
+	background: 
+	white;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
+}
+
+body.page-user .quicktabs_tabs li h2 a{
+	color: #595959 !important;
+	float: none !important;
+	line-height: 1em !important;
+	font-size: 0.75em !important;
+}
+
+body.page-user .quicktabs-style-nostyle .block-title .title{
+	display: none;
+}
+
+body.page-user .view-my-groups ul{
+	margin-left: 10px;
+}
+
+body.page-user .view-my-groups ul li{
+	list-style-type:disc;
+}
