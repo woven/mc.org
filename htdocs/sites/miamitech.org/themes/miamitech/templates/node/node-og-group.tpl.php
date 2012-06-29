@@ -64,9 +64,9 @@
     <?php print $content ?>
   </div>
 
-  <div class="more-link">
+  <!--<div class="more-link">
 	 <?php print l('<span>' . t('Find out more') . '</span><span class="ico-small ico-more-link"></span>', 'groups/' . $node->field_small_name[0]['value'] . '/about' , array('html' => true)); ?>
-  </div>
+  </div>-->
 
 </div> 
 <?php } ?>
