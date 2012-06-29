@@ -336,6 +336,17 @@ function mt_init(){
       drupal_add_js((drupal_get_path('module', 'mt') .'/js/mt.js'));
     }
   }
+  if(isset($_SESSION['new_event_feed']) && $_SESSION['new_event_feed']==TRUE){
+    foreach ($_SESSION['messages']['status'] as $key => $value) {
+      if(!preg_match('/^Success/', $value)){
+        unset($_SESSION['messages']['status'][$key]);
+      }
+    }
+    $message = array_pop($_SESSION['messages']['status']);
+    unset($_SESSION['messages']['status']);
+    $_SESSION['messages']['status'][] = $message;
+    unset($_SESSION['new_event_feed']);
+  }
 }
 
 function mt_node_validate($form, &$form_state) {
@@ -354,6 +365,7 @@ function mt_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
       $gid = $key;
       break;
     }
+    $_SESSION['new_event_feed'] = TRUE;
     feedapi_refresh($node, 'node/' . $gid );
   }
 }
