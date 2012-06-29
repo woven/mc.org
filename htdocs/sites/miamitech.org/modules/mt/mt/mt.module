@@ -229,7 +229,12 @@ function mt_event_image($node){
 }
 
 function mt_form_alter(&$form, &$form_state, $form_id){
-
+  if($form_id=='user_profile_form'){
+    $form['Personal information']['picture_delete'] = $form['picture']['picture_delete'];
+    $form['Personal information']['picture_upload'] = $form['picture']['picture_upload'];
+    $form['Personal information']['picture_upload']['#title'] = 'Picture';
+    unset($form['picture']);
+  }
   //remove the og_register from user registration form.
   if($form_id == "user_register"){
     if($form['og_register']){
@@ -358,4 +363,11 @@ function mt_menu_alter(&$items) {
   unset($items['node/%views_arg/by_subject']['access arguments']);
   $items['node/%views_arg/by_subject']['access arguments']['0']['0']='views_check_roles';
   $items['node/%views_arg/by_subject']['access arguments']['0']['1']['0']['4']='4';
+}
+
+function mt_mail_alter(&$message){
+  $site_name = variable_get('site_name', '');
+  $message['from'] = '"' . $site_name . '" <' .  $message['from'] . '>';
+  $message['headers']['From'] = $message['from'];
+  $message['headers']['Sender'] = $message['from'];
 }
