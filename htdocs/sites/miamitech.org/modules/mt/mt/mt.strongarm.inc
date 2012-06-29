@@ -16,6 +16,7 @@ function mt_strongarm() {
       'timezone' => '1',
     ),
     'event_feed_node_form' => array(
+      'title' => '1',
       'author' => '1',
       'options' => '1',
       'path' => '1',
