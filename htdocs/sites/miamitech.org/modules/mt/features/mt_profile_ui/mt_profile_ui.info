@@ -1,0 +1,5 @@
+name = "MT Profile UI"
+description = "Feature that contains the Ui elements for the User Profile"
+core = "6.x"
+package = "Features"
+features[imagecache][] = "header_mini_avatar"

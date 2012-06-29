@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MT Profile UI feature.
+ */
+
+include_once 'mt_profile_ui.features.inc';
