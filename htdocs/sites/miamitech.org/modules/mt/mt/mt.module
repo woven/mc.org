@@ -359,3 +359,10 @@ function mt_menu_alter(&$items) {
   $items['node/%views_arg/by_subject']['access arguments']['0']['0']='views_check_roles';
   $items['node/%views_arg/by_subject']['access arguments']['0']['1']['0']['4']='4';
 }
+
+function mt_mail_alter(&$message){
+  $site_name = variable_get('site_name', '');
+  $message['from'] = '"' . $site_name . '" <' .  $message['from'] . '>';
+  $message['headers']['From'] = $message['from'];
+  $message['headers']['Sender'] = $message['from'];
+}
