@@ -342,7 +342,7 @@ function mt_init(){
         unset($_SESSION['messages']['status'][$key]);
       }
     }
-    $message = array_pop($_SESSION['messages']['status']);
+    $message = array_shift($_SESSION['messages']['status']);
     unset($_SESSION['messages']['status']);
     $_SESSION['messages']['status'][] = $message;
     unset($_SESSION['new_event_feed']);
@@ -382,4 +382,23 @@ function mt_mail_alter(&$message){
   $message['from'] = '"' . $site_name . '" <' .  $message['from'] . '>';
   $message['headers']['From'] = $message['from'];
   $message['headers']['Sender'] = $message['from'];
+}
+
+function mt_preprocess_views_view_field(&$variables, $hook) {
+  if($variables['view']->name=='og_details'){
+    if($variables['field']->field=="field_header_color_value"){
+      $field = $variables['field'];
+      $alias = $field->field_alias;
+      if(!isset($variables['row']->$alias)){
+        $widget = _mt_defaultimg_nodefield_widget_settings('field_header_color');
+        $default_value = $widget['default_value']['0']['value'];
+        $variables['row']->$alias = $default_value;
+      }
+    }
+  }
+}
+
+function _mt_defaultimg_nodefield_widget_settings($field_name) {
+  $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
+  return unserialize(db_result(db_query($sql, $field_name)));
 }
