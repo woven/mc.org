@@ -2517,3 +2517,7 @@ a.ical-link {
 .field-facebook-like {
 	padding-bottom: 5px;
 }
+
+.field-address-formatted .no-location {
+	color: #CCC;
+}

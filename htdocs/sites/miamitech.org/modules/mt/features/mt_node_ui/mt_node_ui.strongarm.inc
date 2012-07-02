@@ -332,28 +332,21 @@ dsm($object);
     'address_formatted' => array(
       'title' => 'Address Formatted',
       'exclude' => array(
-        'image' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
         'article' => 0,
         'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
         'event' => 0,
-        'feature_spot' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
-        'front_picture' => 0,
         'group' => 0,
-        'healthcare_facility' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
+        'nnews' => 0,
+        'npage' => 0,
         'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
         'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'event_feed' => 0,
         'webform' => 0,
+        'forum' => 0,
       ),
       'type' => 5,
       'status' => 3,
@@ -361,10 +354,18 @@ dsm($object);
         'formatters' => array(
           'ds_eval_code' => 'Default',
         ),
-        'code' => '<?php if(isset($object->location[\'street\']) && !empty($object->location[\'street\'])): ?>
+        'code' => '<?php if((isset($object->location[\'street\']) && !empty($object->location[\'street\'])) || (isset($object->location[\'city\']) && !empty($object->location[\'city\'])) || (isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])) ): ?>
+
+<?php if(isset($object->location[\'street\']) && !empty($object->location[\'street\'])): ?>
    [location-street_0]<br/>
    <?php endif; ?>
-   <?php if(isset($object->location[\'city\']) && !empty($object->location[\'city\'])): ?>[location-city_0]<?php if((isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\']))): ?>,<?php endif; ?> <?php endif; ?><?php if(isset($object->location[\'province\']) && !empty($object->location[\'province\'])): ?>[location-province_name_0] <?php endif; ?><?php if(isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])): ?>[location-postal_code_0]<?php endif; ?>',
+   <?php if(isset($object->location[\'city\']) && !empty($object->location[\'city\'])): ?>[location-city_0]<?php if((isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\']))): ?>,<?php endif; ?> <?php endif; ?><?php if(isset($object->location[\'province\']) && !empty($object->location[\'province\'])): ?>[location-province_name_0] <?php endif; ?><?php if(isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])): ?>[location-postal_code_0]<?php endif; ?>
+
+<?php else: ?>
+<div class="no-location">
+A location wasn\'t provided.
+</div>
+<?php endif; ?>',
         'token' => 1,
       ),
     ),
