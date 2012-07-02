@@ -1,7 +1,17 @@
 <?php
-
+/**
+* Disable "Terms of use" module
+*/
 function mt_update_6001(&$sandbox) {
 	module_disable(array('terms_of_use'));
 	module_uninstall(array('terms_of_use'));
-//	return array();
+}
+
+/**
+* Disable "Spaces" module
+*/
+function mt_update_6002(&$sandbox) {
+	module_disable(array('spaces'));
+	module_uninstall(array('spaces'));
+
 }
