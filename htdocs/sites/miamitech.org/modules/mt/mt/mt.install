@@ -3,6 +3,5 @@
 function mt_update_6001(&$sandbox) {
 	module_disable(array('terms_of_use'));
 	module_uninstall(array('terms_of_use'));
-
-	return array();
+//	return array();
 }
