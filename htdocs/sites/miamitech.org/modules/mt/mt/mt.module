@@ -281,6 +281,40 @@ function mt_ds_fields_alter(&$fields) {
   $fields['nd_location_name'] = $fields['name'];
   $fields['nd_location_name']['properties']['formatters']['mt_location_textfield'] = t('MT Textfield');
   unset($fields['name']); 
+
+  unset($fields['nd_location_gmap']['properties']['formatters']['nd_location_gmap_default']);
+  $fields['nd_location_gmap']['properties']['formatters']['mt_location_gmap_default'] = 'Gmap MT';
+}
+
+function theme_mt_location_gmap_default($field) {
+  $field['format'] = 'nd_location_gmap';
+  $field['formatter'] = 'nd_location_gmap_default';
+  $node = $field['object'];
+  if(isset($node->location) && (!empty($node->location['street']) || !empty($node->location['city']) || !empty($node->location['postal_code']) || ($node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000' ) ) ){
+    if (!empty($field['object']->location['latitude']) && !empty($field['object']->location['longitude'])) {
+
+      // Defaults.
+      $zoom = 'default';
+      $width = 'default';
+      $height = 'default';
+      $latitude = $field['object']->location['latitude'];
+      $longitude = $field['object']->location['longitude'];
+      $autoclick = FALSE;
+
+      // Check format.
+      $format = str_replace('nd_location_gmap_', '', $field['formatter']);
+      if ($format != 'default') {
+        $formatters = variable_get('nd_location_formatters', array());
+        $formatter = $formatters[$format];
+        $width = $formatter['width'] .'px';
+        $height = $formatter['height'] .'px';
+        $zoom = $formatter['zoom'];
+        $autoclick = (isset($formatter['autoclick'])) ? $formatter['autoclick'] : FALSE;
+      }
+
+      return theme('nd_location_gmap', $field, $latitude, $longitude, $width, $height, $zoom, $autoclick);
+    }
+  }
 }
 
 function theme_mt_location_textfield($field) {
@@ -323,6 +357,9 @@ function theme_mt_location_textfield($field) {
 function mt_theme() {
   $theme_functions = array(
   'mt_location_textfield' => array(
+      'arguments' => array('field' => NULL),
+    ),
+  'mt_location_gmap_default' => array(
       'arguments' => array('field' => NULL),
     ),
   );
