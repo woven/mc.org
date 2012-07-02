@@ -342,7 +342,7 @@ function mt_init(){
         unset($_SESSION['messages']['status'][$key]);
       }
     }
-    $message = array_pop($_SESSION['messages']['status']);
+    $message = array_shift($_SESSION['messages']['status']);
     unset($_SESSION['messages']['status']);
     $_SESSION['messages']['status'][] = $message;
     unset($_SESSION['new_event_feed']);
