@@ -140,20 +140,14 @@ body.page-user .ud-region-header .field{
 
 body.page-user .ud-region-header .field-picture{
 	position: relative;
-	padding: 4px;
-	margin: 0 20px 20px 0;
+	margin: 0 20px 0px 0;
 	float: left;
-	border: 1px solid #D0D0D0;
 	background: white;
 }
 
-body.page-user .ud-region-header .field-nd-location-name{
-	margin-top: 10px;
-}
-
-body.page-user .ud-region-header .field-profile-shortbyline{
-	margin-top: 44px;
-	margin-left: -122px;
+body.page-user .ud-region-header .field-picture img{
+	padding: 4px;
+	border: 1px solid #D0D0D0;
 }
 
 body.page-user .ud-region-middle{
