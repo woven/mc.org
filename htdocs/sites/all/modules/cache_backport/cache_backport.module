@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Cache Backport module placeholder.
+ */
+
+/**
+ * Implementation of hook_menu().
+ * 
+ * This module can provide some minor information about configured backend
+ * while it will be unable to set them, because all of this happens during
+ * a really early bootstrap phase where database variables are not being
+ * inited yet.
+ */
+function cache_backport_menu() {
+  $items = array();
+  $items['admin/settings/performance/core'] = array(
+    'title' => t("Settings"),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
+  );
+  $items['admin/settings/performance/cache-backend'] = array(
+    'title' => t("Cache"),
+    'page callback' => 'cache_backport_admin_backend',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'cache_backport.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 10,
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_help().
+ */
+function cache_backport_help($path, $arg) {
+  switch ($path) {
+    case 'admin/settings/performance/cache-backend':
+      return '<p>' . t("Cache backends should be set within the <cite>settings.php</cite> file for security and performances reasons. Setting them up in database variables would crash the site if you move the database over another Drupal physical instance that doesn't provide the underlaying cache mecanism (such as <em>Memcache</em> system library). Please always keep environment related settings in the configuration file and not in database.") . '</p>'
+           . '<p>' . t("If you experience SQL errors on this page, it probably means that you configured cache bins that don't exists (uninstalling a module that provide a cache bin makes the cache table being dropped). If it happens, consider reconfiguring your backends in order to remove the outdated ones.") . '</p>';
+  }
+}

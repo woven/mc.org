@@ -166,4 +166,7 @@ ini_set('display_errors',        '1');
 # );
 
 ### MC.org Settings ###
-ini_set('memory_limit','150M');
+ini_set('memory_limit','200M');
+#$conf['cache_inc'] = 'sites/all/modules/cache_backport/cache.inc';
+#$conf['cache_backends'][] = 'sites/all/modules/apc/drupal_apc_cache.inc';
+#$conf['cache_class_menu'] = 'DrupalAPCCache';

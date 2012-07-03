@@ -1,0 +1,11 @@
+--- memcache.inc.orig	2011-02-04 11:03:15.586666667 +0100
++++ memcache.inc	2011-02-04 11:03:28.813333334 +0100
+@@ -18,7 +18,7 @@
+     $this->wildcard_flushes = variable_get('memcache_wildcard_flushes', array());
+     $this->invalidate = variable_get('memcache_wildcard_invalidate', MEMCACHE_WILDCARD_INVALIDATE);
+     $this->cache_lifetime = variable_get('cache_lifetime', 0);
+-    $this->cache_flush = variable_get('cache_flush_' . $this->bin);
++    $this->cache_flush = variable_get('cache_flush_' . $this->bin, NULL);
+     $this->flushed = min($this->cache_flush, REQUEST_TIME - $this->cache_lifetime);
+   }
+   function get($cid) {
