@@ -126,12 +126,7 @@ function mt_access_user_default_permissions() {
   $permissions['access devel information'] = array(
     'name' => 'access devel information',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
-      '5' => 'unverified',
+      '0' => 'administrator',
     ),
   );
 
@@ -498,14 +493,6 @@ function mt_access_user_default_permissions() {
   $permissions['administer jquery media'] = array(
     'name' => 'administer jquery media',
     'roles' => array(),
-  );
-
-  // Exported permission: administer less
-  $permissions['administer less'] = array(
-    'name' => 'administer less',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
   );
 
   // Exported permission: administer menu
