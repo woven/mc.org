@@ -28,7 +28,7 @@ function mt_update_6003(&$sandbox) {
 /**
 * Enable "print" module
 */
-function mt_update_6003(&$sandbox) {
+function mt_update_6004(&$sandbox) {
 	module_disable(array('print'));
 	module_uninstall(array('print'));
 }
