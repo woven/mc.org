@@ -1,0 +1,72 @@
+<?php
+
+function fct_settings_form(){
+    $form['fct_ignore'] = array(
+        '#title' => t('Ignore'),
+        '#type' => 'textarea',
+        '#description' => t('a comman seperate list of module,variable to not auto import or ignore on auto detection'),
+        '#default_value' =>  variable_get("fct_ignore","")
+    );
+
+    return system_settings_form($form);
+}
+
+function features_ct_menu(){
+
+    $items['admin/build/features/ct'] = array(
+        'title' => 'Content Type Helper',
+        'type' => MENU_NORMAL_ITEM,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array("fct_settings_form"),
+        'access arguments' => array('administer features'),
+        'weight' => 100
+    );
+
+    return $items;
+}
+
+function _fct_getignore(){
+    $ignore = array();
+    if($ig = variable_get('fct_ignore',null)){
+        $lines = explode("\n",$ig);
+        foreach($lines as $line){
+            $var = explode(",",$line);
+            if(count($var)){
+                $ignore[$var[0]][$var[1]] = $var[1];
+            }
+        }
+    }
+
+    return $ignore;
+}
+
+#http://drupalcontrib.org/api/drupal/contributions%21features%21features.api.php/function/hook_features_export_alter/6
+function features_ct_features_export_alter(&$export, $module_name){
+  //check if any content types were being exported
+  if (!empty($export['features']['node'])){
+          $ignore = _fct_getignore();
+
+  	      foreach ($export['features']['node'] as $node) {
+
+              //machine name prefix
+              $node_suffix = "_".$node;
+			  $vd_exclude = "vd_";
+              //find all vars with the content type machine name prefix
+	      	  $result = db_query("SELECT variable.`name` FROM variable WHERE variable.`name` LIKE '%%%s%' AND variable.`name` NOT LIKE '%s%' AND variable.`name` NOT LIKE 'form_build_id_%'",$node_suffix,$vd_exclude);
+
+                while ($var = db_fetch_object($result)) {
+                    $name = $var->name;
+                    if(!isset($ignore[$module_name][$name])){
+                        if(empty($export['features']['variable'][$name])){
+                            $export['features']['variable'][$name] = $name;
+                        }
+                    }
+                }
+  	      }
+  }
+
+    //make sure that we have strongarm enabled and added to the dependecies
+    if(empty($export['dependencies']['strongarm'])) {
+      $export['dependencies']['strongarm'] = 'strongarm';
+    }
+}

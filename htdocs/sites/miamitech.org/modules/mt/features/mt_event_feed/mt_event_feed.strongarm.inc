@@ -114,11 +114,6 @@ function mt_event_feed_strongarm() {
         'enabled' => 1,
         'weight' => '0',
       ),
-      'parser_common_syndication' => array(
-        'enabled' => 0,
-        'weight' => '0',
-        'accept_invalid_cert' => 0,
-      ),
     ),
     'processors' => array(
       'feedapi_node' => array(
@@ -227,6 +222,114 @@ function mt_event_feed_strongarm() {
     ),
   );
   $export['location_settings_node_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeformscols_field_placements_event_feed_default';
+  $strongarm->value = array(
+    'title' => array(
+      'region' => 'main',
+      'weight' => '0',
+      'has_required' => FALSE,
+      'title' => 'Title',
+      'hidden' => 0,
+    ),
+    'body_field' => array(
+      'region' => 'main',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'menu' => array(
+      'region' => 'right',
+      'weight' => '0',
+      'hidden' => 0,
+    ),
+    'comment_settings' => array(
+      'region' => 'right',
+      'weight' => '30',
+      'has_required' => FALSE,
+      'title' => 'Comment settings',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'path' => array(
+      'region' => 'right',
+      'weight' => '30',
+      'has_required' => FALSE,
+      'title' => 'URL path settings',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'options' => array(
+      'region' => 'right',
+      'weight' => '25',
+      'has_required' => FALSE,
+      'title' => 'Publishing options',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'author' => array(
+      'region' => 'right',
+      'weight' => '20',
+      'has_required' => FALSE,
+      'title' => 'Authoring information',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'buttons' => array(
+      'region' => 'main',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'og_nodeapi' => array(
+      'region' => 'main',
+      'weight' => '1',
+      'has_required' => TRUE,
+      'title' => 'Groups',
+      'collapsed' => 0,
+    ),
+    'feedapi' => array(
+      'region' => 'main',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Feed',
+      'collapsed' => 0,
+      'hidden' => 0,
+    ),
+  );
+  $export['nodeformscols_field_placements_event_feed_default'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeformsettings_event_feed';
+  $strongarm->value = array(
+    'nfs_submission_body_rows' => '20',
+    'nfs_splitsummary' => '1',
+    'nfs_inputformat' => '1',
+    'nfs_revisionlog' => '0',
+    'nfs_author_information' => '0',
+    'nfs_path' => '0',
+    'nfs_menu' => '0',
+    'nfs_publishingoptions' => '0',
+    'nfs_comments' => '0',
+    'nfs_taxonomy' => '0',
+    'nfs_preview' => '1',
+    'nfs_cancel' => array(
+      'nfs_cancel_status' => '1',
+      'nfs_cancel_behaviour' => '0',
+    ),
+    'nfs_submit' => 'Save',
+    'nfs_hide_node_title' => '0',
+    'nfs_title_create' => 'Add !node_type',
+    'nfs_title_edit' => '!node_title',
+  );
+  $export['nodeformsettings_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

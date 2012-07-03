@@ -17,12 +17,12 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-69',
+      'ds_weight' => '-66',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'comment_image__colorbox',
+        'format' => 'featured_slideshow__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -30,7 +30,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-69',
+        'weight' => '-66',
       ),
       '5' => array(
         'label' => array(
@@ -127,7 +127,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-71',
+      'ds_weight' => '-67',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -140,7 +140,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_place',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-71',
+        'weight' => '-67',
       ),
       '5' => array(
         'label' => array(
@@ -370,7 +370,7 @@ function ft_event_content_default_fields() {
         'label' => array(
           'format' => 'inline',
         ),
-        'format' => 'comment_image__colorbox',
+        'format' => 'featured_slideshow__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
