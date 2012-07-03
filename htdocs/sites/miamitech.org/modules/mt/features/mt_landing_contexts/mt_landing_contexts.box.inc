@@ -82,7 +82,7 @@ print views_embed_view(\'latest_pages\', \'block_2\');
   $box->title = '';
   $box->description = 'Join us on your favorite social network';
   $box->options = array(
-    'body' => '<p>Join us on your favorite social network.</p><p><a href="http://www.facebook.com/GetHealthyHarlem">Facebook</a></p><p><a href="http://twitter.com/#!/healthyharlem">Twitter</a></p>',
+    'body' => '<p>MiamiTech.org hopes to be a helpful resource for the technology and creative community in Miami and all of South Florida.</p>',
     'format' => '3',
   );
   $export['footer_joinus_box'] = $box;
