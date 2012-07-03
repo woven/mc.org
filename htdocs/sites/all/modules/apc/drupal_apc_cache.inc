@@ -6,7 +6,7 @@
 
 // The cli mode does not run the same php.ini file and could not have
 // loaded the apc functions. Create dummy's to prevent fatal errors.
-if (drupal_is_cli() && !function_exists('apc_fetch')) {
+if (!isset($_SERVER['SERVER_SOFTWARE']) && (php_sapi_name() == 'cli' || (is_numeric($_SERVER['argc']) && $_SERVER['argc'] > 0))) {
   function apc_fetch($key, $success = NULL) {
     return FALSE;
   }
