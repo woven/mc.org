@@ -7,6 +7,48 @@ function mt_event_ui_ds_default_settings() {
   $data = array(
     'nd' => array(
       'event' => array(
+        '5' => array(
+          'fields' => array(
+            'title' => array(
+              'region' => 'header',
+              'weight' => '-100',
+              'format' => 'nd_title_h1_nolink',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'body' => array(
+              'region' => 'middle',
+              'weight' => '-99',
+              'format' => 'nd_bodyfield',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'nodes_event_dates' => array(
+              'region' => 'middle',
+              'weight' => '-85',
+              'format' => 'ds_eval_code',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+          ),
+          'regiontoblock' => array(
+            'block' => array(
+              'header' => 0,
+              'left' => 0,
+              'middle' => 0,
+              'right' => 0,
+              'footer' => 0,
+            ),
+          ),
+          'status' => 2,
+          'region_styles' => array(
+            'header' => '',
+            'left' => '',
+            'middle' => '',
+            'right' => '',
+            'footer' => '',
+          ),
+        ),
         'full' => array(
           'fields' => array(
             'mt_add_ical' => array(
