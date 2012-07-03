@@ -1,0 +1,319 @@
+
+Cache Backport
+==============
+
+This module is a drop-in replacement for D6 cache.inc, using the exact D7
+cache.inc file, with minor patches that allow some D7 constant usage.
+
+Installation
+------------
+
+In order to enable it, just add this line to your settings.php file:
+
+  $conf['cache_inc'] = 'sites/all/modules/cache_backport/cache.inc';
+  
+Then reads the backend configuration details to enable the different backends
+and configure them.
+
+Backend configuration
+---------------------
+
+Download each backend package you want to use. You have to download D7 packages
+in order to be able to use them. 
+
+Here is a method for downloading those using a Drupal 7 instance and Drush:
+
+  # Download drupal 7 somewhere if you want to use drush with it, here I give
+  # an  example with drush on a drupal 7 source, but you could also download
+  # the archives of these modules from drupal.org.
+  # Get Drupal 7 modules sources:
+
+  drush dl apc filecache memcache
+
+  # Copy the Drupal 7 modules in drupal6 module directory.
+  # WARNING: YOU WONT BE ABLE TO ACTIVATE THESE MODULES, obviously
+  # they cannot work with drupal6. But that's not a problem we only
+  # need the sources to include the cache.inc part:
+
+  cp -ar drupal7/www/sites/all/modules/apc \
+    mydrupal6/www/sites/all/modules/apc_d7
+
+  cp -ar drupal7/www/sites/all/modules/filecache \
+    mydrupal6/www/sites/all/modules/filecache_d7
+
+  cp -ar drupal7/www/sites/all/modules/memcache \
+    mydrupal6/www/sites/all/modules/memcache_d7
+
+  # Patch the memcache module with the provided patch:
+
+  cd www/sites/all/modules
+  patch memcache_d7/memcache.inc \
+    cache_backport/patches/memcache.inc-7.x-1.0-beta3-variable_set.patch
+
+To enable a backend, use the D7 formalism such as:
+
+  $conf['cache_backends'][] = 'sites/all/modules/apc/drupal_apc_cache.inc';
+
+This line, for example, will include the APC backend.
+Then in order to use this apc cache backend for 'cache_menu' bin:
+
+  $conf['cache_class_menu'] = 'DrupalAPCCache';
+
+Check Drupal 7 cache documentation for available bin and Cache backends names
+if this page gets created one day on drupal.org.
+If your are looking for a detailled example, checkout the configuration sample
+below.
+
+
+Complete configuration example
+==============================
+
+This example has actually been tested on a complex site that actually is in
+production. Except we only tested it on a cloned environement. Right now, it
+works pretty smoothly.
+
+These configurations settings should be written in your settings.php file.
+
+Short version
+-------------
+
+  // Use our backport, therefore switches to our own database backend
+  // per default for all bins.
+  $conf['cache_inc'] = 'sites/all/modules/cache_backport/cache.inc';
+
+  // Register the backends we want to use.
+  $conf['cache_backends'][] = 'sites/all/modules/apc/drupal_apc_cache.inc';
+  $conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+
+  // Use APC for 'cache_menu'.
+  $conf['cache_class_cache_menu'] = 'DrupalAPCCache';
+
+  // Use Memcached for 'cache_page'.
+  $conf['cache_class_cache_page'] = 'MemCacheDrupal';
+
+Advanced and complete one (thanks to LCPA and Regis Leroy)
+----------------------------------------------------------
+
+$module_cache_backport_enabled = TRUE; // Change to TRUE to enable
+$module_cache_backport_default = TRUE; // Change to FALSE to detect subdomain
+
+// Conditional loading
+if ( $module_cache_backport_enabled ) {
+
+  // Set domain/subdomain
+  if ( $module_cache_backport_default ) {
+    $module_cache_backport_domain = 'default';
+  } else {
+    $module_cache_backport_domain = $_SERVER['SERVER_NAME'];
+  }
+  
+  // Load the cache backport replacement for cache.inc:
+  $conf['cache_inc'] = 'sites/all/modules/cache_backport/cache.inc';
+  
+  // Define cache engines:
+  // Database, given by the cache_backport module : 'DrupalDatabaseCache'
+  $conf['cache_backends'][] = 'sites/all/modules/cache_backport/database.inc';
+  // FileCache from Drupal 7 : 'DrupalFileCache'
+  $conf['cache_backends'][] = 'sites/all/modules/filecache_d7/filecache.inc';
+  // APC from Drupal 7 : 'DrupalAPCCache'
+  $conf['cache_backends'][] = 'sites/all/modules/apc_d7/drupal_apc_cache.inc';
+  // Memcache from drupal 7 : 'MemCacheDrupal'
+  $conf['cache_backends'][] = 'sites/all/modules/memcache_d7/memcache.inc';
+  
+  // Define cache bins, here's the magic, deporting several cache on the
+  // appropriate place depending on usage frequency, size, and others:
+  // Please consider seriously doing brainstorming and benchmarking on your own
+  // since this is only an example, and sites performance may vary depending
+  // on modules and usage.
+  // Cache name |  Usage/frequency/size
+  // default    |  any/any/any          select memcache, apc, file or db
+  $conf['cache_default_class']          = 'DrupalDatabaseCache';
+  // WARNING: this one is 'cache_class_cache' and not 'cache_class_cache_cache'
+  // general    |  all/every/medium     select apc > memcache > file > db
+  $conf['cache_class_cache']            = 'DrupalAPCCache';
+  // bootstrap  |  all/every/medium     select apc > db
+  $conf['cache_class_cache_bootstrap']  = 'DrupalAPCCache';
+  // block      |  any/often/small      select memcache > db > file
+  $conf['cache_class_cache_block']      = 'MemCacheDrupal';
+  // field      |  page/some/large      select file > memcache > db
+  $conf['cache_class_cache_content']    = 'DrupalFileCache';
+  // filter     |  page/some/large      select file > memcache > db
+  $conf['cache_class_cache_filter']     = 'DrupalFileCache';
+  // form       |  edit/rare/medium     select file > memcache > db
+  $conf['cache_class_cache_form']       = 'DrupalFileCache';
+  // menu       |  any/often/large      select memcache > db > file
+  $conf['cache_class_cache_menu']       = 'MemCacheDrupal';
+  // page       |  page/often/large     select memcache > file > db
+  //$conf['cache_class_cache_page']       = 'MemCacheDrupal';
+  $conf['cache_class_cache_page']       = 'DrupalFileCache';
+  // pathdst    |  any/some/medium      select memcache > db > file
+  $conf['cache_class_cache_pathdst']    = 'MemCacheDrupal';
+  // pathsrc    |  any/some/medium      select memcache > db > file
+  $conf['cache_class_cache_pathsrc']    = 'MemCacheDrupal';
+  // multiprice |  any/often/medium     select memcache > db > file
+  $conf['cache_class_cache_uc_price']   = 'MemCacheDrupal';
+  // session    |  any/any/small        select apc (mono server) > memcache > db
+  $conf['cache_class_cache_session']    = 'DrupalAPCCache';
+  // update     |  system/rare/large,   select file > db
+  $conf['cache_class_cache_update']     = 'DrupalFileCache';
+  // users      |  any/some/large       select memcache > file > db
+  $conf['cache_class_cache_users']      = 'MemCacheDrupal';
+  // views      |  any/some/large       select memcache > file > db
+  $conf['cache_class_cache_views']      = 'MemCacheDrupal';
+  // views data |  any/often/small      select apc > db
+  $conf['cache_class_cache_views_data'] = 'DrupalAPCCache';
+  
+  // Define File Cache settings:
+  // See README.TXT in FileCache directory for configuration details.
+  $conf['filecache_fast_pagecache'] = TRUE; // set TRUE to enable fast page serving
+  // You need the patch (until it's applied):
+  // http://drupal.org/files/issues/filecache.inc-7.x-1.0-beta1-mkdir_recursive.patch
+  // If the created directory contains more than one new subdirectory
+  // you will need to define your $conf['file_directory_temp'] = '/something/tmp';
+  // before using this line. Put the directory in a place where drupal can write
+  // (tmp, or files subdirectory) but that is not available via direct web
+  // access, default Drupal conf protects .ht* directories, so default name is
+  // .ht.filecache in the files directory if you provide no value for this setting
+  $conf['filecache_directory'] = $conf['file_directory_temp'] . DIRECTORY_SEPARATOR
+    . $module_cache_backport_domain . DIRECTORY_SEPARATOR . 'filecache';
+  
+  // Define APC settings.
+  $conf['apc_show_debug'] = FALSE; // set TRUE to enable debug mode
+  // TODO In order to use multiple Drupal instance on the same physical box,
+  // each site settings.php file should provide a bin name prefix for APC and
+  // most other bin. Currently APC is managing it internally with request's
+  // $_SERVER['PHP_HOST']. 
+  
+  
+  // Define Memcache settings.
+  /* in case you use php-memcached and not php-memcache (for this one use php.ini settings)
+  $conf['memcache_options'] = array(
+    Memcached::OPT_BINARY_PROTOCOL => FALSE, // set TRUE to enable binary protocol when using memcached >= 1.4
+    Memcached::OPT_COMPRESSION => FALSE, // set FALSE to disable compression for improved performance
+    Memcached::OPT_DISTRIBUTION => Memcached::DISTRIBUTION_CONSISTENT, // set consistent distribution
+    Memcached::OPT_HASH => Memcached::HASH_CRC, // set CRC32 hash method
+    Memcached::OPT_CONNECT_TIMEOUT => 1000, // connection timeout in milliseconds
+    Memcached::OPT_SERVER_FAILURE_LIMIT => 5, // failure limit for server connection attempts
+  );*/
+  // This is not necessary if you have only 1 memcached server on default port
+  // (11211) but could be used to map & replicate bins between several servers
+  // (see memcached module documentation).
+  $conf['memcache_servers'] = array(
+    '127.0.0.1:11211' => 'default',
+  );
+  $conf['memcache_bins'] = array(
+    'cache' => 'default',
+    'cache_block' => 'default',
+    //'cache_bootstrap' => 'default',
+    //'cache_content' => 'default',
+    //'cache_filter' => 'default',
+    //'cache_form' => 'default',
+    'cache_menu' => 'default',
+    'cache_page' => 'default',
+    //'cache_pathdst' => 'default',
+    //'cache_pathsrc' => 'default',
+    //'cache_uc_price' => 'default',
+    'cache_update' => 'default',
+    'cache_views' => 'default',
+    'cache_views_data' => 'default',
+    //'session' => 'default',
+    //'users' => 'default',
+  );
+  // Provide unique prefix for Drupal multisite.
+  $conf['memcache_key_prefix'] = $module_cache_backport_domain;
+  
+  // Define Drupal cache settings:
+  // Inactivate database connection if the cache backend doesn't need it (for
+  // cache_page bin only). If the page is not cached the db connection will be
+  // made later.
+  $conf['page_cache_without_database'] = TRUE;
+  // Avoid executing very early hooks in case of page cached (like hook_boot).
+  $conf['page_cache_invoke_hooks']     = TRUE;
+  // Cached page lifetime.
+  $conf['page_cache_maximum_age']      = 3600;
+  // Default lifetime for all cache entries (except form and page), if no
+  // lifetime is specified by the module.
+  $conf['cache_lifetime']              = 0;
+}
+
+Additional notes
+================
+
+Known working backends
+----------------------
+
+ * Database (provided in this package)
+   Has been fully rewritten to get rid of DBTNG, maintained with this package.
+   Class name : 'DrupalDatabaseCache'
+ 
+ * APC (http://drupal.org/project/apc)
+   Works gracefully as-is.
+   Class name : 'DrupalAPCCache'
+   Important note: This backend ignore the cache clear command from drush
+   command line (by definition command line cannot access user space of mod_php)
+   emptied on apache instance restart.
+
+ * File Cache (http://drupal.org/project/filecache)
+   Works gracefully as-is.
+   Class name: 'DrupalFileCache'
+
+ * Memcache (http://drupal.org/project/memcache)
+   Works using 7.x-1.0-beta3 version after you applied the provided patch (you
+   can try the patch with later versions, it should work if the API has not
+   changed.
+   Class name : 'MemCacheDrupal'
+   Emptied on memcached instance restart. Drupal cache clearing for this backend
+   is done via per-bin variables storing a validity timestamp.
+
+Known limitations and bugs
+--------------------------
+
+ * You cannot use the memcache session handling. Sessions are not handled by the
+   cache_* tables and cannot be deported on APC or memcached with this module.
+   Using Drupal 6 memcache module to deport the session into memcached may
+   conflict with the Drupal 7 memcache module cache.inc includes. So you must
+   keep your session storage in the database.
+   Note that we are working on changing that.
+
+ * Be careful with Drush usage, especially with cache clearing (drush cc), file 
+   backend needs Drush to be run as the web user, and APC & memcached seems to 
+   ignore the cache clearing instructions (you'll need to restart apache and
+   memcached).
+
+  * Drush (valid for Drupal 6 and 7): 
+    - WARNING: DRUSH & APC -
+    Check your drush has the apc.cli_enable ini settings to avoid warnings 
+    about missing APC backend. You could also provides apc settings via drushrc
+    ini_set commands. You should use the -l option to get the right bin keys
+    as APC cache is user $_SERVER['SERVER_NAME'].
+    BUT ANYWAY, "drush cc all" CANNOT by definition empty anything but the 
+    PHP-cli APC user cache, so web server's APC user cache will never be 
+    emptied by drush, you need to perform it from Drupal backoffice.
+    
+    - Filecache ownership
+    To avoid ownership problems of directories for the file cache when using
+    drush (such as the drush user being the owner of the filecache directory and
+    web user unable to create files inside), instead of:
+      drush cc all
+    You should run (having www-data being the web user):
+     sudo su -c "drush -r /path/to/drupal/www/ -l http://example.com:8888 cc all" www-data
+    or
+     sudo su -c "drush -c /path/drushrc.php -l http://example.com:8888 cc all" www-data
+    We add the -l option to enforce good domain detection for multi-domains
+    cache keys.
+
+D7 backends and patches
+-----------------------
+
+Backends are being developped for D7, so you have to download backend packages
+using the D7 version, this is important.
+
+Because they are developped for D7, some of them might use some core functions
+or constants that does not exist in D6. Fortunately, since caching is an early
+bootstrap needed mecanism, they do not rely on any high level API.
+
+APC D7 backend is known working gracefully without any modification.
+Memcached backend uses one variable_get() call without specifying the second
+argument (valid in D7, not in D6) so you'll have to patch it. For specific
+backend patches, see the 'patches' sub-directory contents.
+

@@ -61,19 +61,5 @@ $profile_fields['profile_website'] = array(
   'autocomplete' => '0',
   'options' => '',
 );
-$profile_fields['profile_zipcode'] = array(
-  'title' => 'Zipcode',
-  'name' => 'profile_zipcode',
-  'explanation' => '',
-  'category' => 'Personal information',
-  'page' => '',
-  'type' => 'textfield',
-  'weight' => '0',
-  'required' => '1',
-  'register' => '0',
-  'visibility' => '2',
-  'autocomplete' => '0',
-  'options' => '',
-);
 return $profile_fields;
 }

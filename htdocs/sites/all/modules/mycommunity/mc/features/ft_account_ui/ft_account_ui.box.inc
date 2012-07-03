@@ -91,7 +91,7 @@ function ft_account_ui_default_box() {
         <div class="block-content">
     
           <div class="block block-signup clear-block">
-            <h1>Join the GetHealthyHarlem.org community!</h1>
+            <h1>Join the <?php echo variable_get("site_name","MyCommunity.org"); ?> community!</h1>
             <div class="why">
               <ul>
                 <li>Create a profile and connect with others</li>

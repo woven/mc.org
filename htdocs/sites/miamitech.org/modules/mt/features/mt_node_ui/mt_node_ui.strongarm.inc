@@ -221,28 +221,22 @@ echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"];
     'nodes_print_email' => array(
       'title' => 'Nodes Print and Email',
       'exclude' => array(
-        'image' => 'image',
+        'group' => 'group',
         'gallery' => 'gallery',
         'gallery_image' => 'gallery_image',
-        'feature_spot' => 'feature_spot',
-        'front_picture' => 'front_picture',
-        'group' => 'group',
         'webform' => 'webform',
         'article' => 0,
         'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
         'event' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
-        'healthcare_facility' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
+        'nnews' => 0,
+        'npage' => 0,
         'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
         'video' => 0,
+        'event_feed' => 0,
+        'forum' => 0,
+        'profile' => 0,
       ),
       'type' => 5,
       'status' => 3,
@@ -252,10 +246,12 @@ echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"];
         ),
         'code' => '<?php print l(t(\'Print\'), \'print/\' . $object->nid, array(\'attributes\'=>array(\'class\' => \'button-like button-print\') ) ); ?>
 <?php 
-  $emailSubject = \'Found a great article in gethealthyharlem.org\'; 
-  $emailBody =  \'I just wanted to share with you a great article I found: \' . urlencode( url(\'node/\' . $object->nid, array(\'absolute\' => TRUE) ) );
+$query = array();
+  $query[\'subject\'] = \'Found a great \' . $object->type .\' in \' . variable_get("site_name","");
+  $query[\'body\'] =  \'I just wanted to share with you a great \' . $object->type . \' I found: \' . url(\'node/\' . $object->nid, array(\'absolute\' => TRUE));
+  $emailurl = url("mailto:",array("absolute" => true, "query" => $query));
 ?>
-<a class="button-like button-email" href="mailto: ?subject=<?php print $emailSubject; ?>&amp;body=<?php print $emailBody ?>">Email</a>',
+<a class="button-like button-email" href="<?php print $emailurl ?>">Email</a>',
         'token' => 0,
         'css-class' => 'field-print-email',
       ),

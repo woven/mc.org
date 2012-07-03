@@ -1916,7 +1916,20 @@ a.orange span {
 	border-radius: 0;
 	behavior: none;
 	z-index: 10;
+    height: 91px;
 }
+
+#page #group-page-block .field-content a{
+    float: left;
+}
+#page #group-page-block .field-content h1{
+      width: 800px;
+      float: left;
+      height: 80px;
+      overflow: hidden;
+}
+
+
 
 .node-type-group #group-page-block, .page-groups #group-page-block{margin-bottom: 0 !important; margin-top:-15px !important;}
 .node-type-group #navigation{margin-bottom:15px !important;}

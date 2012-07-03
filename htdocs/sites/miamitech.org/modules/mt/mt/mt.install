@@ -1,8 +1,34 @@
 <?php
-
+/**
+* Disable "Terms of use" module
+*/
 function mt_update_6001(&$sandbox) {
 	module_disable(array('terms_of_use'));
 	module_uninstall(array('terms_of_use'));
+}
 
-	return array();
+/**
+* Disable "Spaces" module
+*/
+function mt_update_6002(&$sandbox) {
+	module_disable(array('spaces'));
+	module_uninstall(array('spaces'));
+
+}
+
+/**
+* Disable "Less" module
+*/
+function mt_update_6003(&$sandbox) {
+	module_disable(array('less'));
+	module_uninstall(array('less'));
+
+}
+
+/**
+* Enable "print" module
+*/
+function mt_update_6004(&$sandbox) {
+	module_disable(array('print'));
+	module_uninstall(array('print'));
 }

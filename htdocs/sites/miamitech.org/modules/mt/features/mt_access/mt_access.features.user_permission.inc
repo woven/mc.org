@@ -6,6 +6,24 @@
 function mt_access_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: Administer imagecache external
+  $permissions['Administer imagecache external'] = array(
+    'name' => 'Administer imagecache external',
+    'roles' => array(),
+  );
+
+  // Exported permission: Bypass black/white list
+  $permissions['Bypass black/white list'] = array(
+    'name' => 'Bypass black/white list',
+    'roles' => array(),
+  );
+
+  // Exported permission: Fetch external images
+  $permissions['Fetch external images'] = array(
+    'name' => 'Fetch external images',
+    'roles' => array(),
+  );
+
   // Exported permission: Use PHP input for field settings (dangerous - grant with care)
   $permissions['Use PHP input for field settings (dangerous - grant with care)'] = array(
     'name' => 'Use PHP input for field settings (dangerous - grant with care)',
@@ -20,6 +38,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: View external images
+  $permissions['View external images'] = array(
+    'name' => 'View external images',
+    'roles' => array(),
   );
 
   // Exported permission: View statistics
@@ -471,14 +495,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: administer less
-  $permissions['administer less'] = array(
-    'name' => 'administer less',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: administer menu
   $permissions['administer menu'] = array(
     'name' => 'administer menu',
@@ -574,14 +590,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'Publisher',
       '1' => 'administrator',
-    ),
-  );
-
-  // Exported permission: administer spaces
-  $permissions['administer spaces'] = array(
-    'name' => 'administer spaces',
-    'roles' => array(
-      '0' => 'administrator',
     ),
   );
 
@@ -935,6 +943,12 @@ function mt_access_user_default_permissions() {
   // Exported permission: create profile sitewide
   $permissions['create profile sitewide'] = array(
     'name' => 'create profile sitewide',
+    'roles' => array(),
+  );
+
+  // Exported permission: create textimages
+  $permissions['create textimages'] = array(
+    'name' => 'create textimages',
     'roles' => array(),
   );
 
@@ -2412,6 +2426,14 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: use realname
+  $permissions['use realname'] = array(
+    'name' => 'use realname',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
   // Exported permission: view advanced help index
   $permissions['view advanced help index'] = array(
     'name' => 'view advanced help index',
@@ -3136,6 +3158,12 @@ function mt_access_user_default_permissions() {
       '3' => 'authenticated user',
       '4' => 'group manager',
     ),
+  );
+
+  // Exported permission: view imagecache home-group-name-text
+  $permissions['view imagecache home-group-name-text'] = array(
+    'name' => 'view imagecache home-group-name-text',
+    'roles' => array(),
   );
 
   // Exported permission: view imagecache medium

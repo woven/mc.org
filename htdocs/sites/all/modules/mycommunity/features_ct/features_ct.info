@@ -1,0 +1,5 @@
+name = "Features: Content Type Helper"
+description = "Feature adding node variables automatically depending on the node machine name, and allows you to specific ignore variables in case it creates conflicts, see admin/structure/features/ct"
+core = "6.x"
+php = "5.2.4"
+dependencies[] = "features"
