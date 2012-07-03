@@ -11210,7 +11210,7 @@ if (is_numeric($nid)){
   $handler = $view->new_display('block', 'Block', 'block_5');
   $handler->override_option('sorts', array(
     'unix_event_start' => array(
-      'order' => 'DESC',
+      'order' => 'ASC',
       'granularity' => 'minute',
       'id' => 'unix_event_start',
       'table' => 'event',
