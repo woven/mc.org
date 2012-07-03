@@ -11208,7 +11208,84 @@ if (is_numeric($nid)){
     'name' => 'navigation',
   ));
   $handler = $view->new_display('block', 'Block', 'block_5');
+  $handler->override_option('sorts', array(
+    'unix_event_start' => array(
+      'order' => 'DESC',
+      'granularity' => 'minute',
+      'id' => 'unix_event_start',
+      'table' => 'event',
+      'field' => 'unix_event_start',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => 0,
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'relationship' => 'field_group_featured_items_nid',
+      'expose_button' => array(
+        'button' => 'Expose',
+      ),
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'event' => 'event',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+    ),
+    'unix_event_start' => array(
+      'operator' => '>=',
+      'value' => array(
+        'type' => 'offset',
+        'value' => '-1 hour',
+        'min' => '',
+        'max' => '',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'unix_event_start',
+      'table' => 'event',
+      'field' => 'unix_event_start',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
   $handler->override_option('title', 'Events');
+  $handler->override_option('items_per_page', 0);
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
 
