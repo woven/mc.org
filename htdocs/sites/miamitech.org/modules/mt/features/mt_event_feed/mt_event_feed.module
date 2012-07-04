@@ -142,6 +142,15 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
 
 function mt_event_feed_getAddressParts($address){ 
+  if($address=='webinar'){
+    return array(
+      'name' => $address,
+      'address'=>'', 
+      'city'=>'', 
+      'state'=>'', 
+      'zip'=>'', 
+    );
+  } 
   $address_encoded = urlencode($address);
   $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $address_encoded . '&sensor=false');
   $results = json_decode($json);
@@ -171,15 +180,49 @@ function mt_event_feed_getAddressParts($address){
             } 
           } 
         }
+    if(empty($address_out['address'])){
+      $new_address = ereg_replace("[^A-Za-z0-9 ]", "", $address);
+      $address_parts = preg_split('/ [0-9]+ /', $new_address);
+      if(preg_match('/ [0-9]+ /', $new_address, $matches)){
+        $address_number = $matches['0'];
+        $address_filtered = $address_number .' ' . $address_parts['1'];
+        $address_encoded = urlencode($address_filtered);
+        $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $address_encoded . '&sensor=false');
+        $results = json_decode($json);
+        if($results->status=='OK'){
+          $parts = array(
+            'address'=>array('street_number','route'), 
+          );
+          if (!empty($results->results['0']->address_components)){ 
+            $ac = $results->results['0']->address_components; 
+            foreach($parts as $need=>&$types) { 
+              foreach($ac as &$a) { 
+                if (in_array($a->types['0'],$types)){
+                  if(!empty($address_out[$need])){
+                    $address_out[$need] .= ' ' . $a->short_name; 
+                  }
+                  else {
+                    $address_out[$need] = $a->short_name; 
+                  }
+                }
+                elseif (empty($address_out[$need])){
+                  $address_out[$need] = ''; 
+                }
+              } 
+            } 
+          }
+        }
+      }
+    }
 
-    if(empty($address_out['name'])){
-      $address_parts = explode(' ', $address_out['address']);
+    //if(empty($address_out['name'])){
+      $address_parts = explode(' ', !empty($address_out['address'])? $address_out['address'] : $address_out['city']);
       $address_start = $address_parts['0'];
       if(!empty($address_start)){
         $address_parts = explode($address_start, $address);
       }
-      $address_out['name'] = ereg_replace("[^A-Za-z0-9 ]", "", $address_parts['0']);
-    }
+      $address_out['name'] = ereg_replace("[^A-Za-z0-9 #-&]", "", $address_parts['0']);
+    //}
     return $address_out;
   }
   else {
