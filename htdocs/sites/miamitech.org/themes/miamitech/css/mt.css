@@ -195,6 +195,7 @@ body.page-user .view-my-groups ul li{
     padding: 4px;
     border: 1px solid #D0D0D0;
     background-color: white;
+    margin: 0 -5px 9px -5px;
 }
 
 .img-placeholder .img{

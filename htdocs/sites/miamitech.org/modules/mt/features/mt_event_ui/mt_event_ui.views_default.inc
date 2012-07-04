@@ -295,7 +295,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
     'nothing_2' => array(
       'label' => '',
       'alter' => array(
-        'text' => '[phpcode_1] [field_list_image_fid]',
+        'text' => '[phpcode_1] [field_logo_fid]',
         'make_link' => 0,
         'path' => '',
         'absolute' => 0,
