@@ -1,0 +1,144 @@
+<?php
+
+function _mc_event_section_all(){
+  _mc_event_section_next_two_weeks();
+  _mc_event_section_after_two_weeks();
+}
+
+function _mc_event_section_next_two_weeks(){
+	$today = mktime(0, 0, 0);
+  $now = time();
+  $tomorrow = $today + 24 * 3600;
+  $afterTomorrow = $tomorrow + 24 * 3600;
+  $dayOfWeek = (int)date('w', $today);
+  
+  if ($dayOfWeek == 0){
+    $thisSunday = $today;
+  }else{
+    $thisSunday = $today + (7 - $dayOfWeek) * 24 * 3600;
+  }
+  
+  $nextSunday = $thisSunday + 7 * 24 * 3600;
+  $minsago = $now - (60 * 30);
+
+  $query = "SELECT n.nid,
+      CASE 
+          WHEN e.unix_event_start BETWEEN '%s' AND '%s'
+          THEN 'Today'
+          WHEN e.unix_event_start BETWEEN '%s' AND '%s'
+          THEN 'Tomorrow'
+          WHEN e.unix_event_start BETWEEN '%s' AND '%s'
+          THEN 'This week'
+          WHEN e.unix_event_start BETWEEN '%s' AND '%s'
+          THEN 'Next week'
+
+      ELSE 'Upcoming'
+      END AS 'Section'
+  FROM node as n 
+  JOIN event as e on n.nid=e.nid
+  WHERE e.unix_event_start between '%s' and '%s'
+  GROUP BY n.nid
+  ORDER BY (
+  CASE WHEN Section='Today' then 0
+   WHEN Section='Tomorrow' then 1
+   WHEN Section='This week' then 2
+   WHEN Section='Next week' then 3
+   WHEN Section='Upcoming' then 4
+  ELSE Section
+  END
+  )";
+
+  $result = db_query($query, $minsago, $tomorrow, $tomorrow, $afterTomorrow, $afterTomorrow, $thisSunday, $thisSunday, $nextSunday, $minsago, $nextSunday);
+
+  $lists = array();
+
+  while ($row = db_fetch_object($result)) {
+    switch($row->Section){
+      case 'Today':
+        $lists['Today'][] = $row->nid;
+        break;
+      case 'Tomorrow':
+        $lists['Tomorrow'][] = $row->nid;
+        break;
+      case 'This week':
+        $lists['This week'][] = $row->nid;
+        break;
+      case 'Next week':
+        $lists['Next week'][] = $row->nid;
+        break;
+      case 'Upcoming':
+        $lists['Upcoming'][] = $row->nid;
+        break;
+    }
+  }
+
+  foreach($lists as $key => $list){
+  if(count($list)){
+    $view = new stdClass();
+    $view->current_display = 'block_5';
+    $view->display['block_5']->display_title = $key; 
+    echo theme("mc_event_view_header",$view);
+    $view = views_embed_view("mc_events_by_dates","block_5", implode('+', $list));
+    echo $view;
+  }
+  }
+}
+
+function _mc_event_section_after_two_weeks(){
+  $today = mktime(0, 0, 0);
+  $now = time();
+  $tomorrow = $today + 24 * 3600;
+  $afterTomorrow = $tomorrow + 24 * 3600;
+  $dayOfWeek = (int)date('w', $today);
+  
+  if ($dayOfWeek == 0){
+    $thisSunday = $today;
+  }else{
+    $thisSunday = $today + (7 - $dayOfWeek) * 24 * 3600;
+  }
+  
+  $nextSunday = $thisSunday + 7 * 24 * 3600;
+  $minsago = $now - (60 * 30);
+
+  $query = "SELECT n.nid,
+      CASE 
+          WHEN e.unix_event_start > '%s'
+          THEN 'Upcoming'
+      END AS 'Section'
+  FROM node as n 
+  JOIN event as e on n.nid=e.nid
+  WHERE e.unix_event_start > '%s'
+  GROUP BY n.nid
+  ORDER BY (
+  CASE WHEN Section='Today' then 0
+   WHEN Section='Tomorrow' then 1
+   WHEN Section='This week' then 2
+   WHEN Section='Next week' then 3
+   WHEN Section='Upcoming' then 4
+  ELSE Section
+  END
+  )";
+
+  $result = db_query($query, $nextSunday, $nextSunday);
+
+  $lists = array();
+
+  while ($row = db_fetch_object($result)) {
+    switch($row->Section){
+      case 'Upcoming':
+        $lists['Upcoming'][] = $row->nid;
+        break;
+    }
+  }
+
+  foreach($lists as $key => $list){
+  if(count($list)){
+    $view = new stdClass();
+    $view->current_display = 'block_5';
+    $view->display['block_5']->display_title = $key; 
+    echo theme("mc_event_view_header",$view);
+    $view = views_embed_view("mc_events_by_dates","block_5", implode('+', $list));
+    echo $view;
+  }
+  }
+}
