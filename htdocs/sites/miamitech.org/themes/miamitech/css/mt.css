@@ -162,11 +162,9 @@ body.page-user .ud-region-middle .field-group{
 }
 
 body.page-user .ud-region-middle .field-group{
-	border: 1px solid 
-	#E5E5E5;
+	border: 1px solid #E5E5E5;
 	border-bottom: 0;
-	background: 
-	white;
+	background: white;
 	-webkit-border-radius: 4px 4px 0 0;
 	-moz-border-radius: 4px 4px 0 0;
 	border-radius: 4px 4px 0 0;
@@ -190,4 +188,34 @@ body.page-user .view-my-groups ul{
 
 body.page-user .view-my-groups ul li{
 	list-style-type:disc;
+}
+
+.img-placeholder{
+    overflow: hidden;
+    padding: 4px;
+    margin: 0 -5px 9px -5px;
+    border: 1px solid #D0D0D0;
+    background-color: white;
+}
+
+.img-placeholder .img{
+    width: 83px;
+    height: 83px;
+    background-color: gray;
+}
+
+.img-placeholder .img span{
+    display: block;
+    line-height: 83px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.img-placeholder .img .cover{
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 100;
+    width: 83px;
+    height: 83px;
 }

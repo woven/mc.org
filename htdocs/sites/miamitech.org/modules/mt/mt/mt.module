@@ -6,6 +6,12 @@
 
 include_once 'mt.features.inc';
 
+
+
+function theme_imgplaceholder($gname){
+  return '<div class="img-placeholder"><div class="img"><span>'.$gname.'</span><div class="cover"></div></div></div>';
+}
+
 function mt_preprocess($vars,$hook){
     if($hook == 'block'){
         $cblock = $vars['block'];
