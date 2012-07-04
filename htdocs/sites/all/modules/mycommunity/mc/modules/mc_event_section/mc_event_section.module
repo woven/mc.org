@@ -77,7 +77,9 @@ function _mc_event_section_next_two_weeks(){
     $view_header = new stdClass();
     $view_header->current_display = 'block_5';
     $view_header->display['block_5']->display_title = $key; 
+    echo '<div class="view"><div class="view-header">';
     echo theme("mc_event_view_header",$view_header);
+    echo '</div></div>';
     $view = views_get_view('mc_events_by_dates');
     if (!$view || !$view->access('block_5')) {
       return;
