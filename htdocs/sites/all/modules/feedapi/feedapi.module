@@ -1274,11 +1274,11 @@ function _feedapi_invoke_refresh(&$feed, $param) {
   _feedapi_store_stat($nid, 'next_refresh_time', $next_refresh_time, $timestamp);
 
   if (!$cron) {
-    if ($new == 0 && $updated == 0) {
-      drupal_set_message(t('There are no new items in the feed.'), 'status');
+    if($new == 1){
+      drupal_set_message(t("You're done! We've imported %new upcoming event, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
     else {
-      drupal_set_message(t("%new new item(s) were saved. %updated existing item(s) were updated.", array("%new" => $new, "%updated" => $updated)));
+      drupal_set_message(t("You're done! We've imported %new upcoming events, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
     // @ TODO what value to return here?
   }
