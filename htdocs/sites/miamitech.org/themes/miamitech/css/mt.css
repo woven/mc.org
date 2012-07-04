@@ -218,4 +218,5 @@ body.page-user .view-my-groups ul li{
 
 #page #group-page-block .field-content a{
     margin-right: 15px;
+    text-decoration: none;
 }
