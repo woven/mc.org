@@ -1,9 +1,9 @@
 /* Custom styles specific to MiamiTech.org */
 
 body {
-	background: #F7F7F7;
+	background: none;
 	font: 75%/1.25 Arial, Helvetica, sans-serif;
-}
+}	
 
 #highlight {
 	display: none;
@@ -45,7 +45,7 @@ body {
 /* Navigation */
 
 #navigation .primary-links {
-	background: #333 repeat-x;
+	background: #0070B6 repeat-x;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
@@ -162,11 +162,9 @@ body.page-user .ud-region-middle .field-group{
 }
 
 body.page-user .ud-region-middle .field-group{
-	border: 1px solid 
-	#E5E5E5;
+	border: 1px solid #E5E5E5;
 	border-bottom: 0;
-	background: 
-	white;
+	background: white;
 	-webkit-border-radius: 4px 4px 0 0;
 	-moz-border-radius: 4px 4px 0 0;
 	border-radius: 4px 4px 0 0;
@@ -190,4 +188,34 @@ body.page-user .view-my-groups ul{
 
 body.page-user .view-my-groups ul li{
 	list-style-type:disc;
+}
+
+.img-placeholder{
+    overflow: hidden;
+    padding: 4px;
+    border: 1px solid #D0D0D0;
+    background-color: white;
+    margin: 0 -5px 9px -5px;
+}
+
+.img-placeholder .img{
+    background-color: gray;
+}
+
+.img-placeholder .img span{
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 9px;
+}
+
+.img-placeholder .img .cover{
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 100;
+}
+
+#page #group-page-block .field-content a{
+    margin-right: 15px;
 }

@@ -1,0 +1,66 @@
+<?php
+// $Id: og_perm.module,v 1.8 2010/05/24 15:39:03 amitaibu Exp $
+
+/**
+ * @file
+ * Add further permissions to the Organic groups module.
+ */
+
+/**
+ * Implementation of hook_perm().
+ */
+function og_perm_perm() {
+  $perms = array();
+  foreach (_og_perm_menu_info() as $perm) {
+    $perms[] = $perm;
+  }
+  return $perms;
+}
+
+/**
+ * Implementation of hook_menu_alter().
+ *
+ * Redirect access callback to own implementation that will check if user is
+ * indeed a group administer and if she has the required role.
+ */
+function og_perm_menu_alter(&$callbacks) {
+  foreach (_og_perm_menu_info() as $item => $perm) {
+    // Save the original callback in the arguments, so we can pull it later.
+    $callbacks[$item]['access arguments'][] = $callbacks[$item]['access callback'];
+    // Add our own permissions.
+    $callbacks[$item]['access arguments'][] = $perm;
+    // Set our own access check.
+    $callbacks[$item]['access callback'] = 'og_perm_check_access';
+  }
+}
+
+/**
+ * Menu access; Check if user has all permissions to access menu item.
+ *
+ * @return
+ *   TRUE if user can access menu item.
+ */
+function og_perm_check_access() {
+  $args = func_get_args();
+  // Permission is the last argument.
+  $perm = array_pop($args);
+  // Callback is one argument before the last one.
+  $callback = array_pop($args);
+  return call_user_func_array($callback, $args) && user_access($perm);
+}
+
+/**
+ * Helper function; Return all the menu items that need to be altered and
+ * the permissions that need to be associated with it.
+ */
+function _og_perm_menu_info() {
+  return array(
+    'og/approve/%node/%user/%' => 'approve membership request',
+    'og/deny/%node/%user/%' => 'deny membership request',
+    'og/create_admin/%node/%user' => 'create group administrator',
+    'og/delete_admin/%node/%user' => 'delete group administrator',
+    'og/users/%node/add_user' => 'add members',
+    'og/unsubscribe/%node/%user' => 'remove members',
+    'node/%node/broadcast' => 'broadcast to group',
+  );
+}

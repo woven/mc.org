@@ -226,14 +226,18 @@ function mt_event_ui_views_default_views() {
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-//if(empty($data->node_og_ancestry_node_data_field_logo_field_logo_fid) || $data->node_og_ancestry_node_data_field_logo_field_logo_fid==null ){
+if(empty($data->node_og_ancestry_node_data_field_logo_field_logo_fid) || $data->node_og_ancestry_node_data_field_logo_field_logo_fid==null ){
 $title = $data->node_og_ancestry_title;
 $title_clean = str_replace(" ","+",$title);
+print theme_imgplaceholder($title);
+}
+/**
 //$img = url("sites/miamitech.org/files/textimage/home-group_logo_default/$title.png");
 $imgraw = "sites/miamitech.org/files/textimage/home-group_logo_default/$title.png";
 print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\\"$imgraw\\" ></div>";
 //print \'<img src="http://placehold.it/83x83&text=\' . $title . \'" >\';
 //}
+*/
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_1',
@@ -291,7 +295,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
     'nothing_2' => array(
       'label' => '',
       'alter' => array(
-        'text' => '[phpcode_1]',
+        'text' => '[phpcode_1] [field_logo_fid]',
         'make_link' => 0,
         'path' => '',
         'absolute' => 0,

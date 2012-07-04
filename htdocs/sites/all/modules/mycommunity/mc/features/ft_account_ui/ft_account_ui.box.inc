@@ -94,11 +94,9 @@ function ft_account_ui_default_box() {
             <h1>Join the <?php echo variable_get("site_name","MyCommunity.org"); ?> community!</h1>
             <div class="why">
               <ul>
-                <li>Create a profile and connect with others</li>
-                <li>Add stuff like articles, videos and more</li>
-                <li>Leave your tips and comments</li>
-    
-                <li>It\'s all absolutely free!</li>
+                <li>Help others find your group</li>
+                <li>Add events or import from any iCal</li>
+                <li>We\'re just getting started!</li>
               </ul>
             </div>
             <div>

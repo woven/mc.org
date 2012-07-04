@@ -88,10 +88,22 @@ function mt_account_strongarm() {
         'formatters' => array(
           'ds_eval_code' => 'Default',
         ),
-        'code' => '<h1>[realname]</h1>
-<h2>[user]</h2>
-<span class="tagline">this is my unique line</span>',
+        'code' => '[realname]',
         'token' => 1,
+      ),
+    ),
+    'ds_group_user_primaryinfo' => array(
+      'title' => 'Primary info',
+      'exclude' => array(),
+      'type' => 7,
+      'status' => 1,
+      'properties' => array(
+        'formatters' => array(
+          'ds_field' => 'A simple div',
+          'ds_group_fieldset_open' => 'Fieldset open',
+          'ds_group_fieldset_collapsible' => 'Fieldset collapsible',
+          'ds_group_fieldset_collapsed' => 'Fieldset collapsed',
+        ),
       ),
     ),
   );

@@ -1,0 +1,11 @@
+name = Organic groups permissions
+description = "Add further permissions to the Organic groups module."
+dependencies[] = og
+package = "Organic groups"
+core = 6.x
+; Information added by drupal.org packaging script on 2010-05-24
+version = "6.x-1.0"
+core = "6.x"
+project = "og_perm"
+datestamp = "1274718611"
+
