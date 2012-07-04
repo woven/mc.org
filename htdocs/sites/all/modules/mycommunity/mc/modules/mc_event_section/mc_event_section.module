@@ -74,12 +74,20 @@ function _mc_event_section_next_two_weeks(){
 
   foreach($lists as $key => $list){
   if(count($list)){
-    $view = new stdClass();
-    $view->current_display = 'block_5';
-    $view->display['block_5']->display_title = $key; 
-    echo theme("mc_event_view_header",$view);
-    $view = views_embed_view("mc_events_by_dates","block_5", implode('+', $list));
-    echo $view;
+    $view_header = new stdClass();
+    $view_header->current_display = 'block_5';
+    $view_header->display['block_5']->display_title = $key; 
+    echo theme("mc_event_view_header",$view_header);
+    $view = views_get_view('mc_events_by_dates');
+    if (!$view || !$view->access('block_5')) {
+      return;
+    }
+    if($key=='Today' || $key=='Tomorrow'){
+      $view->hide_day = TRUE;
+    }
+
+    $view_display =$view->preview('block_5', array(implode('+', $list)));
+    echo $view_display;
   }
   }
 }
