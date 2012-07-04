@@ -16,6 +16,14 @@ function mt_account_ds_default_settings() {
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
+            'profile_website' => array(
+              'region' => 'header',
+              'weight' => '-97',
+              'format' => 'ud_profile_field_urlfilter',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+              'parent' => 'ds_group_user_primaryinfo',
+            ),
             'profile_shortbyline' => array(
               'region' => 'header',
               'weight' => '-98',

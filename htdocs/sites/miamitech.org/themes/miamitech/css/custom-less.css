@@ -425,7 +425,9 @@ table.content-multiple-table { margin-bottom:1px; }
 #page .slideshow .controls .prev.disabled { background-position:0 -20px; }
 #page .slideshow .controls .next.disabled { background-position:100% -20px; }
 .hide-controls .controls { display:none; }
-#page .field { margin-bottom:10px; }
+
+/* #page .field { margin-bottom:10px; } */
+
 #page .field .field-label, #page .field .field-label-inline-first, #page .field .field-label-inline {
   color:#0077d9;
   text-transform:uppercase;

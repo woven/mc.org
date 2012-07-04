@@ -134,9 +134,19 @@ body.page-user .ud-region-header{
 	line-height: 20px;
 }
 
-body.page-user .ud-region-header .field{
-	float: left;
+
+.field-ds-group-user-primaryinfo .field-realname-area{
+    font-size: 2.5em;
+    color: #0070B6;
+    margin-bottom: 7px;
 }
+
+.field-ds-group-user-primaryinfo .field-nd-location-name{
+    color: #ccc;
+
+    margin-bottom: 8px;
+}
+
 
 body.page-user .ud-region-header .field-picture{
 	position: relative;
