@@ -6,10 +6,33 @@
 
 include_once 'mt.features.inc';
 
-
-
 function theme_imgplaceholder($gname){
-  return '<div class="img-placeholder"><div class="img"><span>'.$gname.'</span><div class="cover"></div></div></div>';
+  global $range_colors;
+
+  $range_colors = array(
+    'a-f' => array("red","white"),
+    'f-z' => array("blue","white"),
+    'else' => array("gray","white")
+  );
+
+  $colors_use = array();
+  $gfirst = strtolower($gname[0]);
+
+  foreach($range_colors as $range => $colors){
+    $lt = explode("-",$range);
+    if(count($lt) > 1){
+      if(in_array($gfirst,range($lt[0], $lt[1]))){
+         $colors_use = $colors;
+         break 1;
+      }
+    }
+  }
+
+  if(empty($colors_use)){
+    $colors_use =  "";
+  }
+
+  return "<div class=\"img-placeholder\"><div class=\"img\" style='background-color: $colors_use[0]'><span style='color: $colors_use[1]'>$gname</span><div class=\"cover\"></div></div></div>";
 }
 
 function mt_preprocess($vars,$hook){
