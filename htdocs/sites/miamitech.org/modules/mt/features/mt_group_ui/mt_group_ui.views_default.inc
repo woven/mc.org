@@ -4536,20 +4536,18 @@ if (is_numeric($nid)){
       'hide_alter_empty' => 1,
       'value' => '<?php
 $image = "";
-if ($data->node_data_field_logo_field_logo_fid!="")
-{
-$imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->node_data_field_logo_field_logo_fid));
-$image= theme_imagecache("group_logo", $imagepath, false, false);
+if ($data->node_data_field_logo_field_logo_fid){
+	$imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->node_data_field_logo_field_logo_fid));
+	$image= theme_imagecache("group_logo", $imagepath, false, false);
+}else{
+	$title = $data->node_title;
+	$image = theme_imgplaceholder($title);
 }
-else{
-$title = $data->node_title;
-$image = \'<img src="http://placehold.it/63x66&text=\' . $title . \'" >\';
-}
-//drupal_set_message("<pre>".$imagepath."</pre>"); 
-//drupal_set_message("<pre>".print_r($data, true)."</pre>"); 
 ?>
+
 <div style="background: <?php echo $data->node_data_field_header_color_field_header_color_value; ?>; padding: 12px 10px; width: 920px; margin-left: -10px; height: 67px;">
-<a href="<?php echo $data->node_data_field_header_color_field_small_name_value; ?>"><?php echo $image;?></a> <h1 style="color: <?php echo $data->node_data_field_header_color_field_header_title_color_value; ?>"><?php echo $data->node_title ?></h1>
+	<a href="<?php echo $data->node_data_field_header_color_field_small_name_value; ?>"><?php echo $image;?></a>
+	<h1 style="color: <?php echo $data->node_data_field_header_color_field_header_title_color_value; ?>"><?php echo $data->node_title ?></h1>
 </div>',
       'exclude' => 0,
       'id' => 'phpcode',
