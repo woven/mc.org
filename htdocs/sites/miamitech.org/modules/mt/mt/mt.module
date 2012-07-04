@@ -12,7 +12,7 @@ function theme_imgplaceholder($gname,$height = "83px",$width = "83px"){
   $range_colors = array(
     'a-f' => array("red","white"),
     'f-z' => array("blue","white"),
-    'else' => array("gray","white")
+    'else' => array("green","white")
   );
 
   $colors_use = array();
