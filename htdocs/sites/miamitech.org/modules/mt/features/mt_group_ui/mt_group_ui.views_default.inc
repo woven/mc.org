@@ -4539,7 +4539,7 @@ if ($data->node_data_field_logo_field_logo_fid){
 	$image= theme_imagecache("group_logo", $imagepath, false, false);
 }else{
 	$title = $data->node_title;
-	$image = theme_imgplaceholder($title,"64px","64px");
+	$image = theme_imgplaceholder($title,"64px","70px");
 }
 ?>
 
