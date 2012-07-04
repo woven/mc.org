@@ -29,7 +29,7 @@ function theme_imgplaceholder($gname){
   }
 
   if(empty($colors_use)){
-    $colors_use =  "";
+    $colors_use =  $range_colors['else'];
   }
 
   return "<div class=\"img-placeholder\"><div class=\"img\" style='background-color: $colors_use[0]'><span style='color: $colors_use[1]'>$gname</span><div class=\"cover\"></div></div></div>";
