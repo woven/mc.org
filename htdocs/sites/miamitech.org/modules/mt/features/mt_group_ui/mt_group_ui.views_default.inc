@@ -3889,8 +3889,9 @@ if ($data->node_data_field_logo_field_logo_fid){
 	$imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->node_data_field_logo_field_logo_fid));
 	$image= theme_imagecache("group_logo", $imagepath, false, false);
 }else{
-	$title = $data->node_title;
-	$image = theme_imgplaceholder($title,"64px","64px");
+dsm($data);
+	$title = $data->node_og_ancestry_title;
+	$image = theme_imgplaceholder($title,"64px","85px");
 }
 //drupal_set_message("<pre>".$imagepath."</pre>"); 
 //drupal_set_message("<pre>".print_r($data, true)."</pre>"); 
@@ -4539,7 +4540,7 @@ if ($data->node_data_field_logo_field_logo_fid){
 	$image= theme_imagecache("group_logo", $imagepath, false, false);
 }else{
 	$title = $data->node_title;
-	$image = theme_imgplaceholder($title,"64px","70px");
+	$image = theme_imgplaceholder($title,"64px","85px");
 }
 ?>
 
