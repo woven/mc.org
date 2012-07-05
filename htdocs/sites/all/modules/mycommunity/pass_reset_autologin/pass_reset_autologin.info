@@ -1,0 +1,5 @@
+name = "Pass Reset Autologin"
+description = "Disable password reset confirmation page, and directly login"
+version = VERSION
+core = 6.x
+dependencies[] = user

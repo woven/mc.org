@@ -34,7 +34,7 @@ function mt_account_ds_default_settings() {
             ),
             'mt_userprofile' => array(
               'region' => 'middle',
-              'weight' => '-96',
+              'weight' => '-98',
               'format' => '',
               'css-class' => '',
               'labelformat' => 'hidden',

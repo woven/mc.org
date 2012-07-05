@@ -159,6 +159,8 @@ function mt_account_views_default_views() {
     'type' => 'none',
   ));
   $handler->override_option('title', 'My Groups');
+  $handler->override_option('empty', 'Nothing to show here. Would you like to <a href="/node/add/group">add a group</a>?');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('use_ajax', TRUE);
   $handler->override_option('items_per_page', 0);
   $handler->override_option('style_plugin', 'list');

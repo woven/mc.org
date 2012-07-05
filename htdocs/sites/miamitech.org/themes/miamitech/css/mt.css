@@ -1,7 +1,7 @@
 /* Custom styles specific to MiamiTech.org */
 
 body {
-	background: none;
+	background: #f7f7f7;
 	font: 75%/1.25 Arial, Helvetica, sans-serif;
 }	
 
@@ -219,7 +219,7 @@ body.page-user .view-my-groups ul li{
     display: block;
     vertical-align: middle;
     text-align: center;
-    font-size: 9px;
+    font-size: 75px;
 }
 
 .img-placeholder .img .cover{
@@ -232,4 +232,8 @@ body.page-user .view-my-groups ul li{
 #page #group-page-block .field-content a{
     margin-right: 15px;
     text-decoration: none;
+}
+
+#quicktabs_container_mt_userprofile{
+    margin: 20px;
 }
