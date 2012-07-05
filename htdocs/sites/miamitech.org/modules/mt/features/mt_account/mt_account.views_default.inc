@@ -73,7 +73,7 @@ function mt_account_views_default_views() {
       'wildcard_substitution' => 'All',
       'title' => '',
       'breadcrumb' => '',
-      'default_argument_type' => 'current_user',
+      'default_argument_type' => 'user',
       'default_argument' => '',
       'validate_type' => 'none',
       'validate_fail' => 'not found',
@@ -117,7 +117,6 @@ function mt_account_views_default_views() {
         'event_feed' => 0,
         'webform' => 0,
         'forum' => 0,
-        'profile' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
@@ -131,7 +130,13 @@ function mt_account_views_default_views() {
       'validate_argument_group_node_type' => array(
         'group' => 0,
       ),
-      'validate_argument_php' => '',
+      'validate_argument_php' => 'global $user;
+dsm($user);
+
+return true;',
+      'override' => array(
+        'button' => 'Override',
+      ),
     ),
   ));
   $handler->override_option('filters', array(
@@ -160,7 +165,7 @@ function mt_account_views_default_views() {
   ));
   $handler->override_option('title', 'My Groups');
   $handler->override_option('empty', 'Nothing to show here. Would you like to <a href="/node/add/group">add a group</a>?');
-  $handler->override_option('empty_format', '2');
+  $handler->override_option('empty_format', '3');
   $handler->override_option('use_ajax', TRUE);
   $handler->override_option('items_per_page', 0);
   $handler->override_option('style_plugin', 'list');
