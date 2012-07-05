@@ -6,6 +6,7 @@
 
 include_once 'mt.features.inc';
 
+
 function theme_imgplaceholder($gname,$height = "83px",$width = "83px"){
   global $range_colors;
 
@@ -257,7 +258,18 @@ function mt_event_image($node){
   //}
 }
 
+
 function mt_form_alter(&$form, &$form_state, $form_id){
+  dsm($form_id);
+  global $user;
+
+  if($form_id == "user_pass_reset"){
+    //dsm($form);
+    if($form['help']){
+
+    }
+  }
+
   if($form_id=='user_profile_form'){
     $form['Personal information']['picture_delete'] = $form['picture']['picture_delete'];
     $form['Personal information']['picture_upload'] = $form['picture']['picture_upload'];
@@ -441,7 +453,65 @@ function mt_menu_alter(&$items) {
   unset($items['node/%views_arg/by_subject']['access arguments']);
   $items['node/%views_arg/by_subject']['access arguments']['0']['0']='views_check_roles';
   $items['node/%views_arg/by_subject']['access arguments']['0']['1']['0']['4']='4';
+
+  unset($items['node/%views_arg/by_subject']['access arguments']);
+
+  $items['user/reset/%/%/%']['page arguments'][] = "login";
 }
+
+
+/**
+ * Menu callback; process one time login link and redirects to the user page on success.
+ */
+function mc_user_pass_reset(&$form_state, $uid, $timestamp, $hashed_pass, $action = NULL) {
+  global $user;
+
+  // Check if the user is already logged in. The back button is often the culprit here.
+  if ($user->uid) {
+    drupal_set_message(t('You have already used this one-time login link. It is not necessary to use this link to login anymore. You are already logged in.'));
+    drupal_goto();
+  }
+  else {
+    // Time out, in seconds, until login URL expires. 24 hours = 86400 seconds.
+    $timeout = 86400;
+    $current = time();
+    // Some redundant checks for extra security ?
+    if ($timestamp < $current && $account = user_load(array('uid' => $uid, 'status' => 1)) ) {
+      // Deny one-time login to blocked accounts.
+      if (drupal_is_denied('user', $account->name) || drupal_is_denied('mail', $account->mail)) {
+        drupal_set_message(t('You have tried to use a one-time login for an account which has been blocked.'), 'error');
+        drupal_goto();
+      }
+
+      // No time out for first time login.
+      if ($account->login && $current - $timestamp > $timeout) {
+        drupal_set_message(t('You have tried to use a one-time login link that has expired. Please request a new one using the form below.'));
+        drupal_goto('user/password');
+      }
+      else if ($account->uid && $timestamp > $account->login && $timestamp < $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login)) {
+        // First stage is a confirmation form, then login
+          watchdog('user', 'User %name used one-time login link at time %timestamp.', array('%name' => $account->name, '%timestamp' => $timestamp));
+          // Set the new user.
+          $user = $account;
+          // user_authenticate_finalize() also updates the login timestamp of the
+          // user, which invalidates further use of the one-time login link.
+          user_authenticate_finalize($form_state['values']);
+          drupal_set_message(t('You have just used your one-time login link. It is no longer necessary to use this link to login. Please change your password.'));
+          drupal_goto('user/'. $user->uid .'/edit');
+      }
+      else {
+        drupal_set_message(t('You have tried to use a one-time login link which has either been used or is no longer valid. Please request a new one using the form below.'));
+        drupal_goto('user/password');
+      }
+    }
+    else {
+      // Deny access, no more clues.
+      // Everything will be in the watchdog's URL for the administrator to check.
+      drupal_access_denied();
+    }
+  }
+}
+
 
 function mt_mail_alter(&$message){
   $site_name = variable_get('site_name', '');
