@@ -237,3 +237,15 @@ body.page-user .view-my-groups ul li{
 #quicktabs_container_mt_userprofile{
     margin: 20px;
 }
+
+#add-stuff .links .ico-add-stuff{
+	display: none;
+}
+
+#add-stuff .links .add-stuff-name{
+	width: 80px;
+}
+
+#add-stuff .links .add-stuff-name:hover{
+	color: #ccc;
+}
