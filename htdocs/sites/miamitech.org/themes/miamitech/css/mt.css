@@ -249,3 +249,12 @@ body.page-user .view-my-groups ul li{
 #add-stuff .links .add-stuff-name:hover{
 	color: #ccc;
 }
+
+body #navigation {
+	margin-bottom: 15px !important;
+}
+
+body #page #tabs {
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
