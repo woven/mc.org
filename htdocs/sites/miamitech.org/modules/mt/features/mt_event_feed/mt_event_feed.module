@@ -6,6 +6,15 @@
 
 include_once 'mt_event_feed.features.inc';
 
+
+function mt_event_feed_form_alter(&$form, &$form_state, $form_id){
+  //adding help msg for the feedapi fieldset
+  if($form_id == "event_feed_node_form"){
+    $form['feedapi']['#description'] = t("Import your group's event feed.  We currently only accept iCal feeds, like those found at the bottom of a Meetup.com calendar page.");
+  }
+}
+
+
 function mt_event_feed_menu(){
   $items = array();
   $event_path = drupal_get_path('module', 'event');

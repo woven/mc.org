@@ -263,10 +263,6 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 
   global $user;
 
-  if($form_id == "event_feed_node_form"){
-    $form['feedapi']['#description'] = "Import your group's event feed.  We currently only accept iCal feeds, like those found at the bottom of a Meetup.com calendar page.";
-  }
-
   if($form_id=='user_profile_form'){
     $form['Personal information']['picture_delete'] = $form['picture']['picture_delete'];
     $form['Personal information']['picture_upload'] = $form['picture']['picture_upload'];
