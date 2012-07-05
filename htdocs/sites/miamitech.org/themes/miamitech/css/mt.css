@@ -233,3 +233,7 @@ body.page-user .view-my-groups ul li{
     margin-right: 15px;
     text-decoration: none;
 }
+
+#quicktabs_container_mt_userprofile{
+    margin: 20px;
+}
