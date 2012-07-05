@@ -23,7 +23,15 @@
     <?php if (!empty($print['message'])) {
       print '<div class="print-message">'. $print['message'] .'</div><p />';
     } ?>
-    <div class="print-logo"><?php print $print['logo']; ?></div>
+    
+    <?php
+        if ($logo) {
+        	print '<div class="print-logo">';
+			print '<img src="'. check_url($logo) .'" alt="'. $site_title .'" id="logo" />';
+			print '</div>';
+    	}
+    ?>
+
     <div class="print-site_name"><?php print $print['site_name']; ?></div>
     <p />
     <hr class="print-hr" />
