@@ -9,23 +9,30 @@ function mt_event_ui_ds_default_settings() {
       'event' => array(
         '5' => array(
           'fields' => array(
+            'title' => array(
+              'region' => 'header',
+              'weight' => '-100',
+              'format' => 'nd_title_h1_nolink',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
             'body' => array(
               'region' => 'middle',
-              'weight' => '-100',
+              'weight' => '-99',
               'format' => 'nd_bodyfield',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
             'nodes_event_dates' => array(
               'region' => 'middle',
-              'weight' => '-99',
+              'weight' => '-98',
               'format' => 'ds_eval_code',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
             'nd_location_name' => array(
               'region' => 'middle',
-              'weight' => '-98',
+              'weight' => '-97',
               'format' => 'nd_location_textfield',
               'css-class' => '',
               'labelformat' => 'hidden',
