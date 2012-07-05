@@ -72,8 +72,25 @@ function mt_event_feed_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'content_extra_weights_event_feed';
+  $strongarm->value = array(
+    'title' => '-5',
+    'revision_information' => '20',
+    'author' => '20',
+    'options' => '25',
+    'comment_settings' => '30',
+    'menu' => '-2',
+    'path' => '30',
+    'og_nodeapi' => '0',
+    'print' => '30',
+  );
+  $export['content_extra_weights_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'enable_revisions_page_event_feed';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['enable_revisions_page_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -357,6 +374,27 @@ function mt_event_feed_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'print_display_comment_event_feed';
+  $strongarm->value = 0;
+  $export['print_display_comment_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'print_display_event_feed';
+  $strongarm->value = 1;
+  $export['print_display_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'print_display_urllist_event_feed';
+  $strongarm->value = 1;
+  $export['print_display_urllist_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'show_diff_inline_event_feed';
   $strongarm->value = 0;
   $export['show_diff_inline_event_feed'] = $strongarm;
@@ -365,7 +403,7 @@ function mt_event_feed_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'show_preview_changes_event_feed';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['show_preview_changes_event_feed'] = $strongarm;
 
   return $export;

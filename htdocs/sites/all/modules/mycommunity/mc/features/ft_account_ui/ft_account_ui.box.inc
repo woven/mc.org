@@ -59,8 +59,11 @@ function ft_account_ui_default_box() {
                   <?php  
                   }
                   ?>
-                  
-                  Welcome, <?php print ucfirst($user->name); ?>!</li>
+                <?php if($user->profile_firstname){ ?>
+                  Welcome, <?php print ucfirst($user->profile_firstname); ?>!</li>
+              <?php }else{ ?>
+                  Welcome, <?php print ucfirst($user->nameprofile_firstname); ?>!</li>
+                <?php } ?>
                 <li><span class="ico-small ico-profile"></span><?php print l(t(\'My Profile\'), \'user/\' . $user->uid); ?></li>
                 <li class="last"><a href="/logout">Sign out</a></li>
               </ul>
