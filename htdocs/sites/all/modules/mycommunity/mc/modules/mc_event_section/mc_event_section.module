@@ -152,3 +152,17 @@ function _mc_event_section_after_two_weeks(){
   }
   }
 }
+
+function _mc_event_section_formatted_location($location){
+  if(preg_match("/webinar/i", $location)){
+    return $location;
+  }
+  else {
+    if(!empty($location) || $location!=NULL){
+      return 'at <span class="location">' . $location .'</span>';
+    }
+    else{
+      return;
+    }
+  }
+}
