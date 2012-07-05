@@ -50,3 +50,6 @@ mydocs/
 #mc_femail_ext local file
 local.mc_femail_ext.sh
 db*.sql
+
+htdocs/.htaccess
+htdocs/robots.txt
