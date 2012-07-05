@@ -1,0 +1,5 @@
+<?php
+
+function pass_reset_autologin_menu_alter(&$items) {
+  $items['user/reset/%/%/%']['page arguments'][] = "login";
+}

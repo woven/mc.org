@@ -455,8 +455,6 @@ function mt_menu_alter(&$items) {
   $items['node/%views_arg/by_subject']['access arguments']['0']['1']['0']['4']='4';
 
   unset($items['node/%views_arg/by_subject']['access arguments']);
-
-  $items['user/reset/%/%/%']['page arguments'][] = "login";
 }
 
 
