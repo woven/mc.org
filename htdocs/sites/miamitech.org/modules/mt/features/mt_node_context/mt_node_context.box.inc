@@ -11,16 +11,15 @@ function mt_node_context_default_box() {
   $box->api_version = 1;
   $box->delta = 'join_mc';
   $box->plugin_key = 'simple';
-  $box->title = 'Join MyCommunity.org';
+  $box->title = 'Join MiamiTech.org';
   $box->description = 'Join MC - right block';
   $box->options = array(
-    'body' => '<h5>Joining is quick, easy and free.</h5>
-<p>Once you\'ve joined, you can enjoy the full benefits of the site. Get involved!</p>
+    'body' => '<h5>Do you manage a local group?</h5>
+<p>Tell us about your meetup, conference, workshop or other local group.</p>
 <ul class="li-join-mc">
-  <li>Share your tips and comments</li>
-  <li>Add stuff like articles, videos and more</li>
-  <li>Follow groups to show your support</li>
-  <li>Get notifications and stay connected</li>
+  <li>Help others find your group</li>
+  <li>Add events or import from any iCal</li>
+  <li>Lots more to come!</li>
 </ul>
 <div class="clear-block"><a href="/user/register" class="button overlay" rel="#register"><span>Join now!</span></a></div>',
     'format' => '3',

@@ -59,7 +59,7 @@ function ft_account_ui_default_box() {
                   <?php  
                   }
                   ?>
-                <?php if($user->profile_firstname){ ?>
+                <?php profile_load_profile($user); if($user->profile_firstname){ ?>
                   Welcome, <?php print ucfirst($user->profile_firstname); ?>!</li>
               <?php }else{ ?>
                   Welcome, <?php print ucfirst($user->nameprofile_firstname); ?>!</li>
