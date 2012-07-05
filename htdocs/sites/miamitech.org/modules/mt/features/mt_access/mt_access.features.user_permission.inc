@@ -156,6 +156,19 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: access print
+  $permissions['access print'] = array(
+    'name' => 'access print',
+    'roles' => array(
+      '0' => 'Publisher',
+      '1' => 'administrator',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+      '4' => 'group manager',
+      '5' => 'unverified',
+    ),
+  );
+
   // Exported permission: access security review list
   $permissions['access security review list'] = array(
     'name' => 'access security review list',
@@ -200,6 +213,12 @@ function mt_access_user_default_permissions() {
       '2' => 'authenticated user',
       '3' => 'group manager',
     ),
+  );
+
+  // Exported permission: add members
+  $permissions['add members'] = array(
+    'name' => 'add members',
+    'roles' => array(),
   );
 
   // Exported permission: add photos in any album
@@ -473,6 +492,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer groupadmin
+  $permissions['administer groupadmin'] = array(
+    'name' => 'administer groupadmin',
+    'roles' => array(),
+  );
+
   // Exported permission: administer imageapi
   $permissions['administer imageapi'] = array(
     'name' => 'administer imageapi',
@@ -570,6 +595,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: administer print
+  $permissions['administer print'] = array(
+    'name' => 'administer print',
+    'roles' => array(),
+  );
+
   // Exported permission: administer quicktabs
   $permissions['administer quicktabs'] = array(
     'name' => 'administer quicktabs',
@@ -656,6 +687,18 @@ function mt_access_user_default_permissions() {
       '0' => 'Publisher',
       '1' => 'administrator',
     ),
+  );
+
+  // Exported permission: approve membership request
+  $permissions['approve membership request'] = array(
+    'name' => 'approve membership request',
+    'roles' => array(),
+  );
+
+  // Exported permission: broadcast to group
+  $permissions['broadcast to group'] = array(
+    'name' => 'broadcast to group',
+    'roles' => array(),
   );
 
   // Exported permission: bypass advanced aggregation
@@ -846,6 +889,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: create group administrator
+  $permissions['create group administrator'] = array(
+    'name' => 'create group administrator',
+    'roles' => array(),
   );
 
   // Exported permission: create group content
@@ -1140,6 +1189,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: delete group administrator
+  $permissions['delete group administrator'] = array(
+    'name' => 'delete group administrator',
+    'roles' => array(),
+  );
+
   // Exported permission: delete heartbeat activity logs
   $permissions['delete heartbeat activity logs'] = array(
     'name' => 'delete heartbeat activity logs',
@@ -1336,6 +1391,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: deny membership request
+  $permissions['deny membership request'] = array(
+    'name' => 'deny membership request',
+    'roles' => array(),
   );
 
   // Exported permission: display drupal links
@@ -2299,6 +2360,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: node-specific print configuration
+  $permissions['node-specific print configuration'] = array(
+    'name' => 'node-specific print configuration',
+    'roles' => array(),
+  );
+
   // Exported permission: notify of path changes
   $permissions['notify of path changes'] = array(
     'name' => 'notify of path changes',
@@ -2325,6 +2392,12 @@ function mt_access_user_default_permissions() {
       '1' => 'administrator',
       '2' => 'authenticated user',
     ),
+  );
+
+  // Exported permission: remove members
+  $permissions['remove members'] = array(
+    'name' => 'remove members',
+    'roles' => array(),
   );
 
   // Exported permission: revert overridden settings
@@ -2393,6 +2466,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: use PHP for link visibility
+  $permissions['use PHP for link visibility'] = array(
+    'name' => 'use PHP for link visibility',
+    'roles' => array(),
   );
 
   // Exported permission: use PHP in custom fields
