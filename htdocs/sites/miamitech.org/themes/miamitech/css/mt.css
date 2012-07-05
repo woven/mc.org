@@ -267,3 +267,8 @@ body #page #tabs {
 #block-ds-0b596e3199de270de74a2f6e8f0d1525 .field-address-formatted{
 	padding-top: 5px;
 }
+
+
+#page #group-page-block h1 {
+	margin: 0 0 0 10px; 
+}
