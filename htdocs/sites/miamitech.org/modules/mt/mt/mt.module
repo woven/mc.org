@@ -260,15 +260,8 @@ function mt_event_image($node){
 
 
 function mt_form_alter(&$form, &$form_state, $form_id){
-  dsm($form_id);
+
   global $user;
-
-  if($form_id == "user_pass_reset"){
-    //dsm($form);
-    if($form['help']){
-
-    }
-  }
 
   if($form_id=='user_profile_form'){
     $form['Personal information']['picture_delete'] = $form['picture']['picture_delete'];
