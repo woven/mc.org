@@ -131,6 +131,21 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
 }
 
 function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  if($node->type=='event_feed' && $op=='validate'){
+    if(isset($node->feedapi['feedapi_url'])){
+      $result = db_query("select nid from feedapi where url='%s'", $node->feedapi['feedapi_url']);
+      while ($row = db_fetch_object($result)) {
+        $other_node = node_load($row->nid);
+        if(isset($other_node->og_groups)){
+          $gid = current($node->og_groups);
+          $other_gid = current($other_node->og_groups);
+          if($gid==$other_gid){
+            form_set_error('', t("Woops, we're already importing that very feed.  Try a different one?"));
+          }
+        }
+      }
+    }
+  }
   if($node->type=='event_feed' && $op=='insert'){
     $mapping = 'a:5:{s:91:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:5:"DTEND";i:4;s:8:"datetime";}";s:61:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:3:"end";}";s:93:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:8:"datetime";}";s:63:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:5:"start";}";s:87:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:2:"tz";}";s:66:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:8:"timezone";}";s:60:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:8:"LOCATION";}";s:66:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:8:"location";}";s:55:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:3:"GEO";}";s:61:"a:3:{i:0;s:13:"mt_event_feed";i:1;s:5:"event";i:2;s:3:"geo";}";}';
     $record = new stdClass();

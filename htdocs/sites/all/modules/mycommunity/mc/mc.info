@@ -5,3 +5,4 @@ version = "6.x-1.0"
 package = "MC.org"
 dependencies[] = mc_ui
 dependencies[] = mc_api
+dependencies[] = mc_event_section
