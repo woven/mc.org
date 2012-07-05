@@ -1,5 +1,21 @@
 <?php
 
+function miamitech_ud_profile_field_urlfilter($field) {
+
+  $key = $field['key'];
+  $account = $field['object'];
+  $profile_category = $field['properties']['category'];
+  if (isset($account->content[$profile_category][$key]['#value'])) {
+    $content = $account->content[$profile_category][$key]['#value'];
+    //return _filter_url($content, 1);
+    $attr = array(
+      'external' => true,
+      'attributes' => array("rel"=>"nofollow","target"=>"_blank")
+    );
+    return l($content,$content,$attr);
+  }
+}
+
 ## TODO:
 ## @mc_base_ghh_user_picture: make the default image as file node or variable so it's more dynamic
  
