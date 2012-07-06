@@ -259,18 +259,26 @@ body #page #tabs {
 	margin-bottom: 10px;
 }
 
+#block-ds-0b596e3199de270de74a2f6e8f0d1525 .field-nd-location-gmap{
+	padding-bottom: 10px;
+}
+
 #block-ds-0b596e3199de270de74a2f6e8f0d1525 .field-nd-location-name{
 	font-weight: bold;
-	padding-top: 10px;
+	padding-bottom: 5px;
 }
 
 #block-ds-0b596e3199de270de74a2f6e8f0d1525 .field-address-formatted{
-	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 #register .submit-wrapper {
 	float: left;
 	padding-left: 0px
+}
+
+#register #edit-mail {
+	width: 230px;
 }
 
 #page #group-page-block h1{
