@@ -1,9 +1,9 @@
 ; $Id: rubik.info,v 1.2.2.2 2010/09/28 20:50:29 yhahn Exp $
 name = "MiamiTech.org Theme" 
 description = "Theme for MiamiTech.org"
-base theme = "tao"
 core = "6.x"
 engine = "phptemplate"
+base theme = "tao"
  
 ; Regions
 regions[header] = Header

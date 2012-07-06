@@ -34,11 +34,8 @@
       <?php include_once ('inc/page.drupal.inc'); ?> 
     
     <?php if ($group_logo) : ?>
-      <div id="group-page-block">
-        <div class="block-content clear-block">
-          <?php print $group_logo; ?>
-        </div>
-      </div>
+      <!-- <div id="group-page-block"> -->
+              <?php print $group_logo; ?>
     <?php endif; ?>
 
     <?php if ($featured) : ?>
