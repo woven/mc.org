@@ -4014,7 +4014,7 @@ if (is_numeric($nid)){
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
-        'make_link' => 1,
+        'make_link' => 0,
         'path' => 'node/[nid]',
         'absolute' => 0,
         'link_class' => '',
@@ -4217,8 +4217,8 @@ if (is_numeric($nid)){
       'label' => 'inline html',
       'alter' => array(
         'text' => '[field_logo_fid] [title]',
-        'make_link' => 0,
-        'path' => '',
+        'make_link' => 1,
+        'path' => 'node/[nid]',
         'absolute' => 0,
         'link_class' => '',
         'alt' => '',
