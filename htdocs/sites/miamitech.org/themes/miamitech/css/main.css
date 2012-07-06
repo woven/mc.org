@@ -783,7 +783,7 @@ a .ico-small {
 ------------------------------------------------------------------------------*/
 
 #page {
-	margin-bottom: 25px;
+	margin-bottom: 10px;
 }
 
 /* Featured items */
@@ -1049,7 +1049,7 @@ a .ico-small {
 }
 
 #page h1 {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	font-size: 2.5em;
 	color: #ff6600;
 }
@@ -1576,7 +1576,7 @@ a .ico-small {
 
 /* Node */
 #page .node {
-	margin: 20px 0;
+	margin: 0px 0;
 }
 
 body.node-type-group #page .node {
