@@ -272,7 +272,7 @@ body #page #tabs {
 	padding-bottom: 5px;
 }
 
-#register .submit-wrapper {
+#register .submit-wrapper, #user-register .submit-wrapper {
 	float: left;
 	padding-left: 0px
 }
