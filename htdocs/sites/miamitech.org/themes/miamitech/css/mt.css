@@ -269,6 +269,38 @@ body #page #tabs {
 }
 
 
-#page #group-page-block h1 {
+#page #group-page-block h1{
 	margin: 0 0 0 10px; 
+}
+
+#group-page-head{
+    margin-bottom: 10px;
+}
+
+#group-page-head .wrapper{
+    height: 80px;
+    line-height: 80px;
+    padding: 8px 12px;
+}
+
+#group-page-head h1,#group-page-head a{
+    float: left;
+    margin: 0px;
+    padding: 0px;
+}
+
+#group-page-head .wrapper h1, .wrapper a{
+    color: inherit;
+    text-decoration: none;
+}
+
+#group-page-head .wrapper h1{
+    overflow: hidden;
+    white-space:nowrap;
+    max-width: 82%;
+}
+
+#group-page-head .wrapper img{
+    vertical-align: middle;
+    margin-right: 15px;
 }

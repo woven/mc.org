@@ -4312,8 +4312,10 @@ if (is_numeric($nid)){
         'text' => '',
         'make_link' => 1,
         'path' => 'node/[nid]',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -4328,6 +4330,7 @@ if (is_numeric($nid)){
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
       'format' => 'group_logo_default',
@@ -4506,6 +4509,40 @@ if (is_numeric($nid)){
       ),
       'relationship' => 'none',
     ),
+    'nothing' => array(
+      'label' => 'inline html',
+      'alter' => array(
+        'text' => '[field_logo_fid] [title]',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 0,
+      'id' => 'nothing',
+      'table' => 'views',
+      'field' => 'nothing',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
     'phpcode' => array(
       'label' => '',
       'alter' => array(
@@ -4543,11 +4580,11 @@ if ($data->node_data_field_logo_field_logo_fid){
 }
 ?>
 
-<div style="background: <?php echo $data->node_data_field_header_color_field_header_color_value; ?>; padding: 12px 12px; width: 920px; margin-left: -10px; height: 72px;">
+<div style="background: <?php echo $data->node_data_field_header_color_field_header_color_value; ?>;">
 	<a href="<?php echo $data->node_data_field_header_color_field_small_name_value; ?>"><?php echo $image;?></a>
 	<h1 style="color: <?php echo $data->node_data_field_header_color_field_header_title_color_value; ?>"><?php echo $data->node_title ?></h1>
 </div>',
-      'exclude' => 0,
+      'exclude' => 1,
       'id' => 'phpcode',
       'table' => 'customfield',
       'field' => 'phpcode',
@@ -4660,10 +4697,37 @@ if ($data->node_data_field_logo_field_logo_fid){
       'relationship' => 'none',
     ),
   ));
+  $handler->override_option('style_plugin', 'semanticviews_default');
+  $handler->override_option('style_options', array(
+    'grouping' => '',
+    'group' => array(
+      'element_type' => 'h3',
+      'class' => 'title',
+    ),
+    'list' => array(
+      'element_type' => '',
+      'class' => '',
+    ),
+    'row' => array(
+      'element_type' => '',
+      'class' => '',
+      'last_every_nth' => '0',
+      'first_class' => '',
+      'last_class' => '',
+      'striping_classes' => 'odd even',
+    ),
+  ));
+  $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
-    'inline' => array(),
-    'separator' => '',
-    'hide_empty' => 0,
+    'semantic_html' => array(
+      'nothing' => array(
+        'element_type' => '',
+        'class' => '',
+        'label_element_type' => '',
+        'label_class' => '',
+      ),
+    ),
+    'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
