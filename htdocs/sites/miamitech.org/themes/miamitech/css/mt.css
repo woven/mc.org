@@ -273,6 +273,10 @@ body #page #tabs {
 	padding-left: 0px
 }
 
+#register #edit-mail {
+	width: 250px;
+}
+
 #page #group-page-block h1{
 	margin: 0 0 0 10px; 
 }
