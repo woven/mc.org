@@ -781,9 +781,9 @@ function mt_landing_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'boxes-header_links' => array(
-          'module' => 'boxes',
-          'delta' => 'header_links',
+        'ft_account-0' => array(
+          'module' => 'ft_account',
+          'delta' => 0,
           'region' => 'header',
           'weight' => 0,
         ),
@@ -831,9 +831,6 @@ function mt_landing_contexts_context_default_contexts() {
       'branding' => array(
         'class' => '',
         'blocks' => array(
-          'google_cse-0' => array(
-            'class' => '',
-          ),
           'boxes-add_stuff' => array(
             'class' => '',
           ),

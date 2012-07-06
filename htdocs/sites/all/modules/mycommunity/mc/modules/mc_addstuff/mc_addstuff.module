@@ -20,6 +20,7 @@ function mc_addstuff_block($op = 'list', $delta = 0, $edit = array()) {
         $block = array(
           'subject' => '', 
           'content' => mc_addstuff_display_block_add_stuff(),
+	  'cache' => BLOCK_CACHE_PER_ROLE
         );
         break;
     }

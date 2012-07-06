@@ -1,3 +1,34 @@
 <?php
 
 include_once('ft_account.features.inc');
+
+function ft_account_theme($existing, $type, $theme, $path) {
+  return array(
+    'mc_account_head' => array(
+      'arguments' => array(),
+      'template' => "mc_account_head"
+    )
+  );
+}
+
+function ft_account_block($op = 'list', $delta = 0, $edit = array()) {
+  if ($op == 'list') {
+    $blocks[0] = array(
+      'info' => t('My Account section'), 
+      'weight' => 0, 
+      'status' => 1,
+      'cache' => BLOCK_CACHE_PER_USER
+    );
+    return $blocks;
+  }else if ($op == 'view') {
+    switch ($delta) {
+      case 0:
+        $block = array(
+          'subject' => '', 
+          'content' => theme('mc_account_head'),
+        );
+        break;
+    }
+    return $block;
+  }
+}
