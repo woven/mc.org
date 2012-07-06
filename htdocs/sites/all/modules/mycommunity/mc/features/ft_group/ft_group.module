@@ -35,7 +35,10 @@ function ft_group_nodeapi(&$node, $op, $teaser, $page) {
 		  break;
 		  case 'insert':
 		  //drupal_set_message("<pre>".print_r($node, true)."</pre>");
-		  
+          //dsm(og_save_subscription($node->nid,1,array("is_active","is_admin","created")));
+          // @todo Use og_save_subscription instead.
+          db_query("INSERT INTO og_uid (nid, og_role, is_active, is_admin, uid) VALUES (".$node->nid.", 0, 1, 1, 1)");
+
 		  if ($node->field_group_manager[0]['uid']!="")
 		  {
 		  foreach ($node->field_group_manager as $uid)
