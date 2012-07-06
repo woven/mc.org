@@ -306,7 +306,8 @@ body #page #tabs {
 #group-page-head .wrapper h1{
     overflow: hidden;
     white-space:nowrap;
-    max-width: 82%;
+    max-width: 80%;
+    margin: 0 0 0 10px;
 }
 
 #group-page-head .wrapper img{
