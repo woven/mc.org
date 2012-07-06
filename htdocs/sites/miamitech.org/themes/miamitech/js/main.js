@@ -168,11 +168,11 @@ var GHH = {
 				img.css('margin-top', (wrapper.height() - img.height()) / 2);
 			}
 		});
-		$("#login-button").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
+		$("#login-button").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6, onComplete:function(){ $('#edit-name-1').focus(); } });
 		$("#anonymous-follow").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
-		$("#register-button").colorbox({width:"720", height:"500", inline:true, href:"#register", opacity: 0.6});
+		$("#register-button").colorbox({width:"720", height:"500", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#edit-mail').focus(); }});
 		$("#view-pdf").colorbox({width:"830", height:"500", inline:true, href:".filefield-file", opacity: 0.6});
-		$('#block-boxes-join_mc a[href$="/user/register"]').colorbox({width:"720", height:"500", inline:true, href:"#register", opacity: 0.6});
+		$('#block-boxes-join_mc a[href$="/user/register"]').colorbox({width:"720", height:"500", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#edit-mail').focus(); }});
     $("#fb-friends").colorbox({
       width:"500",
       opacity: 0.6,
