@@ -4360,6 +4360,40 @@ return false;',
       'relationship' => 'none',
     ),
   ));
+  $handler->override_option('cache', array(
+    'type' => 'views_content_cache',
+    'keys' => array(
+      'comment' => array(
+        'changed' => 0,
+      ),
+      'node' => array(
+        'group' => 'group',
+        'gallery' => 0,
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'event_feed' => 0,
+        'file' => 0,
+        'forum' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'gallery_image' => 0,
+        'place' => 0,
+        'profile' => 0,
+        'video' => 0,
+        'webform' => 0,
+      ),
+      'og' => array(
+        'current' => 0,
+        'user' => 0,
+      ),
+    ),
+    'results_min_lifespan' => '21600',
+    'results_max_lifespan' => '21600',
+    'output_min_lifespan' => '21600',
+    'output_max_lifespan' => '21600',
+  ));
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
     'grouping' => '',
@@ -10627,6 +10661,40 @@ if (is_numeric($nid)){
       ),
       'relationship' => 'none',
     ),
+  ));
+  $handler->override_option('cache', array(
+    'type' => 'views_content_cache',
+    'keys' => array(
+      'comment' => array(
+        'changed' => 0,
+      ),
+      'node' => array(
+        'event' => 'event',
+        'gallery' => 0,
+        'article' => 0,
+        'audio' => 0,
+        'event_feed' => 0,
+        'file' => 0,
+        'forum' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'gallery_image' => 0,
+        'place' => 0,
+        'profile' => 0,
+        'video' => 0,
+        'webform' => 0,
+      ),
+      'og' => array(
+        'current' => 0,
+        'user' => 0,
+      ),
+    ),
+    'results_min_lifespan' => '-1',
+    'results_max_lifespan' => '-1',
+    'output_min_lifespan' => '21600',
+    'output_max_lifespan' => '21600',
   ));
   $handler->override_option('title', 'Events');
   $handler->override_option('items_per_page', 0);
