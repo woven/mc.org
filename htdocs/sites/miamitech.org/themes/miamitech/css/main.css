@@ -1206,11 +1206,10 @@ a .ico-small {
 	color: #e60000;
 }
 
-#page .description {
+#page form .description {
 	color: #333;
 	font-size: 1em;
 	margin-top: 6px;
-	margin-left: 103px;
 }
 
 #page .vevent div.short {
