@@ -273,6 +273,7 @@ body #page #tabs {
 	margin: 0 0 0 10px; 
 }
 
+/* New group head block/area this is the only styles affecting on that block right now */
 #group-page-head{
     margin-bottom: 10px;
 }
@@ -304,3 +305,4 @@ body #page #tabs {
     vertical-align: middle;
     margin-right: 15px;
 }
+

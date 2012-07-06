@@ -3617,7 +3617,7 @@ return $usuario->name;',
     'type' => 'none',
   ));
   $handler->override_option('items_per_page', 1);
-  $handler = $view->new_display('block', 'Group Title', 'block_1');
+  $handler = $view->new_display('block', 'Group Title (don\'t use)', 'block_1');
   $handler->override_option('fields', array(
     'nid' => array(
       'label' => '',
@@ -4265,7 +4265,7 @@ if (is_numeric($nid)){
     'weight' => 0,
     'name' => 'navigation',
   ));
-  $handler = $view->new_display('block', 'Group Title - for group homepage', 'block_3');
+  $handler = $view->new_display('block', 'Group Title - for group & nodes', 'block_3');
   $handler->override_option('relationships', array());
   $handler->override_option('fields', array(
     'nid' => array(
@@ -4543,56 +4543,6 @@ if (is_numeric($nid)){
       ),
       'relationship' => 'none',
     ),
-    'phpcode' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'absolute' => 0,
-        'link_class' => '',
-        'alt' => '',
-        'rel' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'hide_alter_empty' => 1,
-      'value' => '<?php
-$image = "";
-if ($data->node_data_field_logo_field_logo_fid){
-	$imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->node_data_field_logo_field_logo_fid));
-	$image= theme_imagecache("group_logo", $imagepath, false, false);
-}else{
-	$title = $data->node_title;
-	$image = theme_imgplaceholder($title,"70px","85px");
-}
-?>
-
-<div style="background: <?php echo $data->node_data_field_header_color_field_header_color_value; ?>;">
-	<a href="<?php echo $data->node_data_field_header_color_field_small_name_value; ?>"><?php echo $image;?></a>
-	<h1 style="color: <?php echo $data->node_data_field_header_color_field_header_title_color_value; ?>"><?php echo $data->node_title ?></h1>
-</div>',
-      'exclude' => 1,
-      'id' => 'phpcode',
-      'table' => 'customfield',
-      'field' => 'phpcode',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
   ));
   $handler->override_option('arguments', array(
     'nid' => array(
@@ -4605,7 +4555,7 @@ if ($data->node_data_field_logo_field_logo_fid){
       'breadcrumb' => '',
       'default_argument_type' => 'node',
       'default_argument' => '',
-      'validate_type' => 'none',
+      'validate_type' => 'php',
       'validate_fail' => 'not found',
       'break_phrase' => 0,
       'not' => 0,
@@ -4618,6 +4568,7 @@ if ($data->node_data_field_logo_field_logo_fid){
         4 => 0,
         5 => 0,
         3 => 0,
+        6 => 0,
       ),
       'override' => array(
         'button' => 'Use default',
@@ -4629,37 +4580,27 @@ if ($data->node_data_field_logo_field_logo_fid){
       'default_argument_image_size' => '_original',
       'default_argument_php' => '',
       'validate_argument_node_type' => array(
-        'image' => 0,
         'article' => 0,
         'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
         'event' => 0,
-        'feature_spot' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
-        'front_picture' => 0,
         'group' => 0,
-        'healthcare_facility' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'photo' => 0,
-        'photo_gallery' => 0,
+        'nnews' => 0,
+        'npage' => 0,
         'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
         'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'event_feed' => 0,
         'webform' => 0,
+        'forum' => 0,
+        'profile' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
         1 => 0,
-        2 => 0,
-        5 => 0,
-        6 => 0,
-        3 => 0,
       ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
@@ -4669,11 +4610,29 @@ if ($data->node_data_field_logo_field_logo_fid){
         'thumbnail' => 'thumbnail',
         'preview' => 'preview',
       ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
+      'validate_argument_is_member' => '0',
       'validate_argument_group_node_type' => array(
         'group' => 0,
       ),
-      'validate_argument_php' => '',
+      'validate_argument_php' => 'if($argument){
+	$node = node_load($argument);
+
+	if($node->type == "group"){
+	   return true;
+	}else{
+		if(!empty($node->og_groups)){
+			$handler->argument = current($node->og_groups);
+			return true;
+		}
+	}
+}
+return false;',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+      ),
     ),
   ));
   $handler->override_option('filters', array(
