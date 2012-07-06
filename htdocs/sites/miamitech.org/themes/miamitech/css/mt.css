@@ -267,3 +267,8 @@ body #page #tabs {
 #block-ds-0b596e3199de270de74a2f6e8f0d1525 .field-address-formatted{
 	padding-top: 5px;
 }
+
+#register .submit-wrapper {
+	float: left;
+	padding-left: 0px
+}
