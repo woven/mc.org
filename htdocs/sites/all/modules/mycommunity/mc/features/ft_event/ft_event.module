@@ -109,3 +109,39 @@ function theme_mc_event_date($unix_date_start = NULL, $unix_date_end = NULL, $ha
   $output .= '</span>';
   return $output;
 }
+
+function theme_mc_event_print_date($unix_date_start = NULL, $unix_date_end = NULL, $has_end_date = NULL, $has_time = NULL, $hide_day = FALSE){
+  
+  $output = '';
+  
+  
+  $output .= '<span class="event-time">';
+    
+  $output .= mc_event_print_format_day($unix_date_start);
+      
+  // if it has a time, and it's not a past date
+  if ($has_time && ($unix_date_start > time() || $occurring)){
+    // if it has an end time, different than start time
+    if ($has_end_date && (date('Hi', $unix_date_start) != date('Hi', $unix_date_end))){
+      $time = mc_api_format_time($unix_date_start, $unix_date_end);
+    }else{
+      $time = mc_api_format_time($unix_date_start);
+    }
+    if (!$hide_day){
+      $output .= ', ';
+    } 
+    $output .= $time;
+  }
+
+  $output .= '</span>';
+  return $output;
+}
+
+function mc_event_print_format_day($unix_date){
+  if (date('Y') == date('Y', $unix_date)){ // same year
+    $output .= date('l F jS', $unix_date);
+  }else{ // different year
+    $output .= date('l F jS, Y', $unix_date);
+  }
+  return $output;
+}

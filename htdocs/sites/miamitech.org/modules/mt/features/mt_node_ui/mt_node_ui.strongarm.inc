@@ -724,6 +724,35 @@ if ( !empty($object->feedapi_node->feed_nids) ){
         'render' => '1',
       ),
     ),
+    'node_event_dates_print' => array(
+      'title' => 'Event Dates Print',
+      'exclude' => array(
+        'article' => 'article',
+        'audio' => 'audio',
+        'file' => 'file',
+        'group' => 'group',
+        'link' => 'link',
+        'nnews' => 'nnews',
+        'npage' => 'npage',
+        'place' => 'place',
+        'video' => 'video',
+        'gallery' => 'gallery',
+        'gallery_image' => 'gallery_image',
+        'event_feed' => 'event_feed',
+        'webform' => 'webform',
+        'forum' => 'forum',
+        'event' => 0,
+      ),
+      'type' => 5,
+      'status' => 3,
+      'properties' => array(
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php return views_embed_view("node_details","block_5",$object->nid) ?>',
+        'token' => 0,
+      ),
+    ),
   );
   $export['nd_fields'] = $strongarm;
 
