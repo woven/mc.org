@@ -282,7 +282,7 @@ body #page #tabs {
 }
 
 #page #group-page-block h1{
-	margin: 0 0 0 10px; 
+	margin: 0 0 0 15px; 
 }
 
 /* New group head block/area this is the only styles affecting on that block right now */
@@ -291,8 +291,11 @@ body #page #tabs {
 }
 
 #group-page-head .wrapper{
-    padding: 8px 12px;
+    margin-top: 0px;
     margin-bottom: 10px;
+    -webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
 }
 
 #group-page-head .wrapper a{
@@ -315,10 +318,24 @@ body #page #tabs {
     overflow: hidden;
     white-space:nowrap;
     max-width: 80%;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 20px;
 }
 
 #group-page-head .wrapper img{
     margin-right: 15px;
 }
 
+
+#block-ds-5c755d31699c072160e29da9599e28f3 .field {
+	margin-bottom: 15px;
+}
+
+.page-node #page .category-link {
+	margin: 0px 0 10px;
+}
+
+.page-node
+
+.nd-region-header {
+	margin-bottom: 0px;
+}
