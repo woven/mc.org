@@ -807,7 +807,37 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
     'type' => 'none',
   ));
   $handler->override_option('cache', array(
-    'type' => 'none',
+    'type' => 'views_content_cache',
+    'keys' => array(
+      'comment' => array(
+        'changed' => 0,
+      ),
+      'node' => array(
+        'event' => 'event',
+        'gallery' => 0,
+        'article' => 0,
+        'audio' => 0,
+        'event_feed' => 0,
+        'file' => 0,
+        'forum' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'gallery_image' => 0,
+        'place' => 0,
+        'video' => 0,
+        'webform' => 0,
+      ),
+      'og' => array(
+        'current' => 0,
+        'user' => 0,
+      ),
+    ),
+    'results_min_lifespan' => '-1',
+    'results_max_lifespan' => '-1',
+    'output_min_lifespan' => '21600',
+    'output_max_lifespan' => '21600',
   ));
   $handler->override_option('header', '<?php
   // Important: Pager should be turned on, otherwise count will not work.
@@ -966,7 +996,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/current\');
   ));
   $handler->override_option('header', '');
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '4');
 
   $views[$view->name] = $view;
 
