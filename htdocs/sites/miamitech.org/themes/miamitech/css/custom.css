@@ -73,11 +73,14 @@
   margin: 10px 0;
 }
 ul.primary-tabs, ul.secondary-tabs{
-  border: 1px solid #ccc;
+  border-width: 1px;
+  border-color: #ccc;
+  border-style: solid;
 }
 ul.primary-tabs{
-  -moz-border-radius: 4px 4px 0 0;
-  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 ul.secondary-tabs{
   background-color:#ccc;

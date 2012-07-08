@@ -243,16 +243,17 @@ body.page-user .view-my-groups ul li{
 }
 
 #add-stuff .links .add-stuff-name:hover{
-	color: #ccc;
+	color: #808080;
 }
 
 body #navigation {
 	margin-bottom: 15px !important;
 }
 
-body #page #tabs {
-	margin-top: -10px;
-	margin-bottom: 10px;
+body #page #tabs,
+.og-context #page #tabs {
+	margin-top: -5px;
+	margin-bottom: 5px;
 }
 
 #block-ds-0b596e3199de270de74a2f6e8f0d1525 .field-nd-location-gmap{
@@ -358,4 +359,43 @@ body #page #tabs {
 #page .field-view-image img {
 	border: none;
 	background: none;
+}
+
+
+#tabs {
+	background-color: transparent;
+} 
+
+ul.primary-tabs {
+	float: right;
+}
+
+ul.primary-tabs, ul.secondary-tabs{
+	font-size: 14px;
+	background-color: none;
+	border: none;
+}
+
+ul.primary-tabs li {
+	margin-right: 4px;
+}
+
+ul.primary-tabs li, ul.primary-tabs a {
+	font-size: 12px;
+	letter-spacing: 1pt;
+	border-width: 1px 1px 1px 1px;
+    -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff;
+  	background: #ccc;
+  	text-transform: uppercase;
+}
+
+ul.primary-tabs a:hover{
+	background: #0070B6;
+}
+
+ul.primary-tabs a.active, ul.primary-tabs li.active{
+	background: #0070B6;
 }
