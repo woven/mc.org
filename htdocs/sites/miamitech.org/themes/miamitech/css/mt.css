@@ -9,6 +9,11 @@ body {
 	display: none;
 }
 
+#header {
+	margin-bottom: 5px;
+}
+
+
 #page .block-title a span {
 	color: #39F;
 }
