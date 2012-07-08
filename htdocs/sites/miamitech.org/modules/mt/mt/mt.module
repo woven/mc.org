@@ -7,13 +7,14 @@
 include_once 'mt.features.inc';
 
 
-function theme_imgplaceholder($gname,$height = "83px",$width = "83px"){
+function theme_imgplaceholder($gname){
 
   $range_colors = array(
-    '1-5' => array("red","white"),
-    '6-10' => array("orange","black"),
-    '11-15' => array("purple","white"),
-    'else' => array("green","white")
+    '1-15' => array("red","white"),
+    '16-25' => array("orange","black"),
+    '26-35' => array("purple","white"),
+	'35-50' => array("green","white"),
+    'else' => array("blue","white")
   );
 
   $colors_use = array();
@@ -34,7 +35,7 @@ function theme_imgplaceholder($gname,$height = "83px",$width = "83px"){
     $colors_use =  $range_colors['else'];
   }
 
-  return "<div class=\"img-placeholder\" style='width: $width; height: $height' ><div class=\"img\" style='background-color: $colors_use[0]; line-height: $height;height: $height'><span style='color: $colors_use[1]'>$gname</span></div></div>";
+  return "<div class=\"img-placeholder\"><div class=\"img\"><span><img src='/sites/miamitech.org/themes/miamitech/images/icons/ico-event.png'/></span></div></div>";
 }
 
 function theme_imgplaceholder_old($gname,$height = "83px",$width = "83px"){

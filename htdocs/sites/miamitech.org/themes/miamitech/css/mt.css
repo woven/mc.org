@@ -211,10 +211,6 @@ body.page-user .view-my-groups ul li{
     margin: 0 -5px 9px -5px;
 }
 
-.img-placeholder .img{
-    background-color: gray;
-}
-
 .img-placeholder .img span{
     display: block;
     vertical-align: middle;
@@ -338,4 +334,28 @@ body #page #tabs {
 
 .nd-region-header {
 	margin-bottom: 0px;
+}
+
+.view-mc-events-by-dates .img-placeholder {
+	height: 85px;
+	width: 85px;
+	background: #fff;
+}
+
+.view-mc-events-by-dates .img span {
+	height: 85px;
+	width: 84px;
+}
+
+.view-mc-events-by-dates .field-view-image .img {
+	height: 83px;
+	width: 83px;
+	margin: auto;
+	border: solid 1px #ccc;
+	background: #f7f7f7;
+}
+
+#page .field-view-image img {
+	border: none;
+	background: none;
 }

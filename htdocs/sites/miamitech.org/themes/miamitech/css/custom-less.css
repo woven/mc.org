@@ -26,6 +26,7 @@
   font-size:0.9em;
   color:#b3b3b3;
   margin-bottom:5px;
+  padding-top:2px;
 }
 #page .field-author .picture { display:inline; }
 #page .field-author .picture img { display:inherit; }
