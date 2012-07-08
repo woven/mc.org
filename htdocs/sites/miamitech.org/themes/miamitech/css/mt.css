@@ -373,29 +373,32 @@ ul.primary-tabs {
 ul.primary-tabs, ul.secondary-tabs{
 	font-size: 14px;
 	background-color: none;
+	margin-right: 4px;
 	border: none;
 }
 
 ul.primary-tabs li {
 	margin-right: 4px;
+	border: solid 1px #FFDC9D;
 }
 
 ul.primary-tabs li, ul.primary-tabs a {
 	font-size: 12px;
-	letter-spacing: 1pt;
-	border-width: 1px 1px 1px 1px;
     -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	color: #fff;
-  	background: #ccc;
-  	text-transform: uppercase;
+	color: #8B8B8B;
+	background: #FDFDFD;
 }
 
 ul.primary-tabs a:hover{
-	background: #0070B6;
+	border-color: #B4E1FD;
+	background-color: #fff;
 }
 
 ul.primary-tabs a.active, ul.primary-tabs li.active{
-	background: #0070B6;
+	border-color: #B4E1FD;
+	background-color: #fff;
+	font-weight: normal;
+	color: #333;
 }
