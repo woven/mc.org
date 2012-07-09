@@ -689,44 +689,6 @@ function mc_menu_alter(&$items){
   $items['search/advanced_help']['type'] = MENU_CALLBACK;
   $items['node/%node/og_menu/add']['type'] = MENU_CALLBACK;
 
-  /*
-  $its = array();
-  $its = array('user' => "Sign in",
-               'user/register' => "Create new account",
-               'user/password' => "Request new password");
-
-
-
-  foreach($its as $menu => $mtitle){
-    $items[$menu]['title'] = "!title";
-    $items[$menu]['title arguments'] = array("!title" => $mtitle);
-  }
-
-  $items['user']['title'] = "user account";
-  $items['user']['title callback'] = false;
-
-
-  $items['user/register']['title'] = "user register";
-  $items['user/register']['title callback'] = false;
-  **/
-
-}
-
-function mc_user_page_title($arg1){
-        switch($arg1){
-          case 'register':
-            drupal_set_title("Create new account");
-            return "Create new account";
-            break;
-          case 'password':
-            drupal_set_title("Request new password");
-            return "Request new password";
-            break;
-          default:
-            drupal_set_title("Sign in");
-            return "Sign in";
-        };
-
 }
 
 //TODO: Facebook Likes. It is gonna be moved to the feature for activities.

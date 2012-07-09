@@ -2,6 +2,34 @@
 
 include_once('ft_account.features.inc');
 
+function ft_account_init(){
+
+  //Changing page and menu titles for /user, also see ft_account_menu_alter
+  if(arg(0) == "user"){
+    switch(arg(1)){
+      case 'password':
+        drupal_set_title("Request new password");
+        break;
+      case 'register':
+        drupal_set_title("Create new account");
+        break;
+    }
+  }
+}
+
+function ft_account_menu_alter(&$items){
+
+  $user_menus = array(
+    'user' => array("title" => "Sign in", "weight" => -10),
+    'user/register' => array("title" => "Create new account"),
+    'user/password' => array("title" => "Request new password")
+  );
+
+  foreach($user_menus as $path => $menu){
+    $items[$path] += $menu;
+  }
+}
+
 function ft_account_theme($existing, $type, $theme, $path) {
   return array(
     'mc_account_head' => array(

@@ -1,0 +1,9 @@
+<?php
+
+function analytics_optout_update_6001() {
+  db_query("UPDATE {system} SET weight = %d WHERE name = '%s'", -100,'analytics_optout');
+}
+
+function analytics_optout_update_6002() {
+  db_query("UPDATE {system} SET weight = %d WHERE name = '%s'", -400,'analytics_optout');
+}
