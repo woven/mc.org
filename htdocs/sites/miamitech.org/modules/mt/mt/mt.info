@@ -12,5 +12,8 @@ dependencies[] = "nodeformcols"
 dependencies[] = "nodeformsettings"
 dependencies[] = "strongarm"
 dependencies[] = "pass_reset_autologin"
+dependencies[] = "mixpanel"
+dependencies[] = "analytics_optout"
+25bd30a8154b0e4456b88255b6db762a
 features[ctools][] = "strongarm:strongarm:1"
 features[variable][] = "formfilter"
