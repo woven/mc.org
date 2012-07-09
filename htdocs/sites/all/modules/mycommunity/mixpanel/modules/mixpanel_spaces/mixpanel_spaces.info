@@ -1,0 +1,11 @@
+name = Mixpanel Spaces
+description = Sub module of Mixpanel that tracks usage of features within spaces.
+package = Mixpanel
+core = 6.x
+
+; Information added by drupal.org packaging script on 2011-02-26
+version = "6.x-1.0-beta1"
+core = "6.x"
+project = "mixpanel"
+datestamp = "1298687471"
+

@@ -1,0 +1,4 @@
+name = "Analytics Opt-Out"
+description = "Helps you to output from Analytics on current drupal site"
+core = 6.x
+version = "6.x-1.0"

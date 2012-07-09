@@ -1,0 +1,101 @@
+<?php
+
+function get_analytics_optout_cookie(){
+	return intval($_COOKIE['analytics_optout']);
+}
+
+
+function set_analytics_optout_cookie($value){
+	//set cookie to expire after one year
+	if($value){
+		setcookie("analytics_optout",1,time()+mktime(0, 0, 0, 0, 0, 1),"/");
+	}else{
+		setcookie("analytics_optout",0,time()-3600,"/");
+	}
+}
+
+function is_analytics_optout(){
+	global $user;
+
+	//check on the current user
+	if($user){
+		//if the current user is admin, always disable from logging.
+		if($user->uid == 1){
+			return true;
+		}
+	}
+	
+	//if the user is visiting administrator pages.. don't track him at all.. whatever is the case.
+	$exclude = array("admin","admin/*","node/*/devel","node/*/devel/*","node/*/convert");
+	$path = drupal_get_path_alias($_GET['q']);
+	$page_match = drupal_match_path($path, implode($exclude,"\n"));
+	if($page_match){
+		return true;
+	}
+	
+	//if cookie exist and true, then don't track this user at all.
+	if(get_analytics_optout_cookie() == 1){
+		return true;
+	}
+
+	//return false if all above is not matching, and track the user
+	return false;
+}
+
+function analytics_optout_menu(){
+  $items['analytics_optout'] = array(
+    'title' => 'Analytics Optout',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('analytics_optout_form'),
+    'access arguments' => array('access content'), 
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+  
+  return $items;
+}
+
+function analytics_optout_form(){
+	$form = array();
+	
+    $form['analytics_optout'] = array(
+      '#type' => 'radios', 
+      '#title' => t("Track Me?"), 
+      '#default_value' => get_analytics_optout_cookie(), 
+      '#options' => array(t('Yes'), t('No')),
+    );
+    
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Save'));
+
+	return $form;
+}
+
+function analytics_optout_form_submit($form, &$form_state){
+	$status = $form_state['values']['analytics_optout'];
+	set_analytics_optout_cookie($status);
+	drupal_set_message("Your settings has been saved!");
+}
+
+function analytics_optout_init(){
+	global $conf;
+	
+	//check if you can track the current visit.
+	$status = intval(is_analytics_optout());
+	if($status){
+		//if you are not allowed to track this visit, block the accounts.
+		
+		//mixpanel toke: none
+		$conf['mixpanel_token'] = "";
+		
+		//google analytics account id: none
+		$conf['googleanalytics_account'] = "";
+		
+	}else{
+		//you can track this visit regullary.
+	}
+	
+	//set drupal variable if other modules want to access it.
+	$conf['analytics_optout'] = $status;
+	
+	//add javascript settings to tell other scripts that tracking is allowed.
+	drupal_add_js(array('analytics_optout' => array('status' => $status)), 'setting');
+}
