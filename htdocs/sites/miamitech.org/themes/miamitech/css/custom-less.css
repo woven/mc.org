@@ -54,18 +54,8 @@
   margin:0 0 6px 0;
   padding-top:1px;
 }
-#page .field-view-image {
-  float:left;
-  margin:0px 20px 0 0;
-  position:relative;
-}
-#page .field-view-image img {
-  position:relative;
-  padding:4px;
-  margin:0 -5px 9px -5px;
-  border:1px solid #d0d0d0;
-  background:white;
-}
+
+
 #page .field-calendar .calendar { margin-bottom:2px; }
 #page .field-comment-img {
   float:left;

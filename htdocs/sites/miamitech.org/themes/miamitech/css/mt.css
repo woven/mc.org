@@ -208,12 +208,18 @@ body.page-user .view-my-groups ul li{
 	list-style-type:disc;
 }
 
+/*** placeholder image ****/
+
 .img-placeholder{
     overflow: hidden;
     padding: 4px;
     border: 1px solid #D0D0D0;
     background-color: white;
     margin: 0 -5px 9px -5px;
+}
+
+.img-placeholder img{
+
 }
 
 .img-placeholder .img span{
@@ -229,6 +235,46 @@ body.page-user .view-my-groups ul li{
     position: absolute;
     z-index: 100;
 }
+
+
+.field-view-image {
+    float:left;
+    margin:0px 20px 0 0;
+    position:relative;
+}
+
+.field-view-image img {
+    border:1px solid #d0d0d0;
+}
+
+
+.view-mc-events-by-dates .img-placeholder{
+    height: 85px;
+    width: 85px;
+    background: #fff;
+}
+
+.view-mc-events-by-dates .img-placeholder .img{
+    height: 83px;
+    width: 83px;
+}
+
+.view-mc-events-by-dates .img-placeholder .img img{
+    line-height: 83px;
+    background: #fff;
+    margin: 25px;
+    border: none;
+}
+
+.view-mc-events-by-dates .field-view-image .img {
+    height: 83px;
+    width: 83px;
+    margin: auto;
+    border: solid 1px #ccc;
+    background: #f7f7f7;
+}
+
+/*** placeholder ****/
 
 #page #group-page-block .field-content a{
     margin-right: 15px;
@@ -340,30 +386,6 @@ body #page #tabs,
 
 .nd-region-header {
 	margin-bottom: 0px;
-}
-
-.view-mc-events-by-dates .img-placeholder {
-	height: 85px;
-	width: 85px;
-	background: #fff;
-}
-
-.view-mc-events-by-dates .img span {
-	height: 85px;
-	width: 84px;
-}
-
-.view-mc-events-by-dates .field-view-image .img {
-	height: 83px;
-	width: 83px;
-	margin: auto;
-	border: solid 1px #ccc;
-	background: #f7f7f7;
-}
-
-#page .field-view-image img {
-	border: none;
-	background: none;
 }
 
 
