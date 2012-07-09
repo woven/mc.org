@@ -207,7 +207,7 @@ function mixpanel_user($op, $edit, $account, $category) {
       break;
 
     case 'delete':
-      mixpanel_track("user-deleted", null, $acccount);
+      mixpanel_track("user-deleted", null, $account);
       break;
 
     case 'update':
@@ -226,59 +226,66 @@ function mixpanel_user($op, $edit, $account, $category) {
   }
 }
 
+
+function mixpanel_mixpanel_event_alter($event,&$properties){
+    //drupal_alter('mp_node', 'eventname', $node);
+    if($event['object-type'] == "node"){
+            if($node->type == "event"){
+                        if($node->feedapi_node){
+                                        $mevent['source'] = "event_feed";
+                                        $mevent['source-nid'] = $node->feedapi_node;
+                        }else{
+                                        $mevent['source'] = "event";
+                        }
+            }
+    }
+}
+
 /*
  * Implementation of hook_nodeapi().
  */
 function mixpanel_nodeapi($node, $op) {
+  global $user;
+
   if (variable_get('mixpanel_token', '') == '') {
     return;
   }
-  global $user;
+
   $user_is_group_manager = isset($user->roles['5']) || isset($user->roles['3']);
+
   if($user_is_group_manager){
     $group_manager = $user->name . "-";
-  }
-  else{
+  }else{
     $group_manager = null;
   }
+
+  $gid = array_pop(array_values($node->og_groups));
+  $group_node = node_load($gid);
+  $group_smallname = $group_node->field_small_name['0']['value'];
+
+  $mevent = array();
+
+  $mevent = array('node-title' => $node->title,
+        'group-id' => $gid,
+        'group-small-name' => $group_smallname,
+        'node-id' => $node->nid,
+        'node-type' => $node->type,
+        'group_manager' => $user_is_group_manager && !empty($group_smallname)? $group_manager . $group_smallname : null,
+  );
+
+  $mevent['object'] = $node;
+  $mevent['object-type'] = 'node';
+
   switch($op) {
     case 'delete':
-      $gid = array_pop(array_values($node->og_groups));
-      $group_node = node_load($gid);
-      $group_smallname = $group_node->field_small_name['0']['value'];
-      mixpanel_track("node-deleted", array('node-title' => $node->title,
-                                        'group-id' => $gid,
-                                        'group-small-name' => $group_smallname,
-                                        'node-id' => $node->nid,
-                                        'node-type' => $node->type,
-                                        'group_manager' => $user_is_group_manager && !empty($group_smallname)? $group_manager . $group_smallname : null,
-                                        ));
+      mixpanel_track("node-deleted", $mevent);
       break;
-
     case 'insert':
-      $gid = array_pop(array_values($node->og_groups));
-      $group_node = node_load($gid);
-      $group_smallname = $group_node->field_small_name['0']['value'];
-      mixpanel_track("node-created", array('node-title' => $node->title,
-                                        'group-id' => $gid,
-                                        'group-small-name' => $group_smallname,
-                                        'node-id' => $node->nid,
-                                        'node-type' => $node->type,
-                                        'group_manager' => $user_is_group_manager && !empty($group_smallname)? $group_manager . $group_smallname : null,
-                                        ));
+      mixpanel_track("node-created", $mevent);
       break;
-
     case 'update':
-      $gid = array_pop(array_values($node->og_groups));
-      $group_node = node_load($gid);
-      $group_smallname = $group_node->field_small_name['0']['value'];
-      mixpanel_track("node-updated", array('node-title' => $node->title,
-                                        'group-id' => $gid,
-                                        'group-small-name' => $group_smallname,
-                                        'node-id' => $node->nid,
-                                        'node-type' => $node->type,
-                                        'group_manager' => $user_is_group_manager && !empty($group_smallname)? $group_manager . $group_smallname : null,
-                                        ));
+      mixpanel_track("node-updated", $mevent);
+      break;
   }
 }
 
@@ -329,10 +336,20 @@ function mixpanel_track($event, $custom_properties = array(), $account = null) {
   // Let other modules alter the properties.
   drupal_alter('mixpanel_event_properties', $properties);
 
+  //hook_mixpanel_event_alter($event,&$properties);
+  drupal_alter('mixpanel_event', $event, $custom_properties);
+
+  if($custom_properties['object']){
+      unset($custom_properties['object']);
+      unset($custom_properties['object-type']);
+  }
+
   // Merge default properties with any passed-in properties. Any passed-in properties will overwrite the defaults.
   if (!empty($custom_properties)) {
     $properties = array_merge($properties, $custom_properties);
   }
+    dsm($properties);
+    exit();
   $token = variable_get('mixpanel_token', '');
   $metrics = new MetricsTracker($token);
   $metrics->track($event, $properties);
