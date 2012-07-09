@@ -262,9 +262,11 @@ function mixpanel_nodeapi($node, $op) {
     $group_manager = null;
   }
 
-  $gid = array_pop(array_values($node->og_groups));
-  $group_node = node_load($gid);
-  $group_smallname = $group_node->field_small_name['0']['value'];
+    if(!empty($node->og_groups)){
+        $gid = array_pop(array_values($node->og_groups));
+        $group_node = node_load($gid);
+        $group_smallname = $group_node->field_small_name['0']['value'];
+    }
 
   $mevent = array();
 

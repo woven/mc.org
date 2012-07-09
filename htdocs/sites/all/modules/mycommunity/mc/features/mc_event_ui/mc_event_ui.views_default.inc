@@ -120,8 +120,8 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
     'field_logo_fid' => array(
       'label' => '',
       'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
+        'alter_text' => 1,
+        'text' => '<div class="img-placeholder">[field_logo_fid]</div>',
         'make_link' => 0,
         'path' => '',
         'absolute' => 0,
