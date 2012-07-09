@@ -24,7 +24,7 @@ function mt_event_feed_node_info() {
       'has_body' => '0',
       'body_label' => '',
       'min_word_count' => '0',
-      'help' => t('Import your group\'s event feed.  We currently only accept iCal feeds, like those found at the bottom of a Meetup.com calendar page.'),
+      'help' => '',
     ),
   );
   return $items;
