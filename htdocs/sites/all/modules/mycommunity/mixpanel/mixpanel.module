@@ -226,20 +226,23 @@ function mixpanel_user($op, $edit, $account, $category) {
   }
 }
 
+/*
+function mixpanel_mixpanel_event_alter($event,$properties){
+    if($properties['object-type'] == "node"){
+        $node = $properties['object'];
 
-function mixpanel_mixpanel_event_alter($event,&$properties){
-    //drupal_alter('mp_node', 'eventname', $node);
-    if($event['object-type'] == "node"){
-            if($node->type == "event"){
-                        if($node->feedapi_node){
-                                        $mevent['source'] = "event_feed";
-                                        $mevent['source-nid'] = $node->feedapi_node;
+            if($node->type == "event"){;
+
+                if($node->feedapi_node){
+                            $properties['source'] = "event_feed";
+                            $properties['source-nid'] = $node->feedapi_node;
                         }else{
-                                        $mevent['source'] = "event";
+                            $properties['source'] = "event";
                         }
             }
     }
 }
+*/
 
 /*
  * Implementation of hook_nodeapi().
@@ -275,6 +278,16 @@ function mixpanel_nodeapi($node, $op) {
 
   $mevent['object'] = $node;
   $mevent['object-type'] = 'node';
+
+
+    if($node->type == "event"){;
+        if($node->feedapi_node){
+            $mevent['source'] = "event_feed";
+            $mevent['source-nid'] = $node->feedapi_node;
+        }else{
+            $mevent['source'] = "event";
+        }
+    }
 
   switch($op) {
     case 'delete':
@@ -336,8 +349,10 @@ function mixpanel_track($event, $custom_properties = array(), $account = null) {
   // Let other modules alter the properties.
   drupal_alter('mixpanel_event_properties', $properties);
 
-  //hook_mixpanel_event_alter($event,&$properties);
-  drupal_alter('mixpanel_event', $event, $custom_properties);
+  //hook_mixpanel_event_alter($event,$properties);
+  //drupal_alter('mixpanel_event', $event, $custom_properties);
+
+  dsm($custom_properties,$event."-before");
 
   if($custom_properties['object']){
       unset($custom_properties['object']);
@@ -348,8 +363,7 @@ function mixpanel_track($event, $custom_properties = array(), $account = null) {
   if (!empty($custom_properties)) {
     $properties = array_merge($properties, $custom_properties);
   }
-    dsm($properties);
-    exit();
+
   $token = variable_get('mixpanel_token', '');
   $metrics = new MetricsTracker($token);
   $metrics->track($event, $properties);
