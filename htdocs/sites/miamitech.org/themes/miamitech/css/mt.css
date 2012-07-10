@@ -325,8 +325,8 @@ body #page #tabs,
 	padding-left: 0px
 }
 
-#register #edit-mail {
-	width: 230px;
+#register input[name=mail]{
+	width: 90% !important;
 }
 
 #page #group-page-block h1{
