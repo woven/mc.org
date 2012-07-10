@@ -359,8 +359,11 @@ body #page #tabs,
     color: inherit;
     vertical-align: middle;
     float: left;
-    height: 80px;
     line-height: 80px;
+}
+
+#group-page-head a img{
+
 }
 
 #group-page-head .wrapper a h1{
