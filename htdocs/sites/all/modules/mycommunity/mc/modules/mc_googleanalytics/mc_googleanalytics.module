@@ -1,0 +1,3 @@
+<?php
+
+include_once('mc_googleanalytics.features.inc');
