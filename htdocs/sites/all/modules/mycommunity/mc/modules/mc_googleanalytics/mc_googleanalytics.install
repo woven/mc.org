@@ -1,0 +1,5 @@
+<?php
+
+function mc_googleanalytics_disable() {
+   module_disable(array('googleanalytics'));
+}
