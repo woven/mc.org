@@ -30,6 +30,7 @@ function _mc_user_pages_menu_alter(&$items){
 function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
   if($form_id == "user_login"){
     $form['submit']['#value'] = MC_USER_PAGE;
+    $form['name']['#description'] = t("Enter your username or email address.");
   }
 }
 
