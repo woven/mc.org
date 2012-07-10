@@ -835,8 +835,8 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       ),
     ),
     'results_min_lifespan' => '-1',
-    'results_max_lifespan' => '-1',
-    'output_min_lifespan' => '21600',
+    'results_max_lifespan' => '21600',
+    'output_min_lifespan' => '-1',
     'output_max_lifespan' => '21600',
   ));
   $handler->override_option('header', '<?php
