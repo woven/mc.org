@@ -1,0 +1,10 @@
+name = Late Form Alter
+description = Provides a new hook: hook_late_form_alter, identical to hook_form_alter except that it is executed after form_alter.  Also provides hook_late_form_(form_id)_alter
+core = 6.x
+package = Development
+; Information added by drupal.org packaging script on 2009-06-24
+version = "6.x-1.0"
+core = "6.x"
+project = "late_form_alter"
+datestamp = "1245875783"
+
