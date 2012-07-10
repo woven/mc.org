@@ -98,7 +98,7 @@ function mc_event_ui_views_default_views() {
 if(empty($data->node_og_ancestry_node_data_field_logo_field_logo_fid) || $data->node_og_ancestry_node_data_field_logo_field_logo_fid==null ){
 $title = $data->node_og_ancestry_title;
 $title_clean = str_replace(" ","+",$title);
-print theme_imgplaceholder($title);
+print theme_imgplaceholder($title,$data->node_og_ancestry_nid);
 }
 /**
 //$img = url("sites/miamitech.org/files/textimage/home-group_logo_default/$title.png");

@@ -10,6 +10,7 @@ define("MC_USER_PAGE", t('Sign in'));
 define("MC_USER_PAGE_REGISTER", t('Create new account'));
 define("MC_USER_PAGE_PASSWORD", t('Request new password'));
 
+
 //sub function being used at hook_menu_alter
 function _mc_user_pages_menu_alter(&$items){
   $user_menus = array(
@@ -23,6 +24,14 @@ function _mc_user_pages_menu_alter(&$items){
 
   foreach($user_menus as $path => $menu){
     $items[$path] = array_merge($items[$path],$menu,$callback);
+  }
+}
+
+function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
+  if($form_id == "user_login"){
+    $form['submit']['#value'] = MC_USER_PAGE;
+    $form['name']['#description'] = t("Enter your username or email address.");
+    $form['pass']['#description'] = t("Enter your password.");
   }
 }
 
@@ -45,6 +54,10 @@ function mc_user_page($where){
 
 function ft_account_menu_alter(&$items){
   _mc_user_pages_menu_alter($items);
+}
+
+function ft_account_late_form_alter(&$form, &$form_state, $form_id){
+  _mc_user_pages_form_alter($form, $form_state, $form_id);
 }
 
 function ft_account_theme($existing, $type, $theme, $path) {
