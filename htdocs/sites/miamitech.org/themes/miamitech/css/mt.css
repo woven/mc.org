@@ -344,6 +344,7 @@ body #page #tabs,
     -webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
+    padding: 10px;
 }
 
 #group-page-head .wrapper a{
@@ -366,13 +367,14 @@ body #page #tabs,
     overflow: hidden;
     white-space:nowrap;
     max-width: 80%;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 10px;
 }
 
 #group-page-head .wrapper img{
     margin-right: 15px;
 }
 
+/* group-page-head */
 
 #block-ds-5c755d31699c072160e29da9599e28f3 .field {
 	margin-bottom: 15px;
@@ -382,13 +384,12 @@ body #page #tabs,
 	margin: 0px 0 10px;
 }
 
-.page-node
-
 .nd-region-header {
 	margin-bottom: 0px;
 }
 
 
+/** Tab styles **/
 #tabs {
 	background-color: transparent;
 } 
@@ -399,7 +400,7 @@ ul.primary-tabs {
 
 ul.primary-tabs, ul.secondary-tabs{
 	font-size: 14px;
-	background-color: none;
+	background-color: transparent;
 	margin-right: 4px;
 	border: none;
 }
@@ -429,3 +430,4 @@ ul.primary-tabs a.active, ul.primary-tabs li.active{
 	font-weight: normal;
 	color: #333;
 }
+/** **/
