@@ -338,7 +338,7 @@ function mt_event_feed_strongarm() {
     'nfs_taxonomy' => '0',
     'nfs_preview' => '1',
     'nfs_cancel' => array(
-      'nfs_cancel_status' => '1',
+      'nfs_cancel_status' => '0',
       'nfs_cancel_behaviour' => '0',
     ),
     'nfs_submit' => 'Save',

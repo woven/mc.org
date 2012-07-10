@@ -664,7 +664,7 @@ function ft_group_strongarm() {
     'nfs_taxonomy' => '0',
     'nfs_preview' => '1',
     'nfs_cancel' => array(
-      'nfs_cancel_status' => '1',
+      'nfs_cancel_status' => '0',
       'nfs_cancel_behaviour' => '0',
     ),
     'nfs_submit' => 'Save',
@@ -829,13 +829,6 @@ This message was sent by an administrator in the \'@group\' group at @site. To v
   $strongarm->name = 'og_content_type_usage_simplenews';
   $strongarm->value = 'omitted';
   $export['og_content_type_usage_simplenews'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_content_type_usage_webform';
-  $strongarm->value = 'group_post_standard';
-  $export['og_content_type_usage_webform'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
