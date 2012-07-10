@@ -345,12 +345,30 @@ function mt_preprocess_page(&$vars){
 
 
 function mt_ds_fields_alter(&$fields) {
+  $fields['nd_directions']['properties']['formatters']['mt_location_directions'] = 'MT Format';
   $fields['nd_location_name'] = $fields['name'];
   $fields['nd_location_name']['properties']['formatters']['mt_location_textfield'] = t('MT Textfield');
   unset($fields['name']); 
 
   unset($fields['nd_location_gmap']['properties']['formatters']['nd_location_gmap_default']);
   $fields['nd_location_gmap']['properties']['formatters']['mt_location_gmap_default'] = 'Gmap MT';
+}
+
+function theme_mt_location_directions($field) {
+  if(empty($field['object']->location['street'])){
+    return;
+  }
+  $destination = array();
+  $fields = array('street', 'city', 'province_name', 'postal_code');
+  foreach ($fields as $key) {
+    if (!empty($field['object']->location[$key])) {
+      $destination[] = check_plain($field['object']->location[$key]);
+    }
+  }
+  if (!empty($destination)) {
+    $link ='<a href="http://maps.google.com/?daddr='. urlencode(implode($destination, '+')) .'" target="_blank">'. t('Get Directions') .'</a>';
+    return $link;
+  }
 }
 
 function theme_mt_location_gmap_default($field) {
@@ -427,6 +445,9 @@ function mt_theme() {
       'arguments' => array('field' => NULL),
     ),
   'mt_location_gmap_default' => array(
+      'arguments' => array('field' => NULL),
+    ),
+  'mt_location_directions' => array(
       'arguments' => array('field' => NULL),
     ),
   );
