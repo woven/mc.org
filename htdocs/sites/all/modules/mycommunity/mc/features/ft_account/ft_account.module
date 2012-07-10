@@ -2,32 +2,49 @@
 
 include_once('ft_account.features.inc');
 
-function ft_account_init(){
+/**
+ *  Enhancing the user Pages titles and callbacks
+ *  https://app.asana.com/0/1044037878840/1212366488866
+*/
+define("MC_USER_PAGE", t('Sign in'));
+define("MC_USER_PAGE_REGISTER", t('Create new account'));
+define("MC_USER_PAGE_PASSWORD", t('Request new password'));
 
-  //Changing page and menu titles for /user, also see ft_account_menu_alter
-  if(arg(0) == "user"){
-    switch(arg(1)){
-      case 'password':
-        drupal_set_title("Request new password");
-        break;
-      case 'register':
-        drupal_set_title("Create new account");
-        break;
-    }
+//sub function being used at hook_menu_alter
+function _mc_user_pages_menu_alter(&$items){
+  $user_menus = array(
+    'user' => array("title" => MC_USER_PAGE, "weight" => -10),
+    'user/login' => array("title" => MC_USER_PAGE, "weight" => -10),
+    'user/register' => array("title" => MC_USER_PAGE_REGISTER),
+    'user/password' => array("title" => MC_USER_PAGE_PASSWORD)
+  );
+
+  $callback = array('page callback' => 'mc_user_page','page arguments' => array(1));
+
+  foreach($user_menus as $path => $menu){
+    $items[$path] = array_merge($items[$path],$menu,$callback);
   }
 }
 
+//mc user page logic and callback
+function mc_user_page($where){
+  switch($where){
+    case 'register':
+      drupal_set_title(MC_USER_PAGE_REGISTER);
+      return drupal_get_form('user_register');
+    case 'password':
+      drupal_set_title(MC_USER_PAGE_PASSWORD);
+      return drupal_get_form('user_pass');
+    case 'login':
+    default:
+      drupal_set_title(MC_USER_PAGE);
+      return user_page();
+  }  //end switch
+}
+## End of Enhancing the user Pages titles and Callbacks
+
 function ft_account_menu_alter(&$items){
-
-  $user_menus = array(
-    'user' => array("title" => "Sign in", "weight" => -10),
-    'user/register' => array("title" => "Create new account"),
-    'user/password' => array("title" => "Request new password")
-  );
-
-  foreach($user_menus as $path => $menu){
-    $items[$path] += $menu;
-  }
+  _mc_user_pages_menu_alter($items);
 }
 
 function ft_account_theme($existing, $type, $theme, $path) {
@@ -42,8 +59,8 @@ function ft_account_theme($existing, $type, $theme, $path) {
 function ft_account_block($op = 'list', $delta = 0, $edit = array()) {
   if ($op == 'list') {
     $blocks[0] = array(
-      'info' => t('My Account section'), 
-      'weight' => 0, 
+      'info' => t('My Account section'),
+      'weight' => 0,
       'status' => 1,
       'cache' => BLOCK_CACHE_PER_USER
     );
@@ -52,7 +69,7 @@ function ft_account_block($op = 'list', $delta = 0, $edit = array()) {
     switch ($delta) {
       case 0:
         $block = array(
-          'subject' => '', 
+          'subject' => '',
           'content' => theme('mc_account_head'),
         );
         break;
