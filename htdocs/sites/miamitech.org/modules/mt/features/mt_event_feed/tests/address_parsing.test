@@ -1,0 +1,232 @@
+<?php
+class AddressParsingTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => t('Address Parsing using Google Maps Api'), 
+      'desc' => t('Parses a address (string) into an array with the different parts of the address'), 
+      'group' => t('MyCommunity.org'),
+    );
+  }
+
+  function setUp() {
+    parent::setUp('mt_event_feed');
+  }
+
+  function testAddressParsingOne() {
+    $address = "New Work City (412 Broadway, Floor 2, New York, NY 10013)";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'New Work City', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '412 Broadway', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'New York', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'NY', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '10013', "The zip matches");
+  }
+
+  function testAddressParsingTwo() {
+    $address = "General Assembly (902 Broadway - 4th Floor, New York, NY 10010)";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'General Assembly', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '902 Broadway', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'New York', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'NY', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '10010', "The zip matches");
+  }
+  
+  
+
+
+  function testAddressParsingThree() {
+    $address = "Planet Linux Caffe (1430 Ponce de Leon Blvd, Coral Gables, FL 33134)";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Planet Linux Caffe', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '1430 Ponce De Leon Blvd', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Coral Gables', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33134', "The zip matches");
+  }
+
+  function testAddressParsingFour() {
+    $address = "Picture Marketing Operations Suite #111 8491 Northwest 17th Street Doral, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Picture Marketing Operations Suite #111', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '8491 NW 17th St', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Doral', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33126', "The zip matches");
+  }
+
+  function testAddressParsingFive() {
+    $address = "The Grove Spot 3324 Virginia Street Coconut Grove, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'The Grove Spot', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '3324 Virginia St', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33133', "The zip matches");
+  }
+
+  function testAddressParsingSix() {
+    $address = "Champps 6401 North Andrews Avenue Ft. Lauderdale, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Champps', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '6401 N Andrews Ave', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Fort Lauderdale', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33309', "The zip matches");
+  }
+
+  function testAddressParsingSeven() {
+    $address = "Dunkin Donuts Cappuccino Conference Room 2895 Davie Road Davie\, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Dunkin Donuts Cappuccino Conference Room', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '2895 Davie Rd', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Davie', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33317', "The zip matches");
+  }
+
+  function testAddressParsingEight() {
+    $address = "Planet Linux Caffe 1430 Ponce De Leon Blvd. Coral Gables, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Planet Linux Caffe', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '1430 Ponce De Leon Blvd', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Coral Gables', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33134', "The zip matches");
+  }
+
+  function testAddressParsingNine() {
+    $address = "webinar";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'webinar', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '', "The address matches");
+    $this->assertEqual($address_parts['city'] , '', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , '', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '', "The zip matches");
+  }
+
+  function testAddressParsingTen() {
+    $address = "LAB Miami Suite 11 2750 NW 3rd Ave Miami, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'LAB Miami Suite 11', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '2750 NW 3rd Ave', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33127', "The zip matches");
+  }
+
+  function testAddressParsingEleven() {
+    $address = "The LAB Miami - The Wynwood Building 2750 NW 3rd Ave Miami, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'The LAB Miami - The Wynwood Building', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '2750 NW 3rd Ave', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33127', "The zip matches");
+  }
+
+  function testAddressParsingTwelve() {
+    $address = "Senzari Suite 602 601 Brickell Key Dr Miami, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Senzari Suite 602', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '601 Brickell Key Dr', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33131', "The zip matches");
+  }
+
+  function testAddressParsingThirteen() {
+    $address = "Nova Southeastern University Carl DeSantis Building 3301 College Avenue Ft. Lauderdale\, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Nova Southeastern University Carl DeSantis Building', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '3301 College Ave', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Fort Lauderdale', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33314', "The zip matches");
+  }
+
+  function testAddressParsingFourteen() {
+    $address = "Miami, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , '', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '', "The zip matches");
+  }
+
+  function testAddressParsingFifteen() {
+    $address = "Marriott Ft. Lauderdale Suite 400 6750 N Andrews Ave Ft. Lauderdale, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Marriott Ft Lauderdale Suite 400', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '6750 N Andrews Ave', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Fort Lauderdale', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33309', "The zip matches");
+  }
+
+  function testAddressParsingSixteen() {
+    $address = "Miami Airport Convention Center 711 N.W. 72nd Avenue miami, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Miami Airport Convention Center', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '711 NW 72nd Ave', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33126', "The zip matches");
+  }
+
+
+
+  function testAddressParsingSeventeen() {
+    $address = "Miami International University of Art & Design 1501 Biscayne Boulevard #100 Miami, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Miami International University of Art & Design', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '1501 Biscayne Blvd', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33132', "The zip matches");
+  }
+
+  function testAddressParsingEigthteen() {
+    $address = "Intercontinental Hotel Miami, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Intercontinental Hotel', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '', "The zip matches");
+  }
+
+  function testAddressParsingNineteen() {
+    $address = "Miami Biscayne Bay Marriott 1633 North Bayshore Drive Miami\, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Miami Biscayne Bay Marriott', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '1633 N Bayshore Dr', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33132', "The zip matches");
+  }
+
+  function testAddressParsingTwenty() {
+    $address = "World of Beer (4437 Lyons Road, Suite E-101, Coconut Creek\, FL 33073)";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'World of Beer', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '4437 Lyons Rd', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Coconut Creek', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33073', "The zip matches");
+  }
+
+  function testAddressParsingTwentyone() {
+    $address = "The LAB Miami - The Wynwood Building 2750 NW 3rd Ave Miami, FL";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'The LAB Miami - The Wynwood Building', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '2750 NW 3rd Ave', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Miami', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33127', "The zip matches");
+  }
+
+  
+}
