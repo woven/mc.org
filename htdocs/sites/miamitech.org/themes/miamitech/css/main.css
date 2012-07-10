@@ -1842,8 +1842,8 @@ a.orange span {
 	color: #999;
 }
 
-.node-form .submit-wrapper button,
-.node-form .submit-wrapper button span,
+.node-form .filefield-upload .submit-wrapper button,
+.node-form .filefield-upload .submit-wrapper button span,
 .newsletter-block .submit-wrapper button,
 .newsletter-block .submit-wrapper button span {
 	height: 37px;
@@ -1855,8 +1855,8 @@ a.orange span {
 	text-shadow: none;
 }
 
-.node-form .submit-wrapper button:hover span,
-.node-form .submit-wrapper button.hover span,
+.node-form .filefield-upload .submit-wrapper button:hover span,
+.node-form .filefield-upload .submit-wrapper button.hover span,
 .newsletter-block .submit-wrapper button:hover span,
 .newsletter-block .submit-wrapper button.hover span{
 	color: #999;
