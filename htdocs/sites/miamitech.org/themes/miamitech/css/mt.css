@@ -213,7 +213,7 @@ body.page-user .view-my-groups ul li{
 .img-placeholder{
     overflow: hidden;
     padding: 4px;
-    border: 1px solid #D0D0D0;
+    border: 1px solid #eee;
     background-color: white;
     margin: 0 -5px 9px -5px;
 }
@@ -270,7 +270,7 @@ body.page-user .view-my-groups ul li{
     height: 83px;
     width: 83px;
     margin: auto;
-    border: solid 1px #ccc;
+    border: solid 1px #eee;
     background: #f7f7f7;
 }
 
@@ -430,4 +430,9 @@ ul.primary-tabs a.active, ul.primary-tabs li.active{
 	font-weight: normal;
 	color: #333;
 }
+
+#footer .block-multiblock {
+	background: #0070B6;
+}
+
 /** **/
