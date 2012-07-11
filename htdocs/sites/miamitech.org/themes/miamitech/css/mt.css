@@ -347,19 +347,28 @@ body #page #tabs,
     padding: 10px;
 }
 
-#group-page-head .wrapper a{
-    display: block;
-    color: inherit;
-    text-decoration: none;
+#group-page-head .wrapper a,h1{
+    color: inherit !important;
 }
 
-#group-page-head a img,#group-page-head a h1{
+#group-page-head .wrapper a{
+    display: block;
+    text-decoration: none;
+    height: 80px;
+    line-height: 80px;
+    float: left;
+}
+
+#group-page-head a img{
+    vertical-align: middle;
+    position: relative;
+}
+
+#group-page-head a h1{
     margin: 0px;
     padding: 0px;
     color: inherit;
-    vertical-align: middle;
     float: left;
-    line-height: 80px;
 }
 
 #group-page-head a img{

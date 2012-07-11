@@ -4035,7 +4035,7 @@ if (is_numeric($nid)){
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'link_to_node' => 0,
+      'link_to_node' => 1,
       'label_type' => 'none',
       'format' => 'group_logo_default',
       'multiple' => array(
@@ -4056,12 +4056,14 @@ if (is_numeric($nid)){
     'title' => array(
       'label' => '',
       'alter' => array(
-        'alter_text' => 1,
-        'text' => '<h1>[title]</h1>',
+        'alter_text' => 0,
+        'text' => '<h1>[title]',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -4076,7 +4078,8 @@ if (is_numeric($nid)){
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'link_to_node' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 1,
       'spaces' => array(
         'type' => NULL,
         'frontpage' => FALSE,
@@ -4216,8 +4219,8 @@ if (is_numeric($nid)){
     'nothing' => array(
       'label' => 'inline html',
       'alter' => array(
-        'text' => '[field_logo_fid] [title]',
-        'make_link' => 1,
+        'text' => '[field_logo_fid] <h1>[title]</h1>',
+        'make_link' => 0,
         'path' => 'node/[nid]',
         'absolute' => 0,
         'link_class' => '',
