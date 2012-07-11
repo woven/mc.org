@@ -297,19 +297,6 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 
   global $user;
 
-  if($form_id=='user_profile_form'){
-    $form['Personal information']['picture_delete'] = $form['picture']['picture_delete'];
-    $form['Personal information']['picture_upload'] = $form['picture']['picture_upload'];
-    $form['Personal information']['picture_upload']['#title'] = 'Picture';
-    unset($form['picture']);
-  }
-  //remove the og_register from user registration form.
-  if($form_id == "user_register"){
-    if($form['og_register']){
-      unset($form['og_register']);
-    }
-  }
-
   if ($form['#id'] == 'node-form') {
     if($form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
       unset($form['og_nodeapi']['visible']['og_groups']['#options']['0']);

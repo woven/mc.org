@@ -8,6 +8,36 @@ include_once('ft_group.features.inc');
  * from module og_group_page_admin
 **/
 
+
+/*
+function ft_group_user($op, &$edit, &$account, $category = NULL){
+  switch($op){
+    case 'load':
+
+      if($account->uid == 1){
+
+        $sql = "SELECT n.* FROM {node} n WHERE n.type = 'group' ORDER BY n.title";
+        $result = db_query($sql);
+        $og_groups = array();
+
+        while ($row = db_fetch_array($result)) {
+          $row['og_role'] = 0;
+          $row['is_active'] = 1;
+          $row['is_admin '] = 1;
+          $og_groups[$row['nid']] = $row;
+        }
+
+        dsm($og_groups,"mine");
+
+        if(!empty($og_groups)){
+          $account->og_groups = $og_groups;
+        }
+
+      }
+  }
+}
+*/
+
 function ft_group_og_home_blocks_alter(&$blocks,$node){
   $blocks = array(
     'og_block|views-og_details-block_4|'.$node->nid => t('Follow Block'),
@@ -33,10 +63,10 @@ function ft_group_nodeapi(&$node, $op, $teaser, $page) {
 		  $_SESSION['aux'] = $aux;
 		  }
 		  break;
-		  case 'insert':
+        case 'insert':
 		  //drupal_set_message("<pre>".print_r($node, true)."</pre>");
           //dsm(og_save_subscription($node->nid,1,array("is_active","is_admin","created")));
-          // @todo Use og_save_subscription instead.
+          // @todo: Use og_save_subscription instead.
           db_query("INSERT INTO og_uid (nid, og_role, is_active, is_admin, uid) VALUES (".$node->nid.", 0, 1, 1, 1)");
 
 		  if ($node->field_group_manager[0]['uid']!="")
