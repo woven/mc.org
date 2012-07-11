@@ -138,7 +138,7 @@ function miamitech_preprocess_page(&$variables){
         //  $page_classes = 'two-columns-equal';
         //}
       }else{
-        $page_classes .= 'secondary-page';
+        $page_classes .= ' secondary-page';
       }
 
       if ($node->field_page_subtype[0]['value'] == 'home'){
