@@ -211,7 +211,7 @@ function mc_form_user_register_alter(&$form, &$form_state){
   );
   */
   $form['submit']['#value'] = 'Join';
-  $form['submit']['#attributes']['class'] = 'orange';
+  $form['submit']['#attributes']['class'] = 'btn-orange';
   
 }
 
