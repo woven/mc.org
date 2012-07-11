@@ -33,6 +33,39 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
     $form['name']['#description'] = t("Enter your username or email address.");
     $form['pass']['#description'] = t("Enter your password.");
   }
+
+  //move the picture fieldset into Personal information.
+  if($form_id=='user_profile_form'){
+    if($form['Personal information'] && $form['picture']){
+      //move picture to personal information
+      $form['Personal information']['picture'] = $form['picture'];
+
+      //remove the original picture fieldset
+      unset($form['picture']);
+
+      //convert fieldset to item
+      $form['Personal information']['picture']['#type'] = "item";
+      $form['Personal information']['picture']['#weight'] = 100;
+      $form['Personal information']['picture']['#title'] = 'Picture';
+      $form['Personal information']['picture']['picture_upload']['#title'] = '';
+
+      /**
+       * Modify the default User Picture Msg
+       * Original msg at /modules/user.module line 1594
+       * t('Your virtual face or picture. Maximum dimensions are %dimensions and the maximum size is %size kB.',
+       * array('%dimensions' => variable_get('user_picture_dimensions', '85x85'), '%size' => variable_get('user_picture_file_size', '30'))) .' '. variable_get('user_picture_guidelines', ''));
+       * */
+      $form['Personal information']['picture']['picture_upload']['#description'] = t('Your virtual face or picture. Maximum size is %size kB.', array('%dimensions' => variable_get('user_picture_dimensions', '85x85'), '%size' => variable_get('user_picture_file_size', '30'))) .' '. variable_get('user_picture_guidelines', '');
+
+    }
+  }
+
+  //remove the og_register from user registration form.
+  if($form_id == "user_register"){
+    if($form['og_register']){
+      unset($form['og_register']);
+    }
+  }
 }
 
 //mc user page logic and callback
