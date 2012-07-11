@@ -81,7 +81,7 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
             '#value' => t('Cancel'),
             '#attributes' => array(
               'onclick' => 'javascript: history.go(-1); return false;',
-              'class' => 'btn-node-del'
+              'class' => 'btn-node-cancel'
             ),
             '#weight' => -2,
           );
