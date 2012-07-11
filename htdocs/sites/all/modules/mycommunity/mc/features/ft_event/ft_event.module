@@ -70,7 +70,9 @@ function theme_mc_event_header($title,$count,$url){
  * Implementation of theme_mc_event_date()
  */
 function theme_mc_event_date($unix_date_start = NULL, $unix_date_end = NULL, $has_end_date = NULL, $has_time = NULL, $hide_day = FALSE){
-  
+  $today = mktime(0, 0, 0);
+  $yesterday = $today - 24 * 3600;
+  $one_week_ago = $today - 7 * (24 * 3600);
   $output = '';
   $occurring = FALSE;
   
@@ -80,27 +82,34 @@ function theme_mc_event_date($unix_date_start = NULL, $unix_date_end = NULL, $ha
     }else{
       // it's still ocuring today
       $occurring = TRUE;
+      $output .= t('Happening now - ');
     }
   }
   
   $output .= '<span class="event-time">';
   if (!$hide_day){
     if ($occurring){
-      $output .= t('Today');
-    }else{
+      //$output .= t('Today');
+    }
+    elseif ($unix_date_start < $yesterday &&  $unix_date_start > $one_week_ago) {
+      $time_diff = time() - $unix_date_start;
+      $output .= strip_tags(t('%time ago', array('%time' => format_interval($time_diff, 1))));
+      $output .= ', ' . mc_api_format_day($unix_date_start);
+    }
+    else{
       $output .= mc_api_format_day($unix_date_start);
     }
   }
   
   // if it has a time, and it's not a past date
-  if ($has_time && ($unix_date_start > time() || $occurring)){
+  if ($has_time){
     // if it has an end time, different than start time
     if ($has_end_date && (date('Hi', $unix_date_start) != date('Hi', $unix_date_end))){
-      $time = mc_api_format_time($unix_date_start, $unix_date_end);
+      $time = mc_api_format_time($unix_date_start, $unix_date_end, $occurring);
     }else{
-      $time = mc_api_format_time($unix_date_start);
+      $time = mc_api_format_time($unix_date_start, null, $occurring);
     }
-    if (!$hide_day){
+    if (!$hide_day && !$occurring){
       $output .= ', ';
     } 
     $output .= $time;

@@ -5,7 +5,11 @@ branch=mt
 rm -f db.sql.gz
 rm -f db.sql
 #download the db from the host
-wget $dbfile
+if which wget -s; then
+  wget $dbfile
+else
+  curl -O $dbfile
+fi
 gunzip db.sql.gz
 #drop existing tables
 drush sql-drop -y
