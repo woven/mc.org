@@ -347,12 +347,12 @@ body #page #tabs,
     padding: 10px;
 }
 
-#group-page-head .wrapper a,#group-page-head .wrapper a h1{
+#group-page-head .wrapper a,#group-page-head .wrapper h1{
     color: inherit !important;
 }
 
-#group-page-head .wrapper a h1{
-
+#group-page-head .wrapper h1{
+	margin-left: 16px;
 }
 
 #group-page-head .wrapper a{
@@ -366,6 +366,7 @@ body #page #tabs,
 #group-page-head a img{
     vertical-align: middle;
     position: relative;
+    margin-left: 16px;
 }
 
 #group-page-head a h1{
@@ -373,10 +374,6 @@ body #page #tabs,
     padding: 0px;
     color: inherit;
     float: left;
-}
-
-#group-page-head a img{
-
 }
 
 #group-page-head .wrapper a h1{
