@@ -347,8 +347,12 @@ body #page #tabs,
     padding: 10px;
 }
 
-#group-page-head .wrapper a,h1{
+#group-page-head .wrapper a,#group-page-head .wrapper a h1{
     color: inherit !important;
+}
+
+#group-page-head .wrapper a h1{
+
 }
 
 #group-page-head .wrapper a{

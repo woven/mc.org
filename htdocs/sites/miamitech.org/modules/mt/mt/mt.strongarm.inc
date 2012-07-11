@@ -50,5 +50,12 @@ function mt_strongarm() {
   );
   $export['formfilter'] = $strongarm;
 
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'googleanalytics_account';
+  $strongarm->value = 'UA-86671-35';
+  $export['googleanalytics_account'] = $strongarm;
+
   return $export;
 }
