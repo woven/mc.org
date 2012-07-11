@@ -291,7 +291,7 @@ function mc_api_format_day($unix_date){
     $printDay = FALSE;
   }
   if ($unix_date >= $yesterday && $unix_date < $today){
-    $output .= t('Yesterday');
+    $output .= t('yesterday');
   }elseif ($unix_date >= $today && $unix_date < $tomorrow){
     $output .= t('Today');
   }elseif ($unix_date >= $tomorrow && $unix_date < $afterTomorrow){
@@ -303,7 +303,7 @@ function mc_api_format_day($unix_date){
       if ($printDay){
         $output .= date('l F jS', $unix_date);
       }else{
-        $output .= date('F jS', $unix_date);
+        $output .= date('D F jS', $unix_date);
       }
     }else{ // different year
       if ($printDay){
@@ -341,22 +341,30 @@ function _mc_api_get_formatted_time($time, $printAMPM = true){
 /**
  * Return a date with a specific format time.
  */
-function mc_api_format_time($start, $end = NULL){
+function mc_api_format_time($start, $end = NULL, $occurring = NULL){
+  if($occurring){
+    $prefix_start = 'started at ';
+    $prefix_end = ', ends at ';
+  }
+  else {
+    $prefix_start = '';
+    $prefix_end = '-';
+  }
   
   if (!$end){
     // start date only
-    return _mc_api_get_formatted_time($start, true);
+    return $prefix_start . _mc_api_get_formatted_time($start, true);
   }
     
   if (date('a', $start) == date('a', $end)){
     // do not print AM/PM in start date
-    $startDate = _mc_api_get_formatted_time($start, false);
+    $startDate = _mc_api_get_formatted_time($start, $occurring);
   }else{
     $startDate = _mc_api_get_formatted_time($start, true);
   }
   $endDate = _mc_api_get_formatted_time($end, true);
   
-  return $startDate . '-' . $endDate;
+  return $prefix_start . $startDate . $prefix_end . $endDate;
   
 }
 
