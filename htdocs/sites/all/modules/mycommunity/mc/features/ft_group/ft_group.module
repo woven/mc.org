@@ -9,19 +9,25 @@ include_once('ft_group.features.inc');
 **/
 
 
-/**
+/*
 function ft_group_user($op, &$edit, &$account, $category = NULL){
   switch($op){
     case 'load':
+
       if($account->uid == 1){
 
-        $sql = "SELECT n.title, n.type, n.status, ou.* FROM {og_uid} ou INNER JOIN {node} n ON ou.nid = n.nid AND n.type = 'group' ORDER BY n.title";
+        $sql = "SELECT n.* FROM {node} n WHERE n.type = 'group' ORDER BY n.title";
         $result = db_query($sql);
         $og_groups = array();
+
         while ($row = db_fetch_array($result)) {
+          $row['og_role'] = 0;
+          $row['is_active'] = 1;
+          $row['is_admin '] = 1;
           $og_groups[$row['nid']] = $row;
         }
-        dsm($og_groups);
+
+        dsm($og_groups,"mine");
 
         if(!empty($og_groups)){
           $account->og_groups = $og_groups;
@@ -30,8 +36,7 @@ function ft_group_user($op, &$edit, &$account, $category = NULL){
       }
   }
 }
-
- **/
+*/
 
 function ft_group_og_home_blocks_alter(&$blocks,$node){
   $blocks = array(
