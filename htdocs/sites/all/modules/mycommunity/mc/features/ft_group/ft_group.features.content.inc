@@ -235,6 +235,81 @@ function ft_group_content_default_fields() {
     ),
   );
 
+  // Exported field: field_group_url
+  $fields['group-field_group_url'] = array(
+    'field_name' => 'field_group_url',
+    'type_name' => 'group',
+    'display_settings' => array(
+      'weight' => '26',
+      'parent' => '',
+      'label' => array(
+        'format' => 'above',
+      ),
+      'teaser' => array(
+        'format' => 'hidden',
+        'exclude' => 1,
+      ),
+      'full' => array(
+        'format' => 'hidden',
+        'exclude' => 1,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'link',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'link',
+    'active' => '1',
+    'attributes' => array(
+      'target' => 'default',
+      'rel' => '',
+      'class' => '',
+      'title' => '',
+    ),
+    'display' => array(
+      'url_cutoff' => '80',
+    ),
+    'url' => 0,
+    'title' => 'none',
+    'title_value' => '',
+    'enable_tokens' => 0,
+    'validate_url' => 1,
+    'widget' => array(
+      'default_value' => array(
+        '0' => array(
+          'title' => '',
+          'url' => '',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Group homepage',
+      'weight' => '26',
+      'description' => 'The URL of your group’s homepage on a service like Meetup.com or Eventbrite.',
+      'type' => 'link',
+      'module' => 'link',
+    ),
+  );
+
   // Exported field: field_header_color
   $fields['group-field_header_color'] = array(
     'field_name' => 'field_header_color',
@@ -659,6 +734,7 @@ black',
   t('About');
   t('Additional Group Managers');
   t('Featured Items');
+  t('Group homepage');
   t('Header Color');
   t('Header Title Color');
   t('Images');

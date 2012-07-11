@@ -177,9 +177,7 @@ function ft_group_strongarm() {
     'og_selective' => '18',
     'og_register' => '15',
     'og_directory' => '17',
-    'path_redirect' => '26',
     'print' => '23',
-    'og_private' => '16',
   );
   $export['content_extra_weights_group'] = $strongarm;
 
