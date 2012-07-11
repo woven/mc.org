@@ -63,6 +63,34 @@ function mc_redirect_when_session_variable_set($form, &$form_state) {
  */
 function mc_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+
+  if($form['#id'] == "node-form"){
+    foreach($form['buttons'] as $key => &$btn){
+      switch($key){
+        case 'submit':
+          $btn['#weight'] = 0;
+          $btn['#attributes']['class'] .= ' btn-node-save';
+        break;
+        case 'delete':
+          $btn['#weight'] = -1;
+          $btn['#attributes']['class'] .= ' btn-node-del';
+        break;
+        case 'cancel':
+          $btn = array(
+            '#type' => 'button',
+            '#value' => t('Cancel'),
+            '#attributes' => array(
+              'onclick' => 'javascript: history.go(-1); return false;',
+              'class' => 'btn-node-cancel'
+            ),
+            '#weight' => -2,
+          );
+        break;
+     }; //end switch
+    };  //end foreach
+  } //end if
+
+
   if($form['form_id']['#value']=='npage_node_form' || $form['form_id']['#value']=='audio_node_form'){
     $form['og_nodeapi']['#access']=false;
   }
@@ -183,7 +211,7 @@ function mc_form_user_register_alter(&$form, &$form_state){
   );
   */
   $form['submit']['#value'] = 'Join';
-  $form['submit']['#attributes']['class'] = 'orange';
+  $form['submit']['#attributes']['class'] = 'btn-orange';
   
 }
 

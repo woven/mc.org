@@ -9,6 +9,39 @@ function mt_landing_contexts_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'about';
+  $context->description = 'About page at /about';
+  $context->tag = 'about';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'about' => 'about',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'boxes-join_mc' => array(
+          'module' => 'boxes',
+          'delta' => 'join_mc',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('About page at /about');
+  t('about');
+  $export['about'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'landing_audiovideo';
   $context->description = 'Context that contains the reactions to display the Audio & Video Landing Page properly';
   $context->tag = 'Landing';
@@ -504,12 +537,6 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
-        'boxes-join_mc' => array(
-          'module' => 'boxes',
-          'delta' => 'join_mc',
-          'region' => 'right',
-          'weight' => 1,
-        ),
         'boxes-mc_event_sections_box' => array(
           'module' => 'boxes',
           'delta' => 'mc_event_sections_box',
@@ -557,7 +584,7 @@ function mt_landing_contexts_context_default_contexts() {
       'above_content' => array(
         'class' => '',
         'blocks' => array(
-          'boxes-upcoming_events_blocks' => array(
+          'boxes-mc_event_sections_box' => array(
             'class' => '',
           ),
         ),

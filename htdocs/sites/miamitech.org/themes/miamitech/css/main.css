@@ -1746,6 +1746,7 @@ textarea {
 	margin-top: 5px;
 }
 
+/** Button style
 button,
 .button,
 button span,
@@ -1794,6 +1795,7 @@ button span,
 	white-space: nowrap;
 }
 
+/*
 button:hover span,
 button.hover span,
 .button:hover span {
@@ -1812,6 +1814,9 @@ a.orange span {
 	text-shadow: 0 -1px #cc5205;
 	background-position: 0 -34px;
 }
+**/
+                    **/
+/** Button style **/
 
 /* Newsletter form */
 .newsletter-block input.form-text {
@@ -1842,8 +1847,6 @@ a.orange span {
 	color: #999;
 }
 
-.node-form .filefield-upload .submit-wrapper button,
-.node-form .filefield-upload .submit-wrapper button span,
 .newsletter-block .submit-wrapper button,
 .newsletter-block .submit-wrapper button span {
 	height: 37px;
@@ -1855,12 +1858,11 @@ a.orange span {
 	text-shadow: none;
 }
 
-.node-form .filefield-upload .submit-wrapper button:hover span,
-.node-form .filefield-upload .submit-wrapper button.hover span,
 .newsletter-block .submit-wrapper button:hover span,
 .newsletter-block .submit-wrapper button.hover span{
 	color: #999;
 }
+
 
 /* Join us block */
 #page .join-block li {

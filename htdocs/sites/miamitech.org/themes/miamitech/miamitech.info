@@ -39,6 +39,7 @@ stylesheets[screen][] = "css/custom-less.css"
 stylesheets[screen][] = "css/mt.css"
 stylesheets[screen][] = "js/colorbox/colorbox.css"
 stylesheets[all][] = "views_gallery.css"
+stylesheets[screen][] = "css/buttons.css"
 
 ; conditional styles for ie 7 and 6
 conditional-stylesheets[if lte IE 7][all][] = css/ie.css
