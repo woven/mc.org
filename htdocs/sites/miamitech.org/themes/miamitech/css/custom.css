@@ -110,13 +110,6 @@ ul.secondary-tabs a.active{
   font-weight:bold;
 }
 
-/* Forms */
-.submit-wrapper {
-    float: left;
-    margin: 5px 10px 0 0;
-    width: auto;
-}
-
 .content-multiple-table th,
 label{
   color: #424242;
