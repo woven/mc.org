@@ -450,3 +450,9 @@ ul.primary-tabs a.active, ul.primary-tabs li.active{
 #footer .block-multiblock {
 	background: #0070B6;
 }
+
+/** node/add forms cleanup **/
+
+#node-form .fieldset legend {
+  display: none;
+}
