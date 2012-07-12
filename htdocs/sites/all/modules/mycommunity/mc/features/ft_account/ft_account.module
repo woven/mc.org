@@ -30,7 +30,14 @@ function _mc_user_pages_menu_alter(&$items){
 function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
   global $user;
 
+  /*
+   * User login form
+   */
   if($form_id == "user_login"){
+
+    /*
+     * Changing some of the default values on the login fields
+     */
     $form['submit']['#value'] = MC_USER_PAGE;
     $form['name']['#description'] = t("Enter your username or email address.");
     $form['pass']['#description'] = t("Enter your password.");
@@ -56,7 +63,7 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
       //remove the original picture fieldset
       unset($form['picture']);
 
-      //convert fieldset to item
+      //convert picture fieldset to an item inside 'Personal Information'
       $form['Personal information']['picture']['#type'] = "item";
       $form['Personal information']['picture']['#weight'] = 100;
       $form['Personal information']['picture']['#title'] = 'Picture';
