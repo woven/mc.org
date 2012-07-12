@@ -125,9 +125,7 @@ function mt_access_user_default_permissions() {
   // Exported permission: access devel information
   $permissions['access devel information'] = array(
     'name' => 'access devel information',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
+    'roles' => array(),
   );
 
   // Exported permission: access display suite
@@ -213,12 +211,6 @@ function mt_access_user_default_permissions() {
       '2' => 'authenticated user',
       '3' => 'group manager',
     ),
-  );
-
-  // Exported permission: add members
-  $permissions['add members'] = array(
-    'name' => 'add members',
-    'roles' => array(),
   );
 
   // Exported permission: add photos in any album
@@ -345,12 +337,6 @@ function mt_access_user_default_permissions() {
   // Exported permission: add stuff place
   $permissions['add stuff place'] = array(
     'name' => 'add stuff place',
-    'roles' => array(),
-  );
-
-  // Exported permission: add stuff profile
-  $permissions['add stuff profile'] = array(
-    'name' => 'add stuff profile',
     'roles' => array(),
   );
 
@@ -486,15 +472,15 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: administer group main page
-  $permissions['administer group main page'] = array(
-    'name' => 'administer group main page',
+  // Exported permission: administer google analytics
+  $permissions['administer google analytics'] = array(
+    'name' => 'administer google analytics',
     'roles' => array(),
   );
 
-  // Exported permission: administer groupadmin
-  $permissions['administer groupadmin'] = array(
-    'name' => 'administer groupadmin',
+  // Exported permission: administer group main page
+  $permissions['administer group main page'] = array(
+    'name' => 'administer group main page',
     'roles' => array(),
   );
 
@@ -624,6 +610,20 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: administer spaces
+  $permissions['administer spaces'] = array(
+    'name' => 'administer spaces',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: administer string overrides
+  $permissions['administer string overrides'] = array(
+    'name' => 'administer string overrides',
+    'roles' => array(),
+  );
+
   // Exported permission: administer styles
   $permissions['administer styles'] = array(
     'name' => 'administer styles',
@@ -687,18 +687,6 @@ function mt_access_user_default_permissions() {
       '0' => 'Publisher',
       '1' => 'administrator',
     ),
-  );
-
-  // Exported permission: approve membership request
-  $permissions['approve membership request'] = array(
-    'name' => 'approve membership request',
-    'roles' => array(),
-  );
-
-  // Exported permission: broadcast to group
-  $permissions['broadcast to group'] = array(
-    'name' => 'broadcast to group',
-    'roles' => array(),
   );
 
   // Exported permission: bypass advanced aggregation
@@ -891,12 +879,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: create group administrator
-  $permissions['create group administrator'] = array(
-    'name' => 'create group administrator',
-    'roles' => array(),
-  );
-
   // Exported permission: create group content
   $permissions['create group content'] = array(
     'name' => 'create group content',
@@ -981,18 +963,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
-  );
-
-  // Exported permission: create profile content
-  $permissions['create profile content'] = array(
-    'name' => 'create profile content',
-    'roles' => array(),
-  );
-
-  // Exported permission: create profile sitewide
-  $permissions['create profile sitewide'] = array(
-    'name' => 'create profile sitewide',
-    'roles' => array(),
   );
 
   // Exported permission: create textimages
@@ -1165,12 +1135,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: delete any profile content
-  $permissions['delete any profile content'] = array(
-    'name' => 'delete any profile content',
-    'roles' => array(),
-  );
-
   // Exported permission: delete any video content
   $permissions['delete any video content'] = array(
     'name' => 'delete any video content',
@@ -1187,12 +1151,6 @@ function mt_access_user_default_permissions() {
       '0' => 'Publisher',
       '1' => 'administrator',
     ),
-  );
-
-  // Exported permission: delete group administrator
-  $permissions['delete group administrator'] = array(
-    'name' => 'delete group administrator',
-    'roles' => array(),
   );
 
   // Exported permission: delete heartbeat activity logs
@@ -1349,12 +1307,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: delete own profile content
-  $permissions['delete own profile content'] = array(
-    'name' => 'delete own profile content',
-    'roles' => array(),
-  );
-
   // Exported permission: delete own video content
   $permissions['delete own video content'] = array(
     'name' => 'delete own video content',
@@ -1391,12 +1343,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
-  );
-
-  // Exported permission: deny membership request
-  $permissions['deny membership request'] = array(
-    'name' => 'deny membership request',
-    'roles' => array(),
   );
 
   // Exported permission: display drupal links
@@ -1539,12 +1485,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: edit any profile content
-  $permissions['edit any profile content'] = array(
-    'name' => 'edit any profile content',
-    'roles' => array(),
-  );
-
   // Exported permission: edit any video content
   $permissions['edit any video content'] = array(
     'name' => 'edit any video content',
@@ -1562,6 +1502,12 @@ function mt_access_user_default_permissions() {
       '1' => 'administrator',
       '2' => 'group manager',
     ),
+  );
+
+  // Exported permission: edit css
+  $permissions['edit css'] = array(
+    'name' => 'edit css',
+    'roles' => array(),
   );
 
   // Exported permission: edit field_about
@@ -1844,6 +1790,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit field_group_url
+  $permissions['edit field_group_url'] = array(
+    'name' => 'edit field_group_url',
+    'roles' => array(),
+  );
+
   // Exported permission: edit field_header_color
   $permissions['edit field_header_color'] = array(
     'name' => 'edit field_header_color',
@@ -2072,10 +2024,7 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_upload_file'] = array(
     'name' => 'edit field_upload_file',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -2263,12 +2212,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: edit own profile content
-  $permissions['edit own profile content'] = array(
-    'name' => 'edit own profile content',
-    'roles' => array(),
-  );
-
   // Exported permission: edit own video content
   $permissions['edit own video content'] = array(
     'name' => 'edit own video content',
@@ -2374,6 +2317,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: opt-in or out of tracking
+  $permissions['opt-in or out of tracking'] = array(
+    'name' => 'opt-in or out of tracking',
+    'roles' => array(),
+  );
+
   // Exported permission: post comments
   $permissions['post comments'] = array(
     'name' => 'post comments',
@@ -2392,12 +2341,6 @@ function mt_access_user_default_permissions() {
       '1' => 'administrator',
       '2' => 'authenticated user',
     ),
-  );
-
-  // Exported permission: remove members
-  $permissions['remove members'] = array(
-    'name' => 'remove members',
-    'roles' => array(),
   );
 
   // Exported permission: revert overridden settings
@@ -2471,6 +2414,12 @@ function mt_access_user_default_permissions() {
   // Exported permission: use PHP for link visibility
   $permissions['use PHP for link visibility'] = array(
     'name' => 'use PHP for link visibility',
+    'roles' => array(),
+  );
+
+  // Exported permission: use PHP for tracking visibility
+  $permissions['use PHP for tracking visibility'] = array(
+    'name' => 'use PHP for tracking visibility',
     'roles' => array(),
   );
 
@@ -2851,6 +2800,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: view field_group_url
+  $permissions['view field_group_url'] = array(
+    'name' => 'view field_group_url',
+    'roles' => array(),
   );
 
   // Exported permission: view field_header_color
@@ -3239,9 +3194,9 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: view imagecache home-group-name-text
-  $permissions['view imagecache home-group-name-text'] = array(
-    'name' => 'view imagecache home-group-name-text',
+  // Exported permission: view imagecache header_mini_avatar
+  $permissions['view imagecache header_mini_avatar'] = array(
+    'name' => 'view imagecache header_mini_avatar',
     'roles' => array(),
   );
 
