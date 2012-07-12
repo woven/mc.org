@@ -132,7 +132,6 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
 
 function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   if($node->type=='group' && $op=='insert'){
-    dpm($node);
     if(preg_match('/(http:|https:).+(meetup.com)(\/{0,})/i', $node->field_group_url['0']['url']) ){
       $url = $node->field_group_url['0']['url'];
       $no_domain_url =  preg_replace('/(http:|https:).+(meetup.com)(\/{0,})/i', '', $url);
@@ -146,7 +145,6 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
         $gid = $node->nid;
         $event_feed_node->og_groups[$gid] = $gid;
         $event_feed_node = feedapi_create_node($event_feed_node, $event_feed_node_url);
-        dpm($event_feed_node);
       }
     }
   }
