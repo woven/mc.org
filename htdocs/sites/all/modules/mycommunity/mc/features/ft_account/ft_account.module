@@ -39,7 +39,9 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
   //move the picture fieldset into Personal information.
   if($form_id=='user_profile_form'){
 
-    //redirect back to the user profile page
+    /*
+     * redirect back to the user profile page
+     */
     $form['#redirect'] = "user/".$user->uid;
 
     /*
