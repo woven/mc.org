@@ -13,3 +13,20 @@ function og_sitewide_perm_perm(){
   }
   return $perms;
 }
+
+function og_sitewide_perm_late_form_alter(&$form, &$form_state, $form_id){
+
+  //check if it's node form
+  if ($form['#id'] != 'node-form' || !is_object($form['#node'])){
+    //it's not a node form
+    return;
+  }
+
+  //Check if has permissions to post sitewide permissions
+  $postSitewide = user_access("create " . $type->type . " sitewide");
+  if ($postSitewide){
+    $none = array(0);
+    array_unshift($form['og_nodeapi']['visible']['og_groups']['#options'],$none);
+    $form['og_nodeapi']['visible']['og_groups']['#options']['0'] = "-- None --";
+  }
+}

@@ -44,7 +44,7 @@ function mc_block($op = 'list', $delta =   0, $edit = array()) {
 
 function is_publisher() {
   global $user;
-  return in_array('Publisher', $user->roles);
+  return in_array('publisher', $user->roles);
 }
 
 
