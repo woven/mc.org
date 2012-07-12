@@ -28,6 +28,8 @@ function _mc_user_pages_menu_alter(&$items){
 }
 
 function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
+  global $user;
+
   if($form_id == "user_login"){
     $form['submit']['#value'] = MC_USER_PAGE;
     $form['name']['#description'] = t("Enter your username or email address.");
@@ -36,6 +38,15 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
 
   //move the picture fieldset into Personal information.
   if($form_id=='user_profile_form'){
+
+    //redirect back to the user profile page
+    $form['#redirect'] = "user/".$user->uid;
+
+    /*
+      convert picture to a item inside personal information
+      'personal information' comes from Profile + ProfileOnePage modules
+    */
+
     if($form['Personal information'] && $form['picture']){
       //move picture to personal information
       $form['Personal information']['picture'] = $form['picture'];
