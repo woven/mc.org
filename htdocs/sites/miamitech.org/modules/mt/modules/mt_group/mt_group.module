@@ -97,6 +97,13 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 }
 
 function _mt_group_save_file($url){
+  if (!function_exists('mime_content_type')) { 
+   function mime_content_type($f) { 
+       $f = escapeshellarg($f); 
+       return trim( `file -bi $f` ); 
+   } 
+  } 
+  
   $field_logo = _mt_group_nodefield_widget_settings('field_logo');
   $file_temp = file_get_contents($url);
   $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_logo['file_path'] . '/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
