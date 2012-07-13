@@ -2406,14 +2406,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: switch users
-  $permissions['switch users'] = array(
-    'name' => 'switch users',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: use PHP for block visibility
   $permissions['use PHP for block visibility'] = array(
     'name' => 'use PHP for block visibility',

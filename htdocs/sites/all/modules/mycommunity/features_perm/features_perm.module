@@ -41,9 +41,12 @@ function features_perm_features_export_alter(&$export, $module_name) {
         //User Permissions
         $perms = user_permission_features_export_options();
 
-        //loop through all permissions
+        /*
+         * loop through all permissions
+         * @todo add alter hook for excluded modules?
+         */
         foreach($perms as $perm => $title){
-            $ex_modules = array("update","devel","devel_node_access","dummyimage");
+            $ex_modules = array("update","devel","devel_node_access","devel_themer","dummyimage");
             $info = explode(":",$title);
             $module = trim($info[0]);
 
