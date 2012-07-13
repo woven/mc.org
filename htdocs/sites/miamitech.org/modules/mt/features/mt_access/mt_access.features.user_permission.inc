@@ -58,8 +58,8 @@ function mt_access_user_default_permissions() {
   $permissions['access admin theme'] = array(
     'name' => 'access admin theme',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -75,8 +75,8 @@ function mt_access_user_default_permissions() {
   $permissions['access administration pages'] = array(
     'name' => 'access administration pages',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -84,8 +84,8 @@ function mt_access_user_default_permissions() {
   $permissions['access all views'] = array(
     'name' => 'access all views',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -93,8 +93,8 @@ function mt_access_user_default_permissions() {
   $permissions['access all webform results'] = array(
     'name' => 'access all webform results',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -102,11 +102,11 @@ function mt_access_user_default_permissions() {
   $permissions['access comments'] = array(
     'name' => 'access comments',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -114,19 +114,11 @@ function mt_access_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
-    ),
-  );
-
-  // Exported permission: access devel information
-  $permissions['access devel information'] = array(
-    'name' => 'access devel information',
-    'roles' => array(
       '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -142,8 +134,8 @@ function mt_access_user_default_permissions() {
   $permissions['access own webform results'] = array(
     'name' => 'access own webform results',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -151,8 +143,8 @@ function mt_access_user_default_permissions() {
   $permissions['access own webform submissions'] = array(
     'name' => 'access own webform submissions',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -160,12 +152,11 @@ function mt_access_user_default_permissions() {
   $permissions['access print'] = array(
     'name' => 'access print',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
-      '5' => 'unverified',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -181,8 +172,8 @@ function mt_access_user_default_permissions() {
   $permissions['access site reports'] = array(
     'name' => 'access site reports',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -196,11 +187,11 @@ function mt_access_user_default_permissions() {
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -208,10 +199,10 @@ function mt_access_user_default_permissions() {
   $permissions['add group content'] = array(
     'name' => 'add group content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -225,8 +216,8 @@ function mt_access_user_default_permissions() {
   $permissions['add photos in any album'] = array(
     'name' => 'add photos in any album',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -234,9 +225,9 @@ function mt_access_user_default_permissions() {
   $permissions['add photos in any album of the groups I manage'] = array(
     'name' => 'add photos in any album of the groups I manage',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -244,11 +235,11 @@ function mt_access_user_default_permissions() {
   $permissions['add photos in any public album'] = array(
     'name' => 'add photos in any public album',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -268,11 +259,11 @@ function mt_access_user_default_permissions() {
   $permissions['add stuff event'] = array(
     'name' => 'add stuff event',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -280,11 +271,11 @@ function mt_access_user_default_permissions() {
   $permissions['add stuff event_feed'] = array(
     'name' => 'add stuff event_feed',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -316,11 +307,11 @@ function mt_access_user_default_permissions() {
   $permissions['add stuff group'] = array(
     'name' => 'add stuff group',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -348,12 +339,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: add stuff profile
-  $permissions['add stuff profile'] = array(
-    'name' => 'add stuff profile',
-    'roles' => array(),
-  );
-
   // Exported permission: add stuff video
   $permissions['add stuff video'] = array(
     'name' => 'add stuff video',
@@ -378,8 +363,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer blocks'] = array(
     'name' => 'administer blocks',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -387,8 +372,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -416,14 +401,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: administer dummyimage
-  $permissions['administer dummyimage'] = array(
-    'name' => 'administer dummyimage',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: administer features
   $permissions['administer features'] = array(
     'name' => 'administer features',
@@ -436,8 +413,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer feedapi'] = array(
     'name' => 'administer feedapi',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -486,15 +463,15 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: administer group main page
-  $permissions['administer group main page'] = array(
-    'name' => 'administer group main page',
+  // Exported permission: administer google analytics
+  $permissions['administer google analytics'] = array(
+    'name' => 'administer google analytics',
     'roles' => array(),
   );
 
-  // Exported permission: administer groupadmin
-  $permissions['administer groupadmin'] = array(
-    'name' => 'administer groupadmin',
+  // Exported permission: administer group main page
+  $permissions['administer group main page'] = array(
+    'name' => 'administer group main page',
     'roles' => array(),
   );
 
@@ -524,8 +501,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer menu'] = array(
     'name' => 'administer menu',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -555,8 +532,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -564,9 +541,9 @@ function mt_access_user_default_permissions() {
   $permissions['administer og menu'] = array(
     'name' => 'administer og menu',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -574,8 +551,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer organic groups'] = array(
     'name' => 'administer organic groups',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -619,9 +596,23 @@ function mt_access_user_default_permissions() {
   $permissions['administer site configuration'] = array(
     'name' => 'administer site configuration',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
+  );
+
+  // Exported permission: administer spaces
+  $permissions['administer spaces'] = array(
+    'name' => 'administer spaces',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: administer string overrides
+  $permissions['administer string overrides'] = array(
+    'name' => 'administer string overrides',
+    'roles' => array(),
   );
 
   // Exported permission: administer styles
@@ -636,8 +627,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer taxonomy'] = array(
     'name' => 'administer taxonomy',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -667,8 +658,8 @@ function mt_access_user_default_permissions() {
   $permissions['administer users'] = array(
     'name' => 'administer users',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -684,8 +675,8 @@ function mt_access_user_default_permissions() {
   $permissions['advanced feedapi options'] = array(
     'name' => 'advanced feedapi options',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -711,11 +702,11 @@ function mt_access_user_default_permissions() {
   $permissions['change own username'] = array(
     'name' => 'change own username',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -785,10 +776,10 @@ function mt_access_user_default_permissions() {
   $permissions['create event content'] = array(
     'name' => 'create event content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -796,10 +787,10 @@ function mt_access_user_default_permissions() {
   $permissions['create event sitewide'] = array(
     'name' => 'create event sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -807,10 +798,10 @@ function mt_access_user_default_permissions() {
   $permissions['create event_feed content'] = array(
     'name' => 'create event_feed content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -818,10 +809,10 @@ function mt_access_user_default_permissions() {
   $permissions['create event_feed sitewide'] = array(
     'name' => 'create event_feed sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -853,9 +844,9 @@ function mt_access_user_default_permissions() {
   $permissions['create forum topics'] = array(
     'name' => 'create forum topics',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -901,10 +892,10 @@ function mt_access_user_default_permissions() {
   $permissions['create group content'] = array(
     'name' => 'create group content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -912,10 +903,10 @@ function mt_access_user_default_permissions() {
   $permissions['create group sitewide'] = array(
     'name' => 'create group sitewide',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -983,18 +974,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: create profile content
-  $permissions['create profile content'] = array(
-    'name' => 'create profile content',
-    'roles' => array(),
-  );
-
-  // Exported permission: create profile sitewide
-  $permissions['create profile sitewide'] = array(
-    'name' => 'create profile sitewide',
-    'roles' => array(),
-  );
-
   // Exported permission: create textimages
   $permissions['create textimages'] = array(
     'name' => 'create textimages',
@@ -1029,8 +1008,8 @@ function mt_access_user_default_permissions() {
   $permissions['create webform content'] = array(
     'name' => 'create webform content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1046,8 +1025,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete all webform submissions'] = array(
     'name' => 'delete all webform submissions',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1055,8 +1034,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any article content'] = array(
     'name' => 'delete any article content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1064,8 +1043,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any audio content'] = array(
     'name' => 'delete any audio content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1073,8 +1052,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any event content'] = array(
     'name' => 'delete any event content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1088,8 +1067,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any file content'] = array(
     'name' => 'delete any file content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1097,9 +1076,9 @@ function mt_access_user_default_permissions() {
   $permissions['delete any forum topic'] = array(
     'name' => 'delete any forum topic',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -1107,8 +1086,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any gallery content'] = array(
     'name' => 'delete any gallery content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1116,8 +1095,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any gallery_image content'] = array(
     'name' => 'delete any gallery_image content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1125,8 +1104,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any group content'] = array(
     'name' => 'delete any group content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1134,8 +1113,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any link content'] = array(
     'name' => 'delete any link content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1143,8 +1122,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any nnews content'] = array(
     'name' => 'delete any nnews content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1160,23 +1139,17 @@ function mt_access_user_default_permissions() {
   $permissions['delete any place content'] = array(
     'name' => 'delete any place content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
-  );
-
-  // Exported permission: delete any profile content
-  $permissions['delete any profile content'] = array(
-    'name' => 'delete any profile content',
-    'roles' => array(),
   );
 
   // Exported permission: delete any video content
   $permissions['delete any video content'] = array(
     'name' => 'delete any video content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1184,8 +1157,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete any webform content'] = array(
     'name' => 'delete any webform content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1207,10 +1180,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own article content'] = array(
     'name' => 'delete own article content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1218,9 +1191,9 @@ function mt_access_user_default_permissions() {
   $permissions['delete own audio content'] = array(
     'name' => 'delete own audio content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -1228,10 +1201,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own event content'] = array(
     'name' => 'delete own event content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1239,10 +1212,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own event_feed content'] = array(
     'name' => 'delete own event_feed content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1250,10 +1223,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own file content'] = array(
     'name' => 'delete own file content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1261,10 +1234,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own forum topics'] = array(
     'name' => 'delete own forum topics',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1272,9 +1245,9 @@ function mt_access_user_default_permissions() {
   $permissions['delete own gallery content'] = array(
     'name' => 'delete own gallery content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -1282,10 +1255,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own gallery_image content'] = array(
     'name' => 'delete own gallery_image content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1293,10 +1266,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own group content'] = array(
     'name' => 'delete own group content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1312,10 +1285,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own link content'] = array(
     'name' => 'delete own link content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1323,10 +1296,10 @@ function mt_access_user_default_permissions() {
   $permissions['delete own nnews content'] = array(
     'name' => 'delete own nnews content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1342,27 +1315,21 @@ function mt_access_user_default_permissions() {
   $permissions['delete own place content'] = array(
     'name' => 'delete own place content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
-  );
-
-  // Exported permission: delete own profile content
-  $permissions['delete own profile content'] = array(
-    'name' => 'delete own profile content',
-    'roles' => array(),
   );
 
   // Exported permission: delete own video content
   $permissions['delete own video content'] = array(
     'name' => 'delete own video content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1370,9 +1337,9 @@ function mt_access_user_default_permissions() {
   $permissions['delete own webform content'] = array(
     'name' => 'delete own webform content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -1380,8 +1347,8 @@ function mt_access_user_default_permissions() {
   $permissions['delete own webform submissions'] = array(
     'name' => 'delete own webform submissions',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1407,20 +1374,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: display source code
-  $permissions['display source code'] = array(
-    'name' => 'display source code',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: edit all webform submissions
   $permissions['edit all webform submissions'] = array(
     'name' => 'edit all webform submissions',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1428,8 +1387,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit any article content'] = array(
     'name' => 'edit any article content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1437,8 +1396,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit any audio content'] = array(
     'name' => 'edit any audio content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1446,9 +1405,9 @@ function mt_access_user_default_permissions() {
   $permissions['edit any event content'] = array(
     'name' => 'edit any event content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -1462,8 +1421,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit any file content'] = array(
     'name' => 'edit any file content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1471,9 +1430,9 @@ function mt_access_user_default_permissions() {
   $permissions['edit any forum topic'] = array(
     'name' => 'edit any forum topic',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
   );
 
@@ -1481,8 +1440,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit any gallery content'] = array(
     'name' => 'edit any gallery content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1490,8 +1449,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit any gallery_image content'] = array(
     'name' => 'edit any gallery_image content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1499,8 +1458,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit any group content'] = array(
     'name' => 'edit any group content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1508,8 +1467,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit any link content'] = array(
     'name' => 'edit any link content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1517,8 +1476,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit any nnews content'] = array(
     'name' => 'edit any nnews content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1534,23 +1493,17 @@ function mt_access_user_default_permissions() {
   $permissions['edit any place content'] = array(
     'name' => 'edit any place content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
-  );
-
-  // Exported permission: edit any profile content
-  $permissions['edit any profile content'] = array(
-    'name' => 'edit any profile content',
-    'roles' => array(),
   );
 
   // Exported permission: edit any video content
   $permissions['edit any video content'] = array(
     'name' => 'edit any video content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1558,20 +1511,26 @@ function mt_access_user_default_permissions() {
   $permissions['edit any webform content'] = array(
     'name' => 'edit any webform content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'group manager',
+      '2' => 'publisher',
     ),
+  );
+
+  // Exported permission: edit css
+  $permissions['edit css'] = array(
+    'name' => 'edit css',
+    'roles' => array(),
   );
 
   // Exported permission: edit field_about
   $permissions['edit field_about'] = array(
     'name' => 'edit field_about',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1579,10 +1538,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_addphoto'] = array(
     'name' => 'edit field_addphoto',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1590,10 +1549,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_block_body'] = array(
     'name' => 'edit field_block_body',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1601,10 +1560,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_block_link'] = array(
     'name' => 'edit field_block_link',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1612,10 +1571,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_block_title'] = array(
     'name' => 'edit field_block_title',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1623,10 +1582,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_computer_cost'] = array(
     'name' => 'edit field_computer_cost',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1634,10 +1593,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_computers_with_internet'] = array(
     'name' => 'edit field_computers_with_internet',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1645,10 +1604,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_contact_name'] = array(
     'name' => 'edit field_contact_name',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1656,10 +1615,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_cost_per_session'] = array(
     'name' => 'edit field_cost_per_session',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1667,10 +1626,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_editorial'] = array(
     'name' => 'edit field_editorial',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1678,10 +1637,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_email'] = array(
     'name' => 'edit field_email',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1689,10 +1648,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_embedtest'] = array(
     'name' => 'edit field_embedtest',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1700,10 +1659,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_fax'] = array(
     'name' => 'edit field_fax',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1711,10 +1670,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_audio_video_items'] = array(
     'name' => 'edit field_featured_audio_video_items',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1722,10 +1681,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_events'] = array(
     'name' => 'edit field_featured_events',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1733,10 +1692,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_group'] = array(
     'name' => 'edit field_featured_group',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1744,10 +1703,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_groups'] = array(
     'name' => 'edit field_featured_groups',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1755,10 +1714,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_items'] = array(
     'name' => 'edit field_featured_items',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1766,10 +1725,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_members'] = array(
     'name' => 'edit field_featured_members',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1777,10 +1736,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_photo'] = array(
     'name' => 'edit field_featured_photo',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1788,10 +1747,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_place'] = array(
     'name' => 'edit field_featured_place',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1799,10 +1758,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_featured_places'] = array(
     'name' => 'edit field_featured_places',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1810,10 +1769,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_gallery'] = array(
     'name' => 'edit field_gallery',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1821,10 +1780,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_gallery_image'] = array(
     'name' => 'edit field_gallery_image',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1844,12 +1803,18 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit field_group_url
+  $permissions['edit field_group_url'] = array(
+    'name' => 'edit field_group_url',
+    'roles' => array(),
+  );
+
   // Exported permission: edit field_header_color
   $permissions['edit field_header_color'] = array(
     'name' => 'edit field_header_color',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1857,8 +1822,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_header_title_color'] = array(
     'name' => 'edit field_header_title_color',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -1866,10 +1831,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_health_insurance'] = array(
     'name' => 'edit field_health_insurance',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1877,10 +1842,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_health_services'] = array(
     'name' => 'edit field_health_services',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1888,10 +1853,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_hours'] = array(
     'name' => 'edit field_hours',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1899,10 +1864,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_link'] = array(
     'name' => 'edit field_link',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1910,10 +1875,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_list_image'] = array(
     'name' => 'edit field_list_image',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1921,10 +1886,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_logo'] = array(
     'name' => 'edit field_logo',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1932,10 +1897,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_media'] = array(
     'name' => 'edit field_media',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1943,10 +1908,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_open_in_evening'] = array(
     'name' => 'edit field_open_in_evening',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1954,10 +1919,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_open_on_weekends'] = array(
     'name' => 'edit field_open_on_weekends',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1965,10 +1930,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_page_subtype'] = array(
     'name' => 'edit field_page_subtype',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1976,10 +1941,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_page_type'] = array(
     'name' => 'edit field_page_type',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1987,10 +1952,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_phone_number'] = array(
     'name' => 'edit field_phone_number',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -1998,10 +1963,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_place'] = array(
     'name' => 'edit field_place',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2009,10 +1974,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_place_type'] = array(
     'name' => 'edit field_place_type',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2020,10 +1985,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_public_album'] = array(
     'name' => 'edit field_public_album',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2039,10 +2004,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_small_name'] = array(
     'name' => 'edit field_small_name',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2050,10 +2015,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_special_features'] = array(
     'name' => 'edit field_special_features',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2061,10 +2026,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_tech_center_type'] = array(
     'name' => 'edit field_tech_center_type',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2072,10 +2037,7 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_upload_file'] = array(
     'name' => 'edit field_upload_file',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
     ),
   );
 
@@ -2083,10 +2045,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_video'] = array(
     'name' => 'edit field_video',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2094,10 +2056,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_website'] = array(
     'name' => 'edit field_website',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2105,10 +2067,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_wireless_cost'] = array(
     'name' => 'edit field_wireless_cost',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2116,10 +2078,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit field_wireless_hotspot'] = array(
     'name' => 'edit field_wireless_hotspot',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2127,10 +2089,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own article content'] = array(
     'name' => 'edit own article content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2138,10 +2100,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own audio content'] = array(
     'name' => 'edit own audio content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2149,10 +2111,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own event content'] = array(
     'name' => 'edit own event content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2160,10 +2122,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own event_feed content'] = array(
     'name' => 'edit own event_feed content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2171,10 +2133,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own file content'] = array(
     'name' => 'edit own file content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2182,10 +2144,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own forum topics'] = array(
     'name' => 'edit own forum topics',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2193,10 +2155,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own gallery content'] = array(
     'name' => 'edit own gallery content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2204,10 +2166,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own gallery_image content'] = array(
     'name' => 'edit own gallery_image content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2215,10 +2177,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own group content'] = array(
     'name' => 'edit own group content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2226,10 +2188,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own link content'] = array(
     'name' => 'edit own link content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2237,10 +2199,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own nnews content'] = array(
     'name' => 'edit own nnews content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2256,27 +2218,21 @@ function mt_access_user_default_permissions() {
   $permissions['edit own place content'] = array(
     'name' => 'edit own place content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
-  );
-
-  // Exported permission: edit own profile content
-  $permissions['edit own profile content'] = array(
-    'name' => 'edit own profile content',
-    'roles' => array(),
   );
 
   // Exported permission: edit own video content
   $permissions['edit own video content'] = array(
     'name' => 'edit own video content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2284,10 +2240,10 @@ function mt_access_user_default_permissions() {
   $permissions['edit own webform content'] = array(
     'name' => 'edit own webform content',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
     ),
   );
 
@@ -2295,8 +2251,8 @@ function mt_access_user_default_permissions() {
   $permissions['edit own webform submissions'] = array(
     'name' => 'edit own webform submissions',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -2310,14 +2266,6 @@ function mt_access_user_default_permissions() {
   $permissions['exclude visits from the access log'] = array(
     'name' => 'exclude visits from the access log',
     'roles' => array(),
-  );
-
-  // Exported permission: execute php code
-  $permissions['execute php code'] = array(
-    'name' => 'execute php code',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
   );
 
   // Exported permission: export and import settings
@@ -2374,13 +2322,19 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: opt-in or out of tracking
+  $permissions['opt-in or out of tracking'] = array(
+    'name' => 'opt-in or out of tracking',
+    'roles' => array(),
+  );
+
   // Exported permission: post comments
   $permissions['post comments'] = array(
     'name' => 'post comments',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'publisher',
     ),
   );
 
@@ -2388,9 +2342,9 @@ function mt_access_user_default_permissions() {
   $permissions['post comments without approval'] = array(
     'name' => 'post comments without approval',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'publisher',
     ),
   );
 
@@ -2428,11 +2382,11 @@ function mt_access_user_default_permissions() {
   $permissions['search Google CSE'] = array(
     'name' => 'search Google CSE',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2452,14 +2406,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: switch users
-  $permissions['switch users'] = array(
-    'name' => 'switch users',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: use PHP for block visibility
   $permissions['use PHP for block visibility'] = array(
     'name' => 'use PHP for block visibility',
@@ -2471,6 +2417,12 @@ function mt_access_user_default_permissions() {
   // Exported permission: use PHP for link visibility
   $permissions['use PHP for link visibility'] = array(
     'name' => 'use PHP for link visibility',
+    'roles' => array(),
+  );
+
+  // Exported permission: use PHP for tracking visibility
+  $permissions['use PHP for tracking visibility'] = array(
+    'name' => 'use PHP for tracking visibility',
     'roles' => array(),
   );
 
@@ -2486,8 +2438,8 @@ function mt_access_user_default_permissions() {
   $permissions['use admin toolbar'] = array(
     'name' => 'use admin toolbar',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
@@ -2517,11 +2469,11 @@ function mt_access_user_default_permissions() {
   $permissions['view advanced help index'] = array(
     'name' => 'view advanced help index',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2529,11 +2481,11 @@ function mt_access_user_default_permissions() {
   $permissions['view advanced help popup'] = array(
     'name' => 'view advanced help popup',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2541,11 +2493,11 @@ function mt_access_user_default_permissions() {
   $permissions['view advanced help topic'] = array(
     'name' => 'view advanced help topic',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2553,11 +2505,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_about'] = array(
     'name' => 'view field_about',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2565,11 +2517,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_addphoto'] = array(
     'name' => 'view field_addphoto',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2577,11 +2529,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_block_body'] = array(
     'name' => 'view field_block_body',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2589,11 +2541,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_block_link'] = array(
     'name' => 'view field_block_link',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2601,11 +2553,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_block_title'] = array(
     'name' => 'view field_block_title',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2613,11 +2565,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_computer_cost'] = array(
     'name' => 'view field_computer_cost',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2625,11 +2577,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_computers_with_internet'] = array(
     'name' => 'view field_computers_with_internet',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2637,11 +2589,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_contact_name'] = array(
     'name' => 'view field_contact_name',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2649,11 +2601,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_cost_per_session'] = array(
     'name' => 'view field_cost_per_session',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2661,11 +2613,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_editorial'] = array(
     'name' => 'view field_editorial',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2673,11 +2625,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_email'] = array(
     'name' => 'view field_email',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2685,11 +2637,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_embedtest'] = array(
     'name' => 'view field_embedtest',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2697,11 +2649,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_fax'] = array(
     'name' => 'view field_fax',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2709,11 +2661,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_audio_video_items'] = array(
     'name' => 'view field_featured_audio_video_items',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2721,11 +2673,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_events'] = array(
     'name' => 'view field_featured_events',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2733,11 +2685,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_group'] = array(
     'name' => 'view field_featured_group',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2745,11 +2697,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_groups'] = array(
     'name' => 'view field_featured_groups',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2757,11 +2709,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_items'] = array(
     'name' => 'view field_featured_items',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2769,11 +2721,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_members'] = array(
     'name' => 'view field_featured_members',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2781,11 +2733,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_photo'] = array(
     'name' => 'view field_featured_photo',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2793,11 +2745,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_place'] = array(
     'name' => 'view field_featured_place',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2805,11 +2757,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_featured_places'] = array(
     'name' => 'view field_featured_places',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2817,11 +2769,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_gallery'] = array(
     'name' => 'view field_gallery',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2829,11 +2781,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_gallery_image'] = array(
     'name' => 'view field_gallery_image',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2853,15 +2805,21 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: view field_group_url
+  $permissions['view field_group_url'] = array(
+    'name' => 'view field_group_url',
+    'roles' => array(),
+  );
+
   // Exported permission: view field_header_color
   $permissions['view field_header_color'] = array(
     'name' => 'view field_header_color',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2869,11 +2827,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_header_title_color'] = array(
     'name' => 'view field_header_title_color',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2881,11 +2839,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_health_insurance'] = array(
     'name' => 'view field_health_insurance',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2893,11 +2851,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_health_services'] = array(
     'name' => 'view field_health_services',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2905,11 +2863,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_hours'] = array(
     'name' => 'view field_hours',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2917,11 +2875,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_link'] = array(
     'name' => 'view field_link',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2929,11 +2887,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_list_image'] = array(
     'name' => 'view field_list_image',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2941,11 +2899,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_logo'] = array(
     'name' => 'view field_logo',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2953,11 +2911,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_media'] = array(
     'name' => 'view field_media',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2965,11 +2923,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_open_in_evening'] = array(
     'name' => 'view field_open_in_evening',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2977,11 +2935,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_open_on_weekends'] = array(
     'name' => 'view field_open_on_weekends',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -2989,11 +2947,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_page_subtype'] = array(
     'name' => 'view field_page_subtype',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3001,11 +2959,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_page_type'] = array(
     'name' => 'view field_page_type',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3013,11 +2971,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_phone_number'] = array(
     'name' => 'view field_phone_number',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3025,11 +2983,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_place'] = array(
     'name' => 'view field_place',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3037,11 +2995,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_place_type'] = array(
     'name' => 'view field_place_type',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3049,11 +3007,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_public_album'] = array(
     'name' => 'view field_public_album',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3069,11 +3027,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_small_name'] = array(
     'name' => 'view field_small_name',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3081,11 +3039,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_special_features'] = array(
     'name' => 'view field_special_features',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3093,11 +3051,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_tech_center_type'] = array(
     'name' => 'view field_tech_center_type',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3105,11 +3063,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_upload_file'] = array(
     'name' => 'view field_upload_file',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3117,11 +3075,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_video'] = array(
     'name' => 'view field_video',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3129,11 +3087,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_website'] = array(
     'name' => 'view field_website',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3141,11 +3099,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_wireless_cost'] = array(
     'name' => 'view field_wireless_cost',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3153,11 +3111,11 @@ function mt_access_user_default_permissions() {
   $permissions['view field_wireless_hotspot'] = array(
     'name' => 'view field_wireless_hotspot',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3171,11 +3129,11 @@ function mt_access_user_default_permissions() {
   $permissions['view heartbeat messages'] = array(
     'name' => 'view heartbeat messages',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3183,11 +3141,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache featured_item'] = array(
     'name' => 'view imagecache featured_item',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3195,11 +3153,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache featured_photo'] = array(
     'name' => 'view imagecache featured_photo',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3207,11 +3165,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache featured_slideshow'] = array(
     'name' => 'view imagecache featured_slideshow',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3219,11 +3177,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache group-page-logo'] = array(
     'name' => 'view imagecache group-page-logo',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3231,17 +3189,17 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache group_logo'] = array(
     'name' => 'view imagecache group_logo',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
-  // Exported permission: view imagecache home-group-name-text
-  $permissions['view imagecache home-group-name-text'] = array(
-    'name' => 'view imagecache home-group-name-text',
+  // Exported permission: view imagecache header_mini_avatar
+  $permissions['view imagecache header_mini_avatar'] = array(
+    'name' => 'view imagecache header_mini_avatar',
     'roles' => array(),
   );
 
@@ -3249,11 +3207,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache medium'] = array(
     'name' => 'view imagecache medium',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3261,11 +3219,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache mt_home_event'] = array(
     'name' => 'view imagecache mt_home_event',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3273,11 +3231,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache node_image'] = array(
     'name' => 'view imagecache node_image',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3285,11 +3243,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache photo_gallery_big'] = array(
     'name' => 'view imagecache photo_gallery_big',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3297,11 +3255,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache photo_gallery_thumbnail'] = array(
     'name' => 'view imagecache photo_gallery_thumbnail',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3309,11 +3267,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache reg'] = array(
     'name' => 'view imagecache reg',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3321,11 +3279,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache short'] = array(
     'name' => 'view imagecache short',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3333,11 +3291,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache submitted_avatar'] = array(
     'name' => 'view imagecache submitted_avatar',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3345,11 +3303,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache thumb'] = array(
     'name' => 'view imagecache thumb',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3357,11 +3315,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache thumbnail'] = array(
     'name' => 'view imagecache thumbnail',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3369,11 +3327,11 @@ function mt_access_user_default_permissions() {
   $permissions['view imagecache tiny'] = array(
     'name' => 'view imagecache tiny',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
-      '4' => 'group manager',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
     ),
   );
 
@@ -3433,8 +3391,8 @@ function mt_access_user_default_permissions() {
   $permissions['view user location details'] = array(
     'name' => 'view user location details',
     'roles' => array(
-      '0' => 'Publisher',
-      '1' => 'administrator',
+      '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 

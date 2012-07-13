@@ -47,9 +47,56 @@ function mc_drush_command() {
     'aliases' => array('mcdfimg'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE, // No bootstrap at all.
   );
+
+  $items['features-revert-all-smart'] = array(
+    'description' => "Revert all enabled feature module on your site.",
+    'arguments' => array(
+      'feature_exclude' => 'A space-delimited list of features to exclude from being reverted.',
+    ),
+    'options' => array(
+      '--force' => "Force revert even if Features assumes components' state are default.",
+    ),
+    'drupal dependencies' => array('features'),
+    'aliases' => array('fr-all-smart', 'fras'),
+  );
+
   return $items;
 }
 
+
+
+/**
+ * Revert all enabled features to their definitions in code. Optionally pass in
+ * a list of features to exclude from being reverted.
+ */
+function drush_mc_features_revert_all_smart() {
+  module_load_include('inc', 'features', 'features.export');
+  $features_to_revert = array();
+  $features_to_exclude = func_get_args();
+  $force = drush_get_option('force');
+
+  foreach (features_get_features(NULL, TRUE) as $module) {
+    $storage = features_get_storage($module->name);
+    if ($module->status && $storage == FEATURES_OVERRIDDEN && !in_array($module->name, $features_to_exclude)) {
+      $features_to_revert[] = $module->name;
+    }
+  }
+
+  if(count($features_to_revert)){
+      drush_print(dt('The following modules will be reverted: !modules', array('!modules' => implode(', ', $features_to_revert))));
+
+      if (drush_confirm(dt('Do you really want to continue?'))) {
+        foreach ($features_to_revert as $module_name) {
+          drush_invoke_process(drush_sitealias_get_record('@self'), 'features-revert', array($module_name), array('force' => $force, '#integrate' => TRUE));
+        }
+      }else{
+        drush_die('Aborting.');
+      }
+  }else{
+      drush_print("All modules are in default status");
+  }
+
+}
 
 
 /**
@@ -81,6 +128,8 @@ function mc_drush_help($section) {
     // they define a title.  It is therefore preferable
     // to not define a title unless the file defines a lot
     // of commands.
+    case 'drush:features-revert-all-smart':
+        return dt("a better and faster version of drsuh fra, where it only tries to revert Overridden modules");
     case 'meta:mc:title':
       return dt("MC Commands");
     // The 'summary' meta item is displayed in `drush help --filter`,

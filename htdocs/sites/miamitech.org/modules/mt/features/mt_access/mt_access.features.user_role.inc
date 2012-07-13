@@ -6,11 +6,6 @@
 function mt_access_user_default_roles() {
   $roles = array();
 
-  // Exported role: Publisher
-  $roles['Publisher'] = array(
-    'name' => 'Publisher',
-  );
-
   // Exported role: administrator
   $roles['administrator'] = array(
     'name' => 'administrator',
@@ -31,9 +26,9 @@ function mt_access_user_default_roles() {
     'name' => 'group manager',
   );
 
-  // Exported role: unverified
-  $roles['unverified'] = array(
-    'name' => 'unverified',
+  // Exported role: publisher
+  $roles['publisher'] = array(
+    'name' => 'publisher',
   );
 
   return $roles;

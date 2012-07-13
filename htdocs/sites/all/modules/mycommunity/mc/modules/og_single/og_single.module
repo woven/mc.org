@@ -1,27 +1,62 @@
 <?php
 
 /**
- * Implementation of hook_form_alter()
+ * Implementation of hook_late_form_alter()
  */
-function og_single_form_alter(&$form, &$form_state, $form_id){
-  
+
+function og_single_late_form_alter(&$form, &$form_state, $form_id){
   global $user;
-  
+
+  //check if it's node form
   if ($form['#id'] != 'node-form' || !is_object($form['#node'])){
     //it's not a node form
     return;
   }
+
+  //adding form validation
+  array_unshift($form['#validate'],'_og_single_node_form_validate');
+
+  //don't allow to be collapsed
+  $form['og_nodeapi']['#collapsed']= FALSE;
+  $form['#content_extra_fields']['og_nodeapi']['weight']=-100;
+
+  // do not allow multiple values, change description
+  $form['og_nodeapi']['visible']['og_groups']['#type'] = 'select';
+  $form['og_nodeapi']['visible']['og_groups']['#multiple'] = FALSE;
+  $form['og_nodeapi']['visible']['og_groups']['#description'] = 'You may choose to post this in one of your groups.';
+
+  //force it to be a required select input
+  $form['og_nodeapi']['visible']['og_groups']['#required'] = TRUE;
+
+
+  //force it to be always public
+  $form['og_nodeapi']['visible']['og_public']['#default_value'] = 1;
+  $form['og_nodeapi']['visible']['og_public']['#prefix'] = '<div style="display:none;">';
+  $form['og_nodeapi']['visible']['og_public']['#suffix'] = '</div>';
+
+  /*
+   * check if gid is set at the 3rd argument (mostly from the addstuff module)
+   * @todo see _og_single_form_alter for the rest of logic about
+   */
+
+  $gid = arg(3);
+  if($gid){
+    $form['og_nodeapi']['visible']['og_groups']['#default_value'] = array($gid);
+  }
+
+}
+
+
+function _og_single_form_alter(&$form, &$form_state, $form_id){
+
+  global $user;
   
   $type = node_get_types('type', $form['#node']);
-  
   $usage = variable_get('og_content_type_usage_'. $type->type, 'omitted');
 	
   $gid = arg(3);
   $setGroup = FALSE;
-  
-  // check if has permissions to post sitewide
-  $postSitewide = user_access("create " . $type->type . " sitewide");
-  
+
   if (!empty($gid)){
       
     // first try: group node is the third argument
@@ -44,7 +79,6 @@ function og_single_form_alter(&$form, &$form_state, $form_id){
     }
     
   }else{
-    
     // third try: the user belongs to 1 group, and they can't post sitewide
     if (count($user->og_groups) == 1 && !$postSitewide){
       $gid = key($user->og_groups); // get the key of the first element
@@ -60,12 +94,13 @@ function og_single_form_alter(&$form, &$form_state, $form_id){
 	  if ($setGroup){
 	    $form['og_nodeapi']['visible']['og_groups']['#default_value'] = array($gid);
 	  }
-		//$group_node = node_load($gid);
-		/*drupal_set_title(t('Create !name for !group_name', 
-		  array('!name' => $type->name, '!group_name' => $group_node->title)));*/
-		
-    // always public
-    $form['og_nodeapi']['visible']['og_public']['#default_value'] = 1; 
+
+	//$group_node = node_load($gid);
+    /*drupal_set_title(t('Create !name for !group_name',
+    array('!name' => $type->name, '!group_name' => $group_node->title)));*/
+
+    //always public
+    $form['og_nodeapi']['visible']['og_public']['#default_value'] = 1;
     $form['og_nodeapi']['visible']['og_public']['#prefix'] = '<div style="display:none;">';
     $form['og_nodeapi']['visible']['og_public']['#suffix'] = '</div>';
     
@@ -75,9 +110,7 @@ function og_single_form_alter(&$form, &$form_state, $form_id){
     
     // change options (display only the groups this user belongs to)
     $form['og_nodeapi']['visible']['og_groups']['#options'] = array();
-    if ($postSitewide){
-      $form['og_nodeapi']['visible']['og_groups']['#options'][0] = '- None -';
-    }
+
     foreach($user->og_groups as $g){
       $form['og_nodeapi']['visible']['og_groups']['#options'][$g['nid']] = $g['title'];
     }
@@ -87,18 +120,15 @@ function og_single_form_alter(&$form, &$form_state, $form_id){
     $form['og_nodeapi']['visible']['og_groups']['#required'] = TRUE;
     
     // hide when less than one option or when it's a gallery_image node
-    if (count($form['og_nodeapi']['visible']['og_groups']['#options']) < 1 ||
-        $type->type == 'gallery_image'){
+    if (count($form['og_nodeapi']['visible']['og_groups']['#options']) < 1 || $type->type == 'gallery_image'){
       $form['og_nodeapi']['#prefix'] = '<div style="display:none;">';
       $form['og_nodeapi']['#suffix'] = '</div>';
     }
-    array_unshift($form['#validate'],'_og_single_node_form_validate');
-    $form['og_nodeapi']['#collapsed']=FALSE;
-    $form['#content_extra_fields']['og_nodeapi']['weight']=-100;
+
+      array_unshift($form['#validate'],'_og_single_node_form_validate');
+      $form['og_nodeapi']['#collapsed']=FALSE;
+      $form['#content_extra_fields']['og_nodeapi']['weight']=-100;
 	}
-  
-  
-  
 }
 
 function _og_single_node_form_validate($form, &$form_state){

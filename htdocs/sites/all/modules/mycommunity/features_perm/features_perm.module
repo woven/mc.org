@@ -30,6 +30,9 @@ function features_perm_features_export_alter(&$export, $module_name) {
 
 	if($module_name == variable_get("features_perm_module","")){
         //User roles
+
+      $export['features']['variable']['features_perm_module'] = "features_perm_module";
+
         $roles = user_role_features_export_options();
         foreach($roles as $role => $title){
             $export['features']['user_role'][$role] = $role;
@@ -37,8 +40,19 @@ function features_perm_features_export_alter(&$export, $module_name) {
 
         //User Permissions
         $perms = user_permission_features_export_options();
+
+        /*
+         * loop through all permissions
+         * @todo add alter hook for excluded modules?
+         */
         foreach($perms as $perm => $title){
-            $export['features']['user_permission'][$perm] = $perm;
+            $ex_modules = array("update","devel","devel_node_access","devel_themer","dummyimage");
+            $info = explode(":",$title);
+            $module = trim($info[0]);
+
+            if(!in_array($module,$ex_modules)){
+              $export['features']['user_permission'][$perm] = $perm;
+            }
         }
 	}
 }
