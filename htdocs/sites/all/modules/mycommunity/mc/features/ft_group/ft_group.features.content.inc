@@ -11,8 +11,8 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_about',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '11',
-      'parent' => '',
+      'weight' => '9',
+      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -66,10 +66,77 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'About',
-      'weight' => '11',
+      'weight' => '9',
       'description' => '',
       'type' => 'text_textarea',
       'module' => 'text',
+    ),
+  );
+
+  // Exported field: field_auto_import
+  $fields['group-field_auto_import'] = array(
+    'field_name' => 'field_auto_import',
+    'type_name' => 'group',
+    'display_settings' => array(
+      'weight' => '16',
+      'parent' => '',
+      'label' => array(
+        'format' => 'above',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 1,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'number_integer',
+    'required' => '1',
+    'multiple' => '0',
+    'module' => 'number',
+    'active' => '1',
+    'prefix' => '',
+    'suffix' => '',
+    'min' => '',
+    'max' => '',
+    'allowed_values' => '0|No, I will to manually enter my group\'s details
+1|Yes, from Meetup.com',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'default_value' => array(
+        '0' => array(
+          'value' => '',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Import from another service?',
+      'weight' => '16',
+      'description' => '',
+      'type' => 'optionwidgets_buttons',
+      'module' => 'optionwidgets',
     ),
   );
 
@@ -78,8 +145,8 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_featured_items',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '14',
-      'parent' => '',
+      'weight' => '11',
+      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'above',
       ),
@@ -155,7 +222,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Featured Items',
-      'weight' => '14',
+      'weight' => '11',
       'description' => 'Start typing and the select the items you want to be featured in this group',
       'type' => 'nodereference_autocomplete',
       'module' => 'nodereference',
@@ -167,7 +234,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_manager',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '13',
+      'weight' => '21',
       'parent' => '',
       'label' => array(
         'format' => 'above',
@@ -228,7 +295,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Additional Group Managers',
-      'weight' => '13',
+      'weight' => '21',
       'description' => 'The user who created this group is a group manager. Enter additional users that should be group managers. The user should already be created, should be active and should belong to the "group manager" role.',
       'type' => 'userreference_autocomplete',
       'module' => 'userreference',
@@ -241,7 +308,7 @@ function ft_group_content_default_fields() {
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '26',
-      'parent' => '',
+      'parent' => 'group_meetup',
       'label' => array(
         'format' => 'above',
       ),
@@ -316,7 +383,7 @@ function ft_group_content_default_fields() {
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '7',
-      'parent' => '',
+      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -401,7 +468,7 @@ function ft_group_content_default_fields() {
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '8',
-      'parent' => '',
+      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -489,8 +556,8 @@ black',
     'field_name' => 'field_list_image',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '12',
-      'parent' => '',
+      'weight' => '10',
+      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -563,7 +630,7 @@ black',
       ),
       'use_default_image' => 1,
       'label' => 'Images',
-      'weight' => '12',
+      'weight' => '10',
       'description' => 'Upload an image to be displayed on the lists of content',
       'type' => 'imagefield_crop_widget',
       'module' => 'imagefield_crop',
@@ -576,7 +643,7 @@ black',
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '6',
-      'parent' => '',
+      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -644,7 +711,7 @@ black',
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '5',
-      'parent' => '',
+      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -738,6 +805,7 @@ black',
   t('Header Color');
   t('Header Title Color');
   t('Images');
+  t('Import from another service?');
   t('Logo');
   t('Short Name');
 

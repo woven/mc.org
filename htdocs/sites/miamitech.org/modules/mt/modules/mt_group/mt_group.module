@@ -1,0 +1,118 @@
+<?php
+function mt_group_late_form_alter(&$form, &$form_state, $form_id){
+  if($form_id=='group_node_form'){
+    $form['title']['#required'] = false;
+    $form['group_manual_entry']['field_small_name']['0']['#required'] = false;
+    $form['group_manual_entry']['field_small_name']['#required'] = false;
+    $form['#after_build'][] = '_mt_group_alter_title_body';
+  }
+}
+
+function _mt_group_alter_title_body($form, &$form_state){
+  array_push($form['group_manual_entry'], $form['title']);
+  array_push($form['group_manual_entry'], $form['body_field']);
+  unset($form['title'], $form['body_field']);
+  return $form;
+}
+
+function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  if($node->type=='group') {
+    $meetupparser_path = drupal_get_path('module', 'mt_group') . '/meetup/meetup.inc';
+    include_once $meetupparser_path;
+    $querypath_path = drupal_get_path('module', 'querypath') . '/QueryPath/QueryPath.php';
+    switch($op){
+      case 'validate':
+        if($node->field_auto_import['0']['value']=='1' && !empty($node->field_group_url['0']['url']) ){
+          try {
+            $obj = new MeetupParser($node->field_group_url['0']['url'], $query_path);
+          }
+          catch (Exception $e) {
+            form_set_error('', t("Woops, Looks like this is not a meetup group. Try a different one?"));
+          }
+        }
+        elseif($node->field_auto_import['0']['value']=='0'){
+          if(empty($node->title)){
+            form_set_error('Title', t("Please enter a title for your group"));
+          }
+          if(empty($node->field_small_name['0']['value'])){
+            form_set_error('field_small_name', t("Please enter a short name for your group"));
+          }
+        }
+        break;
+      case 'update':
+      case 'insert':
+        if ($_SESSION['create_feed']) {
+          $_SESSION['create_feed']=false;
+          unset($_SESSION['create_feed']);
+          $obj = new MeetupParser($node->field_group_url['0']['url'], $query_path);
+          $event_feed_node = new StdClass();
+          $event_feed_node->type = 'event_feed';
+          $event_feed_node->status = 1;  
+          $event_feed_node_url = $obj->eventFeedUrl();
+          $event_feed_node->title = 'Feed from ' . $event_feed_node_url;
+          $gid = $node->nid;
+          $event_feed_node->og_groups[$gid] = $gid;
+          $event_feed_node = feedapi_create_node($event_feed_node, $event_feed_node_url);
+        }
+        break;
+      case 'presave':
+        if($node->field_auto_import['0']['value']=='1' && !empty($node->field_group_url['0']['url']) ){
+          $obj = new MeetupParser($node->field_group_url['0']['url'], $query_path);
+          foreach ($obj->groupNode() as $key => $value) {
+            $node->$key = $value;
+          }
+          if(!empty($node->nid)){
+            $old_url = db_result(db_query('SELECT field_group_url_url FROM content_type_group WHERE nid='.$node->nid));
+            if($old_url!=$node->field_group_url['0']['url']){
+              $_SESSION['create_feed']=true;
+            }
+          }
+          else {
+            $_SESSION['create_feed']=true;
+          }
+          $logo_url =$obj->logoUrl();
+          if(!empty($logo_url) && (!isset($node->field_logo['0']['fid']) || empty($node->field_logo['0']['fid'])) ){
+            $file = _mt_group_save_file($obj->logoUrl());
+            if(isset($file->fid)){
+              $node->field_logo = array(
+                array(
+                    'fid' => $file->fid,
+                    'title' => basename($file->filename),
+                    'filename' => $file->filename,
+                    'filepath' => $file->filepath,
+                    'filesize' => $file->filesize,
+                    'mimetype' => $file->filemime,
+                    'data' => array(
+                        'description' => basename($file->filename),
+                    ),
+                    'list' => 1,
+                ),
+              );
+            }
+          }
+        } 
+        break;
+    }
+  }
+}
+
+function _mt_group_save_file($url){
+  $field_logo = _mt_group_nodefield_widget_settings('field_logo');
+  $file_temp = file_get_contents($url);
+  $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_logo['file_path'] . '/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
+  $file = new stdClass();
+  $file->filename = basename($file_temp);
+  $file->filepath = $file_temp;
+  $file->filemime = mime_content_type($file_temp);
+  $file->filesize = filesize($file_temp);
+  $file->uid = $user->uid;
+  $file->timestamp = time();
+  $file->status = FILE_STATUS_PERMANENT;
+  drupal_write_record('files', $file);
+  return $file;
+}
+
+function _mt_group_nodefield_widget_settings($field_name) {
+  $sql = "SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' LIMIT 1";
+  return unserialize(db_result(db_query($sql, $field_name)));
+}
