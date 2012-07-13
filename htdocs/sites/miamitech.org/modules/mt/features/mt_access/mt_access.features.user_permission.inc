@@ -122,12 +122,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: access devel information
-  $permissions['access devel information'] = array(
-    'name' => 'access devel information',
-    'roles' => array(),
-  );
-
   // Exported permission: access display suite
   $permissions['access display suite'] = array(
     'name' => 'access display suite',
@@ -402,14 +396,6 @@ function mt_access_user_default_permissions() {
   // Exported permission: administer custom pagers
   $permissions['administer custom pagers'] = array(
     'name' => 'administer custom pagers',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
-  // Exported permission: administer dummyimage
-  $permissions['administer dummyimage'] = array(
-    'name' => 'administer dummyimage',
     'roles' => array(
       '0' => 'administrator',
     ),
@@ -1388,14 +1374,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: display source code
-  $permissions['display source code'] = array(
-    'name' => 'display source code',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: edit all webform submissions
   $permissions['edit all webform submissions'] = array(
     'name' => 'edit all webform submissions',
@@ -2290,14 +2268,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: execute php code
-  $permissions['execute php code'] = array(
-    'name' => 'execute php code',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: export and import settings
   $permissions['export and import settings'] = array(
     'name' => 'export and import settings',
@@ -2537,12 +2507,6 @@ function mt_access_user_default_permissions() {
       '3' => 'group manager',
       '4' => 'publisher',
     ),
-  );
-
-  // Exported permission: view devel_node_access information
-  $permissions['view devel_node_access information'] = array(
-    'name' => 'view devel_node_access information',
-    'roles' => array(),
   );
 
   // Exported permission: view field_about
