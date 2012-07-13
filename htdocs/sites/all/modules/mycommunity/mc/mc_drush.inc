@@ -47,10 +47,51 @@ function mc_drush_command() {
     'aliases' => array('mcdfimg'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE, // No bootstrap at all.
   );
+
+  $items['features-revert-all-smart'] = array(
+    'description' => "Revert all enabled feature module on your site.",
+    'arguments' => array(
+      'feature_exclude' => 'A space-delimited list of features to exclude from being reverted.',
+    ),
+    'options' => array(
+      '--force' => "Force revert even if Features assumes components' state are default.",
+    ),
+    'drupal dependencies' => array('features'),
+    'aliases' => array('fr-all-smart', 'fras'),
+  );
+
   return $items;
 }
 
+/**
+ * Revert all enabled features to their definitions in code. Optionally pass in
+ * a list of features to exclude from being reverted.
+ */
+function drush_mc_features_revert_all_smart() {
+  $features_to_revert = array();
+  $features_to_exclude = func_get_args();
+  $force = drush_get_option('force');
 
+  foreach (features_get_features() as $module) {
+    $storage = features_get_storage($m->name);
+
+    if ($module->status && $storage == FEATURES_OVERRIDDEN && !in_array($module->name, $features_to_exclude)) {
+      $features_to_revert[] = $module->name;
+    }
+
+  }
+
+  drush_print(dt('The following modules will be reverted: !modules', array('!modules' => implode(', ', $features_to_revert))));
+
+  if (drush_confirm(dt('Do you really want to continue?'))) {
+    foreach ($features_to_revert as $module_name) {
+      drush_invoke_process(drush_sitealias_get_record('@self'), 'features-revert', array($module_name), array('force' => $force, '#integrate' => TRUE));
+    }
+  }
+  else {
+    drush_die('Aborting.');
+  }
+}
 
 /**
  * Implementation of hook_drush_help().
@@ -191,4 +232,3 @@ function drush_mc_update_mc_dfimg($vid = '2') {
   drush_log(dt('The files table has been updated!'), 'success');
   
 }
-
