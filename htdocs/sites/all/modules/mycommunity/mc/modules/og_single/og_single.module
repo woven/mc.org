@@ -16,7 +16,7 @@ function og_single_late_form_alter(&$form, &$form_state, $form_id){
   //adding form validation
   array_unshift($form['#validate'],'_og_single_node_form_validate');
 
-  //dont allow to be collapsed
+  //don't allow to be collapsed
   $form['og_nodeapi']['#collapsed']= FALSE;
   $form['#content_extra_fields']['og_nodeapi']['weight']=-100;
 
