@@ -2,45 +2,72 @@
 
 
 function mc_environment_switch($target_env, $current_env) {
+
   /*
-   * todo: database logging? http://w.miamitech.org/admin/settings/logging/dblog
+   * @todo: database logging? http://w.miamitech.org/admin/settings/logging/dblog
+   * @todo: enviroment bar or indicator
+   * @todo: check on advagg compressors
+   * @todo: review adagg configration http://w.miamitech.org/admin/settings/advagg/config
+   * @todo: http://drupal.org/project/devel_queries_ajax
    */
+
   // Declare each optional development-related module
 
-  /*  rebuild menu on each page load
-   *   function mymodule_init() {
+  /* @todo rebuild menu on each page load
+     function mymodule_init() {
         menu_rebuild();
-      }
-   */
+     }
+  */
 
   //permissions api http://drupal.org/project/permissions_api/
 
   //permissions
   $permissions['devel'] = array(
-    'access devel information'
+    'access devel information',
+    'execute php code'
   );
 
-  $modules = array(
-    'devel',
-    'devel_generate',
-    'devel_node_access',
-    'devel_themer',
+  $permissions['devel_node_access'] = array(
+    'view devel_node_access information'
+  );
+
+  $permissions['devel_themer'] = array(
+    'access devel theme information'
+  );
+
+  /*
+   * @todo: fix depenencies on ds_ui and rules_admin
+   */
+  $modules['ui'] = array(
     'views_ui',
     'context_ui',
-    'ft_dummyimage',
     'live_css',
-    'drush_views'
+    'imagecache_ui',
+    'rules_admin',
+    'ds_ui'
   );
 
-  $variables['dev'] = array(
+  $variables['themer'] = array(
+    'devel_rebuild_theme_registry',
+  );
+
+  $variables['debug'] = array(
     'dev_timer',
     'dev_mem',
     'error_level', //0:write 1:write/screen
-    'devel_rebuild_theme_registry',
     'views_skip_cache',
     'views_devel_output',
     'views_devel_region', //region name
     'views_show_additional_queries', // Show other queries run during render during live preview
+  );
+
+  $modules['dev'] = array(
+    'devel',
+    'devel_generate',
+    'devel_node_access',
+    'devel_themer',
+    'ft_dummyimage',
+    'drush_views'
   );
 
   $variables['cache'] = array(
@@ -53,17 +80,19 @@ function mc_environment_switch($target_env, $current_env) {
     'preprocess_js'
   );
 
-  // Disable all devel modules for production mode.
-  if ($target_env == 'production') {
-    module_disable($devel_modules);
-    return '- Disabled development modules';
-  }
 
-  // Enable the modules in any other mode.
-  elseif ($current_env == 'production') {
-    module_enable($devel_modules);
-    return '- Reenabled development modules';
-  }
+  switch ($target_env){
+    case 'development':
+
+      break;
+    case 'debug':
+
+      break;
+    case 'production':
+
+      break;
+  };
+
 }
 
 define("VID_CATEGORY", 2);
