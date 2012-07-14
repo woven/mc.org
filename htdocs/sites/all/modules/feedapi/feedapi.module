@@ -1277,6 +1277,9 @@ function _feedapi_invoke_refresh(&$feed, $param) {
     if($new == 1){
       drupal_set_message(t("You're done! We've imported %new upcoming event, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
+    elseif ($new== 0) {
+      drupal_set_message(t("You're done! We didn't find any upcoming events, but we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
+    }
     else {
       drupal_set_message(t("You're done! We've imported %new upcoming events, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
