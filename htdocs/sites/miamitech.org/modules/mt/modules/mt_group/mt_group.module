@@ -39,8 +39,7 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
           }
         }
         break;
-      case 'update':
-      case 'insert':
+      case 'view':
         if ($_SESSION['create_feed']) {
           $_SESSION['create_feed']=false;
           unset($_SESSION['create_feed']);
