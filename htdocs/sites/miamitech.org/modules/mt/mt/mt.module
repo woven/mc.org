@@ -571,3 +571,13 @@ function _mt_defaultimg_nodefield_widget_settings($field_name) {
   $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
   return unserialize(db_result(db_query($sql, $field_name)));
 }
+
+function mt_preprocess_node(&$variables){
+  if($variables['type']=='group' && (!isset($variables['body']) || $variables['body']==NULL || empty($variables['body']))){
+    $gid = $variables['nid'];
+    $nids = og_group_child_nids($gid);
+    if(count($nids)==1){
+      $variables['content'] = '<div id="mission" class="og-mission">This group isn\'t sharing anything yet.</div>';
+    }
+  }
+}
