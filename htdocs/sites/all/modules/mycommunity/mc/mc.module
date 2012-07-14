@@ -47,12 +47,10 @@ function mc_environment_switch($target_env, $current_env) {
   menu_rebuild();
   }
    */
-  $variables['extreem'] = array(
-    //maybe turn off menu caching on each page load
-  );
 
   $variables['themer'] = array(
     'devel_rebuild_theme_registry',
+    //maybe turn off menu caching on each page load
   );
 
   $variables['debug'] = array(
@@ -66,6 +64,10 @@ function mc_environment_switch($target_env, $current_env) {
   $variables['dev'] = array(
     'error_level', //0:write 1:write/screen
     'views_show_additional_queries', // Show other queries run during render during live preview
+  );
+
+  $modules['debug'] = array(
+    'devel_queries_ajax'
   );
 
   $modules['dev'] = array(
@@ -91,13 +93,13 @@ function mc_environment_switch($target_env, $current_env) {
   switch ($target_env){
     case 'development':
 
-      break;
+    break;
     case 'debug':
 
-      break;
+    break;
     case 'production':
 
-      break;
+    break;
   };
 
 }
