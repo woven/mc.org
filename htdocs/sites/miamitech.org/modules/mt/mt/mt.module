@@ -263,6 +263,40 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
         'token' => 0,
       ),
     ),
+
+    'mt_add_gcal' => array(
+      'title' => t('Add to Google Calendar'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'field-gcal',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php 
+          print mt_add_gcal($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
   );
 
   return array('nd' => $fields);
@@ -280,6 +314,22 @@ function mt_add_group_ical($node){
 
 function mt_add_ical($node){
   return '<span class="ical-ico">Image</span><a class="ical-link" href="webcal://'. $_SERVER["SERVER_NAME"] .'/node/' . $node->nid . '/ical">Just this event (iCal)</a>';
+}
+
+function mt_add_gcal($node){
+  $title = urlencode($node->title);
+  $description = urlencode(strip_tags($node->content['body']['#value']));
+  $location_parts = array(
+    $node->location['name'],
+    $node->location['street'],
+    $node->location['city']. ' ' .
+    $node->location['province']. ' ' .
+    $node->location['postal_code'],
+  );
+  $location = urlencode(implode(', ', $location_parts));
+  $start_date = event_format_date($node->event['start_utc'], 'custom', "Ymd\THis\Z");
+  $end_date = event_format_date($node->event['end_utc'], 'custom', "Ymd\THis\Z");
+  return '<span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="http://www.google.com/calendar/render?action=TEMPLATE&text=' . $title . '&details=' . $description . '&dates=' . $start_date .'/' . $end_date . '&location='. $location  .'">Just this event (gCal)</a>';
 }
 
 function mt_event_image($node){
