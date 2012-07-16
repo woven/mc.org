@@ -23,6 +23,8 @@ function mt_strongarm() {
       'comment_settings' => '1',
     ),
     'group_node_form' => array(
+      'group_manual_entry|field_about|0|value' => '1',
+      'group_manual_entry|field_about|value|format' => '1',
       'body_field|teaser_js' => '1',
       'body_field|teaser_include' => '1',
       'body_field|format' => '1',
