@@ -303,12 +303,18 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
 }
 
 function mt_add_group_rss($node){
-  $gid = current($node->og_groups);
+  foreach ($node->og_groups as $key => $value) {
+    $gid=$key;
+    break;
+  }
   return '<span class="rss-group-ico"> </span><a class="ical-link" href="http://'. $_SERVER["SERVER_NAME"] .'/groups/' . $gid . '/rss">All events from this group (RSS)</a>';
 }
 
 function mt_add_group_ical($node){
-  $gid = current($node->og_groups);
+  foreach ($node->og_groups as $key => $value) {
+    $gid=$key;
+    break;
+  }
   return '<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://'. $_SERVER["SERVER_NAME"] .'/group/' . $gid . '/ical">All events from this group (iCal)</a>';
 }
 
