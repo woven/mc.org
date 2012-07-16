@@ -12,9 +12,7 @@ function og_single_late_form_alter(&$form, &$form_state, $form_id){
     //it's not a node form
     return;
   }
-  $type = node_get_types('type', $form['#node']);
-  $usage = variable_get('og_content_type_usage_'. $type->type, 'omitted');
-  if ( $usage == 'group_post_standard' ){
+  if (isset($form['og_nodeapi']) && count($form['og_nodeapi'])>0 ){
   //adding form validation
   array_unshift($form['#validate'],'_og_single_node_form_validate');
 
