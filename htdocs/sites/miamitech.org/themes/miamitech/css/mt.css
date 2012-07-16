@@ -445,7 +445,11 @@ ul.primary-tabs a.active, ul.primary-tabs li.active{
 }
 
 #footer .block-multiblock {
-	background: #0070B6;
+	background: white url(../images/common/bg-block-title.png) 0 0 repeat-x;
+}
+
+#footer .menu a, #footer .menu a:visited {
+	color: #333;
 }
 
 /** node/add forms cleanup **/
