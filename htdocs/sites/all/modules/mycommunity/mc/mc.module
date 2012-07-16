@@ -11,7 +11,6 @@ function mc_environment_switch($target_env, $current_env) {
    * @todo: http://drupal.org/project/devel_queries_ajax
    * @todo: xdebug or xhprof on debugger?
    * @todo: error tracer/display
-   * @todo: fix depenencies on ds_ui and rules_admin
 */
 
   /* @todo rebuild menu on each page load
@@ -45,39 +44,47 @@ function mc_environment_switch($target_env, $current_env) {
     'live_css',
     'imagecache_ui',
     'rules_admin',
-    'ds_ui'
+    'ds_ui',
+    '#env' => array('staging','development')
   );
 
   $modules['dev'] = array(
     'devel',
     'devel_generate',
-    'devel_node_access',
-    'devel_themer',
     'ft_dummyimage',
     'drush_views',
+    'views_show_additional_queries',
+    '#env' => array('development','debug')
+  );
+
+  $modules['debug'] = array(
+    'devel_node_access',
     'devel_queries_ajax',
-    'views_show_additional_queries'
+    '#env' => array('debug')
   );
 
   /*
    * variables
    */
-
   $variables['themer'] = array(
     'devel_rebuild_theme_registry',
     //maybe turn off menu caching on each page load
+  );
+  $modules['themer'] = array(
+    'devel_themer'
   );
 
   $variables['debug'] = array(
     'dev_timer',
     'dev_mem',
-    'views_skip_cache',
     'views_devel_output',
-    'views_devel_region', //region name
+  //  'views_devel_region', //region name
     'error_level', //0:write 1:write/screen
+    '#env' => array("debug")
   );
 
   $variables['cache'] = array(
+    'views_skip_cache',
     'context_reaction_block_disable_core',
     'advagg_enabled',
     'cache',
@@ -85,36 +92,23 @@ function mc_environment_switch($target_env, $current_env) {
     'block_cache',
     'preprocess_css',
     'preprocess_js',
+    '#env' => array('production')
   );
-
-
 
  // @todo: turn off menu caching & devel permissions
   switch ($target_env){
     case 'development':
+      module_disable("dev");
 
-      //disable non required modules
-      module_enable($modules['ui']);
-      module_enable($modules['dev']);
+      variable_disable($variables['cache']);
+    break;
+    case 'staging':
 
-      //disable caching options
-      module_disable($variables['cache']);
-
-      //enable themer and debug features
-      module_enable($variables['themer']);
-      module_enable($variables['debug']);
+      variable_enable($variables['cache']);
     break;
     case 'production':
-      //disable non required modules
-      module_disable($modules['ui']);
-      module_disable($modules['dev']);
 
-      //disable caching options
-      module_enable($variables['cache']);
-
-      //disable themer and debug features
-      module_disable($variables['themer']);
-      module_disable($variables['debug']);
+      variable_enable($variables['cache']);
     break;
   };
 
