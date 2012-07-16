@@ -133,7 +133,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Import from another service?',
-      'weight' => '16',
+      'weight' => '28',
       'description' => '',
       'type' => 'optionwidgets_buttons',
       'module' => 'optionwidgets',
@@ -295,7 +295,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Additional Group Managers',
-      'weight' => '21',
+      'weight' => '32',
       'description' => 'The user who created this group is a group manager. Enter additional users that should be group managers. The user should already be created, should be active and should belong to the "group manager" role.',
       'type' => 'userreference_autocomplete',
       'module' => 'userreference',
@@ -364,14 +364,13 @@ function ft_group_content_default_fields() {
     'widget' => array(
       'default_value' => array(
         '0' => array(
-          'title' => '',
           'url' => '',
         ),
       ),
       'default_value_php' => NULL,
-      'label' => 'Group homepage',
+      'label' => 'What’s the URL of your group’s homepage?',
       'weight' => '26',
-      'description' => 'The URL of your group’s homepage on a service like Meetup.com or Eventbrite.',
+      'description' => 'The URL of your group’s homepage on a service like Meetup.com. Leave blank if you don’t have one.',
       'type' => 'link',
       'module' => 'link',
     ),
@@ -801,13 +800,13 @@ black',
   t('About');
   t('Additional Group Managers');
   t('Featured Items');
-  t('Group homepage');
   t('Header Color');
   t('Header Title Color');
   t('Images');
   t('Import from another service?');
   t('Logo');
   t('Short Name');
+  t('What’s the URL of your group’s homepage?');
 
   return $fields;
 }

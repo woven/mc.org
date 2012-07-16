@@ -453,3 +453,7 @@ ul.primary-tabs a.active, ul.primary-tabs li.active{
 #node-form .fieldset legend {
   display: none;
 }
+
+#conditional-field-auto-import {
+  display: none;
+}

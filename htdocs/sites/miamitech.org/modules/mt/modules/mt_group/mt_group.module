@@ -5,6 +5,16 @@ function mt_group_late_form_alter(&$form, &$form_state, $form_id){
     $form['group_manual_entry']['field_small_name']['0']['#required'] = false;
     $form['group_manual_entry']['field_small_name']['#required'] = false;
     $form['#after_build'][] = '_mt_group_alter_title_body';
+    $form['#validate'][] = '_mt_group_validate_alter';
+  }
+}
+
+function _mt_group_validate_alter($form, &$form_state){
+  if($_SESSION['manually_create_group']){
+    $_SESSION['manually_create_group'] = false;
+    unset($_SESSION['manually_create_group']);
+    drupal_add_js((drupal_get_path('module', 'mt_group') .'/js/mt_group.js'));
+    return false;
   }
 }
 
@@ -12,6 +22,7 @@ function _mt_group_alter_title_body($form, &$form_state){
   array_push($form['group_manual_entry'], $form['title']);
   array_push($form['group_manual_entry'], $form['body_field']);
   unset($form['title'], $form['body_field']);
+  $form['field_auto_import']['value']['1']['#value'] = '1';
   return $form;
 }
 
@@ -22,12 +33,19 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     $querypath_path = drupal_get_path('module', 'querypath') . '/QueryPath/QueryPath.php';
     switch($op){
       case 'validate':
-        if($node->field_auto_import['0']['value']=='1' && !empty($node->field_group_url['0']['url']) ){
-          try {
-            $obj = new MeetupParser($node->field_group_url['0']['url'], $query_path);
+        if($node->field_auto_import['0']['value']=='1' ){
+          if(!empty($node->field_group_url['0']['url'])){
+            try {
+              $obj = new MeetupParser($node->field_group_url['0']['url'], $query_path);
+            }
+            catch (Exception $e) {
+              $_SESSION['manually_create_group'] = true;
+              form_set_error('', t("Woops, Looks like this is not a URL that we currently support. Try a different one?"));
+            }
           }
-          catch (Exception $e) {
-            form_set_error('', t("Woops, Looks like this is not a meetup group. Try a different one?"));
+          else {
+            $_SESSION['manually_create_group'] = true;
+              form_set_error('', t("Woops, Looks like this is not a URL that we currently support. Try a different one?"));
           }
         }
         elseif($node->field_auto_import['0']['value']=='0'){
