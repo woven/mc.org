@@ -3,7 +3,7 @@
 
 function mc_environment_switch($target_env, $current_env) {
 
-  /*
+/*
    * @todo: database logging? http://w.miamitech.org/admin/settings/logging/dblog
    * @todo: enviroment bar or indicator
    * @todo: check on advagg compressors
@@ -11,11 +11,8 @@ function mc_environment_switch($target_env, $current_env) {
    * @todo: http://drupal.org/project/devel_queries_ajax
    * @todo: xdebug or xhprof on debugger?
    * @todo: error tracer/display
-  */
-
-  /*
-  * @todo: fix depenencies on ds_ui and rules_admin
-  */
+   * @todo: fix depenencies on ds_ui and rules_admin
+*/
 
   /* @todo rebuild menu on each page load
   function mymodule_init() {
@@ -95,6 +92,7 @@ function mc_environment_switch($target_env, $current_env) {
  // @todo: turn off menu caching & devel permissions
   switch ($target_env){
     case 'development':
+
       //disable non required modules
       module_enable($modules['ui']);
       module_enable($modules['dev']);
