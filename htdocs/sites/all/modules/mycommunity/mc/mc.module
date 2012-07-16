@@ -142,13 +142,13 @@ function switch_enviroment($callback,$input,$target_env){
         if(in_array($target_env,$val['#env'])){
           unset($val['#env']);
           $fu = $callback . "_enable";
-          print_r($val);
+          //print_r($val);
           $fu($val);
           echo "$fu: $key \n";
         }else{
           unset($val['#env']);
           $fu = $callback . "_disable";
-          print_r($val);
+          //print_r($val);
           $fu($val);
           echo "$fu: $key \n";
         }
