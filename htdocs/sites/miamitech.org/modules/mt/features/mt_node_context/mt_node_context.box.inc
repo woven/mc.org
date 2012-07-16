@@ -11,7 +11,7 @@ function mt_node_context_default_box() {
   $box->api_version = 1;
   $box->delta = 'join_mc';
   $box->plugin_key = 'simple';
-  $box->title = 'Join MiamiTech.org';
+  $box->title = '';
   $box->description = 'Join MC - right block';
   $box->options = array(
     'body' => '<h5>Do you manage a local group?</h5>
