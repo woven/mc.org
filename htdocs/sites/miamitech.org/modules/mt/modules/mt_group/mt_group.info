@@ -1,0 +1,7 @@
+name = "MiamiTech Group"
+description = "MiamiTech Group: Contains all the logic for adding groups"
+core = "6.x"
+package = "MiamiTech.org"
+
+dependencies[] = "querypath"
+dependencies[] = "ft_group"

@@ -131,23 +131,6 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
 }
 
 function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
-  if($node->type=='group' && $op=='insert'){
-    if(preg_match('/(http:|https:).+(meetup.com)(\/{0,})/i', $node->field_group_url['0']['url']) ){
-      $url = $node->field_group_url['0']['url'];
-      $no_domain_url =  preg_replace('/(http:|https:).+(meetup.com)(\/{0,})/i', '', $url);
-      $group_name = preg_replace('/(^\/)|(\/.+)|(\/)/i', '', $no_domain_url);
-      if(!empty($group_name)){
-        $event_feed_node = new StdClass();
-        $event_feed_node->type = 'event_feed';
-        $event_feed_node->status = 1;  
-        $event_feed_node_url = 'http://www.meetup.com/' . $group_name . '/events/ical';
-        $event_feed_node->title = 'Feed from ' . $event_feed_node_url;
-        $gid = $node->nid;
-        $event_feed_node->og_groups[$gid] = $gid;
-        $event_feed_node = feedapi_create_node($event_feed_node, $event_feed_node_url);
-      }
-    }
-  }
   if($node->type=='event_feed' && $op=='validate'){
     if(isset($node->feedapi['feedapi_url'])){
       $result = db_query("select nid from feedapi where url='%s'", $node->feedapi['feedapi_url']);

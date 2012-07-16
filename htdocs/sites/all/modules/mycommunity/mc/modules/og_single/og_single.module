@@ -12,7 +12,7 @@ function og_single_late_form_alter(&$form, &$form_state, $form_id){
     //it's not a node form
     return;
   }
-
+  if (isset($form['og_nodeapi']) && count($form['og_nodeapi'])>0 ){
   //adding form validation
   array_unshift($form['#validate'],'_og_single_node_form_validate');
 
@@ -43,7 +43,7 @@ function og_single_late_form_alter(&$form, &$form_state, $form_id){
   if($gid){
     $form['og_nodeapi']['visible']['og_groups']['#default_value'] = array($gid);
   }
-
+  }
 }
 
 
