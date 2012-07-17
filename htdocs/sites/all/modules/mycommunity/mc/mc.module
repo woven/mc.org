@@ -38,6 +38,11 @@ function mc_environment_switch($target_env, $current_env) {
     '#env' => array('development','debug')
   );
 
+  $permissions['environment_indicator'] = array(
+        'access environment indicator',
+        '#env' => array('staging','development','debug')
+  );
+
   $modules['ui'] = array(
     'views_ui',
     'context_ui',
@@ -45,6 +50,7 @@ function mc_environment_switch($target_env, $current_env) {
     'imagecache_ui',
     'rules_admin',
     'ds_ui',
+    'environment_indicator',
     '#env' => array('staging','development','debug')
   );
 
