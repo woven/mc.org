@@ -9,20 +9,21 @@ function mt_account_ds_default_settings() {
       'ds_profile' => array(
         'full' => array(
           'fields' => array(
+            'created' => array(
+              'region' => 'header',
+              'weight' => '-96',
+              'format' => 'ud_user_created',
+              'css-class' => '',
+              'label_value' => 'Member for',
+              'labelformat' => 'hidden',
+              'parent' => 'ds_group_user_primaryinfo',
+            ),
             'picture' => array(
               'region' => 'header',
               'weight' => '-100',
               'format' => 'user_account_thum_linked',
               'css-class' => '',
               'labelformat' => 'hidden',
-            ),
-            'profile_website' => array(
-              'region' => 'header',
-              'weight' => '-97',
-              'format' => 'ud_profile_field_urlfilter',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-              'parent' => 'ds_group_user_primaryinfo',
             ),
             'profile_shortbyline' => array(
               'region' => 'header',
@@ -32,9 +33,17 @@ function mt_account_ds_default_settings() {
               'labelformat' => 'hidden',
               'parent' => 'ds_group_user_primaryinfo',
             ),
+            'profile_website' => array(
+              'region' => 'header',
+              'weight' => '-97',
+              'format' => 'ud_profile_field_urlfilter',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+              'parent' => 'ds_group_user_primaryinfo',
+            ),
             'mt_userprofile' => array(
               'region' => 'middle',
-              'weight' => '-98',
+              'weight' => '-94',
               'format' => '',
               'css-class' => '',
               'labelformat' => 'hidden',
