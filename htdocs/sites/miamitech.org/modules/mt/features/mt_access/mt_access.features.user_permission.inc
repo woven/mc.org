@@ -122,14 +122,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: access display suite
-  $permissions['access display suite'] = array(
-    'name' => 'access display suite',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: access own webform results
   $permissions['access own webform results'] = array(
     'name' => 'access own webform results',
@@ -475,6 +467,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer groupadmin
+  $permissions['administer groupadmin'] = array(
+    'name' => 'administer groupadmin',
+    'roles' => array(),
+  );
+
   // Exported permission: administer imageapi
   $permissions['administer imageapi'] = array(
     'name' => 'administer imageapi',
@@ -515,14 +513,6 @@ function mt_access_user_default_permissions() {
   // Exported permission: administer module filter
   $permissions['administer module filter'] = array(
     'name' => 'administer module filter',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
-  // Exported permission: administer nd
-  $permissions['administer nd'] = array(
-    'name' => 'administer nd',
     'roles' => array(
       '0' => 'administrator',
     ),
@@ -586,12 +576,6 @@ function mt_access_user_default_permissions() {
     ),
   );
 
-  // Exported permission: administer rules
-  $permissions['administer rules'] = array(
-    'name' => 'administer rules',
-    'roles' => array(),
-  );
-
   // Exported permission: administer site configuration
   $permissions['administer site configuration'] = array(
     'name' => 'administer site configuration',
@@ -615,14 +599,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: administer styles
-  $permissions['administer styles'] = array(
-    'name' => 'administer styles',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: administer taxonomy
   $permissions['administer taxonomy'] = array(
     'name' => 'administer taxonomy',
@@ -630,12 +606,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'publisher',
     ),
-  );
-
-  // Exported permission: administer ud
-  $permissions['administer ud'] = array(
-    'name' => 'administer ud',
-    'roles' => array(),
   );
 
   // Exported permission: administer url aliases
@@ -724,20 +694,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
-  );
-
-  // Exported permission: configure layout for nd
-  $permissions['configure layout for nd'] = array(
-    'name' => 'configure layout for nd',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
-  // Exported permission: configure layout for ud
-  $permissions['configure layout for ud'] = array(
-    'name' => 'configure layout for ud',
-    'roles' => array(),
   );
 
   // Exported permission: create article content
@@ -972,12 +928,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
-  );
-
-  // Exported permission: create textimages
-  $permissions['create textimages'] = array(
-    'name' => 'create textimages',
-    'roles' => array(),
   );
 
   // Exported permission: create url aliases
@@ -1537,6 +1487,17 @@ function mt_access_user_default_permissions() {
   // Exported permission: edit field_addphoto
   $permissions['edit field_addphoto'] = array(
     'name' => 'edit field_addphoto',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
+    ),
+  );
+
+  // Exported permission: edit field_auto_import
+  $permissions['edit field_auto_import'] = array(
+    'name' => 'edit field_auto_import',
     'roles' => array(
       '0' => 'administrator',
       '1' => 'authenticated user',
@@ -2268,14 +2229,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: export and import settings
-  $permissions['export and import settings'] = array(
-    'name' => 'export and import settings',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: flush imagecache
   $permissions['flush imagecache'] = array(
     'name' => 'flush imagecache',
@@ -2354,14 +2307,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: revert overridden settings
-  $permissions['revert overridden settings'] = array(
-    'name' => 'revert overridden settings',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
-  );
-
   // Exported permission: revert revisions
   $permissions['revert revisions'] = array(
     'name' => 'revert revisions',
@@ -2424,14 +2369,6 @@ function mt_access_user_default_permissions() {
   $permissions['use PHP for tracking visibility'] = array(
     'name' => 'use PHP for tracking visibility',
     'roles' => array(),
-  );
-
-  // Exported permission: use PHP in custom fields
-  $permissions['use PHP in custom fields'] = array(
-    'name' => 'use PHP in custom fields',
-    'roles' => array(
-      '0' => 'administrator',
-    ),
   );
 
   // Exported permission: use admin toolbar
@@ -2516,6 +2453,18 @@ function mt_access_user_default_permissions() {
   // Exported permission: view field_addphoto
   $permissions['view field_addphoto'] = array(
     'name' => 'view field_addphoto',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
+    ),
+  );
+
+  // Exported permission: view field_auto_import
+  $permissions['view field_auto_import'] = array(
+    'name' => 'view field_auto_import',
     'roles' => array(
       '0' => 'administrator',
       '1' => 'anonymous user',
