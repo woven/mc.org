@@ -467,12 +467,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: administer groupadmin
-  $permissions['administer groupadmin'] = array(
-    'name' => 'administer groupadmin',
-    'roles' => array(),
-  );
-
   // Exported permission: administer imageapi
   $permissions['administer imageapi'] = array(
     'name' => 'administer imageapi',
@@ -1767,7 +1761,12 @@ function mt_access_user_default_permissions() {
   // Exported permission: edit field_group_url
   $permissions['edit field_group_url'] = array(
     'name' => 'edit field_group_url',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+      '3' => 'publisher',
+    ),
   );
 
   // Exported permission: edit field_header_color
@@ -2757,7 +2756,13 @@ function mt_access_user_default_permissions() {
   // Exported permission: view field_group_url
   $permissions['view field_group_url'] = array(
     'name' => 'view field_group_url',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+      '4' => 'publisher',
+    ),
   );
 
   // Exported permission: view field_header_color
