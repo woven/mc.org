@@ -16,6 +16,10 @@ function miamitech_ud_profile_field_urlfilter($field) {
   }
 }
 
+function miamitech_ud_user_created($field) {
+    return 'Member for ' . format_interval(time() - $field['object']->created) . ".";
+}
+
 ## TODO:
 ## @mc_base_ghh_user_picture: make the default image as file node or variable so it's more dynamic
  
