@@ -74,17 +74,17 @@ function miamitech_textfield($element){
  */
 function miamitech_button($element){
   // Make sure not to overwrite classes.
-  $btn_csl = ' form-' . $element['#button_type'];
+  $btn_csl = ' button form-' . $element['#button_type'];
 
   if (isset($element['#attributes']['class'])) {
     $element['#attributes']['class'] .= $btn_csl;
   }else {
-    $element['#attributes']['class'] = 'form-' . $element['#button_type'];
+    $element['#attributes']['class'] = $btn_csl;
   }
 
   $element['#attributes']['class'] = trim($element['#attributes']['class']);
 
-  return '<span class="submit-wrapper"><button type="submit" ' . (empty($element['#name']) ? '' : 'name="' . $element['#name'] . '" ') . 'id="' . $element['#id'] . '" value="' . check_plain($element['#value']) . '" ' . drupal_attributes($element['#attributes']) . ">" . check_plain($element['#value']) ."</button></span>\n";
+  return '<input type="submit" ' . (empty($element['#name']) ? '' : 'name="' . $element['#name'] . '" ') . 'id="' . $element['#id'] . '" value="' . check_plain($element['#value']) . '" ' . drupal_attributes($element['#attributes']) . "/>";
 
 }
 

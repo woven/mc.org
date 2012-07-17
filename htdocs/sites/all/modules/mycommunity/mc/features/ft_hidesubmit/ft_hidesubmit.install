@@ -1,0 +1,5 @@
+<?php
+
+function ft_hidesubmit_disable(){
+	module_disable(array('hide_submit'));
+}
