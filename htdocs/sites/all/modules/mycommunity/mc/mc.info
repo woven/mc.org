@@ -7,3 +7,6 @@ dependencies[] = mc_ui
 dependencies[] = mc_api
 dependencies[] = mc_event_section
 dependencies[] = late_form_alter
+dependencies[] = permissions_api
+dependencies[] = environment
+dependencies[] = environment_indicator
