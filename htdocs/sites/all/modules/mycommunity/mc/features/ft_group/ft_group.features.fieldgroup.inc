@@ -51,7 +51,7 @@ function ft_group_fieldgroup_default_groups() {
         ),
       ),
     ),
-    'weight' => '32',
+    'weight' => '43',
     'fields' => array(
       '0' => 'field_small_name',
       '1' => 'field_logo',
@@ -108,10 +108,8 @@ function ft_group_fieldgroup_default_groups() {
         ),
       ),
     ),
-    'weight' => '33',
-    'fields' => array(
-      '0' => 'field_group_url',
-    ),
+    'weight' => '44',
+    'fields' => array(),
   );
 
   // Translatables

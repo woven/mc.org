@@ -60,9 +60,9 @@ body {
 
 #navigation .primary-links a:visited {
 	background: #09C 0 0 repeat-x;
-	-webkit-text-shadow: 0 1px 0 #fff;
-	-moz-text-shadow: 0 1px 0 #fff;
-	text-shadow: 0 1px 0 #fff;
+	-webkit-text-shadow: 0;
+	-moz-text-shadow: 0;
+	text-shadow: 0;
 	background-image: none;
 }
 
@@ -72,17 +72,17 @@ body {
 #navigation .primary-links .active-trail a:visited {
 	color: #fff;
 	background-color: #09F;
-	background-position: 0 -38px;
 	background-image: none;
 }
+
 
 #navigation .primary-links a,
 #navigation .primary-links a:visited {
 	background: none;
 	color: #fff;
-	-webkit-text-shadow: 0 1px 0 #333;
-	-moz-text-shadow: 0 1px 0 #333;
-	text-shadow: 0 1px 0 #333;
+	-webkit-text-shadow: none;
+	-moz-text-shadow: none;
+	text-shadow: none;
 }
 
 #navigation .primary-links li {
@@ -91,7 +91,7 @@ body {
 }
 
 #navigation .primary-links a:hover {
-	color: #CCC;
+	color: #f7f7f7;
 	text-decoration: none;
 }
 
@@ -445,11 +445,19 @@ ul.primary-tabs a.active, ul.primary-tabs li.active{
 }
 
 #footer .block-multiblock {
-	background: #0070B6;
+	background: white url(../images/common/bg-block-title.png) 0 0 repeat-x;
+}
+
+#footer .menu a, #footer .menu a:visited {
+	color: #333;
 }
 
 /** node/add forms cleanup **/
 
 #node-form .fieldset legend {
+  display: none;
+}
+
+#conditional-field-auto-import {
   display: none;
 }
