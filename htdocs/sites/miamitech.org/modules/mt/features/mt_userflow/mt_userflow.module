@@ -26,7 +26,7 @@ function mt_userflow_late_form_alter(&$form, &$form_state, $form_id){
 
     //check if you are adding new node and have no group associated with the current user
     if(!$node->nid && $node->type != "group" && !mt_count_user_ct('group')){
-      //drupal_set_message("NO WAY MAN ARE YOU KIDDING");
+       drupal_set_message("Woops, please add a group first.");
        drupal_goto('node/add/group');
     }
   }

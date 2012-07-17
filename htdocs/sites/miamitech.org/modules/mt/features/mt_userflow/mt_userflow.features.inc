@@ -166,7 +166,16 @@ function mt_userflow_rules_defaults() {
         '#status' => 'default',
         '#conditions' => array(
           '0' => array(
-            '#type' => 'condition',
+            '#weight' => 0,
+            '#info' => array(
+              'label' => 'don\'t run on form submit\'s',
+              'label callback' => FALSE,
+              'module' => 'PHP',
+              'eval input' => array(
+                '0' => 'code',
+              ),
+            ),
+            '#name' => 'rules_condition_custom_php',
             '#settings' => array(
               'code' => 'if(empty($_POST[\'form_build_id\'])){
     return true;
@@ -182,28 +191,10 @@ function mt_userflow_rules_defaults() {
                 ),
               ),
             ),
-            '#name' => 'rules_condition_custom_php',
-            '#info' => array(
-              'label' => 'don\'t run on form submit\'s',
-              'label callback' => FALSE,
-              'module' => 'PHP',
-              'eval input' => array(
-                '0' => 'code',
-              ),
-            ),
-            '#weight' => 0,
+            '#type' => 'condition',
           ),
           '1' => array(
-            '#weight' => 0,
-            '#info' => array(
-              'label' => 'user has never created a group',
-              'label callback' => FALSE,
-              'module' => 'PHP',
-              'eval input' => array(
-                '0' => 'code',
-              ),
-            ),
-            '#name' => 'rules_condition_custom_php',
+            '#type' => 'condition',
             '#settings' => array(
               'code' => 'if(!mt_count_user_ct("group")){
     return true;
@@ -219,20 +210,22 @@ function mt_userflow_rules_defaults() {
                 ),
               ),
             ),
-            '#type' => 'condition',
-          ),
-          '2' => array(
+            '#name' => 'rules_condition_custom_php',
             '#info' => array(
-              'label' => 'don\'t run on /user /node/add/group',
+              'label' => 'user has never created a group',
               'label callback' => FALSE,
               'module' => 'PHP',
               'eval input' => array(
                 '0' => 'code',
               ),
             ),
-            '#name' => 'rules_condition_custom_php',
+            '#weight' => 0,
+          ),
+          '2' => array(
+            '#weight' => 0,
+            '#type' => 'condition',
             '#settings' => array(
-              'code' => 'if(arg(0) == "user" or (arg(0) == "node" && arg(1) == "add" && arg(2) == "group")){
+              'code' => 'if(arg(0) == "user" or (arg(0) == "node" && arg(1) == "add")){
 return false;
 }
 return true;',
@@ -245,21 +238,18 @@ return true;',
                 ),
               ),
             ),
-            '#type' => 'condition',
-            '#weight' => 0,
-          ),
-          '3' => array(
-            '#type' => 'condition',
-            '#settings' => array(
-              'roles' => array(
-                '0' => 2,
-              ),
-              'operation' => 'OR',
-              '#argument map' => array(
-                'user' => 'user',
+            '#name' => 'rules_condition_custom_php',
+            '#info' => array(
+              'label' => 'don\'t run on /user /node/add/',
+              'label callback' => FALSE,
+              'module' => 'PHP',
+              'eval input' => array(
+                '0' => 'code',
               ),
             ),
-            '#name' => 'rules_condition_user_hasrole',
+          ),
+          '3' => array(
+            '#weight' => 0,
             '#info' => array(
               'label' => 'User has role(s)',
               'arguments' => array(
@@ -270,20 +260,22 @@ return true;',
               ),
               'module' => 'User',
             ),
-            '#weight' => 0,
+            '#name' => 'rules_condition_user_hasrole',
+            '#settings' => array(
+              'roles' => array(
+                '0' => 2,
+              ),
+              'operation' => 'OR',
+              '#argument map' => array(
+                'user' => 'user',
+              ),
+            ),
+            '#type' => 'condition',
           ),
         ),
         '#actions' => array(
           '0' => array(
-            '#weight' => 0,
-            '#info' => array(
-              'label' => 'Show a configurable message on the site',
-              'module' => 'System',
-              'eval input' => array(
-                '0' => 'message',
-              ),
-            ),
-            '#name' => 'rules_action_drupal_message',
+            '#type' => 'action',
             '#settings' => array(
               'message' => 'It looks like you haven\'t yet told us about your group. Please <a href="/node/add/group">add your group now</a>.',
               'error' => 0,
@@ -295,7 +287,15 @@ return true;',
                 ),
               ),
             ),
-            '#type' => 'action',
+            '#name' => 'rules_action_drupal_message',
+            '#info' => array(
+              'label' => 'Show a configurable message on the site',
+              'module' => 'System',
+              'eval input' => array(
+                '0' => 'message',
+              ),
+            ),
+            '#weight' => 0,
           ),
         ),
         '#version' => 6003,
