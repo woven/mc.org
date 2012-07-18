@@ -1,18 +1,21 @@
 // $Id$
-
+var submit_hidden = 0;
 Drupal.behaviors.hide_submit = function(context) {
   // Hide button and siblings
 
     function hide_submit_button(obj, message, context) {
-        cls = $(obj, context).attr("class");
-        msg = '<div class="button '+cls+'">'+message+'</div>';
-        $(obj, context).hide().after(msg);
+        if(!submit_hidden){
+            cls = $(obj, context).attr("class");
+            msg = '<div class="button '+cls+'">'+message+'</div>';
+            $(obj, context).hide().after(msg);
+            submit_hidden = true;
+        }
 
         //$(obj, context).hide().siblings('input:submit').hide().end().after(message);
   }
   // Disable button and siblings
   function disable_submit_button(obj, context) {
-    var $obj = $(obj, context);
+    var $obj = $(obj, context).first();
     // Workaround for comment-form and node-form
     // inject missing "op" for preview or delete etc.
     $("#edit-hide-submit-fake-op", context)
@@ -24,6 +27,7 @@ Drupal.behaviors.hide_submit = function(context) {
       .parents("form").submit();
   }
   var settings = Drupal.settings.hide_submit;
+
   if (settings.dbg) {
     // For debugging, this addtion to the script will paint included and excluded buttons
     $('input:submit', context).css({border:'6px red solid'});
