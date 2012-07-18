@@ -29,6 +29,9 @@ scripts[] = "js/jquery.elastic.source.js"
 scripts[] = "js/elastic.js"
 
 ; Stylesheets
+stylesheets[all][] = "system-menus.css"
+stylesheets[all][] = "system.css"
+stylesheets[all][] = "css/system-menus.css"
 stylesheets[screen][] = "css/reset.css"
 stylesheets[screen][] = "css/drupal.css"
 stylesheets[screen][] = "css/base.css"
@@ -39,6 +42,7 @@ stylesheets[screen][] = "css/mt.css"
 stylesheets[screen][] = "js/colorbox/colorbox.css"
 stylesheets[all][] = "views_gallery.css"
 stylesheets[screen][] = "css/buttons.css"
+
 
 ; conditional styles for ie 7 and 6
 conditional-stylesheets[if lte IE 7][all][] = css/ie.css

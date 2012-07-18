@@ -305,12 +305,6 @@ body #navigation {
 	margin-bottom: 15px !important;
 }
 
-body #page #tabs,
-.og-context #page #tabs {
-	margin-top: -5px;
-	margin-bottom: 5px;
-}
-
 #block-ds-0b596e3199de270de74a2f6e8f0d1525 .field-nd-location-gmap{
 	padding-bottom: 10px;
 }
@@ -403,49 +397,6 @@ body #page #tabs,
 
 .nd-region-header {
 	margin-bottom: 0px;
-}
-
-
-/** Tab styles **/
-#tabs {
-	background-color: transparent;
-} 
-
-ul.primary-tabs {
-	float: right;
-}
-
-ul.primary-tabs, ul.secondary-tabs{
-	font-size: 14px;
-	background-color: transparent;
-	margin-right: 4px;
-	border: none;
-}
-
-ul.primary-tabs li {
-	margin-right: 4px;
-	border: solid 1px #FFDC9D;
-}
-
-ul.primary-tabs li, ul.primary-tabs a {
-	font-size: 12px;
-    -webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	color: #8B8B8B;
-	background: #FDFDFD;
-}
-
-ul.primary-tabs a:hover{
-	border-color: #B4E1FD;
-	background-color: #fff;
-}
-
-ul.primary-tabs a.active, ul.primary-tabs li.active{
-	border-color: #B4E1FD;
-	background-color: #fff;
-	font-weight: normal;
-	color: #333;
 }
 
 #footer .block-multiblock {
