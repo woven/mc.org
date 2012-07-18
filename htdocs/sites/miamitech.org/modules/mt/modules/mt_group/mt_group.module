@@ -2,29 +2,48 @@
 function mt_group_late_form_alter(&$form, &$form_state, $form_id){
   if($form_id=='group_node_form'){
     $form['title']['#required'] = false;
-    $form['group_manual_entry']['field_small_name']['0']['#required'] = false;
-    $form['group_manual_entry']['field_small_name']['#required'] = false;
-    $form['#after_build'][] = '_mt_group_alter_title_body';
+    $form['field_small_name']['0']['#required'] = false;
+    $form['field_small_name']['#required'] = false;
     $form['#validate'][] = '_mt_group_validate_alter';
+    if(arg(3)=='full'){
+      $form['title']['#required'] = true;
+      $form['field_small_name']['0']['#required'] = true;
+      $form['field_small_name']['#required'] = true;
+      $form['field_group_url']['0']['#default_value']['url'] = $_GET['url'];
+    }
+    if(!is_numeric(arg(1)) && arg(1)=='add' && arg(3)!='full'){
+      $form['title']['#access']= false;
+      $form['body_field']['#access']= false;
+      $form['field_small_name']['#access']= false;
+      $form['field_logo']['#access']= false;
+      $form['buttons']['submit']['#value'] = 'Next';
+    }
   }
 }
 
 function _mt_group_validate_alter($form, &$form_state){
-  if($_SESSION['manually_create_group']){
-    $_SESSION['manually_create_group'] = false;
-    unset($_SESSION['manually_create_group']);
-    drupal_add_js((drupal_get_path('module', 'mt_group') .'/js/mt_group.js'));
-    return false;
+  if(empty($form_state['values']['title']) && empty($form_state['values']['field_small_name']['0']['value'])){
+    $group_url = $form_state['values']['field_group_url']['0']['url'];
+    if(!empty($group_url)){
+      $meetupparser_path = drupal_get_path('module', 'mt_group') . '/meetup/meetup.inc';
+      include_once $meetupparser_path;
+      $querypath_path = drupal_get_path('module', 'querypath') . '/QueryPath/QueryPath.php';
+      try {
+        $obj = new MeetupParser($group_url, $query_path);
+        $_SESSION['group_obj'] = $obj;
+      }
+      catch (Exception $e) {
+        $query = array('url' => $group_url);
+        drupal_goto('node/add/group/full', $query);
+      }
+    }
+    else{
+      drupal_goto('node/add/group/full');
+    }
   }
 }
 
-function _mt_group_alter_title_body($form, &$form_state){
-  array_push($form['group_manual_entry'], $form['title']);
-  array_push($form['group_manual_entry'], $form['body_field']);
-  unset($form['title'], $form['body_field']);
-  $form['field_auto_import']['value']['1']['#value'] = '1';
-  return $form;
-}
+
 
 function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   if($node->type=='group') {
@@ -32,49 +51,32 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     include_once $meetupparser_path;
     $querypath_path = drupal_get_path('module', 'querypath') . '/QueryPath/QueryPath.php';
     switch($op){
-      case 'validate':
-        if($node->field_auto_import['0']['value']=='1' ){
-          if(!empty($node->field_group_url['0']['url'])){
-            try {
-              $obj = new MeetupParser($node->field_group_url['0']['url'], $query_path);
-            }
-            catch (Exception $e) {
-              $_SESSION['manually_create_group'] = true;
-              form_set_error('', t("Woops, Looks like this is not a URL that we currently support. Try a different one?"));
-            }
-          }
-          else {
-            $_SESSION['manually_create_group'] = true;
-              form_set_error('', t("Woops, Looks like this is not a URL that we currently support. Try a different one?"));
-          }
-        }
-        elseif($node->field_auto_import['0']['value']=='0'){
-          if(empty($node->title)){
-            form_set_error('Title', t("Please enter a title for your group"));
-          }
-          if(empty($node->field_small_name['0']['value'])){
-            form_set_error('field_small_name', t("Please enter a short name for your group"));
-          }
-        }
-        break;
       case 'view':
         if ($_SESSION['create_feed']) {
           $_SESSION['create_feed']=false;
           unset($_SESSION['create_feed']);
-          $obj = new MeetupParser($node->field_group_url['0']['url'], $query_path);
+          $feed_url = $_SESSION['feed_url'];
+          unset($_SESSION['feed_url']);
           $event_feed_node = new StdClass();
           $event_feed_node->type = 'event_feed';
           $event_feed_node->status = 1;  
-          $event_feed_node_url = $obj->eventFeedUrl();
+          $event_feed_node_url = $feed_url;
           $event_feed_node->title = 'Feed from ' . $event_feed_node_url;
           $gid = $node->nid;
           $event_feed_node->og_groups[$gid] = $gid;
           $event_feed_node = feedapi_create_node($event_feed_node, $event_feed_node_url);
         }
+        if(count($_SESSION['messages']['status'])){
+          if(preg_match("/^You're done!/i",$_SESSION['messages']['status']['0'])){
+            $link = '<a href="/node/' . $node->nid . '/edit" >edit your group</a>';
+            $_SESSION['messages']['status']['0'] = 'Sweet. We found your page and imported what we could. You can ' . $link . ' as you wish.';
+          }
+        }
         break;
       case 'presave':
-        if($node->field_auto_import['0']['value']=='1' && !empty($node->field_group_url['0']['url']) ){
-          $obj = new MeetupParser($node->field_group_url['0']['url'], $query_path);
+        if(isset($_SESSION['group_obj'])){
+          $obj = $_SESSION['group_obj'];
+          unset($_SESSION['group_obj']);
           foreach ($obj->groupNode() as $key => $value) {
             $node->$key = $value;
           }
@@ -82,10 +84,12 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
             $old_url = db_result(db_query('SELECT field_group_url_url FROM content_type_group WHERE nid='.$node->nid));
             if($old_url!=$node->field_group_url['0']['url']){
               $_SESSION['create_feed']=true;
+              $_SESSION['feed_url'] = $obj->eventFeedUrl();
             }
           }
           else {
             $_SESSION['create_feed']=true;
+            $_SESSION['feed_url'] = $obj->eventFeedUrl();
           }
           $logo_url =$obj->logoUrl();
           if(!empty($logo_url) && (!isset($node->field_logo['0']['fid']) || empty($node->field_logo['0']['fid'])) ){

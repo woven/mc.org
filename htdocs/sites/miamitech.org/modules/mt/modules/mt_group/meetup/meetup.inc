@@ -9,8 +9,8 @@ class MeetupParser{
 
   public function __construct($url, $querypath_path) {
     include_once $querypath_path;
-    if(preg_match('/(http:|https:).+(meetup.com)(\/{0,})/i', $url) ){
-      $no_domain_url =  preg_replace('/(http:|https:).+(meetup.com)(\/{0,})/i', '', $url);
+    if(preg_match('/(http:|https:|)(.+|)(meetup.com\/.+)/i', $url) ){
+      $no_domain_url =  preg_replace('/(http:|https:|)(.+|)(meetup.com)(\/{1,})/i', '', $url);
       $this->small_name = preg_replace('/(^\/)|(\/.+)|(\/)/i', '', $no_domain_url);
       if(!empty($this->small_name)){
         $this->event_feed = 'http://www.meetup.com/' . $this->small_name . '/events/ical';

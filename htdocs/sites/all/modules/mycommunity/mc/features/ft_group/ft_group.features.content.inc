@@ -66,77 +66,10 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'About',
-      'weight' => '9',
+      'weight' => '35',
       'description' => '',
       'type' => 'text_textarea',
       'module' => 'text',
-    ),
-  );
-
-  // Exported field: field_auto_import
-  $fields['group-field_auto_import'] = array(
-    'field_name' => 'field_auto_import',
-    'type_name' => 'group',
-    'display_settings' => array(
-      'weight' => '16',
-      'parent' => '',
-      'label' => array(
-        'format' => 'above',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 1,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
-      ),
-      '4' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'bubble' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '5' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'block' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'number_integer',
-    'required' => '1',
-    'multiple' => '0',
-    'module' => 'number',
-    'active' => '1',
-    'prefix' => '',
-    'suffix' => '',
-    'min' => '',
-    'max' => '',
-    'allowed_values' => '0|No, I will to manually enter my group\'s details
-1|Yes, from Meetup.com',
-    'allowed_values_php' => '',
-    'widget' => array(
-      'default_value' => array(
-        '0' => array(
-          'value' => '',
-        ),
-      ),
-      'default_value_php' => NULL,
-      'label' => 'Import from another service?',
-      'weight' => '28',
-      'description' => '',
-      'type' => 'optionwidgets_buttons',
-      'module' => 'optionwidgets',
     ),
   );
 
@@ -222,7 +155,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Featured Items',
-      'weight' => '11',
+      'weight' => '37',
       'description' => 'Start typing and the select the items you want to be featured in this group',
       'type' => 'nodereference_autocomplete',
       'module' => 'nodereference',
@@ -295,7 +228,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Additional Group Managers',
-      'weight' => '32',
+      'weight' => '41',
       'description' => 'The user who created this group is a group manager. Enter additional users that should be group managers. The user should already be created, should be active and should belong to the "group manager" role.',
       'type' => 'userreference_autocomplete',
       'module' => 'userreference',
@@ -369,7 +302,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'What’s the URL of your group’s homepage?',
-      'weight' => '26',
+      'weight' => '38',
       'description' => 'The URL of your group’s homepage on a service like Meetup.com. Leave blank if you don’t have one.',
       'type' => 'link',
       'module' => 'link',
@@ -454,7 +387,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Header Color',
-      'weight' => '7',
+      'weight' => '33',
       'description' => '',
       'type' => 'colorpicker_cck',
       'module' => 'colorpicker_cck',
@@ -543,7 +476,7 @@ black',
       ),
       'default_value_php' => NULL,
       'label' => 'Header Title Color',
-      'weight' => '8',
+      'weight' => '34',
       'description' => '',
       'type' => 'optionwidgets_select',
       'module' => 'optionwidgets',
@@ -629,7 +562,7 @@ black',
       ),
       'use_default_image' => 1,
       'label' => 'Images',
-      'weight' => '10',
+      'weight' => '36',
       'description' => 'Upload an image to be displayed on the lists of content',
       'type' => 'imagefield_crop_widget',
       'module' => 'imagefield_crop',
@@ -697,7 +630,7 @@ black',
       'use_default_image' => 0,
       'file_widgets' => NULL,
       'label' => 'Logo',
-      'weight' => '6',
+      'weight' => '32',
       'description' => '',
       'type' => 'imagefield_crop_widget',
       'module' => 'imagefield_crop',
@@ -788,7 +721,7 @@ black',
       ),
       'default_value_php' => NULL,
       'label' => 'Short Name',
-      'weight' => '5',
+      'weight' => '30',
       'description' => 'We\'ll use this short name in friendly URLs. Only letters and numbers, and no spaces.',
       'type' => 'text_textfield',
       'module' => 'text',
@@ -803,7 +736,6 @@ black',
   t('Header Color');
   t('Header Title Color');
   t('Images');
-  t('Import from another service?');
   t('Logo');
   t('Short Name');
   t('What’s the URL of your group’s homepage?');

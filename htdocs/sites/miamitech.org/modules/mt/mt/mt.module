@@ -367,8 +367,8 @@ function mt_form_alter(&$form, &$form_state, $form_id){
     if(isset($form['field_related']['#access']) && $form['field_related']['#access']==TRUE){
       $form['field_related']['#access']=FALSE;
     }
-    if(isset($form['group_manual_entry']['field_list_image']['#access']) && $form['group_manual_entry']['field_list_image']['#access']==TRUE){
-      $form['group_manual_entry']['field_list_image']['#access']=FALSE;
+    if(isset($form['field_list_image']['#access']) && $form['field_list_image']['#access']==TRUE){
+      $form['field_list_image']['#access']=FALSE;
     }
   }
   if($form['#id']=='views-exposed-form-latest-pages-page-7'){
