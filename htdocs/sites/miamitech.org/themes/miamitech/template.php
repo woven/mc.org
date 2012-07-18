@@ -17,7 +17,7 @@ function miamitech_ud_profile_field_urlfilter($field) {
 }
 
 function miamitech_ud_user_created($field) {
-    return 'Member for ' . format_interval(time() - $field['object']->created) . ".";
+    return ' &ndash; Member for ' . format_interval(time() - $field['object']->created);
 }
 
 ## TODO:
