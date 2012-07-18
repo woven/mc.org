@@ -159,3 +159,12 @@ button:active,
 #login .form-submit{
     margin: auto 34%;
 }
+
+div.button p.hide_submit{
+         margin: 0;
+         vertical-align: middle;
+}
+
+div.button p.hide_submit img{
+    vertical-align: middle;
+}

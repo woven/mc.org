@@ -282,12 +282,13 @@ a .ico-small {
 	background: url(../images/common/bullet-tick.png) 0 6px no-repeat;
 }
 
-.block-overlay .block-signup div {
+.block-overlay .block-signup div.user-register {
 	float: left;
 	width: 265px;
 }
 
 .block-overlay .block-signup .why {
+	float: left;
 	width: 330px;
 	border-right: 1px solid #f0f0f0;
 }

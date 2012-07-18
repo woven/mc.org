@@ -102,7 +102,7 @@ function ft_account_ui_default_box() {
                 <li>We\'re just getting started!</li>
               </ul>
             </div>
-            <div>
+            <div class="user-register">
               <?php
                 print drupal_get_form(\'user_register\');
               ?>
