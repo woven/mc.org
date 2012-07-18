@@ -158,6 +158,13 @@ function miamitech_preprocess_page(&$variables){
   }
   
   $variables['page_classes'] = $page_classes;
+
+  $attr = array();
+  $attr['class'] = $variables['body_classes'];
+
+  // Don't render the attributes yet so subthemes can alter them
+  $variables['attr'] = $attr;
+
   
 }
 
