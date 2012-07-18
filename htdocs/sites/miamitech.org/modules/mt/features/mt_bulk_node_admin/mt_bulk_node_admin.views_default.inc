@@ -190,6 +190,7 @@ function mt_bulk_node_admin_views_default_views() {
     'type' => 'none',
   ));
   $handler->override_option('items_per_page', 100);
+  $handler->override_option('use_pager', '1');
   $handler->override_option('style_plugin', 'bulk');
   $handler->override_option('style_options', array(
     'execution_type' => '2',
