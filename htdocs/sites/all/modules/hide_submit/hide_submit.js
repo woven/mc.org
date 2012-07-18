@@ -2,8 +2,13 @@
 
 Drupal.behaviors.hide_submit = function(context) {
   // Hide button and siblings
-  function hide_submit_button(obj, message, context) {
-    $(obj, context).hide().siblings('input:submit').hide().end().after(message);
+
+    function hide_submit_button(obj, message, context) {
+        cls = $(obj, context).attr("class");
+        msg = '<div class="button '+cls+'">'+message+'</div>';
+        $(obj, context).hide().after(msg);
+
+        //$(obj, context).hide().siblings('input:submit').hide().end().after(message);
   }
   // Disable button and siblings
   function disable_submit_button(obj, context) {
