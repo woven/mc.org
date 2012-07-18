@@ -409,7 +409,7 @@ body #navigation {
 
 /** node/add forms cleanup **/
 
-#node-form .fieldset legend {
+#node-form fieldset legend {
   display: none;
 }
 
