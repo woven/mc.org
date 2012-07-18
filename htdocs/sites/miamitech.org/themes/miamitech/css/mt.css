@@ -151,10 +151,14 @@ body.page-user .ud-region-header{
 
 .field-ds-group-user-primaryinfo .field-nd-location-name{
     color: #ccc;
-
     margin-bottom: 8px;
 }
 
+.field-ds-group-user-primaryinfo .field-nd-location-name,.field-ds-group-user-primaryinfo .field-created{
+    display: inline;
+    color: #CCC;
+    margin-bottom: 8px;
+}
 
 body.page-user .ud-region-header .field-picture{
 	position: relative;

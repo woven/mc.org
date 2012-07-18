@@ -11,7 +11,7 @@ function mt_account_ds_default_settings() {
           'fields' => array(
             'created' => array(
               'region' => 'header',
-              'weight' => '-96',
+              'weight' => '-98',
               'format' => 'ud_user_created',
               'css-class' => '',
               'label_value' => 'Member for',
@@ -27,7 +27,7 @@ function mt_account_ds_default_settings() {
             ),
             'profile_shortbyline' => array(
               'region' => 'header',
-              'weight' => '-98',
+              'weight' => '-97',
               'format' => 'ud_profile_field',
               'css-class' => '',
               'labelformat' => 'hidden',
@@ -35,7 +35,7 @@ function mt_account_ds_default_settings() {
             ),
             'profile_website' => array(
               'region' => 'header',
-              'weight' => '-97',
+              'weight' => '-96',
               'format' => 'ud_profile_field_urlfilter',
               'css-class' => '',
               'labelformat' => 'hidden',
