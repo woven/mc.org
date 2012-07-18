@@ -3,7 +3,6 @@ name = "MiamiTech.org Theme"
 description = "Theme for MiamiTech.org"
 core = "6.x"
 engine = "phptemplate"
-base theme = "tao"
  
 ; Regions
 regions[header] = Header
