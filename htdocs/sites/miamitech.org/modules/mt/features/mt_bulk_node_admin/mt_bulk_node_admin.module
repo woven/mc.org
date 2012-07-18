@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MT Bulk Node Admin feature.
+ */
+
+include_once 'mt_bulk_node_admin.features.inc';

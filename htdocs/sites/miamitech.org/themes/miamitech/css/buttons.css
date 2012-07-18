@@ -157,5 +157,18 @@ button:active,
 }
 
 #login .form-submit{
-    margin: auto 34%;
+    margin: 0;
+    float: none;
+}
+
+div.button p.hide_submit{
+     margin: 0;
+     vertical-align: middle;
+     line-height: 20px;
+     display: block;
+    font-size: inherit;
+}
+
+div.button p.hide_submit img{
+    vertical-align: middle;
 }
