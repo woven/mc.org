@@ -12,7 +12,6 @@ function ft_group_content_default_fields() {
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '9',
-      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -79,7 +78,6 @@ function ft_group_content_default_fields() {
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '11',
-      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'above',
       ),
@@ -315,7 +313,6 @@ function ft_group_content_default_fields() {
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '7',
-      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -400,7 +397,6 @@ function ft_group_content_default_fields() {
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '8',
-      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -489,7 +485,6 @@ black',
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '10',
-      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -575,7 +570,6 @@ black',
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '6',
-      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -643,7 +637,6 @@ black',
     'type_name' => 'group',
     'display_settings' => array(
       'weight' => '5',
-      'parent' => 'group_manual_entry',
       'label' => array(
         'format' => 'hidden',
       ),
