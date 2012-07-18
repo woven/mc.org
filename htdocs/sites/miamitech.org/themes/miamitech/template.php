@@ -417,3 +417,21 @@ function miamitech_nd_location_gmap($field, $latitude, $longitude, $width, $heig
 
   return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
 }
+
+function miamitech_fieldset($element) {
+
+  if (!empty($element['#collapsible'])) {
+    drupal_add_js('misc/collapse.js');
+
+    if (!isset($element['#attributes']['class'])) {
+      $element['#attributes']['class'] = '';
+    }
+
+    $element['#attributes']['class'] .= ' collapsible';
+    if (!empty($element['#collapsed'])) {
+      $element['#attributes']['class'] .= ' collapsed';
+    }
+  }
+  
+  return '<fieldset' . drupal_attributes($element['#attributes']) . '>' . ($element['#title'] ? '<legend>' . $element['#title'] . '</legend>' : '') . (isset($element['#description']) && $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '') . (!empty($element['#children']) ? '<div class="fieldset-content"> ' .  $element['#children'] . '</div>' : '') . (isset($element['#value']) ? $element['#value'] : '') . "</fieldset>\n";
+}
