@@ -848,6 +848,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/current\');
   $handler->override_option('header_empty', 0);
   $handler->override_option('items_per_page', 0);
   $handler->override_option('use_pager', '0');
+  $handler->override_option('distinct', 1);
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
     'grouping' => '',
