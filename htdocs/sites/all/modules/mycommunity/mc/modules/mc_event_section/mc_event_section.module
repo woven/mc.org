@@ -4,10 +4,9 @@ function _mc_event_section_all(){
   $content = array();
 
   $sec1 = _mc_event_section_next_two_weeks();
-  $sec2 =_mc_event_section_after_two_weeks();
+  $sec2 = _mc_event_section_after_two_weeks();
 
-  $content = array($sec1,$sec2);
-
+  $content = array_merge($sec1,$sec2);
   if(count($content)){
     print implode("\n",$content);
   }else{
