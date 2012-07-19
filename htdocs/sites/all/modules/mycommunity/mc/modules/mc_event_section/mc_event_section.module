@@ -1,11 +1,20 @@
 <?php
 
 function _mc_event_section_all(){
-  _mc_event_section_next_two_weeks();
-  _mc_event_section_after_two_weeks();
+  $content = array();
+
+  _mc_event_section_next_two_weeks($content);
+  _mc_event_section_after_two_weeks($content);
+
+  if(count($content)){
+    print implode("\n",$content);
+  }else{
+    print "Wow, it's quiet around here.  Want to <a href='/node/add/event'>add an event</a> or <a href='/node/add/event-feed'>import an event feed</a>?";
+  }
+
 }
 
-function _mc_event_section_next_two_weeks(){
+function _mc_event_section_next_two_weeks(&$content){
 	$today = mktime(0, 0, 0);
   $now = time();
   $tomorrow = $today + 24 * 3600;
@@ -72,18 +81,13 @@ function _mc_event_section_next_two_weeks(){
     }
   }
 
-  $content = array();
   foreach($lists as $key => $list){
     if(count($list)){
       $content[] = _mc_event_section_print_view($key, $list);
     }
   }
 
-  if(empty($content)){
-    print "Wow, it's quiet around here.  Want to <a href='node/add/event'>add an event</a> or <a href='node/add/event_feed'>import an event feed</a>?";
-  }else{
-    print implode("\n",$content);
-  }
+  return $content;
 
 }
 
@@ -106,7 +110,7 @@ function _mc_event_section_print_view($key, $list){
   return $view_display;
 }
 
-function _mc_event_section_after_two_weeks(){
+function _mc_event_section_after_two_weeks(&$content){
   $today = mktime(0, 0, 0);
   $now = time();
   $tomorrow = $today + 24 * 3600;
@@ -155,7 +159,7 @@ function _mc_event_section_after_two_weeks(){
 
   foreach($lists as $key => $list){
   if(count($list)){
-      print _mc_event_section_print_view($key, $list);
+      $content[] = _mc_event_section_print_view($key, $list);
     }
   }
 }
