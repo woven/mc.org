@@ -7,8 +7,7 @@ class MeetupParser{
   private $body;
   private $logo_url;
 
-  public function __construct($url, $querypath_path) {
-    include_once $querypath_path;
+  public function __construct($url) {
     if(preg_match('/(http:|https:|)(.+|)(meetup.com\/.+)/i', $url) ){
       $no_domain_url =  preg_replace('/(http:|https:|)(.+|)(meetup.com)(\/{1,})/i', '', $url);
       $this->small_name = preg_replace('/(^\/)|(\/.+)|(\/)/i', '', $no_domain_url);
