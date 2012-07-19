@@ -26,7 +26,9 @@ function og_sitewide_perm_late_form_alter(&$form, &$form_state, $form_id){
   $postSitewide = user_access("create " . $type->type . " sitewide");
   if ($postSitewide){
     $none = array(0);
-    array_unshift($form['og_nodeapi']['visible']['og_groups']['#options'],$none);
-    $form['og_nodeapi']['visible']['og_groups']['#options']['0'] = "-- None --";
+    if(is_array($form['og_nodeapi']['visible']['og_groups']['#options'])){
+      array_unshift($form['og_nodeapi']['visible']['og_groups']['#options'],$none);
+      $form['og_nodeapi']['visible']['og_groups']['#options']['0'] = "-- None --";
+    }
   }
 }
