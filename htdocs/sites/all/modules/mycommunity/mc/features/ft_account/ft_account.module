@@ -82,10 +82,18 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
 
   //remove the og_register from user registration form.
   if($form_id == "user_register"){
+      if($form['mail']){
+          unset($form['mail']['#description']);
+      }
+      $form['submit']['#attributes']['class'] = 'btn-orange';
+      $form['submit']['#value'] = 'Join';
+
+    //force removing og_registration
     if($form['og_register']){
       unset($form['og_register']);
     }
   }
+
 }
 
 //mc user page logic and callback

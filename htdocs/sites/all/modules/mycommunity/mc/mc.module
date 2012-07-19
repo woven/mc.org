@@ -65,7 +65,7 @@ function mc_environment_switch($target_env, $current_env) {
     'ft_dummyimage',
     'drush_views',
     'views_show_additional_queries',
-    '#env' => array('development','debug','staging')
+    '#env' => array('development','debug')
   );
 
   $modules['debug'] = array(
@@ -76,7 +76,7 @@ function mc_environment_switch($target_env, $current_env) {
 
   /*
    * variables
-   */
+  */
   $variables['themer'] = array(
     'devel_rebuild_theme_registry',
     //maybe turn off menu caching on each page load
@@ -380,10 +380,11 @@ function mc_validate_user_send_eror($form, &$form_state){
 /**
  * Implementation of hook_form_user_register_alter()
  */
-function mc_form_user_register_alter(&$form, &$form_state){
+
+function _mc_form_user_register_alter(&$form, &$form_state,$form_id){
   unset($form['Personal information']);
-  unset($form['account']['#title']);
-  unset($form['account']['#type']);
+  //unset($form['account']['#title']);
+  //unset($form['account']['#type']);
   unset($form['account']['mail']['#description']);
   unset($form['terms_of_use']['terms_of_use_text']);
   unset($form['terms_of_use']['#type']);
@@ -391,7 +392,7 @@ function mc_form_user_register_alter(&$form, &$form_state){
   $terms_link = l('Terms of Service', 'disclaimer', array('attributes'=> array('target' => '_blank')));
   $form['terms_of_use']['terms_of_use']['#title'] = "I agree to the $terms_link";
   
-  $form['account']['mail']['#size'] = 40;
+  //$form['account']['mail']['#size'] = 40;
   //Functionality to add the Facebook Connect button in the register form.
   if(function_exists('fbconnect_render_button')){
     $form['facebook-button'] = array(
@@ -411,8 +412,6 @@ function mc_form_user_register_alter(&$form, &$form_state){
     '#value' => 1,
   );
   */
-  $form['submit']['#value'] = 'Join';
-  $form['submit']['#attributes']['class'] = 'btn-orange';
   
 }
 
