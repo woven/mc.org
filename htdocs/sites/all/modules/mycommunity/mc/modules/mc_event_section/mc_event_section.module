@@ -87,8 +87,6 @@ function _mc_event_section_next_two_weeks(&$content){
     }
   }
 
-  return $content;
-
 }
 
 function _mc_event_section_print_view($key, $list){
