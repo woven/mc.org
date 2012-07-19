@@ -3,8 +3,10 @@
 function _mc_event_section_all(){
   $content = array();
 
-  _mc_event_section_next_two_weeks($content);
-  _mc_event_section_after_two_weeks($content);
+  $sec1 = _mc_event_section_next_two_weeks();
+  $sec2 =_mc_event_section_after_two_weeks();
+
+  $content = array($sec1,$sec2);
 
   if(count($content)){
     print implode("\n",$content);
@@ -14,7 +16,7 @@ function _mc_event_section_all(){
 
 }
 
-function _mc_event_section_next_two_weeks(&$content){
+function _mc_event_section_next_two_weeks(){
 	$today = mktime(0, 0, 0);
   $now = time();
   $tomorrow = $today + 24 * 3600;
@@ -81,11 +83,14 @@ function _mc_event_section_next_two_weeks(&$content){
     }
   }
 
+  $content = array();
   foreach($lists as $key => $list){
     if(count($list)){
       $content[] = _mc_event_section_print_view($key, $list);
     }
   }
+
+  return $content;
 
 }
 
@@ -108,7 +113,7 @@ function _mc_event_section_print_view($key, $list){
   return $view_display;
 }
 
-function _mc_event_section_after_two_weeks(&$content){
+function _mc_event_section_after_two_weeks(){
   $today = mktime(0, 0, 0);
   $now = time();
   $tomorrow = $today + 24 * 3600;
@@ -155,11 +160,15 @@ function _mc_event_section_after_two_weeks(&$content){
     }
   }
 
+  $content = array();
+
   foreach($lists as $key => $list){
   if(count($list)){
       $content[] = _mc_event_section_print_view($key, $list);
     }
   }
+
+  return $content;
 }
 
 function _mc_event_section_formatted_location($location){
