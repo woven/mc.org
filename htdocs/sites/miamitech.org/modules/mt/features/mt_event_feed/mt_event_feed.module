@@ -233,11 +233,21 @@ function mt_event_feed_getAddressParts($address){
         $address_number = $matches['0'];
         $address_filtered = $address_number .' ' . $address_parts['1'];
         $address_out = mt_event_feed_google_map_call($address_filtered);
+        if(!preg_match('/^[0-9]{1,}\s/i', $address_parts['address'])){
+          $address_filtered = preg_replace('/[A-Z]{2}|[0-9]{5}$/', '', $address_filtered);
+          $address_out = mt_event_feed_google_map_call($address_filtered);
+        }
       }
     }
     if(empty($address_out['zip'])){
-      $new_address = preg_replace('/\b\w{2} \d{5}| \d{5}|\d{5}/i', '', $address_with_no_floor);
-      $address_out = mt_event_feed_google_map_call($new_address);
+      $new_address = ereg_replace("[^A-Za-z0-9 ]", "", $address_with_no_floor);
+      $address_parts = preg_split('/ [0-9]+ /', $new_address);
+      if(preg_match('/ [0-9]+ /', $new_address, $matches)){
+        $address_number = $matches['0'];
+        $address_filtered = $address_number .' ' . $address_parts['1'];
+        $new_address = preg_replace('/\b\w{2} \d{5}| \d{5}|\d{5}/i', '', $address_filtered);
+        $address_out = mt_event_feed_google_map_call($new_address);
+      }
     }
 
     $address_parts = explode(' ', !empty($address_out['address'])? $address_out['address'] : $address_out['city']);

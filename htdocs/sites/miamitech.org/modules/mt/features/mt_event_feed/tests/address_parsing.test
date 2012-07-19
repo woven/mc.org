@@ -228,5 +228,13 @@ class AddressParsingTest extends DrupalWebTestCase {
     $this->assertEqual($address_parts['zip'] , '33127', "The zip matches");
   }
 
-  
+  function testAddressParsingTwentyTwo() {
+    $address = "Global Response (777 S State Road 7th, Margate, FL, FL 33309)";
+    $address_parts = mt_event_feed_getAddressParts($address);
+    $this->assertEqual($address_parts['name'] , 'Global Response', "The name of the location matches");
+    $this->assertEqual($address_parts['address'] , '777 S State Road 7', "The address matches");
+    $this->assertEqual($address_parts['city'] , 'Margate', "The name of the city matches");
+    $this->assertEqual($address_parts['state'] , 'FL', "The name of the state matches");
+    $this->assertEqual($address_parts['zip'] , '33068', "The zip matches");
+  }  
 }
