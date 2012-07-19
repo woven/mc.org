@@ -1,0 +1,5 @@
+name = "Environment Plus"
+description = "Introducting the base for drupal 6 enviroment switching"
+core = "6.x"
+php = "5.2.4"
+dependencies[] = "environment"
