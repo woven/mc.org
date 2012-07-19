@@ -72,11 +72,19 @@ function _mc_event_section_next_two_weeks(){
     }
   }
 
+  $content = array();
   foreach($lists as $key => $list){
-  if(count($list)){
-      print _mc_event_section_print_view($key, $list);      
+    if(count($list)){
+      $content[] = _mc_event_section_print_view($key, $list);
     }
   }
+
+  if(empty($content)){
+    print "Wow, it's quiet around here.  Want to <a href='node/add/event'>add an event</a> or <a href='node/add/event_feed'>import an event feed</a>?";
+  }else{
+    print implode("\n",$content);
+  }
+
 }
 
 function _mc_event_section_print_view($key, $list){
