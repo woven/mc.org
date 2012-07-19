@@ -44,6 +44,11 @@ stylesheets[screen][] = "js/colorbox/colorbox.css"
 stylesheets[all][] = "views_gallery.css"
 stylesheets[screen][] = "css/buttons.css"
 
+;disable core css files
+stylesheets[all][] = "user.css"
+stylesheets[all][] = "node.css"
+stylesheets[all][] = "ctools.css"
+stylesheets[all][] = "defaults.css"
 
 ; conditional styles for ie 7 and 6
 conditional-stylesheets[if lte IE 7][all][] = css/ie.css

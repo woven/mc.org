@@ -1,0 +1,228 @@
+<?php
+
+//environment_plus
+
+function environment_plus_environment_switch($target_env, $current_env) {
+  /*
+     * @todo: database logging? http://w.miamitech.org/admin/settings/logging/dblog
+     * @todo: enviroment bar or indicator
+     * @todo: check on advagg compressors
+     * @todo: review adagg configration http://w.miamitech.org/admin/settings/advagg/config
+     * @todo: http://drupal.org/project/devel_queries_ajax
+     * @todo: xdebug or xhprof on debugger?
+     * @todo: error tracer/display
+  */
+
+  /* @todo rebuild menu on each page load
+  function mymodule_init() {
+  menu_rebuild();
+  }
+   */
+
+  // Declare each optional development-related module
+
+  //permissions
+  $permissions['devel'] = array(
+    'access devel information',
+    'execute php code',
+    '#env' => array('development','debug')
+  );
+
+  $permissions['devel_node_access'] = array(
+    'view devel_node_access information',
+    '#env' => array('development','debug')
+  );
+
+  $permissions['devel_themer'] = array(
+    'access devel theme information',
+    '#env' => array('development','debug')
+  );
+
+  $permissions['environment_indicator'] = array(
+    'access environment indicator',
+    '#env' => array('development','debug')
+  );
+
+  $permissions['admin'] = array(
+    'use admin toolbar',
+    '#env' => array('development','debug')
+  );
+
+  $modules['ui'] = array(
+    'views_ui',
+    'context_ui',
+    'live_css',
+    'imagecache_ui',
+    'rules_admin',
+    'ds_ui',
+    'environment_indicator',
+    '#env' => array('development','debug')
+  );
+
+  $modules['dev'] = array(
+    'devel',
+    'devel_generate',
+    'ft_dummyimage',
+    'drush_views',
+    'views_show_additional_queries',
+    '#env' => array('development','debug')
+  );
+
+  $modules['debug'] = array(
+    'devel_node_access',
+    'devel_queries_ajax',
+    '#env' => array('debug')
+  );
+
+  /*
+   * variables
+  */
+  $variables['themer'] = array(
+    'devel_rebuild_theme_registry',
+    //maybe turn off menu caching on each page load
+  );
+
+  $modules['themer'] = array(
+    'devel_themer'
+  );
+
+  $variables['debug'] = array(
+    'dev_timer',
+    'dev_mem',
+    'views_devel_output',
+    //'views_devel_region', //region name
+    'error_level', //0:write 1:write/screen
+    '#env' => array("debug","staging")
+  );
+
+  $variables['cache'] = array(
+    'views_skip_cache',
+    'context_reaction_block_disable_core',
+    'advagg_enabled',
+    'cache',
+    'page_compression',
+    'block_cache',
+    'preprocess_css',
+    'preprocess_js',
+    '#env' => array('production',"staging")
+  );
+
+
+  switch_enviroment("variable",$variables,$target_env);
+  switch_enviroment("module",$modules,$target_env);
+  switch_permissions($permissions,$target_env);
+
+  // @todo: turn off menu caching & devel permissions
+  switch ($target_env){
+    case 'development':
+
+      break;
+    case 'staging':
+
+
+      break;
+    case 'production':
+
+      break;
+  };
+}
+
+function perm_enable(array $perms){
+  $user_roles = user_roles();
+  foreach($user_roles as $role){
+    permissions_grant_permissions($role,$perms);
+  }
+}
+
+function perm_disable(array $perms){
+  $user_roles = user_roles();
+  foreach($user_roles as $role){ //for each role
+    if($role == "administrator"){
+      permissions_grant_permissions($role,$perms);
+    }else{
+      permissions_revoke_permissions($role,$perms);
+    }
+  }
+}
+
+function environment_plus_environment() {
+  $environments = array();
+  $environments['staging'] = array(
+    'label' => t('Staging'),
+    'description' => t('Test and review its newer versions before it is moved into production. This phase follows the development phase.'),
+    'allowed' => array(
+      'default' => FALSE,
+      'email' => FALSE,
+    ),
+  );
+  return $environments;
+}
+
+function switch_permissions(array $perms ,$target_env){
+  foreach($perms as $module => $permslist){
+    if(module_exists($module)){
+        switch_enviroment("perm",$permslist,$target_env);
+    }
+  }
+}
+/*
+ * Switch to enviroment through
+ * @callback: module/variable
+ * @input: array of variables or modules
+ */
+
+function switch_enviroment($callback,$input,$target_env){
+  $modules = $input;
+
+  foreach($modules as $key => $val){
+    if(is_array($val)){
+      if($val['#env']){
+        if(in_array($target_env,$val['#env'])){
+          unset($val['#env']);
+          $fu = $callback . "_enable";
+          //print_r($val);
+          $fu($val);
+          echo "$fu: $key \n";
+        }else{
+          unset($val['#env']);
+          $fu = $callback . "_disable";
+          //print_r($val);
+          $fu($val);
+          echo "$fu: $key \n";
+        }
+      }
+    }
+  }
+}
+
+function variable_enable(array $vars = array() ){
+  foreach($vars as $varname){
+    variable_set($varname,1);
+  }
+}
+
+function variable_disable(array $vars = array() ){
+  foreach($vars as $varname){
+    variable_set($varname,0);
+  }
+}
+
+function environment_plus_init(){
+  global $conf;
+  //dsm(variable_get("environment_indicator_enabled",false));
+  if(variable_get("environment_indicator_enabled",false)){
+    $evn = strtoupper(variable_get("environment",null));
+    $conf['environment_indicator_text'] .= " @".$evn;
+  }
+}
+
+/**
+Implementation of hook_init()
+function mc_init(){
+    global $conf;
+    if(variable_get("environment_indicator_enabled",false)){
+        $evn = strtoupper(variable_get("environment",null));
+        $conf['environment_indicator_text'] .= " @".$evn;
+    }
+}
+*/

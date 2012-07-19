@@ -121,6 +121,11 @@ a:hover, a:active {
 	text-decoration: underline;
 }
 
+p{
+    margin-bottom: 10px;
+}
+
+
 /* Borders around images + fancy corner signatures */
 .image {
 	position: relative;
@@ -1207,7 +1212,7 @@ a .ico-small {
 	color: #e60000;
 }
 
-#page form .description {
+form .description {
 	color: #333;
 	font-size: 1em;
 	margin-top: 6px;

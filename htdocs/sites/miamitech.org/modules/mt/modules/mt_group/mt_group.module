@@ -29,7 +29,7 @@ function _mt_group_validate_alter($form, &$form_state){
       include_once $meetupparser_path;
       $querypath_path = drupal_get_path('module', 'querypath') . '/QueryPath/QueryPath.php';
       try {
-        $obj = new MeetupParser($group_url, $query_path);
+        $obj = new MeetupParser($group_url);
         $_SESSION['group_obj'] = $obj;
       }
       catch (Exception $e) {
@@ -47,9 +47,8 @@ function _mt_group_validate_alter($form, &$form_state){
 
 function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   if($node->type=='group') {
-    $meetupparser_path = drupal_get_path('module', 'mt_group') . '/meetup/meetup.inc';
-    include_once $meetupparser_path;
-    $querypath_path = drupal_get_path('module', 'querypath') . '/QueryPath/QueryPath.php';
+    module_load_include('inc', 'mt_group', 'meetup/meetup');
+    module_load_include('php', 'querypath', 'QueryPath/QueryPath');
     switch($op){
       case 'view':
         if ($_SESSION['create_feed']) {
@@ -127,7 +126,7 @@ function _mt_group_save_file($url){
   
   $field_logo = _mt_group_nodefield_widget_settings('field_logo');
   $file_temp = file_get_contents($url);
-  $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_logo['file_path'] . '/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
+  $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_logo['file_path'] . '/' . basename($url), FILE_EXISTS_RENAME);
   $file = new stdClass();
   $file->filename = basename($file_temp);
   $file->filepath = $file_temp;
