@@ -121,6 +121,11 @@ a:hover, a:active {
 	text-decoration: underline;
 }
 
+p{
+    margin-bottom: 10px;
+}
+
+
 /* Borders around images + fancy corner signatures */
 .image {
 	position: relative;
