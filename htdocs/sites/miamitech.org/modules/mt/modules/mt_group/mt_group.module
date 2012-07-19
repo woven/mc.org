@@ -126,7 +126,7 @@ function _mt_group_save_file($url){
   
   $field_logo = _mt_group_nodefield_widget_settings('field_logo');
   $file_temp = file_get_contents($url);
-  $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_logo['file_path'] . '/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
+  $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_logo['file_path'] . '/' . basename($url), FILE_EXISTS_RENAME);
   $file = new stdClass();
   $file->filename = basename($file_temp);
   $file->filepath = $file_temp;
