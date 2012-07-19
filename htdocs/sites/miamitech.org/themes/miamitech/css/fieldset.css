@@ -1,24 +1,29 @@
-fieldset legend {
-  background-color: #CCC;
-  padding: 5px 10px;
-  -moz-border-radius: 4px 4px 0 0;
-  -webkit-border-radius: 4px 4px 0 0;
-  font-weight: bold;
-  min-width: 140px;
-  left: -1px;
-  position: absolute;
-  top: -25px;
+fieldset {
+    border: 1px solid #CCC;
+    -moz-border-radius: 0 4px 4px 4px;
+    -webkit-border-radius: 0 4px 4px 4px;
+    margin: 20px 0;
+    position: relative;
+    margin-top: 35px;
 }
 
-fieldset {
-border: 1px solid #CCC;
--moz-border-radius: 0 4px 4px 4px;
--webkit-border-radius: 0 4px 4px 4px;
-margin: 20px 0;
-position: relative;
-margin-top: 35px;
+fieldset legend {
+    background-color: #CCC;
+    padding: 5px 10px;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    font-weight: bold;
+    min-width: 140px;
+    left: -1px;
+    position: absolute;
+    top: -25px;
+}
+
+fieldset .fieldset-wrapper > .description{
+    margin: 15px 15px;
+    margin-bottom: 0px;
 }
 
 fieldset .fieldset-content {
-  padding: 20px;
+  padding: 10px 15px;
 }

@@ -56,7 +56,7 @@ function environment_plus_environment_switch($target_env, $current_env) {
     'rules_admin',
     'ds_ui',
     'environment_indicator',
-    '#env' => array('staging','development','debug')
+    '#env' => array('development','debug')
   );
 
   $modules['dev'] = array(
@@ -110,7 +110,7 @@ function environment_plus_environment_switch($target_env, $current_env) {
 
   switch_enviroment("variable",$variables,$target_env);
   switch_enviroment("module",$modules,$target_env);
-  switch_enviroment("perm",$permissions,$target_env);
+  switch_permissions($permissions,$target_env);
 
   // @todo: turn off menu caching & devel permissions
   switch ($target_env){
@@ -158,6 +158,13 @@ function environment_plus_environment() {
   return $environments;
 }
 
+function switch_permissions(array $perms ,$target_env){
+  foreach($perms as $module => $permslist){
+    if(module_exists($module)){
+        switch_enviroment("perm",$permslist,$target_env);
+    }
+  }
+}
 /*
  * Switch to enviroment through
  * @callback: module/variable
@@ -200,6 +207,14 @@ function variable_disable(array $vars = array() ){
   }
 }
 
+function environment_plus_init(){
+  global $conf;
+  //dsm(variable_get("environment_indicator_enabled",false));
+  if(variable_get("environment_indicator_enabled",false)){
+    $evn = strtoupper(variable_get("environment",null));
+    $conf['environment_indicator_text'] .= " @".$evn;
+  }
+}
 
 /**
 Implementation of hook_init()
