@@ -82,8 +82,6 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
 
   //remove the og_register from user registration form.
   if($form_id == "user_register"){
-
-    dsm($form);
     if($form['account']){
       $form['account']['#type'] = 'item';
       $form['account']['#title'] = "";
