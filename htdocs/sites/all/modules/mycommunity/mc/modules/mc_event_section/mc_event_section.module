@@ -7,12 +7,13 @@ function _mc_event_section_all(){
   $sec2 = _mc_event_section_after_two_weeks();
 
   $content = array_merge($sec1,$sec2);
+
+  dsm($content);
   if(count($content)){
     print implode("\n",$content);
   }else{
     print "Wow, it's quiet around here.  Want to <a href='/node/add/event'>add an event</a> or <a href='/node/add/event-feed'>import an event feed</a>?";
   }
-
 }
 
 function _mc_event_section_next_two_weeks(){
@@ -83,6 +84,7 @@ function _mc_event_section_next_two_weeks(){
   }
 
   $content = array();
+
   foreach($lists as $key => $list){
     if(count($list)){
       $content[] = _mc_event_section_print_view($key, $list);
@@ -97,9 +99,9 @@ function _mc_event_section_print_view($key, $list){
   $view_header = new stdClass();
   $view_header->current_display = 'block_5';
   $view_header->display['block_5']->display_title = $key; 
-  echo '<div class="view"><div class="view-header">';
-  echo theme("mc_event_view_header",$view_header);
-  echo '</div></div>';
+  $head = '<div class="view"><div class="view-header">';
+  $head .= theme("mc_event_view_header",$view_header);
+  $head .= '</div></div>';
   $view = views_get_view('mc_events_by_dates');
   if (!$view || !$view->access('block_5')) {
     return;
@@ -109,7 +111,7 @@ function _mc_event_section_print_view($key, $list){
   }
 
   $view_display =$view->preview('block_5', array(implode('+', $list)));
-  return $view_display;
+  return $head.$view_display;
 }
 
 function _mc_event_section_after_two_weeks(){
@@ -162,8 +164,8 @@ function _mc_event_section_after_two_weeks(){
   $content = array();
 
   foreach($lists as $key => $list){
-  if(count($list)){
-      $content[] = _mc_event_section_print_view($key, $list);
+    if(count($list)){
+        $content[] = _mc_event_section_print_view($key, $list);
     }
   }
 
