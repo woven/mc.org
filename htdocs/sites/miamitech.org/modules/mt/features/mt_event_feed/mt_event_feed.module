@@ -131,7 +131,7 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
 }
 
 function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
-  if($node->type=='event_feed' && $op=='validate'){
+  if($node->type=='event_feed' && $op=='validate' && (!isset($node->nid) || empty($node->nid))){
     if(isset($node->feedapi['feedapi_url'])){
       $result = db_query("select nid from feedapi where url='%s'", $node->feedapi['feedapi_url']);
       while ($row = db_fetch_object($result)) {
