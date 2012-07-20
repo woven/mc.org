@@ -681,3 +681,9 @@ function mt_preprocess_node(&$variables){
     }
   }
 }
+
+function mt_preprocess_og_mission(&$variables) {
+  $node = node_load($variables['form']['#node']->nid);
+  $variables['mission'] = $node->body;
+  $variables['mission'] .= '<p><a href="'. $node->field_group_url['0']['url'] . '">' . $node->field_group_url['0']['url'] . '</a></p>';
+}
