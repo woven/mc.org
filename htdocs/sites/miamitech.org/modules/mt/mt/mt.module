@@ -545,6 +545,51 @@ function mt_menu_alter(&$items) {
   $items['node/%views_arg/by_subject']['access arguments']['0']['1']['0']['4']='4';
 
   unset($items['node/%views_arg/by_subject']['access arguments']);
+  $items['node/add/gallery']['access callback'] = '_mt_node_permissions';
+  $items['node/add/article']['access callback'] = '_mt_node_permissions';
+  $items['node/add/audio']['access callback'] = '_mt_node_permissions';
+  $items['node/add/file']['access callback'] = '_mt_node_permissions';
+  $items['node/add/forum']['access callback'] = '_mt_node_permissions';
+  $items['node/add/link']['access callback'] = '_mt_node_permissions';
+  $items['node/add/nnews']['access callback'] = '_mt_node_permissions'; 
+  $items['node/add/npage']['access callback'] = '_mt_node_permissions';
+  $items['node/add/gallery-image']['access callback'] = '_mt_node_permissions';
+  $items['node/add/place']['access callback'] = '_mt_node_permissions';
+  $items['node/add/video']['access callback'] = '_mt_node_permissions';
+  $items['node/add/webform']['access callback'] = '_mt_node_permissions';
+  
+  $items['node/%node/edit']['access callback'] = '_mt_access_node_edit'; 
+}
+
+function _mt_node_permissions($op, $node, $account = NULL){
+  global $user;
+  if(array_search('publisher', $user->roles)){
+    return false;
+  }
+}
+
+function _mt_access_node_edit($node) {
+  // Am I a group admin for this group post?
+  if (!module_exists('og_access') && isset($node->og_groups)) {
+    foreach ($node->og_groups as $gid) {
+      if (og_is_group_admin(node_load($gid))) {
+        return TRUE;
+      }
+    }
+  }
+
+  // Am I group admin for this group node?
+  if (!module_exists('og_access') && og_is_group_admin($node)) {
+    return TRUE;
+  }
+
+  global $user;
+  if($node->type!='group' && $node->type!='event' && $node->type!='event_feed'){
+    if(array_search('publisher', $user->roles)){
+      return false;
+    }
+  }
+  return node_access('update', $node);  
 }
 
 
