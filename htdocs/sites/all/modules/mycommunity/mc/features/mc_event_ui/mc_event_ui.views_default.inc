@@ -739,14 +739,16 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
         'help' => '',
         'trim' => 1,
-        'max_length' => '100',
+        'max_length' => '190',
         'word_boundary' => 1,
         'ellipsis' => 1,
         'html' => 0,
@@ -755,11 +757,15 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'exclude' => 0,
       'id' => 'body',
       'table' => 'node_revisions',
       'field' => 'body',
       'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
     ),
   ));
   $handler->override_option('sorts', array(
@@ -997,7 +1003,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/current\');
   ));
   $handler->override_option('header', '');
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '4');
+  $handler->override_option('block_caching', '-1');
 
   $views[$view->name] = $view;
 
