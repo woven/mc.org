@@ -566,6 +566,7 @@ function _mt_node_permissions($op, $node, $account = NULL){
   if(array_search('publisher', $user->roles)){
     return false;
   }
+  return node_access($op, $node);
 }
 
 function _mt_access_node_edit($node) {
