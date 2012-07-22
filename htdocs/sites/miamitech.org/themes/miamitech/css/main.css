@@ -423,8 +423,7 @@ a .ico-small {
 #header .block-user li {
 	float: left;
 	padding: 0 20px;
-	border-left: 1px solid #fff;
-	border-right: 1px solid #d0d0d0;
+	border-left: 1px solid #e7e7e7;
 }
 
 #header .block-user li.first {
