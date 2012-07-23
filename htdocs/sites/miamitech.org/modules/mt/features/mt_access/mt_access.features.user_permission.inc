@@ -76,7 +76,6 @@ function mt_access_user_default_permissions() {
     'name' => 'access administration pages',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -85,7 +84,6 @@ function mt_access_user_default_permissions() {
     'name' => 'access all views',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -94,7 +92,6 @@ function mt_access_user_default_permissions() {
     'name' => 'access all webform results',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -106,7 +103,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -118,8 +114,13 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
+  );
+
+  // Exported permission: access environment indicator
+  $permissions['access environment indicator'] = array(
+    'name' => 'access environment indicator',
+    'roles' => array(),
   );
 
   // Exported permission: access own webform results
@@ -127,7 +128,6 @@ function mt_access_user_default_permissions() {
     'name' => 'access own webform results',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -136,7 +136,6 @@ function mt_access_user_default_permissions() {
     'name' => 'access own webform submissions',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -148,7 +147,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -165,7 +163,6 @@ function mt_access_user_default_permissions() {
     'name' => 'access site reports',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -183,7 +180,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -194,7 +190,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -209,7 +204,6 @@ function mt_access_user_default_permissions() {
     'name' => 'add photos in any album',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -219,7 +213,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -231,7 +224,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -255,7 +247,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -267,7 +258,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -303,7 +293,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -356,7 +345,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer blocks',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -365,7 +353,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer comments',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -406,7 +393,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer feedapi',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -494,7 +480,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer menu',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -517,7 +502,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer nodes',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -527,7 +511,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -536,7 +519,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer organic groups',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -575,7 +557,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer site configuration',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -598,7 +579,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer taxonomy',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -623,7 +603,6 @@ function mt_access_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -640,7 +619,6 @@ function mt_access_user_default_permissions() {
     'name' => 'advanced feedapi options',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -670,7 +648,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -729,7 +706,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -740,7 +716,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -751,7 +726,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -762,7 +736,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -796,7 +769,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -845,7 +817,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -856,7 +827,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -953,7 +923,6 @@ function mt_access_user_default_permissions() {
     'name' => 'create webform content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -970,7 +939,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete all webform submissions',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -979,7 +947,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any article content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -988,7 +955,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any audio content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -997,7 +963,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any event content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1012,7 +977,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any file content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1022,7 +986,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -1031,7 +994,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any gallery content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1040,7 +1002,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any gallery_image content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1049,7 +1010,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any group content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1058,7 +1018,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any link content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1067,7 +1026,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any nnews content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1084,7 +1042,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any place content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1093,7 +1050,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any video content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1102,7 +1058,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete any webform content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1127,7 +1082,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1137,7 +1091,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -1148,7 +1101,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1159,7 +1111,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1170,7 +1121,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1181,7 +1131,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1191,7 +1140,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -1202,7 +1150,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1213,7 +1160,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1232,7 +1178,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1243,7 +1188,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1262,7 +1206,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1273,7 +1216,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1283,7 +1225,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -1292,7 +1233,6 @@ function mt_access_user_default_permissions() {
     'name' => 'delete own webform submissions',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1323,7 +1263,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit all webform submissions',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1332,7 +1271,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any article content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1341,7 +1279,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any audio content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1358,7 +1295,9 @@ function mt_access_user_default_permissions() {
   // Exported permission: edit any event_feed content
   $permissions['edit any event_feed content'] = array(
     'name' => 'edit any event_feed content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'publisher',
+    ),
   );
 
   // Exported permission: edit any file content
@@ -1366,7 +1305,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any file content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1376,7 +1314,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -1385,7 +1322,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any gallery content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1394,7 +1330,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any gallery_image content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1412,7 +1347,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any link content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1421,7 +1355,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any nnews content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1438,7 +1371,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any place content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1447,7 +1379,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit any video content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1457,7 +1388,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'group manager',
-      '2' => 'publisher',
     ),
   );
 
@@ -1474,7 +1404,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1485,18 +1414,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
-    ),
-  );
-
-  // Exported permission: edit field_auto_import
-  $permissions['edit field_auto_import'] = array(
-    'name' => 'edit field_auto_import',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'authenticated user',
-      '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1507,7 +1424,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1518,7 +1434,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1529,7 +1444,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1540,7 +1454,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1551,7 +1464,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1562,7 +1474,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1573,7 +1484,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1584,7 +1494,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1595,7 +1504,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1606,7 +1514,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1617,7 +1524,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1628,7 +1534,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1639,7 +1544,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1650,7 +1554,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1661,7 +1564,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1672,7 +1574,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1683,7 +1584,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1694,7 +1594,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1705,7 +1604,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1716,7 +1614,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1727,7 +1624,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1738,7 +1634,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1765,7 +1660,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1774,7 +1668,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit field_header_color',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1783,7 +1676,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit field_header_title_color',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -1794,7 +1686,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1805,7 +1696,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1816,7 +1706,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1827,7 +1716,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1838,7 +1726,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1849,7 +1736,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1860,7 +1746,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1871,7 +1756,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1882,7 +1766,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1893,7 +1776,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1904,7 +1786,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1915,7 +1796,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1926,7 +1806,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1937,7 +1816,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1948,7 +1826,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1967,7 +1844,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1978,7 +1854,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -1989,7 +1864,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2008,7 +1882,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2019,7 +1892,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2030,7 +1902,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2041,7 +1912,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2052,7 +1922,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2063,7 +1932,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2074,7 +1942,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2085,7 +1952,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2096,7 +1962,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2107,7 +1972,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2118,7 +1982,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2129,7 +1992,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2140,7 +2002,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2151,7 +2012,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2162,7 +2022,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2181,7 +2040,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2192,7 +2050,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2203,7 +2060,6 @@ function mt_access_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'authenticated user',
       '2' => 'group manager',
-      '3' => 'publisher',
     ),
   );
 
@@ -2212,7 +2068,6 @@ function mt_access_user_default_permissions() {
     'name' => 'edit own webform submissions',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
@@ -2286,7 +2141,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'authenticated user',
-      '2' => 'publisher',
     ),
   );
 
@@ -2296,7 +2150,6 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
       '1' => 'authenticated user',
-      '2' => 'publisher',
     ),
   );
 
@@ -2330,7 +2183,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2409,7 +2261,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2421,7 +2272,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2433,7 +2283,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2445,7 +2294,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2457,19 +2305,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
-    ),
-  );
-
-  // Exported permission: view field_auto_import
-  $permissions['view field_auto_import'] = array(
-    'name' => 'view field_auto_import',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-      '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2481,7 +2316,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2493,7 +2327,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2505,7 +2338,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2517,7 +2349,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2529,7 +2360,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2541,7 +2371,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2553,7 +2382,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2565,7 +2393,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2577,7 +2404,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2589,7 +2415,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2601,7 +2426,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2613,7 +2437,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2625,7 +2448,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2637,7 +2459,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2649,7 +2470,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2661,7 +2481,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2673,7 +2492,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2685,7 +2503,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2697,7 +2514,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2709,7 +2525,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2721,7 +2536,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2733,7 +2547,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2761,7 +2574,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2773,7 +2585,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2785,7 +2596,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2797,7 +2607,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2809,7 +2618,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2821,7 +2629,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2833,7 +2640,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2845,7 +2651,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2857,7 +2662,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2869,7 +2673,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2881,7 +2684,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2893,7 +2695,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2905,7 +2706,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2917,7 +2717,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2929,7 +2728,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2941,7 +2739,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2953,7 +2750,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2965,7 +2761,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2985,7 +2780,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -2997,7 +2791,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3009,7 +2802,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3021,7 +2813,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3033,7 +2824,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3045,7 +2835,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3057,7 +2846,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3069,7 +2857,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3087,7 +2874,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3099,7 +2885,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3111,7 +2896,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3123,7 +2907,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3135,7 +2918,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3147,7 +2929,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3165,7 +2946,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3177,7 +2957,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3189,7 +2968,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3201,7 +2979,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3213,7 +2990,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3225,7 +3001,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3237,7 +3012,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3249,7 +3023,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3261,7 +3034,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3273,7 +3045,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3285,7 +3056,6 @@ function mt_access_user_default_permissions() {
       '1' => 'anonymous user',
       '2' => 'authenticated user',
       '3' => 'group manager',
-      '4' => 'publisher',
     ),
   );
 
@@ -3346,7 +3116,6 @@ function mt_access_user_default_permissions() {
     'name' => 'view user location details',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'publisher',
     ),
   );
 
