@@ -1198,6 +1198,10 @@ a .ico-small {
 #page .location-link {
 	margin: 5px 0;
 	font-size: 0.9em;
+	color: #333;
+}
+
+#page .location-link span.location {
 	color: #b3b3b3;
 }
 

@@ -343,8 +343,8 @@ function _mc_api_get_formatted_time($time, $printAMPM = true){
  */
 function mc_api_format_time($start, $end = NULL, $occurring = NULL){
   if($occurring){
-    $prefix_start = 'started at ';
-    $prefix_end = ', ends at ';
+    $prefix_start = '';
+    $prefix_end = '-';
   }
   else {
     $prefix_start = '';

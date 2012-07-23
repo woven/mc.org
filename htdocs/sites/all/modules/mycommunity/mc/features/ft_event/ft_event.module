@@ -82,7 +82,7 @@ function theme_mc_event_date($unix_date_start = NULL, $unix_date_end = NULL, $ha
     }else{
       // it's still ocuring today
       $occurring = TRUE;
-      $output .= t('Happening now - ');
+      $output .= t('Happening now, ');
     }
   }
   
