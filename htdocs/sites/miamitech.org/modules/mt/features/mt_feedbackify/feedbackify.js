@@ -1,6 +1,6 @@
-Drupal.behaviors.FeedBackifyAbout = function (context) {
+Drupal.behaviors.feedbackifylink = function (context) {
 	if(Drupal.settings.feedbackify.feedbackify_id){
-		$("a[rel=feedbackfiy]").click(function (e) {
+		$("a[rel*='feedbackify']").click(function (e) {
             FBY.showForm(Drupal.settings.feedbackify.feedbackify_id);
             e.preventDefault();
         });
