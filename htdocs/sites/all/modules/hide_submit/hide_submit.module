@@ -338,7 +338,7 @@ function _hide_submit_get_message() {
       $image = '<img src="' . check_url($url) . '" alt="" title=""  />&nbsp;';
   }
   
-  return  '<p class="hide_submit">'. $image .' '. $message .' </p>';
+  return  '<p class="hide_submit">'. $image .' <span>'. $message .'</span></p>';
 }
 
 /**

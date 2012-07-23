@@ -172,3 +172,7 @@ div.button p.hide_submit{
 div.button p.hide_submit img{
     vertical-align: middle;
 }
+
+div.button p.hide_submit span{
+    vertical-align: middle;
+}
