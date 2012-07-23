@@ -1,0 +1,9 @@
+name = Feedbackify
+description = Integrates the Feedbackify service
+core = 6.x
+; Information added by drupal.org packaging script on 2011-06-28
+version = "6.x-1.0"
+core = "6.x"
+project = "feedbackify"
+datestamp = "1309266117"
+
