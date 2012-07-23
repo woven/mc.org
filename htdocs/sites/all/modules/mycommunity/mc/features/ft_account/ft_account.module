@@ -105,6 +105,8 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
 
 //mc user page logic and callback
 function mc_user_page($where){
+  module_load_include("inc","user","user.pages");
+
   switch($where){
     case 'register':
       drupal_set_title(MC_USER_PAGE_REGISTER);
