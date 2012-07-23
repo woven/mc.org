@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the mt_feedbackify feature.
+ */
+
+include_once 'mt_feedbackify.features.inc';
