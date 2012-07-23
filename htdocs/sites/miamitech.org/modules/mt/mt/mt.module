@@ -684,6 +684,7 @@ function mt_preprocess_node(&$variables){
 }
 
 function mt_preprocess_og_mission(&$variables) {
+  if(!empty($variables['mission'])){
   $node = node_load($variables['form']['#node']->nid);
   if(preg_match('/<p>.+<\/p>/m', $node->body)){
     $variables['mission'] = $node->body;
@@ -692,6 +693,7 @@ function mt_preprocess_og_mission(&$variables) {
     $variables['mission'] = _mt_addParagraphs($node->body); 
   }
   $variables['mission'] .= '<p><a target="_blank" href="'. $node->field_group_url['0']['url'] . '">' . $node->field_group_url['0']['url'] . '</a></p>';
+  }
 }
 
 function _mt_addParagraphs($str)
