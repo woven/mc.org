@@ -162,10 +162,10 @@ button:active,
 }
 
 div.button p.hide_submit{
-     margin: 0;
-     vertical-align: middle;
-     line-height: 20px;
-     display: block;
+    margin: 0;
+    vertical-align: middle;
+    line-height: 20px;
+    display: block;
     font-size: inherit;
 }
 
