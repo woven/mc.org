@@ -358,7 +358,7 @@ function mc_api_format_time($start, $end = NULL, $occurring = NULL){
     
   if (date('a', $start) == date('a', $end)){
     // do not print AM/PM in start date
-    $startDate = _mc_api_get_formatted_time($start, $occurring);
+    $startDate = _mc_api_get_formatted_time($start, false);
   }else{
     $startDate = _mc_api_get_formatted_time($start, true);
   }
