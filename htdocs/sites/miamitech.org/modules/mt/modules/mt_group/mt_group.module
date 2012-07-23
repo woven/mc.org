@@ -99,7 +99,7 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
         }
         break;
       case 'validate':
-        if(!empty($node->field_group_url['0']['url'])){
+        if(!empty($node->field_group_url['0']['url']) && (!isset($node->nid) || empty($node->nid))){
           $group_url = $node->field_group_url['0']['url'];
           _mt_group_check_group_url_exists($group_url);
         }
