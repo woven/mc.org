@@ -761,28 +761,21 @@ function ft_page_content_default_fields() {
     'module' => 'nodereference',
     'active' => '1',
     'referenceable_types' => array(
+      'gallery' => 'gallery',
       'article' => 'article',
       'audio' => 'audio',
       'event' => 'event',
-      'gallery' => 'gallery',
-      'gallery_image' => 'gallery_image',
       'group' => 'group',
-      'image' => 'image',
+      'gallery_image' => 'gallery_image',
       'place' => 'place',
       'video' => 'video',
-      'environmental_resource' => 0,
-      'feature_spot' => 0,
-      'feedapi_node' => 0,
+      'event_feed' => 0,
       'file' => 0,
-      'healthcare_facility' => 0,
-      'front_picture' => 0,
+      'forum' => 0,
       'link' => 0,
-      'embmedia' => 0,
-      'news' => 0,
-      'simplenews' => 0,
-      'spirit_and_mind' => 0,
-      'webform' => 0,
+      'nnews' => 0,
       'npage' => 0,
+      'webform' => 0,
     ),
     'advanced_view' => '--',
     'advanced_view_args' => '',
@@ -1447,7 +1440,8 @@ events|Events
 groups|Groups
 places|Places
 audio-video|Audio and Video
-community|Community',
+community|Community
+blank|Blank',
     'allowed_values_php' => '',
     'widget' => array(
       'default_value' => array(

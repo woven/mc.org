@@ -379,6 +379,20 @@ function ft_page_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_npage';
+  $strongarm->value = '';
+  $export['page_title_type_npage'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_npage_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_npage_showfield'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_npage_pattern';
   $strongarm->value = '[title-raw]';
   $export['pathauto_node_npage_pattern'] = $strongarm;

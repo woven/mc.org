@@ -300,20 +300,13 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'event_nodeapi_user_profile';
-  $strongarm->value = 'never';
-  $export['event_nodeapi_user_profile'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'event_range_next';
   $strongarm->value = array(
-    'year' => 2012,
-    'month' => '10',
-    'day' => '14',
-    'hour' => '22',
-    'minute' => '07',
+    'year' => 2013,
+    'month' => '01',
+    'day' => '07',
+    'hour' => '20',
+    'minute' => '00',
     'second' => '00',
   );
   $export['event_range_next'] = $strongarm;
@@ -1022,6 +1015,34 @@ function ft_event_strongarm() {
   $strongarm->name = 'og_max_groups_event_feed';
   $strongarm->value = '';
   $export['og_max_groups_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_event';
+  $strongarm->value = '';
+  $export['page_title_type_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_event_feed';
+  $strongarm->value = '';
+  $export['page_title_type_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_event_feed_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_event_feed_showfield'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_event_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_event_showfield'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
