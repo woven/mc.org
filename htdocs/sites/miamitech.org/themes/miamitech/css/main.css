@@ -2516,3 +2516,7 @@ a.ical-link {
 .field-address-formatted .no-location {
 	color: #CCC;
 }
+
+.fieldset-wrapper > .description {
+	padding-bottom: 10px;
+}
