@@ -82,6 +82,7 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
           unset($_SESSION['create_feed']);
           $feed_url = $_SESSION['feed_url'];
           unset($_SESSION['feed_url']);
+          $_SESSION['show_message']=true;
           $event_feed_node = new StdClass();
           $event_feed_node->type = 'event_feed';
           $event_feed_node->status = 1;  
@@ -91,8 +92,10 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
           $event_feed_node->og_groups[$gid] = $gid;
           $event_feed_node = feedapi_create_node($event_feed_node, $event_feed_node_url);
         }
-        if(count($_SESSION['messages']['status'])){
+        if(count($_SESSION['messages']['status']) && $_SESSION['show_message']){
           if(preg_match("/^You're done!/i",$_SESSION['messages']['status']['0'])){
+            $_SESSION['show_message']=false;
+            unset($_SESSION['show_message']);
             $link = '<a href="/node/' . $node->nid . '/edit" >edit your group</a>';
             $_SESSION['messages']['status']['0'] = 'Sweet. We found your page and imported what we could. You can ' . $link . ' as you wish.';
           }
