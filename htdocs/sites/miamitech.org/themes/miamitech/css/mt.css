@@ -423,3 +423,7 @@ body #navigation {
 #boxes-box-mc_event_sections_box p.description{
     width: 100%;
 }
+
+#boxes-box-footer_joinus_box > p {
+  padding-bottom: 10px;
+}

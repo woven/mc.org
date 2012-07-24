@@ -537,12 +537,6 @@ function mt_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
-        'boxes-sitewide_ical' => array(
-          'module' => 'boxes',
-          'delta' => 'sitewide_ical',
-          'region' => 'right',
-          'weight' => 1,
-        ),
         'boxes-mc_event_sections_box' => array(
           'module' => 'boxes',
           'delta' => 'mc_event_sections_box',
@@ -578,6 +572,9 @@ function mt_landing_contexts_context_default_contexts() {
         'blocks' => array(
           'views-help_block-block_1' => array(
             'class' => 'block-help important about-block',
+          ),
+          'boxes-sitewide_ical' => array(
+            'class' => '',
           ),
         ),
       ),

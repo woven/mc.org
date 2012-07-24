@@ -82,7 +82,11 @@ print views_embed_view(\'latest_pages\', \'block_2\');
   $box->title = '';
   $box->description = 'Join us on your favorite social network';
   $box->options = array(
-    'body' => '<p>MiamiTech.org hopes to be a helpful resource for the technology and creative community in Miami and all of South Florida.</p>',
+    'body' => '<p>MiamiTech.org hopes to be a helpful resource for the technology and creative community in Miami and all of South Florida.</p>
+
+<div class="field field-mt-add-group-ical field-group-ical">
+<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://<?php echo $_SERVER["SERVER_NAME"] ?>/events/ical">Subscribe to all upcoming events (iCal)</a>
+</div>',
     'format' => '3',
   );
   $export['footer_joinus_box'] = $box;
