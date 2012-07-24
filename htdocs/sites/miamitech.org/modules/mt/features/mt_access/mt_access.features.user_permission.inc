@@ -502,6 +502,7 @@ function mt_access_user_default_permissions() {
     'name' => 'administer nodes',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'publisher',
     ),
   );
 
