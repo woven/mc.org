@@ -350,6 +350,7 @@ body #navigation {
 }
 
 #group-page-head .wrapper h1{
+    margin: 0px !important;
 	margin-left: 16px;
     white-space: nowrap;
     overflow: hidden;
@@ -370,7 +371,7 @@ body #navigation {
 }
 
 #group-page-head a h1{
-    margin: 0px;
+    margin: 0px !important;
     padding: 0px;
     color: inherit;
     float: left;
@@ -417,4 +418,8 @@ body #navigation {
 
 #conditional-field-auto-import {
   display: none;
+}
+
+#boxes-box-mc_event_sections_box p.description{
+    width: 100%;
 }

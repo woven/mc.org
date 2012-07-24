@@ -573,9 +573,6 @@ function mt_landing_contexts_context_default_contexts() {
           'views-help_block-block_1' => array(
             'class' => 'block-help important about-block',
           ),
-          'boxes-join_mc' => array(
-            'class' => '',
-          ),
         ),
       ),
       'below_content' => array(
