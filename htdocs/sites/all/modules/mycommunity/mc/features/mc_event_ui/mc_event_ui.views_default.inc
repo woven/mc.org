@@ -748,7 +748,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
         'target' => '',
         'help' => '',
         'trim' => 1,
-        'max_length' => '190',
+        'max_length' => '175',
         'word_boundary' => 1,
         'ellipsis' => 1,
         'html' => 0,

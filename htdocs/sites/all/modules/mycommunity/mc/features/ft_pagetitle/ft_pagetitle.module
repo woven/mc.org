@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ft_pagetitle feature.
+ */
+
+include_once 'ft_pagetitle.features.inc';
