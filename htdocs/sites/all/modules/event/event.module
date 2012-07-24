@@ -172,6 +172,8 @@ function event_link($type, $node = NULL, $teaser = FALSE) {
  */
 function event_menu() {
   $items = array();
+
+  /*
   $items['event'] = array(
     'title' => 'Events',
     'page callback' => 'event_page',
@@ -180,6 +182,7 @@ function event_menu() {
     'file' => 'ical.inc',
     'type' => MENU_SUGGESTED_ITEM
   );
+
   $items['event/type'] = array(
     'title' => 'Filter by content type',
     'page callback' => 'event_type',
@@ -194,13 +197,7 @@ function event_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK
   );
-  $items['event/feed'] = array(
-    'title' => 'Event rss feed',
-    'page callback' => 'event_feed',
-    'access callback' => 'user_access',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK
-  );
+
   $items['event/dst'] = array(
     'title' => 'Event dst view',
     'page callback' => 'event_dst',
@@ -208,6 +205,16 @@ function event_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK
   );
+*/
+
+  $items['event/feed'] = array(
+    'title' => 'Event rss feed',
+    'page callback' => 'event_feed',
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+
   $items['event/ical'] = array(
     'title' => 'Event ical feed',
     'page callback' => 'event_ical',

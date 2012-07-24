@@ -11,9 +11,10 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_block_body',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '26',
+      'parent' => 'group_block',
       'label' => array(
         'format' => 'above',
-        'exclude' => 0,
       ),
       'teaser' => array(
         'format' => 'default',
@@ -21,7 +22,7 @@ function ft_page_content_default_fields() {
       ),
       'full' => array(
         'format' => 'default',
-        'exclude' => 0,
+        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',
@@ -78,9 +79,10 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_block_link',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '27',
+      'parent' => 'group_block',
       'label' => array(
         'format' => 'above',
-        'exclude' => 0,
       ),
       'teaser' => array(
         'format' => 'default',
@@ -88,7 +90,7 @@ function ft_page_content_default_fields() {
       ),
       'full' => array(
         'format' => 'default',
-        'exclude' => 0,
+        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',
@@ -152,9 +154,10 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_block_title',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '25',
+      'parent' => 'group_block',
       'label' => array(
         'format' => 'above',
-        'exclude' => 0,
       ),
       'teaser' => array(
         'format' => 'default',
@@ -162,7 +165,7 @@ function ft_page_content_default_fields() {
       ),
       'full' => array(
         'format' => 'default',
-        'exclude' => 0,
+        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',
@@ -218,8 +221,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_audio_video_items',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '13',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -238,16 +251,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-78',
-      ),
-      'weight' => '13',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -349,8 +352,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_events',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '10',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -369,16 +382,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-76',
-      ),
-      'weight' => '10',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -464,8 +467,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_group',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '6',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -484,16 +497,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-85',
-      ),
-      'weight' => '6',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -571,8 +574,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_groups',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '11',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -591,16 +604,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-77',
-      ),
-      'weight' => '11',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -702,8 +705,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_items',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '9',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -722,16 +735,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-75',
-      ),
-      'weight' => '9',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -761,28 +764,21 @@ function ft_page_content_default_fields() {
     'module' => 'nodereference',
     'active' => '1',
     'referenceable_types' => array(
+      'gallery' => 'gallery',
       'article' => 'article',
       'audio' => 'audio',
       'event' => 'event',
-      'gallery' => 'gallery',
-      'gallery_image' => 'gallery_image',
       'group' => 'group',
-      'image' => 'image',
+      'gallery_image' => 'gallery_image',
       'place' => 'place',
       'video' => 'video',
-      'environmental_resource' => 0,
-      'feature_spot' => 0,
-      'feedapi_node' => 0,
+      'event_feed' => 0,
       'file' => 0,
-      'healthcare_facility' => 0,
-      'front_picture' => 0,
+      'forum' => 0,
       'link' => 0,
-      'embmedia' => 0,
-      'news' => 0,
-      'simplenews' => 0,
-      'spirit_and_mind' => 0,
-      'webform' => 0,
+      'nnews' => 0,
       'npage' => 0,
+      'webform' => 0,
     ),
     'advanced_view' => '--',
     'advanced_view_args' => '',
@@ -809,8 +805,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_members',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '14',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -829,16 +835,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-87',
-      ),
-      'weight' => '14',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -924,8 +920,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_photo',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '7',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -944,16 +950,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-81',
-      ),
-      'weight' => '7',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -1031,8 +1027,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_place',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '8',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -1051,16 +1057,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-80',
-      ),
-      'weight' => '8',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -1138,8 +1134,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_featured_places',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '12',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -1158,16 +1164,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-79',
-      ),
-      'weight' => '12',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'default',
@@ -1269,8 +1265,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_list_image',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '5',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'hidden',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'hidden',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -1289,16 +1295,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-86',
-      ),
-      'weight' => '5',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'hidden',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'hidden',
-        'exclude' => 0,
       ),
       '4' => array(
         'format' => 'image_plain',
@@ -1373,8 +1369,18 @@ function ft_page_content_default_fields() {
     'field_name' => 'field_page_subtype',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '-1',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -1393,16 +1399,6 @@ function ft_page_content_default_fields() {
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-82',
-      ),
-      'weight' => '-1',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',
@@ -1447,7 +1443,8 @@ events|Events
 groups|Groups
 places|Places
 audio-video|Audio and Video
-community|Community',
+community|Community
+blank|Blank',
     'allowed_values_php' => '',
     'widget' => array(
       'default_value' => array(
@@ -1469,8 +1466,18 @@ community|Community',
     'field_name' => 'field_page_type',
     'type_name' => 'npage',
     'display_settings' => array(
+      'weight' => '-2',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
@@ -1489,16 +1496,6 @@ community|Community',
         'label_value' => '',
         'exclude' => 1,
         'weight' => '-74',
-      ),
-      'weight' => '-2',
-      'parent' => '',
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',

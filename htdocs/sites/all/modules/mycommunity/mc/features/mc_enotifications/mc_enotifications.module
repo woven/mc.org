@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the mc_enotifications feature.
+ */
+
+include_once 'mc_enotifications.features.inc';
