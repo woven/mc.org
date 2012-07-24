@@ -2509,10 +2509,14 @@ a.ical-link {
 	padding-bottom: 5px;
 }
 
-.field-facebook-like {
+.field-facebook-like, .field-tweet-button {
 	padding-bottom: 5px;
 }
 
 .field-address-formatted .no-location {
 	color: #CCC;
+}
+
+.fieldset-wrapper > .description {
+	padding-bottom: 10px;
 }
