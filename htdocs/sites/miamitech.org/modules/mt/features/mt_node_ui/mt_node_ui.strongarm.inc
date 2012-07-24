@@ -753,6 +753,32 @@ if ( !empty($object->feedapi_node->feed_nids) ){
         'token' => 0,
       ),
     ),
+    'tweet_button' => array(
+      'type' => 6,
+      'status' => 3,
+      'title' => 'Tweet button',
+      'exclude' => array(
+        'group' => 'group',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'event_feed' => 0,
+        'webform' => 0,
+        'forum' => 0,
+      ),
+      'properties' => array(
+        'block' => 'boxes|tweet_button',
+        'render' => '3',
+      ),
+    ),
   );
   $export['nd_fields'] = $strongarm;
 
