@@ -198,5 +198,20 @@ print \'<span class="ical-group-ico"> </span><a class="ical-link" href="webcal:/
   );
   $export['mt_group_calendar'] = $box;
 
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'sitewide_ical';
+  $box->plugin_key = 'simple';
+  $box->title = 'Add to calendar';
+  $box->description = 'Add to Calendar  - Sitewide';
+  $box->options = array(
+    'body' => '<div class="field field-mt-add-group-ical field-group-ical">
+<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://<?php echo $_SERVER["SERVER_NAME"] ?>/events/ical">All upcoming events (iCal)</a>
+</div>',
+    'format' => '3',
+  );
+  $export['sitewide_ical'] = $box;
+
   return $export;
 }

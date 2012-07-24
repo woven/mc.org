@@ -23,11 +23,50 @@ function mt_event_feed_menu(){
     'page callback' => 'mt_event_feed_ical',
     'access callback' => true,
   );
+  $items['events/ical'] = array(
+    'title' => 'MiamiTech.org Events',
+    'page callback' => '_mt_event_feed_ical_sitewide',
+    'access callback' => true,
+  );
   return $items;
 }
 
 function mt_event_feed_menu_alter(&$items){
   $items['node/%/ical']['page callback'] = 'mt_event_feed_event_node_ical';
+}
+
+function _mt_event_feed_ical_sitewide(){
+  $now = time();
+  $result = db_query("select nid from event where unix_event_start>=%d", $now);
+  while ($row = db_fetch_object($result)) {
+    $node = node_load($row->nid);
+    if($node->type=='event' && $node->status){
+      $event = _event_node_ical($node);
+      $location = $node->locations['0'];
+      $location_output = $location['name'];
+      if(!empty($location['street']) && !empty($location['city']) && !empty($location['province']) && !empty($location['postal_code'])){
+        $location_output .= ' (';
+        $location_output .= !empty($location['street'])? $location['street'] :'';
+        $location_output .= (!empty($location['street']) && (!empty($location['city']) || !empty($location['province']) || !empty($location['postal_code'])))? ', ' : '';
+        $location_output .= !empty($location['city'])? $location['city'] :'';
+        $location_output .= (!empty($location['city']) && (!empty($location['province']) || !empty($location['postal_code'])))? ', ' : '';
+        $location_output .= !empty($location['province'])? $location['province'] :'';
+        $location_output .= (!empty($location['province']) && !empty($location['postal_code']))? ', ' : '';
+        $location_output .= !empty($location['postal_code'])? $location['postal_code'] :'';
+        $location_output .= ')';
+      }
+      $event['location'] = $location_output;
+      $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
+      $group_name = array_pop($node->og_groups_both);
+      $event['summary'] = $event['summary'] . ' | ' . str_replace(array("\r", "\r\n", "\n"),'',$group_name);
+      $event['description'] = 'More info: ' . $event['url'];
+      $events[] = $event;
+    }
+  }
+
+  drupal_set_header('Content-Type: text/calendar; charset=utf-8');
+  drupal_set_header('Content-Disposition: attachment; filename="calendar.ics"; ');
+  print ical_export($events, 'All events');
 }
 
 function mt_event_feed_event_node_ical() {
