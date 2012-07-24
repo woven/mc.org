@@ -419,3 +419,7 @@ body #navigation {
 #conditional-field-auto-import {
   display: none;
 }
+
+#boxes-box-mc_event_sections_box p.description{
+    width: 100%;
+}
