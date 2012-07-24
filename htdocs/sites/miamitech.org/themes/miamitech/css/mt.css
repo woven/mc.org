@@ -427,3 +427,7 @@ body #navigation {
 #boxes-box-footer_joinus_box > p {
   padding-bottom: 10px;
 }
+
+#boxes-box-footer_joinus_box .field-mt-add-group-ical .ical-group-ico {
+  margin-top: 0px;
+}
