@@ -2277,7 +2277,8 @@ border-width: 1px 0 !important;
 #edit-taxonomy-tags-3-wrapper{display: none;}
 
 #login{padding: 0;}
-#register{padding: 0; background: #fff !important; height: 460px;}
+#register{padding: 0; background: #fff !important;}
+#register #cboxTitle{border: 0px !important;};
 #disclaimer{padding: 0; background: #fff !important; height: 460px; font-size:18px;}
 #disclaimer .submit-wrapper {
 	margin-right:285px;
