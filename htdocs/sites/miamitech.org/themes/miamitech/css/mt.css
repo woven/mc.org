@@ -435,3 +435,17 @@ body #navigation {
 #boxes-box-footer_joinus_box .field-mt-add-group-ical .ical-group-ico {
   margin-top: 0px;
 }
+
+.view-content .event-separator{
+    margin-bottom: 20px;
+   height: 1px;
+   color: white;
+}
+
+.view-content .event-separator{
+    border-bottom: dashed 1px #57A7DD;
+}
+
+.view-content .event-separator:first-child{
+    display: none;
+}

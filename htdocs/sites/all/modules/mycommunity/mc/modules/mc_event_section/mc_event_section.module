@@ -96,21 +96,35 @@ function _mc_event_section_next_two_weeks(&$content){
 }
 
 function _mc_event_section_print_view($key, $list){
+
+  switch($key){
+    case 'Today':
+    case 'Tomorrow':
+      $block = "block_5";
+      break;
+    case 'This week':
+    case 'Next week':
+      $block = "block_1";
+      break;
+    default:
+      $block = "block_2";
+  }
+
   $view_header = new stdClass();
-  $view_header->current_display = 'block_5';
-  $view_header->display['block_5']->display_title = $key; 
+  $view_header->current_display = $block;
+  $view_header->display[$block]->display_title = $key;
   $head = '<div class="view"><div class="view-header">';
   $head .= theme("mc_event_view_header",$view_header);
   $head .= '</div></div>';
   $view = views_get_view('mc_events_by_dates');
-  if (!$view || !$view->access('block_5')) {
+  if (!$view || !$view->access($block)) {
     return;
   }
   if($key=='Today' || $key=='Tomorrow'){
     $view->hide_day = TRUE;
   }
 
-  $view_display =$view->preview('block_5', array(implode('+', $list)));
+  $view_display =$view->preview($block, array(implode('+', $list)));
   return $head.$view_display;
 }
 
