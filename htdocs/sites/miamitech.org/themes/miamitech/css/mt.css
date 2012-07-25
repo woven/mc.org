@@ -453,3 +453,7 @@ body #navigation {
 #boxes-box-mc_event_sections_box .view-content p {
   margin-left: 104px;
 }
+
+.event-time .day{
+    color: #57A7DD;
+}
