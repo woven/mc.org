@@ -449,3 +449,7 @@ body #navigation {
 .view-content .event-separator:first-child{
     display: none;
 }
+
+#boxes-box-mc_event_sections_box .view-content p {
+  margin-left: 104px;
+}
