@@ -21,7 +21,7 @@ function mc_enotifications_rules_defaults() {
           '0' => array(
             '#weight' => 0,
             '#info' => array(
-              'label' => 'Created content is Event or Event Feed or Group',
+              'label' => 'Created content is Event Feed or Group',
               'arguments' => array(
                 'node' => array(
                   'type' => 'node',
@@ -33,7 +33,6 @@ function mc_enotifications_rules_defaults() {
             '#name' => 'rules_condition_content_is_type',
             '#settings' => array(
               'type' => array(
-                'event' => 'event',
                 'event_feed' => 'event_feed',
                 'group' => 'group',
               ),
@@ -51,9 +50,11 @@ function mc_enotifications_rules_defaults() {
               'to' => 'support@woven.org',
               'from' => '',
               'subject' => 'New Content has been created',
-              'message' => 'New Content has been created
-Content Type: [node:type-name]	
-Content Title: [node:title]',
+              'message' => 'New content has just been added!
+
+Type: [node:type-name]
+Title: [node:title]
+URL: [node:node-url]',
               '#eval input' => array(
                 'token_rules_input_evaluator' => array(
                   'subject' => array(
@@ -92,17 +93,28 @@ Content Title: [node:title]',
         '#type' => 'rule',
         '#set' => 'event_user_insert',
         '#label' => 'eNotification: New User',
-        '#active' => 1,
+        '#active' => 0,
         '#weight' => '0',
         '#categories' => array(
           '0' => 'enotifications',
-          'mc_enotifications' => 'mc_enotifications',
+          '1' => 'mc_enotifications',
         ),
         '#status' => 'default',
         '#conditions' => array(),
         '#actions' => array(
           '0' => array(
-            '#type' => 'action',
+            '#weight' => 0,
+            '#info' => array(
+              'label' => 'Send a mail to an arbitrary mail address',
+              'module' => 'System',
+              'eval input' => array(
+                '0' => 'subject',
+                '1' => 'message',
+                '2' => 'from',
+                '3' => 'to',
+              ),
+            ),
+            '#name' => 'rules_action_mail',
             '#settings' => array(
               'to' => 'support@woven.org',
               'from' => '',
@@ -125,18 +137,7 @@ Content Title: [node:title]',
                 ),
               ),
             ),
-            '#name' => 'rules_action_mail',
-            '#info' => array(
-              'label' => 'Send a mail to an arbitrary mail address',
-              'module' => 'System',
-              'eval input' => array(
-                '0' => 'subject',
-                '1' => 'message',
-                '2' => 'from',
-                '3' => 'to',
-              ),
-            ),
-            '#weight' => 0,
+            '#type' => 'action',
           ),
         ),
         '#version' => 6003,

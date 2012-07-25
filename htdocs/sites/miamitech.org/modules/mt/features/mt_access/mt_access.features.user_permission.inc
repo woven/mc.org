@@ -396,6 +396,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: administer feedbackify
+  $permissions['administer feedbackify'] = array(
+    'name' => 'administer feedbackify',
+    'roles' => array(),
+  );
+
   // Exported permission: administer files
   $permissions['administer files'] = array(
     'name' => 'administer files',
@@ -523,6 +529,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: administer page titles
+  $permissions['administer page titles'] = array(
+    'name' => 'administer page titles',
+    'roles' => array(),
+  );
+
   // Exported permission: administer pathauto
   $permissions['administer pathauto'] = array(
     'name' => 'administer pathauto',
@@ -613,6 +625,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: administer xmlsitemap
+  $permissions['administer xmlsitemap'] = array(
+    'name' => 'administer xmlsitemap',
+    'roles' => array(),
   );
 
   // Exported permission: advanced feedapi options
@@ -2193,6 +2211,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(
       '0' => 'administrator',
     ),
+  );
+
+  // Exported permission: set page title
+  $permissions['set page title'] = array(
+    'name' => 'set page title',
+    'roles' => array(),
   );
 
   // Exported permission: submit latitude/longitude
