@@ -449,3 +449,7 @@ body #navigation {
 .view-content .event-separator:first-child{
     display: none;
 }
+
+.event-time .day{
+    color: #57A7DD;
+}
