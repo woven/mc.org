@@ -423,8 +423,8 @@ body #navigation {
 #boxes-box-mc_event_sections_box .view-content p,
 #boxes-box-mc_event_sections_box .view-content h4
 {
-    width: 100%;
-    display: block;
+    margin-left: 124px;
+    width: 450px;
 }
 
 #boxes-box-footer_joinus_box > p {
