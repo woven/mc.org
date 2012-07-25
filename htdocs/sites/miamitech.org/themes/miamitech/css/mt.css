@@ -420,13 +420,6 @@ body #navigation {
   display: none;
 }
 
-#boxes-box-mc_event_sections_box .view-content p,
-#boxes-box-mc_event_sections_box .view-content h4
-{
-    margin-left: 124px;
-    width: 450px;
-}
-
 #boxes-box-footer_joinus_box > p {
   padding-bottom: 10px;
 }
