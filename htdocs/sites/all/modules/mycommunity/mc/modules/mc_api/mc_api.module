@@ -289,6 +289,8 @@ function mc_api_format_day($unix_date){
 
   if ($unix_date < $today){
     $printDay = FALSE;
+  }else{
+    $day = "<span class=\"day\">".date('l', $unix_date)."</span> ";
   }
   if ($unix_date >= $yesterday && $unix_date < $today){
     $output .= t('yesterday');
@@ -297,17 +299,17 @@ function mc_api_format_day($unix_date){
   }elseif ($unix_date >= $tomorrow && $unix_date < $afterTomorrow){
     $output .= t('Tomorrow');
   }elseif ($unix_date >= $afterTomorrow && $unix_date < $thisSunday){
-    $output .= date('l', $unix_date);
+    $output .= "<span class=\"day\">".date('l', $unix_date)."</span>";
   }else{
     if (date('Y') == date('Y', $unix_date)){ // same year
       if ($printDay){
-        $output .= date('l F jS', $unix_date);
+        $output .= $day.date('F jS', $unix_date);
       }else{
         $output .= date('D F jS', $unix_date);
       }
     }else{ // different year
       if ($printDay){
-        $output .= date('l F jS, Y', $unix_date);
+        $output .= $day.date('F jS, Y', $unix_date);
       }else{
         $output .= date('F jS, Y', $unix_date);
       }
