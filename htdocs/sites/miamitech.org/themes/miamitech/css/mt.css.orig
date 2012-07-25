@@ -450,6 +450,11 @@ body #navigation {
     display: none;
 }
 
+<<<<<<< HEAD
+.event-time .day{
+    color: #57A7DD;
+=======
 #boxes-box-mc_event_sections_box .view-content p {
   margin-left: 104px;
+>>>>>>> d173dcae757dc1563f01a61dab078777b5abbbeb
 }
