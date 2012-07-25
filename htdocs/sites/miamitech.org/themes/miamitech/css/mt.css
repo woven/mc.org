@@ -420,6 +420,14 @@ body #navigation {
   display: none;
 }
 
+#boxes-box-mc_event_sections_box .view-content p,
+#boxes-box-mc_event_sections_box .view-content h4
+{
+    font-size-adjust: 100%;
+    -webkit-text-size-adjust: 60%;
+    -ms-text-size-adjust: 60%;
+}
+
 #boxes-box-footer_joinus_box > p {
   padding-bottom: 10px;
 }
