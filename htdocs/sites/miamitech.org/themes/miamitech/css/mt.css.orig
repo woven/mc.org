@@ -420,14 +420,6 @@ body #navigation {
   display: none;
 }
 
-#boxes-box-mc_event_sections_box .view-content p,
-#boxes-box-mc_event_sections_box .view-content h4
-{
-    font-size-adjust: none;
-    -webkit-text-size-adjust: none;
-    -ms-text-size-adjust: none;
-}
-
 #boxes-box-footer_joinus_box > p {
   padding-bottom: 10px;
 }
@@ -450,11 +442,13 @@ body #navigation {
     display: none;
 }
 
-<<<<<<< HEAD
-.event-time .day{
-    color: #57A7DD;
-=======
 #boxes-box-mc_event_sections_box .view-content p {
   margin-left: 104px;
->>>>>>> d173dcae757dc1563f01a61dab078777b5abbbeb
 }
+<<<<<<< HEAD
+
+.event-time .day{
+    color: #57A7DD;
+}
+=======
+>>>>>>> b8b9532930a37b19a4be6d355f85700e6774f9c9
