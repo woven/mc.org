@@ -559,6 +559,7 @@ function mt_menu_alter(&$items) {
   $items['node/add/webform']['access callback'] = '_mt_node_permissions';
   
   $items['node/%node/edit']['access callback'] = '_mt_access_node_edit'; 
+  $items['admin/content/node']['access arguments'] =  array('mt admin nodes');
 }
 
 function _mt_node_permissions($op, $node, $account = NULL){
