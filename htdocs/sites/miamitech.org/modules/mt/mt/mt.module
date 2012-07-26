@@ -384,6 +384,14 @@ function mt_preprocess_page(&$vars){
   if(arg(0)=='latest' && isset($_GET['title'])){
     $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
   }
+
+  if(arg(0)=='user' && arg(1)=='register'){
+    
+    $box = boxes_load('join_overlay_box');
+    $output = $box->render();
+    $vars['content'] = preg_replace(array('/^<div style="display: none;">/i', '/<\/div>\z/m'),'',$output['content']);
+    $vars['title'] = '';
+  }
 }
 
 
