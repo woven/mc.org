@@ -804,8 +804,8 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       ),
       'relationship' => 'none',
     ),
-    'unix_event_start_5' => array(
-      'label' => 'weeknumber',
+    'phpcode_3' => array(
+      'label' => 'calenderweek',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -830,12 +830,15 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'date_format' => 'custom',
-      'custom_date_format' => 'W',
+      'value' => '<?php
+if(function_exists(\'_mc_date_calender_week\')){
+   return _mc_date_calender_week($data->event_unix_event_start);
+}
+?>',
       'exclude' => 1,
-      'id' => 'unix_event_start_5',
-      'table' => 'event',
-      'field' => 'unix_event_start',
+      'id' => 'phpcode_3',
+      'table' => 'customfield',
+      'field' => 'phpcode',
       'override' => array(
         'button' => 'Override',
       ),
@@ -953,6 +956,23 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'field' => 'type',
       'relationship' => 'none',
     ),
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('access', array(
     'type' => 'none',
@@ -1068,7 +1088,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
   $handler->override_option('block_caching', -1);
   $handler = $view->new_display('block', 'upcoming', 'block_2');
   $handler->override_option('style_options', array(
-    'grouping' => 'unix_event_start_5',
+    'grouping' => 'phpcode_3',
     'group' => array(
       'element_type' => 'div',
       'class' => 'event-separator',
