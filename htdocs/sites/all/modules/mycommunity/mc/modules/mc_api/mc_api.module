@@ -318,6 +318,24 @@ function mc_api_format_day($unix_date){
   return $output;
 }
 
+function _mc_date_calender_week($ts){
+  if($ts){
+    $day = format_date($ts,'custom','Y-m-d');
+
+    //check if date_api function exists
+    if(function_exists("date_week")){
+      //return calender week Sunday-Saturday
+      return intval(date_week($day));
+    }else{
+      //use default date format at php
+      //monday to sunday week
+      $date = date_create($day);
+      return intval(date_format($date, 'W'));
+    }
+  }
+
+  return;
+}
 
 /**
  * Return a date with a specific format time.
