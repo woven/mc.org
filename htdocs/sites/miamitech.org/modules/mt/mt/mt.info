@@ -21,6 +21,8 @@ dependencies[] = "mt_bulk_node_admin"
 dependencies[] = "menu_attributes"
 dependencies[] = "ft_pagetitle"
 dependencies[] = "mc_enotifications"
+dependencies[] = "ft_seo"
+
 features[ctools][] = "strongarm:strongarm:1"
 features[variable][] = "formfilter"
 features[variable][] = "googleanalytics_account"
