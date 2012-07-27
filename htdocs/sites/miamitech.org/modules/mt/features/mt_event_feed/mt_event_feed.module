@@ -100,6 +100,9 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
             $node->event[$sub_field . '_exploded']['hour'] = date('G', strtotime($feed_element));
             $node->event[$sub_field . '_exploded']['minute'] = date('i', strtotime($feed_element));
             $node->event[$sub_field . '_exploded']['second'] = date('s', strtotime($feed_element));
+            if(date('G', strtotime($feed_element))=='12'){
+              $node->event[$sub_field . '_exploded']['ampm'] = 'pm';
+            }
           }
           if($sub_field=='timezone'){
             if($feed_element=='UTC'){
