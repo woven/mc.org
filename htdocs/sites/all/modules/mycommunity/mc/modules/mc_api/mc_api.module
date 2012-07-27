@@ -289,6 +289,8 @@ function mc_api_format_day($unix_date){
 
   if ($unix_date < $today){
     $printDay = FALSE;
+  }else{
+    $day = "<span class=\"day\">".date('l', $unix_date)."</span> ";
   }
   if ($unix_date >= $yesterday && $unix_date < $today){
     $output .= t('yesterday');
@@ -297,17 +299,17 @@ function mc_api_format_day($unix_date){
   }elseif ($unix_date >= $tomorrow && $unix_date < $afterTomorrow){
     $output .= t('Tomorrow');
   }elseif ($unix_date >= $afterTomorrow && $unix_date < $thisSunday){
-    $output .= date('l', $unix_date);
+    $output .= "<span class=\"day\">".date('l', $unix_date)."</span>";
   }else{
     if (date('Y') == date('Y', $unix_date)){ // same year
       if ($printDay){
-        $output .= date('l F jS', $unix_date);
+        $output .= $day.date('F jS', $unix_date);
       }else{
         $output .= date('D F jS', $unix_date);
       }
     }else{ // different year
       if ($printDay){
-        $output .= date('l F jS, Y', $unix_date);
+        $output .= $day.date('F jS, Y', $unix_date);
       }else{
         $output .= date('F jS, Y', $unix_date);
       }
@@ -316,6 +318,47 @@ function mc_api_format_day($unix_date){
   return $output;
 }
 
+
+/*
+  * return check if the current user has any nodes of the @type.
+*/
+function _mc_count_user_ct($type){
+  global $user;
+  return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
+}
+
+/*
+   return the current week from timestamp
+*/
+function _mc_date_calender_week($ts){
+  if($ts){
+    $day = format_date($ts,'custom','Y-m-d');
+
+    //check if date_api function exists
+    if(function_exists("date_week")){
+      //return calender week Sunday-Saturday
+      return intval(date_week($day));
+    }else{
+      //use default date format at php
+      //monday to sunday week
+      $date = date_create($day);
+      return intval(date_format($date, 'W'));
+    }
+  }
+
+  return;
+}
+
+/*
+ * return the first day of the weeok
+ */
+function _mc_date_week_firstday($week,$year){
+  $days = date_week_range($week,$year);
+  if(!empty($days)){
+    return date_timestamp_get($days[0]);
+  }
+  return ;
+}
 
 /**
  * Return a date with a specific format time.

@@ -44,23 +44,45 @@ function _mt_group_validate_alter($form, &$form_state){
 }
 
 function _mt_group_check_group_url_exists($group_url){
+  if(preg_match('/(meetup\.com|facebook\.com)/i', $group_url)){
   $group_url = preg_replace('/^(http|webcal):\/{2}w{3}\.|^http:\/{2}|^w{3}\./i', '',$group_url);
   $replace_string = preg_replace('/\w+\.\w{2,3}\/[a-z-]+(\/|)/i', '', $group_url);
   $group_url = str_replace($replace_string, '', $group_url);
   $group_url = preg_replace('/\/$/i', '', $group_url);
-  $group_result = db_result(db_query('SELECT count(*) FROM content_type_group WHERE field_group_url_url LIKE \'%' . $group_url .  '%\''));
-  $feed_result = db_result(db_query('SELECT count(*) FROM feedapi WHERE url LIKE \'%' . $group_url .  '%\''));
+  $group_result = db_result(db_query('SELECT count(*) FROM content_type_group WHERE field_group_url_url IS NOT NULL AND field_group_url_url LIKE \'%' . $group_url .  '%\''));
+  $feed_result = db_result(db_query('SELECT count(*) FROM feedapi WHERE url IS NOT NULL AND url LIKE \'%' . $group_url .  '%\''));
   $result = $group_result + $feed_result;
   if($result){
     if($group_result){
-      $nid = db_result(db_query('SELECT nid FROM content_type_group WHERE field_group_url_url LIKE \'%' . $group_url .  '%\''));
+      $nid = db_result(db_query('SELECT nid FROM content_type_group WHERE field_group_url_url IS NOT NULL AND field_group_url_url LIKE \'%' . $group_url .  '%\''));
       $link = '<a href="/node/' . $nid . '">find it here</a>';
       form_set_error('', 'Hmm, seems like we already know about this group. You can ' . $link  . ' or try another.');
     }
     elseif ($feed_result) {
-      $nid = db_result(db_query('SELECT nid FROM feedapi WHERE url LIKE \'%' . $group_url .  '%\''));
+      $nid = db_result(db_query('SELECT nid FROM feedapi WHERE url IS NOT NULL AND url LIKE \'%' . $group_url .  '%\''));
       $link = '<a href="/node/' . $nid . '">find it here</a>';
       form_set_error('', 'Hmm, seems like we already know about this feed. You can ' . $link  . ' or try another.');
+    }
+  }
+  }
+  else{
+    $group_url = preg_replace('/^(http|webcal):\/{2}w{3}\.|^http:\/{2}|^w{3}\./i', '',$group_url);
+    $group_url = str_replace('/', '', $group_url);
+    $sql = 'SELECT count(*) FROM content_type_group WHERE field_group_url_url IS NOT NULL AND field_group_url_url LIKE \'%%%' . $group_url .  '%\'';
+    $group_result = db_result(db_query($sql));
+    $feed_result = db_result(db_query('SELECT count(*) FROM feedapi WHERE url IS NOT NULL AND url LIKE \'%' . $group_url .  '%\''));
+    $result = $group_result + $feed_result;
+    if($result){
+      if($group_result){
+        $nid = db_result(db_query('SELECT nid FROM content_type_group WHERE field_group_url_url IS NOT NULL AND field_group_url_url LIKE \'%%%' . $group_url .  '%\''));
+        $link = '<a href="/node/' . $nid . '">find it here</a>';
+        form_set_error('', 'Hmm, seems like we already know about this group. You can ' . $link  . ' or try another.');
+      }
+      elseif ($feed_result) {
+        $nid = db_result(db_query('SELECT nid FROM feedapi WHERE url IS NOT NULL AND url LIKE \'%' . $group_url .  '%\''));
+        $link = '<a href="/node/' . $nid . '">find it here</a>';
+        form_set_error('', 'Hmm, seems like we already know about this feed. You can ' . $link  . ' or try another.');
+      }
     }
   }
 }

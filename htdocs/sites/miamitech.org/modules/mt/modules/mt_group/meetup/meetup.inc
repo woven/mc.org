@@ -20,8 +20,26 @@ class MeetupParser{
         $this->logo_url = htmlqp($page, '#C_nav #C_metabox .groupPhotoMeta img')->attr('src');
       }
     }
-    else {
-      throw new Exception('Url does not match meetup known addresses');
+    else{
+      $temp = file_get_contents($url);
+      if (preg_match('/<body id="meetupbody"/i', $temp)) {
+        preg_match('/((\w+\.|)\w+\.[a-z.]{1,}(\/|))/i', $url, $result);
+        $this->group_url = $result['0'];
+        $no_domain = preg_replace('/[a-z0-9-]+\.\w+(\/|)$/i','',$this->group_url);
+        $domain = str_replace($no_domain, '', $this->group_url);
+        $this->small_name = str_replace('/','', $domain);
+        if(!empty($this->small_name)){
+          $domain = str_replace('/','', $this->group_url);
+          $this->event_feed = 'http://' . $domain . '/events/ical';
+          $page = file_get_contents('http://' . $domain . '/');
+          $this->title = htmlqp($page, '#bannerGroupName')->text();
+          $this->body = htmlqp($page, '#groupDesc')->innerHTML();
+          $this->logo_url = htmlqp($page, '#C_nav #C_metabox .groupPhotoMeta img')->attr('src');
+        }
+      }
+      else {
+        throw new Exception('Url does not match meetup known addresses');
+      }
     }
   }
 

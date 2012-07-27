@@ -861,7 +861,7 @@ function ft_event_strongarm() {
     'nfs_submission_body_rows' => '20',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '1',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '2',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
@@ -941,6 +941,48 @@ function ft_event_strongarm() {
   $strongarm->name = 'nodeformsettings_submit_event';
   $strongarm->value = 'Save';
   $export['nodeformsettings_submit_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_edit_metatags_event';
+  $strongarm->value = 1;
+  $export['nodewords_edit_metatags_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_modules_output_event';
+  $strongarm->value = array();
+  $export['nodewords_filter_modules_output_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_regexp_event';
+  $strongarm->value = '';
+  $export['nodewords_filter_regexp_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_method_event';
+  $strongarm->value = '1';
+  $export['nodewords_metatags_generation_method_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_source_event';
+  $strongarm->value = '1';
+  $export['nodewords_metatags_generation_source_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_use_alt_attribute_event';
+  $strongarm->value = 1;
+  $export['nodewords_use_alt_attribute_event'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1202,6 +1244,16 @@ function ft_event_strongarm() {
   $strongarm->name = 'upload_event';
   $strongarm->value = '1';
   $export['upload_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_event';
+  $strongarm->value = array(
+    'status' => '1',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_event'] = $strongarm;
 
   return $export;
 }

@@ -31,7 +31,7 @@ function _mc_event_section_next_two_weeks(&$content){
 
   $query = "SELECT n.nid,
       CASE 
-          WHEN e.unix_event_start BETWEEN '%s' AND '%s'
+          WHEN ((e.unix_event_start BETWEEN '%s' AND '%s') OR (e.unix_event_end BETWEEN '%s' AND '%s'))
           THEN 'Today'
           WHEN e.unix_event_start BETWEEN '%s' AND '%s'
           THEN 'Tomorrow'
@@ -44,7 +44,7 @@ function _mc_event_section_next_two_weeks(&$content){
       END AS 'Section'
   FROM node as n 
   JOIN event as e on n.nid=e.nid
-  WHERE e.unix_event_start between '%s' and '%s'
+  WHERE (e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s')
   GROUP BY n.nid
   ORDER BY (
   CASE WHEN Section='Today' then 0
@@ -58,10 +58,10 @@ function _mc_event_section_next_two_weeks(&$content){
   
   if ($dayOfWeek == 0){
     $twoSundaysFromNow = $nextSunday + 7 * 24 * 3600;
-    $result = db_query($query, $minsago, $tomorrow, $tomorrow, $afterTomorrow, $afterTomorrow, $nextSunday, $nextSunday, $twoSundaysFromNow, $minsago, $twoSundaysFromNow);
+    $result = db_query($query, $now, $tomorrow, $now, $tomorrow, $tomorrow, $afterTomorrow, $afterTomorrow, $nextSunday, $nextSunday, $twoSundaysFromNow, $now, $twoSundaysFromNow, $now, $twoSundaysFromNow);
   }
   else{
-    $result = db_query($query, $minsago, $tomorrow, $tomorrow, $afterTomorrow, $afterTomorrow, $thisSunday, $thisSunday, $nextSunday, $minsago, $nextSunday);
+    $result = db_query($query, $now, $tomorrow, $now, $tomorrow, $tomorrow, $afterTomorrow, $afterTomorrow, $thisSunday, $thisSunday, $nextSunday, $now, $nextSunday, $now, $nextSunday);
   }
 
   $lists = array();
@@ -96,21 +96,38 @@ function _mc_event_section_next_two_weeks(&$content){
 }
 
 function _mc_event_section_print_view($key, $list){
+
+  switch($key){
+    case 'Today':
+    case 'Tomorrow':
+      $block = "block_5";
+      break;
+    case 'This week':
+    case 'Next week':
+      $block = "block_1";
+      break;
+    default:
+      $block = "block_2";
+  }
+
   $view_header = new stdClass();
-  $view_header->current_display = 'block_5';
-  $view_header->display['block_5']->display_title = $key; 
+  $view_header->current_display = $block;
+  $view_header->display[$block]->display_title = $key;
   $head = '<div class="view"><div class="view-header">';
   $head .= theme("mc_event_view_header",$view_header);
   $head .= '</div></div>';
   $view = views_get_view('mc_events_by_dates');
-  if (!$view || !$view->access('block_5')) {
+  if (!$view || !$view->access($block)) {
     return;
   }
   if($key=='Today' || $key=='Tomorrow'){
     $view->hide_day = TRUE;
+    if($key=='Today'){
+      $view->day = 'today';
+    }
   }
 
-  $view_display =$view->preview('block_5', array(implode('+', $list)));
+  $view_display =$view->preview($block, array(implode('+', $list)));
   return $head.$view_display;
 }
 
@@ -185,6 +202,17 @@ function _mc_event_section_formatted_location($location){
     }
     else{
       return;
+    }
+  }
+}
+
+function mc_event_section_views_query_alter(&$view, &$query) {
+  if($view->current_display=='block_5' && $view->name=='mc_events_by_dates'){
+    if(isset($view->day) && $view->day=='today'){
+      $new_condition = '(CASE WHEN (UNIX_TIMESTAMP(now()) - event_unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - event_unix_event_start)>0 THEN 0 END) DESC';
+      $another_condition = 'abs(UNIX_TIMESTAMP(now()) - event_unix_event_start)';
+      array_unshift($query->orderby, $new_condition);
+      $query->orderby['0'] = $another_condition;
     }
   }
 }

@@ -767,6 +767,90 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
         'button' => 'Override',
       ),
     ),
+    'unix_event_start_4' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'date_format' => 'custom',
+      'custom_date_format' => 'l',
+      'exclude' => 1,
+      'id' => 'unix_event_start_4',
+      'table' => 'event',
+      'field' => 'unix_event_start',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'phpcode_3' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php
+if(function_exists(\'_mc_date_calender_week\')){
+$week = _mc_date_calender_week($data->event_unix_event_start);
+$year = date(\'Y\',$data->event_unix_event_start);
+$firstdayts = _mc_date_week_firstday($week,$year);
+if($year > date(\'Y\')){
+return "Week of ". date(\'F jS Y\',$firstdayts);
+}else{
+return "Week of ". date(\'F jS\',$firstdayts);
+}
+}
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_3',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('sorts', array(
     'unix_event_start' => array(
@@ -791,6 +875,77 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'relationship' => 'none',
     ),
   ));
+  $handler->override_option('arguments', array(
+    'nid' => array(
+      'default_action' => 'not found',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '',
+      'breadcrumb' => '',
+      'default_argument_type' => 'fixed',
+      'default_argument' => '',
+      'validate_type' => 'none',
+      'validate_fail' => 'not found',
+      'break_phrase' => 1,
+      'not' => 0,
+      'id' => 'nid',
+      'table' => 'node',
+      'field' => 'nid',
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        2 => 0,
+        4 => 0,
+        5 => 0,
+        3 => 0,
+      ),
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+      ),
+      'default_argument_user' => 0,
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'event_feed' => 0,
+        'webform' => 0,
+        'forum' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        1 => 0,
+      ),
+      'validate_argument_type' => 'tid',
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'validate_argument_is_member' => '0',
+      'validate_argument_group_node_type' => array(
+        'group' => 0,
+      ),
+      'validate_argument_php' => '',
+    ),
+  ));
   $handler->override_option('filters', array(
     'type' => array(
       'operator' => 'in',
@@ -806,6 +961,23 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'id' => 'type',
       'table' => 'node',
       'field' => 'type',
+      'relationship' => 'none',
+    ),
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'override' => array(
+        'button' => 'Override',
+      ),
       'relationship' => 'none',
     ),
   ));
@@ -841,15 +1013,10 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       ),
     ),
     'results_min_lifespan' => '-1',
-    'results_max_lifespan' => '21600',
+    'results_max_lifespan' => '1800',
     'output_min_lifespan' => '-1',
-    'output_max_lifespan' => '21600',
+    'output_max_lifespan' => '-1',
   ));
-  $handler->override_option('header', '<?php
-  // Important: Pager should be turned on, otherwise count will not work.
-$view = views_get_current_view();
-echo theme("mc_event_view_header",$view, \'latest/events/current\');
-?>');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
   $handler->override_option('items_per_page', 0);
@@ -901,109 +1068,53 @@ echo theme("mc_event_view_header",$view, \'latest/events/current\');
     ),
     'skip_blank' => 0,
   ));
-  $handler = $view->new_display('block', 'Variable ranges', 'block_5');
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'not found',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'fixed',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
-      'break_phrase' => 1,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        4 => 0,
-        5 => 0,
-        3 => 0,
-        6 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '',
-      'validate_argument_node_type' => array(
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'npage' => 0,
-        'place' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'event_feed' => 0,
-        'webform' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-      ),
-    ),
-  ));
-  $handler->override_option('filters', array(
-    'type' => array(
-      'operator' => 'in',
-      'value' => array(
-        'event' => 'event',
-      ),
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'id' => 'type',
-      'table' => 'node',
-      'field' => 'type',
-      'relationship' => 'none',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-    ),
-  ));
-  $handler->override_option('header', '');
+  $handler = $view->new_display('block', 'today-tomorrow', 'block_5');
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', '-1');
+  $handler = $view->new_display('block', 'this-next{week}', 'block_1');
+  $handler->override_option('style_options', array(
+    'grouping' => 'unix_event_start_4',
+    'group' => array(
+      'element_type' => 'div',
+      'class' => 'event-separator',
+    ),
+    'list' => array(
+      'element_type' => '',
+      'class' => '',
+    ),
+    'row' => array(
+      'element_type' => 'div',
+      'class' => '',
+      'last_every_nth' => '0',
+      'first_class' => 'first',
+      'last_class' => 'last',
+      'striping_classes' => 'odd even',
+    ),
+  ));
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
+  $handler = $view->new_display('block', 'upcoming', 'block_2');
+  $handler->override_option('style_options', array(
+    'grouping' => 'phpcode_3',
+    'group' => array(
+      'element_type' => 'div',
+      'class' => 'event-separator',
+    ),
+    'list' => array(
+      'element_type' => '',
+      'class' => '',
+    ),
+    'row' => array(
+      'element_type' => 'div',
+      'class' => '',
+      'last_every_nth' => '0',
+      'first_class' => 'first',
+      'last_class' => 'last',
+      'striping_classes' => 'odd even',
+    ),
+  ));
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
 
   $views[$view->name] = $view;
 

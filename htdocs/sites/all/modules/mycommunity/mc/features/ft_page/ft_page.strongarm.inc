@@ -121,7 +121,7 @@ function ft_page_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'enable_revisions_page_npage';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['enable_revisions_page_npage'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -163,17 +163,16 @@ function ft_page_strongarm() {
     'refresh_time' => '1800',
     'items_delete' => '0',
     'parsers' => array(
-      'parser_common_syndication' => array(
+      'parser_ical' => array(
         'enabled' => 0,
         'weight' => '0',
-        'accept_invalid_cert' => 0,
       ),
     ),
     'processors' => array(
       'feedapi_node' => array(
         'enabled' => 0,
         'weight' => '0',
-        'content_type' => 'group',
+        'content_type' => 'article',
         'input_format' => '1',
         'node_date' => 'feed',
         'x_dedupe' => '0',
@@ -287,26 +286,205 @@ function ft_page_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodeformscols_field_placements_npage_default';
+  $strongarm->value = array(
+    'title' => array(
+      'region' => 'main',
+      'weight' => '0',
+      'has_required' => TRUE,
+      'title' => 'Title',
+    ),
+    'body_field' => array(
+      'region' => 'main',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'menu' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'hidden' => 0,
+    ),
+    'comment_settings' => array(
+      'region' => 'right',
+      'weight' => '6',
+      'has_required' => FALSE,
+      'title' => 'Comment settings',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'path' => array(
+      'region' => 'right',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => 'URL path settings',
+      'collapsed' => 0,
+      'hidden' => 0,
+    ),
+    'options' => array(
+      'region' => 'right',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Publishing options',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'author' => array(
+      'region' => 'right',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => 'Authoring information',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'buttons' => array(
+      'region' => 'main',
+      'weight' => '18',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'field_page_type' => array(
+      'region' => 'right',
+      'weight' => '0',
+      'has_required' => TRUE,
+      'title' => 'Page Type',
+    ),
+    'field_page_subtype' => array(
+      'region' => 'right',
+      'weight' => '1',
+      'has_required' => FALSE,
+      'title' => 'Page Subtype',
+      'hidden' => 0,
+    ),
+    'field_list_image' => array(
+      'region' => 'main',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Images',
+      'hidden' => 0,
+    ),
+    'field_featured_group' => array(
+      'region' => 'main',
+      'weight' => '6',
+      'has_required' => FALSE,
+      'title' => 'Featured Group',
+      'hidden' => 0,
+    ),
+    'field_featured_photo' => array(
+      'region' => 'main',
+      'weight' => '7',
+      'has_required' => FALSE,
+      'title' => 'Featured Photo',
+      'hidden' => 0,
+    ),
+    'field_featured_place' => array(
+      'region' => 'main',
+      'weight' => '8',
+      'has_required' => FALSE,
+      'title' => 'Featured Place',
+      'hidden' => 0,
+    ),
+    'field_featured_items' => array(
+      'region' => 'main',
+      'weight' => '9',
+      'has_required' => FALSE,
+      'title' => 'Featured Items',
+      'hidden' => 0,
+    ),
+    'field_featured_events' => array(
+      'region' => 'main',
+      'weight' => '10',
+      'has_required' => FALSE,
+      'title' => 'Featured Events',
+      'hidden' => 0,
+    ),
+    'field_featured_groups' => array(
+      'region' => 'main',
+      'weight' => '11',
+      'has_required' => FALSE,
+      'title' => 'Featured Groups',
+      'hidden' => 0,
+    ),
+    'field_featured_places' => array(
+      'region' => 'main',
+      'weight' => '12',
+      'has_required' => FALSE,
+      'title' => 'Featured Places',
+      'hidden' => 0,
+    ),
+    'field_featured_audio_video_items' => array(
+      'region' => 'main',
+      'weight' => '13',
+      'has_required' => FALSE,
+      'title' => 'Featured Audio and Video Items',
+      'hidden' => 0,
+    ),
+    'field_featured_members' => array(
+      'region' => 'main',
+      'weight' => '14',
+      'has_required' => FALSE,
+      'title' => 'Featured Members',
+      'hidden' => 0,
+    ),
+    'og_nodeapi' => array(
+      'region' => 'main',
+      'weight' => '4',
+      'has_required' => TRUE,
+      'title' => 'Groups',
+      'collapsed' => 0,
+    ),
+    'print' => array(
+      'region' => 'right',
+      'weight' => '7',
+      'has_required' => FALSE,
+      'title' => 'Printer, email and PDF versions',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'group_block' => array(
+      'region' => 'main',
+      'weight' => '16',
+      'has_required' => FALSE,
+      'title' => 'Help Block',
+      'hidden' => 0,
+      'collapsed' => 0,
+    ),
+    'nodewords' => array(
+      'region' => 'main',
+      'weight' => '17',
+      'has_required' => FALSE,
+      'title' => 'Meta tags',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+  );
+  $export['nodeformscols_field_placements_npage_default'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nodeformsettings_npage';
   $strongarm->value = array(
-    'nfs_submission_body_rows' => '20',
+    'nfs_submission_body_rows' => '6',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '2',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
     'nfs_publishingoptions' => '0',
     'nfs_comments' => '0',
     'nfs_taxonomy' => '0',
-    'nfs_preview' => '0',
+    'nfs_preview' => '1',
     'nfs_cancel' => array(
       'nfs_cancel_status' => '1',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_npage'] = $strongarm;
@@ -450,7 +628,7 @@ function ft_page_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'show_preview_changes_npage';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['show_preview_changes_npage'] = $strongarm;
 
   $strongarm = new stdClass;
