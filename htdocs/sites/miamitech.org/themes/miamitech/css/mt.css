@@ -429,14 +429,14 @@ body #navigation {
 }
 
 .view-content .event-separator {
-    height: 26px;
     background: white url(../images/common/bg-block-title.png) 0 0 repeat-x;
     border-color: #E9E9E9;
     border-style: solid;
     border-width: 1px 0 1px 0;
     line-height: 26px;
-    padding-left: 15px;
-    margin-bottom: 5px;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    color: #B3B3B3
 }
 
 #boxes-box-mc_event_sections_box .view-content p {
