@@ -768,7 +768,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       ),
     ),
     'unix_event_start_4' => array(
-      'label' => 'daynumber',
+      'label' => '',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -794,7 +794,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'date_format' => 'custom',
-      'custom_date_format' => 'w',
+      'custom_date_format' => 'l',
       'exclude' => 1,
       'id' => 'unix_event_start_4',
       'table' => 'event',
@@ -805,7 +805,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'relationship' => 'none',
     ),
     'phpcode_3' => array(
-      'label' => 'calenderweek',
+      'label' => '',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -832,7 +832,14 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'hide_alter_empty' => 1,
       'value' => '<?php
 if(function_exists(\'_mc_date_calender_week\')){
-   return _mc_date_calender_week($data->event_unix_event_start);
+$week = _mc_date_calender_week($data->event_unix_event_start);
+$year = date(\'Y\',$data->event_unix_event_start);
+$firstdayts = _mc_date_week_firstday($week,$year);
+if($year > date(\'Y\')){
+return "Week of ". date(\'F jS Y\',$firstdayts);
+}else{
+return "Week of ". date(\'F jS\',$firstdayts);
+}
 }
 ?>',
       'exclude' => 1,
@@ -1006,9 +1013,9 @@ if(function_exists(\'_mc_date_calender_week\')){
       ),
     ),
     'results_min_lifespan' => '-1',
-    'results_max_lifespan' => '21600',
+    'results_max_lifespan' => '1800',
     'output_min_lifespan' => '-1',
-    'output_max_lifespan' => '21600',
+    'output_max_lifespan' => '-1',
   ));
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);

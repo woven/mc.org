@@ -318,6 +318,10 @@ function mc_api_format_day($unix_date){
   return $output;
 }
 
+/*
+   return the current week from timestamp
+*/
+
 function _mc_date_calender_week($ts){
   if($ts){
     $day = format_date($ts,'custom','Y-m-d');
@@ -335,6 +339,17 @@ function _mc_date_calender_week($ts){
   }
 
   return;
+}
+
+/*
+ * return the first day of the weeok
+ */
+function _mc_date_week_firstday($week,$year){
+  $days = date_week_range($week,$year);
+  if(!empty($days)){
+    return date_timestamp_get($days[0]);
+  }
+  return ;
 }
 
 /**

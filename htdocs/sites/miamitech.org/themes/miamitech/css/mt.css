@@ -428,24 +428,17 @@ body #navigation {
   margin-top: 0px;
 }
 
-.view-content .event-separator{
-    margin-bottom: 20px;
-   height: 1px;
-   color: white;
-}
-
-.view-content .event-separator{
-    border-bottom: dashed 1px #57A7DD;
-}
-
-.view-content .event-separator:first-child{
-    display: none;
+.view-content .event-separator {
+    height: 26px;
+    background: white url(../images/common/bg-block-title.png) 0 0 repeat-x;
+    border-color: #E9E9E9;
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+    line-height: 26px;
+    padding-left: 15px;
+    margin-bottom: 5px;
 }
 
 #boxes-box-mc_event_sections_box .view-content p {
   margin-left: 104px;
-}
-
-.event-time .day{
-    color: #57A7DD;
 }
