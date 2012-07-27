@@ -420,8 +420,12 @@ body #navigation {
   display: none;
 }
 
-#boxes-box-mc_event_sections_box p.description{
-    width: 100%;
+#boxes-box-mc_event_sections_box .view-content p,
+#boxes-box-mc_event_sections_box .view-content h4
+{
+    font-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
 }
 
 #boxes-box-footer_joinus_box > p {
