@@ -109,8 +109,12 @@ function mc_user_page($where){
 
   switch($where){
     case 'register':
-      drupal_set_title(MC_USER_PAGE_REGISTER);
-      return drupal_get_form('user_register');
+      //drupal_set_title(MC_USER_PAGE_REGISTER);      
+      drupal_set_title('');
+      $box = boxes_load('join_overlay_box');
+      $box_content = $box->render();
+      $output = preg_replace(array('/^<div style="display: none;">/i', '/<\/div>\z/m'),'',$box_content['content']);
+      return $output;
     case 'password':
       drupal_set_title(MC_USER_PAGE_PASSWORD);
       return drupal_get_form('user_pass');
