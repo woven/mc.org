@@ -1,6 +1,7 @@
 <?php
 /**
  * @file
+ * Code for the ft_seo feature.
  */
 
-// Drupal needs this blank file.
+include_once 'ft_seo.features.inc';

@@ -87,8 +87,8 @@ function mt_preprocess($vars,$hook){
 }
 
 function mt_count_user_ct($type){
-      global $user;
-      return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
+  global $user;
+  return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
 }
 
 function mt_init_(){

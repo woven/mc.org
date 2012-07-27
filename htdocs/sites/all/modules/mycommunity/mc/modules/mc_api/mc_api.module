@@ -318,10 +318,18 @@ function mc_api_format_day($unix_date){
   return $output;
 }
 
+
+/*
+  * return check if the current user has any nodes of the @type.
+*/
+function _mc_count_user_ct($type){
+  global $user;
+  return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
+}
+
 /*
    return the current week from timestamp
 */
-
 function _mc_date_calender_week($ts){
   if($ts){
     $day = format_date($ts,'custom','Y-m-d');
