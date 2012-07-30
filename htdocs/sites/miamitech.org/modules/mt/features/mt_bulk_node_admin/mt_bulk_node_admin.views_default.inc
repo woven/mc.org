@@ -466,14 +466,14 @@ function mt_bulk_node_admin_views_default_views() {
         'label' => '',
       ),
       'node_mass_update-9c585624b9b3af0b4687d5f97f35e047' => array(
-        'selected' => 1,
+        'selected' => 0,
         'skip_confirmation' => 0,
         'label' => '',
       ),
       'node_publish_action' => array(
-        'selected' => 0,
+        'selected' => 1,
         'skip_confirmation' => 0,
-        'label' => '',
+        'label' => 'Publish',
       ),
       'system_goto_action' => array(
         'selected' => 0,
@@ -526,14 +526,14 @@ function mt_bulk_node_admin_views_default_views() {
         'label' => '',
       ),
       'node_mass_update-0ccad85c1ebe4c9ceada1aa64293b080' => array(
-        'selected' => 1,
+        'selected' => 0,
         'skip_confirmation' => 0,
         'label' => '',
       ),
       'node_unpublish_action' => array(
-        'selected' => 0,
+        'selected' => 1,
         'skip_confirmation' => 0,
-        'label' => '',
+        'label' => 'Unpublish',
       ),
       'node_unpublish_by_keyword_action' => array(
         'selected' => 0,

@@ -137,7 +137,7 @@ function mt_event_ui_ds_default_settings() {
             ),
             'google_plus' => array(
               'region' => 'footer',
-              'weight' => '-86',
+              'weight' => '-85',
               'format' => '',
               'css-class' => '',
               'labelformat' => 'hidden',
@@ -145,6 +145,13 @@ function mt_event_ui_ds_default_settings() {
             'file_view' => array(
               'region' => 'middle',
               'weight' => '-94',
+              'format' => '',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'tweet_button' => array(
+              'region' => 'footer',
+              'weight' => '-86',
               'format' => '',
               'css-class' => '',
               'labelformat' => 'hidden',

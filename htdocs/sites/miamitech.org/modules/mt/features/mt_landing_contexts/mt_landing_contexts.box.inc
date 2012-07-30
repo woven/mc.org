@@ -82,7 +82,11 @@ print views_embed_view(\'latest_pages\', \'block_2\');
   $box->title = '';
   $box->description = 'Join us on your favorite social network';
   $box->options = array(
-    'body' => '<p>MiamiTech.org hopes to be a helpful resource for the technology and creative community in Miami and all of South Florida.</p>',
+    'body' => '<p>MiamiTech.org hopes to be a helpful resource for the technology and creative community in Miami and all of South Florida.</p>
+
+<div class="field field-mt-add-group-ical field-group-ical">
+<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://<?php echo $_SERVER["SERVER_NAME"] ?>/events/ical">Subscribe to all upcoming events (iCal)</a>
+</div>',
     'format' => '3',
   );
   $export['footer_joinus_box'] = $box;
@@ -197,6 +201,21 @@ print \'<span class="ical-group-ico"> </span><a class="ical-link" href="webcal:/
     'format' => '3',
   );
   $export['mt_group_calendar'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'sitewide_ical';
+  $box->plugin_key = 'simple';
+  $box->title = 'Add to calendar';
+  $box->description = 'Add to Calendar  - Sitewide';
+  $box->options = array(
+    'body' => '<div class="field field-mt-add-group-ical field-group-ical">
+<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://<?php echo $_SERVER["SERVER_NAME"] ?>/events/ical">All upcoming events (iCal)</a>
+</div>',
+    'format' => '3',
+  );
+  $export['sitewide_ical'] = $box;
 
   return $export;
 }

@@ -14,12 +14,11 @@ function ft_page_fieldgroup_default_groups() {
     'label' => 'Help Block',
     'settings' => array(
       'form' => array(
-        'style' => 'fieldset',
+        'style' => 'fieldset_collapsible',
         'description' => '',
       ),
       'display' => array(
-        'weight' => '24',
-        'label' => 'above',
+        'description' => '',
         'teaser' => array(
           'format' => 'fieldset',
           'exclude' => 0,
@@ -28,7 +27,6 @@ function ft_page_fieldgroup_default_groups() {
           'format' => 'fieldset',
           'exclude' => 1,
         ),
-        'description' => '',
         '4' => array(
           'format' => 'fieldset',
           'exclude' => 0,
@@ -37,7 +35,7 @@ function ft_page_fieldgroup_default_groups() {
           'format' => 'fieldset',
           'exclude' => 0,
         ),
-        'secondary_page' => array(
+        '5' => array(
           'format' => 'fieldset',
           'exclude' => 0,
         ),
@@ -49,6 +47,7 @@ function ft_page_fieldgroup_default_groups() {
           'format' => 'fieldset',
           'exclude' => 0,
         ),
+        'label' => 'above',
       ),
     ),
     'weight' => '24',

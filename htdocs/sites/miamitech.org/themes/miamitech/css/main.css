@@ -1198,6 +1198,10 @@ a .ico-small {
 #page .location-link {
 	margin: 5px 0;
 	font-size: 0.9em;
+	color: #333;
+}
+
+#page .location-link span.location {
 	color: #b3b3b3;
 }
 
@@ -2506,10 +2510,26 @@ a.ical-link {
 	padding-bottom: 5px;
 }
 
-.field-facebook-like {
+.field-facebook-like, .field-tweet-button {
 	padding-bottom: 5px;
 }
 
 .field-address-formatted .no-location {
 	color: #CCC;
+}
+
+.fieldset-wrapper > .description {
+	padding-bottom: 10px;
+}
+
+#main #register {
+	position: initial;
+}
+
+#main #register h1{
+	padding-bottom: 20px;
+}
+
+#main #register .block-signup {
+	padding: 0;
 }

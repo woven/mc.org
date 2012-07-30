@@ -1,4 +1,4 @@
-dbfile=http://dev.miamitech.org/db.sql.gz
+dbfile=http://www.miamitech.org/db.sql.gz
 branch=mt
 #
 #remove db file if already existing

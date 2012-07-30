@@ -87,8 +87,8 @@ function mt_preprocess($vars,$hook){
 }
 
 function mt_count_user_ct($type){
-      global $user;
-      return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
+  global $user;
+  return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
 }
 
 function mt_init_(){
@@ -392,6 +392,10 @@ function mt_preprocess_page(&$vars){
   if(arg(0)=='latest' && isset($_GET['title'])){
     $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
   }
+
+  if(arg(0)=='user' && arg(1)=='register'){
+    $vars['head_title'] = MC_USER_PAGE_REGISTER . ' ' . $vars['head_title'];
+  }
 }
 
 
@@ -567,6 +571,7 @@ function mt_menu_alter(&$items) {
   $items['node/add/webform']['access callback'] = '_mt_node_permissions';
   
   $items['node/%node/edit']['access callback'] = '_mt_access_node_edit'; 
+  $items['admin/content/node']['access arguments'] =  array('mt admin nodes');
 }
 
 function _mt_node_permissions($op, $node, $account = NULL){
@@ -692,6 +697,7 @@ function mt_preprocess_node(&$variables){
 }
 
 function mt_preprocess_og_mission(&$variables) {
+  if(!empty($variables['mission'])){
   $node = node_load($variables['form']['#node']->nid);
   if(preg_match('/<p>.+<\/p>/m', $node->body)){
     $variables['mission'] = $node->body;
@@ -700,6 +706,7 @@ function mt_preprocess_og_mission(&$variables) {
     $variables['mission'] = _mt_addParagraphs($node->body); 
   }
   $variables['mission'] .= '<p><a target="_blank" href="'. $node->field_group_url['0']['url'] . '">' . $node->field_group_url['0']['url'] . '</a></p>';
+  }
 }
 
 function _mt_addParagraphs($str)
