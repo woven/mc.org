@@ -353,6 +353,14 @@ function mt_form_alter(&$form, &$form_state, $form_id){
   global $user;
 
   if ($form['#id'] == 'node-form') {
+    if(isset($form['author'])){
+      $form['author']['name']['#type'] = 'hidden';
+      $form['author']['date']['#type'] = 'hidden';
+
+      $form['name'] = $form['author']['name'];
+      $form['date'] = $form['author']['date'];
+      unset($form['author']);
+    }
     if($form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
       unset($form['og_nodeapi']['visible']['og_groups']['#options']['0']);
     }
