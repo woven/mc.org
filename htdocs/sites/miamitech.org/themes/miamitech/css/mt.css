@@ -327,14 +327,9 @@ body #navigation {
 	width: 90% !important;
 }
 
-#page #group-page-block h1{
-	margin: 0 0 0 15px; 
-}
-
-/* New group head block/area this is the only styles affecting on that block right now */
-#group-page-head{
-
-}
+/**
+  *  New group head block/area this is the only styles affecting on that block right now
+**/
 
 #group-page-head .wrapper{
     margin-top: 0px;
@@ -351,7 +346,7 @@ body #navigation {
 
 #group-page-head .wrapper h1{
     margin: 0px !important;
-	margin-left: 16px;
+	margin-left: 17px !important;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -370,25 +365,11 @@ body #navigation {
     margin-left: 16px;
 }
 
-#group-page-head a h1{
-    margin: 0px !important;
-    padding: 0px;
-    color: inherit;
-    float: left;
-}
-
-#group-page-head .wrapper a h1{
-    overflow: hidden;
-    white-space:nowrap;
-    max-width: 80%;
-    margin: 0 0 0 10px;
-}
-
 #group-page-head .wrapper img{
     margin-right: 15px;
 }
 
-/* group-page-head */
+/* /group-page-head */
 
 #block-ds-5c755d31699c072160e29da9599e28f3 .field {
 	margin-bottom: 15px;
@@ -429,16 +410,23 @@ body #navigation {
 }
 
 .view-content .event-separator {
-    background: white url(../images/common/bg-block-title.png) 0 0 repeat-x;
+    height: 26px;
+    line-height: 26px;
+    background: url(../images/common/bg-block-title.png) 0 0 repeat-x;
     border-color: #E9E9E9;
     border-style: solid;
     border-width: 1px 0 1px 0;
-    line-height: 26px;
-    padding-left: 10px;
+    padding-left: 22px;
     margin-bottom: 15px;
     color: #999;
+    font-size-adjust: none;
+
 }
 
 #boxes-box-mc_event_sections_box .view-content p {
   margin-left: 104px;
+}
+
+.group-mission .group-url{
+    margin: 10px 0px;
 }

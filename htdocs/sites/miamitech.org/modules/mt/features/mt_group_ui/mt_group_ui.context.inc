@@ -37,6 +37,12 @@ function mt_group_ui_context_default_contexts() {
           'region' => 'below_content',
           'weight' => 0,
         ),
+        'views-og_details-block_1' => array(
+          'module' => 'views',
+          'delta' => 'og_details-block_1',
+          'region' => 'above_content',
+          'weight' => 0,
+        ),
       ),
     ),
   );

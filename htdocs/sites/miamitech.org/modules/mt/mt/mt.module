@@ -349,10 +349,17 @@ function mt_event_image($node){
 }
 
 function mt_form_alter(&$form, &$form_state, $form_id){
-
   global $user;
 
   if ($form['#id'] == 'node-form') {
+    if(isset($form['author'])){
+      $form['author']['name']['#type'] = 'hidden';
+      $form['author']['date']['#type'] = 'hidden';
+
+      $form['name'] = $form['author']['name'];
+      $form['date'] = $form['author']['date'];
+      unset($form['author']);
+    }
     if($form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
       unset($form['og_nodeapi']['visible']['og_groups']['#options']['0']);
     }
@@ -689,26 +696,17 @@ function mt_preprocess_node(&$variables){
 }
 
 function mt_preprocess_og_mission(&$variables) {
-  if(!empty($variables['mission'])){
-  $node = node_load($variables['form']['#node']->nid);
-  if(preg_match('/<p>.+<\/p>/m', $node->body)){
-    $variables['mission'] = $node->body;
-  }
-  else{
-    $variables['mission'] = _mt_addParagraphs($node->body); 
-  }
-  $variables['mission'] .= '<p><a target="_blank" href="'. $node->field_group_url['0']['url'] . '">' . $node->field_group_url['0']['url'] . '</a></p>';
-  }
-}
+  $node = $variables['form']['#node'];
+  $format = $variables['form']['#node']->format;
 
-function _mt_addParagraphs($str)
-{
-  $arr=explode("\n",$str);
-  $out='';
+  //pass the missing statement through the input format from body field
+  $variables['mission'] = check_markup($variables['mission'],$format);
 
-  for($i=0;$i<count($arr);$i++) {
-      if(strlen(trim($arr[$i]))>0)
-          $out.='<p>'.trim($arr[$i]).'</p>';
+  //expose the group url to the templates
+  $url = $node->field_group_url[0]['url'];
+  if(!empty($url)){
+    $opts = array('attributes'=> array('target'=>"_blank"),'absolute' => true);
+    $variables['url'] = l($url,$url,$opts);
   }
-  return $out;
+
 }

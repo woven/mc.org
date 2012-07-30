@@ -17,7 +17,6 @@ function mt_strongarm() {
     ),
     'event_feed_node_form' => array(
       'title' => '1',
-      'author' => '1',
       'options' => '1',
       'path' => '1',
       'comment_settings' => '1',
@@ -34,7 +33,6 @@ function mt_strongarm() {
       'themes' => '1',
       'field_about|0|value' => '1',
       'field_about|value|format' => '1',
-      'author' => '1',
       'options' => '1',
       'comment_settings' => '1',
       'path' => '1',
@@ -46,7 +44,6 @@ function mt_strongarm() {
       'field_place|0|nid|nid' => '1',
       'comment_settings' => '1',
       'path' => '1',
-      'author' => '1',
       'options' => '1',
     ),
   );

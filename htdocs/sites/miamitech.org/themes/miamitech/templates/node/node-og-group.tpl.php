@@ -51,22 +51,3 @@
  * @see template_preprocess_node()
  */
 ?>
-<?php if(!empty($content)){ ?>
-<div id="node-<?php print $node->nid; ?>" class="node<?php if ($sticky) { print ' sticky'; } ?><?php if (!$status) { print ' node-unpublished'; } ?> clear-block">
-
-  <div class="meta">
-  <?php if (isset($submitted)): ?>
-    <span class="submitted"><?php print $submitted ?></span>
-  <?php endif; ?>
-  </div>
-
-  <div class="content">
-    <?php print $content ?>
-  </div>
-
-  <!--<div class="more-link">
-	 <?php print l('<span>' . t('Find out more') . '</span><span class="ico-small ico-more-link"></span>', 'groups/' . $node->field_small_name[0]['value'] . '/about' , array('html' => true)); ?>
-  </div>-->
-
-</div> 
-<?php } ?>
