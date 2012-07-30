@@ -56,6 +56,31 @@ function mc_redirect_when_session_variable_set($form, &$form_state) {
   unset($_SESSION['anonymous_group']);
 }
 
+/*
+ * hook_late_form_alter
+ */
+function mc_late_form_alter(&$form, &$form_state, $form_id) {
+
+  /*
+   * Enhancement to the confirm_form forms see http://api.drupal.org/api/drupal/modules%21system%21system.module/function/confirm_form/6
+   */
+  if($form['#theme'] == 'confirm_form'){
+    //wrap "This action cannot be undone." div and p
+    $form['description']['#prefix'] = '<div class="undone"><p>';
+    $form['description']['#suffix'] = '</div></p>';
+
+    //better styles for the cancel btn on the del pages
+    $form['actions']['cancel'] = array(
+       '#type' => 'button',
+       '#value' => t('Cancel'),
+       '#attributes' => array(
+         'onclick' => 'javascript: history.go(-1); return false;',
+         'class' => 'btn-node-cancel'
+       ),
+       '#weight' => -2,
+    );
+  }
+}
 
 /**
  * Implementation of hook_form_alter()

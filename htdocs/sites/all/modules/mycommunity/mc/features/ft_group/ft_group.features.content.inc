@@ -11,7 +11,8 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_about',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '9',
+      'weight' => '35',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -21,7 +22,7 @@ function ft_group_content_default_fields() {
       ),
       'full' => array(
         'format' => 'hidden',
-        'exclude' => 0,
+        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',
@@ -77,7 +78,8 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_featured_items',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '11',
+      'weight' => '37',
+      'parent' => '',
       'label' => array(
         'format' => 'above',
       ),
@@ -165,7 +167,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_manager',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '21',
+      'weight' => '41',
       'parent' => '',
       'label' => array(
         'format' => 'above',
@@ -238,8 +240,8 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_url',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '26',
-      'parent' => 'group_meetup',
+      'weight' => '38',
+      'parent' => '',
       'label' => array(
         'format' => 'above',
       ),
@@ -312,7 +314,8 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_header_color',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '7',
+      'weight' => '33',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -322,7 +325,7 @@ function ft_group_content_default_fields() {
       ),
       'full' => array(
         'format' => 'hidden',
-        'exclude' => 0,
+        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',
@@ -396,7 +399,8 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_header_title_color',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '8',
+      'weight' => '34',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -406,7 +410,7 @@ function ft_group_content_default_fields() {
       ),
       'full' => array(
         'format' => 'hidden',
-        'exclude' => 0,
+        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',
@@ -484,7 +488,8 @@ black',
     'field_name' => 'field_list_image',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '10',
+      'weight' => '36',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -494,7 +499,7 @@ black',
       ),
       'full' => array(
         'format' => 'hidden',
-        'exclude' => 0,
+        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'image_plain',
@@ -569,7 +574,8 @@ black',
     'field_name' => 'field_logo',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '6',
+      'weight' => '32',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
       ),
@@ -636,7 +642,8 @@ black',
     'field_name' => 'field_small_name',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '5',
+      'weight' => '30',
+      'parent' => '',
       'label' => array(
         'format' => 'hidden',
       ),
