@@ -696,8 +696,10 @@ function mt_preprocess_og_mission(&$variables) {
   $variables['mission'] = check_markup($variables['mission'],$format);
 
   //expose the group url to the templates
-  $url = $node->field_group_url['0']['url'];
-  $opts = array('attributes'=> array('target'=>"_blank"),'absolute' => true);
-  $variables['url'] = l($url,$url,$opts);
+  $url = $node->field_group_url[0]['url'];
+  if(!empty($url)){
+    $opts = array('attributes'=> array('target'=>"_blank"),'absolute' => true);
+    $variables['url'] = l($url,$url,$opts);
+  }
 
 }
