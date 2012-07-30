@@ -43,6 +43,7 @@ stylesheets[screen][] = "css/mt.css"
 stylesheets[screen][] = "js/colorbox/colorbox.css"
 stylesheets[all][] = "views_gallery.css"
 stylesheets[screen][] = "css/buttons.css"
+stylesheets[screen][] = "css/form-confirm.css"
 
 ;disable core css files
 stylesheets[all][] = "user.css"
