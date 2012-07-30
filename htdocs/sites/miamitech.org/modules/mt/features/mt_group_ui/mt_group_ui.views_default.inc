@@ -4913,7 +4913,7 @@ return false;',
       'breadcrumb' => '',
       'default_argument_type' => 'node',
       'default_argument' => '',
-      'validate_type' => 'none',
+      'validate_type' => 'php',
       'validate_fail' => 'not found',
       'break_phrase' => 0,
       'not' => 0,
@@ -4970,10 +4970,17 @@ return false;',
       'validate_argument_group_node_type' => array(
         'group' => 0,
       ),
-      'validate_argument_php' => '',
+      'validate_argument_php' => '$nid = $argument;
+$node = node_load($nid);
+if($node->field_group_url[0][\'url\'] || $node->body){
+$node = node_load($nid);
+return true;
+}
+
+return false;',
     ),
   ));
-  $handler->override_option('css_class', 'group-mission');
+  $handler->override_option('css_class', 'group-mission block');
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
     'grouping' => '',
