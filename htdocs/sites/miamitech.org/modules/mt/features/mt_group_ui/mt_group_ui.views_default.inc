@@ -4845,7 +4845,7 @@ return false;',
         'strip_tags' => 0,
       ),
       'empty' => '',
-      'hide_empty' => 0,
+      'hide_empty' => 1,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'exclude' => 0,
@@ -4880,7 +4880,7 @@ return false;',
         'strip_tags' => 0,
       ),
       'empty' => '',
-      'hide_empty' => 0,
+      'hide_empty' => 1,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'link_to_node' => 0,
@@ -4973,25 +4973,25 @@ return false;',
       'validate_argument_php' => '',
     ),
   ));
-  $handler->override_option('css_class', 'content-wrapper');
+  $handler->override_option('css_class', 'group-mission');
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
     'grouping' => '',
     'group' => array(
       'element_type' => 'h3',
-      'class' => 'title',
+      'class' => '',
     ),
     'list' => array(
       'element_type' => '',
       'class' => '',
     ),
     'row' => array(
-      'element_type' => 'div',
-      'class' => 'content',
+      'element_type' => '',
+      'class' => '',
       'last_every_nth' => '0',
-      'first_class' => 'first',
-      'last_class' => 'last',
-      'striping_classes' => 'odd even',
+      'first_class' => '',
+      'last_class' => '',
+      'striping_classes' => '',
     ),
   ));
   $handler->override_option('row_plugin', 'semanticviews_fields');
@@ -4999,11 +4999,11 @@ return false;',
     'semantic_html' => array(
       'body' => array(
         'element_type' => 'div',
-        'class' => 'mission-statement',
+        'class' => 'group-statement',
       ),
       'field_group_url_url' => array(
-        'element_type' => 'p',
-        'class' => '',
+        'element_type' => 'div',
+        'class' => 'group-url',
       ),
     ),
     'skip_blank' => 0,
