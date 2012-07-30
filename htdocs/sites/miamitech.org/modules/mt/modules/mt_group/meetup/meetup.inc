@@ -21,7 +21,12 @@ class MeetupParser{
       }
     }
     else{
-      $temp = file_get_contents($url);
+      if(preg_match('/(https|http):\/{2}/i', $url)){
+        $temp = file_get_contents($url);
+      }
+      else{
+        $temp = file_get_contents('http://'. $url);
+      }
       if (preg_match('/<body id="meetupbody"/i', $temp)) {
         preg_match('/((\w+\.|)\w+\.[a-z.]{1,}(\/|))/i', $url, $result);
         $this->group_url = $result['0'];
