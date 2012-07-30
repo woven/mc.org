@@ -69,6 +69,7 @@ function mc_late_form_alter(&$form, &$form_state, $form_id) {
     $form['description']['#prefix'] = '<div class="undone"><p>';
     $form['description']['#suffix'] = '</div></p>';
 
+    //better styles for the cancel btn on the del pages
     $form['actions']['cancel'] = array(
        '#type' => 'button',
        '#value' => t('Cancel'),
