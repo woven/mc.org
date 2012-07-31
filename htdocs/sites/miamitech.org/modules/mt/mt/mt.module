@@ -387,6 +387,25 @@ function mt_form_alter(&$form, &$form_state, $form_id){
   }
 }
 
+function mt_preprocess_semanticviews_view_fields($vars){
+  dsm($vars);
+
+  foreach($vars['fields'] as &$field){
+    if(!empty($field->attributes)){
+      //dsm($field);
+      $pattern = "({(.*?)})";
+      $cls = $field->attributes['class'];
+
+      preg_match("({(.*?)})",$cls,$matchs);
+      if(count($matchs) > 1){
+        parse_str($matchs[1],$attr);
+        dsm($attr,$cls);
+      }
+
+    }
+  }
+}
+
 function mt_preprocess_page(&$vars){
   if(arg(0)=='latest' && isset($_GET['title'])){
     $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
