@@ -442,3 +442,7 @@ body #navigation {
 .view-mc-events-by-dates .hash {
   display: none;
 }
+
+.default-message {
+  color: #CCC;
+}
