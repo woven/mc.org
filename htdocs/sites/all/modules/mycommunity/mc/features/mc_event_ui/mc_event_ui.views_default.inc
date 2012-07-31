@@ -878,7 +878,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php 
-$string = $data->event_unix_event_start + $data->node_title + $data->location_name;
+$string = $data->event_unix_event_start . $data->node_title . $data->location_name;
 $hash = md5($string);
 echo $hash;
 ?>',
