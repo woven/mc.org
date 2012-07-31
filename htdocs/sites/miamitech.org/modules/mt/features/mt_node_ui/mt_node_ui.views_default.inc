@@ -953,8 +953,7 @@ else {
       'hide_alter_empty' => 1,
       'value' => '<?php 
   if ($data->event_unix_event_start){
-   $iso_start = date(\'c\',$data->event_unix_event_start);
-    print \'<meta itemprop="startDate" content="\'.$iso_start.\'">\';
+    print (_schema_meta_date($data->event_unix_event_start));
     print theme_mc_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
   }
 ?>',
