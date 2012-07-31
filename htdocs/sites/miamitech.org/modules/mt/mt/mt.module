@@ -387,6 +387,27 @@ function mt_form_alter(&$form, &$form_state, $form_id){
   }
 }
 
+function mt_preprocess_semanticviews_view_fields($vars){
+  //parse querystring at classes and turn them into regular attributes
+  // example: class-name {attr1=2&attr3=5} >> <tag class="class-name" attr1="2" attr3="5"></tag>
+  //
+  foreach($vars['fields'] as &$field){
+    if(!empty($field->attributes)){
+      $ptn = "({(.*?)})";
+      $cls = &$field->attributes['class'];
+
+      preg_match($ptn,$cls,$matchs);
+
+      if(count($matchs) > 1){
+        $cls = trim(preg_replace($ptn,"",$cls));
+        parse_str($matchs[1],$attr);
+        $field->attributes = array_merge($field->attributes,$attr);
+      }
+
+    }
+  }
+}
+
 function mt_preprocess_page(&$vars){
   if(arg(0)=='latest' && isset($_GET['title'])){
     $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
