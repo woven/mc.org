@@ -131,6 +131,10 @@ function miamitech_nd_location_address($field) {
     }
   }
 
+  if(empty($address)){
+     return '<div class="no-location"> A location wasn\'t provided.</div>';
+  }
+
   $lines = array(
     0 => array('name'),
     1 => array('street'),
