@@ -351,6 +351,7 @@ dsm($object);
           'ds_eval_code' => 'Default',
         ),
         'code' => '<div itemprop="location" itemscope itemtype="http://schema.org/Place">
+<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 <?php if((isset($object->location[\'street\']) && !empty($object->location[\'street\'])) || (isset($object->location[\'city\']) && !empty($object->location[\'city\'])) || (isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])) ): ?>
 
 <?php if(isset($object->location[\'street\']) && !empty($object->location[\'street\'])): ?>
@@ -363,6 +364,7 @@ dsm($object);
 A location wasn\'t provided.
 </div>
 <?php endif; ?>
+</div>
 </div>',
         'token' => 1,
       ),
