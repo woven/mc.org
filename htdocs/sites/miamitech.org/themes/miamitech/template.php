@@ -108,6 +108,85 @@ function _miamitech_get_featured_carousel_array($field_array){
   return $featured_items;
 }
 
+function miamitech_nd_location_address($field) {
+  // Get the location field settings for this node type
+  $settings = variable_get('location_settings_node_'. $field['object']->type, array());
+
+  // Loop through and collect the address fields we want to output in the order specified in node location settings,
+  // and check that they are not set to be hidden in node location setting
+  // also ignore arrays (eg. locpick)
+  $address = array();
+
+
+  foreach ($settings['form']['fields'] as $fieldname => $fieldsettings) {
+    if (!$settings['display']['hide'][$fieldname] && !empty($field['object']->location[$fieldname]) && !is_array($field['object']->location[$fieldname])) {
+
+      // Replace country code with full country name.
+      if ($fieldname == 'country') {
+        module_load_include('inc', 'location', 'location');
+        $field['object']->location[$fieldname] = location_country_name($field['object']->location[$fieldname]);
+      }
+      // Add this field to our array of fields to output.
+      $address[$fieldname] = check_plain($field['object']->location[$fieldname]);
+    }
+  }
+
+  $lines = array(
+    0 => array('name'),
+    1 => array('street'),
+    2 => array('city','province','postal_code')
+  );
+
+  $lines_value = array();
+
+  foreach($lines as $key => $parts){
+
+    foreach($parts as $part){
+       if(!empty($address[$part])){
+         $value = $address[$part];
+        switch($part){
+          case 'name':
+            $lines_value[$key][] = '<span itemprop="name" class="loc-name">'.$value.'</span>';
+          break;
+          case 'street':
+            $lines_value[$key][] = '<span itemprop="streetAddress" class="loc-street">'.$value.'</span>';
+          break;
+          case 'city':
+            $lines_value[$key][] = '<span itemprop="addressLocality" class="loc-city">'.$value.'</span>';
+          break;
+          case 'province':
+            $lines_value[$key][] = '<span itemprop="addressRegion" class="loc-state">'.$value.'</span>';
+          break;
+          case 'postal_code':
+            $lines_value[$key][] = '<span itemprop="postalCode" class="loc-postalcode">'.$value.'</span>';
+            break;
+        };
+      }
+    }
+  };
+
+  $content = "";
+
+  foreach($lines_value as $key => $values){
+    if($key == 1){
+      //open postal address div
+      $content .= '<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">';
+    };
+
+    if(count($values)){
+      $content .= "<div class='line-$key'>".implode($values, ', ')."</div>";
+    }
+
+    if($key == 2){
+      //close the postal address div
+      $content .= '</div>';
+    };
+  }
+
+  //dsm($address);
+  return '<div itemprop="location" itemscope itemtype="http://schema.org/Place">' . $content . '</div>';
+}
+
 function miamitech_ds_field($field) {
   $output = '';
 
