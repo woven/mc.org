@@ -409,7 +409,7 @@ body #navigation {
   margin-top: 0px;
 }
 
-.view-content .event-separator {
+.event-separator {
     height: 26px;
     line-height: 26px;
     background: url(../images/common/bg-block-title.png) 0 0 repeat-x;
@@ -429,4 +429,16 @@ body #navigation {
 
 .group-mission .group-url{
     margin: 10px 0px;
+}
+
+.duplicates .event {
+  display: none;
+}
+
+.duplicates .event.first {
+  display: block;
+}
+
+.view-mc-events-by-dates .hash {
+  display: none;
 }
