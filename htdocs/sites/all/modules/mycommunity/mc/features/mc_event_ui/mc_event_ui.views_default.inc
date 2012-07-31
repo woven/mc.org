@@ -27,6 +27,42 @@ function mc_event_ui_views_default_views() {
     ),
   ));
   $handler->override_option('fields', array(
+    'path' => array(
+      'label' => 'Event Path',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'absolute' => 0,
+      'exclude' => 1,
+      'id' => 'path',
+      'table' => 'node',
+      'field' => 'path',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'field_list_image_fid' => array(
       'label' => '',
       'alter' => array(
@@ -69,7 +105,7 @@ function mc_event_ui_views_default_views() {
       'relationship' => 'none',
     ),
     'phpcode_1' => array(
-      'label' => 'PHP code',
+      'label' => 'Image output',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -380,27 +416,30 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
     'title' => array(
       'label' => '',
       'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
+        'alter_text' => 1,
+        'text' => '<a href="[path]" itemprop="url"><span itemprop="name">[title]</span></a>',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
         'help' => '',
-        'trim' => 1,
+        'trim' => 0,
         'max_length' => '50',
         'word_boundary' => 1,
-        'ellipsis' => 1,
+        'ellipsis' => 0,
         'html' => 0,
-        'strip_tags' => 1,
+        'strip_tags' => 0,
       ),
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'link_to_node' => 1,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
       'spaces' => array(
         'type' => NULL,
         'frontpage' => FALSE,
@@ -557,8 +596,10 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -573,8 +614,10 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'value' => '<?php 
   $view = views_get_current_view();
+  print _schema_meta_date($data->event_unix_event_start);
   print theme_mc_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time, $view->hide_day);
 ?>',
       'exclude' => 1,
@@ -1075,7 +1118,7 @@ echo $hash;
     ),
     'row' => array(
       'element_type' => 'div',
-      'class' => 'event',
+      'class' => 'event {itemscope&itemtype=http://schema.org/Event}',
       'last_every_nth' => '0',
       'first_class' => 'first',
       'last_class' => 'last',
@@ -1103,7 +1146,7 @@ echo $hash;
       ),
       'body' => array(
         'element_type' => 'p',
-        'class' => 'description',
+        'class' => 'description  {itemprop=description}',
       ),
     ),
     'skip_blank' => 0,

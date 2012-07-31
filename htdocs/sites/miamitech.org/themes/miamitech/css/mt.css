@@ -446,3 +446,12 @@ body #navigation {
 .default-message {
   color: #CCC;
 }
+
+.field-nd-location-address{
+    padding-bottom: 5px;
+}
+
+.field-nd-location-address .line-0{
+    font-weight: bold;
+    padding-bottom: 5px;
+}
