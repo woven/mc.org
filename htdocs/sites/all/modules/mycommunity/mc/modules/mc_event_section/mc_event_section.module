@@ -48,7 +48,7 @@ function _mc_event_section_next_two_weeks(&$content){
   JOIN event as e on n.nid=e.nid
   WHERE (e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s')
   GROUP BY n.nid
-  ORDER BY (
+  ORDER BY Day, (
   CASE WHEN Section='Today' then 0
    WHEN Section='Tomorrow' then 1
    WHEN Section='This week' then 2
@@ -182,7 +182,7 @@ function _mc_event_section_after_two_weeks(&$content){
   JOIN event as e on n.nid=e.nid
   WHERE e.unix_event_start > '%s'
   GROUP BY n.nid
-  ORDER BY (
+  ORDER BY Day, (
   CASE WHEN Section='Today' then 0
    WHEN Section='Tomorrow' then 1
    WHEN Section='This week' then 2
