@@ -11938,7 +11938,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       ),
       'title' => array(
         'element_type' => 'h5',
-        'class' => '{itemprop=url}',
+        'class' => '',
       ),
       'nothing_3' => array(
         'element_type' => 'p',
