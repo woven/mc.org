@@ -108,6 +108,37 @@ function _miamitech_get_featured_carousel_array($field_array){
   return $featured_items;
 }
 
+function miamitech_ds_field($field) {
+  $output = '';
+
+  $attr = array();
+  $attr['class'] = "field ";
+  $attr['class'] .= $field['class'];
+
+
+  //add itemprop for body fields.
+  if($field['format'] == 'nd_bodyfield'){
+    $attr['itemprop'] = "description";
+  }
+
+  if (!empty($field['content'])) {
+    $output .= "<div " . drupal_attributes($attr) .">";
+    // Above label.
+    if ($field['labelformat'] == 'above') {
+      $output .= '<div class="field-label">'. $field['title'] .': </div>';
+    }
+    // Inline label
+    if ($field['labelformat'] == 'inline') {
+      $output .= '<div class="field-label-inline-first">'. $field['title'] .': </div>';
+    }
+    $output .= $field['content'];
+    $output .= '</div>';
+  }
+
+  return $output;
+}
+
+
 /**
  * Implementation of theme_preprocess_age
  * 
@@ -116,6 +147,7 @@ function _miamitech_get_featured_carousel_array($field_array){
  * 
  */
 function miamitech_preprocess_page(&$variables){
+
   //adding schema variables
   $variables['page_attr']  = array();
   if($variables['node']){
