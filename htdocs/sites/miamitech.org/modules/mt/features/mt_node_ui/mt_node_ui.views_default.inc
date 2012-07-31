@@ -932,8 +932,10 @@ else {
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -948,8 +950,11 @@ else {
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'value' => '<?php 
   if ($data->event_unix_event_start){
+   $iso_start = date(\'c\',$data->event_unix_event_start);
+    print \'<meta itemprop="startDate" content="\'.$iso_start.\'">\';
     print theme_mc_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
   }
 ?>',
@@ -957,47 +962,6 @@ else {
       'id' => 'phpcode',
       'table' => 'customfield',
       'field' => 'phpcode',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-    'field_place_nid' => array(
-      'label' => 'Place',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 1,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'custom',
-      'format' => 'default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 0,
-      'id' => 'field_place_nid',
-      'table' => 'node_data_field_place',
-      'field' => 'field_place_nid',
       'override' => array(
         'button' => 'Use default',
       ),
@@ -1023,14 +987,16 @@ else {
       'striping_classes' => '',
     ),
   ));
-  $handler->override_option('row_plugin', 'fields');
   $handler->override_option('row_options', array(
-    'inline' => array(
-      'phpcode' => 'phpcode',
-      'field_place_nid' => 'field_place_nid',
+    'semantic_html' => array(
+      'phpcode' => array(
+        'element_type' => 'div',
+        'class' => '',
+        'label_element_type' => 'label',
+        'label_class' => '',
+      ),
     ),
-    'separator' => '',
-    'hide_empty' => 1,
+    'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', '4');
