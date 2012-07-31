@@ -388,18 +388,20 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 }
 
 function mt_preprocess_semanticviews_view_fields($vars){
-  dsm($vars);
-
+  //parse querystring at classes and turn them into regular attributes
+  // example: class-name {attr1=2&attr3=5} >> <tag class="class-name" attr1="2" attr3="5"></tag>
+  //
   foreach($vars['fields'] as &$field){
     if(!empty($field->attributes)){
-      //dsm($field);
-      $pattern = "({(.*?)})";
-      $cls = $field->attributes['class'];
+      $ptn = "({(.*?)})";
+      $cls = &$field->attributes['class'];
 
-      preg_match("({(.*?)})",$cls,$matchs);
+      preg_match($ptn,$cls,$matchs);
+
       if(count($matchs) > 1){
+        $cls = trim(preg_replace($ptn,"",$cls));
         parse_str($matchs[1],$attr);
-        dsm($attr,$cls);
+        $field->attributes = array_merge($field->attributes,$attr);
       }
 
     }
