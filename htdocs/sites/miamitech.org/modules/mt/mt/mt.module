@@ -407,10 +407,21 @@ function cls_to_attr($attr = array(),$what = 'class'){
 }
 
 function mt_preprocess_semanticviews_view_unformatted(&$vars){
-  //dsm($vars);
-  foreach($vars['row_attributes'] as &$attr){
-    $attr = cls_to_attr($attr);
+
+  if(!empty($vars['group_attributes'])){
+    $vars['group_attributes'] =  cls_to_attr($vars['group_attributes']);
   }
+
+  if(!empty($vars['list_attributes'])){
+    $vars['list_attributes'] =  cls_to_attr($vars['list_attributes']);
+  }
+
+  if(!empty($vars['row_attributes'])){
+    foreach($vars['row_attributes'] as &$attr){
+      $attr = cls_to_attr($attr);
+    }
+  }
+
 }
 
 function mt_preprocess_semanticviews_view_fields(&$vars){
