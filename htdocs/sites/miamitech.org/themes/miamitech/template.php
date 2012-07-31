@@ -116,6 +116,16 @@ function _miamitech_get_featured_carousel_array($field_array){
  * 
  */
 function miamitech_preprocess_page(&$variables){
+  //adding schema variables
+  $variables['page_attr']  = array();
+  if($variables['node']){
+    $node = $variables['node'];
+    if($node->type == "event"){
+      $variables['page_attr']['itemscope '] = "";
+      $variables['page_attr']['itemtype '] = "http://schema.org/Event";
+    }
+  }
+
   $page_classes = '';
   if (arg(0)=="user" && arg(1)!="" && arg(1)!="login" & arg(1)!="register" && arg(1)!="password")
   $page_classes .= " user-profile";
