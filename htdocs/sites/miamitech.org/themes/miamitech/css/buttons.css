@@ -11,7 +11,8 @@
 button,
 .form-button-cancel,
 .button,
-.btn-blue {
+.button:visited,
+.btn-blue{
     display: block;
     margin: 0px;
     cursor:pointer;
@@ -51,7 +52,7 @@ button:hover,
 button:active,
 .form-button-cancel:active,
 .button:active,
-.btn-blue:active {
+.btn-blue:active{
     position:relative;
     top:1px;
     text-decoration:none;
