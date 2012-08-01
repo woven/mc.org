@@ -460,9 +460,6 @@ body #navigation {
 .show-more-events a{
   font-size: 11px;
   text-decoration: none;
-  color: #B3B3B3;
-}
-
-.show-more-events a:hover{ 
-  text-decoration: underline;
+  color: #333;
+  margin-left: 104px;
 }
