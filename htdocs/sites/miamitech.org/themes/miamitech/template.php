@@ -171,24 +171,27 @@ function miamitech_nd_location_address($field) {
 
   $content = "";
 
-  foreach($lines_value as $key => $values){
-    if($key == 1){
-      //open postal address div
-      $content .= '<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">';
-    };
+  $part1 = "";
+  $part2 = "";
 
-    if(count($values)){
-      $content .= "<div class='line-$key'>".implode($values, ', ')."</div>";
+  foreach($lines_value as $key => $values){
+
+    if($key == 0){
+      if(count($values)){
+        $part1 = "<div class='line-$key'>".implode($values, ', ')."</div>";
+      }
     }
 
-    if($key == 2){
-      //close the postal address div
-      $content .= '</div>';
-    };
+    if($key > 0){
+      if(count($values)){
+        $part2 .= "<div class='line-$key'>".implode($values, ', ')."</div>";
+      }
+    }
   }
 
-  //dsm($address);
-  return '<div itemprop="location" itemscope itemtype="http://schema.org/Place">' . $content . '</div>';
+  $part2 = '<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">'.$part2.'</div>';
+
+  return '<div itemprop="location" itemscope itemtype="http://schema.org/Place">' . $part1 . $part2 . '</div>';
 }
 
 function miamitech_ds_field($field) {
