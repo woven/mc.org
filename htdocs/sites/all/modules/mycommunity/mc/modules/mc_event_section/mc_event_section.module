@@ -8,6 +8,8 @@ function _mc_event_section_all(){
 
   if(count($content)){
     print implode("\n",$content);
+    $path = drupal_get_path('module', 'mc_event_section');
+    drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
   }else{
     print "Wow, it's quiet around here.  Want to <a href='/node/add/event'>add an event</a> or <a href='/node/add/event-feed'>import an event feed</a>?";
   }
@@ -29,7 +31,7 @@ function _mc_event_section_next_two_weeks(&$content){
   $nextSunday = $thisSunday + 7 * 24 * 3600;
   $minsago = $now - (60 * 30);
 
-  $query = "SELECT n.nid,
+  $query = "SELECT n.nid, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),DAYOFYEAR(FROM_UNIXTIME(e.unix_event_start))) as 'Day',
       CASE 
           WHEN ((e.unix_event_start BETWEEN '%s' AND '%s') OR (e.unix_event_end BETWEEN '%s' AND '%s'))
           THEN 'Today'
@@ -46,7 +48,7 @@ function _mc_event_section_next_two_weeks(&$content){
   JOIN event as e on n.nid=e.nid
   WHERE (e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s')
   GROUP BY n.nid
-  ORDER BY (
+  ORDER BY Day, (
   CASE WHEN Section='Today' then 0
    WHEN Section='Tomorrow' then 1
    WHEN Section='This week' then 2
@@ -67,23 +69,7 @@ function _mc_event_section_next_two_weeks(&$content){
   $lists = array();
 
   while ($row = db_fetch_object($result)) {
-    switch($row->Section){
-      case 'Today':
-        $lists['Today'][] = $row->nid;
-        break;
-      case 'Tomorrow':
-        $lists['Tomorrow'][] = $row->nid;
-        break;
-      case 'This week':
-        $lists['This week'][] = $row->nid;
-        break;
-      case 'Next week':
-        $lists['Next week'][] = $row->nid;
-        break;
-      case 'Upcoming':
-        $lists['Upcoming'][] = $row->nid;
-        break;
-    }
+    $lists[$row->Section][$row->Day][] = $row->nid;
   }
 
   foreach($lists as $key => $list){
@@ -109,13 +95,20 @@ function _mc_event_section_print_view($key, $list){
     default:
       $block = "block_2";
   }
-
   $view_header = new stdClass();
   $view_header->current_display = $block;
   $view_header->display[$block]->display_title = $key;
   $head = '<div class="view"><div class="view-header">';
   $head .= theme("mc_event_view_header",$view_header);
   $head .= '</div></div>';
+  $output = '';
+  foreach ($list as $day => $nids) {
+    $output .= _mc_event_section_print_day_view($day, $nids, $key, $block);
+  }
+  return $head . $output;
+}
+
+function _mc_event_section_print_day_view($day, $list, $key, $block){
   $view = views_get_view('mc_events_by_dates');
   if (!$view || !$view->access($block)) {
     return;
@@ -127,8 +120,41 @@ function _mc_event_section_print_view($key, $list){
     }
   }
 
+  if($view->hide_day){
+    $head = '';
+  }
+  else {
+    $date = strtotime($day);
+    $head = '<div class="event-separator">';
+    switch($key){
+      case 'This week':
+      case 'Next week':
+        $head .= _mc_event_section_format_day($date);
+        break;
+      default:
+        $head .= _mc_event_section_format_week($date);
+    }
+    $head .= '</div>';
+  }
   $view_display =$view->preview($block, array(implode('+', $list)));
   return $head.$view_display;
+}
+
+function _mc_event_section_format_day($date){
+  return date('l', $date);
+}
+
+function _mc_event_section_format_week($date){
+  if(function_exists('_mc_date_calender_week')){
+    $week = _mc_date_calender_week($date);
+    $year = date('Y',$date);
+    $firstdayts = _mc_date_week_firstday($week,$year);
+    if($year > date('Y')){
+      return "Week of ". date('F jS Y',$firstdayts);
+    }else{
+      return "Week of ". date('F jS',$firstdayts);
+    }
+  }
 }
 
 function _mc_event_section_after_two_weeks(&$content){
@@ -147,7 +173,7 @@ function _mc_event_section_after_two_weeks(&$content){
   $nextSunday = $thisSunday + 7 * 24 * 3600;
   $minsago = $now - (60 * 30);
 
-  $query = "SELECT n.nid,
+  $query = "SELECT n.nid, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),(7*(WEEKOFYEAR(FROM_UNIXTIME(e.unix_event_start)) -1)  + 1)) as 'Day',
       CASE 
           WHEN e.unix_event_start > '%s'
           THEN 'Upcoming'
@@ -156,7 +182,7 @@ function _mc_event_section_after_two_weeks(&$content){
   JOIN event as e on n.nid=e.nid
   WHERE e.unix_event_start > '%s'
   GROUP BY n.nid
-  ORDER BY (
+  ORDER BY Day, (
   CASE WHEN Section='Today' then 0
    WHEN Section='Tomorrow' then 1
    WHEN Section='This week' then 2
@@ -179,7 +205,7 @@ function _mc_event_section_after_two_weeks(&$content){
   while ($row = db_fetch_object($result)) {
     switch($row->Section){
       case 'Upcoming':
-        $lists['Upcoming'][] = $row->nid;
+        $lists['Upcoming'][$row->Day][] = $row->nid;
         break;
     }
   }

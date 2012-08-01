@@ -28,7 +28,7 @@
     <?php endif; ?>
   </div></div>
 
-  <div id='page' class="<?php print $page_classes; ?>">
+  <div id='page' class="<?php print $page_classes; ?>" <?php print drupal_attributes($variables['page_attr']) ?>>
     <div class='limiter clear-block'>
 
       <?php include_once ('inc/page.drupal.inc'); ?> 

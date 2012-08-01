@@ -409,7 +409,7 @@ body #navigation {
   margin-top: 0px;
 }
 
-.view-content .event-separator {
+.event-separator {
     height: 26px;
     line-height: 26px;
     background: url(../images/common/bg-block-title.png) 0 0 repeat-x;
@@ -425,8 +425,44 @@ body #navigation {
 
 #boxes-box-mc_event_sections_box .view-content p {
   margin-left: 104px;
+  margin-bottom: 5px;
 }
 
 .group-mission .group-url{
     margin: 10px 0px;
+}
+
+.duplicates .event {
+  display: none;
+}
+
+.duplicates .event.first {
+  display: block;
+}
+
+.view-mc-events-by-dates .hash {
+  display: none;
+}
+
+.default-message {
+  color: #CCC;
+}
+
+.field-nd-location-address{
+    padding-bottom: 5px;
+}
+
+.field-nd-location-address .line-0{
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.show-more-events a{
+  font-size: 11px;
+  text-decoration: none;
+  color: #B3B3B3;
+}
+
+.show-more-events a:hover{ 
+  text-decoration: underline;
 }

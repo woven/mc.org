@@ -350,7 +350,9 @@ dsm($object);
         'formatters' => array(
           'ds_eval_code' => 'Default',
         ),
-        'code' => '<?php if((isset($object->location[\'street\']) && !empty($object->location[\'street\'])) || (isset($object->location[\'city\']) && !empty($object->location[\'city\'])) || (isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])) ): ?>
+        'code' => '<div itemprop="location" itemscope itemtype="http://schema.org/Place">
+<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+<?php if((isset($object->location[\'street\']) && !empty($object->location[\'street\'])) || (isset($object->location[\'city\']) && !empty($object->location[\'city\'])) || (isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])) ): ?>
 
 <?php if(isset($object->location[\'street\']) && !empty($object->location[\'street\'])): ?>
    [location-street_0]<br/>
@@ -361,7 +363,9 @@ dsm($object);
 <div class="no-location">
 A location wasn\'t provided.
 </div>
-<?php endif; ?>',
+<?php endif; ?>
+</div>
+</div>',
         'token' => 1,
       ),
     ),

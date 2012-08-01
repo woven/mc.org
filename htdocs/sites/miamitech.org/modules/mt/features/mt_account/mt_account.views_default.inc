@@ -164,7 +164,21 @@ return true;',
     'type' => 'none',
   ));
   $handler->override_option('title', 'My Groups');
-  $handler->override_option('empty', 'Nothing to show here. Would you like to <a href="/node/add/group">add a group</a>?');
+  $handler->override_option('empty', '<?php 
+global $user;
+if(is_numeric(arg(1))){
+$account = user_load(array(\'uid\' => arg(1)));
+}
+else{
+$account = user_load(array(\'name\' => arg(1)));
+}
+
+$is_same_user = $account->uid==$user->uid;
+
+?>
+<div class="default-message">
+Nothing to show here.<?php if($is_same_user): ?> Would you like to <a href="/node/add/group">add a group</a>?<?php endif; ?>
+</div>');
   $handler->override_option('empty_format', '3');
   $handler->override_option('use_ajax', TRUE);
   $handler->override_option('items_per_page', 0);

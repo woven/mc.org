@@ -27,6 +27,42 @@ function mc_event_ui_views_default_views() {
     ),
   ));
   $handler->override_option('fields', array(
+    'path' => array(
+      'label' => 'Event Path',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'absolute' => 0,
+      'exclude' => 1,
+      'id' => 'path',
+      'table' => 'node',
+      'field' => 'path',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'field_list_image_fid' => array(
       'label' => '',
       'alter' => array(
@@ -69,7 +105,7 @@ function mc_event_ui_views_default_views() {
       'relationship' => 'none',
     ),
     'phpcode_1' => array(
-      'label' => 'PHP code',
+      'label' => 'Image output',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -380,27 +416,30 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
     'title' => array(
       'label' => '',
       'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
+        'alter_text' => 1,
+        'text' => '<a href="[path]" itemprop="url"><span itemprop="name">[title]</span></a>',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
         'help' => '',
-        'trim' => 1,
+        'trim' => 0,
         'max_length' => '50',
         'word_boundary' => 1,
-        'ellipsis' => 1,
+        'ellipsis' => 0,
         'html' => 0,
-        'strip_tags' => 1,
+        'strip_tags' => 0,
       ),
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'link_to_node' => 1,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
       'spaces' => array(
         'type' => NULL,
         'frontpage' => FALSE,
@@ -557,8 +596,10 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -573,8 +614,10 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'value' => '<?php 
   $view = views_get_current_view();
+  print _schema_meta_date($data->event_unix_event_start);
   print theme_mc_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time, $view->hide_day);
 ?>',
       'exclude' => 1,
@@ -851,6 +894,46 @@ return "Week of ". date(\'F jS\',$firstdayts);
       ),
       'relationship' => 'none',
     ),
+    'phpcode_4' => array(
+      'label' => 'Event hash',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php 
+$string = $data->event_unix_event_start . $data->node_title . $data->location_name;
+$hash = md5($string);
+echo $hash;
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_4',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('sorts', array(
     'unix_event_start' => array(
@@ -1024,18 +1107,18 @@ return "Week of ". date(\'F jS\',$firstdayts);
   $handler->override_option('distinct', 1);
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
-    'grouping' => '',
+    'grouping' => 'phpcode_4',
     'group' => array(
       'element_type' => 'h3',
-      'class' => 'title',
+      'class' => 'hash',
     ),
     'list' => array(
       'element_type' => '',
-      'class' => '',
+      'class' => 'duplicates',
     ),
     'row' => array(
       'element_type' => 'div',
-      'class' => '',
+      'class' => 'event {itemscope&itemtype=http://schema.org/Event}',
       'last_every_nth' => '0',
       'first_class' => 'first',
       'last_class' => 'last',
@@ -1063,7 +1146,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
       ),
       'body' => array(
         'element_type' => 'p',
-        'class' => 'description',
+        'class' => 'description  {itemprop=description}',
       ),
     ),
     'skip_blank' => 0,
@@ -1072,47 +1155,9 @@ return "Week of ". date(\'F jS\',$firstdayts);
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', '-1');
   $handler = $view->new_display('block', 'this-next{week}', 'block_1');
-  $handler->override_option('style_options', array(
-    'grouping' => 'unix_event_start_4',
-    'group' => array(
-      'element_type' => 'div',
-      'class' => 'event-separator',
-    ),
-    'list' => array(
-      'element_type' => '',
-      'class' => '',
-    ),
-    'row' => array(
-      'element_type' => 'div',
-      'class' => '',
-      'last_every_nth' => '0',
-      'first_class' => 'first',
-      'last_class' => 'last',
-      'striping_classes' => 'odd even',
-    ),
-  ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
   $handler = $view->new_display('block', 'upcoming', 'block_2');
-  $handler->override_option('style_options', array(
-    'grouping' => 'phpcode_3',
-    'group' => array(
-      'element_type' => 'div',
-      'class' => 'event-separator',
-    ),
-    'list' => array(
-      'element_type' => '',
-      'class' => '',
-    ),
-    'row' => array(
-      'element_type' => 'div',
-      'class' => '',
-      'last_every_nth' => '0',
-      'first_class' => 'first',
-      'last_class' => 'last',
-      'striping_classes' => 'odd even',
-    ),
-  ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
 
