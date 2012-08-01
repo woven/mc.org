@@ -87,6 +87,7 @@ $myUrl = $_SERVER[\'HTTP_HOST\'];
 $node = node_load(arg(1));
 $group_name = array_pop($node->og_groups_both);
 $string = $node->title . \' |  \' . $group_name . \' | #miamitech\';
+$string = str_replace(\'"\',\'\', $string);
 ?>
 <a href="https://twitter.com/share" class="twitter-share-button" data-text="<?php echo $string; ?>">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>',
