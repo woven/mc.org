@@ -15,9 +15,10 @@ class MeetupParser{
         $this->event_feed = 'http://www.meetup.com/' . $this->small_name . '/events/ical';
         $this->group_url = 'http://www.meetup.com/' . $this->small_name;
         $page = file_get_contents($this->group_url);
-        $this->title = htmlqp($page, '#bannerGroupName')->text();
-        $this->body = htmlqp($page, '#groupDesc')->innerHTML();
-        $this->logo_url = htmlqp($page, '#C_nav #C_metabox .groupPhotoMeta img')->attr('src');
+        $options = array('convert_to_encoding'=>'utf-8');
+        $this->title = htmlqp($page, '#bannerGroupName', $options)->text();
+        $this->body = htmlqp($page, '#groupDesc', $options)->innerHTML();
+        $this->logo_url = htmlqp($page, '#C_nav #C_metabox .groupPhotoMeta img', $options)->attr('src');
       }
     }
     else{
@@ -37,9 +38,10 @@ class MeetupParser{
           $domain = str_replace('/','', $this->group_url);
           $this->event_feed = 'http://' . $domain . '/events/ical';
           $page = file_get_contents('http://' . $domain . '/');
-          $this->title = htmlqp($page, '#bannerGroupName')->text();
-          $this->body = htmlqp($page, '#groupDesc')->innerHTML();
-          $this->logo_url = htmlqp($page, '#C_nav #C_metabox .groupPhotoMeta img')->attr('src');
+          $options = array('convert_to_encoding'=>'utf-8');
+          $this->title = htmlqp($page, '#bannerGroupName', $options)->text();
+          $this->body = htmlqp($page, '#groupDesc', $options)->innerHTML();
+          $this->logo_url = htmlqp($page, '#C_nav #C_metabox .groupPhotoMeta img', $options)->attr('src');
         }
       }
       else {
