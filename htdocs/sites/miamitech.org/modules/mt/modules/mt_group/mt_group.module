@@ -1,4 +1,7 @@
 <?php
+
+define("MEETUP_FORMAT", '2');
+
 function mt_group_late_form_alter(&$form, &$form_state, $form_id){
   if($form_id=='group_node_form'){
     $form['title']['#required'] = false;
@@ -166,6 +169,9 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
                 ),
               );
             }
+          }
+          if(!empty($node->body)){
+            $node->format = MEETUP_FORMAT;
           }
         } 
         break;
