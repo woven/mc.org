@@ -11304,7 +11304,7 @@ print theme_ghh_node_categories($data->nid, 2);
       'label' => '',
       'alter' => array(
         'alter_text' => 1,
-        'text' => '<a href="[path]" itemprop="url"><span itemprop="name">Miami Heat at Philadelphia 76ers - Game 3 (Home Game 1)</span></a>',
+        'text' => '<a href="[path]" itemprop="url"><span itemprop="name">[title]</span></a>',
         'make_link' => 0,
         'path' => '',
         'absolute' => 0,
