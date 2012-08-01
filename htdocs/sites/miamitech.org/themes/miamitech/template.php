@@ -12,7 +12,7 @@ function miamitech_ud_profile_field_urlfilter($field) {
       'external' => true,
       'attributes' => array("rel"=>"nofollow","target"=>"_blank")
     );
-    return l($content,$content,$attr);
+    return l($content,addhttp($content),$attr);
   }
 }
 
