@@ -11,7 +11,7 @@ $(document).ready(function() {
           if($(events).length>1){
             var count = $(events).length - 1;
             var firstEvent = events.closest('.duplicates').find('.first');
-            var showMoreDiv = '<div class="show-more-events"><a href="#">Show similar</a></div>';
+            var showMoreDiv = '<div class="show-more-events"><a href="#">Show ' + count + ' similar</a></div>';
             firstEvent.append(showMoreDiv);
           }
         });
@@ -36,7 +36,7 @@ $(document).ready(function() {
     else {
       var events = $(duplicates).find('.event');
       var count = $(events).length - 1;
-      $(this).text('Show similar');
+      $(this).text('Show ' + count + ' similar');
     }
     event.preventDefault();
   });
