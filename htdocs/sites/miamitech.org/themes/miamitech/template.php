@@ -14,7 +14,8 @@ function miamitech_ud_profile_field_urlfilter($field) {
     );
     //link with http
     $link = addhttp($content);
-    return l($link,$link,$attr);
+
+    return l($content,$link,$attr);
   }
 }
 
