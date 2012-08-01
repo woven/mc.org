@@ -11,7 +11,7 @@ $(document).ready(function() {
           if($(events).length>1){
             var count = $(events).length - 1;
             var firstEvent = events.closest('.duplicates').find('.first');
-            var showMoreDiv = '<div class="show-more-events"><a href="#">' + count + ' more from other hosts</a></div>';
+            var showMoreDiv = '<div class="show-more-events"><a href="#">Show ' + count + ' similar from other hosts</a></div>';
             firstEvent.append(showMoreDiv);
           }
         });
@@ -31,12 +31,12 @@ $(document).ready(function() {
     });
     $(this).toggleClass('clicked');
     if($(this).hasClass('clicked')){
-      $(this).text('Hide events');
+      $(this).text('Hide similar');
     }
     else {
       var events = $(duplicates).find('.event');
       var count = $(events).length - 1;
-      $(this).text(count + ' more from other hosts');
+      $(this).text('Show ' + count + ' similar from other hosts');
     }
     event.preventDefault();
   });
