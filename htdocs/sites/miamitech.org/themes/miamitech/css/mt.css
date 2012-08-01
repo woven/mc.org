@@ -465,5 +465,9 @@ body #navigation {
 
 .show-more-events {
   margin-left: 104px;
+
+}
+
+.show-more-events a:hover{
   color: #333;
 }
