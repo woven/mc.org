@@ -264,6 +264,23 @@ function mt_event_feed_getAddressParts($address){
       'state'=>'', 
       'zip'=>'', 
     );
+  }
+
+  if(preg_match('/\(.+,{1,}.+\)/i', $address)){
+    $address_parts = array();
+    $parts = explode('(', $address);
+
+    $address_parts['name'] = $parts['0'];
+    $parts = explode(')', $parts['1']);
+    $parts = $parts['0'];
+    $parts = explode(', ', $parts);
+
+    $address_parts['address'] = $parts['0'];
+    $address_parts['city'] = $parts['1'];
+    $parts = explode(' ', $parts['2']);
+    $address_parts['state'] = $parts['0'];
+    $address_parts['zip'] = $parts['1'];
+    return $address_parts;
   } 
   $address_with_no_floor = preg_replace('/(floor \d((th|st|nd|rd|)))|(\d(th|st|nd|rd|)) floor/i', '', $address);
   $address_encoded = urlencode($address_with_no_floor);
