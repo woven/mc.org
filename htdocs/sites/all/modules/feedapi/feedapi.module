@@ -123,6 +123,16 @@ function feedapi_nodeapi(&$node, $op, $teaser, $page) {
     switch ($op) {
       case 'validate':
         $node->feed->settings = feedapi_get_settings($node->type);
+
+        if($node->feed->settings['upload_method'] == "both"){
+
+          $node->feed->settings['upload_method'] = $node->feedapi['upload_method'];
+
+          if($node->feed->settings['upload_method'] == 'upload'){
+            $node->feed->settings['refresh_time'] = FEEDAPI_CRON_NEVER_REFRESH;
+          };
+        };
+
         $node->feed->parsers = _feedapi_format_settings($node->feed->settings, 'parsers');
         $node->feed->processors = _feedapi_format_settings($node->feed->settings, 'processors');
         if (count($node->feed->parsers) < 1) {
@@ -377,7 +387,7 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
       '#type' => 'radios',
       '#title' => t('Supply feed as'),
       '#description' => t('Select how a user will supply a feed. Choose URL if the user will paste a URL to a textfield, choose File upload if the user will upload a feed from the local disk.'),
-      '#options' => array('url' => t('URL'), 'upload' => t('File upload')),
+      '#options' => array('url' => t('URL'), 'upload' => t('File upload'),'both' => t('Both File or URL')),
       '#default_value' => isset($node_type_settings['upload_method']) ? $node_type_settings['upload_method'] : 'url',
       '#weight' => -14,
     );
@@ -499,7 +509,19 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
     elseif (isset($form_state['values']['feedapi']['feedapi_url'])) {
       $feedapi_url_default = $form_state['values']['feedapi']['feedapi_url'];
     }
-    if (isset($node_type_settings['upload_method']) && $node_type_settings['upload_method'] == 'upload') {
+
+    if($node_type_settings['upload_method'] == 'both'){
+      $form['feedapi']['upload_method'] = array(
+        '#type' => 'radios',
+        '#title' => t('Supply feed as'),
+        '#description' => t('Select how a user will supply a feed. Choose URL if the user will paste a URL to a textfield, choose File upload if the user will upload a feed from the local disk.'),
+        '#options' => array('url' => t('URL'), 'upload' => t('File upload')),
+        '#default_value' => isset($node_type_settings['upload_method']) ? $node_type_settings['upload_method'] : 'url',
+        '#weight' => -14,
+      );
+    }
+
+    if (isset($node_type_settings['upload_method']) && ($node_type_settings['upload_method'] == 'upload' OR $node_type_settings['upload_method'] == 'both') ) {
       // Makes possible to upload file via this form.
       $form['#attributes']['enctype'] = 'multipart/form-data';
       $form['feedapi']['feedapi_file'] = array(
@@ -513,7 +535,8 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
         '#value' => $feedapi_url_default,
       );
     }
-    else {
+
+    if($node_type_settings['upload_method'] == 'url' OR $node_type_settings['upload_method'] == 'both'){
       $form['feedapi']['feedapi_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Feed URL'),
@@ -522,6 +545,7 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
         '#maxlength' => 2048,
       );
     }
+
     // Show per-node-type feedapi, parser options only for users with permissions.
     if (user_access('advanced feedapi options')) {
       // retrieve forms.
