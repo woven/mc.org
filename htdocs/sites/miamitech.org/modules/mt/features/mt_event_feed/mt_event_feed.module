@@ -7,11 +7,9 @@
 include_once 'mt_event_feed.features.inc';
 
 
-function mt_event_feed_form_alter(&$form, &$form_state, $form_id){
+function mt_event_feed_late_form_alter(&$form, &$form_state, $form_id){
   //adding help msg for the feedapi fieldset
-  if($form_id == "event_feed_node_form"){
-    $form['feedapi']['#description'] = t("Import your group's event feed.  We currently only accept iCal feeds, like those found at the bottom of a Meetup.com calendar page.");
-  }
+
 }
 
 
@@ -201,6 +199,7 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     $record->mapping = $mapping;
     drupal_write_record('feedapi_mapper', $record);
   }
+
   if($node->type=='event' && ($op=='presave')){
     $node->og_public = true;
     if((empty($node->event['dst_region']) || $node->event['dst_region']==NULL) && (empty($node->event['timezone']) || $node->event['timezone']==NULL)){
