@@ -299,6 +299,10 @@ function mt_event_feed_getAddressParts($address){
         }
       }
     }
+    if(!preg_match('/ - \#[0-9]{1,} - /i', $address_parts['address'])){
+      $address_filtered = preg_replace('/ - \#[0-9]{1,} -/i', '', $address);
+      $address_out = mt_event_feed_google_map_call($address_filtered);
+    }
     if(empty($address_out['zip'])){
       $new_address = ereg_replace("[^A-Za-z0-9 ]", "", $address_with_no_floor);
       $address_parts = preg_split('/ [0-9]+ /', $new_address);
@@ -317,6 +321,7 @@ function mt_event_feed_getAddressParts($address){
     }
     $address_out['name'] = preg_replace("/[^A-Za-z0-9 #\-&]/", "", $address_parts['0']);
     $address_out['name'] = preg_replace('/\s$|^\s/i', '', $address_out['name']);
+    $address_out['name']= str_replace(' -', '', $address_out['name']);
     return $address_out;
   }
   else {
