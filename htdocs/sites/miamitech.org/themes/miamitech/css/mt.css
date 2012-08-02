@@ -425,7 +425,7 @@ body #navigation {
 
 #boxes-box-mc_event_sections_box .view-content p {
   margin-left: 104px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .group-mission .group-url{
@@ -460,6 +460,14 @@ body #navigation {
 .show-more-events a{
   font-size: 11px;
   text-decoration: none;
-  color: #333;
+  color: #B3B3B3;
+}
+
+.show-more-events {
   margin-left: 104px;
+
+}
+
+.show-more-events a:hover{
+  color: #333;
 }
