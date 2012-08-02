@@ -93,10 +93,6 @@ function _mt_group_check_group_url_exists($group_url){
 
 
 function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
-  if($node->type=='event_feed' && $op=='validate'  && (!isset($node->nid) || empty($node->nid))){
-    $feed_url = $node->feedapi['feedapi_url'];
-    _mt_group_check_group_url_exists($feed_url);
-  }
   if($node->type=='group') {
     module_load_include('inc', 'mt_group', 'meetup/meetup');
     module_load_include('php', 'querypath', 'QueryPath/QueryPath');
