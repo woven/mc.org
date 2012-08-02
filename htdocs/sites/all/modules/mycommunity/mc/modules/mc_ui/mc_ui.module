@@ -1,4 +1,10 @@
 <?php
+function addhttp($url) {
+  if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+    $url = "http://" . $url;
+  }
+  return $url;
+}
 
 function mc_ui_init(){
   $path = drupal_get_path('module', 'mc_ui');
