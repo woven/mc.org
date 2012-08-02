@@ -460,7 +460,15 @@ body #navigation {
 .show-more-events a{
   font-size: 11px;
   text-decoration: none;
-  color: #B3B3B3;
+  color: #48A6E4;
+}
+
+.show-more-events a:hover{
+  color: #09F;
+}
+
+.view-mc-events-by-dates .field-title a:hover{
+  text-decoration: underline;
 }
 
 .show-more-events {
