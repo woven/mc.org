@@ -39,8 +39,7 @@ function mt_strongarm() {
     ),
     'event_node_form' => array(
       'body_field|teaser_js' => '1',
-      'body_field|teaser_include' => '1',
-      'body_field|format' => '1',
+      'locations|location_settings|delete_location' => '1',
       'field_place|0|nid|nid' => '1',
       'comment_settings' => '1',
       'path' => '1',
