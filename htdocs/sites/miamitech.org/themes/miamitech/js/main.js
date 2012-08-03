@@ -207,3 +207,27 @@ function follow_group_comments(uid)
     window.location = node;
   });
 }
+
+
+function feedapi_updateui(val){
+    switch(val){
+        case 'url':
+            $('#edit-feedapi-feedapi-url-wrapper').show();
+            $('#edit-feedapi-feedapi-file-wrapper').hide();
+            break;
+        case 'upload':
+            $('#edit-feedapi-feedapi-url-wrapper').hide();
+            $('#edit-feedapi-feedapi-file-wrapper').show();
+            break;
+    }
+}
+
+Drupal.behaviors.FeedApiMethod = function (context) {
+    var val = $("input[name='feedapi[upload_method]']:checked").val();
+    feedapi_updateui(val);
+
+    $("input[name='feedapi[upload_method]']").change(function () {
+        var val = $("input[name='feedapi[upload_method]']:checked").val();
+        feedapi_updateui(val);
+    });
+}
