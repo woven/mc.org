@@ -1298,7 +1298,6 @@ function _feedapi_invoke_refresh(&$feed, $param) {
   _feedapi_store_stat($nid, 'next_refresh_time', $next_refresh_time, $timestamp);
 
   if (!$cron) {
-    flog_it($settings);
     if($new == 1){
       drupal_set_message(t("You're done! We've imported %new event, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
@@ -1414,6 +1413,7 @@ function feedapi_get_settings($node_type, $vid = FALSE, $reset = FALSE) {
           $settings['processors'] = array();
         }
       }
+
       if (is_array($settings) && count($settings['processors']) == 0 && count($settings['parsers']) == 0) {
         $settings = NULL;
       }
