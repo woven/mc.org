@@ -39,12 +39,11 @@ function mt_strongarm() {
     ),
     'event_node_form' => array(
       'body_field|teaser_js' => '1',
-      'body_field|teaser_include' => '1',
-      'body_field|format' => '1',
+      'locations|location_settings|delete_location' => '1',
       'field_place|0|nid|nid' => '1',
+      'options' => '1',
       'comment_settings' => '1',
       'path' => '1',
-      'options' => '1',
     ),
   );
   $export['formfilter'] = $strongarm;
@@ -67,7 +66,7 @@ function mt_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_update_action';
-  $strongarm->value = '0';
+  $strongarm->value = '2';
   $export['pathauto_update_action'] = $strongarm;
 
   return $export;
