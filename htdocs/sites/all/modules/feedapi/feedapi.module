@@ -513,9 +513,9 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
     if($node_type_settings['upload_method'] == 'both'){
       $form['feedapi']['upload_method'] = array(
         '#type' => 'radios',
-        '#title' => t('Supply feed as'),
+        //'#title' => t('Supply feed as'),
         '#description' => t('Select how a user will supply a feed. Choose URL if the user will paste a URL to a textfield, choose File upload if the user will upload a feed from the local disk.'),
-        '#options' => array('url' => t('URL'), 'upload' => t('File upload')),
+        '#options' => array('url' => t('Specify a URL'), 'upload' => t('Upload a file')),
         '#default_value' => isset($node_type_settings['upload_method']) ? $node_type_settings['upload_method'] : 'url',
         '#weight' => -14,
       );
