@@ -97,6 +97,10 @@ function _parser_ical_parse($feed_content) {
   $parsed_source->options->calscale = isset($ical['CALSCALE']) ? $ical['CALSCALE'] : '';
   $parsed_source->options->timezone = isset($ical['X-WR-TIMEZONE']) ? $ical['X-WR-TIMEZONE'] : '';
   $parsed_source->items = array();
+
+  if(!isset($ical['VEVENT']) || !is_array($ical['VEVENT'])){
+    return $parsed_source;
+  }
   
   foreach ($ical['VEVENT'] as $event) {
     $item = new stdClass();
