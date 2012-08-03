@@ -1463,9 +1463,10 @@ function feedapi_late_form_alter(&$form, &$form_state, $form_id){
 
   if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id && feedapi_enabled_type($form['type']['#value'])) {
 
+    //add the feedapi js file
     $js = drupal_get_path('module','feedapi') . "/feedapi.js";
-
     drupal_add_js($js,'module','footer');
+
     //overiding _feedapi_populate effect of forcing using the default options
     if($form['feedapi']['upload_method']['#default_value'] == 'both'){
       $form['feedapi']['upload_method']['#default_value'] = "url";
