@@ -384,11 +384,7 @@ function mt_form_alter(&$form, &$form_state, $form_id){
   if($form['#id']=='views-exposed-form-latest-pages-page-7'){
     $form['title']['#attributes']['placeholder']= "Start typing a group's name...";
   }
-  if(is_array($form['#validate']) && in_array('feedapi_node_validate', $form['#validate'])){
-    $index = array_search('feedapi_node_validate', $form['#validate']);
-    $form['#validate'][$index] = 'mt_node_validate';
-    $form['#validate'][] = 'feedapi_node_validate';
-  }
+
 }
 
 
@@ -582,16 +578,6 @@ function mt_init(){
     unset($_SESSION['messages']['status']);
     $_SESSION['messages']['status'][] = $message;
     unset($_SESSION['new_event_feed']);
-  }
-}
-
-function mt_node_validate($form, &$form_state) {
-  if(preg_match('/^webcal:\/\//i',$form_state['values']['feedapi']['feedapi_url']) ){
-    $form_state['values']['feedapi']['feedapi_url'] = str_replace('webcal://', 'http://', $form_state['values']['feedapi']['feedapi_url']);
-  }
-  if (empty($form_state['values']['title'])) {
-    $new_title = 'Feed from ' . str_replace('http://', '', $form_state['values']['feedapi']['feedapi_url']);
-    form_set_value($form['title'], $new_title, $form_state);
   }
 }
 
