@@ -460,7 +460,11 @@ body #navigation {
 .show-more-events a{
   font-size: 11px;
   text-decoration: none;
-  color: #B3B3B3;
+  color: #48A6E4;
+}
+
+.show-more-events a:hover{
+  color: #09F;
 }
 
 .show-more-events {
@@ -468,6 +472,6 @@ body #navigation {
 
 }
 
-.show-more-events a:hover{
-  color: #333;
+#page .field-title a:hover{
+  text-decoration: underline;
 }

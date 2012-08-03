@@ -39,8 +39,7 @@ function mt_strongarm() {
     ),
     'event_node_form' => array(
       'body_field|teaser_js' => '1',
-      'body_field|teaser_include' => '1',
-      'body_field|format' => '1',
+      'locations|location_settings|delete_location' => '1',
       'field_place|0|nid|nid' => '1',
       'comment_settings' => '1',
       'path' => '1',
@@ -62,6 +61,13 @@ function mt_strongarm() {
   $strongarm->name = 'mixpanel_token';
   $strongarm->value = '25bd30a8154b0e4456b88255b6db762a';
   $export['mixpanel_token'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_update_action';
+  $strongarm->value = '0';
+  $export['pathauto_update_action'] = $strongarm;
 
   return $export;
 }

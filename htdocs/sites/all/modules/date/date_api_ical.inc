@@ -407,6 +407,11 @@ function date_ical_parse_date($field, $data) {
         // Time.
         $datetime .= ' ' . date_pad($regs[4]) . ':' . date_pad($regs[5]) . ':' . date_pad($regs[6]);
         $has_time = TRUE;
+        if($datetime=='00-00-00 00:00:00'){
+          preg_match(DATE_REGEX_ICAL_DATE, $data, $regs);
+          // Date.
+          $datetime = date_pad($regs[1]) . '-' . date_pad($regs[2]) . '-' . date_pad($regs[3]);
+        }
         break;
     }
   }

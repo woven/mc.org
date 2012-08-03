@@ -771,7 +771,11 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'value' => '<?php echo _mc_event_section_formatted_location($data->location_name); ?>',
+      'value' => '<?php 
+if($data->location_name!=\'Exact Location TBD\'){
+echo _mc_event_section_formatted_location($data->location_name); 
+}
+?>',
       'exclude' => 1,
       'id' => 'phpcode_2',
       'table' => 'customfield',
