@@ -514,7 +514,7 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
       $form['feedapi']['upload_method'] = array(
         '#type' => 'radios',
         //'#title' => t('Supply feed as'),
-        '#description' => t('Select how a user will supply a feed. Choose URL if the user will paste a URL to a textfield, choose File upload if the user will upload a feed from the local disk.'),
+        //'#description' => t('Select how a user will supply a feed. Choose URL if the user will paste a URL to a textfield, choose File upload if the user will upload a feed from the local disk.'),
         '#options' => array('url' => t('Specify a URL'), 'upload' => t('Upload a file')),
         '#default_value' => isset($node_type_settings['upload_method']) ? $node_type_settings['upload_method'] : 'url',
         '#weight' => -14,
@@ -1298,14 +1298,15 @@ function _feedapi_invoke_refresh(&$feed, $param) {
   _feedapi_store_stat($nid, 'next_refresh_time', $next_refresh_time, $timestamp);
 
   if (!$cron) {
+    flog_it($settings);
     if($new == 1){
-      drupal_set_message(t("You're done! We've imported %new upcoming event, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
+      drupal_set_message(t("You're done! We've imported %new event, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
-    elseif ($new== 0) {
-      drupal_set_message(t("You're done! We didn't find any upcoming events, but we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
+    elseif ($new == 0) {
+      drupal_set_message(t("You're done! We didn't find any events, but we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
     else {
-      drupal_set_message(t("You're done! We've imported %new upcoming events, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
+      drupal_set_message(t("You're done! We've imported %new events, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
     // @ TODO what value to return here?
   }
