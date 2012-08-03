@@ -12,6 +12,53 @@ function mt_event_feed_late_form_alter(&$form, &$form_state, $form_id){
   //dsm($form,"late-form");
 }
 
+function mt_event_feed_form_alter(&$form, &$form_state, $form_id){
+  //if event feed form,
+  if($form_id == 'event_feed_node_form'){
+    $form['#validate'][] = 'mt_event_node_validate';
+  }
+
+  /*
+   * old code from santiago to add validation, it was at mt.module
+  if(is_array($form['#validate']) && in_array('feedapi_node_validate', $form['#validate'])){
+    $index = array_search('feedapi_node_validate', $form['#validate']);
+    $form['#validate'][$index] = 'mt_event_node_validate';
+    $form['#validate'][] = 'feedapi_node_validate';
+  }
+  */
+}
+
+function mt_event_node_validate($form, &$form_state) {
+  //curent event_node node
+  $node = $form['#node'];
+
+  /*
+  * replace webcal with http on if webcal exists
+  */
+  if(preg_match('/^webcal:\/\//i',$form_state['values']['feedapi']['feedapi_url']) ){
+    $form_state['values']['feedapi']['feedapi_url'] = str_replace('webcal://', 'http://', $form_state['values']['feedapi']['feedapi_url']);
+  }
+
+  /*
+   * change refresh time to never if the upload method is file
+   */
+
+  if($form_state['values']['feedapi']['upload_method'] == 'upload'){
+    $form_state['values']['feedapi']['refresh_time'] = FEEDAPI_CRON_NEVER_REFRESH;
+  }else{
+    //set from the default content type settings.
+  }
+
+  /*
+   * auto set the title of the event_feed 'Feed from url'
+   */
+  if (empty($form_state['values']['title'])) {
+    $new_title = 'Feed from ' . str_replace('http://', '', $form_state['values']['feedapi']['feedapi_url']);
+    form_set_value($form['title'], $new_title, $form_state);
+  }
+
+}
+
 
 function mt_event_feed_menu(){
   $items = array();
@@ -174,7 +221,9 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
   if($node->type=='event_feed' && $op=='validate' && (!isset($node->nid) || empty($node->nid))){
 
-    if(isset($node->feedapi['feedapi_url']) && $node->feedapi['upload_method'] == "url"){
+    //check if it it has feedapi url and if upload method is url
+    if(isset($node->feedapi['feedapi_url']) && !empty($node->feedapi['feedapi_url']) && $node->feedapi['upload_method'] == "url"){
+
       $feed_url = $node->feedapi['feedapi_url'];
       _mt_group_check_group_url_exists($feed_url);
 
@@ -257,7 +306,7 @@ function mt_event_feed_reverse_getAddressParts($latitude, $longitude){
   else {
     return array();
   }
-} 
+}
 
 
 function mt_event_feed_getAddressParts($address){ 
