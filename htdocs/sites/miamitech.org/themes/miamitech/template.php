@@ -136,13 +136,6 @@ function miamitech_nd_location_address($field) {
   if(empty($address)){
      return '<div class="no-location"> A location wasn\'t provided.</div>';
   }
-  if(empty($address['street']) && empty($address['postal_code']) && $address['name']=='Exact Location TBD' ){
-    $firstLine[] = '<div>' . $address['city'];
-    $firstLine[] = $address['province'] . '</div>';
-    $output[] = implode(', ', $firstLine);
-    $output[] = '<div class="default-message">' . $address['name'] . '</div>';
-    return implode(' ', $output);
-  }
 
   $lines = array(
     0 => array('name'),

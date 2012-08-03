@@ -36,8 +36,9 @@ function mt_event_feed_menu_alter(&$items){
 }
 
 function _mt_event_feed_ical_sitewide(){
-  $now = time();
-  $result = db_query("select nid from event where unix_event_start>=%d", $now);
+  $today = mktime(0, 0, 0);
+  $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
+  $result = db_query("select nid from event where unix_event_start>=%d", $threeMonthsAgo);
   while ($row = db_fetch_object($result)) {
     $node = node_load($row->nid);
     if($node->type=='event' && $node->status){
@@ -86,11 +87,15 @@ function mt_event_feed_ical() {
   if($group->type!='group'){
     return;
   }
+  $today = mktime(0, 0, 0);
+  $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
   $nids = og_group_child_nids($gid);
   $events = array();
   foreach ($nids as $nid) {
     $node = node_load($nid);
-    if($node->type=='event'){
+    date_default_timezone_set('UTC');
+    $event_start_unixtime = strtotime($node->event['start_utc']);
+    if($node->type=='event' && $event_start_unixtime>=$threeMonthsAgo){
       $event = _event_node_ical($node);
       $location = $node->locations['0'];
       $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
@@ -212,7 +217,6 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     }
     if(isset($node->locations['0']) && is_array($node->locations['0']) && (empty($node->locations['0']['street']) && empty($node->locations['0']['city'])  && empty($node->locations['0']['province'])) && (!empty($node->locations['0']['latitude']) && !empty($node->locations['0']['longitude'])))  {
       $parts = mt_event_feed_reverse_getAddressParts($node->locations['0']['latitude'], $node->locations['0']['longitude']);
-      $node->locations['0']['name'] = "Exact Location TBD";
       //$node->locations['0']['name'] = $parts['name'];
       //$node->locations['0']['street'] = $parts['address'];
       $node->locations['0']['city'] = $parts['city'];
