@@ -772,7 +772,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php 
-if(!$data->location_name==\'Exact Location TBD\'){
+if($data->location_name!=\'Exact Location TBD\'){
 echo _mc_event_section_formatted_location($data->location_name); 
 }
 ?>',
