@@ -9,7 +9,7 @@ include_once 'mt_event_feed.features.inc';
 
 function mt_event_feed_late_form_alter(&$form, &$form_state, $form_id){
   //adding help msg for the feedapi fieldset
-  dsm($form,"late-form");
+  //dsm($form,"late-form");
 }
 
 
