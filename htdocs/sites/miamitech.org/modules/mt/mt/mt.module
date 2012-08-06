@@ -568,17 +568,6 @@ function mt_init(){
       drupal_add_js((drupal_get_path('module', 'mt') .'/js/mt.js'));
     }
   }
-  if(isset($_SESSION['new_event_feed']) && $_SESSION['new_event_feed']==TRUE){
-    foreach ($_SESSION['messages']['status'] as $key => $value) {
-      if(!preg_match("/^You're done!/", $value)){
-        unset($_SESSION['messages']['status'][$key]);
-      }
-    }
-    $message = array_shift($_SESSION['messages']['status']);
-    unset($_SESSION['messages']['status']);
-    $_SESSION['messages']['status'][] = $message;
-    unset($_SESSION['new_event_feed']);
-  }
 }
 
 function mt_menu_alter(&$items) {
