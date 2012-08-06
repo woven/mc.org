@@ -125,12 +125,7 @@ function feedapi_nodeapi(&$node, $op, $teaser, $page) {
         $node->feed->settings = feedapi_get_settings($node->type);
 
         if($node->feed->settings['upload_method'] == "both"){
-
           $node->feed->settings['upload_method'] = $node->feedapi['upload_method'];
-
-          if($node->feed->settings['upload_method'] == 'upload'){
-            $node->feed->settings['refresh_time'] = FEEDAPI_CRON_NEVER_REFRESH;
-          };
         };
 
         $node->feed->parsers = _feedapi_format_settings($node->feed->settings, 'parsers');
@@ -530,11 +525,12 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
         '#description' => $feedapi_url_default ? '<div class="feed-url">'. $feedapi_url_default .'</div>' : '',
         '#size' => 40,
       );
-      $form['feedapi']['feedapi_url'] = array(
-        '#type' => 'value',
-        '#value' => $feedapi_url_default,
-      );
     }
+
+    $form['feedapi']['feedapi_url'] = array(
+      '#type' => 'value',
+      '#value' => $feedapi_url_default,
+    );
 
     if($node_type_settings['upload_method'] == 'url' OR $node_type_settings['upload_method'] == 'both'){
       $form['feedapi']['feedapi_url'] = array(

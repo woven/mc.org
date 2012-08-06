@@ -32,17 +32,10 @@ function _mt_event_feed_form_submit($form, &$form_state){
     }
   }
 
-  /*
-  * auto set the title of the event_feed 'Feed from url'
-  */
-  if (empty($form_state['values']['title'])) {
-    dsm($form_state);
-    $new_title = 'Feed from ' . str_replace('http://', '', $form_state['values']['feedapi']['feedapi_url']);
-    form_set_value($form['title'], $new_title, $form_state);
-  }
 }
 
 function mt_event_feed_form_alter(&$form, &$form_state, $form_id){
+
   if($form_id == 'event_feed_node_form'){
     $form['#validate'][] = '_mt_event_feed_node_form_validate';
   }
@@ -69,6 +62,21 @@ function _mt_event_feed_node_form_validate($form, &$form_state) {
     $form_state['values']['feedapi']['refresh_time'] = FEEDAPI_CRON_NEVER_REFRESH;
   }
 
+  /*
+  * auto set the title of the event_feed 'Feed from LOCATION'
+  */
+  if (empty($form_state['values']['title'])) {
+    switch($feedapi['upload_method']){
+      case 'upload':
+        //@todo find away to grap the filename
+        form_set_value($form['title'], 'Feed from file', $form_state);
+      break;
+      case 'url':
+        $new_title = 'Feed from ' . str_replace('http://', '', $form_state['values']['feedapi']['feedapi_url']);
+        form_set_value($form['title'], $new_title, $form_state);
+      break;
+    }
+  }
 }
 
 
