@@ -7,9 +7,23 @@
 include_once 'mt_event_feed.features.inc';
 
 
+
 function mt_event_feed_late_form_alter(&$form, &$form_state, $form_id){
-  //adding help msg for the feedapi fieldset
-  //dsm($form,"late-form");
+  //http://drupal.org/node/247585#comment-2913420
+  if($submit = &$form['buttons']['submit']){
+    unset($form['#redirect']);
+    $submit['#submit'][] = 'mt_event_feed_submit';
+  }
+}
+
+function mt_event_feed_submit($form, &$form_state){
+  if(!empty($form_state['values']['og_groups'])){
+    $gid = array_shift(array_values($form_state['values']['og_groups']));
+
+    if($gid){
+      $form_state['redirect'] = 'node/'.$gid;
+    }
+  }
 }
 
 function mt_event_feed_form_alter(&$form, &$form_state, $form_id){
