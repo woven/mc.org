@@ -133,6 +133,21 @@ function miamitech_nd_location_address($field) {
       $address[$fieldname] = check_plain($field['object']->location[$fieldname]);
     }
   }
+  if($address['name']=='Exact Location TBD'){
+    unset($address['name']);
+    unset($address['street']);
+    unset($address['postal_code']);
+  }
+  if(empty($address)){
+    $has_address = $field['object']->location['name'] && $field['object']->location['street']
+      && $field['object']->location['city'] && $field['object']->location['province'];
+    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'];
+    if(!$has_address && $has_lat_and_lon){
+      $parts = mt_event_feed_reverse_getAddressParts($node->locations['0']['latitude'], $node->locations['0']['longitude']);
+      $address['city'] = $parts['city'];
+      $address['state'] = $parts['state'];
+    }
+  }
   if(empty($address)){
      return '<div class="no-location"> A location wasn\'t provided.</div>';
   }
