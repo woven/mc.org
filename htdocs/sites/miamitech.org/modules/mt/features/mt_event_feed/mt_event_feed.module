@@ -22,7 +22,7 @@ function _mt_event_feed_form_submit($form, &$form_state){
 
     if($gid){
       /*
-       * @todo improve this logic
+       * @todo improve this logic of hiding messages
        * @see mt_event_feed_init
       */
       $_SESSION['new_event_feed'] = TRUE;
@@ -30,30 +30,30 @@ function _mt_event_feed_form_submit($form, &$form_state){
     }else{
       // @todo what to do if it's site wide event_feed?
     }
+  }
 
-
+  /*
+  * auto set the title of the event_feed 'Feed from url'
+  */
+  if (empty($form_state['values']['title'])) {
+    dsm($form_state);
+    $new_title = 'Feed from ' . str_replace('http://', '', $form_state['values']['feedapi']['feedapi_url']);
+    form_set_value($form['title'], $new_title, $form_state);
   }
 }
 
 function mt_event_feed_form_alter(&$form, &$form_state, $form_id){
-  //if event feed form,
   if($form_id == 'event_feed_node_form'){
-    $form['#validate'][] = 'mt_event_node_validate';
+    $form['#validate'][] = '_mt_event_feed_node_form_validate';
   }
-
-  /*
-   * old code from santiago to add validation, it was at mt.module
-  if(is_array($form['#validate']) && in_array('feedapi_node_validate', $form['#validate'])){
-    $index = array_search('feedapi_node_validate', $form['#validate']);
-    $form['#validate'][$index] = 'mt_event_node_validate';
-    $form['#validate'][] = 'feedapi_node_validate';
-  }
-  */
 }
 
-function mt_event_node_validate($form, &$form_state) {
-  //curent event_node node
+function _mt_event_feed_node_form_validate($form, &$form_state) {
+  //current event_node node
   $node = $form['#node'];
+
+  //current feedapi settings from the form submit
+  $feedapi = &$form_state['values']['feedapi'];
 
   /*
   * replace webcal with http on if webcal exists
@@ -64,20 +64,9 @@ function mt_event_node_validate($form, &$form_state) {
 
   /*
    * change refresh time to never if the upload method is file
-   */
-
+  */
   if($form_state['values']['feedapi']['upload_method'] == 'upload'){
     $form_state['values']['feedapi']['refresh_time'] = FEEDAPI_CRON_NEVER_REFRESH;
-  }else{
-    //set from the default content type settings.
-  }
-
-  /*
-   * auto set the title of the event_feed 'Feed from url'
-   */
-  if (empty($form_state['values']['title'])) {
-    $new_title = 'Feed from ' . str_replace('http://', '', $form_state['values']['feedapi']['feedapi_url']);
-    form_set_value($form['title'], $new_title, $form_state);
   }
 
 }
