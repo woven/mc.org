@@ -33,7 +33,7 @@ function _mc_event_section_next_two_weeks(&$content){
 
   $query = "SELECT n.nid, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),DAYOFYEAR(FROM_UNIXTIME(e.unix_event_start))) as 'Day',
       CASE 
-          WHEN ((e.unix_event_start BETWEEN '%s' AND '%s') OR (e.unix_event_end BETWEEN '%s' AND '%s'))
+          WHEN ((e.unix_event_start BETWEEN '%s' AND '%s') OR (e.unix_event_end BETWEEN '%s' AND '%s') OR (UNIX_TIMESTAMP(now()) BETWEEN e.unix_event_start AND e.unix_event_end))
           THEN 'Today'
           WHEN e.unix_event_start BETWEEN '%s' AND '%s'
           THEN 'Tomorrow'
@@ -69,6 +69,9 @@ function _mc_event_section_next_two_weeks(&$content){
   $lists = array();
 
   while ($row = db_fetch_object($result)) {
+    if($row->Section=='Today'){
+      $row->Day = date('Y-m-d');
+    }
     $lists[$row->Section][$row->Day][] = $row->nid;
   }
 
