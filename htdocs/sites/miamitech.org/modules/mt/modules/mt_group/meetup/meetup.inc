@@ -18,6 +18,7 @@ class MeetupParser{
         $options = array('convert_to_encoding'=>'utf-8');
         $this->title = htmlqp($page, '#bannerGroupName', $options)->text();
         $this->body = htmlqp($page, '#groupDesc', $options)->innerHTML();
+        $this->body = preg_replace(array('/<br.+>/i', '/\n<br.+>\n/i'), '', $this->body);
         $this->logo_url = htmlqp($page, '#C_nav #C_metabox .groupPhotoMeta img', $options)->attr('src');
       }
     }
