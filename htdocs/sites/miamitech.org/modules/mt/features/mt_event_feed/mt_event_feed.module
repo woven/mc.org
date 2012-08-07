@@ -225,11 +225,16 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
           }
           if($sub_field=='location'){
             $parts = mt_event_feed_getAddressParts($feed_element);
-            $node->locations['0']['name'] = $parts['name'];
-            $node->locations['0']['street'] = $parts['address'];
-            $node->locations['0']['city'] = $parts['city'];
-            $node->locations['0']['province'] = $parts['state'];
-            $node->locations['0']['postal_code'] = $parts['zip'];
+            if($parts['name']=='webinar'){
+              $node->field_online_event['0']['value'] = 1;
+            }
+            else {
+              $node->locations['0']['name'] = $parts['name'];
+              $node->locations['0']['street'] = $parts['address'];
+              $node->locations['0']['city'] = $parts['city'];
+              $node->locations['0']['province'] = $parts['state'];
+              $node->locations['0']['postal_code'] = $parts['zip'];
+            }
           }
           if($sub_field=='geo'){
             $parts = explode(';', $feed_element);
