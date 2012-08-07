@@ -1,0 +1,6 @@
+<?php
+
+function github_deploy_menu(){
+
+return $items;
+}
