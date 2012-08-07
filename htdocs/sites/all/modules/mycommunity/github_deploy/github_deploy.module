@@ -1,6 +1,30 @@
 <?php
 
 function github_deploy_menu(){
+ $items = array();
 
-return $items;
+      $items['github/deploy'] = array(
+        'title' => 'github deploy',
+        'page callback' => '_github_deploy',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK
+      );
+
+    return $items;
+}
+function exec_enabled() {
+    $disabled = explode(', ', ini_get('disable_functions'));
+    return !in_array('exec', $disabled);
+}
+
+function _github_deploy(){
+    //dsm(realpath('.'));
+    //dsm(conf_path());
+
+    set_time_limit(120);
+    $current_site = realpath('.')."/".conf_path();
+    exec("cd $current_site; sh deploy.sh mt", $output);
+    dsm($output);
+
+    return 'Im here';
 }
