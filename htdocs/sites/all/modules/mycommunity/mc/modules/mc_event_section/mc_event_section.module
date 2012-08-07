@@ -31,7 +31,7 @@ function _mc_event_section_next_two_weeks(&$content){
   $nextSunday = $thisSunday + 7 * 24 * 3600;
   $minsago = $now - (60 * 30);
 
-  $query = "SELECT n.nid, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),DAYOFYEAR(FROM_UNIXTIME(e.unix_event_start))) as 'Day',
+  $query = "SELECT n.nid, n.title, l.name AS 'location_name', e.unix_event_start, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),DAYOFYEAR(FROM_UNIXTIME(e.unix_event_start))) as 'Day',
       CASE 
           WHEN ((e.unix_event_start BETWEEN '%s' AND '%s') OR (e.unix_event_end BETWEEN '%s' AND '%s'))
           THEN 'Today'
@@ -46,10 +46,14 @@ function _mc_event_section_next_two_weeks(&$content){
       END AS 'Section'
   FROM node as n 
   JOIN event as e on n.nid=e.nid
-  WHERE (e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s')
+  JOIN location_instance AS li on n.nid=li.nid
+  JOIN location AS l on li.lid=l.lid
+  WHERE n.status=1 AND ((e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s'))
   GROUP BY n.nid
-  ORDER BY Day, (
-  CASE WHEN Section='Today' then 0
+  ORDER BY (CASE WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)>0 THEN 0 END) DESC,
+    abs(UNIX_TIMESTAMP(now()) - e.unix_event_start),
+    Day,
+   (CASE WHEN Section='Today' then 0
    WHEN Section='Tomorrow' then 1
    WHEN Section='This week' then 2
    WHEN Section='Next week' then 3
@@ -67,12 +71,64 @@ function _mc_event_section_next_two_weeks(&$content){
   }
 
   $lists = array();
+  $events = array();
 
   while ($row = db_fetch_object($result)) {
     $lists[$row->Section][$row->Day][] = $row->nid;
+    $events[$row->nid]['title'] = $row->title;
+    $events[$row->nid]['datetime'] = $row->unix_event_start;
+    $events[$row->nid]['location_name'] = $row->location_name;
   }
 
-  foreach($lists as $key => $list){
+  $new_list = array();
+  $ignore_nids = array();
+
+  foreach($lists as $section => $list_section){
+    foreach($list_section as $day => $list_day){
+      for($i=0; $i< count($list_day) -1; $i++){
+        if(!isset($ignore_nids[$list_day[$i]])){
+          $main_nid = $list_day[$i];
+          $new_list[$section][$day][$i][] = $main_nid;
+          $ignore_nids[$main_nid] = $main_nid;
+          $main_event = $events[$main_nid];
+          $main_title_soundex = soundex($main_event['title']);
+          $main_location_soundex = soundex($main_event['location_name']);
+          for($j=$i; $j<count($list_day); $j++){
+            if(!isset($ignore_nids[$list_day[$j]])){
+              $checked_nid = $list_day[$j];
+              $checked_event = $events[$checked_nid];
+
+              if($main_event['datetime']==$checked_event['datetime']){
+                $checked_title_soundex = soundex($checked_event['title']);
+                $checked_location_soundex = soundex($checked_event['location_name']);
+
+                similar_text($main_title_soundex, $checked_title_soundex, $percent_title);
+                similar_text($main_location_soundex, $checked_location_soundex, $percent_location);
+
+                $total_percent = 30;
+
+                if($percent_title>=50){
+                  $total_percent += 50;
+                }
+
+                if($percent_location>=50){
+                  $total_percent += 20;
+                }
+
+                if($total_percent>=50){
+                  $new_list[$section][$day][$i][] = $checked_nid;
+                  $ignore_nids[$checked_nid] = $checked_nid;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  foreach($new_list as $key => $list){
     if(count($list)){
       $content[] = _mc_event_section_print_view($key, $list);
     }
@@ -102,25 +158,15 @@ function _mc_event_section_print_view($key, $list){
   $head .= theme("mc_event_view_header",$view_header);
   $head .= '</div></div>';
   $output = '';
-  foreach ($list as $day => $nids) {
-    $output .= _mc_event_section_print_day_view($day, $nids, $key, $block);
+  foreach ($list as $day => $dups) {
+    $output .= _mc_event_section_print_day_view($day, $dups, $key, $block);
   }
   return $head . $output;
 }
 
-function _mc_event_section_print_day_view($day, $list, $key, $block){
-  $view = views_get_view('mc_events_by_dates');
-  if (!$view || !$view->access($block)) {
-    return;
-  }
-  if($key=='Today' || $key=='Tomorrow'){
-    $view->hide_day = TRUE;
-    if($key=='Today'){
-      $view->day = 'today';
-    }
-  }
+function _mc_event_section_print_day_view($day, $lists, $key, $block){
 
-  if($view->hide_day){
+  if($key=='Today' || $key=='Tomorrow'){
     $head = '';
   }
   else {
@@ -136,8 +182,27 @@ function _mc_event_section_print_day_view($day, $list, $key, $block){
     }
     $head .= '</div>';
   }
+
+  $content = array();
+  foreach($lists as $dup => $list){
+    $content[] = _mc_event_section_print_duplicate_view($day, $list, $key, $block);
+  }
+  return $head . implode('',$content);
+}
+
+function _mc_event_section_print_duplicate_view($day, $list, $key, $block){
+  $view = views_get_view('mc_events_by_dates');
+  if (!$view || !$view->access($block)) {
+    return;
+  }
+  if($key=='Today' || $key=='Tomorrow'){
+    $view->hide_day = TRUE;
+    if($key=='Today'){
+      $view->day = 'today';
+    }
+  }
   $view_display =$view->preview($block, array(implode('+', $list)));
-  return $head.$view_display;
+  return '<div class="duplicates">' . $view_display . '</div>';
 }
 
 function _mc_event_section_format_day($date){
@@ -173,17 +238,21 @@ function _mc_event_section_after_two_weeks(&$content){
   $nextSunday = $thisSunday + 7 * 24 * 3600;
   $minsago = $now - (60 * 30);
 
-  $query = "SELECT n.nid, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),(7*(WEEKOFYEAR(FROM_UNIXTIME(e.unix_event_start)) -1)  + 1)) as 'Day',
+  $query = "SELECT n.nid, n.title, l.name AS 'location_name', e.unix_event_start, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),(7*(WEEKOFYEAR(FROM_UNIXTIME(e.unix_event_start)) -1)  + 1)) as 'Day',
       CASE 
           WHEN e.unix_event_start > '%s'
           THEN 'Upcoming'
       END AS 'Section'
   FROM node as n 
   JOIN event as e on n.nid=e.nid
-  WHERE e.unix_event_start > '%s'
+  JOIN location_instance AS li on n.nid=li.nid
+  JOIN location AS l on li.lid=l.lid
+  WHERE n.status=1 AND  e.unix_event_start > '%s'
   GROUP BY n.nid
-  ORDER BY Day, (
-  CASE WHEN Section='Today' then 0
+  ORDER BY (CASE WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)>0 THEN 0 END) DESC,
+    abs(UNIX_TIMESTAMP(now()) - e.unix_event_start),
+    Day,
+   (CASE WHEN Section='Today' then 0
    WHEN Section='Tomorrow' then 1
    WHEN Section='This week' then 2
    WHEN Section='Next week' then 3
@@ -201,16 +270,65 @@ function _mc_event_section_after_two_weeks(&$content){
   }
 
   $lists = array();
+  $events = array();
 
   while ($row = db_fetch_object($result)) {
-    switch($row->Section){
-      case 'Upcoming':
-        $lists['Upcoming'][$row->Day][] = $row->nid;
-        break;
+    $lists[$row->Section][$row->Day][] = $row->nid;
+    $events[$row->nid]['title'] = $row->title;
+    $events[$row->nid]['datetime'] = $row->unix_event_start;
+    $events[$row->nid]['location_name'] = $row->location_name;
+  }
+
+  $new_list = array();
+  $ignore_nids = array();
+
+  foreach($lists as $section => $list_section){
+    foreach($list_section as $day => $list_day){
+      for($i=0; $i< count($list_day) -1; $i++){
+        if(!isset($ignore_nids[$list_day[$i]])){
+          $main_nid = $list_day[$i];
+          $new_list[$section][$day][$i][] = $main_nid;
+          $ignore_nids[$main_nid] = $main_nid;
+          $main_event = $events[$main_nid];
+          $main_title_soundex = soundex($main_event['title']);
+          $main_location_soundex = soundex($main_event['location_name']);
+          for($j=$i; $j<count($list_day); $j++){
+            if(!isset($ignore_nids[$list_day[$j]])){
+              $checked_nid = $list_day[$j];
+              $checked_event = $events[$checked_nid];
+
+              if($main_event['datetime']==$checked_event['datetime']){
+                $checked_title_soundex = soundex($checked_event['title']);
+                $checked_location_soundex = soundex($checked_event['location_name']);
+
+                similar_text($main_title_soundex, $checked_title_soundex, $percent_title);
+                similar_text($main_location_soundex, $checked_location_soundex, $percent_location);
+
+                $total_percent = 30;
+
+                if($percent_title>=50){
+                  $total_percent += 50;
+                }
+
+                if($percent_location>=50){
+                  $total_percent += 20;
+                }
+
+                if($total_percent>=50){
+                  $new_list[$section][$day][$i][] = $checked_nid;
+                  $ignore_nids[$checked_nid] = $checked_nid;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 
-  foreach($lists as $key => $list){
+
+
+  foreach($new_list as $key => $list){
     if(count($list)){
         $content[] = _mc_event_section_print_view($key, $list);
     }
