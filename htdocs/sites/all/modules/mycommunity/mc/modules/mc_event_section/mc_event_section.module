@@ -50,8 +50,10 @@ function _mc_event_section_next_two_weeks(&$content){
   JOIN location AS l on li.lid=l.lid
   WHERE n.status=1 AND ((e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s'))
   GROUP BY n.nid
-  ORDER BY Day, (
-  CASE WHEN Section='Today' then 0
+  ORDER BY (CASE WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)>0 THEN 0 END) DESC,
+    abs(UNIX_TIMESTAMP(now()) - e.unix_event_start),
+    Day,
+   (CASE WHEN Section='Today' then 0
    WHEN Section='Tomorrow' then 1
    WHEN Section='This week' then 2
    WHEN Section='Next week' then 3
@@ -96,11 +98,7 @@ function _mc_event_section_next_two_weeks(&$content){
               $checked_nid = $list_day[$j];
               $checked_event = $events[$checked_nid];
 
-              if($main_event['datetime']!=$checked_event['datetime']){
-                $new_list[$section][$day][$j][] = $checked_nid;
-                $ignore_nids[$checked_nid] = $checked_nid;
-              }
-              else{
+              if($main_event['datetime']==$checked_event['datetime']){
                 $checked_title_soundex = soundex($checked_event['title']);
                 $checked_location_soundex = soundex($checked_event['location_name']);
 
@@ -109,11 +107,11 @@ function _mc_event_section_next_two_weeks(&$content){
 
                 $total_percent = 30;
 
-                if($percent_title>=40){
+                if($percent_title>=50){
                   $total_percent += 50;
                 }
 
-                if($percent_location>=40){
+                if($percent_location>=50){
                   $total_percent += 20;
                 }
 
@@ -251,8 +249,10 @@ function _mc_event_section_after_two_weeks(&$content){
   JOIN location AS l on li.lid=l.lid
   WHERE n.status=1 AND  e.unix_event_start > '%s'
   GROUP BY n.nid
-  ORDER BY Day, (
-  CASE WHEN Section='Today' then 0
+  ORDER BY (CASE WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)>0 THEN 0 END) DESC,
+    abs(UNIX_TIMESTAMP(now()) - e.unix_event_start),
+    Day,
+   (CASE WHEN Section='Today' then 0
    WHEN Section='Tomorrow' then 1
    WHEN Section='This week' then 2
    WHEN Section='Next week' then 3
@@ -297,11 +297,7 @@ function _mc_event_section_after_two_weeks(&$content){
               $checked_nid = $list_day[$j];
               $checked_event = $events[$checked_nid];
 
-              if($main_event['datetime']!=$checked_event['datetime']){
-                $new_list[$section][$day][$j][] = $checked_nid;
-                $ignore_nids[$checked_nid] = $checked_nid;
-              }
-              else{
+              if($main_event['datetime']==$checked_event['datetime']){
                 $checked_title_soundex = soundex($checked_event['title']);
                 $checked_location_soundex = soundex($checked_event['location_name']);
 
@@ -310,11 +306,11 @@ function _mc_event_section_after_two_weeks(&$content){
 
                 $total_percent = 30;
 
-                if($percent_title>=40){
+                if($percent_title>=50){
                   $total_percent += 50;
                 }
 
-                if($percent_location>=40){
+                if($percent_location>=50){
                   $total_percent += 20;
                 }
 
