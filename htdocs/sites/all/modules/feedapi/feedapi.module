@@ -1294,15 +1294,50 @@ function _feedapi_invoke_refresh(&$feed, $param) {
   _feedapi_store_stat($nid, 'next_refresh_time', $next_refresh_time, $timestamp);
 
   if (!$cron) {
+
+    $results = array(
+      'new' => $new,
+      'updated' => $updated,
+      'settings' => $settings,
+      'message' => "You're done! We've imported %new nodes, and we'll keep checking for updates."
+    );
+
+    if($new){
+      $update = "";
+      if($settings['next_refresh_time'] != FEEDAPI_CRON_NEVER_REFRESH){
+        //say say you will check for next updates
+        $msg = t("You're done! We've imported %nodes, and we'll keep checking for updates",array(
+          '%nodes' => format_plural($new, '1 event', '@count events'),
+        ));
+      }else{
+        $msg = t("You're done! We've imported %nodes.",array(
+          '%nodes' => format_plural($new, '1 event', '@count events'),
+        ));
+      }
+    }else{
+      $update = "";
+
+      if($settings['next_refresh_time'] != FEEDAPI_CRON_NEVER_REFRESH){
+        //say say you will check for next updates
+        $msg = t("We didn't find any events, but we'll keep checking for updates.");
+      }else{
+        $msg = t("You're done!, We didn't find any events");
+      }
+    }
+
+    drupal_set_message($msg);
+
+    /*
     if($new == 1){
       drupal_set_message(t("You're done! We've imported %new event, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
-    }
-    elseif ($new == 0) {
+    }elseif ($new == 0) {
       drupal_set_message(t("You're done! We didn't find any events, but we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
     else {
       drupal_set_message(t("You're done! We've imported %new events, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
+    */
+
     // @ TODO what value to return here?
   }
   else {

@@ -312,6 +312,11 @@ function mt_event_feed_init(){
   }
 }
 
+function mt_event_feed_feedapi_message(&$msg){
+  flog_it($msg);
+  $msg['message'] = "cool new stuff";
+}
+
 function mt_event_feed_reverse_getAddressParts($latitude, $longitude){
   $address = $latitude . ',' . $longitude;
   $address_encoded = urlencode($address);
