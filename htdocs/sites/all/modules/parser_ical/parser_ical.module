@@ -46,6 +46,16 @@ function parser_ical_feedapi_feed($op) {
   }
 }
 
+/*
+ * @todo: move this logic to feedapi or mt_event_feed
+ */
+function encode_basename($url) {
+  $url = explode('/', $url);
+  $base = array_pop($url);
+
+  return implode('/', $url) . '/' . rawurlencode ($base);
+}
+
 /**
  * Parse the feed into a data structure
  *
@@ -58,16 +68,21 @@ function parser_ical_feedapi_feed($op) {
  */
 function _parser_ical_feedapi_parse($feed, $cache = FALSE) {
   $url = $feed->url;
+
   // Substitute webcal with http.
   if (stripos($url, 'webcal') === 0) {
     $url = 'http'. substr($url, 6);
   }
+
+  //* fix incorrect url encoding **/
+  $url = encode_basename($url);
+
   $downloaded_string = _parser_ical_download($url);
 
   if ($downloaded_string === FALSE || empty($downloaded_string)) {
     return $downloaded_string;
   }
-  
+
   return _parser_ical_parse($downloaded_string);
 }
 
