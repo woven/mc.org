@@ -495,6 +495,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer meta tags
+  $permissions['administer meta tags'] = array(
+    'name' => 'administer meta tags',
+    'roles' => array(),
+  );
+
   // Exported permission: administer module filter
   $permissions['administer module filter'] = array(
     'name' => 'administer module filter',
@@ -595,6 +601,18 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: administer theme assignments
+  $permissions['administer theme assignments'] = array(
+    'name' => 'administer theme assignments',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer themekey settings
+  $permissions['administer themekey settings'] = array(
+    'name' => 'administer themekey settings',
+    'roles' => array(),
+  );
+
   // Exported permission: administer url aliases
   $permissions['administer url aliases'] = array(
     'name' => 'administer url aliases',
@@ -638,6 +656,7 @@ function mt_access_user_default_permissions() {
     'name' => 'advanced feedapi options',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'authenticated user',
     ),
   );
 
@@ -1410,6 +1429,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit canonical URL meta tag
+  $permissions['edit canonical URL meta tag'] = array(
+    'name' => 'edit canonical URL meta tag',
+    'roles' => array(),
+  );
+
   // Exported permission: edit css
   $permissions['edit css'] = array(
     'name' => 'edit css',
@@ -1932,6 +1957,42 @@ function mt_access_user_default_permissions() {
       '1' => 'authenticated user',
       '2' => 'group manager',
     ),
+  );
+
+  // Exported permission: edit meta tag ABSTRACT
+  $permissions['edit meta tag ABSTRACT'] = array(
+    'name' => 'edit meta tag ABSTRACT',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit meta tag COPYRIGHT
+  $permissions['edit meta tag COPYRIGHT'] = array(
+    'name' => 'edit meta tag COPYRIGHT',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit meta tag DESCRIPTION
+  $permissions['edit meta tag DESCRIPTION'] = array(
+    'name' => 'edit meta tag DESCRIPTION',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit meta tag KEYWORDS
+  $permissions['edit meta tag KEYWORDS'] = array(
+    'name' => 'edit meta tag KEYWORDS',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit meta tag REVISIT-AFTER
+  $permissions['edit meta tag REVISIT-AFTER'] = array(
+    'name' => 'edit meta tag REVISIT-AFTER',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit meta tag ROBOTS
+  $permissions['edit meta tag ROBOTS'] = array(
+    'name' => 'edit meta tag ROBOTS',
+    'roles' => array(),
   );
 
   // Exported permission: edit own article content

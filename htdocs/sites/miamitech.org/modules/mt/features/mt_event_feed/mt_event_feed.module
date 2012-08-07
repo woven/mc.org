@@ -7,10 +7,75 @@
 include_once 'mt_event_feed.features.inc';
 
 
+
+function mt_event_feed_late_form_alter(&$form, &$form_state, $form_id){
+  //http://drupal.org/node/247585#comment-2913420
+  if($submit = &$form['buttons']['submit']){
+    unset($form['#redirect']);
+    $submit['#submit'][] = '_mt_event_feed_form_submit';
+  }
+}
+
+function _mt_event_feed_form_submit($form, &$form_state){
+  if(!empty($form_state['values']['og_groups'])){
+    $gid = array_shift(array_values($form_state['values']['og_groups']));
+
+    if($gid){
+      /*
+       * @todo improve this logic of hiding messages
+       * @see mt_event_feed_init
+      */
+      $_SESSION['new_event_feed'] = TRUE;
+      $form_state['redirect'] = 'node/'.$gid;
+    }else{
+      // @todo what to do if it's site wide event_feed?
+    }
+  }
+
+}
+
 function mt_event_feed_form_alter(&$form, &$form_state, $form_id){
-  //adding help msg for the feedapi fieldset
-  if($form_id == "event_feed_node_form"){
-    $form['feedapi']['#description'] = t("Import your group's event feed.  We currently only accept iCal feeds, like those found at the bottom of a Meetup.com calendar page.");
+
+  if($form_id == 'event_feed_node_form'){
+    $form['#validate'][] = '_mt_event_feed_node_form_validate';
+  }
+}
+
+function _mt_event_feed_node_form_validate($form, &$form_state) {
+  //current event_node node
+  $node = $form['#node'];
+
+  //current feedapi settings from the form submit
+  $feedapi = &$form_state['values']['feedapi'];
+
+  /*
+  * replace webcal with http on if webcal exists
+  */
+  if(preg_match('/^webcal:\/\//i',$form_state['values']['feedapi']['feedapi_url']) ){
+    $form_state['values']['feedapi']['feedapi_url'] = str_replace('webcal://', 'http://', $form_state['values']['feedapi']['feedapi_url']);
+  }
+
+  /*
+   * change refresh time to never if the upload method is file
+  */
+  if($form_state['values']['feedapi']['upload_method'] == 'upload'){
+    $form_state['values']['feedapi']['refresh_time'] = FEEDAPI_CRON_NEVER_REFRESH;
+  }
+
+  /*
+  * auto set the title of the event_feed 'Feed from LOCATION'
+  */
+  if (empty($form_state['values']['title'])) {
+    switch($feedapi['upload_method']){
+      case 'upload':
+        //@todo find away to grap the filename
+        form_set_value($form['title'], 'Feed from file', $form_state);
+      break;
+      case 'url':
+        $new_title = 'Feed from ' . str_replace('http://', '', $form_state['values']['feedapi']['feedapi_url']);
+        form_set_value($form['title'], $new_title, $form_state);
+      break;
+    }
   }
 }
 
@@ -181,7 +246,9 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
   if($node->type=='event_feed' && $op=='validate' && (!isset($node->nid) || empty($node->nid))){
 
-    if(isset($node->feedapi['feedapi_url'])){
+    //check if it it has feedapi url and if upload method is url
+    if(isset($node->feedapi['feedapi_url']) && !empty($node->feedapi['feedapi_url']) && $node->feedapi['upload_method'] == "url"){
+
       $feed_url = $node->feedapi['feedapi_url'];
       _mt_group_check_group_url_exists($feed_url);
 
@@ -206,7 +273,8 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     $record->mapping = $mapping;
     drupal_write_record('feedapi_mapper', $record);
   }
-  if($node->type=='event' && ($op=='presave')){
+
+  if($node->type=='event' && ($op=='presave') && isset($node->feedapi_node->feed_nids) && isset($node->feedapi->feed_nid)){
     $node->og_public = true;
     if((empty($node->event['dst_region']) || $node->event['dst_region']==NULL) && (empty($node->event['timezone']) || $node->event['timezone']==NULL)){
       $timezone = event_zone_by_name(str_replace('_', ' ', 'America/New_York'));
@@ -224,6 +292,29 @@ function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 //      $node->locations['0']['postal_code'] = $parts['zip'];
 //    }
   }
+}
+
+function mt_event_feed_init(){
+  /*
+   *  hide messages, on event feed import
+   *  @see _mt_event_feed_form_submit
+   */
+  if(isset($_SESSION['new_event_feed']) && $_SESSION['new_event_feed']==TRUE){
+    foreach ($_SESSION['messages']['status'] as $key => $value) {
+      if(!preg_match("/^You're done!/", $value)){
+        unset($_SESSION['messages']['status'][$key]);
+      }
+    }
+    $message = array_shift($_SESSION['messages']['status']);
+    unset($_SESSION['messages']['status']);
+    $_SESSION['messages']['status'][] = $message;
+    unset($_SESSION['new_event_feed']);
+  }
+}
+
+function mt_event_feed_feedapi_message(&$msg){
+  flog_it($msg);
+  $msg['message'] = "cool new stuff";
 }
 
 function mt_event_feed_reverse_getAddressParts($latitude, $longitude){
@@ -262,7 +353,7 @@ function mt_event_feed_reverse_getAddressParts($latitude, $longitude){
   else {
     return array();
   }
-} 
+}
 
 
 function mt_event_feed_getAddressParts($address){ 

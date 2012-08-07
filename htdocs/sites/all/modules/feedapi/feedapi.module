@@ -123,6 +123,11 @@ function feedapi_nodeapi(&$node, $op, $teaser, $page) {
     switch ($op) {
       case 'validate':
         $node->feed->settings = feedapi_get_settings($node->type);
+
+        if($node->feed->settings['upload_method'] == "both"){
+          $node->feed->settings['upload_method'] = $node->feedapi['upload_method'];
+        };
+
         $node->feed->parsers = _feedapi_format_settings($node->feed->settings, 'parsers');
         $node->feed->processors = _feedapi_format_settings($node->feed->settings, 'processors');
         if (count($node->feed->parsers) < 1) {
@@ -377,7 +382,7 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
       '#type' => 'radios',
       '#title' => t('Supply feed as'),
       '#description' => t('Select how a user will supply a feed. Choose URL if the user will paste a URL to a textfield, choose File upload if the user will upload a feed from the local disk.'),
-      '#options' => array('url' => t('URL'), 'upload' => t('File upload')),
+      '#options' => array('url' => t('URL'), 'upload' => t('File upload'),'both' => t('Both File or URL')),
       '#default_value' => isset($node_type_settings['upload_method']) ? $node_type_settings['upload_method'] : 'url',
       '#weight' => -14,
     );
@@ -499,7 +504,19 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
     elseif (isset($form_state['values']['feedapi']['feedapi_url'])) {
       $feedapi_url_default = $form_state['values']['feedapi']['feedapi_url'];
     }
-    if (isset($node_type_settings['upload_method']) && $node_type_settings['upload_method'] == 'upload') {
+
+    if($node_type_settings['upload_method'] == 'both'){
+      $form['feedapi']['upload_method'] = array(
+        '#type' => 'radios',
+        //'#title' => t('Supply feed as'),
+        //'#description' => t('Select how a user will supply a feed. Choose URL if the user will paste a URL to a textfield, choose File upload if the user will upload a feed from the local disk.'),
+        '#options' => array('url' => t('Specify a URL'), 'upload' => t('Upload a file')),
+        '#default_value' => isset($node_type_settings['upload_method']) ? $node_type_settings['upload_method'] : 'url',
+        '#weight' => -14,
+      );
+    }
+
+    if (isset($node_type_settings['upload_method']) && ($node_type_settings['upload_method'] == 'upload' OR $node_type_settings['upload_method'] == 'both') ) {
       // Makes possible to upload file via this form.
       $form['#attributes']['enctype'] = 'multipart/form-data';
       $form['feedapi']['feedapi_file'] = array(
@@ -508,12 +525,14 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
         '#description' => $feedapi_url_default ? '<div class="feed-url">'. $feedapi_url_default .'</div>' : '',
         '#size' => 40,
       );
-      $form['feedapi']['feedapi_url'] = array(
-        '#type' => 'value',
-        '#value' => $feedapi_url_default,
-      );
     }
-    else {
+
+    $form['feedapi']['feedapi_url'] = array(
+      '#type' => 'value',
+      '#value' => $feedapi_url_default,
+    );
+
+    if($node_type_settings['upload_method'] == 'url' OR $node_type_settings['upload_method'] == 'both'){
       $form['feedapi']['feedapi_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Feed URL'),
@@ -522,6 +541,7 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
         '#maxlength' => 2048,
       );
     }
+
     // Show per-node-type feedapi, parser options only for users with permissions.
     if (user_access('advanced feedapi options')) {
       // retrieve forms.
@@ -1274,15 +1294,50 @@ function _feedapi_invoke_refresh(&$feed, $param) {
   _feedapi_store_stat($nid, 'next_refresh_time', $next_refresh_time, $timestamp);
 
   if (!$cron) {
-    if($new == 1){
-      drupal_set_message(t("You're done! We've imported %new upcoming event, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
+
+    $results = array(
+      'new' => $new,
+      'updated' => $updated,
+      'settings' => $settings,
+      'message' => "You're done! We've imported %new nodes, and we'll keep checking for updates."
+    );
+
+    if($new){
+      $update = "";
+      if($settings['next_refresh_time'] != FEEDAPI_CRON_NEVER_REFRESH){
+        //say say you will check for next updates
+        $msg = t("You're done! We've imported %nodes, and we'll keep checking for updates",array(
+          '%nodes' => format_plural($new, '1 event', '@count events'),
+        ));
+      }else{
+        $msg = t("You're done! We've imported %nodes.",array(
+          '%nodes' => format_plural($new, '1 event', '@count events'),
+        ));
+      }
+    }else{
+      $update = "";
+
+      if($settings['next_refresh_time'] != FEEDAPI_CRON_NEVER_REFRESH){
+        //say say you will check for next updates
+        $msg = t("We didn't find any events, but we'll keep checking for updates.");
+      }else{
+        $msg = t("You're done!, We didn't find any events");
+      }
     }
-    elseif ($new== 0) {
-      drupal_set_message(t("You're done! We didn't find any upcoming events, but we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
+
+    drupal_set_message($msg);
+
+    /*
+    if($new == 1){
+      drupal_set_message(t("You're done! We've imported %new event, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
+    }elseif ($new == 0) {
+      drupal_set_message(t("You're done! We didn't find any events, but we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
     else {
-      drupal_set_message(t("You're done! We've imported %new upcoming events, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
+      drupal_set_message(t("You're done! We've imported %new events, and we'll keep checking for updates.", array("%new" => $new, "%updated" => $updated)));
     }
+    */
+
     // @ TODO what value to return here?
   }
   else {
@@ -1389,6 +1444,7 @@ function feedapi_get_settings($node_type, $vid = FALSE, $reset = FALSE) {
           $settings['processors'] = array();
         }
       }
+
       if (is_array($settings) && count($settings['processors']) == 0 && count($settings['parsers']) == 0) {
         $settings = NULL;
       }
@@ -1432,6 +1488,22 @@ function feedapi_get_settings($node_type, $vid = FALSE, $reset = FALSE) {
     }
   }
   return FALSE;
+}
+
+
+function feedapi_late_form_alter(&$form, &$form_state, $form_id){
+
+  if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id && feedapi_enabled_type($form['type']['#value'])) {
+
+    //add the feedapi js file
+    $js = drupal_get_path('module','feedapi') . "/feedapi.js";
+    drupal_add_js($js,'module','footer');
+
+    //overiding _feedapi_populate effect of forcing using the default options
+    if($form['feedapi']['upload_method']['#default_value'] == 'both'){
+      $form['feedapi']['upload_method']['#default_value'] = "url";
+    }
+  }
 }
 
 /**

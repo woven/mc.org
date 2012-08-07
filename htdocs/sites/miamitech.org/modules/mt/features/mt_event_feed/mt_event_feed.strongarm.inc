@@ -121,7 +121,7 @@ function mt_event_feed_strongarm() {
   $strongarm->name = 'feedapi_settings_event_feed';
   $strongarm->value = array(
     'enabled' => 1,
-    'upload_method' => 'url',
+    'upload_method' => 'both',
     'refresh_on_create' => 1,
     'update_existing' => 1,
     'refresh_time' => '1800',
@@ -351,6 +351,48 @@ function mt_event_feed_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_edit_metatags_event_feed';
+  $strongarm->value = 1;
+  $export['nodewords_edit_metatags_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_modules_output_event_feed';
+  $strongarm->value = array();
+  $export['nodewords_filter_modules_output_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_regexp_event_feed';
+  $strongarm->value = '';
+  $export['nodewords_filter_regexp_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_method_event_feed';
+  $strongarm->value = '0';
+  $export['nodewords_metatags_generation_method_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_source_event_feed';
+  $strongarm->value = '2';
+  $export['nodewords_metatags_generation_source_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_use_alt_attribute_event_feed';
+  $strongarm->value = 1;
+  $export['nodewords_use_alt_attribute_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_event_feed';
   $strongarm->value = array(
     0 => 'status',
@@ -370,6 +412,20 @@ function mt_event_feed_strongarm() {
   $strongarm->name = 'og_max_groups_event_feed';
   $strongarm->value = '';
   $export['og_max_groups_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_event_feed';
+  $strongarm->value = '';
+  $export['page_title_type_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_event_feed_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_event_feed_showfield'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -405,6 +461,16 @@ function mt_event_feed_strongarm() {
   $strongarm->name = 'show_preview_changes_event_feed';
   $strongarm->value = 0;
   $export['show_preview_changes_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_event_feed';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_event_feed'] = $strongarm;
 
   return $export;
 }

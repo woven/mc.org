@@ -1,0 +1,26 @@
+<?php
+// $Id: flog.install,v 1.1 2010/02/23 13:49:13 dwightaspinwall Exp $
+
+/**
+ * @file
+ * flog: Dump variables to a file.
+ */
+
+/**
+* Implementation of hook_install().
+*/
+function flog_install() {
+  drupal_set_message(st("File logger installed.  Configure and enable at !link", 
+    array( '!link' => l('Administer > Site configuration > File logging ',  'admin/settings/flog' ))
+  ));
+}
+
+/**
+* Implementation of hook_uninstall().
+*/
+function flog_uninstall() {
+  variable_del('flog_enabled');
+  variable_del('flog_path');
+  variable_del('flog_file');
+  variable_del('flog_date');
+}
