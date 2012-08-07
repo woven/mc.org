@@ -31,7 +31,7 @@ function _mc_event_section_next_two_weeks(&$content){
   $nextSunday = $thisSunday + 7 * 24 * 3600;
   $minsago = $now - (60 * 30);
 
-  $query = "SELECT n.nid, n.title, l.name AS 'location_name', e.unix_event_start, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),DAYOFYEAR(FROM_UNIXTIME(e.unix_event_start))) as 'Day',
+  $query = "SELECT n.nid, n.title, l.name AS 'location_name', e.unix_event_start, e.unix_event_end, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),DAYOFYEAR(FROM_UNIXTIME(e.unix_event_start))) as 'Day',
       CASE 
           WHEN ((e.unix_event_start BETWEEN '%s' AND '%s') OR (e.unix_event_end BETWEEN '%s' AND '%s'))
           THEN 'Today'
@@ -59,8 +59,8 @@ function _mc_event_section_next_two_weeks(&$content){
    WHEN Section='Next week' then 3
    WHEN Section='Upcoming' then 4
   ELSE Section
-  END
-  )";
+  END),
+  rand()";
   
   if ($dayOfWeek == 0){
     $twoSundaysFromNow = $nextSunday + 7 * 24 * 3600;
@@ -77,6 +77,7 @@ function _mc_event_section_next_two_weeks(&$content){
     $lists[$row->Section][$row->Day][] = $row->nid;
     $events[$row->nid]['title'] = $row->title;
     $events[$row->nid]['datetime'] = $row->unix_event_start;
+    $events[$row->nid]['datetime_end'] = $row->unix_event_end;
     $events[$row->nid]['location_name'] = $row->location_name;
   }
 
@@ -85,7 +86,7 @@ function _mc_event_section_next_two_weeks(&$content){
 
   foreach($lists as $section => $list_section){
     foreach($list_section as $day => $list_day){
-      for($i=0; $i< count($list_day) -1; $i++){
+      for($i=0; $i< count($list_day); $i++){
         if(!isset($ignore_nids[$list_day[$i]])){
           $main_nid = $list_day[$i];
           $new_list[$section][$day][$i][] = $main_nid;
@@ -98,7 +99,7 @@ function _mc_event_section_next_two_weeks(&$content){
               $checked_nid = $list_day[$j];
               $checked_event = $events[$checked_nid];
 
-              if($main_event['datetime']==$checked_event['datetime']){
+              if($main_event['datetime']==$checked_event['datetime'] && $main_event['datetime_end']==$checked_event['datetime_end'] ){
                 $checked_title_soundex = soundex($checked_event['title']);
                 $checked_location_soundex = soundex($checked_event['location_name']);
 
@@ -238,7 +239,7 @@ function _mc_event_section_after_two_weeks(&$content){
   $nextSunday = $thisSunday + 7 * 24 * 3600;
   $minsago = $now - (60 * 30);
 
-  $query = "SELECT n.nid, n.title, l.name AS 'location_name', e.unix_event_start, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),(7*(WEEKOFYEAR(FROM_UNIXTIME(e.unix_event_start)) -1)  + 1)) as 'Day',
+  $query = "SELECT n.nid, n.title, l.name AS 'location_name', e.unix_event_start, e.unix_event_end, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),(7*(WEEKOFYEAR(FROM_UNIXTIME(e.unix_event_start)) -1)  + 1)) as 'Day',
       CASE 
           WHEN e.unix_event_start > '%s'
           THEN 'Upcoming'
@@ -258,8 +259,8 @@ function _mc_event_section_after_two_weeks(&$content){
    WHEN Section='Next week' then 3
    WHEN Section='Upcoming' then 4
   ELSE Section
-  END
-  )";
+  END),
+  rand()";
   
   if ($dayOfWeek == 0){
     $twoSundaysFromNow = $nextSunday + 7 * 24 * 3600;
@@ -276,6 +277,7 @@ function _mc_event_section_after_two_weeks(&$content){
     $lists[$row->Section][$row->Day][] = $row->nid;
     $events[$row->nid]['title'] = $row->title;
     $events[$row->nid]['datetime'] = $row->unix_event_start;
+    $events[$row->nid]['datetime_end'] = $row->unix_event_end;
     $events[$row->nid]['location_name'] = $row->location_name;
   }
 
@@ -284,7 +286,7 @@ function _mc_event_section_after_two_weeks(&$content){
 
   foreach($lists as $section => $list_section){
     foreach($list_section as $day => $list_day){
-      for($i=0; $i< count($list_day) -1; $i++){
+      for($i=0; $i< count($list_day); $i++){
         if(!isset($ignore_nids[$list_day[$i]])){
           $main_nid = $list_day[$i];
           $new_list[$section][$day][$i][] = $main_nid;
@@ -297,7 +299,7 @@ function _mc_event_section_after_two_weeks(&$content){
               $checked_nid = $list_day[$j];
               $checked_event = $events[$checked_nid];
 
-              if($main_event['datetime']==$checked_event['datetime']){
+              if($main_event['datetime']==$checked_event['datetime'] && $main_event['datetime_end']==$checked_event['datetime_end'] ){
                 $checked_title_soundex = soundex($checked_event['title']);
                 $checked_location_soundex = soundex($checked_event['location_name']);
 

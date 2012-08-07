@@ -1151,7 +1151,7 @@ echo $hash;
   $handler->override_option('distinct', 1);
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
-    'grouping' => 'phpcode_4',
+    'grouping' => '',
     'group' => array(
       'element_type' => 'h3',
       'class' => 'hash',
