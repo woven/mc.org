@@ -228,12 +228,11 @@ function ft_event_strongarm() {
     'options' => '19',
     'comment_settings' => '16',
     'menu' => '13',
-    'taxonomy' => '10',
     'path' => '17',
-    'mollom' => '20',
+    'locations' => '9',
     'og_nodeapi' => '6',
-    'path_redirect' => '30',
     'print' => '15',
+    'xmlsitemap' => '30',
     'nodewords' => '10',
   );
   $export['content_extra_weights_event'] = $strongarm;
@@ -303,9 +302,9 @@ function ft_event_strongarm() {
   $strongarm->name = 'event_range_next';
   $strongarm->value = array(
     'year' => 2013,
-    'month' => '01',
-    'day' => '07',
-    'hour' => '20',
+    'month' => '06',
+    'day' => '11',
+    'hour' => '22',
     'minute' => '00',
     'second' => '00',
   );
@@ -316,11 +315,11 @@ function ft_event_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'event_range_prev';
   $strongarm->value = array(
-    'year' => 0,
-    'month' => '00',
-    'day' => '00',
-    'hour' => '00',
-    'minute' => '00',
+    'year' => 2012,
+    'month' => '07',
+    'day' => '19',
+    'hour' => '18',
+    'minute' => '30',
     'second' => '00',
   );
   $export['event_range_prev'] = $strongarm;
@@ -533,7 +532,7 @@ function ft_event_strongarm() {
       ),
     ),
     'display' => array(
-      'weight' => '0',
+      'weight' => '9',
       'hide' => array(
         'name' => 0,
         'street' => 0,
@@ -952,9 +951,23 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_edit_metatags_event_feed';
+  $strongarm->value = 1;
+  $export['nodewords_edit_metatags_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nodewords_filter_modules_output_event';
   $strongarm->value = array();
   $export['nodewords_filter_modules_output_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_modules_output_event_feed';
+  $strongarm->value = array();
+  $export['nodewords_filter_modules_output_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -966,9 +979,23 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_regexp_event_feed';
+  $strongarm->value = '';
+  $export['nodewords_filter_regexp_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nodewords_metatags_generation_method_event';
   $strongarm->value = '1';
   $export['nodewords_metatags_generation_method_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_method_event_feed';
+  $strongarm->value = '0';
+  $export['nodewords_metatags_generation_method_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -980,9 +1007,23 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_source_event_feed';
+  $strongarm->value = '2';
+  $export['nodewords_metatags_generation_source_event_feed'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nodewords_use_alt_attribute_event';
   $strongarm->value = 1;
   $export['nodewords_use_alt_attribute_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_use_alt_attribute_event_feed';
+  $strongarm->value = 1;
+  $export['nodewords_use_alt_attribute_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1254,6 +1295,16 @@ function ft_event_strongarm() {
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_event'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_event_feed';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_event_feed'] = $strongarm;
 
   return $export;
 }

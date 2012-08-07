@@ -112,6 +112,10 @@ function _miamitech_get_featured_carousel_array($field_array){
 }
 
 function miamitech_nd_location_address($field) {
+  if($field['object']->field_online_event[0]['value']==1){
+    return 'Online Event';
+  }
+
   // Get the location field settings for this node type
   $settings = variable_get('location_settings_node_'. $field['object']->type, array());
 

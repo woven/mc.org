@@ -116,6 +116,72 @@ function ft_event_content_default_fields() {
     ),
   );
 
+  // Exported field: field_online_event
+  $fields['event-field_online_event'] = array(
+    'field_name' => 'field_online_event',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'number_integer',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'number',
+    'active' => '1',
+    'prefix' => '',
+    'suffix' => '',
+    'min' => '',
+    'max' => '',
+    'allowed_values' => '0|This is NOT an online event
+1|This is an online event',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'default_value' => array(
+        '0' => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Online Event',
+      'weight' => '33',
+      'description' => '',
+      'type' => 'optionwidgets_onoff',
+      'module' => 'optionwidgets',
+    ),
+  );
+
   // Exported field: field_place
   $fields['event-field_place'] = array(
     'field_name' => 'field_place',
@@ -452,6 +518,7 @@ function ft_event_content_default_fields() {
   // Included for use with string extractors like potx.
   t('File');
   t('Images');
+  t('Online Event');
   t('Place');
   t('Reference Related Content');
 

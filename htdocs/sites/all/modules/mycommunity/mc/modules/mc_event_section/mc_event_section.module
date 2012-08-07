@@ -338,18 +338,21 @@ function _mc_event_section_after_two_weeks(&$content){
 
 }
 
-function _mc_event_section_formatted_location($location){
+function _mc_event_section_formatted_location($location, $online){
   if(preg_match("/webinar/i", $location)){
     return $location;
+  }
+  elseif($online){
+    if(!empty($location) || $location!=NULL){
+      return '<span class="location">' . 'Online event' .'</span>';
+    }
   }
   else {
     if(!empty($location) || $location!=NULL){
       return 'at <span class="location">' . $location .'</span>';
     }
-    else{
-      return;
-    }
   }
+  return;
 }
 
 function mc_event_section_views_query_alter(&$view, &$query) {
