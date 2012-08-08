@@ -132,11 +132,3 @@ function excute_deploy($branch){
 
   watchdog('mc_deploy',"Auto Deployment Log");
 }
-
-function mc_deploy_requirements($phase){
-  $req = array();
-  if($phase == "runtime"){
-
-  }
-
-}
