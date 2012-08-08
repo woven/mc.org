@@ -114,21 +114,22 @@ function excute_deploy($branch){
   include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/AES.php');
   include_once(libraries_get_path('phpseclib') .'/' . 'Net/SSH2.php');
 
-  set_time_limit(120 * 2);
+  set_time_limit(60 * 3);
 
   $ssh = new Net_SSH2($host);
-  if (!$ssh->login($user, $pass)) {
-    exit('Login Failed');
+
+  if ($ssh->login($user, $pass)) {
+    $dir = variable_get('mc_deploy_dir','');
+    $dir_mirror = variable_get('mc_deploy_dir_mirror','');
+
+    if(!empty($dir) && !empty($dir_mirror)){
+      $dsite = str_replace($dir,$dir_mirror,$dsite);
+    }
+
+    watchdog('mc_deploy',"Auto Deployment: Starting");
+    $output = $ssh->exec("cd $dsite; sh deploy.sh $branch");
+    watchdog('mc_deploy',"Auto Deployment: Finished");
+  }else{
+    watchdog('mc_deploy',"Auto Deployment: Failed to login to SSH server",null,WATCHDOG_ERROR);
   }
-
-  $dir = variable_get('mc_deploy_dir','');
-  $dir_mirror = variable_get('mc_deploy_dir_mirror','');
-
-  if(!empty($dir) && !empty($dir_mirror)){
-    $dsite = str_replace($dir,$dir_mirror,$dsite);
-  }
-
-  $output = $ssh->exec("cd $dsite; sh deploy.sh $branch");
-
-  watchdog('mc_deploy',"Auto Deployment Log");
 }
