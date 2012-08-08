@@ -75,7 +75,7 @@ function _github_deploy(){
     }
 
     $output[] = $ssh->exec("ls");
-    $output[] = $ssh->exec("cd ..");
+    $output[] = $ssh->exec("cd /");
     $output[] = $ssh->exec("ls");
     $output[] = $ssh->exec("sh deploy.sh mt");
 
