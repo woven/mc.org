@@ -794,9 +794,9 @@ function mc_facebook_like($nid){
   define('FEATURES_DISABLED', 5);
 */
 
-function features_tourl(&$modules = array()){
+function features_tourl(&$modules = array(),$extra_path = ""){
   foreach($modules as &$module){
-    $path = 'admin/build/features/' . $module;
+    $path = 'admin/build/features/' . $module . $extra_path;
     $module = l($module,$path);
   }
 
@@ -819,7 +819,7 @@ function mc_requirements($phase){
       case FEATURES_OVERRIDDEN:
         $creq = &$req['FEATURES_OVERRIDDEN'];
         $creq['title'] = "Features: Overridden";
-        $creq['value'] = implode(", ",features_tourl($modules));
+        $creq['value'] = implode(", ",features_tourl($modules,'/diff'));
         $creq['severity'] = REQUIREMENT_ERROR;
       break;
       case FEATURES_NEEDS_REVIEW:
@@ -831,14 +831,14 @@ function mc_requirements($phase){
       case 'FEATURES_DEFAULT':
         $creq = &$req['FEATURES_DEFAULT'];
         $creq['title'] = "Features";
-        $creq['value'] = "Attention Required! Not All Features are in default status";
+        $creq['value'] = "Some features are not in sync! See below for their status.";
         $creq['severity'] = REQUIREMENT_WARNING;
       break;
     }
   }
 
   if(count($req) == 1 && isset($req['FEATURES_DEFAULT'])){
-    $req['FEATURES_DEFAULT']['value'] = "Ok! All features are in default status";
+    $req['FEATURES_DEFAULT']['value'] = "All features are in sync.";
     $req['FEATURES_DEFAULT']['severity'] = REQUIREMENT_OK;
   }
 
