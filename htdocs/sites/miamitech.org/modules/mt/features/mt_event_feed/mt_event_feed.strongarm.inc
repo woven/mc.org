@@ -394,7 +394,9 @@ function mt_event_feed_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_event_feed';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'status',
+  );
   $export['node_options_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
