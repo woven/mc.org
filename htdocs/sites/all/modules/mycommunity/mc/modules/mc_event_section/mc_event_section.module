@@ -360,9 +360,7 @@ function _mc_event_section_formatted_location($location, $online){
     return $location;
   }
   elseif($online){
-    if(!empty($location) || $location!=NULL){
-      return '<span class="location">' . 'Online event' .'</span>';
-    }
+    return '<span class="location">' . 'Online event' .'</span>';
   }
   else {
     if(!empty($location) || $location!=NULL){
