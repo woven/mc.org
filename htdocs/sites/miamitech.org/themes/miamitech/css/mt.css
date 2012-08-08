@@ -469,13 +469,8 @@ body #navigation {
 
 .show-more-events {
   margin-left: 104px;
-
 }
 
 #page .field-title a:hover{
   text-decoration: underline;
-}
-
-body{
-    background-color: green ;
 }
