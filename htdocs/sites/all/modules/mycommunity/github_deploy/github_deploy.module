@@ -114,7 +114,7 @@ function excute_deploy($branch){
   include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/AES.php');
   include_once(libraries_get_path('phpseclib') .'/' . 'Net/SSH2.php');
 
-  set_time_limit(120);
+  set_time_limit(120 * 2);
 
   $ssh = new Net_SSH2($host);
   if (!$ssh->login($user, $pass)) {
