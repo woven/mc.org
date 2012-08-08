@@ -17,6 +17,10 @@ function exec_enabled() {
     return !in_array('exec', $disabled);
 }
 
+function _deploy_settings(){
+  $form[''] =
+}
+
 function _github_deploy(){
     //dsm(realpath('.'));
     //dsm(conf_path());
