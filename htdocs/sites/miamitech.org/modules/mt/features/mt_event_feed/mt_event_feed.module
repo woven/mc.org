@@ -245,6 +245,8 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
             $node->locations['0']['longitude'] = $parts['1'];
           }
         }
+
+      //force the node to always become published
       return $node;
     }
   }

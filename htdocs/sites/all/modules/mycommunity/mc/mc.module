@@ -825,7 +825,7 @@ function mc_requirements($phase){
       case FEATURES_NEEDS_REVIEW:
         $creq = &$req['FEATURES_NEEDS_REVIEW'];
         $creq['title'] = "Features: Needs Review";
-        $creq['value'] = implode(", ",features_tourl($modules));
+        $creq['value'] = implode(", ",features_tourl($modules,'/diff'));
         $creq['severity'] = REQUIREMENT_WARNING;
       break;
       case 'FEATURES_DEFAULT':
