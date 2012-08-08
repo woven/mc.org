@@ -1,0 +1,33 @@
+<?php
+
+function github_deploy_menu(){
+ $items = array();
+
+      $items['github/deploy'] = array(
+        'title' => 'github deploy',
+        'page callback' => '_github_deploy',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK
+      );
+
+    return $items;
+}
+function exec_enabled() {
+    $disabled = explode(', ', ini_get('disable_functions'));
+    return !in_array('exec', $disabled);
+}
+
+function _github_deploy(){
+    //dsm(realpath('.'));
+    //dsm(conf_path());
+
+    set_time_limit(120);
+    $sitepath = realpath('.');
+    $sitepath = "/home/www/miamitech/dev.miamitech.org/htdocs";
+    $current_site = $sitepath ."/".conf_path();
+    dsm($current_site);
+    $output = shell_exec("cd $current_site; drush cc all", $output);
+    dsm($output);
+
+    return 'Done Excuting deploy';
+}
