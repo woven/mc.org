@@ -52,7 +52,7 @@ function mc_deploy_form_settings(){
   $form['mc_deploy_ssh_pass'] = array(
            '#type' => 'textfield',
            '#title' => t('SSH Password'),
-           '#value' => variable_get("mc_deploy_ssh_pass","")
+           '#default_value' => variable_get("mc_deploy_ssh_pass","")
   );
 
   $form['mc_deploy_github_branch'] = array(
