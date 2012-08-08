@@ -12,13 +12,34 @@ function github_deploy_menu(){
 
     return $items;
 }
+
 function exec_enabled() {
     $disabled = explode(', ', ini_get('disable_functions'));
     return !in_array('exec', $disabled);
 }
 
-function _deploy_settings(){
-  $form[''] =
+function mc_deploy_form_settings(){
+  $form = array();
+
+  $form['mc_deploy_ssh_host'] = array(
+    '#type' => 'textfield',
+    '#title' => t('SSH Host'),
+    '#default_value' => variable_get("mc_deploy_ssh_host","")
+  );
+
+  $form['mc_deploy_shh_user'] = array(
+          '#type' => 'textfield',
+          '#title' => t('SSH User Name'),
+          '#default_value' => variable_get("mc_deploy_shh_user","")
+  );
+
+  $form['mc_deploy_ssh_pass'] = array(
+           '#type' => 'textfield',
+           '#title' => t('SSH Password'),
+           '#default_value' => variable_get("mc_deploy_ssh_pass","")
+  );
+
+  return system_settings_form($form);
 }
 
 function _github_deploy(){
