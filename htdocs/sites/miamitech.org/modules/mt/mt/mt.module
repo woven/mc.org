@@ -355,6 +355,17 @@ function mt_event_image($node){
 function mt_form_alter(&$form, &$form_state, $form_id){
   global $user;
 
+  if($form_id=='event_node_form'){
+    if(isset($form['field_online_event'])){
+      $form['locations']['0']['field_online_event'] = $form['field_online_event'];
+      $form['locations'][0]['field_online_event']['#weight'] = '-99';
+      unset($form['field_online_event']);
+      $form['locations']['0']['field_online_event']['#suffix'] = '<div class="default-location-wrapper">';
+      $form['locations'][0]['#suffix'] = "</div>";
+      drupal_add_js((drupal_get_path('module', 'mt') .'/js/mt_online_location.js'));
+    }
+  }
+
   if ($form['#id'] == 'node-form') {
     if(isset($form['author'])){
       $form['author']['name']['#type'] = 'hidden';
