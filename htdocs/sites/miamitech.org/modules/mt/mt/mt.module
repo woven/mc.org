@@ -369,7 +369,7 @@ function mt_form_alter(&$form, &$form_state, $form_id){
         $hidden_class = "";
       }
       $form['locations']['0']['field_online_event']['#suffix'] = '<div class="default-location-wrapper '.$hidden_class . '">';
-      $form['locations'][0]['#suffix'] = "</div>";
+      //$form['locations'][0]['#suffix'] = "</div>";
       drupal_add_js((drupal_get_path('module', 'mt') .'/js/mt_online_location.js'));
       drupal_add_css((drupal_get_path('module', 'mt') .'/css/mt_online_location.css'));
     }
