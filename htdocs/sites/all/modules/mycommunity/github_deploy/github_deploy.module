@@ -55,6 +55,12 @@ function mc_deploy_form_settings(){
            '#default_value' => variable_get("mc_deploy_ssh_pass","")
   );
 
+  $form['mc_deploy_github_branch'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Github Branch to Monitor'),
+    '#default_value' => variable_get("mc_deploy_github_branch","")
+  );
+
     $form['mc_deploy_dir'] = array(
         '#type' => 'textfield',
         '#title' => t('Directory'),
@@ -62,26 +68,31 @@ function mc_deploy_form_settings(){
     );
 
     $form['mc_deploy_dir_mirror'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Directory Mirror'),
-        '#default_value' => variable_get("mc_deploy_dir_mirror","")
-    );
+    '#type' => 'textfield',
+    '#title' => t('Directory Mirror'),
+    '#default_value' => variable_get("mc_deploy_dir_mirror","")
+  );
 
   return system_settings_form($form);
 }
 
 function _github_deploy(){
 
-  if(isset($_REQUEST['payload'])){
-    $payload = json_decode($_REQUEST['payload']);
+  $branch = variable_get("mc_deploy_github_branch","");
 
-    if ($payload->ref === 'refs/heads/mt'){
-      excute_deploy('mt');
+  if(!empty($branch)){
+    if(isset($_REQUEST['payload'])){
+      $payload = json_decode($_REQUEST['payload']);
+
+      $github_branch = "refs/heads/".$branch;
+      if ($payload->ref === $github_branch){
+        excute_deploy($branch);
+      }
     }
-  }
 
-  if($_GET['debug'] == 1){
-    excute_deploy('mt');
+    if($_GET['debug'] == 1){
+      excute_deploy($branch);
+    }
   }
 
   return 'Done Executing deploy script';
@@ -118,6 +129,6 @@ function excute_deploy($branch){
   }
 
   $output = $ssh->exec("cd $dsite; sh deploy.sh $branch");
-  dsm($output);
+
   watchdog('mc_deploy',"Auto Deployment Log");
 }
