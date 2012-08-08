@@ -50,7 +50,7 @@ function mc_deploy_form_settings(){
   );
 
   $form['mc_deploy_ssh_pass'] = array(
-           '#type' => 'password',
+           '#type' => 'textfield',
            '#title' => t('SSH Password'),
            '#value' => variable_get("mc_deploy_ssh_pass","")
   );
@@ -131,4 +131,12 @@ function excute_deploy($branch){
   $output = $ssh->exec("cd $dsite; sh deploy.sh $branch");
 
   watchdog('mc_deploy',"Auto Deployment Log");
+}
+
+function mc_deploy_requirements($phase){
+  $req = array();
+  if($phase == "runtime"){
+
+  }
+
 }
