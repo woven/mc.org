@@ -1,7 +1,15 @@
 <?php
 
 function github_deploy_menu(){
- $items = array();
+      $items = array();
+
+      $items['admin/settings/mc_deploy'] = array(
+        'title' => 'github deploy',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('mc_deploy_form_settings'),
+        'access arguments' => array('administer mc_deploy'),
+        'type' => MENU_NORMAL_ITEM
+      );
 
       $items['github/deploy'] = array(
         'title' => 'github deploy',
@@ -12,22 +20,104 @@ function github_deploy_menu(){
 
     return $items;
 }
+
+function github_deploy_perm() {
+  return array('administer mc_deploy');
+}
+
 function exec_enabled() {
     $disabled = explode(', ', ini_get('disable_functions'));
     return !in_array('exec', $disabled);
 }
 
+function github_deploy_late_form_alter(&$form, &$form_state, $form_id){
+  //dsm($form);
+}
+
+function mc_deploy_form_settings(){
+  $form = array();
+
+  $form['mc_deploy_ssh_host'] = array(
+    '#type' => 'textfield',
+    '#title' => t('SSH Host'),
+    '#default_value' => variable_get("mc_deploy_ssh_host","")
+  );
+
+  $form['mc_deploy_shh_user'] = array(
+          '#type' => 'textfield',
+          '#title' => t('SSH User Name'),
+          '#default_value' => variable_get("mc_deploy_shh_user","")
+  );
+
+  $form['mc_deploy_ssh_pass'] = array(
+           '#type' => 'textfield',
+           '#title' => t('SSH Password'),
+           '#default_value' => variable_get("mc_deploy_ssh_pass","")
+  );
+
+    $form['mc_deploy_dir'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Directory'),
+        '#default_value' => variable_get("mc_deploy_dir","")
+    );
+
+    $form['mc_deploy_dir_mirror'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Directory Mirror'),
+        '#default_value' => variable_get("mc_deploy_dir_mirror","")
+    );
+
+  return system_settings_form($form);
+}
+
 function _github_deploy(){
-    //dsm(realpath('.'));
-    //dsm(conf_path());
 
-    set_time_limit(120);
-    $sitepath = realpath('.');
-    $sitepath = "/home/www/miamitech/dev.miamitech.org/htdocs";
-    $current_site = $sitepath ."/".conf_path();
-    dsm($current_site);
-    $output = shell_exec("cd $current_site; drush cc all", $output);
-    dsm($output);
+  if(isset($_REQUEST['payload'])){
+    $payload = json_decode($_REQUEST['payload']);
 
-    return 'Done Excuting deploy';
+    if ($payload->ref === 'refs/heads/mt'){
+      excute_deploy('mt');
+    }
+  }
+
+  if($_GET['debug'] == 1){
+    excute_deploy('mt');
+  }
+
+  return 'Done Executing deploy script';
+}
+
+function excute_deploy($branch){
+  $sitepath = realpath('.');
+  $dsite = $sitepath ."/".conf_path();
+
+  $host = variable_get("mc_deploy_ssh_host","");
+  $user = variable_get("mc_deploy_shh_user","");
+  $pass = variable_get("mc_deploy_ssh_pass","");
+
+  include_once(libraries_get_path('phpseclib') .'/' . 'Math/BigInteger.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/Random.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/Hash.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/TripleDES.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/RC4.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/AES.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Net/SSH2.php');
+
+  set_time_limit(120);
+
+  $ssh = new Net_SSH2($host);
+  if (!$ssh->login($user, $pass)) {
+    exit('Login Failed');
+  }
+
+  $dir = variable_get('mc_deploy_dir','');
+  $dir_mirror = variable_get('mc_deploy_dir_mirror','');
+
+  if(!empty($dir) && !empty($dir_mirror)){
+    $dsite = str_replace($dir,$dir_mirror,$dsite);
+  }
+
+  $output = $ssh->exec("cd $dsite; sh deploy.sh $branch");
+  dsm($output);
+  watchdog('mc_deploy',"Auto Deployment Log");
 }
