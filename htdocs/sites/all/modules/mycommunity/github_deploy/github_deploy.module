@@ -26,5 +26,6 @@ function _github_deploy(){
     exec("cd $current_site; sh deploy.sh mt", $output);
     dsm($output);
 
+   
     return 'Im here';
 }
