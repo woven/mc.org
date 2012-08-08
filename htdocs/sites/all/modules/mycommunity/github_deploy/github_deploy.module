@@ -30,6 +30,10 @@ function exec_enabled() {
     return !in_array('exec', $disabled);
 }
 
+function github_deploy_late_form_alter(&$form, &$form_state, $form_id){
+  dsm($form);
+}
+
 function mc_deploy_form_settings(){
   $form = array();
 
