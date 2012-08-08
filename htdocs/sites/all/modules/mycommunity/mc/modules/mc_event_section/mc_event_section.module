@@ -111,12 +111,19 @@ function _mc_event_section_next_two_weeks(&$content){
 
                 $total_percent = 30;
 
-                if($percent_title>=50){
-                  $total_percent += 50;
-                }
+                if($checked_event['title']!='Share and Learn'){
+                  if($percent_title>=50){
+                    $total_percent += 50;
+                  }
 
-                if($percent_location>=50){
-                  $total_percent += 20;
+                  if($percent_location>=50){
+                    $total_percent += 20;
+                  }
+                }
+                else{
+                  if($percent_location>=50){
+                    $total_percent += 40;
+                  }
                 }
 
                 if($total_percent>=50){
@@ -311,12 +318,19 @@ function _mc_event_section_after_two_weeks(&$content){
 
                 $total_percent = 30;
 
-                if($percent_title>=50){
-                  $total_percent += 50;
-                }
+                if($checked_event['title']!='Share and Learn'){
+                  if($percent_title>=50){
+                    $total_percent += 50;
+                  }
 
-                if($percent_location>=50){
-                  $total_percent += 20;
+                  if($percent_location>=50){
+                    $total_percent += 20;
+                  }
+                }
+                else{
+                  if($percent_location>=50){
+                    $total_percent += 40;
+                  }
                 }
 
                 if($total_percent>=50){
@@ -346,9 +360,7 @@ function _mc_event_section_formatted_location($location, $online){
     return $location;
   }
   elseif($online){
-    if(!empty($location) || $location!=NULL){
-      return '<span class="location">' . 'Online event' .'</span>';
-    }
+    return '<span class="location">' . 'Online event' .'</span>';
   }
   else {
     if(!empty($location) || $location!=NULL){

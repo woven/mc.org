@@ -1793,6 +1793,16 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit field_online_event
+  $permissions['edit field_online_event'] = array(
+    'name' => 'edit field_online_event',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
   // Exported permission: edit field_open_in_evening
   $permissions['edit field_open_in_evening'] = array(
     'name' => 'edit field_open_in_evening',
@@ -2754,6 +2764,17 @@ function mt_access_user_default_permissions() {
   // Exported permission: view field_media
   $permissions['view field_media'] = array(
     'name' => 'view field_media',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_online_event
+  $permissions['view field_online_event'] = array(
+    'name' => 'view field_online_event',
     'roles' => array(
       '0' => 'administrator',
       '1' => 'anonymous user',
