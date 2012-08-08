@@ -8,7 +8,7 @@ function github_deploy_menu(){
         'page callback' => 'drupal_get_form',
         'page arguments' => array('mc_deploy_form_settings'),
         'access arguments' => array('administer mc_deploy'),
-        'type' => MENU_CALLBACK
+        'type' => MENU_NORMAL_ITEM
       );
 
       $items['github/deploy'] = array(
@@ -51,6 +51,18 @@ function mc_deploy_form_settings(){
            '#default_value' => variable_get("mc_deploy_ssh_pass","")
   );
 
+    $form['mc_deploy_dir'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Directory'),
+        '#default_value' => variable_get("mc_deploy_dir","")
+    );
+
+    $form['mc_deploy_dir_mirror'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Directory Mirror'),
+        '#default_value' => variable_get("mc_deploy_dir_mirror","")
+    );
+
   return system_settings_form($form);
 }
 
@@ -58,6 +70,10 @@ function _github_deploy(){
 
     $sitepath = realpath('.');
     $dsite = $sitepath ."/".conf_path();
+
+    $host = variable_get("mc_deploy_ssh_host","");
+    $user = variable_get("mc_deploy_shh_user","");
+    $pass = variable_get("mc_deploy_ssh_pass","");
 
     include_once(libraries_get_path('phpseclib') .'/' . 'Math/BigInteger.php');
     include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/Random.php');
@@ -69,14 +85,20 @@ function _github_deploy(){
 
     set_time_limit(120);
 
-    $ssh = new Net_SSH2('localhost');
-    if (!$ssh->login('quickstart', 'quickstart')) {
+    $ssh = new Net_SSH2($host);
+    if (!$ssh->login($user, $pass)) {
        exit('Login Failed');
     }
 
-    $output[] = $ssh->exec("cd $dsite; sh deploy.sh mt");
+    $dir = variable_get('mc_deploy_dir','');
+    $dir_mirror = variable_get('mc_deploy_dir_mirror','');
 
-    //$sitepath = "/home/www/miamitech/dev.miamitech.org/htdocs";
+    if(!empty($dir) && !empty($dir_mirror)){
+       $dsite = str_replace($dir,$dir_mirror,$dsite);
+    }
+
+    $output = $ssh->exec("cd $dsite; sh deploy.sh mt");
+    //watchdog($output);
 
     return 'Done Executing deploy script';
 }
