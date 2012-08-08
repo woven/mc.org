@@ -26,7 +26,7 @@ function _github_deploy(){
     $sitepath = "/home/www/miamitech/dev.miamitech.org/htdocs";
     $current_site = $sitepath ."/".conf_path();
     dsm($current_site);
-    exec("cd $current_site; sh deploy.sh mt", $output);
+    exec("cd $current_site; drush cc all", $output);
     dsm($output);
 
     return 'Done Excuting deploy';
