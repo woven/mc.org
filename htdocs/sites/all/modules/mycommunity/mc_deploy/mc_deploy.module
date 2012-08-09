@@ -86,6 +86,19 @@ function _github_deploy(){
 
       $github_branch = "refs/heads/".$branch;
       if ($payload->ref === $github_branch){
+
+        //get all commits into array with id as key
+        $commits = array();
+        if(!empty($payload->commits)){
+          foreach($payload->commits as $commit){
+            $commits[$commit->id] = $commit;
+          }
+        }
+
+        $last_commit = $commits[$payload->after];
+
+        variable_set("mc_deploy_last_commit",$last_commit);
+
         excute_deploy($branch);
       }
     }
@@ -132,4 +145,28 @@ function excute_deploy($branch){
   }else{
     watchdog('mc_deploy',"Auto Deployment: Failed to login to SSH server",null,WATCHDOG_ERROR);
   }
+}
+
+function mc_deploy_requirements($phase){
+  if($phase != 'runtime'){
+    return array();
+  }
+
+  $reqs = array();
+
+  $last_commit = variable_get("mc_deploy_last_commit",array());
+
+  if(!empty($last_commit)){
+    $req = &$reqs[];
+    $req['title'] = "MC Deploy";
+    $req['value'] = l($last_commit->message ,$last_commit->url,array("absolute"=>true)) . " @ ". $last_commit->timestamp . ".";
+    $req['severity'] = REQUIREMENT_OK;
+  }else{
+    $req = &$reqs[];
+    $req['title'] = "MC Deploy";
+    $req['value'] = "Unknown";
+    $req['severity'] = REQUIREMENT_WARNING;
+  }
+
+  return $reqs;
 }

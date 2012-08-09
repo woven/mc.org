@@ -805,6 +805,10 @@ function features_tourl(&$modules = array(),$extra_path = ""){
 
 function mc_requirements($phase){
 
+  if($phase != 'runtime'){
+     return array();
+  }
+
   module_load_include('inc', 'features', 'features.export');
 
   foreach (features_get_features(NULL, TRUE) as $module) {
