@@ -95,6 +95,9 @@ function _github_deploy(){
           }
         }
 
+
+
+
         $last_commit = $commits[$payload->after];
 
         variable_set("mc_deploy_last_commit",$last_commit);
