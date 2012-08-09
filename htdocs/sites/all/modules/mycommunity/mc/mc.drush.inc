@@ -77,7 +77,7 @@ function drush_mc_features_revert_all_smart() {
 
   foreach (features_get_features(NULL, TRUE) as $module) {
     $storage = features_get_storage($module->name);
-    if ($module->status && $storage == FEATURES_OVERRIDDEN && !in_array($module->name, $features_to_exclude)) {
+    if ($module->status && ($storage == FEATURES_OVERRIDDEN || $storage == FEATURES_NEEDS_REVIEW) && !in_array($module->name, $features_to_exclude)) {
       $features_to_revert[] = $module->name;
     }
   }

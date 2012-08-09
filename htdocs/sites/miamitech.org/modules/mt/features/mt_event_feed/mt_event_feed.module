@@ -9,11 +9,14 @@ include_once 'mt_event_feed.features.inc';
 
 
 function mt_event_feed_late_form_alter(&$form, &$form_state, $form_id){
-  //http://drupal.org/node/247585#comment-2913420
-  if($submit = &$form['buttons']['submit']){
-    unset($form['#redirect']);
-    $submit['#submit'][] = '_mt_event_feed_form_submit';
+
+  if($form_id == 'event_feed_node_form'){
+    if($submit = &$form['buttons']['submit']){
+      unset($form['#redirect']);
+      $submit['#submit'][] = '_mt_event_feed_form_submit';
+    }
   }
+
 }
 
 function _mt_event_feed_form_submit($form, &$form_state){
@@ -242,6 +245,8 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
             $node->locations['0']['longitude'] = $parts['1'];
           }
         }
+
+      //force the node to always become published
       return $node;
     }
   }

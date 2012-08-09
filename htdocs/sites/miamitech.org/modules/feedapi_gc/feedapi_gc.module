@@ -33,6 +33,7 @@ function feedapi_gc_feedapi_item($op) {
 function feedapi_gc_feedapi_after_refresh($feed) {
   foreach ($feed->items as $item) {
     $present[$item->options->guid] = $item->options->guid;
+    $present_nids[$item->nid] = $item->is_new;
   }
 
   $result = db_query('SELECT fi.nid, fi.guid FROM {feedapi_node_item} fi JOIN {feedapi_node_item_feed} ff ON ff.feed_item_nid = fi.nid JOIN {node} n ON n.nid = fi.nid WHERE ff.feed_nid = %d AND n.status <> 0', $feed->nid);
@@ -40,7 +41,7 @@ function feedapi_gc_feedapi_after_refresh($feed) {
   $unpublished = 0;
   while ($feed_item = db_fetch_object($result)) {
     $checked++;
-    if (!isset($present[$feed_item->guid])) {
+    if (!isset($present[$feed_item->guid]) && !$present_nids[$item->nid]) {
       $unpublished++;
       db_query('UPDATE {node} SET status = 0 WHERE nid = %d', $feed_item->nid);
     }
