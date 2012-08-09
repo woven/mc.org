@@ -217,6 +217,7 @@ function environment_plus_init(){
   }
 }
 
+
 /**
 Implementation of hook_init()
 function mc_init(){
@@ -227,3 +228,4 @@ function mc_init(){
     }
 }
 */
+
