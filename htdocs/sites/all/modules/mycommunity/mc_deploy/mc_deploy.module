@@ -86,7 +86,7 @@ function _github_deploy(){
 
       $github_branch = "refs/heads/".$branch;
       if ($payload->ref === $github_branch){
-
+        /
         //get all commits into array with id as key
         $commits = array();
         if(!empty($payload->commits)){
@@ -151,6 +151,8 @@ function mc_deploy_requirements($phase){
   if($phase != 'runtime'){
     return array();
   }
+
+
 
   $reqs = array();
 
