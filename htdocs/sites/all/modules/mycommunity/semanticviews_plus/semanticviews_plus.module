@@ -18,6 +18,18 @@ function _semanticviews_class_to_attr($attr = array(),$what = 'class'){
   return $attr;
 }
 
+function semanticviews_plus_theme_registry_alter(&$theme_registry){
+  $themes = array("semanticviews_view_unformatted","semanticviews_view_fields");
+  $module_loc = drupal_get_path("module",'semanticviews_plus');
+
+  foreach($themes as $theme){
+    if(isset($theme_registry[$theme])){
+      $theme_registry[$theme]['theme paths'][] = $module_loc;
+    }
+  }
+
+}
+
 function semanticviews_plus_preprocess_semanticviews_view_unformatted(&$vars){
 
   if(!empty($vars['group_attributes'])){
