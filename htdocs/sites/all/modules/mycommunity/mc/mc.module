@@ -811,6 +811,7 @@ function mc_requirements($phase){
 
   module_load_include('inc', 'features', 'features.export');
 
+
   foreach (features_get_features(NULL, TRUE) as $module) {
     $storage = features_get_storage($module->name);
     $features[$storage][$module->name] = $module->name;

@@ -1,4 +1,0 @@
-name = "Github Deploy"
-description = "automating github deployment through github post receive"
-version = VERSION
-core = 6.x
