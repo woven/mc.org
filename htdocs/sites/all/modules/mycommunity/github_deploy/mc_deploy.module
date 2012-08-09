@@ -1,6 +1,6 @@
 <?php
 
-function github_deploy_menu(){
+function mc_deploy_menu(){
       $items = array();
 
       $items['admin/settings/mc_deploy'] = array(
@@ -21,7 +21,7 @@ function github_deploy_menu(){
     return $items;
 }
 
-function github_deploy_perm() {
+function mc_deploy_perm() {
   return array('administer mc_deploy');
 }
 
@@ -30,7 +30,7 @@ function exec_enabled() {
     return !in_array('exec', $disabled);
 }
 
-function github_deploy_late_form_alter(&$form, &$form_state, $form_id){
+function mc_deploy_late_form_alter(&$form, &$form_state, $form_id){
   //dsm($form);
 }
 
