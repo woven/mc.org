@@ -413,53 +413,6 @@ function _schema_meta_date($ts,$itemprop = 'startDate'){
   return "<meta itemprop=\"$itemprop\" content=\"$iso_start\">";
 }
 
-function cls_to_attr($attr = array(),$what = 'class'){
-  $ptn = "({(.*?)})";
-
-  if(!empty($attr[$what])){
-    $cls = &$attr[$what];
-
-    preg_match($ptn,$cls,$matchs);
-
-    if(count($matchs) > 1){
-      $cls = trim(preg_replace($ptn,"",$cls));
-      parse_str($matchs[1],$new_attr);
-      $attr = array_merge($attr,$new_attr);
-    }
-  }
-
-  return $attr;
-}
-
-function mt_preprocess_semanticviews_view_unformatted(&$vars){
-
-  if(!empty($vars['group_attributes'])){
-    $vars['group_attributes'] =  cls_to_attr($vars['group_attributes']);
-  }
-
-  if(!empty($vars['list_attributes'])){
-    $vars['list_attributes'] =  cls_to_attr($vars['list_attributes']);
-  }
-
-  if(!empty($vars['row_attributes'])){
-    foreach($vars['row_attributes'] as &$attr){
-      $attr = cls_to_attr($attr);
-    }
-  }
-
-}
-
-function mt_preprocess_semanticviews_view_fields(&$vars){
-  //parse querystring at classes and turn them into regular attributes
-  //example: class-name {attr1=2&attr3=5} >> <tag class="class-name" attr1="2" attr3="5"></tag>
-
-  foreach($vars['fields'] as &$field){
-    if(!empty($field->attributes)){
-      $field->attributes = cls_to_attr($field->attributes);
-    }
-  }
-}
-
 function mt_preprocess_page(&$vars){
   if(arg(0)=='latest' && isset($_GET['title'])){
     $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);

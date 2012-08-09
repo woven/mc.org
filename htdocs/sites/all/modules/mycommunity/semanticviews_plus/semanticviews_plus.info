@@ -1,0 +1,5 @@
+name = Semanticviews Plus
+description = "adds the ability to add extra html attrs to rows/columns and fields classname {attr=something&attr2=value2}"
+package = Views
+core = 6.x
+dependencies = semanticviews

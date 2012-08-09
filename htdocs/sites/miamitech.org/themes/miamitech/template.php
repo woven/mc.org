@@ -7,16 +7,20 @@ function miamitech_ud_profile_field_urlfilter($field) {
   $profile_category = $field['properties']['category'];
   if (isset($account->content[$profile_category][$key]['#value'])) {
     $content = $account->content[$profile_category][$key]['#value'];
+
     //return _filter_url($content, 1);
     $attr = array(
       'external' => true,
       'attributes' => array("rel"=>"nofollow","target"=>"_blank")
     );
+
     //link with http
     $link = addhttp($content);
 
     return l($content,$link,$attr);
   }
+
+  return "";
 }
 
 function miamitech_ud_user_created($field) {
@@ -152,6 +156,7 @@ function miamitech_nd_location_address($field) {
       $address['state'] = $parts['state'];
     }
   }
+
   if(empty($address)){
      return '<div class="no-location"> A location wasn\'t provided.</div>';
   }
