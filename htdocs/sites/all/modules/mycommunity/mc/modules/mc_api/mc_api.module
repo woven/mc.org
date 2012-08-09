@@ -381,6 +381,22 @@ function _mc_api_get_formatted_time($time, $printAMPM = true){
 }
 
 
+function mc_api_format_whole_day_event($start, $end = NULL, $occurring = NULL){
+  if($occurring){
+    $prefix_start = '';
+    $prefix_end = '-';
+  }
+  else {
+    $prefix_start = '';
+    $prefix_end = '-';
+  }
+  if (!$end){
+    // start date only
+    return $prefix_start . date('D', $start);
+  }
+  return $prefix_start . date('D', $start) . $prefix_end . date('D', $end);
+}
+
 /**
  * Return a date with a specific format time.
  */
