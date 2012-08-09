@@ -357,6 +357,7 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 
   if($form_id=='event_node_form'){
     if(isset($form['field_online_event'])){
+      array_unshift($form['#submit'], '_mt_event_submit_form');
       $form['locations']['0']['field_online_event'] = $form['field_online_event'];
       $form['locations'][0]['field_online_event']['#weight'] = '-99';
       unset($form['field_online_event']);
@@ -407,6 +408,10 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 
 }
 
+function _mt_event_submit_form($form, &$form_state) {
+  $form_state['values']['field_online_event'] = $form_state['values']['locations'][0]['field_online_event'];
+  unset($form_state['values']['locations'][0]['field_online_event']);
+}
 
 function _schema_meta_date($ts,$itemprop = 'startDate'){
   $iso_start = date('c',$ts);
