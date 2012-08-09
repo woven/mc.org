@@ -144,7 +144,7 @@ function excute_deploy($branch){
 
     watchdog('mc_deploy',"Auto Deployment: Starting");
     $output = $ssh->exec("cd $dsite; sh deploy.sh $branch");
-    watchdog('mc_deploy',"Auto Deployment: Finished");
+    watchdog('mc_deploy',"Auto Deployment: Finished \n $output");
   }else{
     watchdog('mc_deploy',"Auto Deployment: Failed to login to SSH server",null,WATCHDOG_ERROR);
   }
