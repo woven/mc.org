@@ -1,0 +1,40 @@
+// $Id: INSTALL.txt,v 1.3 2009/09/18 15:16:22 arto Exp $
+
+REQUIREMENTS
+------------
+This version of Trace is designed for Drupal 6.x. It should work on both
+Unix platforms and Windows, but the latter has not been tested.
+
+INSTALLATION
+------------
+
+  1. Copy all the module files into a subdirectory called
+     sites/all/modules/trace/ under your Drupal installation directory.
+
+  2. Go to [Administer >> Site building >> Modules] and enable the Trace
+     module. (Don't worry, tracing is NOT yet activated simply by enabling
+     the module.)
+
+  3. Go to [Administer >> Site configuration >> Tracing] to review and
+     change the configuration options to your liking.
+
+     At the very least, select whether you want tracing output to go to a
+     log file or to the system log.
+
+     IMPORTANT: to prevent any potential WSOD (white screen of death) from
+     disabling access to your site, the page filter settings have been
+     preset to always disable tracing on the login page (user/login) and any
+     of the administration pages (admin*). This means you will always be
+     able to access this settings page (admin/settings/trace) to disable
+     tracing, if needed.
+
+  4. Tracing is now ready for use. From the same screen, activate tracing
+     when necessary, e.g. when debugging a problem, and deactivate it
+     afterwards.
+
+     IMPORTANT: unless you know what you're doing (i.e. have configured a
+     minimal set of enabled tracing options), do NOT leave tracing active
+     unattended on a busy production server, as the log file will grow
+     extremely large very quickly and could bring your entire server down.
+
+  5. (See README.txt for information on submitting bug reports.)

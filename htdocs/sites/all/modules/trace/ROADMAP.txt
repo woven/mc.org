@@ -1,0 +1,49 @@
+// $Id: ROADMAP.txt,v 1.2 2009/09/18 15:09:51 arto Exp $
+
+This is a listing of known bugs, features that mostly work but are still
+somewhat in progress, features that are being considered or planned for
+implementation, and just miscellaneous far-out ideas that could, in
+principle, be implemented if one had the time and inclination to do so.
+
+(NOTE: there is no guarantee any of these items will, in fact, be
+implemented, nor should any possible scheduling indications be construed as
+promises under any circumstances. TANSTAAFL. If you absolutely need
+something implemented right now, please contact the developers to see if
+they're available for contract work, or whether a modest donation could
+perhaps speed things along.)
+
+TODO: MISSING FEATURES
+----------------------
+* Tracing of watchdog messages has not yet been implemented.
+
+TODO: NEAR-TERM TASKS
+---------------------
+* Filter by user role and/or by IP address?
+* Add an option to overwrite the output file, instead of appending to it.
+* Add two new output drivers: socket and email.
+* Add an option to ignore repeated, duplicate errors.
+* Test and ensure compatibility with the Devel module (especially with
+  regards to the shared `dev_query' variable).
+* Drupal core patch to improve tracing capabilities in the database layer.
+* Write the developer documentation (API.txt).
+
+TODO: UNDER CONSIDERATION
+-------------------------
+* Add host name to the REQUEST trace message (useful for multi-sites).
+* Add option to include the contents of the page response into the trace
+  output, or to write each response into a separate file in a directory?
+* Look into adding XDebug support?
+* Allow multiple output drivers to be active simultaneously, with possibly
+  different settings. Useful for having critical production error messages
+  go into the syslog or be e-mailed, while still having the possibility to
+  send more verbose debugging output to a file from time to time.
+* Add setting to add trace output as a comment to the end of the HTML page?
+* More accurate time adjustments to account for time lost to tracing?
+
+TODO: LONG-TERM IDEAS
+---------------------
+* Implement ability to dynamically and on-the-fly inject tracing statements
+  into any third-party module with some fancy tokenizing hacks. (Requires
+  early calls to drupal_get_filename() to override module filenames before
+  they are loaded by Drupal.)
+* Look into PHP's register_tick_function() for potential advanced uses.
