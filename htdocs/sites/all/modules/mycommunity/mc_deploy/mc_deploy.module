@@ -155,8 +155,6 @@ function mc_deploy_requirements($phase){
     return array();
   }
 
-
-
   $reqs = array();
 
   $last_commit = variable_get("mc_deploy_last_commit",array());
