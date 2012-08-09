@@ -10,3 +10,4 @@ dependencies[] = late_form_alter
 dependencies[] = permissions_api
 dependencies[] = environment
 dependencies[] = environment_indicator
+dependencies[] = semanticviews_plus
