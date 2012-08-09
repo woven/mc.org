@@ -1,0 +1,135 @@
+<?php
+
+function mc_deploy_menu(){
+      $items = array();
+
+      $items['admin/settings/mc_deploy'] = array(
+        'title' => 'github deploy',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('mc_deploy_form_settings'),
+        'access arguments' => array('administer mc_deploy'),
+        'type' => MENU_NORMAL_ITEM
+      );
+
+      $items['github/deploy'] = array(
+        'title' => 'github deploy',
+        'page callback' => '_github_deploy',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK
+      );
+
+    return $items;
+}
+
+function mc_deploy_perm() {
+  return array('administer mc_deploy');
+}
+
+function exec_enabled() {
+    $disabled = explode(', ', ini_get('disable_functions'));
+    return !in_array('exec', $disabled);
+}
+
+function mc_deploy_late_form_alter(&$form, &$form_state, $form_id){
+  //dsm($form);
+}
+
+function mc_deploy_form_settings(){
+  $form = array();
+
+  $form['mc_deploy_ssh_host'] = array(
+    '#type' => 'textfield',
+    '#title' => t('SSH Host'),
+    '#default_value' => variable_get("mc_deploy_ssh_host","")
+  );
+
+  $form['mc_deploy_shh_user'] = array(
+          '#type' => 'textfield',
+          '#title' => t('SSH User Name'),
+          '#default_value' => variable_get("mc_deploy_shh_user","")
+  );
+
+  $form['mc_deploy_ssh_pass'] = array(
+           '#type' => 'textfield',
+           '#title' => t('SSH Password'),
+           '#default_value' => variable_get("mc_deploy_ssh_pass","")
+  );
+
+  $form['mc_deploy_github_branch'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Github Branch to Monitor'),
+    '#default_value' => variable_get("mc_deploy_github_branch","")
+  );
+
+    $form['mc_deploy_dir'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Directory'),
+        '#default_value' => variable_get("mc_deploy_dir","")
+    );
+
+    $form['mc_deploy_dir_mirror'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Directory Mirror'),
+    '#default_value' => variable_get("mc_deploy_dir_mirror","")
+  );
+
+  return system_settings_form($form);
+}
+
+function _github_deploy(){
+
+  $branch = variable_get("mc_deploy_github_branch","");
+
+  if(!empty($branch)){
+    if(isset($_REQUEST['payload'])){
+      $payload = json_decode($_REQUEST['payload']);
+
+      $github_branch = "refs/heads/".$branch;
+      if ($payload->ref === $github_branch){
+        excute_deploy($branch);
+      }
+    }
+
+    if($_GET['debug'] == 1){
+      excute_deploy($branch);
+    }
+  }
+
+  return 'Done Executing deploy script';
+}
+
+function excute_deploy($branch){
+  $sitepath = realpath('.');
+  $dsite = $sitepath ."/".conf_path();
+
+  $host = variable_get("mc_deploy_ssh_host","");
+  $user = variable_get("mc_deploy_shh_user","");
+  $pass = variable_get("mc_deploy_ssh_pass","");
+
+  include_once(libraries_get_path('phpseclib') .'/' . 'Math/BigInteger.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/Random.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/Hash.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/TripleDES.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/RC4.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Crypt/AES.php');
+  include_once(libraries_get_path('phpseclib') .'/' . 'Net/SSH2.php');
+
+  set_time_limit(60 * 3);
+
+  $ssh = new Net_SSH2($host);
+
+  if ($ssh->login($user, $pass)) {
+    $dir = variable_get('mc_deploy_dir','');
+    $dir_mirror = variable_get('mc_deploy_dir_mirror','');
+
+    if(!empty($dir) && !empty($dir_mirror)){
+      $dsite = str_replace($dir,$dir_mirror,$dsite);
+    }
+
+    watchdog('mc_deploy',"Auto Deployment: Starting");
+    $output = $ssh->exec("cd $dsite; sh deploy.sh $branch");
+    watchdog('mc_deploy',"Auto Deployment: Finished");
+  }else{
+    watchdog('mc_deploy',"Auto Deployment: Failed to login to SSH server",null,WATCHDOG_ERROR);
+  }
+}
