@@ -775,6 +775,8 @@ function mc_facebook_like($nid){
   else{
     $gid=0;
   }
+
+
   // Heartbeat record activity
   $variables = array(
     '@username' => l(_mc_api_get_user_name($user), 'user/' . $user->uid),
