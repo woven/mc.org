@@ -1,0 +1,536 @@
+<?php
+// $Id: trace.module,v 1.13 2009/09/18 15:07:47 arto Exp $
+
+/**
+ * @file
+ *
+ * Adds tracing facilities for Drupal hook invocations, database queries and
+ * PHP errors.
+ */
+
+//////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Call full bootstrap to make use of path checking & file functions early on.
+ * See also: http://api.drupal.org/api/file/includes/path.inc/6
+ */
+drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+
+define('TRACE_PATH',       dirname(__FILE__));
+define('TRACE_FORMAT',     "#%s %s [%s]");
+define('TRACE_ENABLED',    variable_get('trace_enabled', FALSE));
+define('TRACE_FILTER',     variable_get('trace_filter', 0));
+define('TRACE_PAGES',      variable_get('trace_pages', "admin*\nfavicon.ico\n"));
+define('TRACE_OUTPUT',     variable_get('trace_output', 'file'));
+define('TRACE_FILE',       variable_get('trace_file', file_directory_path() . '/trace.log'));
+define('TRACE_ERRORS',     count(array_filter(variable_get('trace_errors', array()))) > 0);
+define('TRACE_WATCHDOG',   count(array_filter(variable_get('trace_watchdog', array()))) > 0);
+define('TRACE_QUERIES',    count(array_filter(variable_get('trace_queries', array()))) > 0);
+define('TRACE_HOOKS',      count(array_filter(variable_get('trace_hooks', array()))) > 0);
+define('TRACE_REQUEST',    variable_get('trace_request', TRUE));
+define('TRACE_DEBUG',      variable_get('trace_debug', FALSE));
+define('TRACE_STACKTRACE', variable_get('trace_stacktrace', FALSE));
+define('TRACE_MAX_STRING', (integer)variable_get('trace_max_string', 100));
+define('TRACE_ERRORLINE',  variable_get('trace_errorline', FALSE));
+
+define('TRACE_ACTIVE',     TRACE_ENABLED && trace_path_enabled($_GET['q']));
+
+if (TRACE_ACTIVE) {
+  define('TRACE_TIME',     trace_time(FALSE));
+  define('TRACE_ID',       substr(uniqid(''), 5));
+  _trace_ob_start();
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Implements hook_help(). Provide online user help.
+ */
+function trace_help($path, $arg) {
+  if (TRACE_ACTIVE && TRACE_HOOKS) {
+    trace_hook('help');
+  }
+
+  switch ($path) {
+    case 'admin/modules#name':
+      return t('trace');
+    case 'admin/modules#description':
+      return t('Adds tracing facilities for Drupal hook invocations, database queries and PHP errors.');
+  }
+}
+
+/**
+ * Implements hook_menu(). Define menu items and page callbacks.
+ */
+function trace_menu() {
+  if (TRACE_ACTIVE && TRACE_HOOKS) {
+    trace_hook('menu');
+  }
+  return array(
+    'admin/settings/trace' => array(
+      'title'            => 'Tracing',
+      'description'      => 'Enable or disable tracing facilities for Drupal hook invocations, database queries and PHP errors.',
+      'access arguments' => array('administer site configuration'),
+      'page callback'    => 'drupal_get_form',
+      'page arguments'   => array('trace_settings'),
+    ),
+    'admin/trace' => array(
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('administer site configuration'),
+      'page callback' => 'trace_admin_log',
+    ),
+  );
+}
+
+/**
+ * Implements hook_settings(). Declare administrative settings for a module.
+ */
+function trace_settings() {
+  if (TRACE_ACTIVE && TRACE_HOOKS) {
+    trace_hook('settings');
+  }
+
+  require_once TRACE_PATH . '/trace.admin.inc';
+  return trace_settings_form();
+}
+
+/**
+ * Implements hook_boot(). Perform setup tasks, even for cached pages.
+ */
+function trace_boot() {
+  if (TRACE_ACTIVE) {
+    if (TRACE_DEBUG) {
+      trace('debug', '$_ENV = '     . trace_format_php($_ENV));
+      trace('debug', '$_SERVER = '  . trace_format_php($_SERVER));
+      trace('debug', '$_COOKIE = '  . trace_format_php($_COOKIE));
+      trace('debug', '$_REQUEST = ' . trace_format_php($_REQUEST));
+      if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        trace('debug', '$_GET = '   . trace_format_php($_GET));
+      }
+      else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        trace('debug', '$_POST = '  . trace_format_php($_POST));
+        trace('debug', '$_FILES = ' . trace_format_php($_FILES));
+      }
+      trace('debug', '$_SESSION = ' . trace_format_php($_SESSION));
+    }
+
+    if (TRACE_HOOKS) {
+      trace_hook('boot');
+    }
+  }
+}
+
+/**
+ * Implements hook_exit(). Perform cleanup tasks.
+ */
+function trace_exit($destination = NULL) {
+  if (TRACE_ACTIVE) {
+    if (TRACE_HOOKS) {
+      trace_hook('exit');
+    }
+
+    if (TRACE_DEBUG) {
+      trace('debug', 'drupal_set_message() = ' . trace_format_php(drupal_set_message()));
+      trace('debug', 'drupal_set_header() = '  . trace_format_php(explode("\n", drupal_set_header())));
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// TRACE START/EXIT HANDLERS
+
+/**
+ *
+ */
+function trace_time($delta = TRUE) {
+  list($usec, $sec) = explode(' ', microtime());
+  $time = ((double)$usec + (double)$sec);
+
+  // NOTE: we can't rely on $_SERVER['REQUEST_TIME'] for the request start
+  // time as it isn't accurate enough (no sub-second precision) and it's not
+  // available prior to PHP 5.1, anyway.
+  return !$delta ? $time : $time - TRACE_TIME;
+}
+
+/**
+ * Matches the user's traceability settings against the page path.
+ */
+function trace_path_enabled($path) {
+  $alias = drupal_get_path_alias($path);
+  return !(TRACE_FILTER xor drupal_match_path($alias, TRACE_PAGES));
+}
+
+function _trace_ob_start() {
+  $timestamp = _trace_format_timestamp();
+
+  if (TRACE_ERRORS) {
+    // Extend Drupal's error handler so that we catch warnings and errors:
+    set_error_handler('trace_error_handler');
+  }
+
+  if (TRACE_HOOKS) {
+    // Inject tracing code into all selected Drupal hooks:
+    foreach (trace_hook_list(NULL, TRUE) as $hook) {
+      trace_hook_define('trace', $hook);
+    }
+  }
+
+  if (TRACE_QUERIES) {
+    variable_set('dev_query', TRUE); // FIXME!
+  }
+
+  if (TRACE_REQUEST) {
+    $msg = array($timestamp, $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER['SERVER_PROTOCOL']);
+    trace('request', implode(' ', $msg), 0);
+  }
+
+  ob_start('_trace_ob_handler');
+}
+
+function _trace_ob_handler($buffer) {
+  global $queries;
+  $timestamp = _trace_format_timestamp();
+
+  // Ensure we're in the correct working directory, since some web servers
+  // (e.g. Apache) mess this up for exit-time handlers:
+  chdir(dirname($_SERVER['SCRIPT_FILENAME']));
+
+  // This is not ideal, but if no hooks were traced, we have to get the
+  // queries here at the end of the page request. Timing information is
+  // going to be entirely unaccurate, of course.
+  if (TRACE_QUERIES) {
+    trace_queries();
+  }
+
+  // Output some statistics about the page response
+  if (TRACE_DEBUG && count($queries) > 0) {
+    trace('stats', sprintf('Total SQL queries: %d', count($queries)));
+  }
+
+  if (TRACE_REQUEST) {
+    $msg = array($timestamp, _trace_get_http_response());
+    trace('respnse', implode(' ', $msg));
+  }
+
+  return $buffer; // Pass through page contents unmodified
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Menu callbacks
+
+function trace_admin_log() {
+  drupal_set_header('Content-Type: text/plain; charset=utf-8');
+  die(implode("\n", array_reverse(array_slice(file(TRACE_FILE), -10))));
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Trace hooks API
+
+/**
+ * Implements hook_trace().
+ */
+function trace_trace($type, $msg, $time = NULL) {
+  if (TRACE_OUTPUT) {
+    // Delegate to the actual selected output driver:
+    $driver = 'trace_' . TRACE_OUTPUT . '_trace';
+    if (!function_exists($driver)) {
+      require_once TRACE_PATH . '/drivers/' . TRACE_OUTPUT . '.inc';
+    }
+    return $driver($type, $msg, $time);
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Trace error API
+
+/**
+ * Custom error handler with tracing support.
+ */
+function trace_error_handler($errno, $message, $filename, $line) {
+  static $types = array(1 => 'E_ERROR', 2 => 'E_WARNING', 4 => 'E_PARSE', 8 => 'E_NOTICE', 16 => 'E_CORE_ERROR', 32 => 'E_CORE_WARNING', 64 => 'E_COMPILE_ERROR', 128 => 'E_COMPILE_WARNING', 256 => 'E_USER_ERROR', 512 => 'E_USER_WARNING', 1024 => 'E_USER_NOTICE', 2048 => 'E_STRICT', 4096 => 'E_RECOVERABLE_ERROR');
+  static $options = NULL;
+  if (!$options) {
+    $options = array_filter(variable_get('trace_errors', array()), 'is_string');
+  }
+
+  $output = array(sprintf("%s: %s in `%s':%s", $types[$errno], $message, _trace_format_filename($filename), $line));
+  if (TRACE_ERRORLINE && ($code = _trace_get_line_from_file($filename, $line))) {
+    $output[] = trim($code);
+  }
+  if (TRACE_STACKTRACE) {
+    $stacktrace = array_map('_trace_format_stack_frame', array_slice(debug_backtrace(), 1));
+    $output = array_merge($output, $stacktrace);
+  }
+
+  $type = 'error';
+  $type = ($errno == E_WARNING || $errno == E_USER_WARNING ? 'warning' : $type);
+  $type = ($errno == E_NOTICE || $errno == E_USER_NOTICE || $errno == 2048 ? 'notice' : $type); // PHP4 compatible
+  if (!empty($options[$type])) {
+    trace($type, $output);
+  }
+
+  // Delegate to the standard Drupal error handler:
+  return drupal_error_handler($errno, $message, $filename, $line, NULL);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Trace procedural API
+
+/**
+ * Invokes hook_trace() with the specified arguments.
+ *
+ * If passed just argument, will use it for the trace message and default to
+ * 'debug' for the trace message type.
+ */
+function trace($type, $msg = NULL, $time = NULL) {
+  if (func_num_args() == 1) {
+    $type = 'debug';
+    $msg  = func_get_arg(0);
+  }
+  call_user_func_array('module_invoke_all', array('trace', $type, $msg, $time));
+}
+
+function trace_dump($value) {
+  trace(trace_format_php($value));
+}
+
+/**
+ * Traces the entire function call chain leading up to this point,
+ * outputting a log entry of the DEBUG type.
+ */
+function trace_backtrace($depth = -1) {
+  // FIXME: add support for $depth.
+  trace('debug', array_map('_trace_format_stack_frame', array_slice(debug_backtrace(), 1)));
+}
+
+function trace_query($query, $caller = NULL, $time = NULL, $duration = NULL) {
+  // TODO: only trace queries matching configuration settings.
+  trace('query', sprintf('d=%.6fs %s: %s', $duration, $caller, $query), ($time ? $time : trace_time()));
+}
+
+function trace_queries() {
+  global $queries;
+  static $last_query = 0;
+  static $options = NULL;
+  if (!$options) {
+    $options = variable_get('trace_queries', array());
+  }
+
+  if (count($queries) > $last_query) {
+    $time = trace_time();
+    $new_queries = array();
+    foreach (array_reverse(array_slice($queries, $last_query)) as $query) {
+      list($query, $diff) = $query;
+      $query = preg_replace("/\/\*(.*)\*\/\s/", '', $query); // Drupal 6.x adds user & function info in a comment at the front
+      $query = array_reverse(explode("\n", $query));
+
+      $type = explode(' ', reset($query));
+      $type = strtolower(reset($type));
+      if (array_key_exists($type, $options) && empty($options[$type]))
+        continue; // skip any known query types that are not enabled
+      if (!array_key_exists($type, $options) && empty($options['misc']))
+        continue; // skip query unless the 'Other queries' option is enabled
+
+      $new_queries[] = array_merge($query, array($time -= $diff, $diff));
+    }
+    foreach (array_reverse($new_queries) as $query) {
+      call_user_func_array('trace_query', $query);
+    }
+
+    $last_query = count($queries);
+  }
+}
+
+function trace_hook($hook) {
+  if (!trace_hook_enabled($hook)) {
+    return;
+  }
+  if (TRACE_QUERIES) {
+    trace_queries();
+  }
+  $stacktrace = !TRACE_STACKTRACE ? NULL : array_map('_trace_format_stack_frame', array_slice(debug_backtrace(), 1));
+  trace('hook', _trace_format_hook_entry($hook, $stacktrace));
+}
+
+function trace_hook_implementors($hook) {
+  static $modules = array();
+  if (!isset($modules[$hook])) {
+    $modules[$hook] = module_implements($hook);
+
+    // Remove this module from the list:
+    if (($key = array_search('trace', $modules[$hook])) !== FALSE)
+      unset($modules[$hook][$key]);
+  }
+  return empty($modules[$hook]) ? array() : $modules[$hook];
+}
+
+function trace_hook_enabled($hook) {
+  static $enabled_hooks = NULL;
+  if (!$enabled_hooks) {
+    $enabled_hooks = array_filter(variable_get('trace_hooks', array()), 'is_string');
+  }
+  return isset($enabled_hooks[$hook]);
+}
+
+function trace_hook_defined($module, $hook) {
+  return function_exists($module . '_' . $hook);
+}
+
+/**
+ * Defines a Drupal hook function containing tracing code.
+ */
+function trace_hook_define($module, $hook) {
+  static $skipped_hooks = array('enable', 'disable', 'install', 'uninstall'); // prevent conflicts
+  if (!trace_hook_defined($module, $hook)) {
+    if ($module != 'trace' || !in_array($hook, $skipped_hooks)) {
+      eval("function {$module}_$hook() { trace_hook('$hook'); }");
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+function trace_hook_list($module = NULL, $only_enabled = FALSE) {
+  $hooks = parse_ini_file(TRACE_PATH . '/hooks.ini', !empty($module));
+  $hooks = array_merge(array_keys(!empty($module) ? $hooks[$module] : $hooks));
+  return !$only_enabled ? $hooks : array_filter($hooks, 'trace_hook_enabled');
+}
+
+function trace_hook_data() {
+  return parse_ini_file(TRACE_PATH . '/hooks.ini', TRUE);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Miscellaneous helpers
+
+function _trace_get_http_response() {
+  $status = '200 OK';
+  $headers = explode("\n", drupal_set_header());
+  foreach ($headers as $header) {
+    if (preg_match('!^HTTP/!', $header)) {
+      list($prefix, $status) = explode(' ', $header, 2);
+    }
+  }
+  return $status;
+}
+
+function _trace_get_line_from_file($filename, $line) {
+  $result = NULL;
+  if (file_exists($filename) && ($fp = fopen($filename, 'r'))) {
+    $counter = 0;
+    while (!feof($fp) && ($buffer = fgets($fp))) {
+      if (++$counter == $line) {
+        $result = $buffer;
+        break;
+      }
+    }
+    fclose($fp);
+  }
+  return $result;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Trace format helpers
+
+function _trace_format_timedelta($t = NULL) {
+  $t = !is_null($t) ? $t : trace_time(TRUE);
+  return $t === 0 ? sprintf('T=%.6f', 0.0) : sprintf('T%s%.6f', ($t < 0 ? '-' : '+'), abs($t));
+}
+
+function _trace_format_timestamp() {
+  list($usec, $time) = explode(' ', microtime());
+  if (function_exists('date_default_timezone_set')) {
+    date_default_timezone_set('UTC'); // // avoid E_STRICT message in PHP 5.1+
+  }
+  if (($timezone = variable_get('date_default_timezone', 0))) {
+    $time += $timezone; // Adjust to Drupal default timezone
+  }
+  return sprintf('%s.%s', strftime('%Y-%m-%d %H:%M:%S', (int)$time), substr($usec, 2, 6));
+}
+
+function _trace_format_hook_entry($hook, $stacktrace = NULL) {
+  $modules = implode(', ', trace_hook_implementors($hook));
+  $output = array(sprintf('hook_%s: %s', $hook, $modules));
+  if (!empty($stacktrace)) {
+    $output = array_merge($output, $stacktrace);
+  }
+  return $output;
+}
+
+function _trace_format_stack_frame($frame) {
+  $function_call = _trace_format_function_call($frame['function'], $frame['args']);
+  return (empty($frame['file']) || empty($frame['line']) ?
+    $function_call :
+    sprintf("%s in `%s':%s", $function_call, _trace_format_filename($frame['file']), $frame['line']));
+}
+
+function _trace_format_filename($filename) {
+  if (($cwd = getcwd()) && strpos($filename, $cwd) === 0) {
+    return substr($filename, strlen($cwd) + 1);
+  }
+  return $filename;
+}
+
+function _trace_format_function_call($function, $args) {
+  // NOTE: Can't use array_map() here due to weird warning output it causes on PHP5
+  //$args = implode(', ', array_map('trace_format_php', $args));
+  $output = array();
+  if (is_array($args)) {
+    foreach ($args as $arg) {
+      $output[] = trace_format_php($arg);
+    }
+  }
+  return $function . '(' . implode(', ', $output) . ')';
+}
+
+function _trace_format_watchdog_entry($severity, $msg) {
+  // TODO
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Trace helpers
+
+function trace_format_php($value, $depth = 0) {
+  switch (gettype($value)) {
+    case 'NULL':
+      return 'NULL';
+    case 'boolean':
+      return $value ? 'TRUE' : 'FALSE';
+    case 'integer':
+    case 'double':
+      return (string)$value;
+    case 'string':
+      if (TRACE_MAX_STRING > 0 && strlen($value) > TRACE_MAX_STRING) {
+        $suffix = TRUE;
+        $value = substr($value, 0, TRACE_MAX_STRING);
+      }
+      $value = str_replace(array("'", "\n", "\r", "\t"), array("\\'", '\n', '\r', '\t'), $value);
+      return "'$value'" . (!empty($suffix) ? '...' : '');
+    case 'object':
+      $class = get_class($value);
+      $value = (array)$value;
+      // fall through
+    case 'array':
+      // Limit recursion to something sane to prevent massive output (as
+      // well as XDebug bailing out) with stack traces containing deep data
+      // structures:
+      if ($depth > 1) {
+        $array = array('...');
+      }
+      else if (array_keys($value) === range(0, sizeof($value) - 1)) {
+        $array = array_map('trace_format_php', array_values($value));
+      }
+      else {
+        $array = array();
+        foreach ($value as $k => $v) {
+          $array[] = trace_format_php($k, $depth + 1) . ' => ' . trace_format_php($v, $depth + 1);
+        }
+      }
+      $array = implode(', ', $array);
+      return (isset($class) ? "($class)" : '') . 'array(' . $array . ')';
+    case 'resource':
+      return 'resource(' . get_resource_type($value) . ')';
+    default:
+      return '<unknown>';
+  }
+}

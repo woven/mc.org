@@ -745,6 +745,50 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       ),
       'relationship' => 'none',
     ),
+    'field_online_event_value' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'label_type' => 'none',
+      'format' => 'default',
+      'multiple' => array(
+        'group' => TRUE,
+        'multiple_number' => '',
+        'multiple_from' => '',
+        'multiple_reversed' => FALSE,
+      ),
+      'exclude' => 1,
+      'id' => 'field_online_event_value',
+      'table' => 'node_data_field_online_event',
+      'field' => 'field_online_event_value',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'phpcode_2' => array(
       'label' => '',
       'alter' => array(
@@ -773,7 +817,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'hide_alter_empty' => 1,
       'value' => '<?php 
 if($data->location_name!=\'Exact Location TBD\'){
-echo _mc_event_section_formatted_location($data->location_name); 
+echo _mc_event_section_formatted_location($data->location_name, $data->node_data_field_place_field_online_event_value);
 }
 ?>',
       'exclude' => 1,
@@ -1151,7 +1195,7 @@ echo $hash;
   $handler->override_option('distinct', 1);
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
-    'grouping' => 'phpcode_4',
+    'grouping' => '',
     'group' => array(
       'element_type' => 'h3',
       'class' => 'hash',

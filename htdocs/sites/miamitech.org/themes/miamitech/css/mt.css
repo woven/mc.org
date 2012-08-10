@@ -469,9 +469,18 @@ body #navigation {
 
 .show-more-events {
   margin-left: 104px;
-
 }
 
 #page .field-title a:hover{
   text-decoration: underline;
+}
+
+/* Feedapi file/url wrapper */
+
+#edit-feedapi-feedapi-file-wrapper{
+    display: none;
+}
+
+#edit-feedapi-feedapi-url-wrapper label,#edit-feedapi-feedapi-file-wrapper label{
+    display: none;
 }

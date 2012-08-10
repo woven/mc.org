@@ -46,3 +46,17 @@ function mt_update_6005(&$sandbox) {
 function mt_update_6006(&$sandbox) {
   module_disable(array('og_access'));
 }
+
+/**
+ * disable "features_ct module"
+ */
+function mt_update_6007(&$sandbox) {
+  module_disable(array('features_ct'));
+}
+
+/**
+ * enable "mc_deploy module"
+ */
+function mt_update_6008(&$sandbox) {
+  module_enable(array('mc_deploy'));
+}

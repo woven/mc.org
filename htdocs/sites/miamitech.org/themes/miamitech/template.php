@@ -7,16 +7,20 @@ function miamitech_ud_profile_field_urlfilter($field) {
   $profile_category = $field['properties']['category'];
   if (isset($account->content[$profile_category][$key]['#value'])) {
     $content = $account->content[$profile_category][$key]['#value'];
+
     //return _filter_url($content, 1);
     $attr = array(
       'external' => true,
       'attributes' => array("rel"=>"nofollow","target"=>"_blank")
     );
+
     //link with http
     $link = addhttp($content);
 
     return l($content,$link,$attr);
   }
+
+  return "";
 }
 
 function miamitech_ud_user_created($field) {
@@ -112,6 +116,10 @@ function _miamitech_get_featured_carousel_array($field_array){
 }
 
 function miamitech_nd_location_address($field) {
+  if($field['object']->field_online_event[0]['value']==1){
+    return 'Online Event';
+  }
+
   // Get the location field settings for this node type
   $settings = variable_get('location_settings_node_'. $field['object']->type, array());
 
@@ -133,6 +141,22 @@ function miamitech_nd_location_address($field) {
       $address[$fieldname] = check_plain($field['object']->location[$fieldname]);
     }
   }
+  if($address['name']=='Exact Location TBD'){
+    unset($address['name']);
+    unset($address['street']);
+    unset($address['postal_code']);
+  }
+  if(empty($address)){
+    $has_address = $field['object']->location['name'] && $field['object']->location['street']
+      && $field['object']->location['city'] && $field['object']->location['province'];
+    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'];
+    if(!$has_address && $has_lat_and_lon){
+      $parts = mt_event_feed_reverse_getAddressParts($field['object']->locations['0']['latitude'], $field['object']->locations['0']['longitude']);
+      $address['city'] = $parts['city'];
+      $address['state'] = $parts['state'];
+    }
+  }
+
   if(empty($address)){
      return '<div class="no-location"> A location wasn\'t provided.</div>';
   }
