@@ -34,10 +34,11 @@ function enviroment_plus_drush_help($section) {
   }
 }
 
-function drush_environment_plus_environment_loc($loc = NULL,$name = NULL){
+function drush_environment_plus_environment_loc($loc = NULL){
     $locs = array('local','development','dev','staging','production','prod');
 
-	if(!empty($loc)){
+
+	if(empty($loc)){
 		dt('No Location was selected');
         return;
 	}
@@ -71,14 +72,12 @@ function drush_environment_plus_environment_loc($loc = NULL,$name = NULL){
     }
 
   module_enable(array("environment_indicator"));
-
   variable_set("environment_indicator_enabled",1);
-  variable_set("environment_indicator_color",$color);
 
-  if(!empty($name)){
-    variable_set("environment_indicator_text",$name);
-  }else{
-    variable_set("environment_indicator_text",$loc);
+  if(!empty($color)){
+    variable_set("environment_indicator_color",$color);
   }
-	
+
+  variable_set("environment_indicator_text",$loc);
+  dt('Enviroment location is now '.$loc);
 }
