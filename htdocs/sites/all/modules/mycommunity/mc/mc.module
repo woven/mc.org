@@ -682,13 +682,6 @@ function mc_events_grouped_by_dates_view($view_name, $display_id, $time_key, $it
  * Implementation of hook_init()
  */
 function mc_init(){
-/*
-    global $conf;
-    if(variable_get("environment_indicator_enabled",false)){
-        $evn = strtoupper(variable_get("environment",null));
-        $conf['environment_indicator_text'] .= " @".$evn;
-    }
-*/
   //Avoid 404 page in user/register for authenticated users.
   if ($GLOBALS['user']->uid != 0){
     if ($_GET['q'] == 'user/register'){
