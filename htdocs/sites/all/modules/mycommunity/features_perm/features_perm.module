@@ -46,7 +46,7 @@ function features_perm_features_export_alter(&$export, $module_name) {
          * @todo add alter hook for excluded modules?
          */
         foreach($perms as $perm => $title){
-            $ex_modules = array("update","devel","devel_node_access","devel_themer","dummyimage",'ds_ui','rules_admin','eazylaunch');
+            $ex_modules = array("update","devel","devel_node_access","devel_themer","dummyimage",'ds_ui','rules_admin','eazylaunch','environment_plus','environment');
             $info = explode(":",$title);
             $module = trim($info[0]);
 

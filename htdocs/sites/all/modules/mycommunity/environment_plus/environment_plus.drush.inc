@@ -17,14 +17,14 @@ function environment_plus_drush_command() {
     'aliases' => array('env-loc'),
   );
 
-  return $items;
-}
+    return $items;
+  }
 
-/**
- * Implementation of hook_drush_help().
- */
-function enviroment_plus_drush_help($section) {
-  switch ($section) {
+  /**
+   * Implementation of hook_drush_help().
+   */
+  function enviroment_plus_drush_help($section) {
+    switch ($section) {
     case 'meta:environment_plus:title':
       return dt('Environment Plus commands');
     case 'meta:environment_plus:summary':
