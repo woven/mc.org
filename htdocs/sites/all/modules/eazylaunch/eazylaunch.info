@@ -1,0 +1,25 @@
+; $Id: eazylaunch.info,v 1.1.2.2 2010/08/04 19:52:13 tdway Exp $
+name = Eazy Launch
+description = A text-driven launcher for navigating the entire menu system of your Drupal site.  On any page, hit Ctrl+Z and start typing to see suggestions.  Hit 'Enter' to launch.
+core = 6.x
+package = Administration
+; Information added by drupal.org packaging script on 2010-04-20
+version = "6.x-1.0"
+core = "6.x"
+project = "eazylaunch"
+datestamp = "1271778011"
+
+
+; Information added by drupal.org packaging script on 2010-05-06
+version = "6.x-1.1"
+core = "6.x"
+project = "eazylaunch"
+datestamp = "1273179906"
+
+
+; Information added by drupal.org packaging script on January 1, 1970 - 00:00
+version = "6.x-1.4"
+core = "6.x"
+project = "eazylaunch"
+datestamp = "1296510127"
+

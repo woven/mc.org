@@ -79,5 +79,5 @@ function drush_environment_plus_environment_loc($loc = NULL){
   }
 
   variable_set("environment_indicator_text",$loc);
-  dt('Enviroment location is now '.$loc);
+  echo('Environment location is now '.$loc);
 }
