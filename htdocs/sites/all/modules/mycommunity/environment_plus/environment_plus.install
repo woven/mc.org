@@ -1,7 +1,7 @@
 <?php
 
 /*
- * change enviroment plus module weight
+ * change environment_plus module weight
  */
 function environment_plus_update_6001(&$sandbox){
 	db_query("UPDATE {system} SET weight = -100 WHERE name = 'environment_plus'");
