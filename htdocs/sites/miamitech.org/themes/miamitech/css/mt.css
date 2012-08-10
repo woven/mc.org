@@ -484,3 +484,7 @@ body #navigation {
 #edit-feedapi-feedapi-url-wrapper label,#edit-feedapi-feedapi-file-wrapper label{
     display: none;
 }
+
+.node-form .form-region-right{
+    display: none;
+}
