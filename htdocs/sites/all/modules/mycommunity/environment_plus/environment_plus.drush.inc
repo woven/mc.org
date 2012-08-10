@@ -47,6 +47,11 @@ function drush_environment_plus_environment_loc($loc = NULL,$name = NULL){
         return;
     }
 
+    //load environment_plus_loc with the current loc name
+    variable_set("environment_plus_loc",$loc);
+
+
+    //find the color for the env indicator
     switch($loc){
       case 'local':
         $color = "darkgreen";
