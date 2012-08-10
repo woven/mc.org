@@ -16,6 +16,13 @@ function ft_hidesubmit_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'hide_submit_custom_image_link';
+  $strongarm->value = 'sites/all/modules/mycommunity/mc/features/ft_hidesubmit/ajax-loader.gif';
+  $export['hide_submit_custom_image_link'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'hide_submit_debug';
   $strongarm->value = 0;
   $export['hide_submit_debug'] = $strongarm;
@@ -52,7 +59,7 @@ function ft_hidesubmit_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'hide_submit_image';
-  $strongarm->value = 'sites/miamitech.org/themes/miamitech/ajax-loader.gif';
+  $strongarm->value = 'sites/all/modules/mycommunity/mc/features/ft_hidesubmit/ajax-loader.gif';
   $export['hide_submit_image'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -110,6 +117,20 @@ function ft_hidesubmit_strongarm() {
   $strongarm->name = 'hide_submit_text_only';
   $strongarm->value = 0;
   $export['hide_submit_text_only'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'hide_submit_toggle_custom_image';
+  $strongarm->value = 1;
+  $export['hide_submit_toggle_custom_image'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'hide_submit_toggle_random';
+  $strongarm->value = 0;
+  $export['hide_submit_toggle_random'] = $strongarm;
 
   return $export;
 }
