@@ -1,0 +1,9 @@
+8/10/12
+---------------
+* Retroactive fix for malformed location names for events created through a feed
+* Event deletions in a feed are now synced
+* Dupe-detection logic is improved
+* There's a new option for specifying an event as an online event
+* Event micro data is in place, which means rich snippets in Google results
+* Ability to upload iCal file on Add Event Feed, in addition to URL
+* Misc. bug fixes and improvements
