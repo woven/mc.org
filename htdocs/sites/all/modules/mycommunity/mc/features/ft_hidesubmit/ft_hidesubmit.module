@@ -5,3 +5,9 @@
  */
 
 include_once 'ft_hidesubmit.features.inc';
+
+function ft_hidesubmit_init(){
+	global $conf;
+	$conf['hide_submit_toggle_custom_image'] = 1;
+	$conf['hide_submit_custom_image_link'] = drupal_get_path("module","hide_submit")."/ajax-loader.gif";
+}
