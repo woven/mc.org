@@ -205,7 +205,7 @@ function switch_enviroment($callback,$input,$target_env){
   }
 }
 
-function variable_enable(array $vars = array() ){
+function variable_enable(array $vars = array()){
   foreach($vars as $varname){
     variable_set($varname,1);
   }
@@ -219,8 +219,17 @@ function variable_disable(array $vars = array() ){
 
 function environment_plus_init(){
   global $conf;
+
   if(variable_get("environment_indicator_enabled",false)){
     $evn = strtoupper(variable_get("environment",null));
     $conf['environment_indicator_text'] .= " " . $evn;
   }
+
+  //filelogger module settings for path
+  $sitepath = realpath('.');
+  $filepath = file_directory_path();
+  $dsite = $sitepath ."/". $filepath;
+  $conf['flog_file'] = 'drupal.log';
+  $conf['flog_path'] = $dsite;
+
 }

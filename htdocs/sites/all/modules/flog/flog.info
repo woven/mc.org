@@ -3,17 +3,3 @@ name = File logger
 description = Allows developers to dump variables to a file for easy tailing during development.
 core = 6.x
 package = Development
-
-; Information added by drupal.org packaging script on 2010-02-23
-version = "6.x-1.0"
-core = "6.x"
-project = "flog"
-datestamp = "1266936009"
-
-
-; Information added by drupal.org packaging script on 2010-11-12
-version = "6.x-1.1"
-core = "6.x"
-project = "flog"
-datestamp = "1289590570"
-

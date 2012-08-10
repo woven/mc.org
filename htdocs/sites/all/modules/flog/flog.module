@@ -69,7 +69,8 @@ function flog_it($var, $label = NULL, $filename = NULL) {
   
   $output = $date_format ? '[' . date($date_format) . '] ' : '';
   $output .= $label ? '(' . $label . ') ' : '';
-  $output .= $formatted_var . "\n";
+  $output .= "\n" . $formatted_var . "\n";
+  $output .= "============================================= \n";
   
   // Open the log file, or create it if it doesn't exist.
   if (!$handle = fopen($logfile, 'a')) {
