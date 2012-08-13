@@ -9,5 +9,6 @@ dependencies[] = mc_event_section
 dependencies[] = late_form_alter
 dependencies[] = permissions_api
 dependencies[] = environment
+dependencies[] = environment_plus
 dependencies[] = environment_indicator
 dependencies[] = semanticviews_plus

@@ -1,0 +1,18 @@
+<?php
+// $Id: socket.inc,v 1.2 2008/07/07 16:16:14 incanus Exp $
+
+/**
+ * @file
+ * TODO
+ */
+
+//////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Implements hook_trace().
+ */
+function trace_socket_trace($type, $msg, $time = NULL) {
+  // TODO: implementation.
+}
+
+//////////////////////////////////////////////////////////////////////////////

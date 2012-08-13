@@ -682,13 +682,6 @@ function mc_events_grouped_by_dates_view($view_name, $display_id, $time_key, $it
  * Implementation of hook_init()
  */
 function mc_init(){
-/*
-    global $conf;
-    if(variable_get("environment_indicator_enabled",false)){
-        $evn = strtoupper(variable_get("environment",null));
-        $conf['environment_indicator_text'] .= " @".$evn;
-    }
-*/
   //Avoid 404 page in user/register for authenticated users.
   if ($GLOBALS['user']->uid != 0){
     if ($_GET['q'] == 'user/register'){
@@ -775,6 +768,8 @@ function mc_facebook_like($nid){
   else{
     $gid=0;
   }
+
+
   // Heartbeat record activity
   $variables = array(
     '@username' => l(_mc_api_get_user_name($user), 'user/' . $user->uid),
@@ -805,7 +800,12 @@ function features_tourl(&$modules = array(),$extra_path = ""){
 
 function mc_requirements($phase){
 
+  if($phase != 'runtime'){
+     return array();
+  }
+
   module_load_include('inc', 'features', 'features.export');
+
 
   foreach (features_get_features(NULL, TRUE) as $module) {
     $storage = features_get_storage($module->name);

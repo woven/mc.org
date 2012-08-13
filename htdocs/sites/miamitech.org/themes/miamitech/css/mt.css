@@ -474,3 +474,17 @@ body #navigation {
 #page .field-title a:hover{
   text-decoration: underline;
 }
+
+/* Feedapi file/url wrapper */
+
+#edit-feedapi-feedapi-file-wrapper{
+    display: none;
+}
+
+#edit-feedapi-feedapi-url-wrapper label,#edit-feedapi-feedapi-file-wrapper label{
+    display: none;
+}
+
+.node-form .form-region-right{
+    display: none;
+}

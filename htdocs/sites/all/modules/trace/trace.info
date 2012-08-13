@@ -1,0 +1,12 @@
+; $Id: trace.info,v 1.2 2008/07/07 16:16:14 incanus Exp $
+name = Trace
+description = Adds tracing facilities for Drupal hook invocations, database queries and PHP errors.
+package = Development
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-09-18
+version = "6.x-1.0"
+core = "6.x"
+project = "trace"
+datestamp = "1253287606"
+
