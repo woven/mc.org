@@ -125,6 +125,7 @@ function _mt_event_feed_ical_sitewide(){
         $location_output .= ')';
       }
       $event['location'] = $location_output;
+      $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
       $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
       $group_name = array_pop($node->og_groups_both);
       $event['summary'] = $event['summary'] . ' | ' . str_replace(array("\r", "\r\n", "\n"),'',$group_name);
@@ -143,6 +144,7 @@ function mt_event_feed_event_node_ical() {
   $event = _event_node_ical($node);
   $location = $node->locations['0'];
   $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
+  $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
   $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
   drupal_set_header('Content-Type: text/calendar; charset=utf-8');
   drupal_set_header('Content-Disposition: attachment; filename="calendar.ics"; ');
@@ -167,6 +169,7 @@ function mt_event_feed_ical() {
       $event = _event_node_ical($node);
       $location = $node->locations['0'];
       $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
+      $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
       $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
       $events[] = $event;
     }
