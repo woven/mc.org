@@ -556,20 +556,6 @@ function mt_menu_alter(&$items) {
   $items['node/%views_arg/by_subject']['access arguments']['0']['1']['0']['4']='4';
 
   unset($items['node/%views_arg/by_subject']['access arguments']);
-  $items['node/add/gallery']['access callback'] = '_mt_node_permissions';
-  $items['node/add/article']['access callback'] = '_mt_node_permissions';
-  $items['node/add/audio']['access callback'] = '_mt_node_permissions';
-  $items['node/add/file']['access callback'] = '_mt_node_permissions';
-  $items['node/add/forum']['access callback'] = '_mt_node_permissions';
-  $items['node/add/link']['access callback'] = '_mt_node_permissions';
-  $items['node/add/nnews']['access callback'] = '_mt_node_permissions'; 
-  $items['node/add/npage']['access callback'] = '_mt_node_permissions';
-  $items['node/add/gallery-image']['access callback'] = '_mt_node_permissions';
-  $items['node/add/place']['access callback'] = '_mt_node_permissions';
-  $items['node/add/video']['access callback'] = '_mt_node_permissions';
-  $items['node/add/webform']['access callback'] = '_mt_node_permissions';
-  
-  $items['node/%node/edit']['access callback'] = '_mt_access_node_edit'; 
   $items['admin/content/node']['access arguments'] =  array('mt admin nodes');
 }
 
