@@ -50,16 +50,17 @@ function _mc_event_section_next_two_weeks(&$content){
   JOIN location AS l on li.lid=l.lid
   WHERE n.status=1 AND ((e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s'))
   GROUP BY n.nid
-  ORDER BY (CASE WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)>0 THEN 0 END) DESC,
+  ORDER BY
+    (CASE WHEN Section='Today' then 0
+     WHEN Section='Tomorrow' then 1
+     WHEN Section='This week' then 2
+     WHEN Section='Next week' then 3
+     WHEN Section='Upcoming' then 4
+    ELSE Section
+    END),
+    (CASE WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)>0 THEN 0 END) DESC,
     abs(UNIX_TIMESTAMP(now()) - e.unix_event_start),
     Day,
-   (CASE WHEN Section='Today' then 0
-   WHEN Section='Tomorrow' then 1
-   WHEN Section='This week' then 2
-   WHEN Section='Next week' then 3
-   WHEN Section='Upcoming' then 4
-  ELSE Section
-  END),
   rand()";
   
   if ($dayOfWeek == 0){

@@ -387,8 +387,8 @@ function mt_event_feed_getAddressParts($address){
     $parts = explode(', ', $parts);
 
     $address_parts['address'] = $parts['0'];
-    $address_parts['city'] = $parts['1'];
-    $parts = explode(' ', $parts['2']);
+    $address_parts['city'] = $parts[count($parts) - 2];
+    $parts = explode(' ', $parts[count($parts) - 1]);
     $address_parts['state'] = $parts['0'];
     $address_parts['zip'] = $parts['1'];
     return $address_parts;
