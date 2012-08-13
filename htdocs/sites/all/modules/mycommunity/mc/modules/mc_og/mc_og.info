@@ -1,0 +1,5 @@
+name = "MyCommunity OG"
+description = "MyCommunity OG: Contains tweaks related to OG, specific for MyCommunity.org"
+core = "6.x"
+
+dependencies[] = "og"

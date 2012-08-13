@@ -1,6 +1,6 @@
 <?php
 
-function _mt_og_form_add_og_audience(&$form, &$form_state) {
+function _mc_og_form_add_og_audience(&$form, &$form_state) {
   global $user;
   // Determine the selected groups if it is stored in the form_state.
   if (!empty($form_state['og_gids'][0]) && empty($form_state['og_groups'])) {

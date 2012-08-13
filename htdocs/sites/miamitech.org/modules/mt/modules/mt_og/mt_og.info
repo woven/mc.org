@@ -1,6 +1,0 @@
-name = "MiamiTech OG"
-description = "MiamiTech OG: Contains tweaks related to OG, specific for MiamiTech"
-core = "6.x"
-package = "MiamiTech.org"
-
-dependencies[] = "og"
