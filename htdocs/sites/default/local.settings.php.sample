@@ -32,7 +32,3 @@ $db_url = array(
  */
 
 # $base_url = 'http://www.sample.org';  // NO trailing slash!
-
-$conf['environment_indicator_text'] = 'LOCAL';
-$conf['environment_indicator_color'] = 'darkgreen';
-$conf['environment_indicator_enabled'] = TRUE;
