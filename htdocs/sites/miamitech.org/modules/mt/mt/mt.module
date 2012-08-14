@@ -329,14 +329,7 @@ function mt_add_ical($node){
 function mt_add_gcal($node){
   $title = urlencode($node->title);
   $description = urlencode(strip_tags($node->content['body']['#value']));
-  $location_parts = array(
-    $node->location['name'],
-    $node->location['street'],
-    $node->location['city']. ' ' .
-    $node->location['province']. ' ' .
-    $node->location['postal_code'],
-  );
-  $location = urlencode(implode(', ', $location_parts));
+  $location = _mc_api_format_location($node->location);
   $start_date = event_format_date($node->event['start_utc'], 'custom', "Ymd\THis\Z");
   $end_date = event_format_date($node->event['end_utc'], 'custom', "Ymd\THis\Z");
   return '<span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="http://www.google.com/calendar/render?action=TEMPLATE&text=' . $title . '&details=' . $description . '&dates=' . $start_date .'/' . $end_date . '&location='. $location  .'">Just this event (gCal)</a>';

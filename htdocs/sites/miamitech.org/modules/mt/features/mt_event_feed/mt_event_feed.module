@@ -185,19 +185,7 @@ function _ical_feed_generate($title,$filename,$sql_result){
     if($node->type=='event' && $node->status){
       $event = _event_node_ical($node);
       $location = $node->locations['0'];
-      $location_output = $location['name'];
-      if(!empty($location['street']) && !empty($location['city']) && !empty($location['province']) && !empty($location['postal_code'])){
-        $location_output .= ' (';
-        $location_output .= !empty($location['street'])? $location['street'] :'';
-        $location_output .= (!empty($location['street']) && (!empty($location['city']) || !empty($location['province']) || !empty($location['postal_code'])))? ', ' : '';
-        $location_output .= !empty($location['city'])? $location['city'] :'';
-        $location_output .= (!empty($location['city']) && (!empty($location['province']) || !empty($location['postal_code'])))? ', ' : '';
-        $location_output .= !empty($location['province'])? $location['province'] :'';
-        $location_output .= (!empty($location['province']) && !empty($location['postal_code']))? ', ' : '';
-        $location_output .= !empty($location['postal_code'])? $location['postal_code'] :'';
-        $location_output .= ')';
-      }
-      $event['location'] = $location_output;
+      $event['location'] = _mc_api_format_location($location);
       $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
       $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
       $group_name = array_pop($node->og_groups_both);
@@ -223,7 +211,7 @@ function mt_event_feed_event_node_ical() {
   $node = node_load(arg(1));
   $event = _event_node_ical($node);
   $location = $node->locations['0'];
-  $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
+  $event['location'] = _mc_api_format_location($location);
   $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
   $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
   drupal_set_header('Content-Type: text/calendar; charset=utf-8');
@@ -248,7 +236,7 @@ function mt_event_feed_ical() {
     if($node->type=='event' && $event_start_unixtime>=$threeMonthsAgo){
       $event = _event_node_ical($node);
       $location = $node->locations['0'];
-      $event['location'] = $location['name'] . ' (' . $location['street'] . ', ' . $location['city'] . ', '. $location['province'] . ' ' . $location['postal_code'] .')' ;
+      $event['location'] = _mc_api_format_location($location);
       $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
       $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
       $events[] = $event;

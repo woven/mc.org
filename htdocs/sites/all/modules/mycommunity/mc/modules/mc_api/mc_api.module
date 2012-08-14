@@ -454,3 +454,19 @@ function _mc_api_get_vid_from_name($name){
   $vid = db_result(db_query("SELECT vid FROM {vocabulary} v WHERE v.module = '%s'", $name));
   return $vid;
 }
+
+function _mc_api_format_location($location){
+  $location_output = $location['name'];
+  if(!empty($location['street']) && !empty($location['city']) && !empty($location['province']) && !empty($location['postal_code'])){
+    $location_output .= ' (';
+    $location_output .= !empty($location['street'])? $location['street'] :'';
+    $location_output .= (!empty($location['street']) && (!empty($location['city']) || !empty($location['province']) || !empty($location['postal_code'])))? ', ' : '';
+    $location_output .= !empty($location['city'])? $location['city'] :'';
+    $location_output .= (!empty($location['city']) && (!empty($location['province']) || !empty($location['postal_code'])))? ', ' : '';
+    $location_output .= !empty($location['province'])? $location['province'] :'';
+    $location_output .= (!empty($location['province']) && !empty($location['postal_code']))? ', ' : '';
+    $location_output .= !empty($location['postal_code'])? $location['postal_code'] :'';
+    $location_output .= ')';
+  }
+  return $location_output;
+}
