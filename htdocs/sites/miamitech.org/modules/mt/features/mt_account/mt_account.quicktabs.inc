@@ -19,10 +19,17 @@ function mt_account_quicktabs_default_quicktabs() {
       'vid' => 'my_groups',
       'display' => 'block_1',
       'args' => '',
-      'get_displays' => 'vdisp_0',
+      'get_displays' => 'vdisp_1',
       'title' => 'My Groups',
-      'weight' => '-99',
+      'weight' => '-100',
       'type' => 'view',
+    ),
+    1 => array(
+      'bid' => 'boxes_delta_profile_myevents',
+      'hide_title' => 1,
+      'title' => 'My Events',
+      'weight' => '-99',
+      'type' => 'block',
     ),
   );
   $quicktabs->style = 'default';

@@ -1,10 +1,10 @@
 <?php
 
-function _mc_event_section_all(){
+function _mc_event_section_all($flag = null){
   $content = array();
 
-  _mc_event_section_next_two_weeks($content);
-  _mc_event_section_after_two_weeks($content);
+  _mc_event_section_next_two_weeks($content,$flag);
+  _mc_event_section_after_two_weeks($content,$flag);
 
   if(count($content)){
     print implode("\n",$content);
@@ -15,8 +15,10 @@ function _mc_event_section_all(){
   }
 }
 
-function _mc_event_section_next_two_weeks(&$content){
-	$today = mktime(0, 0, 0);
+function _mc_event_section_next_two_weeks(&$content,$flag = null){
+  global $user;
+
+  $today = mktime(0, 0, 0);
   $now = time();
   $tomorrow = $today + 24 * 3600;
   $afterTomorrow = $tomorrow + 24 * 3600;
@@ -30,6 +32,16 @@ function _mc_event_section_next_two_weeks(&$content){
   
   $nextSunday = $thisSunday + 7 * 24 * 3600;
   $minsago = $now - (60 * 30);
+
+  if(!is_null($flag) && !empty($flag)){
+    $flag_ob = flag_get_flag($flag);
+    if(!is_null($flag_ob)){
+      $fuid = $user->uid;
+      $fid = $flag_ob->fid;
+      $flag_join = 'JOIN flag_content AS flag ON flag.content_id = n.nid';
+      $flag_where =  "AND (flag.uid = $fuid AND flag.fid = $fid)";
+    }
+  }
 
   $query = "SELECT n.nid, n.title, l.name AS 'location_name', e.unix_event_start, e.unix_event_end, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),DAYOFYEAR(FROM_UNIXTIME(e.unix_event_start))) as 'Day',
       CASE 
@@ -48,7 +60,8 @@ function _mc_event_section_next_two_weeks(&$content){
   JOIN event as e on n.nid=e.nid
   JOIN location_instance AS li on n.nid=li.nid
   JOIN location AS l on li.lid=l.lid
-  WHERE n.status=1 AND ((e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s'))
+  $flag_join
+  WHERE n.status=1 AND ((e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s')) $flag_where
   GROUP BY n.nid
   ORDER BY
     (CASE WHEN Section='Today' then 0
@@ -234,7 +247,9 @@ function _mc_event_section_format_week($date){
   }
 }
 
-function _mc_event_section_after_two_weeks(&$content){
+function _mc_event_section_after_two_weeks(&$content,$flag){
+  global $user;
+
   $today = mktime(0, 0, 0);
   $now = time();
   $tomorrow = $today + 24 * 3600;
@@ -250,6 +265,17 @@ function _mc_event_section_after_two_weeks(&$content){
   $nextSunday = $thisSunday + 7 * 24 * 3600;
   $minsago = $now - (60 * 30);
 
+
+  if(!is_null($flag) && !empty($flag)){
+    $flag_ob = flag_get_flag($flag);
+    if(!is_null($flag_ob)){
+      $fuid = $user->uid;
+      $fid = $flag_ob->fid;
+      $flag_join = 'JOIN flag_content AS flag ON flag.content_id = n.nid';
+      $flag_where =  "AND (flag.uid = $fuid AND flag.fid = $fid)";
+    }
+  }
+
   $query = "SELECT n.nid, n.title, l.name AS 'location_name', e.unix_event_start, e.unix_event_end, MAKEDATE(YEAR(FROM_UNIXTIME(e.unix_event_start)),(7*(WEEKOFYEAR(FROM_UNIXTIME(e.unix_event_start)) -1)  + 1)) as 'Day',
       CASE 
           WHEN e.unix_event_start > '%s'
@@ -259,7 +285,8 @@ function _mc_event_section_after_two_weeks(&$content){
   JOIN event as e on n.nid=e.nid
   JOIN location_instance AS li on n.nid=li.nid
   JOIN location AS l on li.lid=l.lid
-  WHERE n.status=1 AND  e.unix_event_start > '%s'
+  $flag_join
+  WHERE n.status=1 AND  e.unix_event_start > '%s' $flag_where
   GROUP BY n.nid
   ORDER BY (CASE WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - e.unix_event_start)>0 THEN 0 END) DESC,
     abs(UNIX_TIMESTAMP(now()) - e.unix_event_start),

@@ -5,7 +5,10 @@
  */
 function mt_account_ctools_plugin_api() {
   list($module, $api) = func_get_args();
-  if ($module == "quicktabs" && $api == "quicktabs") {
+  if ($module == "boxes" && $api == "box") {
+    return array("version" => 1);
+  }
+  elseif ($module == "quicktabs" && $api == "quicktabs") {
     return array("version" => 1);
   }
   elseif ($module == "strongarm" && $api == "strongarm") {
