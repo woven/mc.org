@@ -29,7 +29,12 @@ var GHH = {
 		GHH.lightbox();
 		GHH.newsletterPlaceholder();
 		GHH.followButton();
+        GHH.starJoin();
 	},
+
+    starJoin: function(){
+        $(".flag-events-bookmarks.unknown a.flag-action").colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register input[name=mail]').focus(); }});
+    },
 
 	likeButton: function(){
 		var nid=$("#nid").val();

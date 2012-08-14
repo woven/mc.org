@@ -1,0 +1,24 @@
+.view-mc-events-by-dates .flag-events-bookmarks{
+    float: right;
+}
+
+.flag-events-bookmarks{
+    display: block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+}
+
+.flag-events-bookmarks a{
+    display: block;
+    text-indent: -1999px;
+}
+
+.flag-events-bookmarks a.flag-action{
+    background-image: url("../images/icons/icon-star-empty.png");
+}
+
+.flag-events-bookmarks a.unflag-action{
+    background-image: url("../images/icons/icon-star-yellow.png");
+}
