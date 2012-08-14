@@ -89,19 +89,19 @@ function mt_event_feed_menu(){
   $items['group/%/ical'] = array(
     'title' => 'Group iCal feed',
     'page callback' => 'mt_event_feed_ical',
-    'access callback' => TRUE,
+    'access arguments' => array('access content'),
   );
   $items['events/ical'] = array(
     'title' => 'MiamiTech.org Events',
     'page callback' => '_mt_event_feed_ical_sitewide',
-    'access callback' => 'access content',
+    'access arguments' => array('access content'),
   );
 
   $items['user/%/ical'] = array(
     'title' => 'MiamiTech.org User Events',
-    'page callback' => '_mt_event_feed_ical_sitewide',
-    'page callback' => array(),
-    'access callback' => 'access content',
+    'page callback' => '_mt_event_feed_ical_user',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
   );
 
   return $items;
@@ -109,6 +109,31 @@ function mt_event_feed_menu(){
 
 function mt_event_feed_menu_alter(&$items){
   $items['node/%/ical']['page callback'] = 'mt_event_feed_event_node_ical';
+}
+
+function _mt_event_feed_ical_user($uid){
+  $today = mktime(0, 0, 0);
+  $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
+  $sql = "SELECT DISTINCT
+      n.nid
+      FROM
+      node AS n
+      INNER JOIN flag_content AS f ON n.nid = f.content_id AND f.fid = %d AND f.uid = %d AND f.content_type = 'node'
+      INNER JOIN `event` AS e ON e.nid = n.nid
+      WHERE
+      n.type = 'event' AND e.unix_event_start >= %d
+      ORDER BY
+      e.event_start ASC
+  ";
+
+  //get the default flag to use for events
+  $flag = flag_get_flag('events_bookmarks');
+
+  //if flag is loaded and you can find fid, go on and output the feed
+  if($flag){
+    $result = db_query($sql,$flag->fid,$uid,$threeMonthsAgo);
+    _ical_feed_generate("User Calender","calender-user-$uid.ics",$result);
+  }
 }
 
 function _ical_feed_generate($title,$filename,$sql_result){
@@ -150,7 +175,7 @@ function _ical_feed_generate($title,$filename,$sql_result){
 function _mt_event_feed_ical_sitewide(){
   $today = mktime(0, 0, 0);
   $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
-  $result = db_query("select nid from event where unix_event_start>=%d", $threeMonthsAgo);
+  $result = db_query("select nid from event where unix_event_start>=%d",$threeMonthsAgo );
   _ical_feed_generate("All upcoming events",'calendar.ics',$result);
 }
 
