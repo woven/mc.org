@@ -22,11 +22,15 @@
     text-indent: -1999px;
 }
 
-.flag-events-bookmarks a.flag-action{
+.flag-events-bookmarks a.flag-action,
+.flag-events-bookmarks.flag-waiting a.unflag-action{
     background-image: url("../images/icons/ico-star-default.png");
 }
 
-.flag-events-bookmarks a.unflag-action,.flag-events-bookmarks a:hover{
+.flag-events-bookmarks a.unflag-action,
+.flag-events-bookmarks a:hover,
+.flag-events-bookmarks a:active,
+.flag-events-bookmarks.flag-waiting a.flag-action{
     background-image: url("../images/icons/ico-star-active.png");
 }
 
