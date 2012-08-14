@@ -114,13 +114,15 @@ function mt_event_feed_menu_alter(&$items){
 function _mt_user_myevents(){
   global $user; $cuid = arg(1);
 
+  if(!($user->uid == $cuid & $user->uid > 0)){
+    return;
+  }
+
   print '<div class="two-cols"><div class="col-main">';
 
-  if($user->uid == $cuid & $user->uid > 0){
     if(function_exists('_mc_event_section_all')){
       print  _mc_event_section_all('events_bookmarks');
     }
-  }
 
   print '</div>';
 
@@ -135,9 +137,17 @@ function _mt_user_myevents(){
 
   );
 
-  print  '<div class="col-right">'.l("Add To Calender","user/$user->uid/myevents/ical").'</div>';
+  $url = webcal_url("user/$user->uid/myevents/ical",array("absolute"=>true));
+
+  $link = '<div class="user_addcal"><span class="ical-ico">Image</span><a href="'.$url.'" class="ical-link">Subscribe to my events</a></div>';
+  print  '<div class="col-right">'.$link.'</div>';
 
   print '</div>';
+}
+
+function webcal_url($path = NULL, $options = array()){
+  $url = url($path,$options);
+  return str_replace("http://","webcal://",$url);
 }
 
 function _mt_event_feed_ical_user($user){

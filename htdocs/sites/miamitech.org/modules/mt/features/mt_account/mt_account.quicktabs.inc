@@ -11,7 +11,7 @@ function mt_account_quicktabs_default_quicktabs() {
   $quicktabs->api_version = 1;
   $quicktabs->machine_name = 'mt_userprofile';
   $quicktabs->ajax = 0;
-  $quicktabs->hide_empty_tabs = 0;
+  $quicktabs->hide_empty_tabs = 1;
   $quicktabs->default_tab = FALSE;
   $quicktabs->title = 'User Information';
   $quicktabs->tabs = array(

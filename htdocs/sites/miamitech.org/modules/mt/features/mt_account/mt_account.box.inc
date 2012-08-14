@@ -11,17 +11,11 @@ function mt_account_default_box() {
   $box->api_version = 1;
   $box->delta = 'profile_myevents';
   $box->plugin_key = 'simple';
-  $box->title = '';
+  $box->title = 'Upcoming Events';
   $box->description = 'My Events sections';
   $box->options = array(
     'body' => '<?php
-global $user;
-$cuid = arg(1);
-if($user->uid == $cuid & $user->uid > 0){
-if(function_exists(\'_mc_event_section_all\')){
-print  _mc_event_section_all(\'events_bookmarks\');
-}
-}
+_mt_user_myevents();
 ?>',
     'format' => '3',
   );
