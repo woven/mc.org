@@ -414,15 +414,21 @@ function mc_api_format_time($start, $end = NULL, $occurring = NULL){
     // start date only
     return $prefix_start . _mc_api_get_formatted_time($start, true);
   }
-    
-  if (date('a', $start) == date('a', $end)){
-    // do not print AM/PM in start date
-    $startDate = _mc_api_get_formatted_time($start, false);
-  }else{
-    $startDate = _mc_api_get_formatted_time($start, true);
+  if(date('z', $start)==date('z', $end)){
+    if (date('a', $start) == date('a', $end)){
+      // do not print AM/PM in start date
+      $startDate = _mc_api_get_formatted_time($start, false);
+    }else{
+      $startDate = _mc_api_get_formatted_time($start, true);
+    }
+    $endDate = _mc_api_get_formatted_time($end, true);
   }
-  $endDate = _mc_api_get_formatted_time($end, true);
-  
+  else {
+    $startDate = date('D', $start) . ' ' . _mc_api_get_formatted_time($start, true) . ' ';
+    $endDate = ' ' . date('D', $end) . ' ' . _mc_api_get_formatted_time($end, true);
+  }
+
+
   return $prefix_start . $startDate . $prefix_end . $endDate;
   
 }
