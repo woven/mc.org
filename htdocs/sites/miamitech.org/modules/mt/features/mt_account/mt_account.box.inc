@@ -15,8 +15,12 @@ function mt_account_default_box() {
   $box->description = 'My Events sections';
   $box->options = array(
     'body' => '<?php
+global $user;
+$cuid = arg(1);
+if($user->uid == $cuid & $user->uid > 0){
 if(function_exists(\'_mc_event_section_all\')){
 print  _mc_event_section_all(\'events_bookmarks\');
+}
 }
 ?>',
     'format' => '3',

@@ -19,7 +19,7 @@ function mt_account_quicktabs_default_quicktabs() {
       'vid' => 'my_groups',
       'display' => 'block_1',
       'args' => '',
-      'get_displays' => 'vdisp_1',
+      'get_displays' => 'vdisp_0',
       'title' => 'My Groups',
       'weight' => '-100',
       'type' => 'view',
