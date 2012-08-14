@@ -1,0 +1,8 @@
+<?php
+/**
+ * Uninstall unneeded module.
+ */
+function mc_og_install() {
+  module_disable(array('mt_og'));
+  drupal_uninstall_module('mt_og');
+}
