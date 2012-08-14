@@ -11,7 +11,11 @@ function _mc_event_section_all($flag = null){
     $path = drupal_get_path('module', 'mc_event_section');
     drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
   }else{
-    print "Wow, it's quiet around here.  Want to <a href='/node/add/event'>add an event</a> or <a href='/node/add/event-feed'>import an event feed</a>?";
+    if($flag){
+      print "Nothing to show here. Star some upcoming events and they'll show here.";
+    }else{
+      print "Wow, it's quiet around here.  Want to <a href='/node/add/event'>add an event</a> or <a href='/node/add/event-feed'>import an event feed</a>?";
+    }
   }
 }
 
