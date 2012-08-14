@@ -97,7 +97,7 @@ function mt_event_feed_menu(){
     'access arguments' => array('access content'),
   );
 
-  $items['user/%/ical'] = array(
+  $items['user/%user/myevents/ical'] = array(
     'title' => 'MiamiTech.org User Events',
     'page callback' => '_mt_event_feed_ical_user',
     'page arguments' => array(1),
@@ -111,7 +111,37 @@ function mt_event_feed_menu_alter(&$items){
   $items['node/%/ical']['page callback'] = 'mt_event_feed_event_node_ical';
 }
 
-function _mt_event_feed_ical_user($uid){
+function _mt_user_myevents(){
+  global $user; $cuid = arg(1);
+
+  print '<div class="two-cols"><div class="col-main">';
+
+  if($user->uid == $cuid & $user->uid > 0){
+    if(function_exists('_mc_event_section_all')){
+      print  _mc_event_section_all('events_bookmarks');
+    }
+  }
+
+  print '</div>';
+
+  $addtocalender = '<div id="block-ds-5c755d31699c072160e29da9599e28f3" class="block block-ds ">
+    	<div class="block-title">Add to calendar</div>
+        <div class="block-content clear-block">
+            <div class="field field-mt-add-ical field-ical"><span class="ical-ico">Image</span><a class="ical-link" href="webcal://w.miamitech.org/node/1342/ical">Just this event (iCal)</a></div><div class="field field-mt-add-gcal field-gcal"><span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="http://www.google.com/calendar/render?action=TEMPLATE&amp;text=Share+and+Learn&amp;details=South+Florida+PHP+Meetup+Group%0ATuesday%2C+August+14+at+7%3A00+PM%0A561-213-3854+Call+me+if+you+get+lost%0ADetails%3A+http%3A%2F%2Fwww.meetup.com%2Fsouthfloridaphp%2Fevents%2F73596652%2F%0A&amp;dates=20120814T230000Z/20120815T020000Z&amp;location=Global+Response%2C+777+S+State+Road+7%2C+Margate+FL+33068">Just this event (gCal)</a></div><div class="field field-mt-add-group-ical field-group-ical"><span class="ical-group-ico"> </span><a class="ical-link" href="webcal://w.miamitech.org/group/1339/ical">All events from this group (iCal)</a></div><div class="field field-mt-add-group-rss field-group-ical"><span class="rss-group-ico"> </span><a class="ical-link" href="http://w.miamitech.org/groups/1339/rss">All events from this group (RSS)</a></div><a id="context-block-ds-5c755d31699c072160e29da9599e28f3" class="context-block editable edit-mt_node_event"></a></div>
+        </div>';
+
+  $links = array(
+
+
+  );
+
+  print  '<div class="col-right">'.l("Add To Calender","user/$user->uid/myevents/ical").'</div>';
+
+  print '</div>';
+}
+
+function _mt_event_feed_ical_user($user){
+  $uid = $user->uid;
   $today = mktime(0, 0, 0);
   $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
   $sql = "SELECT DISTINCT
