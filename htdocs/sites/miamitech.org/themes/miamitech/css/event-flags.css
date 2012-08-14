@@ -19,6 +19,6 @@
     background-image: url("../images/icons/ico-star-default.png");
 }
 
-.flag-events-bookmarks a.unflag-action,a:hover{
+.flag-events-bookmarks a.unflag-action,.flag-events-bookmarks a:hover{
     background-image: url("../images/icons/ico-star-active.png");
 }
