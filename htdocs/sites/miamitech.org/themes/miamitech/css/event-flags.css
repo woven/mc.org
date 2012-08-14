@@ -4,6 +4,11 @@
     padding-top: 22px;
 }
 
+.flag-events-bookmarks.flag-waiting a {
+    opacity: 1;
+    filter: alpha(opacity=100); /* IE */
+}
+
 .flag-events-bookmarks{
     display: block;
     width: 16px;
