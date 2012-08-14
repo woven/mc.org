@@ -7,7 +7,7 @@
  *   An array of modules to enable.
  */
 function mycommunity_profile_modules(){
-  return array('content','admin_theme','comment', 'menu', 'taxonomy','dblog','ctools','imageapi','imageapi_gd','ds','nd','context','views','fieldgroup','features','ft_admin','imagecache','imagefield','imagefield_crop','mc','mc_base_helper','ft_group','ft_article','ft_page','ft_comment','ft_event','late_form_alter','environment','permissions_api','environment_indicator');
+  return array('content','admin_theme','comment', 'menu', 'taxonomy','dblog','ctools','imageapi','imageapi_gd','ds','nd','context','views','fieldgroup','features','ft_admin','imagecache','imagefield','imagefield_crop','mc','mc_base_helper','ft_group','ft_article','ft_page','ft_comment','ft_event','late_form_alter','environment','permissions_api','environment_indicator','path_alias_xt');
 }
 
 /**

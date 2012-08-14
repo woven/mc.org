@@ -32,3 +32,17 @@
     float: right;
     width: 220px;
 }
+.two-cols .col-right .user_addcal{
+    padding: 10px;
+}
+
+/*
+overide the .quicktabs_tabpage .block .block-title hiding block titles at the user page (specifically for my events).
+*/
+.page-user .quicktabs_tabpage .block .block-title{
+    display: block;
+}
+
+.page-user .quicktabs_tabpage .block .block-title h3{
+    font-size: 17px !important;
+}
