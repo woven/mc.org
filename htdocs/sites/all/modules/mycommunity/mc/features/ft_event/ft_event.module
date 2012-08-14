@@ -104,7 +104,7 @@ function theme_mc_event_date($unix_date_start = NULL, $unix_date_end = NULL, $ha
   // if it has a time, and it's not a past date
   if ($has_time){
     // if it has an end time, different than start time
-    if ($has_end_date && (date('Hi', $unix_date_start) != date('Hi', $unix_date_end))){
+    if ($has_end_date && (date('zHi', $unix_date_start) != date('zHi', $unix_date_end))){
       $time = mc_api_format_time($unix_date_start, $unix_date_end, $occurring);
     }else{
       $time = mc_api_format_time($unix_date_start, null, $occurring);
