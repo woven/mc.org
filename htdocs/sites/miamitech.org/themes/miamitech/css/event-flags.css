@@ -1,5 +1,7 @@
-.view-mc-events-by-dates .flag-events-bookmarks{
+.view-mc-events-by-dates .event-staring{
     float: right;
+    height: 80px;
+    padding-top: 22px;
 }
 
 .flag-events-bookmarks{
