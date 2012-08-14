@@ -114,13 +114,15 @@ function mt_event_feed_menu_alter(&$items){
 function _mt_user_myevents(){
   global $user; $cuid = arg(1);
 
+  if(!($user->uid == $cuid & $user->uid > 0)){
+    return;
+  }
+
   print '<div class="two-cols"><div class="col-main">';
 
-  if($user->uid == $cuid & $user->uid > 0){
     if(function_exists('_mc_event_section_all')){
       print  _mc_event_section_all('events_bookmarks');
     }
-  }
 
   print '</div>';
 
