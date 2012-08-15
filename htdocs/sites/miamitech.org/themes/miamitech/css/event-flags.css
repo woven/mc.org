@@ -37,6 +37,10 @@
     background-image: url("../images/icons/ico-star-hover.png");
 }
 
+.two-cols .view-header,.two-cols .event-separator{
+    display: none;
+}
+
 .two-cols .col-main{
     width: 638px;
     float: left;
