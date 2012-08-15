@@ -57,3 +57,10 @@ overide the .quicktabs_tabpage .block .block-title hiding block titles at the us
 .page-user .quicktabs_tabpage .block .block-title h3{
     font-size: 17px !important;
 }
+
+.page-user .flag-events-bookmarks a.unflag-action,
+.page-user .flag-events-bookmarks a:hover,
+.page-user .flag-events-bookmarks a:active,
+.page-user .flag-events-bookmarks.flag-waiting a.flag-action{
+    background-image: url("../images/icons/ico-delete.png");
+}
