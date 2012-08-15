@@ -126,20 +126,14 @@ function _mt_user_myevents(){
 
   print '</div>';
 
-  $addtocalender = '<div id="block-ds-5c755d31699c072160e29da9599e28f3" class="block block-ds ">
+  $url = webcal_url("user/$user->uid/myevents/ical",array("absolute"=>true));
+  $link = '<div class="user_addcal"><span class="ical-ico">Image</span><a href="'.$url.'" class="ical-link">Subscribe to my events</a></div>';
+
+  $addtocalender = '<div class="block block-ds">
     	<div class="block-title">Add to calendar</div>
         <div class="block-content clear-block">
-            <div class="field field-mt-add-ical field-ical"><span class="ical-ico">Image</span><a class="ical-link" href="webcal://w.miamitech.org/node/1342/ical">Just this event (iCal)</a></div><div class="field field-mt-add-gcal field-gcal"><span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="http://www.google.com/calendar/render?action=TEMPLATE&amp;text=Share+and+Learn&amp;details=South+Florida+PHP+Meetup+Group%0ATuesday%2C+August+14+at+7%3A00+PM%0A561-213-3854+Call+me+if+you+get+lost%0ADetails%3A+http%3A%2F%2Fwww.meetup.com%2Fsouthfloridaphp%2Fevents%2F73596652%2F%0A&amp;dates=20120814T230000Z/20120815T020000Z&amp;location=Global+Response%2C+777+S+State+Road+7%2C+Margate+FL+33068">Just this event (gCal)</a></div><div class="field field-mt-add-group-ical field-group-ical"><span class="ical-group-ico"> </span><a class="ical-link" href="webcal://w.miamitech.org/group/1339/ical">All events from this group (iCal)</a></div><div class="field field-mt-add-group-rss field-group-ical"><span class="rss-group-ico"> </span><a class="ical-link" href="http://w.miamitech.org/groups/1339/rss">All events from this group (RSS)</a></div><a id="context-block-ds-5c755d31699c072160e29da9599e28f3" class="context-block editable edit-mt_node_event"></a></div>
+            '.$link.'
         </div>';
-
-  $links = array(
-
-
-  );
-
-  $url = webcal_url("user/$user->uid/myevents/ical",array("absolute"=>true));
-
-  $link = '<div class="user_addcal"><span class="ical-ico">Image</span><a href="'.$url.'" class="ical-link">Subscribe to my events</a></div>';
   print  '<div class="col-right">'.$link.'</div>';
 
   print '</div>';
