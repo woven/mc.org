@@ -28,10 +28,13 @@
 }
 
 .flag-events-bookmarks a.unflag-action,
-.flag-events-bookmarks a:hover,
 .flag-events-bookmarks a:active,
 .flag-events-bookmarks.flag-waiting a.flag-action{
     background-image: url("../images/icons/ico-star-active.png");
+}
+
+.flag-events-bookmarks a:hover{
+    background-image: url("../images/icons/ico-star-hover.png");
 }
 
 .two-cols .col-main{
