@@ -72,8 +72,11 @@ overide the .quicktabs_tabpage .block .block-title hiding block titles at the us
 }
 
 .page-user .flag-events-bookmarks a.unflag-action,
-.page-user .flag-events-bookmarks a:hover,
 .page-user .flag-events-bookmarks a:active,
 .page-user .flag-events-bookmarks.flag-waiting a.flag-action{
+    background-image: url("../images/icons/ico-delete-default.png");
+}
+
+.page-user .flag-events-bookmarks a:hover{
     background-image: url("../images/icons/ico-delete.png");
 }

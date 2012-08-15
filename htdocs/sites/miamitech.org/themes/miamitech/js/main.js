@@ -39,7 +39,8 @@ var GHH = {
             if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $('body').hasClass('page-user')){
 
                 if ($(data.link).parents('.event').size()){
-                    $(data.link).parents('.event').fadeOut('slow',function(){
+
+                    $(data.link).hide().parents('.event').fadeOut('slow',function(){
                         $(this).remove();
                         if(!$('.col-main .event').size()){
                             $('.col-main').html("<p>Nothing to show here. Star some upcoming events and they'll show here.</p>");
