@@ -48,7 +48,7 @@
 }
 
 .two-cols .col-main{
-    width: 638px;
+    width: 630px;
     float: left;
 }
 
@@ -56,6 +56,19 @@
     float: right;
     width: 220px;
 }
+
+.two-cols .col-right .user_addcal{
+    margin-bottom: 10px;
+    border: 1px solid #F7F2E4;
+    background: white;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border-color: #FED064;
+    behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
+    border-color: #FED064;
+}
+
 .two-cols .col-right .user_addcal{
     padding: 10px;
 }
