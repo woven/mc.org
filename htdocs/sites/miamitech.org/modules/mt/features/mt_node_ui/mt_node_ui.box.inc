@@ -86,7 +86,7 @@ $myUrl = $_SERVER[\'HTTP_HOST\'];
     'body' => '<?php
 $node = node_load(arg(1));
 $group_name = array_pop($node->og_groups_both);
-$string = $node->title . \' |  \' . $group_name . \' | #miamitech\';
+$string = trim($node->title) . \' | \' . trim($group_name) . \' | #miamitech\';
 $string = str_replace(\'"\',\'\', $string);
 $string = str_replace(array("\r", "\r\n", "\n"), "", $string);
 ?>
