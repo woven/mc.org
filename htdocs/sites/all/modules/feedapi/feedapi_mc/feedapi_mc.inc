@@ -17,3 +17,12 @@ function _feedapi_mc_get_update_date($nid){
   $result = db_result(db_query($query));
   return $result;
 }
+
+function _feedapi_mc_updating($nid){
+  if(_feedapi_mc_is_updatable($nid)){
+    return 'Auto';
+  }
+  else{
+    return 'Manual';
+  }
+}
