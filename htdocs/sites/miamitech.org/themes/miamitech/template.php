@@ -569,7 +569,7 @@ function miamitech_nd_location_gmap($field, $latitude, $longitude, $width, $heig
       'longitude' => $longitude,
       'text' => $bubble_content,
       'autoclick' => $autoclick,
-      'link' => 'http://maps.google.com/?q=' . theme('nd_location_address', $field),
+      'link' => 'http://maps.google.com/?q=' . strip_tags(theme('nd_location_address', $field)),
     );
   }
 
