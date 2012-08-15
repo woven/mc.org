@@ -29,10 +29,10 @@ function mt_event_ui_flag_default_flags() {
     'types' => array(
       '0' => 'event',
     ),
-    'flag_short' => 'Star',
+    'flag_short' => 'Save to my events',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'UnStar',
+    'unflag_short' => 'Remove from my events',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
@@ -51,11 +51,11 @@ function mt_event_ui_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 'mt_event_ui',
     'locked' => array(
       '0' => 'name',
     ),
+    'api_version' => 2,
   );
   return $flags;
 }
