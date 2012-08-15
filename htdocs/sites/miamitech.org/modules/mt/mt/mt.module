@@ -569,8 +569,13 @@ function mt_theme() {
 
 function theme_myevents_flag_link($field){
   $node = $field['object'];
+  global $user;
 
-  return flag_create_link('events_bookmarks', $node->nid);
+  if($user->uid){
+    return flag_create_link('events_bookmarks', $node->nid);
+  }else{
+    return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
+  }
 }
 
 function mt_init(){
