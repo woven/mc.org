@@ -233,6 +233,36 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
       ),
     ),
 
+    'mt_add_myevents' => array(
+      'title' => t('Add To My events'),
+      'exclude' => array(
+        'group' => 0,
+        'link' => 0,
+        'webform' => 0,
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_THEME,
+      'status' => DS_FIELD_STATUS_DEFAULT,
+      'properties' => array(
+        'css-class' => 'field-add-myevents',
+        'formatters' => array(
+          'myevents_flag_link' => t('Default'),
+        ),
+        'token' => 0,
+      ),
+    ),
 
     'mt_add_group_rss' => array(
       'title' => t('Add Group to Calendar RSS'),
@@ -530,8 +560,17 @@ function mt_theme() {
   'mt_location_directions' => array(
       'arguments' => array('field' => NULL),
     ),
+   'myevents_flag_link' => array(
+     'arguments' => array('field' => NULL),
+   )
   );
   return $theme_functions;
+}
+
+function theme_myevents_flag_link($field){
+  $node = $field['object'];
+
+  return flag_create_link('events_bookmarks', $node->nid);
 }
 
 function mt_init(){

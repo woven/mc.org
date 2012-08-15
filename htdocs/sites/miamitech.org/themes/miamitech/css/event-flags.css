@@ -4,12 +4,7 @@
     padding-top: 22px;
 }
 
-.flag-events-bookmarks.flag-waiting a {
-    opacity: 1;
-    filter: alpha(opacity=100); /* IE */
-}
-
-.flag-events-bookmarks{
+.view-mc-events-by-dates .flag-events-bookmarks{
     display: block;
     width: 16px;
     height: 16px;
@@ -17,9 +12,20 @@
     overflow: hidden;
 }
 
-.flag-events-bookmarks a{
+.view-mc-events-by-dates .flag-events-bookmarks a{
     display: block;
     text-indent: -1999px;
+    background-repeat: no-repeat;
+}
+
+.flag-events-bookmarks a{
+    background-repeat: no-repeat;
+    padding-left: 20px;
+}
+
+.flag-events-bookmarks.flag-waiting a {
+    opacity: 1;
+    filter: alpha(opacity=100); /* IE */
 }
 
 .flag-events-bookmarks a.flag-action,
