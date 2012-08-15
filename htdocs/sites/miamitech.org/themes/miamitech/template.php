@@ -146,10 +146,10 @@ function miamitech_nd_location_address($field) {
     unset($address['street']);
     unset($address['postal_code']);
   }
-  if(empty($address) || (count($address) && isset($address['country'])) ){
+  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
     $has_address = $field['object']->location['name'] && $field['object']->location['street']
       && $field['object']->location['city'] && $field['object']->location['province'];
-    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'];
+    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'] && $field['object']->location['latitude']!='0.000000' && $field['object']->location['longitude']!='0.000000';
     if(!$has_address && $has_lat_and_lon){
       $parts = mt_event_feed_reverse_getAddressParts($field['object']->locations['0']['latitude'], $field['object']->locations['0']['longitude']);
       $address['city'] = $parts['city'];
@@ -157,7 +157,7 @@ function miamitech_nd_location_address($field) {
     }
   }
 
-  if(empty($address)){
+  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
      return '<div class="no-location"> A location wasn\'t provided.</div>';
   }
 
