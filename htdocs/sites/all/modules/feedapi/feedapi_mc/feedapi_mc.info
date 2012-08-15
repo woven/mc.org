@@ -1,0 +1,7 @@
+name = FeedAPI MC
+description = "Tweaks to the FeedAPI module"
+dependencies[] = feedapi_node
+dependencies[] = feedapi
+package = MyCommunity
+core = 6.x
+
