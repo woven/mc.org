@@ -1,7 +1,24 @@
+
 .view-mc-events-by-dates .event-staring{
     float: right;
     height: 80px;
     padding-top: 22px;
+}
+
+.event-staring-tooltip,#event-staring-tooltip {
+    margin-bottom: 10px;
+    border: 1px solid #F7F2E4;
+    background: #F7F7F7;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border-color: #FED064;
+    behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
+    border-color: #FED064;
+    width:120px;
+    padding:5px 10px;;
+    color: #333;
+    display: none;
 }
 
 .view-mc-events-by-dates .flag-events-bookmarks{
@@ -64,7 +81,6 @@
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
-    border-color: #FED064;
     behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
     border-color: #FED064;
 }
