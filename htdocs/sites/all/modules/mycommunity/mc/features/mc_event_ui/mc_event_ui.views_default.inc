@@ -1231,6 +1231,12 @@ echo $hash;
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
+      'phpcode_5' => array(
+        'element_type' => 'div',
+        'class' => 'event-staring',
+        'label_element_type' => '',
+        'label_class' => '',
+      ),
       'nothing_2' => array(
         'element_type' => 'div',
         'class' => 'field-view-image',

@@ -1,8 +1,10 @@
-.view-mc-events-by-dates .flag-events-bookmarks{
+.view-mc-events-by-dates .event-staring{
     float: right;
+    height: 80px;
+    padding-top: 22px;
 }
 
-.flag-events-bookmarks{
+.view-mc-events-by-dates .flag-events-bookmarks{
     display: block;
     width: 16px;
     height: 16px;
@@ -10,17 +12,39 @@
     overflow: hidden;
 }
 
-.flag-events-bookmarks a{
+.view-mc-events-by-dates .flag-events-bookmarks a{
     display: block;
     text-indent: -1999px;
+    background-repeat: no-repeat;
 }
 
-.flag-events-bookmarks a.flag-action{
+.flag-events-bookmarks a{
+    background-repeat: no-repeat;
+    padding-left: 20px;
+}
+
+.flag-events-bookmarks.flag-waiting a {
+    opacity: 1;
+    filter: alpha(opacity=100); /* IE */
+}
+
+.flag-events-bookmarks a.flag-action,
+.flag-events-bookmarks.flag-waiting a.unflag-action{
     background-image: url("../images/icons/ico-star-default.png");
 }
 
-.flag-events-bookmarks a.unflag-action,.flag-events-bookmarks a:hover{
+.flag-events-bookmarks a.unflag-action,
+.flag-events-bookmarks a:active,
+.flag-events-bookmarks.flag-waiting a.flag-action{
     background-image: url("../images/icons/ico-star-active.png");
+}
+
+.flag-events-bookmarks a:hover{
+    background-image: url("../images/icons/ico-star-hover.png");
+}
+
+.two-cols .view-header,.two-cols .event-separator{
+    display: none;
 }
 
 .two-cols .col-main{
@@ -45,4 +69,11 @@ overide the .quicktabs_tabpage .block .block-title hiding block titles at the us
 
 .page-user .quicktabs_tabpage .block .block-title h3{
     font-size: 17px !important;
+}
+
+.page-user .flag-events-bookmarks a.unflag-action,
+.page-user .flag-events-bookmarks a:hover,
+.page-user .flag-events-bookmarks a:active,
+.page-user .flag-events-bookmarks.flag-waiting a.flag-action{
+    background-image: url("../images/icons/ico-delete.png");
 }

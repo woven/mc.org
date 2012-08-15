@@ -34,6 +34,18 @@ var GHH = {
 
     starJoin: function(){
         $(".flag-events-bookmarks.unknown a.flag-action").colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register input[name=mail]').focus(); }});
+
+        $(document).bind('flagGlobalAfterLinkUpdate', function(event, data) {
+            if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $('body').hasClass('page-user')){
+                if ($(data.link).parents('.event').size()){
+                    $(data.link).parents('.event').hide('slow');
+                }
+            }
+
+            // alert('Object #' + data.contentId + ' (of type ' +
+            //data.contentType + ') has been ' + data.flagStatus +
+            //' using flag "' + data.flagName + '"');
+        });
     },
 
 	likeButton: function(){
