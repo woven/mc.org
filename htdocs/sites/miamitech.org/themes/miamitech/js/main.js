@@ -33,12 +33,18 @@ var GHH = {
 	},
 
     starJoin: function(){
-        $(".flag-events-bookmarks.unknown a.flag-action").colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register input[name=mail]').focus(); }});
+        //$(".flag-events-bookmarks.unknown a.flag-action").colorbox({width:"300", height:"300", inline:true, href:"#block-boxes-event_staring_tooltip", opacity: 0.6, onComplete:function(){ }});
 
         $(document).bind('flagGlobalAfterLinkUpdate', function(event, data) {
             if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $('body').hasClass('page-user')){
+
                 if ($(data.link).parents('.event').size()){
-                    $(data.link).parents('.event').hide('slow');
+                    $(data.link).parents('.event').fadeOut('slow',function(){
+                        $(this).remove();
+                        if(!$('.col-main .event').size()){
+                            $('.col-main').html("<p>Nothing to show here. Star some upcoming events and they'll show here.</p>");
+                        }
+                    });
                 }
             }
 
@@ -46,6 +52,13 @@ var GHH = {
             //data.contentType + ') has been ' + data.flagStatus +
             //' using flag "' + data.flagName + '"');
         });
+
+        /*
+        $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
+                tip: '#block-boxes-event_staring_tooltip',
+                delay: 0
+         });
+         */
     },
 
 	likeButton: function(){
