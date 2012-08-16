@@ -1,5 +1,14 @@
 <?php
 
 function select2_init(){
+  $path = drupal_get_path("module",'select2');
+  $lib = libraries_get_path("select2");
+
+  //add required select2 files
+  drupal_add_js($lib."/select2.min.js");
+  drupal_add_css($lib."/select2.css");
+
+  //add select2 autocomplete behaviour, overrides the current drupal autocomplete
+  //drupal_add_js($path."/select2.js");
 
 }
