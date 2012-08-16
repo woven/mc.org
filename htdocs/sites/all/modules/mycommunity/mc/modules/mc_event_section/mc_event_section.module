@@ -130,13 +130,15 @@ function _mc_event_section_next_two_weeks(&$content,$flag = null){
                 $total_percent = 30;
 
                 if($checked_event['title']!='Share and Learn'){
-                  if($percent_title>=50){
-                    $total_percent += 50;
-                  }
-
-                  if($percent_location>=50){
-                    $total_percent += 20;
-                  }
+                  $total_percent += ($percent_title * 0.5);
+                  $total_percent += ($percent_location * 0.2);
+//                  if($percent_title>=50){
+//                    $total_percent += 50;
+//                  }
+//
+//                  if($percent_location>=50){
+//                    $total_percent += 20;
+//                  }
                 }
                 else{
                   if($percent_location>=50){
@@ -144,7 +146,7 @@ function _mc_event_section_next_two_weeks(&$content,$flag = null){
                   }
                 }
 
-                if($total_percent>=50){
+                if($total_percent>=60){
                   $new_list[$section][$day][$i][] = $checked_nid;
                   $ignore_nids[$checked_nid] = $checked_nid;
                 }
@@ -351,13 +353,15 @@ function _mc_event_section_after_two_weeks(&$content,$flag){
                 $total_percent = 30;
 
                 if($checked_event['title']!='Share and Learn'){
-                  if($percent_title>=50){
-                    $total_percent += 50;
-                  }
-
-                  if($percent_location>=50){
-                    $total_percent += 20;
-                  }
+                  $total_percent += ($percent_title * 0.5);
+                  $total_percent += ($percent_location * 0.2);
+//                  if($percent_title>=50){
+//                    $total_percent += 50;
+//                  }
+//
+//                  if($percent_location>=50){
+//                    $total_percent += 20;
+//                  }
                 }
                 else{
                   if($percent_location>=50){
@@ -365,7 +369,7 @@ function _mc_event_section_after_two_weeks(&$content,$flag){
                   }
                 }
 
-                if($total_percent>=50){
+                if($total_percent>=60){
                   $new_list[$section][$day][$i][] = $checked_nid;
                   $ignore_nids[$checked_nid] = $checked_nid;
                 }
