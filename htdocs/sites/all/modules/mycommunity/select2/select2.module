@@ -9,6 +9,35 @@ function select2_init(){
   drupal_add_css($lib."/select2.css");
 
   //add select2 autocomplete behaviour, overrides the current drupal autocomplete
-  //drupal_add_js($path."/select2.js");
+  drupal_add_js($path."/select2.js");
 
+}
+
+function select2_menu(){
+  $items = array();
+
+  $items['select2/autocomplete'] = array(
+    'page callback' => '_select2_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+
+  return $items;
+}
+
+
+function _select2_autocomplete(){
+  $url = $_GET['url'];
+  $query = $_GET['term'];
+
+
+  $fullpath = $url."/".$query;
+
+  $new_url = str_replace("http://w.miamitech.org/","",$url);
+
+  $content =  drupal_http_request($fullpath);
+
+  drupal_set_header('Content-Type: application/json');
+  echo $content->data;
+  exit();
 }
