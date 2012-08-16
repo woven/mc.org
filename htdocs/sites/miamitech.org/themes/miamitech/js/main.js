@@ -62,8 +62,9 @@ var GHH = {
         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
                 tip: '#event-staring-tooltip',
                 delay: 1200,
-                position: 'top center',
-                offset: [-10,85]
+                position: 'bottom center',
+                offset: [-20,-2]
+                //layout: '<div><span class="b"></span></div>'
         });
 
     },

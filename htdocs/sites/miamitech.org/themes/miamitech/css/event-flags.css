@@ -5,6 +5,7 @@
     padding-top: 22px;
 }
 
+/*
 .event-staring-tooltip,#event-staring-tooltip {
     position: relative;
     background-color:#eee;
@@ -33,7 +34,6 @@
     left:1em;
 }
 
-/*
 .event-staring-tooltip,#event-staring-tooltip {
     margin-bottom: 10px;
     border: 1px solid #F7F2E4;
