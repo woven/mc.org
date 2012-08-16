@@ -35,12 +35,24 @@ var GHH = {
     starJoin: function(){
         //$(".flag-events-bookmarks.unknown a.flag-action").colorbox({width:"300", height:"300", inline:true, href:"#block-boxes-event_staring_tooltip", opacity: 0.6, onComplete:function(){ }});
 
+        $(document).bind('flagGlobalBeforeLinkUpdate', function(event, data) {
+            console.log(data);
+            if(data.flagName == "events_bookmarks"){
+                if(data.flagStatus == "unflagged"){
+                    $(data.link).find("a").text("Save to my events");
+                }else{
+                    $(data.link).find("a").text("Remove from my events");
+                }
+
+
+            }
+        });
+
         $(document).bind('flagGlobalAfterLinkUpdate', function(event, data) {
             if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $('body').hasClass('page-user')){
 
                 if ($(data.link).parents('.event').size()){
-
-                    $(data.link).hide().parents('.event').fadeOut('slow',function(){
+                    $(data.link).hide().parents('.event').fadeOut('fast',function(){
                         $(this).remove();
                         if(!$('.col-main .event').size()){
                             $('.col-main').html("<p>Nothing to show here. Star some upcoming events and they'll show here.</p>");
@@ -61,7 +73,7 @@ var GHH = {
 
         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
                 tip: '#event-staring-tooltip',
-                delay: 2000,
+                delay: 1000,
                 position: 'bottom center',
                 offset: [-20,-2]
                 //layout: '<div><span class="b"></span></div>'
