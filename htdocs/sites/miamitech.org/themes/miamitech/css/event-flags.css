@@ -61,6 +61,7 @@
 
 .view-mc-events-by-dates .flag-events-bookmarks a{
     display: block;
+    position: relative;
     text-indent: -1999px;
     background-repeat: no-repeat;
 }

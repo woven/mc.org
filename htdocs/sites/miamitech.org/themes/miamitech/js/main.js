@@ -61,7 +61,7 @@ var GHH = {
 
         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
                 tip: '#event-staring-tooltip',
-                delay: 1200,
+                delay: 2000,
                 position: 'bottom center',
                 offset: [-20,-2]
                 //layout: '<div><span class="b"></span></div>'
@@ -162,7 +162,7 @@ var GHH = {
 	
 	tooltipLeave: function(){
 	  var api = $(this).data('tooltip');
-    api.hide();
+        api.hide();
 	},
 	
 	tooltips: function() {
