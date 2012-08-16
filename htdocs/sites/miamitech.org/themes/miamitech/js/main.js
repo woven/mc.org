@@ -55,12 +55,15 @@ var GHH = {
         });
 
 
+        $(".flag-events-bookmarks.unknown a.flag-action").click(function(e){
+            e.preventDefault();
+        });
+
         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
                 tip: '#event-staring-tooltip',
-                delay: 750,
+                delay: 1200,
                 position: 'top center',
-                offset: [-5,0],
-                tipClass: 'event-staring-tooltip'
+                offset: [-10,85]
         });
 
     },

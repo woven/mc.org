@@ -104,7 +104,7 @@
  <?php include_once ('inc/page.footer.inc'); ?>
 
   <!-- @todo #event-staring-tooltip from here -->
-  <div id="event-staring-tooltip"> <?php echo l('Sign in','user', array('attributes' => array('class' => "login"))) ?> or <?php echo l('Join now','user/register',array('attributes' => array('class' => "join"))) ?> to save events."</div>
+  <div id="event-staring-tooltip"> <?php echo l('Sign in','user', array('attributes' => array('class' => "login"))) ?> or <?php echo l('Join now','user/register',array('attributes' => array('class' => "join"))) ?> to save events.</div>
 
   <?php if (!empty($overlay)): ?>
   <div id="overlay">

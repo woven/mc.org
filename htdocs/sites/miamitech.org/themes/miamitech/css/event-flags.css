@@ -6,6 +6,35 @@
 }
 
 .event-staring-tooltip,#event-staring-tooltip {
+    position: relative;
+    background-color:#eee;
+    margin: 0;
+    padding:10px;
+    text-align:center;
+    width:200px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -webkit-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+    box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+}
+
+.event-staring-tooltip:after,#event-staring-tooltip:after {
+    position: absolute;
+    display: block;
+    content: '';
+    border-color: #eee transparent transparent transparent;
+    border-style: solid;
+    border-width: 10px;
+    height:0;
+    width:0;
+    position:absolute;
+    bottom:-19px;
+    left:1em;
+}
+
+/*
+.event-staring-tooltip,#event-staring-tooltip {
     margin-bottom: 10px;
     border: 1px solid #F7F2E4;
     background: #F7F7F7;
@@ -20,6 +49,7 @@
     color: #333;
     display: none;
 }
+*/
 
 .view-mc-events-by-dates .flag-events-bookmarks{
     display: block;
@@ -33,6 +63,10 @@
     display: block;
     text-indent: -1999px;
     background-repeat: no-repeat;
+}
+
+.flag-events-bookmarks .flag-throbber{
+    display: none;
 }
 
 .flag-events-bookmarks a{
@@ -50,14 +84,18 @@
     background-image: url("../images/icons/ico-star-default.png");
 }
 
-.flag-events-bookmarks a.unflag-action,
-.flag-events-bookmarks a:active,
-.flag-events-bookmarks.flag-waiting a.flag-action{
-    background-image: url("../images/icons/ico-star-active.png");
-}
-
 .flag-events-bookmarks a:hover{
     background-image: url("../images/icons/ico-star-hover.png");
+}
+
+.flag-events-bookmarks a.unflag-action,
+.flag-events-bookmarks a:active,
+.flag-events-bookmarks.flag-waiting a.flag-action,
+.flag-events-bookmarks a.unflag-action :hover,
+.flag-events-bookmarks a:active :hover,
+.flag-events-bookmarks.flag-waiting a.flag-action :hover
+{
+    background-image: url("../images/icons/ico-star-active.png");
 }
 
 .two-cols .view-header,.two-cols .event-separator{
