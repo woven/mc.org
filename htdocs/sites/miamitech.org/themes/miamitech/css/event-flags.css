@@ -123,6 +123,14 @@
     padding: 10px;
 }
 
+.two-cols .col-right .user_addcal ul li{
+    margin-bottom: 10px;
+}
+
+.two-cols .col-right .user_addcal ul li:last-child{
+    margin-bottom: 0px;
+}
+
 /*
 overide the .quicktabs_tabpage .block .block-title hiding block titles at the user page (specifically for my events).
 */
