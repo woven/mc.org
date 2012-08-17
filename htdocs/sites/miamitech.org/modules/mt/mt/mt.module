@@ -6,6 +6,12 @@
 
 include_once 'mt.features.inc';
 
+function mt_jqmulti_files(){
+  $theme = drupal_get_path("theme","miamitech");
+  return array(
+    $theme."/js/jquery.qtip.min.js"
+  );
+}
 
 function theme_imgplaceholder($gname,$gid){
 

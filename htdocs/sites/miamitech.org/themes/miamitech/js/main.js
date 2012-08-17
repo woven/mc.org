@@ -1,15 +1,16 @@
 /*******************************************************************************
 
-	CSS on Sails Framework
-	Title: Pocketlistings
-	Author: XHTMLized (http://www.xhtmlized.com/)
-	Date: February 2011
+ CSS on Sails Framework
+ Title: Pocketlistings
+ Author: XHTMLized (http://www.xhtmlized.com/)
+ Date: February 2011
 
-*******************************************************************************/
+ *******************************************************************************/
 
 $(document).ready(function() {
 	GHH.init();
 });
+
 $(".node-type-gallery-image .field-gallery a").html("« Back to album");
 $(".node-type-gallery-image .field-gallery").css('display', 'block');
 $(".field-gallery-image").addClass("cursor-pointer");
@@ -40,7 +41,8 @@ var GHH = {
                 if ($(data.link).parents('.event').size()){
                     $(data.link).hide().parents('.event').fadeOut('fast',function(){
                         $(this).remove();
-                        if(!$('.col-main .event').size()){
+
+                        if(!$('.col-main .event:visible').size()){
                             $('.col-main').html("<p>Nothing to show here. Star some upcoming events and they'll show here.</p>");
                         }
                     });
@@ -58,6 +60,7 @@ var GHH = {
             e.preventDefault();
         });
 
+        /*
         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
                 tip: '#event-staring-tooltip',
                 delay: 1250,
@@ -65,7 +68,7 @@ var GHH = {
                 //offset: [-20,-2]
                 //layout: '<div><span class="b"></span></div>'
         }).hover(GHH.tooltipOverStaring, function(){});
-
+         */
     },
 
     tooltipOverStaring: function(){
@@ -202,6 +205,21 @@ var GHH = {
 	},
 	
 	lightbox: function(){
+
+        if(!(/iPhone|iPod/i.test(navigator.userAgent))){
+
+            $("#login-button,a.login").livequery(function(e){
+                $(this).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
+                    $('#login input[name=name]').focus();
+                }});
+            });
+
+            $("#register-button,a.join").colorbox({width:"720", height:"300", inline:true,href:"#register", opacity:0.6, onComplete:function () {
+                $('#register input[name=mail]').focus();
+            }});
+        }
+
+
 		$('a[rel=lightbox]').colorbox({
 			opacity: 0.6,
 			loop: false,
@@ -218,9 +236,7 @@ var GHH = {
 			}
 		});
 		if(!(/iPhone|iPod/i.test(navigator.userAgent))){
-			$("#login-button,a.login").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6, onComplete:function(){ $('#login input[name=name]').focus(); } });
 			$("#anonymous-follow").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
-			$("#register-button,a.join").colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register input[name=mail]').focus(); }});
 			$("#view-pdf").colorbox({width:"830", height:"500", inline:true, href:".filefield-file", opacity: 0.6});
 			$('#block-boxes-join_mc a[href$="/user/register"]').colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register [name=mail]').focus(); }});
 			$("#fb-friends").colorbox({
@@ -255,4 +271,18 @@ function follow_group_comments(uid)
     $('.subscribe').remove();
     window.location = node;
   });
+}
+
+function openColorboxLogin(){
+        $(".ui-tooltip").hide();
+        $.colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
+            $('#login input[name=name]').focus();
+        }});
+}
+
+function openColorboxJoin(){
+    $(".ui-tooltip").hide();
+    $.colorbox({width:"720", height:"300", inline:true,href:"#register", opacity:0.6, onComplete:function () {
+        $('#register input[name=mail]').focus();
+    }});
 }

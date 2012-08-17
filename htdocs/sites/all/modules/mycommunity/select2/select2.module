@@ -1,1 +1,53 @@
 <?php
+
+/*
+ * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
+ * @todo imrpove the speed and logic of auto-complete callback
+ * @todo use the hooks of jqmulti to add the jq1.8 dependecies
+*/
+
+function select2_init(){
+  $path = drupal_get_path("module",'select2');
+  $lib = libraries_get_path("select2");
+
+  /*
+   * add required select2 files
+  */
+  drupal_add_js($lib."/select2.min.js");
+  drupal_add_css($lib."/select2.css");
+
+  /*
+   * add select2 auto-complete behaviour, overrides the current drupal auto-complete
+  */
+  drupal_add_js($path."/select2.js");
+}
+
+
+function select2_menu(){
+  $items = array();
+
+  $items['select2/autocomplete'] = array(
+    'page callback' => '_select2_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+
+  return $items;
+}
+
+
+function _select2_autocomplete(){
+  $url = $_GET['url'];
+  $query = $_GET['term'];
+
+  $fullpath = $url."/".$query;
+
+  /*
+   * detect the current host and remove it automatically
+   */
+  $real_path = str_replace("http://w.miamitech.org/","",$fullpath);
+
+  //change the url to become
+  $_GET['q'] = $real_path;
+  menu_execute_active_handler();
+}
