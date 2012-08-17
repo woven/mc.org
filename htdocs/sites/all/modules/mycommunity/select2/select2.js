@@ -39,7 +39,7 @@
                                 }
                             },
                             results: function(data,page){
-//                                console.log(data);
+                                console.log(data);
 
                                 items = new Array();
 
