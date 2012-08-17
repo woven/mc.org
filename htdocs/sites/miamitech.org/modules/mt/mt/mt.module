@@ -485,7 +485,7 @@ function theme_mt_location_gmap_default($field) {
   $field['format'] = 'nd_location_gmap';
   $field['formatter'] = 'nd_location_gmap_default';
   $node = $field['object'];
-  if(isset($node->location) && (!empty($node->location['street']) || !empty($node->location['city']) || !empty($node->location['postal_code']) || ($node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000' ) ) ){
+  if(isset($node->location) && ((!empty($node->location['street']) || !empty($node->location['city']) || !empty($node->location['province']) || !empty($node->location['postal_code'])) || ($node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000' ) ) ){
     if (!empty($field['object']->location['latitude']) && !empty($field['object']->location['longitude'])) {
 
       // Defaults.
@@ -494,6 +494,12 @@ function theme_mt_location_gmap_default($field) {
       $height = 'default';
       $latitude = $field['object']->location['latitude'];
       $longitude = $field['object']->location['longitude'];
+      if($latitude=='0.000000' && $longitude=='0.000000'){
+        $address = $node->location['street'] . ' ' . $node->location['city'] . ' ' . $node->location['province'] . ' ' . $node->location['postal_code'];
+        $results = mt_event_feed_google_get_georeference($address);
+        $longitude = $results['longitude']; 
+        $latitude = $results['latitude'];
+      }
       $autoclick = FALSE;
 
       // Check format.
@@ -506,7 +512,10 @@ function theme_mt_location_gmap_default($field) {
         $zoom = $formatter['zoom'];
         $autoclick = (isset($formatter['autoclick'])) ? $formatter['autoclick'] : FALSE;
       }
-
+      $is_only_state_provided = empty($node->location['street']) && empty($node->location['city']) && empty($node->location['postal_code']) && !empty($node->location['province']);
+      if($is_only_state_provided){
+        $zoom = '7';
+      }
       return theme('nd_location_gmap', $field, $latitude, $longitude, $width, $height, $zoom, $autoclick);
     }
   }

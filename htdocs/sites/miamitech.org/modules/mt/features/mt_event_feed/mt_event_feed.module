@@ -541,3 +541,19 @@ function mt_event_feed_google_map_call($address){
     return array();
   }
 }
+
+
+
+function mt_event_feed_google_get_georeference($address){
+  $address_encoded = urlencode($address);
+  $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $address_encoded . '&sensor=false');
+  $results = json_decode($json);
+  if($results->status=='OK'){
+    $address_out['latitude'] = $results->results['0']->geometry->location->lat;
+    $address_out['longitude'] = $results->results['0']->geometry->location->lng;;
+    return $address_out;
+  }
+  else {
+    return array();
+  }
+}
