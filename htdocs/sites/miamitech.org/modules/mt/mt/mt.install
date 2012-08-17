@@ -76,3 +76,10 @@ function mt_update_6009(&$sandbox) {
     module_enable(array('jqmulti'));
     variable_set("advagg-enabled",0);
   }
+
+/**
+ * turn on feedapi_mc module
+ */
+function mt_update_6010(&$sandbox) {
+  module_enable(array('feedapi_mc'));
+}
