@@ -60,3 +60,11 @@ function mt_update_6007(&$sandbox) {
 function mt_update_6008(&$sandbox) {
   module_enable(array('mc_deploy'));
 }
+
+/**
+ * enable "jqmulti module" & enable it
+ */
+function mt_update_6009(&$sandbox) {
+  module_enable(array('jqmulti'));
+  variable_set("jqmulti_load_always",1);
+}

@@ -1,8 +1,18 @@
 
+.ui-tooltip-mc{
+    background-color: #ffffff;
+    border-color: #aaaaaa;
+    color: #868686;
+    padding: 5px 10px 5px;
+}
 .view-mc-events-by-dates .event-staring{
     float: right;
     height: 80px;
     padding-top: 22px;
+}
+
+#event-staring-tooltip {
+    display: none;
 }
 
 /*

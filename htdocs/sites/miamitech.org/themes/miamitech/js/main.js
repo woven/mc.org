@@ -1,15 +1,27 @@
 /*******************************************************************************
 
-	CSS on Sails Framework
-	Title: Pocketlistings
-	Author: XHTMLized (http://www.xhtmlized.com/)
-	Date: February 2011
+ CSS on Sails Framework
+ Title: Pocketlistings
+ Author: XHTMLized (http://www.xhtmlized.com/)
+ Date: February 2011
 
-*******************************************************************************/
+ *******************************************************************************/
+Drupal.behaviors.defaultJoinLoginColorbox = function (context) {
+    if(!(/iPhone|iPod/i.test(navigator.userAgent))){
+        $("#login-button,a.login",context).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
+            $('#login input[name=name]').focus();
+        }});
+
+        $("#register-button,a.join",context).colorbox({width:"720", height:"300", inline:true, href:"#register", opacity:0.6, onComplete:function () {
+            $('#register input[name=mail]').focus();
+        }});
+    }
+};
 
 $(document).ready(function() {
 	GHH.init();
 });
+
 $(".node-type-gallery-image .field-gallery a").html("« Back to album");
 $(".node-type-gallery-image .field-gallery").css('display', 'block');
 $(".field-gallery-image").addClass("cursor-pointer");
@@ -58,6 +70,7 @@ var GHH = {
             e.preventDefault();
         });
 
+        /*
         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
                 tip: '#event-staring-tooltip',
                 delay: 1250,
@@ -65,7 +78,7 @@ var GHH = {
                 //offset: [-20,-2]
                 //layout: '<div><span class="b"></span></div>'
         }).hover(GHH.tooltipOverStaring, function(){});
-
+         */
     },
 
     tooltipOverStaring: function(){
@@ -218,9 +231,7 @@ var GHH = {
 			}
 		});
 		if(!(/iPhone|iPod/i.test(navigator.userAgent))){
-			$("#login-button,a.login").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6, onComplete:function(){ $('#login input[name=name]').focus(); } });
 			$("#anonymous-follow").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
-			$("#register-button,a.join").colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register input[name=mail]').focus(); }});
 			$("#view-pdf").colorbox({width:"830", height:"500", inline:true, href:".filefield-file", opacity: 0.6});
 			$('#block-boxes-join_mc a[href$="/user/register"]').colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register [name=mail]').focus(); }});
 			$("#fb-friends").colorbox({
