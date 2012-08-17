@@ -6,6 +6,7 @@
  Date: February 2011
 
  *******************************************************************************/
+(function($){
 Drupal.behaviors.defaultJoinLoginColorbox = function (context) {
     if(!(/iPhone|iPod/i.test(navigator.userAgent))){
         $("#login-button,a.login",context).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
@@ -17,6 +18,7 @@ Drupal.behaviors.defaultJoinLoginColorbox = function (context) {
         }});
     }
 };
+})(jQuery);
 
 $(document).ready(function() {
 	GHH.init();
@@ -52,7 +54,8 @@ var GHH = {
                 if ($(data.link).parents('.event').size()){
                     $(data.link).hide().parents('.event').fadeOut('fast',function(){
                         $(this).remove();
-                        if(!$('.col-main .event').size()){
+
+                        if(!$('.col-main .event:visible').size()){
                             $('.col-main').html("<p>Nothing to show here. Star some upcoming events and they'll show here.</p>");
                         }
                     });
