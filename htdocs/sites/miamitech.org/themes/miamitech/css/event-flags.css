@@ -91,10 +91,8 @@
 }
 
 .flag-events-bookmarks a.unflag-action,
-.flag-events-bookmarks a:active,
 .flag-events-bookmarks.flag-waiting a.flag-action,
 .flag-events-bookmarks a.unflag-action :hover,
-.flag-events-bookmarks a:active :hover,
 .flag-events-bookmarks.flag-waiting a.flag-action :hover
 {
     background-image: url("../images/icons/ico-star-active.png");
