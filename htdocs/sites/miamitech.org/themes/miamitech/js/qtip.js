@@ -8,7 +8,7 @@
                         viewport: $(window)
                       },
             show: {solo: true},
-            hide: {event: "click mouseleave",delay: 1000,fixed:true},
+            hide: {event: 'click',delay: 1000,fixed:true},
             style: {
                 classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
             }

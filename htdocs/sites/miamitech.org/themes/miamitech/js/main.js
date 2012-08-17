@@ -7,19 +7,6 @@
 
  *******************************************************************************/
 
-Drupal.behaviors.defaultJoinLoginColorbox = function (context) {
-    if(!(/iPhone|iPod/i.test(navigator.userAgent))){
-
-        $("#login-button,a.login",context).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
-            $('#login input[name=name]').focus();
-        }});
-
-        $("#register-button,a.join",context).colorbox({width:"720", height:"300", inline:true, href:"#register", opacity:0.6, onComplete:function () {
-            $('#register input[name=mail]').focus();
-        }});
-    }
-};
-
 $(document).ready(function() {
 	GHH.init();
 });
@@ -40,7 +27,7 @@ var GHH = {
 		GHH.tabs();
 		GHH.tooltips();
 		GHH.overlay();
-		//GHH.lightbox();
+		GHH.lightbox();
 		GHH.newsletterPlaceholder();
 		GHH.followButton();
         GHH.starJoin();
@@ -218,6 +205,21 @@ var GHH = {
 	},
 	
 	lightbox: function(){
+
+        if(!(/iPhone|iPod/i.test(navigator.userAgent))){
+
+            $("#login-button,a.login").livequery(function(e){
+                $(this).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
+                    $('#login input[name=name]').focus();
+                }});
+            });
+
+            $("#register-button,a.join").colorbox({width:"720", height:"300", inline:true,href:"#register", opacity:0.6, onComplete:function () {
+                $('#register input[name=mail]').focus();
+            }});
+        }
+
+
 		$('a[rel=lightbox]').colorbox({
 			opacity: 0.6,
 			loop: false,
@@ -269,4 +271,18 @@ function follow_group_comments(uid)
     $('.subscribe').remove();
     window.location = node;
   });
+}
+
+function openColorboxLogin(){
+        $(".ui-tooltip").hide();
+        $.colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
+            $('#login input[name=name]').focus();
+        }});
+}
+
+function openColorboxJoin(){
+    $(".ui-tooltip").hide();
+    $.colorbox({width:"720", height:"300", inline:true,href:"#register", opacity:0.6, onComplete:function () {
+        $('#register input[name=mail]').focus();
+    }});
 }
