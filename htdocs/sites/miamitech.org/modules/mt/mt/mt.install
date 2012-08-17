@@ -60,3 +60,26 @@ function mt_update_6007(&$sandbox) {
 function mt_update_6008(&$sandbox) {
   module_enable(array('mc_deploy'));
 }
+
+/**
+ * enable "jqmulti module" & enable it
+ */
+function mt_update_6009(&$sandbox) {
+  module_enable(array('jqmulti'));
+  variable_set("jqmulti_load_always",1);
+}
+
+  /**
+   * turn off advagg module
+   */
+  function mt_update_6010(&$sandbox) {
+    module_enable(array('jqmulti'));
+    variable_set("advagg-enabled",0);
+  }
+
+/**
+ * turn on feedapi_mc module
+ */
+function mt_update_6010(&$sandbox) {
+  module_enable(array('feedapi_mc'));
+}

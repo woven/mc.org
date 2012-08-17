@@ -381,6 +381,22 @@ function _mc_api_get_formatted_time($time, $printAMPM = true){
 }
 
 
+function mc_api_format_whole_day_event($start, $end = NULL, $occurring = NULL){
+  if($occurring){
+    $prefix_start = '';
+    $prefix_end = '-';
+  }
+  else {
+    $prefix_start = '';
+    $prefix_end = '-';
+  }
+  if (!$end){
+    // start date only
+    return $prefix_start . date('D', $start);
+  }
+  return $prefix_start . date('D', $start) . $prefix_end . date('D', $end);
+}
+
 /**
  * Return a date with a specific format time.
  */
@@ -398,15 +414,21 @@ function mc_api_format_time($start, $end = NULL, $occurring = NULL){
     // start date only
     return $prefix_start . _mc_api_get_formatted_time($start, true);
   }
-    
-  if (date('a', $start) == date('a', $end)){
-    // do not print AM/PM in start date
-    $startDate = _mc_api_get_formatted_time($start, false);
-  }else{
-    $startDate = _mc_api_get_formatted_time($start, true);
+  if(date('z', $start)==date('z', $end)){
+    if (date('a', $start) == date('a', $end)){
+      // do not print AM/PM in start date
+      $startDate = _mc_api_get_formatted_time($start, false);
+    }else{
+      $startDate = _mc_api_get_formatted_time($start, true);
+    }
+    $endDate = _mc_api_get_formatted_time($end, true);
   }
-  $endDate = _mc_api_get_formatted_time($end, true);
-  
+  else {
+    $startDate = date('D', $start) . ' ' . _mc_api_get_formatted_time($start, true) . ' ';
+    $endDate = ' ' . date('D', $end) . ' ' . _mc_api_get_formatted_time($end, true);
+  }
+
+
   return $prefix_start . $startDate . $prefix_end . $endDate;
   
 }
@@ -431,4 +453,20 @@ function _mc_api_get_image_tag($image, $preset, $title){
 function _mc_api_get_vid_from_name($name){
   $vid = db_result(db_query("SELECT vid FROM {vocabulary} v WHERE v.module = '%s'", $name));
   return $vid;
+}
+
+function _mc_api_format_location($location){
+  $location_output = $location['name'];
+  if(!empty($location['street']) && !empty($location['city']) && !empty($location['province']) && !empty($location['postal_code'])){
+    $location_output .= ' (';
+    $location_output .= !empty($location['street'])? $location['street'] :'';
+    $location_output .= (!empty($location['street']) && (!empty($location['city']) || !empty($location['province']) || !empty($location['postal_code'])))? ', ' : '';
+    $location_output .= !empty($location['city'])? $location['city'] :'';
+    $location_output .= (!empty($location['city']) && (!empty($location['province']) || !empty($location['postal_code'])))? ', ' : '';
+    $location_output .= !empty($location['province'])? $location['province'] :'';
+    $location_output .= (!empty($location['province']) && !empty($location['postal_code']))? ', ' : '';
+    $location_output .= !empty($location['postal_code'])? $location['postal_code'] :'';
+    $location_output .= ')';
+  }
+  return $location_output;
 }

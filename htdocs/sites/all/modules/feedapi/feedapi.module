@@ -1244,9 +1244,17 @@ function _feedapi_invoke_refresh(&$feed, $param) {
     foreach ($feed->processors as $processor) {
       $unique = module_invoke($processor, 'feedapi_item', 'unique', $item, $feed->nid, $settings['processors'][$processor]);
       if ($unique === FALSE || is_numeric($unique)) {
-        if ($settings['update_existing'] == TRUE) {
-          module_invoke($processor, 'feedapi_item', 'update', $item, $feed->nid, $settings['processors'][$processor], $unique);
-          $item->is_updated = TRUE;
+        if(function_exists('_feedapi_mc_is_updatable') ){
+          if ($settings['update_existing'] == TRUE && _feedapi_mc_is_updatable($item->options->guid)) {
+            module_invoke($processor, 'feedapi_item', 'update', $item, $feed->nid, $settings['processors'][$processor], $unique);
+            $item->is_updated = TRUE;
+          }
+        }
+        else{
+          if ($settings['update_existing'] == TRUE) {
+            module_invoke($processor, 'feedapi_item', 'update', $item, $feed->nid, $settings['processors'][$processor], $unique);
+            $item->is_updated = TRUE;
+          }
         }
       }
       else {

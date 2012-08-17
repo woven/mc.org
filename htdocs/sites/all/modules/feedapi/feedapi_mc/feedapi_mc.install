@@ -1,0 +1,30 @@
+<?php
+
+function feedapi_mc_install() {
+  $ret = array();
+  db_add_field($ret, 'feedapi_node_item', 'updatable', array('type' => 'int', 'size' => 'tiny', 'default' => 1));
+  db_add_field($ret, 'feedapi_node_item', 'update_date', array('type' => 'int'));
+  return $ret;
+}
+
+function feedapi_mc_schema_alter(&$schema) {
+  $schema['feedapi_node_item']['fields']['updatable'] = array(
+    'type' => 'int',
+    'default' => 1,
+    'size' => 'tiny',
+    'description' => 'Indicates whether a node should be updated from the feed or not.',
+  );
+  $schema['feedapi_node_item']['fields']['update_date'] = array(
+    'type' => 'int',
+    'default' => 1,
+    'size' => 'tiny',
+    'description' => 'The date when the node was manually edited',
+  );
+}
+
+function feedapi_mc_uninstall() {
+  $ret = array();
+  db_drop_field($ret, 'feedapi_node_item', 'updatable');
+  db_drop_field($ret, 'feedapi_node_item', 'update_date');
+  return $ret;
+}

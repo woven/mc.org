@@ -1,0 +1,17 @@
+<?php
+
+require_once ( dirname(__FILE__) . '/mc_og.inc');
+
+function mc_og_form_alter(&$form, &$form_state, $form_id) {
+  // Add audience selection to node forms
+  if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form') {
+    $node = $form['#node'];
+    if (og_is_group_post_type($node->type)) {
+      _mc_og_form_add_og_audience($form, $form_state);
+    }
+  }
+}
+
+function mc_og_perm(){
+  return array('post to all the groups');
+}

@@ -6,6 +6,12 @@
 
 include_once 'mt.features.inc';
 
+function mt_jqmulti_files(){
+  $theme = drupal_get_path("theme","miamitech");
+  return array(
+    $theme."/js/jquery.qtip.min.js"
+  );
+}
 
 function theme_imgplaceholder($gname,$gid){
 
@@ -233,6 +239,36 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
       ),
     ),
 
+    'mt_add_myevents' => array(
+      'title' => t('Add To My events'),
+      'exclude' => array(
+        'group' => 0,
+        'link' => 0,
+        'webform' => 0,
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_THEME,
+      'status' => DS_FIELD_STATUS_DEFAULT,
+      'properties' => array(
+        'css-class' => 'field-add-myevents',
+        'formatters' => array(
+          'myevents_flag_link' => t('Default'),
+        ),
+        'token' => 0,
+      ),
+    ),
 
     'mt_add_group_rss' => array(
       'title' => t('Add Group to Calendar RSS'),
@@ -329,14 +365,7 @@ function mt_add_ical($node){
 function mt_add_gcal($node){
   $title = urlencode($node->title);
   $description = urlencode(strip_tags($node->content['body']['#value']));
-  $location_parts = array(
-    $node->location['name'],
-    $node->location['street'],
-    $node->location['city']. ' ' .
-    $node->location['province']. ' ' .
-    $node->location['postal_code'],
-  );
-  $location = urlencode(implode(', ', $location_parts));
+  $location = _mc_api_format_location($node->location);
   $start_date = event_format_date($node->event['start_utc'], 'custom', "Ymd\THis\Z");
   $end_date = event_format_date($node->event['end_utc'], 'custom', "Ymd\THis\Z");
   return '<span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="http://www.google.com/calendar/render?action=TEMPLATE&text=' . $title . '&details=' . $description . '&dates=' . $start_date .'/' . $end_date . '&location='. $location  .'">Just this event (gCal)</a>';
@@ -357,6 +386,7 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 
   if($form_id=='event_node_form'){
     if(isset($form['field_online_event'])){
+      array_unshift($form['#submit'], '_mt_event_submit_form');
       $form['locations']['0']['field_online_event'] = $form['field_online_event'];
       $form['locations'][0]['field_online_event']['#weight'] = '-99';
       unset($form['field_online_event']);
@@ -409,6 +439,10 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 
 }
 
+function _mt_event_submit_form($form, &$form_state) {
+  $form_state['values']['field_online_event'] = $form_state['values']['locations'][0]['field_online_event'];
+  unset($form_state['values']['locations'][0]['field_online_event']);
+}
 
 function _schema_meta_date($ts,$itemprop = 'startDate'){
   $iso_start = date('c',$ts);
@@ -457,7 +491,7 @@ function theme_mt_location_gmap_default($field) {
   $field['format'] = 'nd_location_gmap';
   $field['formatter'] = 'nd_location_gmap_default';
   $node = $field['object'];
-  if(isset($node->location) && (!empty($node->location['street']) || !empty($node->location['city']) || !empty($node->location['postal_code']) || ($node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000' ) ) ){
+  if(isset($node->location) && ((!empty($node->location['street']) || !empty($node->location['city']) || !empty($node->location['province']) || !empty($node->location['postal_code'])) || ($node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000' ) ) ){
     if (!empty($field['object']->location['latitude']) && !empty($field['object']->location['longitude'])) {
 
       // Defaults.
@@ -466,6 +500,12 @@ function theme_mt_location_gmap_default($field) {
       $height = 'default';
       $latitude = $field['object']->location['latitude'];
       $longitude = $field['object']->location['longitude'];
+      if($latitude=='0.000000' && $longitude=='0.000000'){
+        $address = $node->location['street'] . ' ' . $node->location['city'] . ' ' . $node->location['province'] . ' ' . $node->location['postal_code'];
+        $results = mt_event_feed_google_get_georeference($address);
+        $longitude = $results['longitude']; 
+        $latitude = $results['latitude'];
+      }
       $autoclick = FALSE;
 
       // Check format.
@@ -478,7 +518,10 @@ function theme_mt_location_gmap_default($field) {
         $zoom = $formatter['zoom'];
         $autoclick = (isset($formatter['autoclick'])) ? $formatter['autoclick'] : FALSE;
       }
-
+      $is_only_state_provided = empty($node->location['street']) && empty($node->location['city']) && empty($node->location['postal_code']) && !empty($node->location['province']);
+      if($is_only_state_provided){
+        $zoom = '7';
+      }
       return theme('nd_location_gmap', $field, $latitude, $longitude, $width, $height, $zoom, $autoclick);
     }
   }
@@ -532,8 +575,22 @@ function mt_theme() {
   'mt_location_directions' => array(
       'arguments' => array('field' => NULL),
     ),
+   'myevents_flag_link' => array(
+     'arguments' => array('field' => NULL),
+   )
   );
   return $theme_functions;
+}
+
+function theme_myevents_flag_link($field){
+  $node = $field['object'];
+  global $user;
+
+  if($user->uid){
+    return flag_create_link('events_bookmarks', $node->nid);
+  }else{
+    return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
+  }
 }
 
 function mt_init(){
@@ -551,20 +608,6 @@ function mt_menu_alter(&$items) {
   $items['node/%views_arg/by_subject']['access arguments']['0']['1']['0']['4']='4';
 
   unset($items['node/%views_arg/by_subject']['access arguments']);
-  $items['node/add/gallery']['access callback'] = '_mt_node_permissions';
-  $items['node/add/article']['access callback'] = '_mt_node_permissions';
-  $items['node/add/audio']['access callback'] = '_mt_node_permissions';
-  $items['node/add/file']['access callback'] = '_mt_node_permissions';
-  $items['node/add/forum']['access callback'] = '_mt_node_permissions';
-  $items['node/add/link']['access callback'] = '_mt_node_permissions';
-  $items['node/add/nnews']['access callback'] = '_mt_node_permissions'; 
-  $items['node/add/npage']['access callback'] = '_mt_node_permissions';
-  $items['node/add/gallery-image']['access callback'] = '_mt_node_permissions';
-  $items['node/add/place']['access callback'] = '_mt_node_permissions';
-  $items['node/add/video']['access callback'] = '_mt_node_permissions';
-  $items['node/add/webform']['access callback'] = '_mt_node_permissions';
-  
-  $items['node/%node/edit']['access callback'] = '_mt_access_node_edit'; 
   $items['admin/content/node']['access arguments'] =  array('mt admin nodes');
 }
 

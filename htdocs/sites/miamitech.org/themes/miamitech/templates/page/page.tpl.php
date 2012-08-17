@@ -101,8 +101,13 @@
   </div><!--/#limiter-->
   </div><!--/#page-->
 
- <?php include_once ('inc/page.footer.inc'); ?> 
-  
+ <?php include_once ('inc/page.footer.inc'); ?>
+
+  <!-- @todo #event-staring-tooltip from here -->
+  <div id="event-staring-tooltip">
+      <?php echo l('Sign in','user', array('attributes' => array('class' => "login","onclick"=>"openColorboxLogin();return false;"))) ?> or <?php echo l('join now','user/register',array('attributes' => array('class' => "join","onclick"=>"openColorboxJoin();return false;"))) ?> to save events.
+  </div>
+
   <?php if (!empty($overlay)): ?>
   <div id="overlay">
     <?php print $overlay ?>

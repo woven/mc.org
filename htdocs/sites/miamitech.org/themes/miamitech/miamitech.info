@@ -22,11 +22,14 @@ regions[overlay] = Overlay
 
 ; Scripts
 scripts[] = "js/jcarousel/lib/jquery.jcarousel.js"
-scripts[] = "js/main.js"
+scripts[] = "js/jquery.livequery.js"
 scripts[] = "js/jquery.tools.min.js"
+scripts[] = "jquery.qtip.min.js"
+scripts[] = "js/main.js"
 scripts[] = "js/custom.js"
 scripts[] = "js/jquery.elastic.source.js"
 scripts[] = "js/elastic.js"
+scripts[] = "js/qtip.js"
 
 ; Stylesheets
 stylesheets[all][] = "system-menus.css"
@@ -40,10 +43,13 @@ stylesheets[screen][] = "css/custom.css"
 stylesheets[screen][] = "css/fieldset.css"
 stylesheets[screen][] = "css/custom-less.css"
 stylesheets[screen][] = "css/mt.css"
+stylesheets[screen][] = "css/jquery.qtip.min.css"
 stylesheets[screen][] = "js/colorbox/colorbox.css"
+
 stylesheets[all][] = "views_gallery.css"
 stylesheets[screen][] = "css/buttons.css"
 stylesheets[screen][] = "css/form-confirm.css"
+stylesheets[screen][] = "css/event-flags.css"
 
 ;disable core css files
 stylesheets[all][] = "user.css"

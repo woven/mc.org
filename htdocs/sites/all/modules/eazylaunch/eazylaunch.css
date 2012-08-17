@@ -1,0 +1,18 @@
+/* $Id: eazylaunch.css,v 1.1.2.2 2010/08/04 19:52:13 tdway Exp $ */ 
+#eazylaunch-input {width:100%;}
+#eazylaunch-div h2 {font-size:20px}
+#eazylaunch-desc {font-size: 11px; color: #999}
+#el-wrap #eazylaunch-div {width: 30%;
+  top: 30px;
+  position: fixed;
+  left: 35%;
+  z-index: 10;
+  background-color: #fff;
+  padding:20px;
+  border:2px solid #bbb;
+  display:none
+}
+
+#admin-toolbar #eazylaunch-input {background:#fff !important;color:#222 !important;padding:2px}
+
+.ac_results li {font-size:11px;list-style:none}

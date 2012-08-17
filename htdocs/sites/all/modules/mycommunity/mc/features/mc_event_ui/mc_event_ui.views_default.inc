@@ -27,6 +27,51 @@ function mc_event_ui_views_default_views() {
     ),
   ));
   $handler->override_option('fields', array(
+    'phpcode_5' => array(
+      'label' => 'flag/staring link',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php 
+global $user;
+if(function_exists(\'flag_create_link\')){
+if($user->uid){
+    print flag_create_link(\'events_bookmarks\', $data->nid);
+}else{
+    print \'<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Star</a></span>\';
+}
+}
+?>',
+      'exclude' => 0,
+      'id' => 'phpcode_5',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'path' => array(
       'label' => 'Event Path',
       'alter' => array(
@@ -1156,37 +1201,7 @@ echo $hash;
     'type' => 'none',
   ));
   $handler->override_option('cache', array(
-    'type' => 'views_content_cache',
-    'keys' => array(
-      'comment' => array(
-        'changed' => 0,
-      ),
-      'node' => array(
-        'event' => 'event',
-        'gallery' => 0,
-        'article' => 0,
-        'audio' => 0,
-        'event_feed' => 0,
-        'file' => 0,
-        'forum' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'npage' => 0,
-        'gallery_image' => 0,
-        'place' => 0,
-        'video' => 0,
-        'webform' => 0,
-      ),
-      'og' => array(
-        'current' => 0,
-        'user' => 0,
-      ),
-    ),
-    'results_min_lifespan' => '-1',
-    'results_max_lifespan' => '1800',
-    'output_min_lifespan' => '-1',
-    'output_max_lifespan' => '-1',
+    'type' => 'none',
   ));
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
@@ -1216,6 +1231,12 @@ echo $hash;
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
+      'phpcode_5' => array(
+        'element_type' => 'div',
+        'class' => 'event-staring',
+        'label_element_type' => '',
+        'label_class' => '',
+      ),
       'nothing_2' => array(
         'element_type' => 'div',
         'class' => 'field-view-image',

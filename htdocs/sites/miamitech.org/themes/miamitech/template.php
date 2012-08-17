@@ -146,18 +146,18 @@ function miamitech_nd_location_address($field) {
     unset($address['street']);
     unset($address['postal_code']);
   }
-  if(empty($address)){
+  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
     $has_address = $field['object']->location['name'] && $field['object']->location['street']
       && $field['object']->location['city'] && $field['object']->location['province'];
-    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'];
+    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'] && $field['object']->location['latitude']!='0.000000' && $field['object']->location['longitude']!='0.000000';
     if(!$has_address && $has_lat_and_lon){
       $parts = mt_event_feed_reverse_getAddressParts($field['object']->locations['0']['latitude'], $field['object']->locations['0']['longitude']);
       $address['city'] = $parts['city'];
-      $address['state'] = $parts['state'];
+      $address['province'] = $parts['state'];
     }
   }
 
-  if(empty($address)){
+  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
      return '<div class="no-location"> A location wasn\'t provided.</div>';
   }
 
@@ -474,18 +474,22 @@ function miamitech_pager($tags = array(), $limit = 10, $element = 0, $parameters
 
 
 function miamitech_boxes_box($block) {
-  $output = "<div id='boxes-box-" . $block['delta'] . "' class='boxes-box" . (!empty($block['editing']) ? ' boxes-box-editing' : '') . "'>";
-  $output .= $block['content'];
-  if (!empty($block['controls'])) {
-    $output .= '<div class="boxes-box-controls">';
-    $output .= $block['controls'];
-    $output .= '</div>';
+	if(!empty($block['content'])){
+	  $output = "<div id='boxes-box-" . $block['delta'] . "' class='boxes-box" . (!empty($block['editing']) ? ' boxes-box-editing' : '') . "'>";
+	  $output .= $block['content'];
+	  if (!empty($block['controls'])) {
+	    $output .= '<div class="boxes-box-controls">';
+	    $output .= $block['controls'];
+	    $output .= '</div>';
+	  }
+	  if (!empty($block['editing'])) {
+	    $output .= '<div class="box-editor">' . $block['editing'] . '</div>';
+	  }
+	  $output .= '</div>';
+	  return $output;
+  }else{
+  	  return;
   }
-  if (!empty($block['editing'])) {
-    $output .= '<div class="box-editor">' . $block['editing'] . '</div>';
-  }
-  $output .= '</div>';
-  return $output;
 }
 
 
@@ -565,7 +569,7 @@ function miamitech_nd_location_gmap($field, $latitude, $longitude, $width, $heig
       'longitude' => $longitude,
       'text' => $bubble_content,
       'autoclick' => $autoclick,
-      'link' => 'http://maps.google.com/?q=' . theme('nd_location_address', $field),
+      'link' => 'http://maps.google.com/?q=' . strip_tags(theme('nd_location_address', $field)),
     );
   }
 
