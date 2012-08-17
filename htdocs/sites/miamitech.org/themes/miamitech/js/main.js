@@ -6,9 +6,10 @@
  Date: February 2011
 
  *******************************************************************************/
-(function($){
+
 Drupal.behaviors.defaultJoinLoginColorbox = function (context) {
     if(!(/iPhone|iPod/i.test(navigator.userAgent))){
+
         $("#login-button,a.login",context).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
             $('#login input[name=name]').focus();
         }});
@@ -18,7 +19,6 @@ Drupal.behaviors.defaultJoinLoginColorbox = function (context) {
         }});
     }
 };
-})(jQuery);
 
 $(document).ready(function() {
 	GHH.init();
@@ -40,7 +40,7 @@ var GHH = {
 		GHH.tabs();
 		GHH.tooltips();
 		GHH.overlay();
-		GHH.lightbox();
+		//GHH.lightbox();
 		GHH.newsletterPlaceholder();
 		GHH.followButton();
         GHH.starJoin();
