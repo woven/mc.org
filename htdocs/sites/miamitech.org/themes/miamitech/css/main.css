@@ -2467,7 +2467,6 @@ span.gcal-ico {
   text-indent: -99999px;
   height: 16px;
   width: 15px;
-  margin-top: -2px;
 }
 
 span.ical-ico {
@@ -2476,7 +2475,6 @@ span.ical-ico {
   text-indent: -99999px;
   height: 16px;
   width: 15px;
-  margin-top: -2px;
 }
 
 span.ical-group-ico {
@@ -2485,7 +2483,6 @@ span.ical-group-ico {
   text-indent: -99999px;
   height: 16px;
   width: 15px;
-  margin-top: -2px;
 }
 
 span.rss-group-ico {
@@ -2494,7 +2491,6 @@ span.rss-group-ico {
   text-indent: -99999px;
   height: 14px;
   width: 14px;
-  margin-top: -2px;
 }
 
 a.ical-link {
