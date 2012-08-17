@@ -83,3 +83,12 @@ function mt_update_6009(&$sandbox) {
 function mt_update_6011(&$sandbox) {
   module_enable(array('feedapi_mc'));
 }
+
+/**
+ * removeadvagg-enabled and enable mc_og
+ */
+function mt_update_6012(&$sandbox) {
+  variable_del("advagg-enabled");
+  variable_set("advagg_enabled",0);
+  module_enable(array('mc_og'));
+}
