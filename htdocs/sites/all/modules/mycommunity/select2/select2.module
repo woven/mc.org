@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
+ * @todo imrpove the speed and logic of auto-complete callback
+*/
+
 function select2_init(){
   $path = drupal_get_path("module",'select2');
   $lib = libraries_get_path("select2");
@@ -12,7 +17,6 @@ function select2_init(){
 
   /*
    * add select2 auto-complete behaviour, overrides the current drupal auto-complete
-   * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
    */
   drupal_add_js($path."/select2.js");
 }
