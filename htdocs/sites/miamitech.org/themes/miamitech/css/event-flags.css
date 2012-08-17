@@ -64,6 +64,7 @@
     position: relative;
     text-indent: -1999px;
     background-repeat: no-repeat;
+    line-height: 16px;
 }
 
 .flag-events-bookmarks .flag-throbber{
@@ -121,7 +122,6 @@
     -moz-border-radius: 6px;
     border-radius: 6px;
     behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
-    border-color: #FED064;
 }
 
 .two-cols .col-right .user_addcal{
@@ -147,4 +147,8 @@ overide the .quicktabs_tabpage .block .block-title hiding block titles at the us
 
 .page-user .flag-events-bookmarks a:hover{
     background-image: url("../images/icons/ico-delete.png");
+}
+
+.page-user #page .block-content .block-content{
+    margin: 5px;
 }

@@ -33,20 +33,6 @@ var GHH = {
 	},
 
     starJoin: function(){
-        //$(".flag-events-bookmarks.unknown a.flag-action").colorbox({width:"300", height:"300", inline:true, href:"#block-boxes-event_staring_tooltip", opacity: 0.6, onComplete:function(){ }});
-
-        $(document).bind('flagGlobalBeforeLinkUpdate', function(event, data) {
-            console.log(data);
-            if(data.flagName == "events_bookmarks"){
-                if(data.flagStatus == "unflagged"){
-                    $(data.link).find("a").text("Save to my events");
-                }else{
-                    $(data.link).find("a").text("Remove from my events");
-                }
-
-
-            }
-        });
 
         $(document).bind('flagGlobalAfterLinkUpdate', function(event, data) {
             if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $('body').hasClass('page-user')){
@@ -67,18 +53,26 @@ var GHH = {
         });
 
 
+
         $(".flag-events-bookmarks.unknown a.flag-action").click(function(e){
             e.preventDefault();
         });
 
         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
                 tip: '#event-staring-tooltip',
-                delay: 1000,
-                position: 'bottom center',
-                offset: [-20,-2]
+                delay: 1250,
+                position: 'bottom center'
+                //offset: [-20,-2]
                 //layout: '<div><span class="b"></span></div>'
-        });
+        }).hover(GHH.tooltipOverStaring, function(){});
 
+    },
+
+    tooltipOverStaring: function(){
+        var api = $(this).data('tooltip');
+        if(!api.isShown(true)){
+            api.show();
+        }
     },
 
 	likeButton: function(){
@@ -176,6 +170,11 @@ var GHH = {
 	  var api = $(this).data('tooltip');
         api.hide();
 	},
+
+    tooltipLeaveSlow: function(){
+        var api = $(this).data('tooltip');
+        api.hide(1000);
+    },
 	
 	tooltips: function() {
 	  $('ul a[title]').each(function(i, e){
