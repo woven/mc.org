@@ -2,3 +2,5 @@ name = Select2
 description = "Replace the built in Drupal autocomplete with Select2 liberary"
 package = MC.org
 core = 6.x
+dependencies[] = jquery_ui
+dependencies[] = jqmulti
