@@ -13,10 +13,12 @@
 
                 ac.width("150px");
                 ac.removeAttr("disabled");
+                ac.val(input.val());
 
-                console.log(ac.attr("id")+":"+ac_url);
+                //console.log(ac.attr("id")+":"+ac_url);
 
                 ac.select2({
+                        dropdownCssClass: "drupal-autocomplete-select2",
                         placeholder: "Search for a movie",
                         minimumInputLength: 1,
                         allowClear: true,
@@ -38,10 +40,10 @@
                                     items.push({id: key,text: data[key]})
                                 }
 
+                                items.push({id: "new",text: "Add New NODE"});
+
                                 return {results: items };
                             }
-                            //formatResult: drupalformatresult,
-                            //formatSelection: drupalFormatSelection
                         }
                 });
 
