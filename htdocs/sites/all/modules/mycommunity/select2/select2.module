@@ -35,10 +35,10 @@ function select2_menu(){
     'type' => MENU_SUGGESTED_ITEM,
   );
 
-  $items['select2/%ctools_js/add/place'] = array(
-    'title' => 'Login',
+  $items['select2/%ctools_js/add/%'] = array(
+    //'title' => 'Login',
     'page callback' => 'modal_forms_login',
-    'page arguments' => array(1),
+    'page arguments' => array(1,3),
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -66,6 +66,9 @@ function _select2_autocomplete(){
 
 function _add_node_form(){
   static $already_added = FALSE;
+
+  //adding bootstrap js
+  //ctools_add_css('bootstrap.min', 'select2', '/');
 
   // Include the CTools tools that we need.
   ctools_include('ajax');
@@ -118,20 +121,29 @@ function modal_forms_login($js = NULL) {
     'args' => array($node)
   );
 
-
   $output = ctools_modal_form_wrapper('place_node_form', $form_state);
+
   if (!empty($form_state['executed'])) {
-    // We'll just overwrite the form output if it was successful.
+
+    //initiate the output ajax command array
     $output = array();
+
+    //the new node that has been created
+    $nid = $form_state['nid'];
+
+    //resturn the new node id back to the select list
+    if($nid){
+      // @todo change the selectlist list to the newly created content type.
+    }
+
+
+    // We'll just overwrite the form output if it was successful.
     ctools_add_js('ajax-responder');
     $output[] = ctools_modal_command_dismiss(t('Login Success'));
-    if (isset($_GET['destination'])) {
-      $output[] = ctools_ajax_command_redirect($_GET['destination']);
-    }
-    else {
-      $output[] = ctools_ajax_command_reload();
-    }
+
   }
+
+  //render output array/string to back to drupal
   print ctools_ajax_render($output);
   exit;
 }

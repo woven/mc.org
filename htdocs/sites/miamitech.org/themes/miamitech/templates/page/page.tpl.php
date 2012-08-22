@@ -29,10 +29,6 @@
   </div></div>
 
   <div id='page' class="<?php print $page_classes; ?>" <?php print drupal_attributes($variables['page_attr']) ?>>
-    <a href="/select2/ajax/add/place" class="ctools-use-modal ctools-use-ajax">TEST MODEL</a>
-    <?php
-      //echo ctools_modal_text_button(t('Modal Login'), 'modal_forms/nojs/user/login', t('Login via modal'),  'ctools-modal-modal-popup-small');
-    ?>
 
     <div class='limiter clear-block'>
 
@@ -68,6 +64,8 @@
         <?php if(!empty($content_top) || !empty($content) || !empty($content_bottom)): ?>
         <div id="content-wrapper" class="block-content block clear-block">
           <div id='content' class='clear-block block-content'>
+            <a href="/select2/ajax/add/place" class="ctools-use-modal ctools-use-ajax">TEST MODEL</a>
+
             <?php if ($content_top) : ?>
               <div id="content-top"><?php print $content_top ?></div>
             <?php endif; ?>
@@ -118,5 +116,5 @@
     <?php print $overlay ?>
   </div>
   <?php endif;?>
- 
+
   <?php include_once ('inc/page.closure.inc'); ?>

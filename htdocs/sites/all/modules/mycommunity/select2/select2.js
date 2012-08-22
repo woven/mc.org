@@ -1,4 +1,36 @@
+
+/**
+ * Provide the HTML to create the modal dialog.
+
+Drupal.theme.prototype.CToolsModalDialog = function () {
+    var html = ''
+
+    html += "<div id=\"ctools-modal\" class=\"\">";
+    html += "  <div class=\"ctools-modal-content\">";
+    html += "  <div class=\"modal-header\">";
+    html += "    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;<\/button>";
+    html += "    <h3 id=\"modal-title\"><\/h3>";
+    html += "  <\/div>";
+    html += "  <div id=\"modal-content\" class=\"modal-body\"><\/div>";
+    html += "  <div class=\"modal-footer\">";
+    html += "    <a href=\"#\" class=\"btn close\">Close<\/a>";
+    html += "    <a href=\"#\" class=\"btn btn-primary\">Save changes<\/a>";
+    html += "  <\/div>";
+    html += "<\/div>";
+    html += "<\/div>";
+
+    return html;
+};
+
+ */
+function selectChanged(me){
+    console.log("TEST");
+    console.log(me);
+    $("<a href='/select2/ajax/add/place' class='ctools-use-modal'></a>").find('a').click(Drupal.CTools.Modal.clickAjaxLink).click();
+}
+
 (function($){
+
     Drupal.behaviors.newauto = function (context) {
             $('input.autocomplete:not(.autocomplete-processed)', context).each(function () {
 
@@ -11,7 +43,7 @@
 
                 var select = $('#'+text_id+'-autocomplete-select');
 
-                ac.width("150px");
+                ac.width("90%");
                 ac.removeAttr("disabled");
                 ac.val(input.val());
 
@@ -19,9 +51,8 @@
 
                 ac.select2({
                         dropdownCssClass: "drupal-autocomplete-select2",
-                        placeholder: "Search for a movie",
+                        //placeholder: "Search for a movie",
                         minimumInputLength: 1,
-                        allowClear: true,
                         ajax: {
                             url: "http://w.miamitech.org/select2/autocomplete",
                             dataType: 'json',
@@ -40,12 +71,19 @@
                                     items.push({id: key,text: data[key]})
                                 }
 
-                                items.push({id: "new",text: "Add New NODE"});
+                                items.push({id: "new",text: "Add a new Node..."});
+                                items.push({id: 'new_term', text: "Just use it"});
 
                                 return {results: items };
                             }
                         }
                 });
+
+                ac.on("change", function(e) {
+                    if(e.val == 'new'){
+                        selectChanged(this);
+                    }
+                })
 
             });
 
