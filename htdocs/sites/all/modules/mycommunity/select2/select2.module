@@ -4,6 +4,7 @@
  * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
  * @todo imrpove the speed and logic of auto-complete callback
  * @todo use the hooks of jqmulti to add the jq1.8 dependecies
+ * @todo avoid hacking line 978 @ nodereference.module
 */
 
 function select2_init(){
@@ -43,11 +44,12 @@ function _select2_autocomplete(){
   $fullpath = $url."/".$query;
 
   /*
-   * detect the current host and remove it automatically
+   * @todo detect the current host and remove it automatically
    */
   $real_path = str_replace("http://w.miamitech.org/","",$fullpath);
 
   //change the url to become
   $_GET['q'] = $real_path;
   menu_execute_active_handler();
+  exit();
 }

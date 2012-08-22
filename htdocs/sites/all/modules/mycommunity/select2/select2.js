@@ -1,13 +1,4 @@
 (function($){
-    function drupalformatresult(item){
-        console.log('drupalformatresult');
-        console.log(item);
-    }
-
-    function drupalFormatSelection(item){
-        console.log(item);
-    }
-
     Drupal.behaviors.newauto = function (context) {
             $('input.autocomplete:not(.autocomplete-processed)', context).each(function () {
 
@@ -48,9 +39,9 @@
                                 }
 
                                 return {results: items };
-                            },
-                            formatResult: drupalformatresult,
-                            formatSelection: drupalFormatSelection
+                            }
+                            //formatResult: drupalformatresult,
+                            //formatSelection: drupalFormatSelection
                         }
                 });
 
