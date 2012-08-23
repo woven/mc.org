@@ -24,13 +24,19 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
 
  */
 
+/*
+* @todo on form load, detect if it has [nid: ] and remove from the selection
+*/
+
 (function($){
 
     Drupal.behaviors.select2 = function (context) {
             $('input.autocomplete:not(.autocomplete-processed)', context).each(function () {
 
+
                 //auto complete input field
                 var ac = $(this);
+                ac.addClass("autocomplete-processed");
 
                 //the actual text-box , id and input
                 var input_id = this.id.substr(0, this.id.length - 13);
@@ -57,6 +63,7 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
                         //placeholder: "Search for a movie",
                         allowClear: true,
                         multiple: true,
+                        minimumInputLength: 1,
                         maximumSelectionSize: 1,
                         width: '75%',
                         ajax: {
@@ -70,6 +77,11 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
                                 }
                             },
                             results: function(data,page){
+                                if(data.is_nr){
+                                    data.vals.push({id:"new","text":"Add new node...",custom: true});
+                                }
+
+                                data.vals.push({id:data.term,"text":"Just use: " + data.term,custom: true});
                                 return {results: data.vals };
                             }
                         }
@@ -89,15 +101,19 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
                 //on change select2 logic to sync between original input and select2
                 select2.on("change", function(e) {
                     input = $("#"+$.data(this,"input_id"));
-                     console.log(e);
+
                     if(e.val[0] == undefined){
                         value = "";
                     }else{
                         value = e.val[0];
                     }
-                    input.val(value);
 
-
+                    if(value == "new"){
+                        l = jQuery("<a></a>").attr('href',"/select2/ajax/add/place").addClass('ctools-use-modal-processed');
+                        Drupal.CTools.Modal.clickAjaxLink.apply(l);
+                    }else{
+                        input.val(value);
+                    }
                 });
 
             });
