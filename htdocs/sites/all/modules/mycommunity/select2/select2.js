@@ -23,11 +23,6 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
 };
 
  */
-function selectChanged(me){
-//    link = "<a href='/select2/ajax/add/place' id='REMOVEMELATER' class='ctools-use-modal ctools-use-ajax'></a>";
-
-
-}
 
 (function($){
 
@@ -49,10 +44,13 @@ function selectChanged(me){
 
                 //console.log(ac.attr("id")+":"+ac_url);
 
+                var event = $.Event("modal-select");
+
                 ac.select2({
                         dropdownCssClass: "drupal-autocomplete-select2",
                         //placeholder: "Search for a movie",
                         minimumInputLength: 1,
+                        allowClear: true,
                         ajax: {
                             url: "http://w.miamitech.org/select2/autocomplete",
                             dataType: 'json',
@@ -63,7 +61,6 @@ function selectChanged(me){
                                 }
                             },
                             results: function(data,page){
-                                console.log(data);
 
                                 items = new Array();
 
@@ -74,15 +71,22 @@ function selectChanged(me){
                                 items.push({id: "new",text: "Add a new Node..."});
                                 items.push({id: 'new_term', text: "Just use it"});
 
-                                return {results: items };
+                                return {results: data.vals };
                             }
                         }
                 });
 
                 ac.on("change", function(e) {
-                    console.log(e);
                     if(e.val == 'new'){
-                        selectChanged(this);
+                        //using the default jquery object
+
+                        console.log($(this).attr("id"));
+
+                        l = jQuery("<a></a>").attr('href',"/select2/ajax/add/place").addClass('ctools-use-modal-processed');
+                        Drupal.CTools.Modal.clickAjaxLink.apply(l);
+
+                        //$(this).select2("data", {id: "CA", text: "California"});
+                        //selectChanged(this);
                     }
                 })
 
