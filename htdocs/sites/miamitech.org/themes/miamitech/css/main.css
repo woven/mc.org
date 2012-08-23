@@ -1656,12 +1656,12 @@ body.node-type-group #page .node {
 }
 
 /* Comment form */
-.block form li {
+#comment-form li {
 	float: left;
 	width: 262px;
 	margin: 10px 10px 10px 15px;
 }
-.block form li.wide {
+#comment-form li.wide {
 	width: 548px;
 	margin-right: 0;
 }

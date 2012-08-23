@@ -55,10 +55,41 @@ function select2_menu(){
   return $items;
 }
 
+/*
+ * Converts drupal default auto-complete response to an array of objects, {id: "",text:"","nid": "if nodereference"}
+ */
+function _drupal_ac_to_object($vals,$is_nr = false){
+  $vals_ob = array();
+
+  if(!empty($vals)){
+    foreach($vals as $key => &$val){
+      $val_ob = new stdClass();
+      $val_ob->id = $key;
+
+      //parse back the string as it was before it passed through check_plain
+      $val_ob->text = html_entity_decode(strip_tags($val),ENT_QUOTES,'UTF-8');
+
+      if($is_nr){
+        //parse node id and attach it to the select data for easier access on the client side
+        preg_match('/^(?:\s*|(.*) )?\[\s*nid\s*:\s*(\d+)\s*\]$/', $val_ob->id, $matches);
+        if (!empty($matches)) {
+          // Explicit [nid:n].
+          list(, $title, $nid) = $matches;
+          $val_ob->nid = $nid;
+        }
+      }
+
+      array_push($vals_ob,$val_ob);
+    }
+  }
+
+  return $vals_ob;
+}
 
 function _select2_autocomplete(){
   $url = $_GET['url'];
   $term = $_GET['term'];
+  $field_id = $_GET['field_id'];
 
   $fullpath = $url."/".$term;
 
@@ -76,33 +107,12 @@ function _select2_autocomplete(){
 
   //decode the values that you got from ob_get_clean
   $vals = json_decode($output,true);
-  $vals_ob = array();
 
-  if(!empty($vals)){
-
-    foreach($vals as $key => &$val){
-      $val_ob = new stdClass();
-      $val_ob->id = $key;
-
-      //parse back the string as it was before it passed through check_plain
-      $val_ob->text = html_entity_decode(strip_tags($val),ENT_QUOTES,'UTF-8');
-
-      if(arg(0) == "nodereference"){
-        //parse node id and attach it to the select data for easier access on the client side
-        preg_match('/^(?:\s*|(.*) )?\[\s*nid\s*:\s*(\d+)\s*\]$/', $val_ob->id, $matches);
-        if (!empty($matches)) {
-          // Explicit [nid:n].
-          list(, $title, $nid) = $matches;
-          $val_ob->nid = $nid;
-        }
-      }
-
-      array_push($vals_ob,$val_ob);
-    }
-  }
-
+  //starting the response object
   $ob = new stdClass();
   $ob->term = $term;
+  $ob->input_id = $_GET['field_id'];
+  $ob->custom = false;
 
   if(arg(0) == 'nodereference'){
     $ob->cck_field = arg(2);
@@ -111,7 +121,10 @@ function _select2_autocomplete(){
     $ob->is_nr = false;
   }
 
-  $ob->vals = $vals_ob;
+  //convert the drupal ac json response to object of arrays
+  $ob->vals = _drupal_ac_to_object($vals,$ob->is_nr);
+
+  //output the response object
   print drupal_json($ob);
   exit();
 }

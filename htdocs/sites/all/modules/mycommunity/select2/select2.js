@@ -26,69 +26,79 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
 
 (function($){
 
-    Drupal.behaviors.newauto = function (context) {
+    Drupal.behaviors.select2 = function (context) {
             $('input.autocomplete:not(.autocomplete-processed)', context).each(function () {
 
+                //auto complete input field
                 var ac = $(this);
-                var text_id = this.id.substr(0, this.id.length - 13);
 
-                var input = $('#'+text_id);
+                //the actual text-box , id and input
+                var input_id = this.id.substr(0, this.id.length - 13);
+                var input_wrapper_id = input_id+'-wrapper';
+                var input_select2_id = input_id+'-select2';
+                var input = $('#'+input_id);
+
+
+                var select2 = $("<input></input>").attr("id",input_select2_id).attr("type","hidden");
+
+                input.hide();
+                select2.insertAfter(input);
+                select2.data("input_id",input_id);
 
                 var ac_url = ac.attr("value");
 
-                var select = $('#'+text_id+'-autocomplete-select');
+                //var event = $.Event("modal-select");
 
-                ac.width("90%");
-                ac.removeAttr("disabled");
-                ac.val(input.val());
-
-                //console.log(ac.attr("id")+":"+ac_url);
-
-                var event = $.Event("modal-select");
-
-                ac.select2({
+                select2.select2({
+                        createSearchChoice: function (term,data){
+                            return {id:term, text:"Just use: " + term,custom: data};
+                        },
                         dropdownCssClass: "drupal-autocomplete-select2",
                         //placeholder: "Search for a movie",
-                        minimumInputLength: 1,
                         allowClear: true,
+                        multiple: true,
+                        maximumSelectionSize: 1,
+                        width: '75%',
                         ajax: {
-                            url: "http://w.miamitech.org/select2/autocomplete",
+                            url: "/select2/autocomplete",
                             dataType: 'json',
                             data: function (term,page){
                                 return {
                                     url:ac_url,
-                                    term: term
+                                    term: term,
+                                    field_id: input.attr("id")
                                 }
                             },
                             results: function(data,page){
-
-                                items = new Array();
-
-                                for(var key in data) {
-                                    items.push({id: key,text: data[key]})
-                                }
-
-                                items.push({id: "new",text: "Add a new Node..."});
-                                items.push({id: 'new_term', text: "Just use it"});
-
                                 return {results: data.vals };
                             }
                         }
                 });
 
-                ac.on("change", function(e) {
-                    if(e.val == 'new'){
-                        //using the default jquery object
 
-                        console.log($(this).attr("id"));
+                //on change for the original input field
+                input.on("change", function(e) {
+                    input = $(this);
+                    data = {id: input.val(), text: input.val()};
+                    select2.select2("data",[data]);
+                });
 
-                        l = jQuery("<a></a>").attr('href',"/select2/ajax/add/place").addClass('ctools-use-modal-processed');
-                        Drupal.CTools.Modal.clickAjaxLink.apply(l);
+                //trigger the change event right away
+                input.change();
 
-                        //$(this).select2("data", {id: "CA", text: "California"});
-                        //selectChanged(this);
+                //on change select2 logic to sync between original input and select2
+                select2.on("change", function(e) {
+                    input = $("#"+$.data(this,"input_id"));
+                     console.log(e);
+                    if(e.val[0] == undefined){
+                        value = "";
+                    }else{
+                        value = e.val[0];
                     }
-                })
+                    input.val(value);
+
+
+                });
 
             });
 
