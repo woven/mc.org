@@ -24,9 +24,9 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
 
  */
 function selectChanged(me){
-    console.log("TEST");
-    console.log(me);
-    $("<a href='/select2/ajax/add/place' class='ctools-use-modal'></a>").find('a').click(Drupal.CTools.Modal.clickAjaxLink).click();
+//    link = "<a href='/select2/ajax/add/place' id='REMOVEMELATER' class='ctools-use-modal ctools-use-ajax'></a>";
+
+
 }
 
 (function($){
@@ -80,6 +80,7 @@ function selectChanged(me){
                 });
 
                 ac.on("change", function(e) {
+                    console.log(e);
                     if(e.val == 'new'){
                         selectChanged(this);
                     }

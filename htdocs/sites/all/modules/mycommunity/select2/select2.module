@@ -1,10 +1,18 @@
 <?php
 
 /*
+ * @todo fix for jquery_update missing constant that needed for ctools
+ * @see http://drupal.org/node/1067290#comment-6208188
+ */
+define('JQUERY_UPDATE_REPLACE_PATH', drupal_get_path('module', 'jquery_update') .'/replace');
+
+
+/*
  * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
  * @todo imrpove the speed and logic of auto-complete callback
  * @todo use the hooks of jqmulti to add the jq1.8 dependecies
  * @todo avoid hacking line 978 @ nodereference.module
+ * @todo package jquery_update options at http://w.miamitech.org/admin/settings/jquery_update
 */
 
 function select2_init(){
@@ -99,6 +107,10 @@ function _add_node_form(){
 function modal_forms_login($js = NULL,$ct = NULL) {
   global $user;
 
+  /*
+   * @todo add logic if it's not js callback, maybe simply redirect to the add form page.
+   */
+
   ctools_include('node.pages','node',"");
 
   //set up a dummy node to make sure the form comes in right
@@ -118,7 +130,7 @@ function modal_forms_login($js = NULL,$ct = NULL) {
 
   //@todo change the title to the content type human name
   $form_state = array(
-    'title' => t('Add New Place'),
+    'title' => t('Add New ' . $ct),
     'ajax' => TRUE,
     'args' => array($node)
   );

@@ -208,11 +208,9 @@ var GHH = {
 
         if(!(/iPhone|iPod/i.test(navigator.userAgent))){
 
-            $("#login-button,a.login").livequery(function(e){
-                $(this).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
-                    $('#login input[name=name]').focus();
-                }});
-            });
+            $("#login-button,a.login").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
+                $('#login input[name=name]').focus();
+            }});
 
             $("#register-button,a.join").colorbox({width:"720", height:"300", inline:true,href:"#register", opacity:0.6, onComplete:function () {
                 $('#register input[name=mail]').focus();
