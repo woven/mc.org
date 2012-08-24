@@ -133,7 +133,6 @@ function _add_node_form(){
   static $already_added = FALSE;
 
   //adding bootstrap js
-  //ctools_add_css('bootstrap.min', 'select2', '/');
 
   // Include the CTools tools that we need.
   ctools_include('ajax');

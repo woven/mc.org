@@ -1,28 +1,3 @@
-
-/**
- * Provide the HTML to create the modal dialog.
-*/
-
-Drupal.theme.prototype.CToolsModalDialog = function () {
-    var html = ''
-
-    html += "<div id=\"ctools-modal\" class=\"modal\">";
-    html += "  <div class=\"ctools-modal-content\">";
-    html += "  <div class=\"modal-header\">";
-    html += "    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;<\/button>";
-    html += "    <h3 id=\"modal-title\"><\/h3>";
-    html += "  <\/div>";
-    html += "  <div id=\"modal-content\" class=\"modal-body\"><\/div>";
-    html += "  <div class=\"modal-footer\">";
-    html += "    <a href=\"#\" class=\"btn close\">Close<\/a>";
-    html += "    <a href=\"#\" class=\"btn btn-primary\">Save changes<\/a>";
-    html += "  <\/div>";
-    html += "<\/div>";
-    html += "<\/div>";
-
-    return html;
-};
-
 /*
 * @todo on form load, detect if it has [nid: ] and remove from the selection
 */
@@ -110,7 +85,7 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
                     }
 
                     if(value == "new"){
-                        l = jQuery("<a></a>").attr('href',"/select2/ajax/add/place").addClass('ctools-use-modal-processed ctools-use-modal ctools-modal-modal-popup-small');
+                        l = jQuery("<a></a>").attr('href',"/select2/ajax/add/place").addClass('ctools-use-modal-processed ctools-use-modal');
                         Drupal.CTools.Modal.clickAjaxLink.apply(l);
                     }else{
                         input.val(value);
