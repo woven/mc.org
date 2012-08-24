@@ -1,11 +1,12 @@
 
 /**
  * Provide the HTML to create the modal dialog.
+*/
 
 Drupal.theme.prototype.CToolsModalDialog = function () {
     var html = ''
 
-    html += "<div id=\"ctools-modal\" class=\"\">";
+    html += "<div id=\"ctools-modal\" class=\"modal\">";
     html += "  <div class=\"ctools-modal-content\">";
     html += "  <div class=\"modal-header\">";
     html += "    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;<\/button>";
@@ -21,8 +22,6 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
 
     return html;
 };
-
- */
 
 /*
 * @todo on form load, detect if it has [nid: ] and remove from the selection
@@ -45,7 +44,7 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
                 var input = $('#'+input_id);
 
 
-                var select2 = $("<input></input>").attr("id",input_select2_id).attr("type","hidden");
+                var select2 = $("<input />").attr("id",input_select2_id).attr("type","hidden");
 
                 input.hide();
                 select2.insertAfter(input);
@@ -65,7 +64,7 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
                         multiple: true,
                         minimumInputLength: 1,
                         maximumSelectionSize: 1,
-                        width: '75%',
+                        width: '60%',
                         ajax: {
                             url: "/select2/autocomplete",
                             dataType: 'json',
@@ -91,8 +90,10 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
                 //on change for the original input field
                 input.on("change", function(e) {
                     input = $(this);
-                    data = {id: input.val(), text: input.val()};
-                    select2.select2("data",[data]);
+                    if(input.val().length){
+                        data = {id: input.val(), text: input.val()};
+                        select2.select2("data",[data]);
+                    }
                 });
 
                 //trigger the change event right away
@@ -109,7 +110,7 @@ Drupal.theme.prototype.CToolsModalDialog = function () {
                     }
 
                     if(value == "new"){
-                        l = jQuery("<a></a>").attr('href',"/select2/ajax/add/place").addClass('ctools-use-modal-processed');
+                        l = jQuery("<a></a>").attr('href',"/select2/ajax/add/place").addClass('ctools-use-modal-processed ctools-use-modal ctools-modal-modal-popup-small');
                         Drupal.CTools.Modal.clickAjaxLink.apply(l);
                     }else{
                         input.val(value);

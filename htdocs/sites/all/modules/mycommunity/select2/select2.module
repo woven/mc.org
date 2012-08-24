@@ -146,16 +146,21 @@ function _add_node_form(){
     'modal-popup-small' => array(
       'modalSize' => array(
         'type' => 'fixed',
-        'width' => 300,
-        'height' => 300,
+        'width' => 600,
+        'height' => 600,
+        'addWidth' => 0,
+        'addHeight' => 0,
+        'contentRight' => 0,
+        'contentBottom' => 0
       ),
       'modalOptions' => array(
         'opacity' => 0.85,
-        'background' => '#000',
+        'background' => 'gray',
       ),
-      'animation' => 'fadeIn',
+      'animation' => 'show',
       'closeText' => t('Close'),
-    )
+    ),
+
   );
 
   drupal_add_js($js_settings, 'setting');
