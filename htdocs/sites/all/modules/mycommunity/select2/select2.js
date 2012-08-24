@@ -1,5 +1,6 @@
 /*
-* @todo on form load, detect if it has [nid: ] and remove from the selection
+* todo on form load, detect if it has [nid: ] and remove from the selection
+* todo better logic to sync select2 and input values
 */
 
 (function($){
@@ -33,7 +34,7 @@
 
                 var select2 = $("<input />").attr("id",input_select2_id).attr("type","hidden");
 
-                //input.hide();
+                input.hide();
                 select2.insertAfter(input);
                 select2.data("input_id",input_id);
 
