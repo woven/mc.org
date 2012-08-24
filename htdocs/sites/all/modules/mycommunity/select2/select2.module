@@ -7,6 +7,16 @@
 define('JQUERY_UPDATE_REPLACE_PATH', drupal_get_path('module', 'jquery_update') .'/replace');
 
 
+function ctools_ajax_command_select2_val($selector,$nid,$val,$val_title) {
+  return array(
+    'command' => 'select2_val',
+    'selector' => $selector,
+    'value' => $val,
+    'value_title' => $val_title,
+    'nid' => $nid
+  );
+}
+
 /*
  * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
  * @todo imrpove the speed and logic of auto-complete callback
@@ -47,7 +57,7 @@ function select2_menu(){
   $items['select2/%ctools_js/add/%'] = array(
     //'title' => 'Login',
     'page callback' => 'modal_forms_login',
-    'page arguments' => array(1,3),
+    'page arguments' => array(1,3,4),
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -165,7 +175,7 @@ function _add_node_form(){
   drupal_add_js($js_settings, 'setting');
 }
 
-function modal_forms_login($js = NULL,$ct = NULL) {
+function modal_forms_login($js = NULL,$ct = NULL,$input_id) {
   global $user;
 
   /*
@@ -206,15 +216,17 @@ function modal_forms_login($js = NULL,$ct = NULL) {
     //the new node that has been created
     $nid = $form_state['nid'];
 
-    //resturn the new node id back to the select list
+    //return the new node id back to the select list
     if($nid){
       // @todo change the selectlist list to the newly created content type.
+      $node = node_load($nid);
+      $val = $node->title . " [nid:$node->nid]";
+      $output[] = ctools_ajax_command_select2_val($input_id,$nid,$val,$node->title);
     }
-
 
     // We'll just overwrite the form output if it was successful.
     ctools_add_js('ajax-responder');
-    $output[] = ctools_modal_command_dismiss(t('Login Success'));
+    //$output[] = ctools_modal_command_dismiss(t('Login Success'));
 
   }
 

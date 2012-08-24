@@ -4,9 +4,21 @@
 
 (function($){
 
+    Drupal.CTools.AJAX.commands.select2_val = function(data){
+        //define the input and select2 shadow input
+        input = $("#"+data.selector);
+        select2 = $("#"+data.selector+"-select2");
+
+        //select2 value array
+        select2_data = [{id: data.value, text: data.value_title}];
+
+        //update both select2 and input with the new node value
+        select2.select2("data",select2_data);
+        input.val(data.value);
+    };
+
     Drupal.behaviors.select2 = function (context) {
             $('input.autocomplete:not(.autocomplete-processed)', context).each(function () {
-
 
                 //auto complete input field
                 var ac = $(this);
@@ -21,7 +33,7 @@
 
                 var select2 = $("<input />").attr("id",input_select2_id).attr("type","hidden");
 
-                input.hide();
+                //input.hide();
                 select2.insertAfter(input);
                 select2.data("input_id",input_id);
 
@@ -77,6 +89,7 @@
                 //on change select2 logic to sync between original input and select2
                 select2.on("change", function(e) {
                     input = $("#"+$.data(this,"input_id"));
+                    select2 = $(this);
 
                     if(e.val[0] == undefined){
                         value = "";
@@ -85,8 +98,11 @@
                     }
 
                     if(value == "new"){
-                        l = jQuery("<a></a>").attr('href',"/select2/ajax/add/place").addClass('ctools-use-modal-processed ctools-use-modal');
-                        Drupal.CTools.Modal.clickAjaxLink.apply(l);
+                        select2.select2("data",[]);
+                        (function($){
+                            l = $("<a></a>").attr('href',"/select2/ajax/add/place/"+input.attr("id")).addClass('ctools-use-modal-processed ctools-use-modal');
+                            Drupal.CTools.Modal.clickAjaxLink.apply(l);
+                        })(jQuery);
                     }else{
                         input.val(value);
                     }
