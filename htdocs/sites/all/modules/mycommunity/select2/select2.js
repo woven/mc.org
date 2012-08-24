@@ -19,6 +19,15 @@ Drupal.theme.prototype.CToolsModalNodeForm = function () {
 };
 
 /*
+* Overrides the default modal_display so it would scroll to top automatically after form submit
+ */
+Drupal.CTools.AJAX.commands.modal_display = function(command) {
+    $('#modal-title').html(command.title);
+    $('#modal-content').html(command.output).scrollTop(0);
+    Drupal.attachBehaviors();
+};
+
+/*
 * todo on form load, detect if it has [nid: ] and remove from the selection
 * todo better logic to sync select2 and input values
 */
