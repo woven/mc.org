@@ -25,21 +25,6 @@ Drupal.theme.prototype.CToolsModalNodeForm = function () {
 
 (function($){
 
-    $('#modal-footer input').live('click',function(){
-        //$('#modalContent form.ctools-use-modal-processed').submit();
-        e.preventDefault();
-    });
-
-    $(document).ready(function(){
-        return ;
-        (function($){
-            l = $("<a></a>").attr('href',"/select2/ajax/add/place/test").addClass('ctools-use-modal-processed ctools-use-modal ctools-modal-modal-node-form');
-            Drupal.CTools.Modal.clickAjaxLink.apply(l);
-        })(jQuery);
-
-        }
-    );
-
     Drupal.CTools.AJAX.commands.select2_val = function(data){
         //define the input and select2 shadow input
         input = $("#"+data.selector);
@@ -135,10 +120,8 @@ Drupal.theme.prototype.CToolsModalNodeForm = function () {
 
                     if(value == "new"){
                         select2.select2("data",[]);
-                        (function($){
                             l = $("<a></a>").attr('href',"/select2/ajax/add/place/"+input.attr("id")).addClass('ctools-use-modal-processed ctools-use-modal ctools-modal-modal-node-form');
                             Drupal.CTools.Modal.clickAjaxLink.apply(l);
-                        })(jQuery);
                     }else{
                         input.val(value);
                     }

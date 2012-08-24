@@ -16,6 +16,10 @@ function ctools_ajax_command_select2_val($selector,$nid,$val,$val_title) {
   );
 }
 
+function select2_jqmulti_libraries(){
+         return ("select2");
+}
+
 /*
  * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
  * @todo imrpove the speed and logic of auto-complete callback
@@ -219,6 +223,8 @@ function modal_forms_login($js = NULL,$ct = NULL,$input_id) {
     //the new node that has been created
     $nid = $form_state['nid'];
 
+    ctools_add_js('ajax-responder');
+
     //return the new node id back to the select list
     if($nid){
       // @todo change the selectlist list to the newly created content type.
@@ -227,9 +233,7 @@ function modal_forms_login($js = NULL,$ct = NULL,$input_id) {
       $output[] = ctools_ajax_command_select2_val($input_id,$nid,$val,$node->title);
     }
 
-    // We'll just overwrite the form output if it was successful.
-    ctools_add_js('ajax-responder');
-    //$output[] = ctools_modal_command_dismiss(t('Login Success'));
+    $output[] = ctools_modal_command_dismiss();
 
   }
 
