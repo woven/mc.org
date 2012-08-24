@@ -17,7 +17,7 @@ function ctools_ajax_command_select2_val($selector,$nid,$val,$val_title) {
 }
 
 function select2_jqmulti_libraries(){
-         return ("select2");
+       return ("select2");
 }
 
 /*
@@ -34,6 +34,7 @@ function select2_init(){
   $lib = libraries_get_path("select2");
 
   _add_node_form();
+
 
   /*
    * add required select2 files
@@ -99,7 +100,16 @@ function _drupal_ac_to_object($vals,$is_nr = false){
   return $vals_ob;
 }
 
+function _allowed_cck_node_type($var){
+  if(!$var){
+    return false;
+  }
+
+  return true;
+}
+
 function _select2_autocomplete(){
+
   $url = $_GET['url'];
   $term = $_GET['term'];
   $field_id = $_GET['field_id'];
@@ -128,7 +138,13 @@ function _select2_autocomplete(){
   $ob->custom = false;
 
   if(arg(0) == 'nodereference'){
+    $fields = content_fields();
+
     $ob->cck_field = arg(2);
+    $ob->cck = $fields[$ob->cck_field];
+
+    $ob->allow_nodes = array_filter($ob->cck['referenceable_types'],'_allowed_cck_node_type');
+
     $ob->is_nr = true;
   }else{
     $ob->is_nr = false;

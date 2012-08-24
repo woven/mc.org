@@ -28,7 +28,7 @@ Drupal.CTools.AJAX.commands.modal_display = function(command) {
 };
 
 /*
-* todo on form load, detect if it has [nid: ] and remove from the selection
+* todo on form load, detect if it has [nid: ] and remove from the selection TEXT value
 * todo better logic to sync select2 and input values
 */
 

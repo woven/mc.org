@@ -1006,7 +1006,7 @@ function nodereference_node_type($op, $info) {
           content_clear_type_cache(TRUE);
           menu_rebuild();
         }
-      }
+  }
       break;
   }
 }
