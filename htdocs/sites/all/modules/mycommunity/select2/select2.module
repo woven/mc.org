@@ -6,7 +6,6 @@
  */
 define('JQUERY_UPDATE_REPLACE_PATH', drupal_get_path('module', 'jquery_update') .'/replace');
 
-
 function ctools_ajax_command_select2_val($selector,$nid,$val,$val_title) {
   return array(
     'command' => 'select2_val',
@@ -142,7 +141,8 @@ function _select2_autocomplete(){
 function _add_node_form(){
   static $already_added = FALSE;
 
-  //adding bootstrap js
+  //adding bootstrap css
+  ctools_add_css("select2-modal",'select2','');
 
   // Include the CTools tools that we need.
   ctools_include('ajax');
@@ -152,21 +152,23 @@ function _add_node_form(){
   ctools_modal_add_js();
 
   $js_settings = array(
-    'modal-popup-small' => array(
+    'modal-node-form' => array(
+      'modalTheme' => 'CToolsModalNodeForm',
       'modalSize' => array(
-        'type' => 'fixed',
-        'width' => 600,
-        'height' => 600,
+        'type' => 'scale',
+        'width' => .8,
+        'height' => .8,
         'addWidth' => 0,
-        'addHeight' => 0,
-        'contentRight' => 0,
-        'contentBottom' => 0
+        'addHeight' => 30,
+        'contentRight' => 25,
+        'contentBottom' => 45
       ),
       'modalOptions' => array(
-        'opacity' => 0.85,
-        'background' => 'gray',
+        'opacity' => 0.8,
+        'background' => 'black',
       ),
-      'animation' => 'show',
+      'animation' => 'slideDown',
+      'animationSpeed' => 'medium',
       'closeText' => t('Close'),
     ),
 

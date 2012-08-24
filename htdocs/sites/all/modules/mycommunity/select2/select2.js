@@ -1,9 +1,38 @@
+/**
+ * Provide the HTML to create the modal dialog.
+ */
+
+Drupal.theme.prototype.CToolsModalNodeForm = function () {
+    var html = '';
+    html += '  <div id="ctools-modal">';
+    html += '    <div class="ctools-modal-content">'; // panels-modal-content
+    html += '      <div class="modal-header">';
+    html += '        <a class="close" href="#">X</a>';
+    html += '        <h3 id="modal-title" class="modal-title">&nbsp;</h3>';
+    html += '      </div>';
+    html += '      <div id="modal-content" class="modal-content"></div>';
+    html += '    </div>';
+    html += '  </div>';
+
+    return html;
+};
+
 /*
 * todo on form load, detect if it has [nid: ] and remove from the selection
 * todo better logic to sync select2 and input values
 */
 
 (function($){
+
+    $(document).ready(function(){
+
+        (function($){
+            l = $("<a></a>").attr('href',"/select2/ajax/add/place/test").addClass('ctools-use-modal-processed ctools-use-modal ctools-modal-modal-node-form');
+            Drupal.CTools.Modal.clickAjaxLink.apply(l);
+        })(jQuery);
+
+        }
+    );
 
     Drupal.CTools.AJAX.commands.select2_val = function(data){
         //define the input and select2 shadow input
@@ -101,7 +130,7 @@
                     if(value == "new"){
                         select2.select2("data",[]);
                         (function($){
-                            l = $("<a></a>").attr('href',"/select2/ajax/add/place/"+input.attr("id")).addClass('ctools-use-modal-processed ctools-use-modal');
+                            l = $("<a></a>").attr('href',"/select2/ajax/add/place/"+input.attr("id")).addClass('ctools-use-modal-processed ctools-use-modal ctools-modal-modal-node-form');
                             Drupal.CTools.Modal.clickAjaxLink.apply(l);
                         })(jQuery);
                     }else{

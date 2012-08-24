@@ -1,0 +1,132 @@
+div.ctools-modal-content {
+    padding: 0;
+    margin: 2px;
+    width: 600px;
+    text-align: left;
+    overflow: auto;
+
+    background-color: #ffffff;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    *border: 1px solid #999;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+div.ctools-modal-content .modal-title {
+    margin: 0;
+    line-height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+div.ctools-modal-content .modal-header {
+    padding: 9px 15px;
+    border-bottom: 1px solid #EEE;
+}
+
+div.ctools-modal-content .modal-header a {
+    color: white;
+    float: right;
+}
+
+div.ctools-modal-content .modal-content {
+    padding: 1em 1em 0 1em;
+    overflow: auto;
+    position: relative; /* Keeps IE7 from flowing outside the modal. */
+}
+
+div.ctools-modal-content .modal-form {
+
+}
+
+div.ctools-modal-content .modal-header .close {
+    margin-top: 2px;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: black;
+    text-shadow: 0 1px 0 white;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+}
+
+div.ctools-modal-content a.close:hover {
+    text-decoration: none;
+}
+
+div.ctools-modal-content a.close img {
+    position: relative;
+    top: 1px;
+}
+
+div.ctools-modal-content .modal-content .modal-throbber-wrapper {
+    text-align: center;
+}
+
+div.ctools-modal-content .modal-content .modal-throbber-wrapper img {
+    margin-top: 160px;
+}
+
+/** modal forms CSS **/
+div.ctools-modal-content .form-item label {
+    width: 15em;
+    float: left;
+}
+
+div.ctools-modal-content .form-item label.option {
+    width: auto;
+    float: none;
+}
+
+div.ctools-modal-content .form-item .description {
+    clear: left;
+}
+
+div.ctools-modal-content .form-item .description .tips {
+    margin-left: 2em;
+}
+
+div.ctools-modal-content .no-float .form-item * {
+    float: none;
+}
+
+div.ctools-modal-content .modal-form .no-float label  {
+    width: auto;
+}
+
+div.ctools-modal-content fieldset,
+div.ctools-modal-content .form-radios,
+div.ctools-modal-content .form-checkboxes {
+    clear: left;
+}
+
+div.ctools-modal-content .resizable-textarea {
+    width: auto;
+    margin-left: 15em;
+    margin-right: 5em;
+}
+
+div.ctools-modal-content .container-inline .form-item {
+    margin-right: 2em;
+}
+
+#views-exposed-pane-wrapper .form-item {
+    margin-top: 0;
+    margin-bottom: 0;
+}
