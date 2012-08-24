@@ -64,7 +64,6 @@
         <?php if(!empty($content_top) || !empty($content) || !empty($content_bottom)): ?>
         <div id="content-wrapper" class="block-content block clear-block">
           <div id='content' class='clear-block block-content'>
-            <a href="/select2/ajax/add/place" class="ctools-use-modal ctools-use-ajax">TEST MODEL</a>
 
             <?php if ($content_top) : ?>
               <div id="content-top"><?php print $content_top ?></div>

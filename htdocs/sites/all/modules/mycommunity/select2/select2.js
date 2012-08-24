@@ -11,6 +11,7 @@ Drupal.theme.prototype.CToolsModalNodeForm = function () {
     html += '        <h3 id="modal-title" class="modal-title">&nbsp;</h3>';
     html += '      </div>';
     html += '      <div id="modal-content" class="modal-content"></div>';
+    //html += '    <div id="modal-footer" class="modal-footer"><input value="Save" class="button form-submit"> <input type="submit" name="op" id="edit-submit" value="Close" class="button form-cancel"></div>';
     html += '    </div>';
     html += '  </div>';
 
@@ -24,8 +25,13 @@ Drupal.theme.prototype.CToolsModalNodeForm = function () {
 
 (function($){
 
-    $(document).ready(function(){
+    $('#modal-footer input').live('click',function(){
+        //$('#modalContent form.ctools-use-modal-processed').submit();
+        e.preventDefault();
+    });
 
+    $(document).ready(function(){
+        return ;
         (function($){
             l = $("<a></a>").attr('href',"/select2/ajax/add/place/test").addClass('ctools-use-modal-processed ctools-use-modal ctools-modal-modal-node-form');
             Drupal.CTools.Modal.clickAjaxLink.apply(l);

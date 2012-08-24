@@ -162,7 +162,7 @@ function _add_node_form(){
         'addWidth' => 0,
         'addHeight' => 30,
         'contentRight' => 25,
-        'contentBottom' => 45
+        'contentBottom' => 33
       ),
       'modalOptions' => array(
         'opacity' => 0.8,
