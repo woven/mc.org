@@ -27,15 +27,17 @@ div.ctools-modal-content .modal-title {
     font-weight: bold;
     overflow: hidden;
     white-space: nowrap;
+    color: #333;
 }
 
 div.ctools-modal-content .modal-header {
+    background-color: transparent;
     padding: 9px 15px;
     border-bottom: 1px solid #EEE;
 }
 
 div.ctools-modal-content .modal-header a {
-    color: white;
+    color: #333;
     float: right;
 }
 

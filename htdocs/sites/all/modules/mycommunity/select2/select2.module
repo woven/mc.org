@@ -141,8 +141,6 @@ function _select2_autocomplete(){
 function _add_node_form(){
   static $already_added = FALSE;
 
-  //adding bootstrap css
-  ctools_add_css("select2-modal",'select2','');
 
   // Include the CTools tools that we need.
   ctools_include('ajax');
@@ -150,6 +148,9 @@ function _add_node_form(){
 
   // Add CTools' javascript to the page.
   ctools_modal_add_js();
+
+  //adding bootstrap css
+  ctools_add_css("select2-modal",'select2','');
 
   $js_settings = array(
     'modal-node-form' => array(
