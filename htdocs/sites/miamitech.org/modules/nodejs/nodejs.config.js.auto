@@ -1,0 +1,17 @@
+backendSettings = {
+  "scheme":"http",
+  "host":"w.miamitech.org",
+  "port":"8080",
+  "key":"/path/to/key/file",
+  "cert":"/path/to/cert/file",
+  "resource":"/socket.io",
+  "publishUrl":"/nodejs/publish",
+  "serviceKey":"",
+  "backend":{
+  "port":"80",
+  "host":"w.miamitech.org",
+  "authPath":"/nodejs/auth/"},
+  "clientsCanWriteToChannels":false,
+  "clientsCanWriteToClients":false,
+  "extensions":[[""]],
+  "debug":true}

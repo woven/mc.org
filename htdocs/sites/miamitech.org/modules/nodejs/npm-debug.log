@@ -1,0 +1,57 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install', 'zlb' ]
+2 info using npm@1.1.36
+3 info using node@v0.8.2
+4 verbose config file /home/quickstart/.npmrc
+5 verbose config file /usr/local/etc/npmrc
+6 verbose config file /usr/local/lib/node_modules/npm/npmrc
+7 verbose read json /home/quickstart/websites/w.miamitech.org/htdocs/sites/miamitech.org/modules/nodejs/package.json
+8 verbose read json /home/quickstart/websites/w.miamitech.org/htdocs/sites/miamitech.org/modules/nodejs/node_modules/connect/package.json
+9 verbose read json /home/quickstart/websites/w.miamitech.org/htdocs/sites/miamitech.org/modules/nodejs/node_modules/express/package.json
+10 verbose read json /home/quickstart/websites/w.miamitech.org/htdocs/sites/miamitech.org/modules/nodejs/node_modules/socket.io/package.json
+11 verbose read json /home/quickstart/websites/w.miamitech.org/htdocs/sites/miamitech.org/modules/nodejs/node_modules/request/package.json
+12 verbose read json /home/quickstart/websites/w.miamitech.org/htdocs/sites/miamitech.org/modules/nodejs/package.json
+13 verbose cache add [ 'zlb', null ]
+14 silly cache add name=undefined spec="zlb" args=["zlb",null]
+15 verbose parsed url { pathname: 'zlb', path: 'zlb', href: 'zlb' }
+16 silly lockFile b683d77f-zlb zlb
+17 verbose lock zlb /home/quickstart/.npm/b683d77f-zlb.lock
+18 silly lockFile b683d77f-zlb zlb
+19 verbose addNamed [ 'zlb', '' ]
+20 verbose addNamed [ null, '' ]
+21 silly lockFile e23b3f3b-zlb zlb@
+22 verbose lock zlb@ /home/quickstart/.npm/e23b3f3b-zlb.lock
+23 silly addNameRange { name: 'zlb', range: '', hasData: false }
+24 verbose url raw zlb
+25 verbose url resolving [ 'https://registry.npmjs.org/', './zlb' ]
+26 verbose url resolved https://registry.npmjs.org/zlb
+27 info retry registry request attempt 1 at 22:36:50
+28 http GET https://registry.npmjs.org/zlb
+29 http 408 https://registry.npmjs.org/zlb
+30 verbose bad json <html><title>Request timeout</title><body><h1>Request timeout</h1></body></html>
+31 error registry error parsing json
+32 info retry will retry, error on last attempt: SyntaxError: Unexpected token <
+32 info retry <html><title>Request timeout</title><body><h1>Request timeout</h1></body></html>
+33 info retry registry request attempt 2 at 22:57:29
+34 http GET https://registry.npmjs.org/zlb
+35 http 404 https://registry.npmjs.org/zlb
+36 silly registry.get cb [ 404,
+36 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+36 silly registry.get     date: 'Sat, 25 Aug 2012 02:57:31 GMT',
+36 silly registry.get     'content-type': 'application/json',
+36 silly registry.get     'content-length': '52',
+36 silly registry.get     'cache-control': 'must-revalidate' } ]
+37 silly lockFile e23b3f3b-zlb zlb@
+38 error 404 'zlb' is not in the npm registry.
+38 error 404 You should bug the author to publish it
+38 error 404
+38 error 404 Note that you can also install from a
+38 error 404 tarball, folder, or http url, or git url.
+39 error System Linux 3.0.0-24-generic
+40 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "zlb"
+41 error cwd /home/quickstart/websites/w.miamitech.org/htdocs/sites/miamitech.org/modules/nodejs
+42 error node -v v0.8.2
+43 error npm -v 1.1.36
+44 error code E404
+45 error message 404 Not Found: zlb
+46 verbose exit [ 1, true ]
