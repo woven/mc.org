@@ -25,14 +25,6 @@
  * @see template_preprocess_block()
  */
 ?>
-<div id="block-<?php print $block->module .'-'. $block->delta; ?>" class="block block-<?php print $block->module ?> <?php print $context_block_classes ?>">
-    <?php if ($block->subject): ?>
-	<div class="block-title">
-		  <?php print $block->subject ?>
-	</div>
-    <?php endif;?>
-
-  <div class="block-content clear-block">
+<div id="group-page-head" class="block-<?php print $block->module ?> <?php print $context_block_classes ?>">
     <?php print $block->content ?>
-  </div>
 </div>

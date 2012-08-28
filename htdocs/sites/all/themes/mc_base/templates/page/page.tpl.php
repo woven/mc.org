@@ -28,18 +28,15 @@
     <?php endif; ?>
   </div></div>
 
-  <div id='page' class="<?php print $page_classes; ?>">
+  <div id='page' class="<?php print $page_classes; ?>" <?php print drupal_attributes($variables['page_attr']) ?>>
     <div class='limiter clear-block'>
 
-      <?php include_once ('inc/page.drupal.inc'); ?> 
-    
-    <?php if ($group_logo) : ?>
-      <div id="group-page-block">
-        <div class="block-content clear-block">
-          <?php print $group_logo; ?>
-        </div>
-      </div>
-    <?php endif; ?>
+      <?php include_once ('inc/page.drupal.inc'); ?>
+
+      <?php if ($group_logo) : ?>
+      <!-- <div id="group-page-block"> -->
+      <?php print $group_logo; ?>
+      <?php endif; ?>
 
     <?php if ($featured) : ?>
       <div id="featured">
@@ -63,13 +60,16 @@
     
         <?php if ( !(is_array($node->field_page_type) && $node->field_page_type[0]['value'] == 'landing' && ( arg(2) == 'view' || arg(2) == '') ) ) : ?>
     
+        <?php if(!empty($content_top) || !empty($content) || !empty($content_bottom)): ?>
         <div id="content-wrapper" class="block-content block clear-block">
           <div id='content' class='clear-block block-content'>
             <?php if ($content_top) : ?>
               <div id="content-top"><?php print $content_top ?></div>
             <?php endif; ?>
             
-            <?php if ( $title && !( isset($node) && is_null(arg(2)) ) ): ?><h1 class='page-title'><?php print $title ?></h1><?php endif; ?>
+            <?php if ( $title && !( isset($node) && is_null(arg(2)) ) ): ?>
+                    <h1 class='page-title'><?php print $title ?></h1>
+            <?php endif; ?>
             
             <?php if($content){ ?>
             <div class="clear-block">
@@ -83,7 +83,8 @@
             <?php endif; ?>
           </div>
         </div>
-        
+        <?php endif; ?>
+
         <?php endif; ?>
         
         <?php if ($below_content) : ?>

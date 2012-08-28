@@ -1,5 +1,32 @@
 <?php
 
+function mc_base_ud_profile_field_urlfilter($field) {
+
+  $key = $field['key'];
+  $account = $field['object'];
+  $profile_category = $field['properties']['category'];
+  if (isset($account->content[$profile_category][$key]['#value'])) {
+    $content = $account->content[$profile_category][$key]['#value'];
+
+    //return _filter_url($content, 1);
+    $attr = array(
+      'external' => true,
+      'attributes' => array("rel"=>"nofollow","target"=>"_blank")
+    );
+
+    //link with http
+    $link = addhttp($content);
+
+    return l($content,$link,$attr);
+  }
+
+  return "";
+}
+
+function miamitech_ud_user_created($field) {
+    return ' &ndash; Member for ' . format_interval(time() - $field['object']->created);
+}
+
 ## TODO:
 ## @mc_base_ghh_user_picture: make the default image as file node or variable so it's more dynamic
  
@@ -50,14 +77,17 @@ function mc_base_textfield($element){
  */
 function mc_base_button($element){
     // Make sure not to overwrite classes.
+  $btn_csl = ' button form-' . $element['#button_type'];
+
   if (isset($element['#attributes']['class'])) {
-    $element['#attributes']['class'] = 'form-' . $element['#button_type'] . ' ' . $element['#attributes']['class'];
-  }
-  else {
-    $element['#attributes']['class'] = 'form-' . $element['#button_type'];
+    $element['#attributes']['class'] .= $btn_csl;
+  }else {
+    $element['#attributes']['class'] = $btn_csl;
   }
 
-  return '<span class="submit-wrapper"><button type="submit" ' . (empty($element['#name']) ? '' : 'name="' . $element['#name'] . '" ') . 'id="' . $element['#id'] . '" value="' . check_plain($element['#value']) . '" ' . drupal_attributes($element['#attributes']) . "><span>" . check_plain($element['#value']) ."</span></button></span>\n";
+  $element['#attributes']['class'] = trim($element['#attributes']['class']);
+
+  return '<input type="submit" ' . (empty($element['#name']) ? '' : 'name="' . $element['#name'] . '" ') . 'id="' . $element['#id'] . '" value="' . check_plain($element['#value']) . '" ' . drupal_attributes($element['#attributes']) . "/>";
 
 }
 
@@ -81,6 +111,142 @@ function _mc_base_get_featured_carousel_array($field_array){
   return $featured_items;
 }
 
+function mc_base_nd_location_address($field) {
+  if($field['object']->field_online_event[0]['value']==1){
+    return 'Online Event';
+  }
+
+  // Get the location field settings for this node type
+  $settings = variable_get('location_settings_node_'. $field['object']->type, array());
+
+  // Loop through and collect the address fields we want to output in the order specified in node location settings,
+  // and check that they are not set to be hidden in node location setting
+  // also ignore arrays (eg. locpick)
+  $address = array();
+
+
+  foreach ($settings['form']['fields'] as $fieldname => $fieldsettings) {
+    if (!$settings['display']['hide'][$fieldname] && !empty($field['object']->location[$fieldname]) && !is_array($field['object']->location[$fieldname])) {
+
+      // Replace country code with full country name.
+      if ($fieldname == 'country') {
+        module_load_include('inc', 'location', 'location');
+        $field['object']->location[$fieldname] = location_country_name($field['object']->location[$fieldname]);
+      }
+      // Add this field to our array of fields to output.
+      $address[$fieldname] = check_plain($field['object']->location[$fieldname]);
+    }
+  }
+  if($address['name']=='Exact Location TBD'){
+    unset($address['name']);
+    unset($address['street']);
+    unset($address['postal_code']);
+  }
+  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
+    $has_address = $field['object']->location['name'] && $field['object']->location['street']
+      && $field['object']->location['city'] && $field['object']->location['province'];
+    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'] && $field['object']->location['latitude']!='0.000000' && $field['object']->location['longitude']!='0.000000';
+    if(!$has_address && $has_lat_and_lon){
+      $parts = mt_event_feed_reverse_getAddressParts($field['object']->locations['0']['latitude'], $field['object']->locations['0']['longitude']);
+      $address['city'] = $parts['city'];
+      $address['province'] = $parts['state'];
+    }
+  }
+
+  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
+     return '<div class="no-location"> A location wasn\'t provided.</div>';
+  }
+
+  $lines = array(
+    0 => array('name'),
+    1 => array('street'),
+    2 => array('city','province','postal_code')
+  );
+
+  $lines_value = array();
+
+  foreach($lines as $key => $parts){
+
+    foreach($parts as $part){
+       if(!empty($address[$part])){
+         $value = $address[$part];
+        switch($part){
+          case 'name':
+            $lines_value[$key][] = '<span itemprop="name" class="loc-name">'.$value.'</span>';
+          break;
+          case 'street':
+            $lines_value[$key][] = '<span itemprop="streetAddress" class="loc-street">'.$value.'</span>';
+          break;
+          case 'city':
+            $lines_value[$key][] = '<span itemprop="addressLocality" class="loc-city">'.$value.'</span>';
+          break;
+          case 'province':
+            $lines_value[$key][] = '<span itemprop="addressRegion" class="loc-state">'.$value.'</span>';
+          break;
+          case 'postal_code':
+            $lines_value[$key][] = '<span itemprop="postalCode" class="loc-postalcode">'.$value.'</span>';
+            break;
+        };
+      }
+    }
+  };
+
+  $content = "";
+
+  $part1 = "";
+  $part2 = "";
+
+  foreach($lines_value as $key => $values){
+
+    if($key == 0){
+      if(count($values)){
+        $part1 = "<div class='line-$key'>".implode($values, ', ')."</div>";
+      }
+    }
+
+    if($key > 0){
+      if(count($values)){
+        $part2 .= "<div class='line-$key'>".implode($values, ', ')."</div>";
+      }
+    }
+  }
+
+  $part2 = '<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">'.$part2.'</div>';
+
+  return '<div itemprop="location" itemscope itemtype="http://schema.org/Place">' . $part1 . $part2 . '</div>';
+}
+
+function miamitech_ds_field($field) {
+  $output = '';
+
+  $attr = array();
+  $attr['class'] = "field ";
+  $attr['class'] .= $field['class'];
+
+
+  //add itemprop for body fields.
+  if($field['format'] == 'nd_bodyfield'){
+    $attr['itemprop'] = "description";
+  }
+
+  if (!empty($field['content'])) {
+    $output .= "<div " . drupal_attributes($attr) .">";
+    // Above label.
+    if ($field['labelformat'] == 'above') {
+      $output .= '<div class="field-label">'. $field['title'] .': </div>';
+    }
+    // Inline label
+    if ($field['labelformat'] == 'inline') {
+      $output .= '<div class="field-label-inline-first">'. $field['title'] .': </div>';
+    }
+    $output .= $field['content'];
+    $output .= '</div>';
+  }
+
+  return $output;
+}
+
+
 /**
  * Implementation of theme_preprocess_age
  * 
@@ -89,6 +255,17 @@ function _mc_base_get_featured_carousel_array($field_array){
  * 
  */
 function mc_base_preprocess_page(&$variables){
+
+  //adding schema variables
+  $variables['page_attr']  = array();
+  if($variables['node']){
+    $node = $variables['node'];
+    if($node->type == "event"){
+      $variables['page_attr']['itemscope '] = "";
+      $variables['page_attr']['itemtype '] = "http://schema.org/Event";
+    }
+  }
+
   $page_classes = '';
   if (arg(0)=="user" && arg(1)!="" && arg(1)!="login" & arg(1)!="register" && arg(1)!="password")
   $page_classes .= " user-profile";
@@ -115,7 +292,7 @@ function mc_base_preprocess_page(&$variables){
         //  $page_classes = 'two-columns-equal';
         //}
       }else{
-        $page_classes .= 'secondary-page';
+        $page_classes .= ' secondary-page';
       }
 
       if ($node->field_page_subtype[0]['value'] == 'home'){
@@ -132,6 +309,13 @@ function mc_base_preprocess_page(&$variables){
   
   $variables['page_classes'] = $page_classes;
   
+  $attr = array();
+  $attr['class'] = $variables['body_classes'];
+
+  // Don't render the attributes yet so subthemes can alter them
+  $variables['attr'] = $attr;
+
+
 }
 
 /**
@@ -286,6 +470,7 @@ function mc_base_pager($tags = array(), $limit = 10, $element = 0, $parameters =
 
 
 function mc_base_boxes_box($block) {
+	if(!empty($block['content'])){
   $output = "<div id='boxes-box-" . $block['delta'] . "' class='boxes-box" . (!empty($block['editing']) ? ' boxes-box-editing' : '') . "'>";
   $output .= $block['content'];
   if (!empty($block['controls'])) {
@@ -298,6 +483,9 @@ function mc_base_boxes_box($block) {
   }
   $output .= '</div>';
   return $output;
+  }else{
+  	  return;
+}
 }
 
 
@@ -365,4 +553,39 @@ function mc_base_preprocess_comment_wrapper(&$vars) {
     
     
   }  
+}
+
+
+function miamitech_nd_location_gmap($field, $latitude, $longitude, $width, $height, $zoom, $autoclick = FALSE) {
+  $map = array();
+  $bubble_content = _nd_location_theme_bubble($field);
+  if (!empty($bubble_content)) {
+    $map['markers'][] = array(
+      'latitude' => $latitude,
+      'longitude' => $longitude,
+      'text' => $bubble_content,
+      'autoclick' => $autoclick,
+      'link' => 'http://maps.google.com/?q=' . strip_tags(theme('nd_location_address', $field)),
+    );
+  }
+
+  return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
+}
+
+function mc_base_fieldset($element) {
+
+  if (!empty($element['#collapsible'])) {
+    drupal_add_js('misc/collapse.js');
+
+    if (!isset($element['#attributes']['class'])) {
+      $element['#attributes']['class'] = '';
+    }
+
+    $element['#attributes']['class'] .= ' collapsible';
+    if (!empty($element['#collapsed'])) {
+      $element['#attributes']['class'] .= ' collapsed';
+    }
+  }
+
+  return '<fieldset' . drupal_attributes($element['#attributes']) . '>' . ($element['#title'] ? '<legend>' . $element['#title'] . '</legend>' : '') . (isset($element['#description']) && $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '') . (!empty($element['#children']) ? '<div class="fieldset-content"> ' .  $element['#children'] . '</div>' : '') . (isset($element['#value']) ? $element['#value'] : '') . "</fieldset>\n";
 }

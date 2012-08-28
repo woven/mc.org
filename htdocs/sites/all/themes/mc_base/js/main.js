@@ -5,11 +5,12 @@
 	Author: XHTMLized (http://www.xhtmlized.com/)
 	Date: February 2011
 
-*******************************************************************************/
+ *******************************************************************************/
 
 $(document).ready(function() {
 	GHH.init();
 });
+
 $(".node-type-gallery-image .field-gallery a").html("« Back to album");
 $(".node-type-gallery-image .field-gallery").css('display', 'block');
 $(".field-gallery-image").addClass("cursor-pointer");
@@ -124,9 +125,14 @@ var GHH = {
 	
 	tooltipLeave: function(){
 	  var api = $(this).data('tooltip');
-    api.hide();
+        api.hide();
 	},
-	
+
+    tooltipLeaveSlow: function(){
+        var api = $(this).data('tooltip');
+        api.hide(1000);
+    },
+
 	tooltips: function() {
 	  $('ul a[title]').each(function(i, e){
 	    // cannot trust only in 'ul a[title]' selector, need to verify
@@ -153,6 +159,21 @@ var GHH = {
 	},
 	
 	lightbox: function(){
+
+        if(!(/iPhone|iPod/i.test(navigator.userAgent))){
+
+            $("#login-button,a.login").livequery(function(e){
+                $(this).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
+                    $('#login input[name=name]').focus();
+                }});
+            });
+
+            $("#register-button,a.join").colorbox({width:"720", height:"300", inline:true,href:"#register", opacity:0.6, onComplete:function () {
+                $('#register input[name=mail]').focus();
+            }});
+        }
+
+
 		$('a[rel=lightbox]').colorbox({
 			opacity: 0.6,
 			loop: false,
@@ -168,15 +189,17 @@ var GHH = {
 				img.css('margin-top', (wrapper.height() - img.height()) / 2);
 			}
 		});
-		$("#login-button").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
-		$("#anonymous-follow").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
+		if(!(/iPhone|iPod/i.test(navigator.userAgent))){
+			$("#anonymous-follow").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
 		$("#register-button").colorbox({width:"720", height:"500", inline:true, href:"#register", opacity: 0.6});
-		$("#view-pdf").colorbox({width:"830", height:"500", inline:true, href:".filefield-file", opacity: 0.6});
-    $("#fb-friends").colorbox({
-      width:"500",
-      opacity: 0.6,
-      title: "Your Facebook Friends on GetHealthyHarlem.org"
-    });
+			$("#view-pdf").colorbox({width:"830", height:"500", inline:true, href:".filefield-file", opacity: 0.6});
+			$('#block-boxes-join_mc a[href$="/user/register"]').colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register [name=mail]').focus(); }});
+			$("#fb-friends").colorbox({
+				width:"500",
+				opacity: 0.6,
+				title: "Your Facebook Friends on GetHealthyHarlem.org"
+			});
+	  }
 	},
 	
 	newsletterPlaceholder: function () {

@@ -1,0 +1,11 @@
+  .view-content label {
+    font-weight: bold;
+  }
+
+  .views-field-address>*, .views-field-address .field-content .adr>*{
+    display: inline-block;
+  }
+
+  .views-field-address {
+    padding-top: 10px;
+  }

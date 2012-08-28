@@ -32,3 +32,7 @@ function mc_update_6001() {
 function mc_install() {
   db_query("UPDATE {system} SET weight = 20 WHERE name = 'mc'");
 }
+
+function mc_update_6002() {
+  module_disable(array('less'));
+}
