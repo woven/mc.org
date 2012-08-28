@@ -97,7 +97,7 @@ function mc_femail_ext_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
         }
         if (!isset($node->og_groups) || empty($node->og_groups)){
           $result = db_result(db_query("SELECT nid FROM og_forum_reference WHERE tid = ".$node->taxonomy[1]));
-          $node->og_groups = $result;
+          $node->og_groups = array($result => $result);
         }
         //If a user no belong to a group, don't save the discussion.
         if (!_mc_api_user_belongs_to_a_group($node->uid, $node->taxonomy[1]) || ($node->uid == 0)){
