@@ -117,12 +117,6 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
   } //end if
 
 
-  if($form['form_id']['#value']=='npage_node_form' || $form['form_id']['#value']=='audio_node_form'){
-    $form['og_nodeapi']['#access']=false;
-  }
-  if(count($form['og_nodeapi']['visible']['og_groups']['#options'])==1 && $form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
-    $form['og_nodeapi']['#access']=false; 
-  }
   if(isset($_SESSION['anonymous_group']) && $user->uid!=0 && $form_id=='user_profile_form'){
     $form['#submit'][]="mc_redirect_when_session_variable_set";
   }
@@ -131,11 +125,6 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
   }
   if($form['form_id']['#value']=='forum_node_form'){
     $form['field_list_image']['#access']=false;
-  }
-  if($form['form_id']['#value']=='group_node_form'){
-    if($user->uid!=1){
-      $form['og_register']['#access']=false;
-    }
   }
 
   if($form['form_id']['#value']=='file_node_form'){
@@ -741,7 +730,6 @@ function mc_menu_alter(&$items){
   $items['og/users/%node/faces']['type'] = MENU_CALLBACK;
   $items['search/advanced_help']['type'] = MENU_CALLBACK;
   $items['node/%node/og_menu/add']['type'] = MENU_CALLBACK;
-
 }
 
 //TODO: Facebook Likes. It is gonna be moved to the feature for activities.

@@ -121,6 +121,11 @@ a:hover, a:active {
 	text-decoration: underline;
 }
 
+p{
+    margin-bottom: 10px;
+}
+
+
 /* Borders around images + fancy corner signatures */
 .image {
 	position: relative;
@@ -282,12 +287,13 @@ a .ico-small {
 	background: url(../images/common/bullet-tick.png) 0 6px no-repeat;
 }
 
-.block-overlay .block-signup div {
+.block-overlay .block-signup div.user-register {
 	float: left;
 	width: 265px;
 }
 
 .block-overlay .block-signup .why {
+	float: left;
 	width: 330px;
 	border-right: 1px solid #f0f0f0;
 }
@@ -783,7 +789,7 @@ a .ico-small {
 ------------------------------------------------------------------------------*/
 
 #page {
-	margin-bottom: 25px;
+	margin-bottom: 10px;
 }
 
 /* Featured items */
@@ -1049,7 +1055,7 @@ a .ico-small {
 }
 
 #page h1 {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	font-size: 2.5em;
 	color: #ff6600;
 }
@@ -1136,7 +1142,7 @@ a .ico-small {
 #page .block-title .arrow {
 	display: block;
 	position: absolute;
-	left: 66px;
+	left: 42px;
 	bottom: -7px;
 	right: auto;
 	top: auto;
@@ -1193,6 +1199,10 @@ a .ico-small {
 #page .location-link {
 	margin: 5px 0;
 	font-size: 0.9em;
+	color: #333;
+}
+
+#page .location-link span.location {
 	color: #b3b3b3;
 }
 
@@ -1206,7 +1216,7 @@ a .ico-small {
 	color: #e60000;
 }
 
-#page .description {
+form .description {
 	color: #333;
 	font-size: 1em;
 	margin-top: 6px;
@@ -1576,7 +1586,7 @@ a .ico-small {
 
 /* Node */
 #page .node {
-	margin: 20px 0;
+	margin: 0px 0;
 }
 
 body.node-type-group #page .node {
@@ -1746,6 +1756,7 @@ textarea {
 	margin-top: 5px;
 }
 
+/** Button style
 button,
 .button,
 button span,
@@ -1794,6 +1805,7 @@ button span,
 	white-space: nowrap;
 }
 
+/*
 button:hover span,
 button.hover span,
 .button:hover span {
@@ -1812,6 +1824,8 @@ a.orange span {
 	text-shadow: 0 -1px #cc5205;
 	background-position: 0 -34px;
 }
+**/
+/** Button style **/
 
 /* Newsletter form */
 .newsletter-block input.form-text {
@@ -1861,6 +1875,7 @@ a.orange span {
 .newsletter-block .submit-wrapper button.hover span{
 	color: #999;
 }
+
 
 /* Join us block */
 #page .join-block li {
@@ -1916,7 +1931,20 @@ a.orange span {
 	border-radius: 0;
 	behavior: none;
 	z-index: 10;
+    height: 91px;
 }
+
+#page #group-page-block .field-content a{
+    float: left;
+}
+#page #group-page-block .field-content h1{
+      width: 725px;
+      float: left;
+      height: 80px;
+      overflow: hidden;
+}
+
+
 
 .node-type-group #group-page-block, .page-groups #group-page-block{margin-bottom: 0 !important; margin-top:-15px !important;}
 .node-type-group #navigation{margin-bottom:15px !important;}
@@ -1941,7 +1969,6 @@ a.orange span {
 
 #page #group-page-block img {
 	float: left;
-	margin: 0 40px 0 0;
 }
 
 #page #group-page-block h1 {
@@ -2245,9 +2272,9 @@ border-width: 1px 0 !important;
 .page-user .user-profile #content {margin: 0 !important;}
 .page-user .user-profile #content-wrapper {margin: 0 !important; padding: 0 !important;}
 
-.page-user .user-profile #content.block-content {margin: 30px !important;}
+.page-user .user-profile #content.block-content {margin: 0px !important;}
 
-.page-user #page.user-profile #main .block #content.block-content {margin: 0 !important;}
+/* .page-user #page.user-profile #main .block #content.block-content {margin: 0 !important;} */
 
 .page-user .view-og-community .views-row{min-height: 0 !important;}
 .field-facebook-like{clear: both;}
@@ -2386,11 +2413,26 @@ border-width: 1px 0 !important;
 #page .node-type-article .view .view-content {clear: none;}
 
 
-/* #page .node-type-event .field-nodes-event-dates {float: left;}
+#page .node-type-event .field-nodes-event-dates {
+	width: 100%;
+	clear: none;
+	float: none;
+	display: table-row;
+	height: 50px;
+}
 
-#page .node-type-event .field-body {clear: both;}
+#page .node-type-event .field-body {clear: none; display: block; width: 100%;}
 
-#page .node-type-event .field-file-view {float: left; width: 500px;} */
+#page .node-type-event .field-file-view {
+	width: 100%;
+	clear: none;
+	float: none;
+	display: table-row;
+}
+
+#page .node-type-event .field-file-view .block-content {
+	margin: 0px;
+}
 
 #page #main #content-wrapper #content .node .groups {display: none;}
 
@@ -2400,7 +2442,10 @@ border-width: 1px 0 !important;
 
 #right #block-boxes-join_mc #boxes-box-join_mc ul{margin-bottom: 10px;}
 
-#right #block-boxes-join_mc #boxes-box-join_mc ul.li-join-mc li{list-style: disc; margin: 8px 0px 8px 15px; height: 20px;}
+#right #block-boxes-join_mc #boxes-box-join_mc ul.li-join-mc li{
+    list-style: disc;
+    margin: 8px 0px 8px 15px;
+}
 
 #right #block-boxes-join_mc #boxes-box-join_mc a span{text-align: center;}
 
@@ -2442,4 +2487,88 @@ clear: initial;
 
 .node-type-article #page .nd-region-middle .field-body ol {
   list-style: decimal;
+}
+
+#block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit, #block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit span {
+	height: 37px;
+	line-height: 37px;
+	background-image: url(/sites/miamitech.org/themes/miamitech/images/common/btn-gray.png);
+	color:
+	#797979;
+	-webkit-text-shadow: none;
+	-moz-text-shadow: none;
+	text-shadow: none;
+}
+
+#block-views--exp-latest_pages-page_7 .views-submit-button {
+	float: right;
+}
+
+span.gcal-ico {
+  background: url(/sites/miamitech.org/themes/miamitech/images/mt/g-calendar.png);
+  position: absolute;
+  text-indent: -99999px;
+  height: 16px;
+  width: 15px;
+}
+
+span.ical-ico {
+  background: url(/sites/miamitech.org/themes/miamitech/images/mt/calendar.png);
+  position: absolute;
+  text-indent: -99999px;
+  height: 16px;
+  width: 15px;
+}
+
+span.ical-group-ico {
+  background: url(/sites/miamitech.org/themes/miamitech/images/mt/calendar-group.png);
+  position: absolute;
+  text-indent: -99999px;
+  height: 16px;
+  width: 15px;
+}
+
+span.rss-group-ico {
+  background: url(/sites/miamitech.org/themes/miamitech/images/mt/rss.png);
+  position: absolute;
+  text-indent: -99999px;
+  height: 14px;
+  width: 14px;
+}
+
+a.ical-link {
+  padding-left: 20px;
+}
+
+#views-exposed-form-latest-pages-page-7 .views-exposed-widget, #views-exposed-form-latest-pages-page-7 .form-item {
+  padding: 0px;
+}
+
+
+#block-ds-5c755d31699c072160e29da9599e28f3 .field {
+	padding-bottom: 5px;
+}
+
+.field-facebook-like, .field-tweet-button {
+	padding-bottom: 5px;
+}
+
+.field-nd-location-address .no-location {
+	color: #CCC;
+}
+
+.fieldset-wrapper > .description {
+	padding-bottom: 10px;
+}
+
+#main #register {
+	position: initial;
+}
+
+#main #register h1{
+	padding-bottom: 20px;
+}
+
+#main #register .block-signup {
+	padding: 0;
 }

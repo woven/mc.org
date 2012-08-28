@@ -137,5 +137,7 @@ function _og_single_node_form_validate($form, &$form_state){
     $form_state['values']['og_groups'] = array(
         $group => $group,
       );
+
+    return ;
   }
 }

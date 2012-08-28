@@ -4,6 +4,7 @@ function mc_update_6001() {
   // disable modules
   module_disable(array('simplemenu'));
   drupal_uninstall_module('simplemenu');
+
   // enable modules
   drupal_install_modules(array(
     'sections', 
@@ -13,13 +14,10 @@ function mc_update_6001() {
     'strongarm', 
     'features', 
     'adminrole', 
-    'jquery_ui', 
-    'spaces',
+    'jquery_ui',
     'context',
     'purl',
     'context_ui',
-    'spaces_og',
-    'spaces_ui',
     'conditional_styles',
     'og'
   ));
@@ -31,4 +29,18 @@ function mc_update_6001() {
 
 function mc_install() {
   db_query("UPDATE {system} SET weight = 20 WHERE name = 'mc'");
+}
+
+/*
+ * Disable less
+ */
+function mc_update_6002() {
+  module_disable(array('less'));
+}
+
+/*
+ * Disable spaces
+ */
+function mc_update_6003() {
+  module_disable(array('spaces'));
 }

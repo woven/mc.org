@@ -1,0 +1,6 @@
+<?php
+
+function early_form_alter_install() {
+  //Make sure we're heavy so our form_alter hook gets executed last
+  db_query("UPDATE system SET weight = -1000 WHERE name = 'early_form_alter'");
+}
