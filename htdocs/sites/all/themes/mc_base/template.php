@@ -288,9 +288,9 @@ function mc_base_preprocess_page(&$variables){
       
       if ($node->field_page_type[0]['value'] == 'landing' ){
         $page_mode = arg(2);
-        //if ( $page_mode == 'view' || empty($page_mode) ){
-        //  $page_classes = 'two-columns-equal';
-        //}
+        if ( $page_mode == 'view' || empty($page_mode) ){
+         $page_classes = 'two-columns-equal';
+        }
       }else{
         $page_classes .= ' secondary-page';
       }
