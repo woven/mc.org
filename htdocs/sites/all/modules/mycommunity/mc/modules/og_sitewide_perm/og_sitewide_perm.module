@@ -32,10 +32,3 @@ function og_sitewide_perm_late_form_alter(&$form, &$form_state, $form_id){
       array_unshift_assoc($ops,0,"-- None --");
     }
 }
-
-function array_unshift_assoc(&$arr, $key, $val)
-{
-  $arr = array_reverse($arr, true);
-  $arr[$key] = $val;
-  $arr = array_reverse($arr, true);
-}

@@ -1,4 +1,16 @@
 <?php
+/**
+ *  like array_unshift but can working on assoctes
+ * @param $arr
+ * @param $key
+ * @param $val
+ */
+function array_unshift_assoc(&$arr, $key, $val)
+{
+  $arr = array_reverse($arr, TRUE);
+  $arr[$key] = $val;
+  $arr = array_reverse($arr, TRUE);
+}
 
 /**
  * Returns the groups that the user is subscribed to.
@@ -363,7 +375,7 @@ function _mc_date_week_firstday($week,$year){
 /**
  * Return a date with a specific format time.
  */
-function _mc_api_get_formatted_time($time, $printAMPM = true){
+function _mc_api_get_formatted_time($time, $printAMPM = TRUE){
   if (date('i', $time) != '00'){
     if ($printAMPM){
       $timeFormat = "g:ia";
@@ -412,20 +424,20 @@ function mc_api_format_time($start, $end = NULL, $occurring = NULL){
   
   if (!$end){
     // start date only
-    return $prefix_start . _mc_api_get_formatted_time($start, true);
+    return $prefix_start . _mc_api_get_formatted_time($start, TRUE);
   }
   if(date('z', $start)==date('z', $end)){
     if (date('a', $start) == date('a', $end)){
       // do not print AM/PM in start date
-      $startDate = _mc_api_get_formatted_time($start, false);
+      $startDate = _mc_api_get_formatted_time($start, FALSE);
     }else{
-      $startDate = _mc_api_get_formatted_time($start, true);
+      $startDate = _mc_api_get_formatted_time($start, TRUE);
     }
-    $endDate = _mc_api_get_formatted_time($end, true);
+    $endDate = _mc_api_get_formatted_time($end, TRUE);
   }
   else {
-    $startDate = date('D', $start) . ' ' . _mc_api_get_formatted_time($start, true) . ' ';
-    $endDate = ' ' . date('D', $end) . ' ' . _mc_api_get_formatted_time($end, true);
+    $startDate = date('D', $start) . ' ' . _mc_api_get_formatted_time($start, TRUE) . ' ';
+    $endDate = ' ' . date('D', $end) . ' ' . _mc_api_get_formatted_time($end, TRUE);
   }
 
 
