@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * Implementation of hook_form_alter
+ * Because of this module's heavy weight, this function should be the last form_alter called.
+ * It then invokes the corresponding hook, hook_heavy_form_alter()
+ * Copied from form.inc
+ *
+ */
+function early_form_alter_form_alter(&$form, &$form_state, $form_id) {
+  // Normally, we would call drupal_alter($form_id, $form, $form_state).
+  // However, drupal_alter() normally supports just one byref parameter. Using
+  // the __drupal_alter_by_ref key, we can store any additional parameters
+  // that need to be altered, and they'll be split out into additional params
+  // for the hook_form_alter() implementations.
+  // @todo: Remove this in Drupal 7.
+  $data = &$form;
+  $data['__drupal_alter_by_ref'] = array(&$form_state);
+  drupal_alter('early_form_'. $form_id, $data);
+
+  // __drupal_alter_by_ref is unset in the drupal_alter() function, we need
+  // to repopulate it to ensure both calls get the data.
+  $data['__drupal_alter_by_ref'] = array(&$form_state);
+  drupal_alter('early_form', $data, $form_id);
+}

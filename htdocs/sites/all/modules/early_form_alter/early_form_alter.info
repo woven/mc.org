@@ -1,0 +1,10 @@
+name = Early Form Alter
+description = Provides a new hook: hook_early_form_alter, identical to hook_form_alter except that it is executed before hook_form_alter.  Also provides hook_early_form_(form_id)_alter
+core = 6.x
+package = Development
+; Information added by drupal.org packaging script on 2009-06-24
+version = "6.x-1.0"
+core = "6.x"
+project = "early_form_alter"
+datestamp = "1245873676"
+

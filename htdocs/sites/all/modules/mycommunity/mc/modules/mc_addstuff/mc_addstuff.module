@@ -39,6 +39,7 @@ function mc_addstuff_display_block_add_stuff(){
   
   // check if og is configured properly
   $is_configured = count(og_get_types('group')) && count(og_get_types('group_post'));
+
   if (!$is_configured) {
     form_set_error('content_types_table', t('You must designate at least one content type to act as a group node and another as a group post. <a href="!create">Create new content type</a> if needed.', array('!create' => url('admin/content/types/add', array('query' => drupal_get_destination())))));
   }
