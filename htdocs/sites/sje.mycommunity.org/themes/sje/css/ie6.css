@@ -1,0 +1,151 @@
+/*******************************************************************************
+
+	CSS on Sails Framework
+	Internet Explorer 6 stylesheet
+	Author: XHTMLized (http://www.xhtmlized.com/)
+
+*******************************************************************************/
+
+
+/* 2. COMMON
+--------------------------------------------------------------------------------
+==============================================================================*/
+
+/* PNG fix */
+#search,
+#branding .site-name a,
+#add-stuff-button,
+.corner,
+.ico-small ,
+#navigation .ico-menu,
+#page .node-page .controls .zoom,
+#page .node-page .controls a,
+#featured .browse,
+.tooltip {
+	-pie-png-fix: true;
+	behavior: url(PIE/PIE.htc);
+}
+
+/* Images */
+.corner {
+	top: -2px;
+	right: -3px;
+}
+.corner-left {
+	top: -2px;
+	left: -2px;
+}
+
+#main .corner,
+#main .corner-left {
+	-pie-png-fix: false;
+	top: -3px;
+	background-image: url(../images/common/misc-corner-signature.gif);
+}
+#main .corner {
+	right: -8px;
+}
+#main .corner-left {
+	left: -4px;
+}
+
+/* Icons */
+.ico-small {
+	position: relative;
+	float: left;
+	margin-top: -2px;
+}
+
+.block-overlay {
+	width: 670px;
+}
+
+.block-overlay .title {
+	height: 29px;
+}
+
+
+/* 2.1 Header
+------------------------------------------------------------------------------*/
+
+#header .block-user img {
+	float: left;
+	margin-top: 4px;
+}
+
+#header .block-user .ico-small {
+	margin-top: 0;
+}
+
+
+/* 2.3 Navigation
+------------------------------------------------------------------------------*/
+
+#navigation .ico-menu {
+	background-image: url(../images/common/sprite-menu-icons.gif);
+	-pie-png-fix: false;
+}
+
+
+/* 2.4 Page
+------------------------------------------------------------------------------*/
+
+.featured-item {
+	margin: 0 8px;
+}
+
+#page .block-title {
+	padding-bottom: 6px;
+}
+
+#page .tabs {
+	padding-bottom: 0;
+}
+#page .tabs li {
+	margin: -2px 5px -1px 0;
+}
+
+#page .block-title a span,
+#page .see-all span {
+	float: left;
+}
+#page .block-title .arrow {
+	bottom: -14px;
+}
+
+.block form li {
+	width: 252px;
+}
+
+.block form li.wide {
+	width: 532px;
+}
+
+.block form li.submit {
+	margin-right: 0;
+}
+
+#page .tabs span {
+	margin-right: 5px;
+}
+
+#page .item-block .calendar,
+#page .community  .image {
+	margin-left: 10px;
+}
+
+#page .vevent .calendar {
+	border: 1px solid #dadada;
+	behavior: none;
+}
+
+/* 2.5 Footer
+------------------------------------------------------------------------------*/
+
+#footer .menu  {
+	display: inline;
+}
+
+#sitemap .ico-small {
+	margin-right: 5px;
+}
