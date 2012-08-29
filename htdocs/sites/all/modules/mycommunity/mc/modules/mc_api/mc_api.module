@@ -5,11 +5,13 @@
  * @param $key
  * @param $val
  */
-function array_unshift_assoc(&$arr, $key, $val)
+function array_unshift_assoc($arr = array(), $key, $val)
 {
-  $arr = array_reverse($arr, TRUE);
-  $arr[$key] = $val;
-  $arr = array_reverse($arr, TRUE);
+  if(is_array($arr)){
+    $arr = array_reverse($arr, TRUE);
+    $arr[$key] = $val;
+    return array_reverse($arr, TRUE);
+  }
 }
 
 /**

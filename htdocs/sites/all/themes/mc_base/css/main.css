@@ -1718,10 +1718,6 @@ textarea {
 	border: 1px solid #d6d6d6;
 }
 
-.block form input {
-	height: 23px;
-}
-
 .block form textarea {
 	height: 92px;
 	padding: 5px;
