@@ -19,7 +19,8 @@ function mc_update_6001() {
     'purl',
     'context_ui',
     'conditional_styles',
-    'og'
+    'og',
+    'ft_hidesubmit'
   ));
   // enable admin interface feature
   features_install_modules(array('admin_interface', 'harlem_theme'));
@@ -46,8 +47,9 @@ function mc_update_6003() {
 }
 
 /**
- * Disable ft_formats
+ * Disable ft_formats, enable hidesubmit feature
  */
 function mc_update_6004() {
   module_disable(array('ft_formats'));
+  module_enable(array('ft_hidesubmit'));
 }
