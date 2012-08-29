@@ -1,0 +1,13 @@
+name = OG Access CT
+description = OG Access configuration per content type.
+dependencies[] = og
+dependencies[] = og_access
+core = 6.x
+package = Organic Groups
+
+; Information added by drupal.org packaging script on 2012-07-09
+version = "6.x-1.0"
+core = "6.x"
+project = "og_access_ct"
+datestamp = "1341826037"
+

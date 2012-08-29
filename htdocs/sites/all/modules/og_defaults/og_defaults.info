@@ -1,0 +1,10 @@
+name = Organic groups defaults
+description = Set defaults for Organic group 'group' nodes.
+dependencies[] = og
+package = Organic groups
+; Information added by drupal.org packaging script on 2011-11-23
+version = "6.x-1.2"
+core = "6.x"
+project = "og_defaults"
+datestamp = "1322016043"
+

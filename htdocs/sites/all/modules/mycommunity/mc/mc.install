@@ -19,7 +19,8 @@ function mc_update_6001() {
     'purl',
     'context_ui',
     'conditional_styles',
-    'og'
+    'og',
+    'ft_hidesubmit'
   ));
   // enable admin interface feature
   features_install_modules(array('admin_interface', 'harlem_theme'));
@@ -31,16 +32,31 @@ function mc_install() {
   db_query("UPDATE {system} SET weight = 20 WHERE name = 'mc'");
 }
 
-/*
+/**
  * Disable less
  */
 function mc_update_6002() {
   module_disable(array('less'));
 }
 
-/*
+/**
  * Disable spaces
  */
 function mc_update_6003() {
   module_disable(array('spaces'));
+}
+
+/**
+ * Disable ft_formats, enable hidesubmit feature
+ */
+function mc_update_6004() {
+  module_disable(array('ft_formats'));
+  module_enable(array('ft_hidesubmit'));
+}
+
+/**
+ * Disable ft_formats, enable hidesubmit feature
+ */
+function mc_update_6005() {
+  module_enable(array('nodeformcols'));
 }
