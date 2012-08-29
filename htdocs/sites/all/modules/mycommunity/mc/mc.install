@@ -55,8 +55,15 @@ function mc_update_6004() {
 }
 
 /**
- * Disable ft_formats, enable hidesubmit feature
+ * enable nodeformcols
  */
 function mc_update_6005() {
   module_enable(array('nodeformcols'));
+}
+
+/**
+ * enable mc_og
+ */
+function mc_update_6006() {
+  module_enable(array('mc_og','og_access','og_access_roles'));
 }

@@ -165,20 +165,21 @@ function ft_group_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'content_extra_weights_group';
   $strongarm->value = array(
-    'title' => '29',
+    'title' => '28',
     'body_field' => '31',
-    'revision_information' => '47',
-    'author' => '46',
-    'options' => '48',
-    'comment_settings' => '51',
-    'menu' => '45',
-    'path' => '50',
-    'og_description' => '40',
-    'og_selective' => '44',
-    'og_register' => '42',
-    'og_directory' => '43',
-    'print' => '49',
-    'og_private' => '39',
+    'revision_information' => '49',
+    'author' => '48',
+    'options' => '50',
+    'comment_settings' => '52',
+    'menu' => '47',
+    'path' => '51',
+    'og_description' => '42',
+    'og_selective' => '46',
+    'og_register' => '44',
+    'og_directory' => '45',
+    'xmlsitemap' => '53',
+    'og_private' => '41',
+    'nodewords' => '43',
   );
   $export['content_extra_weights_group'] = $strongarm;
 
@@ -492,12 +493,12 @@ function ft_group_strongarm() {
   $strongarm->value = array(
     'menu' => array(
       'region' => 'right',
-      'weight' => '0',
+      'weight' => '6',
       'hidden' => 0,
     ),
     'comment_settings' => array(
       'region' => 'right',
-      'weight' => '30',
+      'weight' => '9',
       'has_required' => FALSE,
       'title' => 'Comment settings',
       'collapsed' => 1,
@@ -505,7 +506,7 @@ function ft_group_strongarm() {
     ),
     'path' => array(
       'region' => 'right',
-      'weight' => '30',
+      'weight' => '10',
       'has_required' => FALSE,
       'title' => 'URL path settings',
       'collapsed' => 1,
@@ -513,7 +514,7 @@ function ft_group_strongarm() {
     ),
     'options' => array(
       'region' => 'right',
-      'weight' => '25',
+      'weight' => '8',
       'has_required' => FALSE,
       'title' => 'Publishing options',
       'collapsed' => 1,
@@ -521,7 +522,7 @@ function ft_group_strongarm() {
     ),
     'author' => array(
       'region' => 'right',
-      'weight' => '20',
+      'weight' => '7',
       'has_required' => FALSE,
       'title' => 'Authoring information',
       'collapsed' => 1,
@@ -529,59 +530,51 @@ function ft_group_strongarm() {
     ),
     'buttons' => array(
       'region' => 'main',
-      'weight' => '19',
+      'weight' => '21',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
     ),
     'field_group_manager' => array(
       'region' => 'main',
-      'weight' => '9',
+      'weight' => '8',
       'has_required' => FALSE,
       'title' => 'Additional Group Managers',
       'hidden' => 0,
     ),
     'og_selective' => array(
-      'region' => 'main',
-      'weight' => '10',
+      'region' => 'right',
+      'weight' => '0',
       'has_required' => TRUE,
       'title' => 'Membership requests',
     ),
     'og_register' => array(
-      'region' => 'main',
-      'weight' => '6',
+      'region' => 'right',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => 'Registration form',
       'hidden' => 0,
     ),
     'og_directory' => array(
-      'region' => 'main',
-      'weight' => '8',
+      'region' => 'right',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => 'List in groups directory',
       'hidden' => 0,
     ),
     'themes' => array(
       'region' => 'main',
-      'weight' => '11',
+      'weight' => '20',
       'has_required' => FALSE,
       'title' => 'Theme configuration',
       'collapsed' => 0,
       'hidden' => 0,
     ),
     'og_menu' => array(
-      'region' => 'main',
-      'weight' => '7',
+      'region' => 'right',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Enable menu for this group',
-      'hidden' => 0,
-    ),
-    'print' => array(
-      'region' => 'main',
-      'weight' => '12',
-      'has_required' => FALSE,
-      'title' => 'Printer, email and PDF versions',
-      'collapsed' => 1,
       'hidden' => 0,
     ),
     'field_group_url' => array(
@@ -592,23 +585,16 @@ function ft_group_strongarm() {
       'hidden' => 0,
     ),
     'og_private' => array(
-      'region' => 'main',
-      'weight' => '13',
+      'region' => 'right',
+      'weight' => '1',
       'has_required' => FALSE,
       'title' => 'Private group',
-      'hidden' => 0,
-    ),
-    'og_nodeapi' => array(
-      'region' => 'main',
-      'weight' => '5',
-      'has_required' => FALSE,
-      'title' => NULL,
       'hidden' => 0,
     ),
     'title' => array(
       'region' => 'main',
       'weight' => '0',
-      'has_required' => FALSE,
+      'has_required' => TRUE,
       'title' => 'Title',
       'hidden' => 0,
     ),
@@ -622,7 +608,7 @@ function ft_group_strongarm() {
     'field_small_name' => array(
       'region' => 'main',
       'weight' => '2',
-      'has_required' => FALSE,
+      'has_required' => TRUE,
       'title' => 'Short Name',
       'hidden' => 0,
     ),
@@ -635,36 +621,66 @@ function ft_group_strongarm() {
     ),
     'field_header_color' => array(
       'region' => 'main',
-      'weight' => '14',
+      'weight' => '11',
       'has_required' => FALSE,
       'title' => 'Header Color',
       'hidden' => 0,
     ),
     'field_header_title_color' => array(
       'region' => 'main',
-      'weight' => '16',
+      'weight' => '13',
       'has_required' => TRUE,
       'title' => 'Header Title Color',
     ),
     'field_about' => array(
       'region' => 'main',
-      'weight' => '17',
+      'weight' => '14',
       'has_required' => FALSE,
       'title' => 'About',
       'hidden' => 0,
     ),
     'field_list_image' => array(
       'region' => 'main',
-      'weight' => '18',
+      'weight' => '15',
       'has_required' => FALSE,
       'title' => 'Images',
       'hidden' => 0,
     ),
     'field_group_featured_items' => array(
       'region' => 'main',
-      'weight' => '15',
+      'weight' => '12',
       'has_required' => FALSE,
       'title' => 'Featured Items',
+      'hidden' => 0,
+    ),
+    'field_enable_discussions' => array(
+      'region' => 'right',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Enable or Disable Discussions',
+      'hidden' => 0,
+    ),
+    'field_welcome_email' => array(
+      'region' => 'main',
+      'weight' => '18',
+      'has_required' => FALSE,
+      'title' => 'Welcome Email',
+      'hidden' => 0,
+    ),
+    'xmlsitemap' => array(
+      'region' => 'main',
+      'weight' => '19',
+      'has_required' => FALSE,
+      'title' => 'XML sitemap',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'nodewords' => array(
+      'region' => 'main',
+      'weight' => '16',
+      'has_required' => FALSE,
+      'title' => 'Meta tags',
+      'collapsed' => 1,
       'hidden' => 0,
     ),
   );
@@ -800,6 +816,19 @@ function ft_group_strongarm() {
     1 => 'promote',
   );
   $export['node_options_group_page'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_access_roles_choices';
+  $strongarm->value = array(
+    2 => 2,
+    1 => 0,
+    3 => 0,
+    5 => 0,
+    4 => 0,
+  );
+  $export['og_access_roles_choices'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -994,13 +1023,6 @@ Join: !group_url
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_gallery';
-  $strongarm->value = '';
-  $export['og_max_groups_gallery'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'og_max_groups_group';
   $strongarm->value = '';
   $export['og_max_groups_group'] = $strongarm;
@@ -1022,20 +1044,6 @@ Join: !group_url
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_nnews';
-  $strongarm->value = '';
-  $export['og_max_groups_nnews'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_npage';
-  $strongarm->value = '';
-  $export['og_max_groups_npage'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'og_max_groups_page';
   $strongarm->value = '';
   $export['og_max_groups_page'] = $strongarm;
@@ -1043,23 +1051,9 @@ Join: !group_url
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_place';
-  $strongarm->value = '';
-  $export['og_max_groups_place'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'og_max_groups_simplenews';
   $strongarm->value = '';
   $export['og_max_groups_simplenews'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_video';
-  $strongarm->value = '';
-  $export['og_max_groups_video'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1112,8 +1106,15 @@ To manage your subscription, visit !group_url';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'og_private_groups';
-  $strongarm->value = '0';
+  $strongarm->value = '3';
   $export['og_private_groups'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_public_group';
+  $strongarm->value = array();
+  $export['og_public_group'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1139,7 +1140,7 @@ Personal message from @username:
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'og_visibility';
-  $strongarm->value = '1';
+  $strongarm->value = '2';
   $export['og_visibility'] = $strongarm;
 
   $strongarm = new stdClass;

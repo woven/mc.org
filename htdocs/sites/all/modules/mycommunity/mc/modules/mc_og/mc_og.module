@@ -12,6 +12,99 @@ function mc_og_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+function og_post_visibility($node){
+  $is_public = $node->og_public;
+
+  if(!empty($node->og_access_roles)){
+    $is_auth = array_search('2',$node->og_access_roles);
+  }else{
+    $is_auth = false;
+  }
+
+  if(!($is_auth === false)){
+    $is_auth = 1;
+  }else{
+    $is_auth = 0;
+  }
+
+  if($is_public){
+    return 0;
+  }else{
+    if($is_auth){
+      return 2;
+    }
+    return 1;
+  }
+
+}
+
+function mc_og_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
+  global $user;
+  if (!og_is_group_post_type($node->type)) {
+    return;
+  }
+
+  switch($op){
+    case 'load':
+      $node->og_post_visibility = og_post_visibility($node);
+      break;
+  }
+
+}
+
+
+function _mc_og_post_visibility_validate($form, &$form_state) {
+  $form_post_visibility = $form_state['values']['og_post_visibility'];
+  $og = &$form['og_nodeapi'];
+
+  switch($form_post_visibility){
+    case 0; //public
+      form_set_value($og['visible']['og_public'], 1, $form_state);
+      form_set_value($og['og_access_roles'], array(), $form_state);
+    break;
+    case 1; //private
+      form_set_value($og['visible']['og_public'], 0, $form_state);
+      form_set_value($og['og_access_roles'], array(), $form_state);
+    break;
+    case 2; //semi-private
+      form_set_value($og['visible']['og_public'], 0, $form_state);
+      form_set_value($og['og_access_roles'], array(2), $form_state);
+    break;
+  }
+}
+
+  function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
+
+  //post visibility
+  if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form' && og_is_group_post_type($form['#node']->type)) {
+
+    $node = $form['#node'];
+
+    array_unshift($form['#validate'],'_mc_og_post_visibility_validate');
+
+    $og = &$form['og_nodeapi'];
+    $og_visible = &$og['visible'];
+    $og_visible['og_post_visibility'] = array(
+        '#type' => 'radios',
+        '#title' => t('Post Visibility'),
+        '#options' => array(
+          '0' => 'Public',
+          '1' => 'Private',
+          '2' => 'Semi-Private'
+        ),
+        '#default_value' => ($node->og_post_visibility) ? $node->og_post_visibility : 0
+    );
+
+    $og_visible['og_public']['#prefix'] = '<div style="display:none;">';
+    $og_visible['og_public']['#suffix'] = '</div>';
+
+    $og['og_access_roles']['#prefix'] = '<div style="display:none;">';
+    $og['og_access_roles']['#suffix'] = '</div>';
+
+  }
+
+}
+
 function mc_og_perm(){
   return array('post to all the groups');
 }
