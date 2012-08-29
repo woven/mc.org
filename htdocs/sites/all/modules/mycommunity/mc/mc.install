@@ -53,3 +53,10 @@ function mc_update_6004() {
   module_disable(array('ft_formats'));
   module_enable(array('ft_hidesubmit'));
 }
+
+/**
+ * Disable ft_formats, enable hidesubmit feature
+ */
+function mc_update_6005() {
+  module_enable(array('nodeformcols'));
+}

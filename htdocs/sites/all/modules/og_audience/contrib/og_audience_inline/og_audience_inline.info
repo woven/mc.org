@@ -1,0 +1,10 @@
+name = OG Audience Inline
+description = Provides organic groups audience inline support
+dependencies = og_audience
+package = Organic groups
+; Information added by drupal.org packaging script on 2011-02-25
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "og_audience"
+datestamp = "1298619796"
+

@@ -1,0 +1,26 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for the OG Access CT module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function og_access_ct_install() {
+  // Code for updating weight of module over og_access module.
+  $weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'og_access'"));
+  db_query("UPDATE {system} SET weight = %d WHERE name = 'og_access_ct'", $weight + 1);
+}
+
+/**
+ * Implements hook_install().
+ */
+function og_access_ct_uninstall() {
+  $node_types = array_keys(node_get_types('names'));
+  foreach ($node_types as $key => $value) {
+    if ($value) {
+      variable_del('og_visibility_' . $value);
+    }
+  }
+}

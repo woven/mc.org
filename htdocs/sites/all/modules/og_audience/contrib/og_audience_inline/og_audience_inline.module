@@ -1,0 +1,95 @@
+<?php
+
+function og_audience_inline_perm() {
+  return array('access inline og audience form');
+}
+
+function og_audience_inline_menu ($may_cache) {
+  $items = array();
+
+  $items[] = array(
+    'path' => 'og_audience_inline/form',
+    'title' => t('OG audience Inline Form'),
+    'callback' => '_og_audience_inline_form',
+    'access' => user_access('access inline og audience form'),
+    'type' => MENU_CALLBACK);
+
+  $items[] = array(
+    'path' => 'og_audience_inline/formsubmit',
+    'title' => t('OG audience Inline Form'),
+    'callback' => '_og_audience_inline_form_submit',
+    'access' => user_access('access inline og audience form'),
+    'type' => MENU_CALLBACK);
+
+  return $items;
+}
+
+function og_audience_inline_link ($type, $node = NULL, $teaser = FALSE) {
+  static $pass = FALSE;
+
+  global $user;
+  $links = array();
+  if($type=='node' && user_access('access inline og audience form')) {
+    if (variable_get('og_audience_tab_enable', 1) && $node && !og_is_group_type($node->type) && !og_is_omitted_type($node->type)) {
+      if (count($user->og_groups) && (count($node->og_groups) || variable_get('og_audience_allow_add', 1)) && user_access('change audience')) {
+        drupal_add_js('misc/jquery.js', 'core', 'header', FALSE);
+        drupal_add_js(drupal_get_path('module', 'og_audience_inline') . '/js/og_audience_inline.js', 'module', 'header', FALSE);
+
+        if(!$pass) {
+          $settings = array('ogAudienceInline' =>
+                        array(
+                          'urlForm' => url('og_audience_inline/form/'),
+                          'urlFormSubmit' => url('og_audience_inline/formsubmit/'),
+                        )
+                      );
+          drupal_add_js($settings, 'setting');
+          $pass = TRUE;
+        }
+
+        $links['node_og_audience'] = array( 
+          'title' => t('Audience'), 
+          'href' => '',
+          'fragment' => '',
+          'attributes' => array('id'=> 'link_og_audience_' . $node->nid, 'title' => t('Audience'), 'onclick' => "og_audience_inline_showhide_form($node->nid, '" . t('Audience') . "','" . t('Close audience') . "'); return false;") ,
+          'html' => TRUE,
+        );     
+      }
+    }
+  }
+  return $links; 
+}
+
+function _og_audience_inline_form ($nid) {
+  $node = node_load($nid);  
+  echo drupal_get_form('_og_audience_inline_build_form', $node);
+  exit();
+}
+
+function _og_audience_inline_build_form($node) {
+  $form = og_audience_build_form($node);
+  unset($form['submit']);
+  $form['submit'] = array(
+    '#type' => 'button',
+    '#value' => t('Save'),
+    '#name' => 'save',
+    '#attributes' => array('onclick' => "og_audience_inline_submit();return false;"),
+  );
+  return $form;
+}
+
+function _og_audience_inline_form_submit($nid) {
+  $form_id = "-og-audience-build-form";
+  $form_values = $_POST;
+  $form_values['orig_node'] = node_load($nid);
+  
+  if(!array_key_exists('add_to', $form_values)) {
+    $form_values['add_to'] = array();
+  }
+  if(!array_key_exists('remove_from', $form_values)) {
+    $form_values['remove_from'] = array();
+  }
+  og_audience_build_form_submit($form_id, $form_values);
+  echo drupal_to_js(drupal_get_messages());
+  exit();
+}
+

@@ -1,0 +1,297 @@
+<?php
+
+/**
+ * Implementation of hook_perm().
+ */
+function og_audience_perm() {
+  return array('change audience');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function og_audience_menu() {
+  $items['admin/og/og-audience'] = array(
+    'title' => 'OG Audience',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('og_audience_settings'),
+    'access arguments' => array('administer site configuration'),
+  );
+  $items['node/%node/audience'] = array(
+    'title' => 'Audience',
+    'type' => MENU_LOCAL_TASK,
+    'access callback' => 'og_audience_tab_access',
+    'access arguments' => array(1),
+    'page callback' => 'og_audience_page',
+    'page arguments' => array(1),
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function og_audience_block($op = 'list', $delta = 0) { 
+  switch ($op) {
+    case 'list':
+      $blocks = array();
+      $blocks[0]['info'] = t('Organic group audience');
+      $blocks[0]['cache'] = BLOCK_NO_CACHE;
+      return $blocks;
+
+    case 'view':
+      if (user_access('change audience')) {
+        global $user;
+        
+        if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+          $node = node_load(arg(1));
+          if ($node &&
+            og_is_group_post_type($node->type) &&
+            count($user->og_groups) && 
+            (count($node->og_groups) || variable_get('og_audience_allow_add', 1))) {
+            
+            $block['subject'] = t('Audience');
+            $block['content'] = drupal_get_form('og_audience_build_form', $node);
+            return $block;
+          }
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Menu callback function for settings form
+ */
+function og_audience_settings() {
+  $form['og_audience_tab_enable'] = array(
+    '#title' => t('Provide a tab'), 
+    '#type' => 'checkbox',
+    '#default_value' => variable_get('og_audience_tab_enable', 1),
+    '#description' => t('If this is enabled, an additional tab will appear on posts for users with the <em>change audience</em> permission. You may wish to disable this if you have enabled the block interface.'),
+  );
+  $form['og_audience_allow_add'] = array(
+    '#title' => t('Posts with no audience may be added to a group'), 
+    '#type' => 'checkbox',
+    '#default_value' => variable_get('og_audience_allow_add', 1),
+    '#description' => t('If this is enabled, a user may add to a group a post that initially had no audience. Note that the user may also be able to determine whether the post will remain public.'),
+  );
+  
+  return system_settings_form($form);
+}
+
+/**
+ * Determine whether a user may access the audience page to perform audience
+ * changes.
+ *
+ * @param $account
+ *   The user whose access needs to be verified. If empty, the current user is
+ *   checked.
+ */
+function og_audience_tab_access($node, $account = NULL) {
+  global $user;
+  
+  if (empty($account)) {
+    $account = $user;
+  }
+
+  return (
+    variable_get('og_audience_tab_enable', 1) &&
+    $node &&
+    user_access('change audience') &&
+    og_is_group_post_type($node->type) &&
+    count($account->og_groups) &&
+    (count($node->og_groups) || variable_get('og_audience_allow_add', 1))
+  );
+}
+
+/**
+ * Provide the audience management page.
+ */
+function og_audience_page($node) {
+  drupal_set_title(t('Audience for %title', array('%title' => $node->title)));
+  return drupal_get_form('og_audience_build_form', $node);
+}
+
+/**
+ * Return the audience form for the given node and user.
+ */
+function og_audience_build_form(&$form_state, $node) {
+  global $user;
+
+  $type = node_get_types('name', $node);
+
+  if (empty($node->og_groups)) {
+    $node->og_groups = array(); 
+  }
+
+  $form['target_node'] = array(
+    '#type' => 'value',
+    '#value' => $node,
+  );
+  
+  // Find groups the node could be added to.
+  $add_to_options = _og_audience_add_to_options($node, $user);
+
+  $form['og_audience_add'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Add'),
+  );
+  
+  if ($count = count($add_to_options)) {
+    $form['og_audience_add']['add_to'] = array(
+      '#type' => $count >= 10 ? 'select' : 'checkboxes',
+      '#title' => t('Add this %type to', array('%type' => $type)),
+      '#options' => $add_to_options,
+      '#multiple' => TRUE,
+    );
+    $submit = TRUE;
+
+    // Only show the "Public" checkbox when the node is not in any group.
+    if (empty($node->og_groups) && module_exists('og_access')) {
+      og_access_alter_nongroup_form($form, $node);
+
+      // Only an author/editor should be offered the visibility override. 
+      if (isset($form['og_nodeapi']['visible']['og_public']) && !node_access('update', $node) && !user_access('administer organic groups')) {
+        // Not allowed to set visibility. Ensure that the post remains public,
+        // because it was public in the first place by not belonging to any
+        // group.
+        unset($form['og_nodeapi']['visible']['og_public']);
+        $form['og_nodeapi']['og_public'] = array('#type' => 'value', '#value' => 1);
+      }
+    }
+  }
+  else {
+    $form['og_audience_add']['add_to'] = array(
+      '#type' => 'value',
+      '#value' => array(),
+    );
+    $form['og_audience_add']['add_to_message'] = array(
+      '#type' => 'markup',
+      '#value' => '<p>'. t('There are no groups you can add this %type to.', array('%type' => $type)) .'</p>',
+    );
+  }
+
+  // Find groups the node could be removed from.
+  $remove_from_options = _og_audience_remove_from_options($node, $user);
+
+  $form['og_audience_remove'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Remove'),
+  );
+  
+  if ($count = count($remove_from_options)) {
+    $form['og_audience_remove']['remove_from'] = array(
+      '#type' => $count >= 10 ? 'select' : 'checkboxes',
+      '#title' => t('Remove this %type from', array('%type' => $type)),
+      '#options' => $remove_from_options,
+      '#multiple' => TRUE,
+    );
+    $submit = TRUE;
+  }
+  else {
+    $form['og_audience_remove']['remove_from'] = array(
+      '#type' => 'value',
+      '#value' => array(),
+    );
+    $form['og_audience_remove']['remove_from_message'] = array(
+      '#type' => 'markup',
+      '#value' => '<p>'. t('There are no groups you can remove this %type from.', array('%type' => $type)) .'</p>',
+    );
+  }
+
+  if ($submit) {
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit'),
+    );
+  }
+  
+  return $form;
+}
+
+/**
+ * Form submit handler.
+ */
+function og_audience_build_form_submit($form, &$form_state) {
+  global $user;
+  $changed = FALSE;
+  $node = $form_state['values']['target_node'];
+
+  // Add array_filter in case we're using checkboxes
+  $add_to = array_keys(array_filter($form_state['values']['add_to']));
+
+  $remove_from = array_keys(array_filter($form_state['values']['remove_from']));
+
+  $type = node_get_types('name', $node);
+  if (count($add_to)) {
+    foreach ($add_to as $gid) {
+      $node->og_groups[] = $gid;
+      drupal_set_message(t('The %type has been added to %group.', array('%type' => $type, '%group' => $user->og_groups[$gid]['title'])));
+    }
+    // This should only be set if the node was part of no groups previously.
+    if (isset($form_state['values']['og_public'])) { 
+      $node->og_public = $form_state['values']['og_public'];
+    }
+    $changed = TRUE;
+  }
+  if (count($remove_from)) {
+    $node->og_groups = array_diff($node->og_groups, $form_state['values']['remove_from']);
+    $required = variable_get('og_audience_required', 0) && !user_access('administer nodes');
+    if (empty($node->og_groups) && $required) {
+      form_set_error('remove_form', t('You must leave at least one group selected for the %type.', array('%type' => $type)));
+    }
+    else {
+      foreach ($remove_from as $gid) {
+        drupal_set_message(t('The %type has been removed from %group.', array('%type' => $type, '%group' => $user->og_groups[$gid]['title'])));
+      }
+      $changed = TRUE;
+    }
+  }
+  
+  if ($changed) {
+    og_save_ancestry($node);
+    node_access_acquire_grants($node);
+    cache_clear_all();
+  }
+}
+
+/**
+ * Find groups a node could be added to by the given user (assuming that the
+ * user has the permission for doing so).
+ *
+ * @return
+ *   Array of options.
+ */
+function _og_audience_add_to_options($node, $user) {
+  $options = array();
+  $groups = array_diff(array_keys($user->og_groups), $node->og_groups);
+  if (count($groups)) {
+    foreach ($groups as $gid) {
+      $options[$gid] = $user->og_groups[$gid]['title'];
+    }
+  }
+  return $options;
+}
+
+/**
+ * Find groups a node could be removed from by the given user.
+ *
+ * Only group administrators and the node's author are allowed to remove content
+ * from a group.
+ *
+ * @return
+ *   Array of options.
+ */
+function _og_audience_remove_from_options($node, $user) {
+  $options = array();
+  $groups = array_intersect($node->og_groups, array_keys($user->og_groups));
+  if (count($groups)) {
+    foreach ($groups as $gid) {
+      if ($user->og_groups[$gid]['is_admin'] || node_access('update', $node)) {
+        $options[$gid] = $user->og_groups[$gid]['title'];
+      }
+    }
+  }
+  return $options;
+}

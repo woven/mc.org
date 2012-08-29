@@ -1,0 +1,12 @@
+name = OG Audience
+description = Allows group subscribers and administrators to change the audience of existing content.
+dependencies[] = og
+package = Organic groups
+core = 6.x
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "og_audience"
+datestamp = "1298619796"
+
