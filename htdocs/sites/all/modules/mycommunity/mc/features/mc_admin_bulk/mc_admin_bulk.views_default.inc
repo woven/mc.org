@@ -3,7 +3,7 @@
 /**
  * Implementation of hook_views_default_views().
  */
-function sje_bulk_node_admin_views_default_views() {
+function mc_admin_bulk_views_default_views() {
   $views = array();
 
   // Exported view: admin_node_bulk
@@ -265,7 +265,7 @@ function sje_bulk_node_admin_views_default_views() {
         'event' => 'event',
         'file' => 'file',
         'forum' => 'forum',
-        'npage' => 'npage',
+        'video' => 'video',
       ),
       'group' => '0',
       'exposed' => TRUE,
@@ -295,7 +295,6 @@ function sje_bulk_node_admin_views_default_views() {
         'event' => 'event',
         'file' => 'file',
         'forum' => 'forum',
-        'npage' => 'npage',
         'video' => 'video',
       ),
       'group' => '0',
@@ -322,7 +321,6 @@ function sje_bulk_node_admin_views_default_views() {
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
-  $handler->override_option('title', 'Manage Content');
   $handler->override_option('items_per_page', 100);
   $handler->override_option('use_pager', '1');
   $handler->override_option('style_plugin', 'bulk');
@@ -374,12 +372,12 @@ function sje_bulk_node_admin_views_default_views() {
     'display_result' => 1,
     'merge_single_action' => 1,
     'operations' => array(
-      'node_assign_owner_action' => array(
+      'og_add_group_action' => array(
         'selected' => 0,
         'skip_confirmation' => 0,
         'label' => '',
       ),
-      'nodewords_mass_update-48d00920397f9d8f23f7088c88056286' => array(
+      'node_assign_owner_action' => array(
         'selected' => 0,
         'skip_confirmation' => 0,
         'label' => '',
@@ -395,6 +393,11 @@ function sje_bulk_node_admin_views_default_views() {
         'label' => '',
       ),
       'system_message_action' => array(
+        'selected' => 0,
+        'skip_confirmation' => 0,
+        'label' => '',
+      ),
+      'views_bulk_operations_ruleset_action_rules_set_1' => array(
         'selected' => 0,
         'skip_confirmation' => 0,
         'label' => '',
@@ -420,6 +423,16 @@ function sje_bulk_node_admin_views_default_views() {
         'label' => '',
       ),
       'imagecache_generate_action' => array(
+        'selected' => 0,
+        'skip_confirmation' => 0,
+        'label' => '',
+      ),
+      'og_make_private_action' => array(
+        'selected' => 0,
+        'skip_confirmation' => 0,
+        'label' => '',
+      ),
+      'og_make_public_action' => array(
         'selected' => 0,
         'skip_confirmation' => 0,
         'label' => '',
@@ -491,7 +504,17 @@ function sje_bulk_node_admin_views_default_views() {
         'skip_confirmation' => 0,
         'label' => '',
       ),
+      'og_remove_groups_action' => array(
+        'selected' => 0,
+        'skip_confirmation' => 0,
+        'label' => '',
+      ),
       'node_unpromote_action' => array(
+        'selected' => 0,
+        'skip_confirmation' => 0,
+        'label' => '',
+      ),
+      'og_remove_group_action' => array(
         'selected' => 0,
         'skip_confirmation' => 0,
         'label' => '',
@@ -605,7 +628,7 @@ function sje_bulk_node_admin_views_default_views() {
       'views_bulk_operations_delete_node_action' => array(
         'selected' => 1,
         'skip_confirmation' => 0,
-        'label' => '',
+        'label' => 'Delete',
       ),
       'node_mass_update-a27b9efabcd054685a549378b174ad11' => array(
         'selected' => 0,
