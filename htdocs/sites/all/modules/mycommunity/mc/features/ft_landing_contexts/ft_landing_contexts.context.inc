@@ -485,6 +485,38 @@ function ft_landing_contexts_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'landing_help';
+  $context->description = '';
+  $context->tag = 'Landing';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'help' => 'help',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-mc_page_menu-block_1' => array(
+          'module' => 'views',
+          'delta' => 'mc_page_menu-block_1',
+          'region' => 'left',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Landing');
+  $export['landing_help'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'landing_homepage';
   $context->description = 'Context that contains the reactions to display the homepage properly';
   $context->tag = 'Landing';
