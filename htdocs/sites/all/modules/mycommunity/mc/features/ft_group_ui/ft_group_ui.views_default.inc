@@ -3617,297 +3617,6 @@ return $usuario->name;',
     'type' => 'none',
   ));
   $handler->override_option('items_per_page', 1);
-  $handler = $view->new_display('block', 'Group Title', 'block_1');
-  $handler->override_option('fields', array(
-    'nid' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'exclude' => 1,
-      'spaces' => array(
-        'type' => NULL,
-        'frontpage' => FALSE,
-      ),
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'group_nid',
-    ),
-    'field_logo_fid' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 1,
-        'path' => 'node/[nid]',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'group_logo_default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_logo_fid',
-      'table' => 'node_data_field_logo',
-      'field' => 'field_logo_fid',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-    ),
-    'title' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 1,
-        'text' => '<h1>[title]</h1>',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'spaces' => array(
-        'type' => NULL,
-        'frontpage' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'title',
-      'table' => 'node',
-      'field' => 'title',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-    ),
-    'field_header_color_value' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_header_color_value',
-      'table' => 'node_data_field_header_color',
-      'field' => 'field_header_color_value',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-    ),
-    'field_header_title_color_value' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_header_title_color_value',
-      'table' => 'node_data_field_header_title_color',
-      'field' => 'field_header_title_color_value',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-    ),
-    'field_small_name_value' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_small_name_value',
-      'table' => 'node_data_field_small_name',
-      'field' => 'field_small_name_value',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-    ),
-    'phpcode' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'value' => '<?php
-$image = "";
-if ($data->node_og_ancestry_node_data_field_logo_field_logo_fid!="")
-{
-$imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->node_og_ancestry_node_data_field_logo_field_logo_fid));
-$image= theme_imagecache("group_logo", $imagepath, false, false);
-}
-//drupal_set_message("<pre>".$imagepath."</pre>"); 
-//drupal_set_message("<pre>".print_r($data, true)."</pre>"); 
-?>
-<div style="background: <?php echo $data->node_og_ancestry_node_data_field_header_color_field_header_color_value; ?>; padding: 12px 10px; width: 920px; margin-left: -10px; height: 67px;">
-<a href="../../<?php echo $data->node_og_ancestry_node_data_field_header_color_field_small_name_value; ?>"><?php echo $image;?></a> <h1 style="color: <?php echo $data->node_og_ancestry_node_data_field_header_color_field_header_title_color_value; ?>"><?php echo $data->node_og_ancestry_title ?></h1>
-</div>',
-      'exclude' => 0,
-      'id' => 'phpcode',
-      'table' => 'customfield',
-      'field' => 'phpcode',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('style_options', array(
-    'grouping' => '',
-  ));
-  $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', -1);
   $handler = $view->new_display('block', 'Follow Link', 'block_2');
   $handler->override_option('fields', array(
     'nid' => array(
@@ -4260,7 +3969,7 @@ if (is_numeric($nid)){
     'weight' => 0,
     'name' => 'navigation',
   ));
-  $handler = $view->new_display('block', 'Group Title - for group homepage', 'block_3');
+  $handler = $view->new_display('block', 'Group Title - for group/nodes-in-groups', 'block_3');
   $handler->override_option('relationships', array());
   $handler->override_option('fields', array(
     'nid' => array(
@@ -4305,10 +4014,12 @@ if (is_numeric($nid)){
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
-        'make_link' => 1,
+        'make_link' => 0,
         'path' => 'node/[nid]',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -4323,7 +4034,8 @@ if (is_numeric($nid)){
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'link_to_node' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 1,
       'label_type' => 'none',
       'format' => 'group_logo_default',
       'multiple' => array(
@@ -4344,12 +4056,14 @@ if (is_numeric($nid)){
     'title' => array(
       'label' => '',
       'alter' => array(
-        'alter_text' => 1,
-        'text' => '<h1>[title]</h1>',
+        'alter_text' => 0,
+        'text' => '<h1>[title]',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -4364,7 +4078,8 @@ if (is_numeric($nid)){
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'link_to_node' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 1,
       'spaces' => array(
         'type' => NULL,
         'frontpage' => FALSE,
@@ -4501,15 +4216,16 @@ if (is_numeric($nid)){
       ),
       'relationship' => 'none',
     ),
-    'phpcode' => array(
-      'label' => '',
+    'nothing' => array(
+      'label' => 'inline html',
       'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
+        'text' => '[field_logo_fid] <h1>[title]</h1>',
         'make_link' => 0,
-        'path' => '',
+        'path' => 'node/[nid]',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -4524,23 +4240,11 @@ if (is_numeric($nid)){
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'value' => '<?php
-$image = "";
-if ($data->node_data_field_logo_field_logo_fid!="")
-{
-$imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->node_data_field_logo_field_logo_fid));
-$image= theme_imagecache("group_logo", $imagepath, false, false);
-}
-//drupal_set_message("<pre>".$imagepath."</pre>"); 
-//drupal_set_message("<pre>".print_r($data, true)."</pre>"); 
-?>
-<div style="background: <?php echo $data->node_data_field_header_color_field_header_color_value; ?>; padding: 12px 10px; width: 920px; margin-left: -10px; height: 67px;">
-<a href="<?php echo $data->node_data_field_header_color_field_small_name_value; ?>"><?php echo $image;?></a> <h1 style="color: <?php echo $data->node_data_field_header_color_field_header_title_color_value; ?>"><?php echo $data->node_title ?></h1>
-</div>',
+      'hide_alter_empty' => 1,
       'exclude' => 0,
-      'id' => 'phpcode',
-      'table' => 'customfield',
-      'field' => 'phpcode',
+      'id' => 'nothing',
+      'table' => 'views',
+      'field' => 'nothing',
       'override' => array(
         'button' => 'Use default',
       ),
@@ -4558,7 +4262,7 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
       'breadcrumb' => '',
       'default_argument_type' => 'node',
       'default_argument' => '',
-      'validate_type' => 'none',
+      'validate_type' => 'php',
       'validate_fail' => 'not found',
       'break_phrase' => 0,
       'not' => 0,
@@ -4568,9 +4272,9 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
         2 => 0,
-        4 => 0,
-        5 => 0,
         3 => 0,
+        5 => 0,
+        4 => 0,
       ),
       'override' => array(
         'button' => 'Use default',
@@ -4582,36 +4286,28 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
       'default_argument_image_size' => '_original',
       'default_argument_php' => '',
       'validate_argument_node_type' => array(
-        'image' => 0,
         'article' => 0,
         'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
         'event' => 0,
-        'feature_spot' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
-        'front_picture' => 0,
         'group' => 0,
-        'healthcare_facility' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'photo' => 0,
-        'photo_gallery' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
-        'video' => 0,
+        'nnews' => 0,
         'webform' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
         1 => 0,
         2 => 0,
-        5 => 0,
-        6 => 0,
         3 => 0,
       ),
       'validate_argument_type' => 'tid',
@@ -4622,11 +4318,39 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
         'thumbnail' => 'thumbnail',
         'preview' => 'preview',
       ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
+      'validate_argument_is_member' => '0',
       'validate_argument_group_node_type' => array(
         'group' => 0,
       ),
-      'validate_argument_php' => '',
+      'validate_argument_php' => 'if($argument){
+	$node = node_load($argument);
+
+	if($node->type == "group"){
+	   return true;
+	}else{
+		if(!empty($node->og_groups)){
+			$handler->argument = current($node->og_groups);
+			return true;
+		}
+	}
+}
+elseif(arg(0)==\'groups\' && arg(1)) {
+  $small_name = arg(1);
+  $nid = db_result(db_query("SELECT nid FROM  content_type_group WHERE field_small_name_value=\'" . $small_name ."\'"));
+  if(!empty($nid)){
+    $handler->argument = $nid;
+     return true;
+  }
+}
+return false;',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
     ),
   ));
   $handler->override_option('filters', array(
@@ -4650,10 +4374,37 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
       'relationship' => 'none',
     ),
   ));
+  $handler->override_option('style_plugin', 'semanticviews_default');
+  $handler->override_option('style_options', array(
+    'grouping' => '',
+    'group' => array(
+      'element_type' => 'h3',
+      'class' => 'title',
+    ),
+    'list' => array(
+      'element_type' => '',
+      'class' => '',
+    ),
+    'row' => array(
+      'element_type' => '',
+      'class' => '',
+      'last_every_nth' => '0',
+      'first_class' => '',
+      'last_class' => '',
+      'striping_classes' => 'odd even',
+    ),
+  ));
+  $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
-    'inline' => array(),
-    'separator' => '',
-    'hide_empty' => 0,
+    'semantic_html' => array(
+      'nothing' => array(
+        'element_type' => '',
+        'class' => '',
+        'label_element_type' => '',
+        'label_class' => '',
+      ),
+    ),
+    'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
@@ -4854,385 +4605,6 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
-  $handler = $view->new_display('block', 'Group Title - for add node', 'block_5');
-  $handler->override_option('relationships', array());
-  $handler->override_option('fields', array(
-    'nid' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'exclude' => 1,
-      'spaces' => array(
-        'type' => NULL,
-        'frontpage' => FALSE,
-      ),
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-    'field_logo_fid' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 1,
-        'path' => 'node/[nid]',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'group_logo_default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_logo_fid',
-      'table' => 'node_data_field_logo',
-      'field' => 'field_logo_fid',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-    'title' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 1,
-        'text' => '<h1>[title]</h1>',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'spaces' => array(
-        'type' => NULL,
-        'frontpage' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'title',
-      'table' => 'node',
-      'field' => 'title',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-    'field_header_color_value' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_header_color_value',
-      'table' => 'node_data_field_header_color',
-      'field' => 'field_header_color_value',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-    'field_header_title_color_value' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_header_title_color_value',
-      'table' => 'node_data_field_header_title_color',
-      'field' => 'field_header_title_color_value',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-    'field_small_name_value' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_small_name_value',
-      'table' => 'node_data_field_small_name',
-      'field' => 'field_small_name_value',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-    'phpcode' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'value' => '<?php
-$image = "";
-if ($data->node_data_field_logo_field_logo_fid!="")
-{
-$imagepath = db_result(db_query("SELECT filepath from files WHERE fid =".$data->node_data_field_logo_field_logo_fid));
-$image= theme_imagecache("group_logo", $imagepath, false, false);
-}
-//drupal_set_message("<pre>".$imagepath."</pre>"); 
-//drupal_set_message("<pre>".print_r($data, true)."</pre>"); 
-?>
-<div style="background: <?php echo $data->node_data_field_header_color_field_header_color_value; ?>; padding: 12px 10px; width: 920px; margin-left: -10px; height: 67px;">
-<a href="/<?php echo $data->node_data_field_header_color_field_small_name_value; ?>"><?php echo $image;?></a> <h1 style="color: <?php echo $data->node_data_field_header_color_field_header_title_color_value; ?>"><?php echo $data->node_title ?></h1>
-</div>',
-      'exclude' => 0,
-      'id' => 'phpcode',
-      'table' => 'customfield',
-      'field' => 'phpcode',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'php',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        4 => 0,
-        5 => 0,
-        3 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => 'if ( arg(0) == \'node\' && arg(1) == \'add\' && is_numeric(arg(3)) ){
-  $node = node_load( arg(3) );
-  if ( $node->type == \'group\' ){
-    return arg(3);
-  }
-  foreach ($node->og_groups as $gid => $group){
-    return $gid;
-  }
-}',
-      'validate_argument_node_type' => array(
-        'image' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'article' => 0,
-        'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
-        'event' => 0,
-        'feature_spot' => 0,
-        'feedapi_node' => 0,
-        'file' => 0,
-        'front_picture' => 0,
-        'group' => 0,
-        'healthcare_facility' => 0,
-        'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
-        'video' => 0,
-        'webform' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        5 => 0,
-        6 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-    ),
-  ));
-  $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', -1);
   $handler = $view->new_display('block', 'Follow not authenticated user', 'block_6');
   $handler->override_option('relationships', array());
   $handler->override_option('fields', array(
@@ -5422,6 +4794,204 @@ $image= theme_imagecache("group_logo", $imagepath, false, false);
     ),
   ));
   $handler->override_option('css_class', 'follow-block');
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
+  $handler = $view->new_display('block', 'og mission statement', 'block_1');
+  $handler->override_option('relationships', array());
+  $handler->override_option('fields', array(
+    'body' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 0,
+      'id' => 'body',
+      'table' => 'node_revisions',
+      'field' => 'body',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+    'field_group_url_url' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 1,
+        'path' => '[field_group_url_url]',
+        'absolute' => 1,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '_blank',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'label_type' => 'none',
+      'format' => 'plain',
+      'multiple' => array(
+        'group' => TRUE,
+        'multiple_number' => '',
+        'multiple_from' => '',
+        'multiple_reversed' => FALSE,
+      ),
+      'exclude' => 0,
+      'id' => 'field_group_url_url',
+      'table' => 'node_data_field_group_url',
+      'field' => 'field_group_url_url',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('arguments', array(
+    'nid' => array(
+      'default_action' => 'default',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '',
+      'breadcrumb' => '',
+      'default_argument_type' => 'node',
+      'default_argument' => '',
+      'validate_type' => 'php',
+      'validate_fail' => 'not found',
+      'break_phrase' => 0,
+      'not' => 0,
+      'id' => 'nid',
+      'table' => 'node',
+      'field' => 'nid',
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        2 => 0,
+        4 => 0,
+        5 => 0,
+        3 => 0,
+      ),
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+      ),
+      'default_argument_user' => 0,
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'event_feed' => 0,
+        'webform' => 0,
+        'forum' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        1 => 0,
+      ),
+      'validate_argument_type' => 'tid',
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'validate_argument_is_member' => '0',
+      'validate_argument_group_node_type' => array(
+        'group' => 0,
+      ),
+      'validate_argument_php' => '$nid = $argument;
+$node = node_load($nid);
+if($node->field_group_url[0][\'url\'] || $node->body){
+$node = node_load($nid);
+return true;
+}
+
+return false;',
+    ),
+  ));
+  $handler->override_option('css_class', 'group-mission block');
+  $handler->override_option('style_plugin', 'semanticviews_default');
+  $handler->override_option('style_options', array(
+    'grouping' => '',
+    'group' => array(
+      'element_type' => 'h3',
+      'class' => '',
+    ),
+    'list' => array(
+      'element_type' => '',
+      'class' => '',
+    ),
+    'row' => array(
+      'element_type' => '',
+      'class' => '',
+      'last_every_nth' => '0',
+      'first_class' => '',
+      'last_class' => '',
+      'striping_classes' => '',
+    ),
+  ));
+  $handler->override_option('row_plugin', 'semanticviews_fields');
+  $handler->override_option('row_options', array(
+    'semantic_html' => array(
+      'body' => array(
+        'element_type' => 'div',
+        'class' => 'group-statement',
+      ),
+      'field_group_url_url' => array(
+        'element_type' => 'div',
+        'class' => 'group-url',
+      ),
+    ),
+    'skip_blank' => 0,
+  ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
 
