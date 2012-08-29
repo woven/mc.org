@@ -31,16 +31,23 @@ function mc_install() {
   db_query("UPDATE {system} SET weight = 20 WHERE name = 'mc'");
 }
 
-/*
+/**
  * Disable less
  */
 function mc_update_6002() {
   module_disable(array('less'));
 }
 
-/*
+/**
  * Disable spaces
  */
 function mc_update_6003() {
   module_disable(array('spaces'));
+}
+
+/**
+ * Disable ft_formats
+ */
+function mc_update_6004() {
+  module_disable(array('ft_formats'));
 }
