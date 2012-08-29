@@ -2568,3 +2568,12 @@ a.ical-link {
 #main #register .block-signup {
 	padding: 0;
 }
+
+#page #block-views-mc_page_menu-block_1 .view-mc-page-menu .view-content .odd, #page #block-views-mc_page_menu-block_1 .view-mc-page-menu .view-content .even {
+margin: 0;
+}
+
+.view-mc-page-menu .menu .leaf {
+	overflow: hidden;
+	white-space: nowrap;
+}
