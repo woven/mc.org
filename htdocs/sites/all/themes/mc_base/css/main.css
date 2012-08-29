@@ -2577,3 +2577,8 @@ margin: 0;
 	overflow: hidden;
 	white-space: nowrap;
 }
+
+.view-mc-page-menu .menu .leaf .views-field-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
