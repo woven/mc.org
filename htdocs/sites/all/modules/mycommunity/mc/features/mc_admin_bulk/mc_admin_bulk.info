@@ -1,5 +1,5 @@
-name = "Sje Bulk Node Admin"
-description = "Sje Bulk Node Admin Feature"
+name = "Mc Admin Bulk"
+description = "Mc Admin Bulk Feature"
 core = "6.x"
 package = "Features"
 dependencies[] = "strongarm"

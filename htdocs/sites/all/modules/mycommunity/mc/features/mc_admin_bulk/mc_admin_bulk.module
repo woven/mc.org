@@ -4,4 +4,4 @@
  * Code for the MT Bulk Node Admin feature.
  */
 
-include_once 'sje_bulk_node_admin.features.inc';
+include_once 'mc_admin_bulk.features.inc';
