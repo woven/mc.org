@@ -74,3 +74,10 @@ function mc_update_6006() {
 function mc_update_6007() {
   module_enable(array('mc_roles'));
 }
+
+/**
+ * enable mc_perms
+ */
+function mc_update_6008() {
+  module_enable(array('mc_perms'));
+}

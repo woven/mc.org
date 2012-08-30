@@ -1,7 +1,7 @@
 name = "mc_perms"
 description = "MC perms"
 core = "6.x"
-package = "Features"
+package = "MyCommunity.org"
 dependencies[] = "features"
 dependencies[] = "features_perm"
 features[ctools][] = "strongarm:strongarm:1"
