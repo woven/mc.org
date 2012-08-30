@@ -73,7 +73,21 @@ function _mc_og_post_visibility_validate($form, &$form_state) {
   }
 }
 
-  function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
+function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
+
+  if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form' && og_is_group_post_type($form['#node']->type)) {
+    $og = &$form['og_nodeapi'];
+    $og_visible = &$og['visible'];
+
+    $og_groups = $og_visible['og_groups'];
+
+    if(!(isset($og_groups['#options']) && !empty($og_groups['#options']))){
+      $l = l("browse available groups","groups");
+      drupal_set_message("Woops, you must be a member of a group first. Please $l.");
+      drupal_goto('<front>');
+    }
+
+  }
 
   //post visibility
   if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form' && og_is_group_post_type($form['#node']->type)) {
