@@ -417,10 +417,13 @@ function mc_base_preprocess(&$vars){
 function mc_base_preprocess_block(&$vars){
 
         //support sub title feature TITLE | SUB TITLE
-        if(isset($vars['title'])){
+        $block = $vars['block'];
+        $vars['title'] = $block->subject;
+        if(isset($vars['title']) && !empty($vars['title'])){
             if(strstr($vars['title'],'|')){
                 $titles = explode("|",$vars['title']);
-                $vars['title'] = $titles[0]."<span>".$titles[1]."</span>";
+                $vars['title'] = $titles[0];
+                $vars['title_sub'] = $titles[1];
             }
         }
 

@@ -1,7 +1,6 @@
 ; $Id: rubik.info,v 1.2.2.2 2010/09/28 20:50:29 yhahn Exp $
 name = "MyCommunity.org Base Theme" 
 description = "Base Theme for MyCommunity.org"
-base theme = "tao"
 core = "6.x"
 engine = "phptemplate"
  

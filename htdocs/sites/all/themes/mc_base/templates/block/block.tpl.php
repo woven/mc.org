@@ -26,9 +26,14 @@
  */
 ?>
 <div id="block-<?php print $block->module .'-'. $block->delta; ?>" class="block block-<?php print $block->module ?> <?php print $context_block_classes ?>">
-    <?php if ($block->subject): ?>
+
+    <?php if ($title): ?>
 	<div class="block-title">
-		  <?php print $block->subject ?>
+		  <?php print $title ?>
+
+          <?php if(!empty($title_sub)): ?>
+              <span><?php print $title_sub ?></span>
+          <?php endif; ?>
 	</div>
     <?php endif;?>
 
