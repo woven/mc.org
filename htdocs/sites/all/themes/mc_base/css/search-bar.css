@@ -51,6 +51,9 @@
 	position: relative;
 }
 
+/**
+   @todo change button style to become css button instead of image
+*/
 #search .button {
 	display: block;
 	border: 0;
