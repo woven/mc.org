@@ -34,9 +34,12 @@ scripts[] = "js/qtip.js"
 ; Stylesheets
 stylesheets[all][] = "system-menus.css"
 stylesheets[all][] = "system.css"
-stylesheets[all][] = "css/system-menus.css"
+
 stylesheets[screen][] = "css/reset.css"
 stylesheets[screen][] = "css/drupal.css"
+
+stylesheets[all][] = "css/tabs.css"
+
 stylesheets[screen][] = "css/base.css"
 stylesheets[screen][] = "css/main.css"
 stylesheets[screen][] = "css/custom.css"
