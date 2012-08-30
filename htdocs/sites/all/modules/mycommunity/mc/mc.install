@@ -67,3 +67,10 @@ function mc_update_6005() {
 function mc_update_6006() {
   module_enable(array('mc_og','og_access','og_access_roles'));
 }
+
+/**
+ * enable mc_roles
+ */
+function mc_update_6007() {
+  module_enable(array('mc_roles'));
+}

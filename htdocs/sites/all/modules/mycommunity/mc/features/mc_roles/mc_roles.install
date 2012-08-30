@@ -1,0 +1,18 @@
+<?php
+
+/*
+ * Delete 'Publisher' role if it exist on the current database
+ */
+function mc_roles_update_6002(){
+	require_once(drupal_get_path('module', 'user') . "/user.admin.inc");
+
+    $roles = user_roles();
+    $rid = array_search('publisher',array_map('strtolower', $roles));
+    if(!($rid === false)){
+      $form = array();
+      $form_state = array();
+      $form_state['values'] = array('rid' => $rid,'op'=> 'Delete role');
+      user_admin_role_submit($form, $form_state);
+    };
+
+  }
