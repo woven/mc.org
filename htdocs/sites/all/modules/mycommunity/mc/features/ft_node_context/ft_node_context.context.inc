@@ -52,9 +52,9 @@ function ft_node_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-og_details-block_1' => array(
+        'views-og_details-block_3' => array(
           'module' => 'views',
-          'delta' => 'og_details-block_1',
+          'delta' => 'og_details-block_3',
           'region' => 'group_logo',
           'weight' => 0,
         ),
