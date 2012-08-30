@@ -1,4 +1,6 @@
 <?php
 
-
-?>
+function ft_group_update_6001(){
+  module_load_include('inc', 'content', 'includes/content.crud');
+  content_field_instance_delete('field_group_manager', 'group',true);  
+}
