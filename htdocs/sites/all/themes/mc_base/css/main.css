@@ -2493,3 +2493,47 @@ margin: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+
+.field-profile-facebook a{
+    background: url(../images/profile/facebook.png);
+    height: 32px;
+    width: 32px;
+    display: block;
+    text-indent: -999px;
+}
+
+.field-profile-facebook, .field-profile-gender {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.field-profile-twitter, .field-profile-birthday {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.field-profile-twitter a{
+    background: url(../images/profile/twitter.png);
+    height: 32px;
+    width: 32px;
+    display: block;
+    text-indent: -999px;
+}
+
+.field-profile-gender .male {
+    background: url(../images/profile/male.png);
+    height: 32px;
+    width: 32px;
+    display: block;
+    text-indent: -999px;
+}
+
+.field-profile-gender .female {
+    background: url(../images/profile/female.png);
+    height: 32px;
+    width: 32px;
+    display: block;
+    text-indent: -999px;
+}

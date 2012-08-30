@@ -1,0 +1,32 @@
+<?php
+/**
+ * @file
+ * Code for the MT Profile UI feature.
+ */
+
+include_once 'mc_profile_ui.features.inc';
+
+function mc_profile_ui_ds_fields_alter(&$fields) {
+  $fields['profile_gender']['properties']['formatters']['mc_profile_ui_gender'] = 'MC Format';
+}
+
+function theme_mc_profile_ui_gender($field) {
+  if($field['object']->profile_gender=="Male"){
+    return '<span class="male"></span>';
+  }
+  if($field['object']->profile_gender=="Female"){
+    return '<span class="female"></span>';
+  }
+  else {
+    return '';
+  }
+}
+
+function mc_profile_ui_theme() {
+  $theme_functions = array(
+    'mc_profile_ui_gender' => array(
+      'arguments' => array('field' => NULL),
+    ),
+  );
+  return $theme_functions;
+}

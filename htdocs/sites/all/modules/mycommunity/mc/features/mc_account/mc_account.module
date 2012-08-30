@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MT account feature.
+ */
+
+include_once 'mc_account.features.inc';
