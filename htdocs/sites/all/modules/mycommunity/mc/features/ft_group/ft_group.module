@@ -29,8 +29,9 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
 }
 
 /**
+ * @todo remove this code/logic after making sure that we dont need this field anymore: field_group_manager
+ *
  * Implementation of hook_nodeapi()
- */
 function ft_group_nodeapi(&$node, $op, $teaser, $page) {
   
   if ($node->type == 'group'){
@@ -82,7 +83,7 @@ function ft_group_nodeapi(&$node, $op, $teaser, $page) {
 	  }
   }
 }
-
+ */
 
 /**
  * Implementation of hook_menu()
@@ -92,14 +93,14 @@ function ft_group_menu(){
     'type' => MENU_CALLBACK,
     'page callback' => 'follow_group',
     //'access arguments' => array(''),
-    'access callback' => true,
+    'access callback' => TRUE,
     'page arguments' => array(1),
     'title' => 'Follow group'
   );
   $items['follow/anonymous/%'] = array(
      'type' => MENU_CALLBACK,
      'page callback' => 'follow_group_anonymous',
-     'access callback' => true,
+     'access callback' => TRUE,
      'page arguments' => array(2),
      'title' => 'Follow group as anonymous user'
   );
@@ -337,6 +338,6 @@ function follow_group($group){
  * @return 
  */  
 function follow_group_anonymous($group){
-  $_SESSION['anonymous_must_follow']=true;
+  $_SESSION['anonymous_must_follow']=TRUE;
   $_SESSION['anonymous_group']=$group;
 }

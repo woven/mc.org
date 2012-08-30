@@ -162,79 +162,6 @@ function ft_group_content_default_fields() {
     ),
   );
 
-  // Exported field: field_group_manager
-  $fields['group-field_group_manager'] = array(
-    'field_name' => 'field_group_manager',
-    'type_name' => 'group',
-    'display_settings' => array(
-      'weight' => '41',
-      'parent' => '',
-      'label' => array(
-        'format' => 'above',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 1,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
-      ),
-      '4' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '2' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '3' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '5' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'userreference',
-    'required' => '0',
-    'multiple' => '1',
-    'module' => 'userreference',
-    'active' => '1',
-    'referenceable_roles' => array(
-      '5' => 5,
-      '2' => 0,
-      '4' => 0,
-      '3' => 0,
-    ),
-    'referenceable_status' => '1',
-    'advanced_view' => '--',
-    'advanced_view_args' => '',
-    'widget' => array(
-      'autocomplete_match' => 'contains',
-      'size' => '60',
-      'reverse_link' => 0,
-      'default_value' => array(
-        '0' => array(
-          'uid' => NULL,
-          '_error_element' => 'default_value_widget][field_group_manager][0][uid][uid',
-        ),
-      ),
-      'default_value_php' => NULL,
-      'label' => 'Additional Group Managers',
-      'weight' => '39',
-      'description' => 'The user who created this group is a group manager. Enter additional users that should be group managers. The user should already be created, should be active and should belong to the "group manager" role.',
-      'type' => 'userreference_autocomplete',
-      'module' => 'userreference',
-    ),
-  );
-
   // Exported field: field_group_url
   $fields['group-field_group_url'] = array(
     'field_name' => 'field_group_url',
@@ -731,7 +658,6 @@ black',
   // Translatables
   // Included for use with string extractors like potx.
   t('About');
-  t('Additional Group Managers');
   t('Featured Items');
   t('Header Color');
   t('Header Title Color');

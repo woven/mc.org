@@ -43,11 +43,6 @@ function mc_block($op = 'list', $delta =   0, $edit = array()) {
   }
 }
 
-function is_publisher() {
-  global $user;
-  return in_array('publisher', $user->roles);
-}
-
 
 function mc_redirect_when_session_variable_set($form, &$form_state) {
   unset($_REQUEST['destination']);
@@ -120,9 +115,7 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
   if(isset($_SESSION['anonymous_group']) && $user->uid!=0 && $form_id=='user_profile_form'){
     $form['#submit'][]="mc_redirect_when_session_variable_set";
   }
-  if($form['form_id']['#value']=='audio_node_form' && in_array("Publisher", $user->roles)){
-    $form['field_media']['0']['#upload_validators']['filefield_validate_size']['0']=52428800;
-  }
+
   if($form['form_id']['#value']=='forum_node_form'){
     $form['field_list_image']['#access']=false;
   }
