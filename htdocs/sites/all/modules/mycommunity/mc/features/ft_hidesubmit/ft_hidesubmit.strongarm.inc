@@ -45,7 +45,7 @@ function ft_hidesubmit_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'hide_submit_form_exclusion';
-  $strongarm->value = '';
+  $strongarm->value = 'google_cse_searchbox_form';
   $export['hide_submit_form_exclusion'] = $strongarm;
 
   $strongarm = new stdClass;

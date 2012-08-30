@@ -69,6 +69,10 @@
 	text-shadow: 0 -1px 0 #c95405;
 	vertical-align: middle;
 	text-align: center;
+
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    box-shadow: none;
 }
 
 #search .button span {
