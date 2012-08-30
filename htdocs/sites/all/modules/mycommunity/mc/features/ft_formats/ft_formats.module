@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Feature Formats feature.
- */
-
-include_once 'ft_formats.features.inc';
