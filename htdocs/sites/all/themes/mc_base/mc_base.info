@@ -51,6 +51,8 @@ stylesheets[screen][] = "css/buttons.css"
 stylesheets[screen][] = "css/form-confirm.css"
 stylesheets[screen][] = "css/event-flags.css"
 
+stylesheets[screen][] = "css/search-bar.css"
+
 ;disable core css files
 stylesheets[all][] = "user.css"
 stylesheets[all][] = "node.css"
