@@ -33,19 +33,30 @@ function features_perm_features_export_alter(&$export, $module_name) {
 
       $export['features']['variable']['features_perm_module'] = "features_perm_module";
 
+      /*
         $roles = user_role_features_export_options();
         foreach($roles as $role => $title){
             $export['features']['user_role'][$role] = $role;
         }
-
+      */
         //User Permissions
         $perms = user_permission_features_export_options();
 
-        /*
-         * loop through all permissions
-         * @todo add alter hook for excluded modules?
-         */
-        foreach($perms as $perm => $title){
+      //clean up existing permissions if they don't exit
+      if(isset($export['features']['user_permission']) && !empty($export['features']['user_permission'])){
+        $module_perms = &$export['features']['user_permission'];
+        foreach($module_perms as $key => $module_perm){
+          if(!array_key_exists($module_perm,$perms)){
+              unset($module_perms[$key]);
+          }
+        }
+      }
+
+      /*
+      * loop through all permissions
+      * @todo add alter hook for excluded modules?
+      */
+      foreach($perms as $perm => $title){
             $ex_modules = array("update","devel","devel_node_access","devel_themer","dummyimage",'ds_ui','rules_admin','eazylaunch','environment_plus','environment');
             $info = explode(":",$title);
             $module = trim($info[0]);
@@ -53,6 +64,10 @@ function features_perm_features_export_alter(&$export, $module_name) {
             if(!in_array($module,$ex_modules)){
               $export['features']['user_permission'][$perm] = $perm;
             }
-        }
+      }
+
+      //don't add dependecies to this module, only what I specifiy
+      $export['dependencies'] = array("features"=>'features','features_perm'=>'features_perm');
+
 	}
 }

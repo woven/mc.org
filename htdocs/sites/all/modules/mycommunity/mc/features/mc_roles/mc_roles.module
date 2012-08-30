@@ -4,3 +4,28 @@
  */
 
 // Drupal needs this blank file.
+
+
+function test(){
+  $perms = array();
+  $roles = array();
+
+  $roles = array(
+    'anonymous user',
+    'authenticated user',
+    'administrator',
+    'community manager',
+    'group manager'
+  );
+
+  $site_nodes = node_get_types();
+  $allowed_nodes = array();
+
+  $perms['create !ctype content'] = array('authenticated user');
+  $perms['delete any !ctype content'] = array('community manager');
+  $perms['edit any !ctype content'] = array('community manager');
+
+  $perms['delete own !ctype content'] = array('community manager');
+  $perms['edit own !ctype content'] = array('community manager');
+  $perms['create article sitewide'] = array('community manager');
+}
