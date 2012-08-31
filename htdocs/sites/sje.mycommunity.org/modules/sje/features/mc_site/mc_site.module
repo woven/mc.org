@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MC Site feature.
+ */
+
+include_once 'mc_site.features.inc';
