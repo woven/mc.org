@@ -622,6 +622,12 @@ a .ico-small {
 }
 */
 
+#navigation .primary-links li.last {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
 #navigation .primary-links li.last a {
 	-webkit-border-radius: 0 6px 6px 0;
 	-moz-border-radius: 0 6px 6px 0;
