@@ -16,6 +16,7 @@ function ft_landing_contexts_context_default_contexts() {
     'path' => array(
       'values' => array(
         'audio-and-video' => 'audio-and-video',
+        'audio-video' => 'audio-video',
       ),
     ),
   );
