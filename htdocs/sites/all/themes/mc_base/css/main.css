@@ -616,10 +616,11 @@ a .ico-small {
 	border-radius: 6px 0 0 6px;
 	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
 }
-
+/*
 #navigation .primary-links li.last {
 	float: right;
 }
+*/
 
 #navigation .primary-links li.last a {
 	-webkit-border-radius: 0 6px 6px 0;
