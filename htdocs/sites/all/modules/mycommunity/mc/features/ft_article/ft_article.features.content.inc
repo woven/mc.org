@@ -101,8 +101,8 @@ function ft_article_content_default_fields() {
       'label' => 'Images',
       'weight' => '5',
       'description' => 'Upload an image to be displayed on the lists of content',
-      'type' => 'imagefield_crop_widget',
-      'module' => 'imagefield_crop',
+      'type' => 'imagefield_widget',
+      'module' => 'imagefield',
     ),
   );
 
