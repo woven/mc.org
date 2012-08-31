@@ -81,3 +81,10 @@ function mc_update_6007() {
 function mc_update_6008() {
   module_enable(array('mc_perms'));
 }
+
+/**
+ * enable nodeformsettings
+ */
+function mc_update_6009() {
+  module_enable(array('nodeformsettings'));
+}

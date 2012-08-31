@@ -11,3 +11,4 @@ dependencies[] = early_form_alter
 dependencies[] = permissions_api
 dependencies[] = semanticviews_plus
 dependencies[] = mc_perms
+dependencies[] = nodeformsettings
