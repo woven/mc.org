@@ -18,6 +18,12 @@
  * @see template_preprocess_mimemail_message()
  */
 ?>
+<?php
+$settings = variable_get('theme_settings', array());
+if(!empty($settings)){
+  $logo_path = $settings['logo_path'];
+}
+?>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -28,7 +34,9 @@
     <td>
        <div id="center">
       <div id="main" style="margin: 12px;">
-      <div><img src=<?php echo $GLOBALS['base_url'] . '/' . $GLOBALS['theme_path'] . '/images/common/logo.png';?>"/sites/default/themes/harlem2/images/common/logo.png"></div>
+        <?php if($logo_path): ?>
+      <div><img src="<?php echo $GLOBALS['base_url'] . '/' . $logo_path;?>"></div>
+        <?php endif; ?>
         <div style="margin-top: 10px; background: #fff; padding: 10px;">
         <?php print $body ?>
         </div>
