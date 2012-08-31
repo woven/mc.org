@@ -142,6 +142,13 @@ function ft_audio_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'enable_revisions_page_audio';
+  $strongarm->value = 1;
+  $export['enable_revisions_page_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'event_nodeapi_audio';
   $strongarm->value = 'never';
   $export['event_nodeapi_audio'] = $strongarm;
@@ -299,24 +306,66 @@ function ft_audio_strongarm() {
     'nfs_submission_body_rows' => '20',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '1',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
     'nfs_publishingoptions' => '0',
     'nfs_comments' => '0',
     'nfs_taxonomy' => '0',
-    'nfs_preview' => '0',
+    'nfs_preview' => '1',
     'nfs_cancel' => array(
-      'nfs_cancel_status' => '1',
+      'nfs_cancel_status' => '0',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_edit_metatags_audio';
+  $strongarm->value = 1;
+  $export['nodewords_edit_metatags_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_modules_output_audio';
+  $strongarm->value = array();
+  $export['nodewords_filter_modules_output_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_regexp_audio';
+  $strongarm->value = '';
+  $export['nodewords_filter_regexp_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_method_audio';
+  $strongarm->value = '0';
+  $export['nodewords_metatags_generation_method_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_source_audio';
+  $strongarm->value = '2';
+  $export['nodewords_metatags_generation_source_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_use_alt_attribute_audio';
+  $strongarm->value = 1;
+  $export['nodewords_use_alt_attribute_audio'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -341,6 +390,27 @@ function ft_audio_strongarm() {
   $strongarm->name = 'og_max_groups_audio';
   $strongarm->value = '';
   $export['og_max_groups_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility_audio';
+  $strongarm->value = '0';
+  $export['og_visibility_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_audio';
+  $strongarm->value = '';
+  $export['page_title_type_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_audio_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_audio_showfield'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -390,6 +460,20 @@ function ft_audio_strongarm() {
   $strongarm->name = 'print_mail_display_urllist_audio';
   $strongarm->value = 1;
   $export['print_mail_display_urllist_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'show_diff_inline_audio';
+  $strongarm->value = 0;
+  $export['show_diff_inline_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'show_preview_changes_audio';
+  $strongarm->value = 1;
+  $export['show_preview_changes_audio'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -445,6 +529,16 @@ function ft_audio_strongarm() {
     1 => 'title',
   );
   $export['views_audio'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_audio';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_audio'] = $strongarm;
 
   return $export;
 }

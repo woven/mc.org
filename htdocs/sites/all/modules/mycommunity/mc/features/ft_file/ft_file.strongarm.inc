@@ -217,6 +217,13 @@ function ft_file_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'enable_revisions_page_file';
+  $strongarm->value = 1;
+  $export['enable_revisions_page_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'event_nodeapi_file';
   $strongarm->value = 'never';
   $export['event_nodeapi_file'] = $strongarm;
@@ -461,21 +468,21 @@ function ft_file_strongarm() {
     'nfs_submission_body_rows' => '20',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '1',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
     'nfs_publishingoptions' => '0',
     'nfs_comments' => '0',
     'nfs_taxonomy' => '0',
-    'nfs_preview' => '0',
+    'nfs_preview' => '1',
     'nfs_cancel' => array(
       'nfs_cancel_status' => '1',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_file'] = $strongarm;
@@ -518,6 +525,48 @@ function ft_file_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_edit_metatags_file';
+  $strongarm->value = 1;
+  $export['nodewords_edit_metatags_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_modules_output_file';
+  $strongarm->value = array();
+  $export['nodewords_filter_modules_output_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_regexp_file';
+  $strongarm->value = '';
+  $export['nodewords_filter_regexp_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_method_file';
+  $strongarm->value = '0';
+  $export['nodewords_metatags_generation_method_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_source_file';
+  $strongarm->value = '2';
+  $export['nodewords_metatags_generation_source_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_use_alt_attribute_file';
+  $strongarm->value = 1;
+  $export['nodewords_use_alt_attribute_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_file';
   $strongarm->value = array(
     0 => 'status',
@@ -548,6 +597,13 @@ function ft_file_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility_file';
+  $strongarm->value = '0';
+  $export['og_visibility_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'onepageprofile_weights';
   $strongarm->value = array(
     'account' => -10,
@@ -557,6 +613,20 @@ function ft_file_strongarm() {
     'timezone' => -6,
   );
   $export['onepageprofile_weights'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_file';
+  $strongarm->value = '';
+  $export['page_title_type_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_file_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_file_showfield'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -613,6 +683,20 @@ function ft_file_strongarm() {
   $strongarm->name = 'realname_profile_module';
   $strongarm->value = 'profile';
   $export['realname_profile_module'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'show_diff_inline_file';
+  $strongarm->value = 0;
+  $export['show_diff_inline_file'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'show_preview_changes_file';
+  $strongarm->value = 1;
+  $export['show_preview_changes_file'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -707,6 +791,16 @@ function ft_file_strongarm() {
   $strongarm->name = 'user_picture_imagecache_profiles_min_width';
   $strongarm->value = '';
   $export['user_picture_imagecache_profiles_min_width'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_file';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_file'] = $strongarm;
 
   return $export;
 }

@@ -75,29 +75,6 @@
     padding-left:10px;
 }
 
-.content-multiple-table th,
-label{
-  color: #424242;
-  text-transform: uppercase;
-}
-.content-multiple-table th{
-  color:#0077D9;
-}
-
-.content-multiple-table .form-item,
-.form-item-labeled {
-  padding: 0;  
-}
-
-.content-multiple-table .form-item:after,
-.form-item-labeled:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
 label.option{
   text-transform: none;
   color: inherit;

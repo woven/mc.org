@@ -2,13 +2,12 @@ fieldset > div {
     padding: 10px 15px;
 }
 
-fieldset {
+fieldset,.content-multiple-table {
     border: 1px solid #CCC;
-    -moz-border-radius: 0 4px 4px 4px;
-    -webkit-border-radius: 0 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
     margin: 20px 0;
     position: relative;
-    margin-top: 35px;
 }
 
 fieldset legend {
@@ -16,9 +15,44 @@ fieldset legend {
     padding: 5px 10px;
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
     font-weight: bold;
     min-width: 140px;
     left: -1px;
     position: absolute;
     top: -25px;
+}
+
+.content-multiple-table th {
+    color:#333333;
+    text-transform:uppercase;
+}
+
+.content-multiple-table label {
+    color:#424242;
+    text-transform:uppercase;
+}
+
+.content-multiple-table .form-item{
+    padding:0;
+}
+
+.form-item-labeled {
+    padding:0;
+}
+
+.content-multiple-table .form-item:after, .form-item-labeled:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+
+
+/**
+** removing fieldset legend for now
+*/
+#node-form fieldset legend {
+    display: none;
 }

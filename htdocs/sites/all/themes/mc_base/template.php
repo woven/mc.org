@@ -387,24 +387,6 @@ function mc_base_filter_tips(){
   return '';  // just hide it
 }
 
-/**
- * Implementation of template_preprocess
- * 
- * This is adding the classes need to display object like fieldsets in a proper
- * way. 
- * 
- */
-function mc_base_preprocess(&$vars){
-  if (is_array($vars['element']) && $vars['element']['#type'] == 'fieldset'){
-    if ($vars['element']['#title'] == t('Input format')){
-      $vars['attr']['class'] .= ' input-format-fieldset';
-      $vars['element']['#collapsible'] = FALSE;
-      $vars['element']['#collapsed'] = FALSE;
-    }
-  }
-  $vars['$content_bottom'] = '';
-}
-
 
 /**
  * Implementation of template_preprocess_block
@@ -575,7 +557,15 @@ function miamitech_nd_location_gmap($field, $latitude, $longitude, $width, $heig
   return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
 }
 
+
+/** theme_fieldset
+ * @todo add back the collapse logic if needed, right now commenting two links to avoid collapsible and collapsed classes
+ * @param $element
+ * @return string
+ */
+
 function mc_base_fieldset($element) {
+  unset($element['#collapsible']);
 
   if (!empty($element['#collapsible'])) {
     drupal_add_js('misc/collapse.js');

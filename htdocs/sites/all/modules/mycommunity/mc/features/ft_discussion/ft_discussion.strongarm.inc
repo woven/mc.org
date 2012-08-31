@@ -294,9 +294,9 @@ function ft_discussion_strongarm() {
   $strongarm->name = 'nodeformsettings_forum';
   $strongarm->value = array(
     'nfs_submission_body_rows' => '20',
-    'nfs_splitsummary' => '0',
+    'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '1',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
@@ -308,9 +308,9 @@ function ft_discussion_strongarm() {
       'nfs_cancel_status' => '1',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_forum'] = $strongarm;

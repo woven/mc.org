@@ -327,7 +327,6 @@
   float:right;
   margin:0;
 }
-table.content-multiple-table { margin-bottom:1px; }
 #field-list-image-items .description { float:left; }
 .content-add-more { margin-bottom:20px; }
 #node-form .submit-wrapper button.form-submit span {
@@ -343,7 +342,6 @@ table.content-multiple-table { margin-bottom:1px; }
   font-weight:bold;
 }
 #node-form label { color:#333; }
-#node-form .content-multiple-table th { color:#333; }
 #page .views-view-grid td, #page .views-view-grid th { border:none; }
 #page ul.custom-pager .key { font-size:14px !important; }
 #page .field-nodes-slideshow {

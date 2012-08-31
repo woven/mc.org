@@ -177,6 +177,13 @@ function ft_article_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'enable_revisions_page_article';
+  $strongarm->value = 0;
+  $export['enable_revisions_page_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'event_nodeapi_article';
   $strongarm->value = 'never';
   $export['event_nodeapi_article'] = $strongarm;
@@ -370,7 +377,7 @@ function ft_article_strongarm() {
     'nfs_submission_body_rows' => '20',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '1',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
@@ -384,7 +391,7 @@ function ft_article_strongarm() {
     ),
     'nfs_submit' => 'Submit',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_article'] = $strongarm;
@@ -434,10 +441,51 @@ function ft_article_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_edit_metatags_article';
+  $strongarm->value = 1;
+  $export['nodewords_edit_metatags_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_modules_output_article';
+  $strongarm->value = array();
+  $export['nodewords_filter_modules_output_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_regexp_article';
+  $strongarm->value = '';
+  $export['nodewords_filter_regexp_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_method_article';
+  $strongarm->value = '0';
+  $export['nodewords_metatags_generation_method_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_source_article';
+  $strongarm->value = '2';
+  $export['nodewords_metatags_generation_source_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_use_alt_attribute_article';
+  $strongarm->value = 1;
+  $export['nodewords_use_alt_attribute_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_article';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_article'] = $strongarm;
 
@@ -461,6 +509,27 @@ function ft_article_strongarm() {
   $strongarm->name = 'og_max_groups_article';
   $strongarm->value = '';
   $export['og_max_groups_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility_article';
+  $strongarm->value = '0';
+  $export['og_visibility_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_article';
+  $strongarm->value = '';
+  $export['page_title_type_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_article_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_article_showfield'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -510,6 +579,20 @@ function ft_article_strongarm() {
   $strongarm->name = 'print_mail_display_urllist_article';
   $strongarm->value = 1;
   $export['print_mail_display_urllist_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'show_diff_inline_article';
+  $strongarm->value = 0;
+  $export['show_diff_inline_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'show_preview_changes_article';
+  $strongarm->value = 0;
+  $export['show_preview_changes_article'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -572,6 +655,16 @@ function ft_article_strongarm() {
     1 => 'title',
   );
   $export['views_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_article';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_article'] = $strongarm;
 
   return $export;
 }
