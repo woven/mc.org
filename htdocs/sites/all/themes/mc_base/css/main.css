@@ -1335,9 +1335,10 @@ form .description {
 }
 
 /* About Harlem block */
+/*
 #page .about-block {
 	background: #fff url(../images/common/bg-about-block.png) 100% 100% no-repeat;
-}
+} */
 
 #page .about-block .block-content {
 	padding-right: 70px;
