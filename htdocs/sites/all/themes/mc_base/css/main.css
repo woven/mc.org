@@ -2518,3 +2518,7 @@ margin: 0;
     display: block;
     text-indent: -999px;
 }
+
+#block-quicktabs-hidden {
+    display: none;
+}
