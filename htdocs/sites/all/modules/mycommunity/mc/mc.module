@@ -55,8 +55,7 @@ function mc_redirect_when_session_variable_set($form, &$form_state) {
  * hook_late_form_alter
  */
 function mc_late_form_alter(&$form, &$form_state, $form_id) {
-
-
+  //add different butoons submit/delete/cancel styles
   if($form['#id'] == "node-form"){
     foreach($form['buttons'] as $key => &$btn){
       switch($key){

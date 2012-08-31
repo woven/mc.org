@@ -173,13 +173,19 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add stuff file
   $permissions['add stuff file'] = array(
     'name' => 'add stuff file',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
+    ),
   );
 
   // Exported permission: add stuff forum
   $permissions['add stuff forum'] = array(
     'name' => 'add stuff forum',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
+    ),
   );
 
   // Exported permission: add stuff gallery
@@ -221,10 +227,7 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add stuff place
   $permissions['add stuff place'] = array(
     'name' => 'add stuff place',
-    'roles' => array(
-      '0' => 'anonymous user',
-      '1' => 'authenticated user',
-    ),
+    'roles' => array(),
   );
 
   // Exported permission: add stuff taxonomy_feature
