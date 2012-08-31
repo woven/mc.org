@@ -88,3 +88,11 @@ function mc_update_6008() {
 function mc_update_6009() {
   module_enable(array('nodeformsettings'));
 }
+
+
+/**
+ * enable pass_reset_autologin
+*/
+  function mc_update_6010() {
+    module_enable(array('pass_reset_autologin'));
+  }
