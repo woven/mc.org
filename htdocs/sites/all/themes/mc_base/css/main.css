@@ -1374,6 +1374,7 @@ form .description {
 #page .block-browse .block-content ul.links {
 	margin: 0;
 }
+.two-columns-equal .ghh-menu-items ul.links,
 .two-columns-equal .browse-topic .block-content ul.links{
   width:400px;
 }
