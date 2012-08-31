@@ -28,7 +28,6 @@ body.page-user .ud-region-header{
 
 .field-ds-group-user-primaryinfo{
     margin-top: 5px;
-    margin-left: 155px;
 }
 
 .field-ds-group-user-primaryinfo .field-realname-area{
@@ -53,6 +52,7 @@ body.page-user .ud-region-header .field-picture{
 	margin: 0 20px 0px 0;
 	float: left;
 	background: white;
+    margin-bottom: 5px;
 }
 
 body.page-user .ud-region-header .field-picture img{

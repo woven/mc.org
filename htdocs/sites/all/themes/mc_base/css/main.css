@@ -2471,6 +2471,14 @@ margin: 0;
     vertical-align: middle;
 }
 
+#page .field-profile-gender span.male, #page .field-profile-gender span.female {
+    margin-right: 5px;
+}
+
+.not-logged-in #page .field-profile-gender {
+    display: none;
+}
+
 .field-profile-twitter, .field-profile-birthday {
     display: inline-block;
     vertical-align: middle;

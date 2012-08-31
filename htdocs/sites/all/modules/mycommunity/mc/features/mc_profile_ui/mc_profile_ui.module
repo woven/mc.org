@@ -11,6 +11,19 @@ function mc_profile_ui_ds_fields_alter(&$fields) {
 }
 
 function theme_mc_profile_ui_gender($field) {
+  global $user;
+  if($user->uid=='0'){
+    unset($field['object']->picture, $field['object']->profile_birthday, $field['object']->profile_website, $field['object']->profile_twitter, $field['object']->profile_facebook, $field['object']->profile_employer, $field['object']->profile_position, $field['object']->profile_employer_city, $field['object']->profile_position_description);
+    unset($field['object']->ds_fields['picture']);
+    unset($field['object']->ds_fields['profile_website']);
+    unset($field['object']->ds_fields['profile_birthday']);
+    unset($field['object']->content['Personal Information']['profile_twitter']);
+    unset($field['object']->content['Personal Information']['profile_facebook']);
+    unset($field['object']->content['Personal information']['profile_birthday']);
+    $field['object']->profile_birthday = array();
+    unset($field['object']->profile_birthday);
+    return '<span></span>';
+  }
   if($field['object']->profile_gender=="Male"){
     return '<span class="male"></span>';
   }
@@ -29,4 +42,11 @@ function mc_profile_ui_theme() {
     ),
   );
   return $theme_functions;
+}
+
+function mc_profile_ui_user($op, &$edit, &$account, $category = NULL){
+  global $user;
+  if(($op=='load' || $op=='view') && $user->uid=='0'){
+    unset($account->profile_gender, $account->profile_birthday, $account->profile_website, $account->profile_twitter, $account->profile_facebook, $account->picture, $account->profile_employer, $account->profile_position, $account->profile_employer_city, $account->profile_position_description);
+  }
 }
