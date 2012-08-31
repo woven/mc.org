@@ -115,7 +115,7 @@ After logging in, you will be redirected to !edit_uri so you can change your pas
   $strongarm->name = 'user_mail_register_no_approval_required_body';
   $strongarm->value = 'Hey there!
 
-Thank you for joining MiamiTech.org.
+Thank you for joining !site.
 
 Please verify your email address by going to this link:
 
@@ -129,7 +129,7 @@ We\'re listening hard to your feedback, so please don\'t hesitate to be in touch
 
 See you around, 
 
--- MiamiTech.org';
+-- !site';
   $export['user_mail_register_no_approval_required_body'] = $strongarm;
 
   $strongarm = new stdClass;
