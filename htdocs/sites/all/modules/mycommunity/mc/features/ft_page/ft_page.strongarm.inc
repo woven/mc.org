@@ -544,7 +544,7 @@ function ft_page_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'og_content_type_usage_npage';
-  $strongarm->value = 'group_post_standard';
+  $strongarm->value = 'omitted';
   $export['og_content_type_usage_npage'] = $strongarm;
 
   $strongarm = new stdClass;
