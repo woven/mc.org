@@ -31,15 +31,14 @@ scripts[] = "js/jquery.elastic.source.js"
 scripts[] = "js/elastic.js"
 scripts[] = "js/qtip.js"
 
-; Stylesheets
+; Stylesheets disable core styles
 stylesheets[all][] = "system-menus.css"
 stylesheets[all][] = "system.css"
 
+; theme stylesheets
 stylesheets[screen][] = "css/reset.css"
 stylesheets[screen][] = "css/drupal.css"
-
 stylesheets[all][] = "css/tabs.css"
-
 stylesheets[screen][] = "css/base.css"
 stylesheets[screen][] = "css/main.css"
 stylesheets[screen][] = "css/custom.css"

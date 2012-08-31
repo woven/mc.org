@@ -126,6 +126,13 @@ function ft_discussion_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'enable_revisions_page_forum';
+  $strongarm->value = 1;
+  $export['enable_revisions_page_forum'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'event_nodeapi_forum';
   $strongarm->value = 'never';
   $export['event_nodeapi_forum'] = $strongarm;
@@ -294,9 +301,9 @@ function ft_discussion_strongarm() {
   $strongarm->name = 'nodeformsettings_forum';
   $strongarm->value = array(
     'nfs_submission_body_rows' => '20',
-    'nfs_splitsummary' => '0',
+    'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '1',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
@@ -308,9 +315,9 @@ function ft_discussion_strongarm() {
       'nfs_cancel_status' => '1',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_forum'] = $strongarm;
@@ -372,6 +379,27 @@ function ft_discussion_strongarm() {
   $strongarm->name = 'notify_node_type_forum';
   $strongarm->value = 1;
   $export['notify_node_type_forum'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility_forum';
+  $strongarm->value = '0';
+  $export['og_visibility_forum'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_forum';
+  $strongarm->value = '';
+  $export['page_title_type_forum'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_forum_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_forum_showfield'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -453,12 +481,36 @@ function ft_discussion_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'show_diff_inline_forum';
+  $strongarm->value = 0;
+  $export['show_diff_inline_forum'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'show_preview_changes_forum';
+  $strongarm->value = 1;
+  $export['show_preview_changes_forum'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'skinr_settings_forum';
   $strongarm->value = array(
     0 => 'comment_group',
     1 => 'node_group',
   );
   $export['skinr_settings_forum'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_forum';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_forum'] = $strongarm;
 
   return $export;
 }

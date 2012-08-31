@@ -387,24 +387,6 @@ function mc_base_filter_tips(){
   return '';  // just hide it
 }
 
-/**
- * Implementation of template_preprocess
- * 
- * This is adding the classes need to display object like fieldsets in a proper
- * way. 
- * 
- */
-function mc_base_preprocess(&$vars){
-  if (is_array($vars['element']) && $vars['element']['#type'] == 'fieldset'){
-    if ($vars['element']['#title'] == t('Input format')){
-      $vars['attr']['class'] .= ' input-format-fieldset';
-      $vars['element']['#collapsible'] = FALSE;
-      $vars['element']['#collapsed'] = FALSE;
-    }
-  }
-  $vars['$content_bottom'] = '';
-}
-
 
 /**
  * Implementation of template_preprocess_block
@@ -575,7 +557,15 @@ function miamitech_nd_location_gmap($field, $latitude, $longitude, $width, $heig
   return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
 }
 
+
+/** theme_fieldset
+ * @todo add back the collapse logic if needed, right now commenting two links to avoid collapsible and collapsed classes
+ * @param $element
+ * @return string
+ */
+
 function mc_base_fieldset($element) {
+  unset($element['#collapsible']);
 
   if (!empty($element['#collapsible'])) {
     drupal_add_js('misc/collapse.js');
@@ -591,4 +581,75 @@ function mc_base_fieldset($element) {
   }
 
   return '<fieldset' . drupal_attributes($element['#attributes']) . '>' . ($element['#title'] ? '<legend>' . $element['#title'] . '</legend>' : '') . (isset($element['#description']) && $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '') . (!empty($element['#children']) ? '<div class="fieldset-content"> ' .  $element['#children'] . '</div>' : '') . (isset($element['#value']) ? $element['#value'] : '') . "</fieldset>\n";
+}
+
+
+/**
+ * Theme an individual form element.
+ *
+ * Combine multiple values into a table with drag-n-drop reordering.
+ */
+function mc_base_content_multiple_values($element) {
+  $field_name = $element['#field_name'];
+  $field = content_fields($field_name);
+  $output = '';
+
+  if ($field['multiple'] >= 1) {
+    $table_id = $element['#field_name'] .'_values';
+    $order_class = $element['#field_name'] .'-delta-order';
+    $required = !empty($element['#required']) ? '<span class="form-required" title="'. t('This field is required.') .'">*</span>' : '';
+
+    $header = array(
+      array(
+        'data' => t('!title: !required', array('!title' => $element['#title'], '!required' => $required)),
+        'colspan' => 2
+      ),
+      t('Order'),
+    );
+    $rows = array();
+
+    // Sort items according to '_weight' (needed when the form comes back after
+    // preview or failed validation)
+    $items = array();
+    foreach (element_children($element) as $key) {
+      if ($key !== $element['#field_name'] .'_add_more') {
+        $items[] = &$element[$key];
+      }
+    }
+    usort($items, '_content_sort_items_value_helper');
+
+    // Add the items as table rows.
+    foreach ($items as $key => $item) {
+      $item['_weight']['#attributes']['class'] = $order_class;
+      $delta_element = drupal_render($item['_weight']);
+      $cells = array(
+        array('data' => '', 'class' => 'content-multiple-drag'),
+        drupal_render($item),
+        array('data' => $delta_element, 'class' => 'delta-order'),
+      );
+      $rows[] = array(
+        'data' => $cells,
+        'class' => 'draggable',
+      );
+    }
+
+    $output .= theme('table', $header, $rows, array('id' => $table_id, 'class' => 'content-multiple-table'));
+    $output .= '<div class="content-multiple-footer">';
+    $output .= $element['#description'] ? '<div class="description">'. $element['#description'] .'</div>' : '';
+    $output .= drupal_render($element[$element['#field_name'] .'_add_more']);
+    $output .= '</div>';
+
+    drupal_add_tabledrag($table_id, 'order', 'sibling', $order_class);
+  }
+  else {
+    foreach (element_children($element) as $key) {
+      $output .= drupal_render($element[$key]);
+    }
+  }
+
+  if($field['multiple'] >= 1){
+    return '<div class="content-multiple-wrapper">'.$output.'</div>';
+  }else{
+    return $output;
+  }
 }

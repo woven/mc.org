@@ -114,6 +114,400 @@ function ft_video_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_archive';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_archive'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_bliptv';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_bliptv'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_brightcove';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_brightcove'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_dailymotion';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_dailymotion'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_google';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_google'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_guba';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_guba'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_imeem';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_imeem'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_jumpcut';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_jumpcut'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_lastfm';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_lastfm'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_livestream';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_livestream'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_livevideo';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_livevideo'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_metacafe';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_metacafe'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_myspace';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_myspace'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_revver';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_revver'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_sevenload';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_sevenload'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_spike';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_spike'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_tudou';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_tudou'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_twistage';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_twistage'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_ustreamlive';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_ustreamlive'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_veoh';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_veoh'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_vimeo';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_vimeo'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_voicethread';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_voicethread'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_yahoomusic';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_yahoomusic'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_youtube';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_youtube'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emfield_emvideo_allow_zzz_custom_url';
+  $strongarm->value = 1;
+  $export['emfield_emvideo_allow_zzz_custom_url'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_google_domain';
+  $strongarm->value = 'com';
+  $export['emvideo_google_domain'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_guba_api_key';
+  $strongarm->value = '';
+  $export['emvideo_guba_api_key'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_guba_api_secret';
+  $strongarm->value = '';
+  $export['emvideo_guba_api_secret'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_imeem_api_key';
+  $strongarm->value = '';
+  $export['emvideo_imeem_api_key'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_imeem_api_secret';
+  $strongarm->value = '';
+  $export['emvideo_imeem_api_secret'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_livestream_api_key';
+  $strongarm->value = '';
+  $export['emvideo_livestream_api_key'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_livestream_autoplay';
+  $strongarm->value = 1;
+  $export['emvideo_livestream_autoplay'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_livestream_full_screen';
+  $strongarm->value = 1;
+  $export['emvideo_livestream_full_screen'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_livevideo_api_key';
+  $strongarm->value = '';
+  $export['emvideo_livevideo_api_key'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_revver_affiliate_id';
+  $strongarm->value = '0';
+  $export['emvideo_revver_affiliate_id'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_twistage_allowfullscreen';
+  $strongarm->value = 1;
+  $export['emvideo_twistage_allowfullscreen'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_twistage_playerprofile';
+  $strongarm->value = '';
+  $export['emvideo_twistage_playerprofile'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_ustreamlive_api_key';
+  $strongarm->value = '';
+  $export['emvideo_ustreamlive_api_key'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_veoh_api_key';
+  $strongarm->value = '';
+  $export['emvideo_veoh_api_key'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_veoh_api_secret';
+  $strongarm->value = '';
+  $export['emvideo_veoh_api_secret'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_app_id';
+  $strongarm->value = '';
+  $export['emvideo_yahoomusic_app_id'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_bandwidth';
+  $strongarm->value = '';
+  $export['emvideo_yahoomusic_bandwidth'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_bgcolor';
+  $strongarm->value = '#000000';
+  $export['emvideo_yahoomusic_bgcolor'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_close_enable';
+  $strongarm->value = 0;
+  $export['emvideo_yahoomusic_close_enable'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_controls_enable';
+  $strongarm->value = 1;
+  $export['emvideo_yahoomusic_controls_enable'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_event_handler';
+  $strongarm->value = '';
+  $export['emvideo_yahoomusic_event_handler'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_full_screen';
+  $strongarm->value = 1;
+  $export['emvideo_yahoomusic_full_screen'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_info_enable';
+  $strongarm->value = 1;
+  $export['emvideo_yahoomusic_info_enable'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_locale';
+  $strongarm->value = 'us';
+  $export['emvideo_yahoomusic_locale'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_now_playing_enable';
+  $strongarm->value = 1;
+  $export['emvideo_yahoomusic_now_playing_enable'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_post_panel_enable';
+  $strongarm->value = 1;
+  $export['emvideo_yahoomusic_post_panel_enable'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_pre_panel_enable';
+  $strongarm->value = 1;
+  $export['emvideo_yahoomusic_pre_panel_enable'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_yahoomusic_share_enable';
+  $strongarm->value = 1;
+  $export['emvideo_yahoomusic_share_enable'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'emvideo_zzz_custom_url_supported_types';
+  $strongarm->value = array(
+    'wmv' => 'wmv',
+    'wma' => 'wma',
+    'swf' => 'swf',
+    'flv' => 'flv',
+    'mov' => 'mov',
+    'rm' => 'rm',
+    'mp4' => 0,
+    'm4v' => 0,
+  );
+  $export['emvideo_zzz_custom_url_supported_types'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'enable_revisions_page_video';
+  $strongarm->value = 1;
+  $export['enable_revisions_page_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'event_nodeapi_video';
   $strongarm->value = 'never';
   $export['event_nodeapi_video'] = $strongarm;
@@ -281,6 +675,13 @@ function ft_video_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'media_youtube__show_related_videos';
+  $strongarm->value = 0;
+  $export['media_youtube__show_related_videos'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nd_switch_bm_map_video';
   $strongarm->value = array();
   $export['nd_switch_bm_map_video'] = $strongarm;
@@ -300,24 +701,66 @@ function ft_video_strongarm() {
     'nfs_submission_body_rows' => '20',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '1',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
     'nfs_publishingoptions' => '0',
     'nfs_comments' => '0',
     'nfs_taxonomy' => '0',
-    'nfs_preview' => '0',
+    'nfs_preview' => '1',
     'nfs_cancel' => array(
-      'nfs_cancel_status' => '1',
+      'nfs_cancel_status' => '0',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_edit_metatags_video';
+  $strongarm->value = 1;
+  $export['nodewords_edit_metatags_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_modules_output_video';
+  $strongarm->value = array();
+  $export['nodewords_filter_modules_output_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_filter_regexp_video';
+  $strongarm->value = '';
+  $export['nodewords_filter_regexp_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_method_video';
+  $strongarm->value = '0';
+  $export['nodewords_metatags_generation_method_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_metatags_generation_source_video';
+  $strongarm->value = '2';
+  $export['nodewords_metatags_generation_source_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodewords_use_alt_attribute_video';
+  $strongarm->value = 1;
+  $export['nodewords_use_alt_attribute_video'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -349,6 +792,27 @@ function ft_video_strongarm() {
   $strongarm->name = 'og_max_groups_video';
   $strongarm->value = '';
   $export['og_max_groups_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility_video';
+  $strongarm->value = '0';
+  $export['og_visibility_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_video';
+  $strongarm->value = '';
+  $export['page_title_type_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_video_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_video_showfield'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -402,6 +866,20 @@ function ft_video_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'show_diff_inline_video';
+  $strongarm->value = 0;
+  $export['show_diff_inline_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'show_preview_changes_video';
+  $strongarm->value = 1;
+  $export['show_preview_changes_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'skinr_settings_video';
   $strongarm->value = array(
     0 => 'comment_group',
@@ -443,6 +921,16 @@ function ft_video_strongarm() {
   $strongarm->name = 'upload_video';
   $strongarm->value = '1';
   $export['upload_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_video';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_video'] = $strongarm;
 
   return $export;
 }
