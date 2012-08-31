@@ -107,6 +107,7 @@ function _og_prepopulate_menu_create_links($node){
       'has_children' => 0,
       'customized' => 0,
     );
+  /* temporary disable photos
   $items[] = array(
       'link_title' => 'Photos',
       'link_path' => 'groups/' . $small_path . '/photos',
@@ -121,6 +122,7 @@ function _og_prepopulate_menu_create_links($node){
       'has_children' => 0,
       'customized' => 0,
     );
+  */
   $items[] = array(
       'link_title' => 'Videos',
       'link_path' => 'groups/' . $small_path . '/videos',
