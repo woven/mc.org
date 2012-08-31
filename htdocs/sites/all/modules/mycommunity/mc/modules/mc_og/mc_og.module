@@ -100,12 +100,12 @@ function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
     $og_visible = &$og['visible'];
 
     $og_visible['og_post_visibility'] = array(
-        '#type' => 'radios',
+        '#type' => 'select',
         '#title' => t('Post Visibility'),
         '#options' => array(
-          '0' => 'Public',
-          '1' => 'Private',
-          '2' => 'Semi-Private'
+          '1' => 'Private -- only group members can see',
+          '0' => 'Public -- anyone can see',
+          '2' => 'Community -- anyone in the community can see'
         ),
         '#default_value' => ($node->og_post_visibility) ? $node->og_post_visibility : 0
     );
