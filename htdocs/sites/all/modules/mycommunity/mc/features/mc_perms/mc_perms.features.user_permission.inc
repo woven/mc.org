@@ -314,6 +314,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer form filters
+  $permissions['administer form filters'] = array(
+    'name' => 'administer form filters',
+    'roles' => array(),
+  );
+
   // Exported permission: administer forums
   $permissions['administer forums'] = array(
     'name' => 'administer forums',
@@ -323,6 +329,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer group main page
   $permissions['administer group main page'] = array(
     'name' => 'administer group main page',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer groupadmin
+  $permissions['administer groupadmin'] = array(
+    'name' => 'administer groupadmin',
     'roles' => array(),
   );
 
@@ -486,7 +498,8 @@ function mc_perms_user_default_permissions() {
   $permissions['create article content'] = array(
     'name' => 'create article content',
     'roles' => array(
-      '0' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
     ),
   );
 
@@ -500,7 +513,8 @@ function mc_perms_user_default_permissions() {
   $permissions['create audio content'] = array(
     'name' => 'create audio content',
     'roles' => array(
-      '0' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
     ),
   );
 
@@ -527,7 +541,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: create file content
   $permissions['create file content'] = array(
     'name' => 'create file content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+    ),
   );
 
   // Exported permission: create file sitewide
@@ -545,7 +562,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: create forum topics
   $permissions['create forum topics'] = array(
     'name' => 'create forum topics',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: create gallery content
@@ -665,7 +684,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: create video content
   $permissions['create video content'] = array(
     'name' => 'create video content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: create video sitewide
@@ -704,13 +725,19 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete any audio content
   $permissions['delete any audio content'] = array(
     'name' => 'delete any audio content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any event content
   $permissions['delete any event content'] = array(
     'name' => 'delete any event content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any file content
@@ -722,7 +749,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete any forum topic
   $permissions['delete any forum topic'] = array(
     'name' => 'delete any forum topic',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any gallery content
@@ -782,7 +812,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete any video content
   $permissions['delete any video content'] = array(
     'name' => 'delete any video content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any webform content
@@ -808,13 +841,17 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete own audio content
   $permissions['delete own audio content'] = array(
     'name' => 'delete own audio content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: delete own event content
   $permissions['delete own event content'] = array(
     'name' => 'delete own event content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: delete own file content
@@ -826,7 +863,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete own forum topics
   $permissions['delete own forum topics'] = array(
     'name' => 'delete own forum topics',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: delete own gallery content
@@ -892,7 +931,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete own video content
   $permissions['delete own video content'] = array(
     'name' => 'delete own video content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: delete own webform content
@@ -937,13 +978,19 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any audio content
   $permissions['edit any audio content'] = array(
     'name' => 'edit any audio content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any event content
   $permissions['edit any event content'] = array(
     'name' => 'edit any event content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any file content
@@ -955,7 +1002,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any forum topic
   $permissions['edit any forum topic'] = array(
     'name' => 'edit any forum topic',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any gallery content
@@ -1015,7 +1065,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any video content
   $permissions['edit any video content'] = array(
     'name' => 'edit any video content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any webform content
@@ -1077,85 +1130,113 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit own audio content
   $permissions['edit own audio content'] = array(
     'name' => 'edit own audio content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own event content
   $permissions['edit own event content'] = array(
     'name' => 'edit own event content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own file content
   $permissions['edit own file content'] = array(
     'name' => 'edit own file content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own forum topics
   $permissions['edit own forum topics'] = array(
     'name' => 'edit own forum topics',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own gallery content
   $permissions['edit own gallery content'] = array(
     'name' => 'edit own gallery content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own gallery_image content
   $permissions['edit own gallery_image content'] = array(
     'name' => 'edit own gallery_image content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own group content
   $permissions['edit own group content'] = array(
     'name' => 'edit own group content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own link content
   $permissions['edit own link content'] = array(
     'name' => 'edit own link content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own nnews content
   $permissions['edit own nnews content'] = array(
     'name' => 'edit own nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own npage content
   $permissions['edit own npage content'] = array(
     'name' => 'edit own npage content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own place content
   $permissions['edit own place content'] = array(
     'name' => 'edit own place content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own taxonomy_feature content
   $permissions['edit own taxonomy_feature content'] = array(
     'name' => 'edit own taxonomy_feature content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own taxonomy_topic content
   $permissions['edit own taxonomy_topic content'] = array(
     'name' => 'edit own taxonomy_topic content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own video content
   $permissions['edit own video content'] = array(
     'name' => 'edit own video content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own webform content
@@ -1185,18 +1266,6 @@ function mc_perms_user_default_permissions() {
   // Exported permission: flush imagecache
   $permissions['flush imagecache'] = array(
     'name' => 'flush imagecache',
-    'roles' => array(),
-  );
-
-  // Exported permission: grant content access
-  $permissions['grant content access'] = array(
-    'name' => 'grant content access',
-    'roles' => array(),
-  );
-
-  // Exported permission: grant own content access
-  $permissions['grant own content access'] = array(
-    'name' => 'grant own content access',
     'roles' => array(),
   );
 
@@ -1330,6 +1399,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view advanced help topic
   $permissions['view advanced help topic'] = array(
     'name' => 'view advanced help topic',
+    'roles' => array(),
+  );
+
+  // Exported permission: view forms without filtering
+  $permissions['view forms without filtering'] = array(
+    'name' => 'view forms without filtering',
     'roles' => array(),
   );
 
