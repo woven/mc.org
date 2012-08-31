@@ -276,17 +276,11 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
-        'views-popular_places-block_2' => array(
-          'module' => 'views',
-          'delta' => 'popular_places-block_2',
-          'region' => 'right',
-          'weight' => 1,
-        ),
         'views-featured_blocks-block_1' => array(
           'module' => 'views',
           'delta' => 'featured_blocks-block_1',
           'region' => 'right',
-          'weight' => 2,
+          'weight' => 1,
         ),
         'boxes-upcoming_events_blocks' => array(
           'module' => 'boxes',
@@ -554,17 +548,11 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 2,
         ),
-        'views-featured_blocks-block_5' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_5',
-          'region' => 'right',
-          'weight' => 3,
-        ),
         'views-og_community-block_2' => array(
           'module' => 'views',
           'delta' => 'og_community-block_2',
           'region' => 'right',
-          'weight' => 4,
+          'weight' => 3,
         ),
         'quicktabs-home_tabs' => array(
           'module' => 'quicktabs',
@@ -577,24 +565,6 @@ function ft_landing_contexts_context_default_contexts() {
           'delta' => 'featured_blocks-block_1',
           'region' => 'below_content',
           'weight' => 1,
-        ),
-        'views-featured_blocks-block_2' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_2',
-          'region' => 'below_content',
-          'weight' => 2,
-        ),
-        'views-featured_blocks-block_3' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_3',
-          'region' => 'below_content',
-          'weight' => 3,
-        ),
-        'boxes-home_joinus' => array(
-          'module' => 'boxes',
-          'delta' => 'home_joinus',
-          'region' => 'below_content',
-          'weight' => 4,
         ),
       ),
     ),
@@ -659,9 +629,6 @@ function ft_landing_contexts_context_default_contexts() {
           ),
           'views-featured_blocks-block_3' => array(
             'class' => '',
-          ),
-          'boxes-home_joinus' => array(
-            'class' => 'join-block',
           ),
         ),
       ),
@@ -893,18 +860,6 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'header',
           'weight' => 0,
         ),
-        'boxes-join_overlay_box' => array(
-          'module' => 'boxes',
-          'delta' => 'join_overlay_box',
-          'region' => 'overlay',
-          'weight' => 0,
-        ),
-        'boxes-login_overlay_box' => array(
-          'module' => 'boxes',
-          'delta' => 'login_overlay_box',
-          'region' => 'overlay',
-          'weight' => 1,
-        ),
         'google_cse-0' => array(
           'module' => 'google_cse',
           'delta' => 0,
@@ -917,30 +872,6 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'branding',
           'weight' => 1,
         ),
-        'menu-menu-categories' => array(
-          'module' => 'menu',
-          'delta' => 'menu-categories',
-          'region' => 'footer_above',
-          'weight' => 0,
-        ),
-        'menu-menu-footer-links' => array(
-          'module' => 'menu',
-          'delta' => 'menu-footer-links',
-          'region' => 'footer_above',
-          'weight' => 1,
-        ),
-        'menu-secondary-links' => array(
-          'module' => 'menu',
-          'delta' => 'secondary-links',
-          'region' => 'footer_above',
-          'weight' => 2,
-        ),
-        'boxes-footer_joinus_box' => array(
-          'module' => 'boxes',
-          'delta' => 'footer_joinus_box',
-          'region' => 'footer_above',
-          'weight' => 3,
-        ),
         'boxes-footer_hon_logo' => array(
           'module' => 'boxes',
           'delta' => 'footer_hon_logo',
@@ -951,6 +882,18 @@ function ft_landing_contexts_context_default_contexts() {
           'module' => 'boxes',
           'delta' => 'footer_prc_logo',
           'region' => 'footer',
+          'weight' => 1,
+        ),
+        'boxes-join_overlay_box' => array(
+          'module' => 'boxes',
+          'delta' => 'join_overlay_box',
+          'region' => 'overlay',
+          'weight' => 0,
+        ),
+        'boxes-login_overlay_box' => array(
+          'module' => 'boxes',
+          'delta' => 'login_overlay_box',
+          'region' => 'overlay',
           'weight' => 1,
         ),
       ),
