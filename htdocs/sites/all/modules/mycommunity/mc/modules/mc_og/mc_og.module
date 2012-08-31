@@ -113,9 +113,15 @@ function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
     $og_visible['og_public']['#prefix'] = '<div style="display:none;">';
     $og_visible['og_public']['#suffix'] = '</div>';
 
+
     $og['og_access_roles']['#prefix'] = '<div style="display:none;">';
     $og['og_access_roles']['#suffix'] = '</div>';
 
+    //force discussions forms to be always public
+    if($node->type == "forum"){
+      unset($og_visible['og_post_visibility']);
+      $og_visible['og_public']['#default_value'] = 1;
+    }
   }
 
 }
