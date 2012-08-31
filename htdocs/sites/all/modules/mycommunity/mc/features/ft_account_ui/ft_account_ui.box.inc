@@ -96,10 +96,13 @@ function ft_account_ui_default_box() {
           <div class="block block-signup clear-block">
             <h1>Join the <?php echo variable_get("site_name","MyCommunity.org"); ?> community!</h1>
             <div class="why">
+<p>Once you\'ve joined, you can enjoy the full benefits of our community. Get involved!</p>
               <ul>
-                <li>Help others find your group</li>
-                <li>Add events or import from any iCal</li>
-                <li>We\'re just getting started!</li>
+<li>Add stuff like articles, videos and more</li>
+<li>Follow groups and join discussions</li>
+<li>Get notifications and stay connected</li>
+<li>Interact with others in our community</li>
+<li>We\'re adding new things all the time!</li>
               </ul>
             </div>
             <div class="user-register">

@@ -313,8 +313,8 @@ a .ico-small {
 }
 
 .block-overlay .block-signup p {
-	margin: 20px 0 0 25px;
-	font-size: 0.9em;
+    font-size: 1.5em;
+    margin: 0px;
 }
 
 .block-overlay .close {
