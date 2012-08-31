@@ -117,13 +117,11 @@ After logging in, you will be redirected to !edit_uri so you can change your pas
 
 Thank you for joining !site.
 
-Please verify your email address by going to this link:
+Please verify your email address by following this link (it can only be used once):
 
 !login_url
 
-This link can only be used once.
-
-You\'ll then be able to choose your username and password and tell us about your awesome group.
+You\'ll then be able to choose your username and password and get to interacting with our community!
 
 We\'re listening hard to your feedback, so please don\'t hesitate to be in touch.
 
