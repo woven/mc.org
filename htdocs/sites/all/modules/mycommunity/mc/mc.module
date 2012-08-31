@@ -58,7 +58,24 @@ function mc_late_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   //add different butoons submit/delete/cancel styles
   if($form['#id'] == "node-form"){
+    /**
+    $fields = array('og_nodeapi','title','body_field');
+    $start = -500;
+    foreach($fields as $field){
+      if(isset($form[$field])){
+        switch($field){
+          case 'body_field':
+            $form['body_field']['#weight'] = $start++;;
+            break;
 
+          default:
+            $form[$field]['#weight'] = $start++;;
+            break;
+        }
+      }
+
+    }
+       */
     /*
      * removing format selectors and field_related
      * @todo clean this up or use another method

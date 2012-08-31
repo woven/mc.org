@@ -298,6 +298,113 @@ function ft_discussion_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodeformscols_field_placements_forum_default';
+  $strongarm->value = array(
+    'title' => array(
+      'region' => 'main',
+      'weight' => '1',
+      'has_required' => TRUE,
+      'title' => 'Subject',
+    ),
+    'body_field' => array(
+      'region' => 'main',
+      'weight' => '2',
+      'has_required' => TRUE,
+      'title' => NULL,
+    ),
+    'menu' => array(
+      'region' => 'right',
+      'weight' => '0',
+      'hidden' => 0,
+    ),
+    'revision_information' => array(
+      'region' => 'right',
+      'weight' => '0.022',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'comment_settings' => array(
+      'region' => 'right',
+      'weight' => '30',
+      'has_required' => FALSE,
+      'title' => 'Comment settings',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'path' => array(
+      'region' => 'right',
+      'weight' => '30',
+      'has_required' => FALSE,
+      'title' => 'URL path settings',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'options' => array(
+      'region' => 'right',
+      'weight' => '25',
+      'has_required' => FALSE,
+      'title' => 'Publishing options',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'author' => array(
+      'region' => 'right',
+      'weight' => '20',
+      'has_required' => FALSE,
+      'title' => 'Authoring information',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'buttons' => array(
+      'region' => 'main',
+      'weight' => '7',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'taxonomy' => array(
+      'region' => 'main',
+      'weight' => '3',
+      'has_required' => TRUE,
+      'title' => NULL,
+    ),
+    'field_list_image' => array(
+      'region' => 'main',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => 'Images',
+      'hidden' => 0,
+    ),
+    'og_nodeapi' => array(
+      'region' => 'main',
+      'weight' => '0',
+      'has_required' => TRUE,
+      'title' => 'Groups',
+      'collapsed' => 0,
+    ),
+    'xmlsitemap' => array(
+      'region' => 'main',
+      'weight' => '6',
+      'has_required' => FALSE,
+      'title' => 'XML sitemap',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'nodewords' => array(
+      'region' => 'main',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Meta tags',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+  );
+  $export['nodeformscols_field_placements_forum_default'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nodeformsettings_forum';
   $strongarm->value = array(
     'nfs_submission_body_rows' => '20',
