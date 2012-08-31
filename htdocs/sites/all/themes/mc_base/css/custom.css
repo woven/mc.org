@@ -175,25 +175,26 @@ div.two-columns-left #left{
   margin: 0 100px;
   width:100px;
 }
-#main table th,
-#main table.views-table th{
+table th,
+table.views-table th{
   font-weight:bold;
 }
-#main table th,
-#main table td{
+table th,
+table td{
   border: 1px solid #E5E5E5;
   padding: 4px;
 }
-#main table.views-table th,
-#main table.views-table td{
+
+table.views-table th,
+table.views-table td{
   border: 1px solid #E5E5E5;
   padding: 4px;
   text-align:center;
 }
-#main table.views-table th{
+table.views-table th{
   background-color:#E5E5E5;
 }
-#main table.views-view-grid td {
+table.views-view-grid td {
 	vertical-align: top;
 }
 

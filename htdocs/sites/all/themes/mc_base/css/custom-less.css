@@ -327,8 +327,7 @@
   float:right;
   margin:0;
 }
-#field-list-image-items .description { float:left; }
-.content-add-more { margin-bottom:20px; }
+
 #node-form .submit-wrapper button.form-submit span {
   text-transform:none;
   font-size:11px;
