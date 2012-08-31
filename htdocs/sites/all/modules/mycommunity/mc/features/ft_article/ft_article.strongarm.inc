@@ -386,10 +386,10 @@ function ft_article_strongarm() {
     'nfs_taxonomy' => '0',
     'nfs_preview' => '1',
     'nfs_cancel' => array(
-      'nfs_cancel_status' => '1',
+      'nfs_cancel_status' => '0',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
     'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
