@@ -178,13 +178,6 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'emvideo_yahoomusic_event_handler';
-  $strongarm->value = '';
-  $export['emvideo_yahoomusic_event_handler'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'enable_revisions_page_event';
   $strongarm->value = 0;
   $export['enable_revisions_page_event'] = $strongarm;
@@ -610,13 +603,6 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'nodewords_filter_modules_output_event';
-  $strongarm->value = array();
-  $export['nodewords_filter_modules_output_event'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'nodewords_filter_regexp_event';
   $strongarm->value = '';
   $export['nodewords_filter_regexp_event'] = $strongarm;
@@ -685,20 +671,6 @@ function ft_event_strongarm() {
   $strongarm->name = 'og_content_type_usage_event';
   $strongarm->value = 'group_post_standard';
   $export['og_content_type_usage_event'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_event';
-  $strongarm->value = '';
-  $export['og_max_groups_event'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_event_feed';
-  $strongarm->value = '';
-  $export['og_max_groups_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
