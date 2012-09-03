@@ -475,6 +475,13 @@ function ft_group_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'menutrails_og_group_menu';
+  $strongarm->value = 0;
+  $export['menutrails_og_group_menu'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nd_switch_bm_map_group';
   $strongarm->value = array();
   $export['nd_switch_bm_map_group'] = $strongarm;
@@ -948,6 +955,13 @@ This message was sent by an administrator in the \'@group\' group at @site. To v
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_description_optional_group';
+  $strongarm->value = 0;
+  $export['og_description_optional_group'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'og_email_notification_pattern';
   $strongarm->value = '@user_name  <@site_mail>';
   $export['og_email_notification_pattern'] = $strongarm;
@@ -1023,6 +1037,20 @@ Join: !group_url
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_gallery';
+  $strongarm->value = '';
+  $export['og_max_groups_gallery'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_gallery_image';
+  $strongarm->value = '';
+  $export['og_max_groups_gallery_image'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'og_max_groups_group';
   $strongarm->value = '';
   $export['og_max_groups_group'] = $strongarm;
@@ -1044,9 +1072,30 @@ Join: !group_url
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_nnews';
+  $strongarm->value = '';
+  $export['og_max_groups_nnews'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_npage';
+  $strongarm->value = '';
+  $export['og_max_groups_npage'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'og_max_groups_page';
   $strongarm->value = '';
   $export['og_max_groups_page'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_place';
+  $strongarm->value = '';
+  $export['og_max_groups_place'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1058,9 +1107,23 @@ Join: !group_url
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_video';
+  $strongarm->value = '';
+  $export['og_max_groups_video'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'og_max_groups_webform';
   $strongarm->value = '';
   $export['og_max_groups_webform'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_membership_requests_restriction_group';
+  $strongarm->value = array();
+  $export['og_membership_requests_restriction_group'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

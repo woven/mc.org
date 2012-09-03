@@ -308,7 +308,7 @@ function ft_group_content_default_fields() {
     'widget' => array(
       'default_value' => array(
         '0' => array(
-          'value' => '#09f',
+          'value' => '#ffffff',
           '_error_element' => 'default_value_widget][field_header_color][0][value',
         ),
       ),
@@ -398,7 +398,7 @@ black',
     'widget' => array(
       'default_value' => array(
         '0' => array(
-          'value' => 'white',
+          'value' => 'black',
         ),
       ),
       'default_value_php' => NULL,
