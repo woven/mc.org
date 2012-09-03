@@ -138,6 +138,7 @@ ini_set('session.use_trans_sid',    0);
 ini_set('url_rewriter.tags',        '');
 ini_set('display_errors',        '1');
 ini_set('memory_limit', '200M');
+ini_set('date.timezone', 'America/New_York');
 
 /**
  * Drupal automatically generates a unique session cookie name for each site
