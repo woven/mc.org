@@ -1,5 +1,4 @@
 <?php
-// $Id: formfilter_ui.module,v 1.6 2010/01/26 00:11:58 nedjo Exp $
 
 /**
  * @file
@@ -66,7 +65,7 @@ function formfilter_ui_admin_settings() {
     '#title' => t('Simplify node form'),
     '#default_value' => variable_get('formfilter_simplify_node', 0),
     '#options' => array(t('Disabled'), t('Enabled')),
-    '#description' => t('Simplify the node form by pulling the <em>Promote</em> and <em>Sticky</em> options out of fieldsets and then putting all the fieldsets in one <em>Advanced options</em> fieldset.'),
+    '#description' => t('Simplify the node form by pulling the <em>Promote</em> and <em>Sticky</em> options out of fieldsets and then putting all the fieldsets - except taxonomy selects or any created with the CCK Fieldgroup module - in one <em>Advanced options</em> fieldset.'),
   );
   return system_settings_form($form);
 }
@@ -139,9 +138,9 @@ function formfilter_ui_form_alter(&$form, &$form_state, $form_id) {
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
-    // ...and move all first-level fieldsets there.
+    // ...and move all first-level fieldsets there, except CCK or taxonomy fields.
     foreach (element_children($form) as $key) {
-      if (!(in_array($key, array('advanced', 'taxonomy'))) && $form[$key]['#type'] && $form[$key]['#type'] == 'fieldset') {
+      if (!(in_array($key, array('advanced', 'taxonomy'))) && (strpos($key, 'group_') === FALSE) && (strpos($key, 'field_') === FALSE) && $form[$key]['#type'] && $form[$key]['#type'] == 'fieldset') {
         $form['advanced'][$key] = $form[$key];
         unset($form[$key]);
       }
@@ -176,7 +175,7 @@ function formfilter_ui_pre_render($form) {
     _formfilter_ui_add_node_filters($filters, $form, $form_id);
     $form_filters = array();
     if ($_REQUEST['formfilter_preview']) {
-      drupal_set_message(t('Previewing filtered version of form.'));
+      drupal_set_message(t('Previewing filtered version of form. Note: the "view forms without filtering" permission is used to control who will see filtered forms. The main administrator account (user 1) will always see the unfiltered form.'));
     }
     if (isset($filters[$form_id]) && is_array($filters[$form_id])) {
       // Convert filters to arrays.

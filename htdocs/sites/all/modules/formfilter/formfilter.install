@@ -1,5 +1,4 @@
 <?php
-// $Id: formfilter.install,v 1.1 2007/01/12 04:14:46 nedjo Exp $
 
 /** 
   * Implementation of hook_install(). 

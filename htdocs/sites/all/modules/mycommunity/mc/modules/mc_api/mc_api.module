@@ -1,4 +1,23 @@
 <?php
+
+/**
+ * @param $form
+ * @param $ct
+ * @return bool
+ */
+function is_ct_form($form,$ct){
+  if($form['#id'] == "node-form"){
+    if(isset($form['#node'])){
+      $node = $form['#node'];
+      if($ct == $node->type){
+        return TRUE;
+      }
+    }
+  }
+
+  return FALSE;
+}
+
 /**
  *  like array_unshift but can working on assoctes
  * @param $arr
