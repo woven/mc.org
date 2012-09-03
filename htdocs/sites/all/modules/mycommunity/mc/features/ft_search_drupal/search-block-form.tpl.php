@@ -33,6 +33,6 @@
 ?>
 <div class="container-inline">
 	<div id="search">
-  <?php print $search_form; ?>
+  		<?php print $search_form; ?>
 	</div>
 </div>

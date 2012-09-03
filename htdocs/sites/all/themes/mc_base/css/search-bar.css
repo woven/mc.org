@@ -5,6 +5,11 @@
 	margin: 30px 0 0 0;
 }
 
+/* Drupal Search styles*/
+#search-bar .block-title,#search-bar .form-filter-ui{
+    display: none;
+}
+
 #search-bar #block-google_cse-0, #search-bar .block-search {
 	float: left;
 }
