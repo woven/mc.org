@@ -2177,6 +2177,7 @@ return true;
   ));
   $handler = $view->new_display('page', 'Page: latest', 'page_2');
   $handler->override_option('arguments', array());
+  $handler->override_option('title', 'Latest Stuff');
   $handler->override_option('path', 'latest');
   $handler->override_option('menu', array(
     'type' => 'none',

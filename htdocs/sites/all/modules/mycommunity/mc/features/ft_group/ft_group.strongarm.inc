@@ -623,12 +623,12 @@ function ft_group_strongarm() {
       'region' => 'main',
       'weight' => '5',
       'has_required' => FALSE,
-      'title' => NULL,
+      'title' => 'Header Color',
       'hidden' => 0,
     ),
     'field_header_title_color' => array(
       'region' => 'main',
-      'weight' => '7',
+      'weight' => '6',
       'has_required' => TRUE,
       'title' => 'Header Title Color',
     ),
@@ -648,7 +648,7 @@ function ft_group_strongarm() {
     ),
     'field_group_featured_items' => array(
       'region' => 'main',
-      'weight' => '6',
+      'weight' => '7',
       'has_required' => FALSE,
       'title' => 'Featured Items',
       'hidden' => 0,

@@ -110,7 +110,7 @@ function _formfilter_filter_element(&$element, $recurse = TRUE) {
       }
       break;
     case 'colorpicker_cck':
-      $value = isset($element['#default_value']) ? $element['#default_value']['value'] : NULL;
+     $value = isset($element['#default_value']) ? $element['#default_value']['value'] : NULL;
       break;
   }
   // Unset unneeded keys. We don't simply redefine the arrays as they may have
