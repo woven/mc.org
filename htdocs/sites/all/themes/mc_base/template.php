@@ -326,8 +326,15 @@ function mc_base_preprocess_page(&$variables){
  */
 function mc_base_quicktabs_tabs($quicktabs, $active_tab = 'none') {
   $output = '';
+  $are_tabs_empty = true;
+  foreach($quicktabs['tabs'] as $tab){
+    if(!empty($tab)){
+      $are_tabs_empty = false;
+    }
+  }
   $tabs_count = count($quicktabs['tabs']);
-  if ($tabs_count <= 0) {
+  if ($tabs_count <= 0 || $are_tabs_empty) {
+    $_SESSION['empty_quicktabs'] = $quicktabs['machine_name'];
     return $output;
   }
 
@@ -400,6 +407,14 @@ function mc_base_preprocess_block(&$vars){
 
         //support sub title feature TITLE | SUB TITLE
         $block = $vars['block'];
+  if($block->module=='quicktabs' && isset($_SESSION['empty_quicktabs']) && $_SESSION['empty_quicktabs']==$block->delta){
+    unset($_SESSION['empty_quicktabs']);
+    $vars['block']->delta = 'hidden';
+    $block->delta = 'hidden';
+    $vars['content']='';
+    $vars['subject']='<none>';
+    return '';
+  }
         $vars['title'] = $block->subject;
         if(isset($vars['title']) && !empty($vars['title'])){
             if(strstr($vars['title'],'|')){
