@@ -537,16 +537,9 @@ function ft_group_strongarm() {
     ),
     'buttons' => array(
       'region' => 'main',
-      'weight' => '21',
+      'weight' => '14',
       'has_required' => FALSE,
       'title' => NULL,
-      'hidden' => 0,
-    ),
-    'field_group_manager' => array(
-      'region' => 'main',
-      'weight' => '8',
-      'has_required' => FALSE,
-      'title' => 'Additional Group Managers',
       'hidden' => 0,
     ),
     'og_selective' => array(
@@ -571,7 +564,7 @@ function ft_group_strongarm() {
     ),
     'themes' => array(
       'region' => 'main',
-      'weight' => '20',
+      'weight' => '13',
       'has_required' => FALSE,
       'title' => 'Theme configuration',
       'collapsed' => 0,
@@ -607,14 +600,14 @@ function ft_group_strongarm() {
     ),
     'body_field' => array(
       'region' => 'main',
-      'weight' => '1',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
     ),
     'field_small_name' => array(
       'region' => 'main',
-      'weight' => '2',
+      'weight' => '1',
       'has_required' => TRUE,
       'title' => 'Short Name',
       'hidden' => 0,
@@ -628,34 +621,34 @@ function ft_group_strongarm() {
     ),
     'field_header_color' => array(
       'region' => 'main',
-      'weight' => '11',
+      'weight' => '5',
       'has_required' => FALSE,
-      'title' => 'Header Color',
+      'title' => NULL,
       'hidden' => 0,
     ),
     'field_header_title_color' => array(
       'region' => 'main',
-      'weight' => '13',
+      'weight' => '7',
       'has_required' => TRUE,
       'title' => 'Header Title Color',
     ),
     'field_about' => array(
       'region' => 'main',
-      'weight' => '14',
+      'weight' => '8',
       'has_required' => FALSE,
       'title' => 'About',
       'hidden' => 0,
     ),
     'field_list_image' => array(
       'region' => 'main',
-      'weight' => '15',
+      'weight' => '9',
       'has_required' => FALSE,
       'title' => 'Images',
       'hidden' => 0,
     ),
     'field_group_featured_items' => array(
       'region' => 'main',
-      'weight' => '12',
+      'weight' => '6',
       'has_required' => FALSE,
       'title' => 'Featured Items',
       'hidden' => 0,
@@ -669,14 +662,14 @@ function ft_group_strongarm() {
     ),
     'field_welcome_email' => array(
       'region' => 'main',
-      'weight' => '18',
+      'weight' => '11',
       'has_required' => FALSE,
       'title' => 'Welcome Email',
       'hidden' => 0,
     ),
     'xmlsitemap' => array(
       'region' => 'main',
-      'weight' => '19',
+      'weight' => '12',
       'has_required' => FALSE,
       'title' => 'XML sitemap',
       'collapsed' => 1,
@@ -684,7 +677,7 @@ function ft_group_strongarm() {
     ),
     'nodewords' => array(
       'region' => 'main',
-      'weight' => '16',
+      'weight' => '10',
       'has_required' => FALSE,
       'title' => 'Meta tags',
       'collapsed' => 1,
@@ -1089,6 +1082,13 @@ Join: !group_url
   $strongarm->name = 'og_max_groups_page';
   $strongarm->value = '';
   $export['og_max_groups_page'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_page_general';
+  $strongarm->value = '';
+  $export['og_max_groups_page_general'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
