@@ -10,7 +10,9 @@ function mc_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_footer';
-  $strongarm->value = '';
+  $strongarm->value = '<p>The Society of Jewish Entrepreneurs</p>
+
+<p>Powered by <a href="http://www.mycommunity.org">MyCommunity.org</a></p>';
   $export['site_footer'] = $strongarm;
 
   $strongarm = new stdClass;
