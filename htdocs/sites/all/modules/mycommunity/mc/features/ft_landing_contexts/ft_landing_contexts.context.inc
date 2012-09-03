@@ -816,12 +816,12 @@ function ft_landing_contexts_context_default_contexts() {
       'blocks' => array(
         'ft_account-0' => array(
           'module' => 'ft_account',
-          'delta' => '0',
+          'delta' => 0,
           'region' => 'header',
           'weight' => 0,
         ),
-        'google_cse-0' => array(
-          'module' => 'google_cse',
+        'search-0' => array(
+          'module' => 'search',
           'delta' => 0,
           'region' => 'branding',
           'weight' => 0,

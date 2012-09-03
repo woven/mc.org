@@ -1,5 +1,5 @@
 name = "ft_hidesubmit"
-description = """"default hide_submit settings for "Please wait" msg""""
+description = """""default hide_submit settings for "Please wait" msg"""""
 core = "6.x"
 package = "MyCommunity.org"
 dependencies[] = "hide_submit"

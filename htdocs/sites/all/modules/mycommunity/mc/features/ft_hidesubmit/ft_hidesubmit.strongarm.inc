@@ -46,7 +46,8 @@ function ft_hidesubmit_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'hide_submit_form_exclusion';
   $strongarm->value = 'google_cse_searchbox_form
-_groupadmin_manage';
+_groupadmin_manage
+search_block_form';
   $export['hide_submit_form_exclusion'] = $strongarm;
 
   $strongarm = new stdClass;
