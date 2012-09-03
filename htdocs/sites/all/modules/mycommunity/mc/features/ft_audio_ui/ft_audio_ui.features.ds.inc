@@ -51,13 +51,6 @@ function ft_audio_ui_ds_default_settings() {
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
-            'related_stuff' => array(
-              'region' => 'footer',
-              'weight' => '-93',
-              'format' => 'ds_eval_code',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-            ),
             'series' => array(
               'region' => 'middle',
               'weight' => '-96',
@@ -68,7 +61,7 @@ function ft_audio_ui_ds_default_settings() {
             ),
             'facebook_like' => array(
               'region' => 'footer',
-              'weight' => '-19',
+              'weight' => '-93',
               'format' => '',
               'css-class' => '',
               'labelformat' => 'hidden',
