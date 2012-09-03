@@ -16,12 +16,19 @@ function ft_group_og_home_blocks_alter(&$blocks,$node){
   );
 }
 
-
 /*
  *
  */
 function ft_group_late_form_alter(&$form, &$form_state, $form_id){
+  if(is_ct_form($form,'group')){
+    formfilter_filter_form($form,array(
+      array('field_header_title_color'),
+      array('field_header_color')
+    ));;
+  }
 
+
+  //formfilter($form,)
   //remove "In addition to deleting this group, you choose how to disposition the posts and memberships within it."
   if($form_id == "node_delete_confirm"){
     unset($form['verb']['#description']);

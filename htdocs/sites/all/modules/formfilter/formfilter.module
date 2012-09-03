@@ -1,11 +1,10 @@
 <?php
-// $Id: formfilter.module,v 1.9 2008/12/15 18:54:44 nedjo Exp $
 
 /**
  * Array of form element types for which filtering is supported.
  */
 function formfilter_supported_types() {
-  return array('button', 'fieldset', 'select', 'textfield', 'checkbox', 'checkboxes', 'radio', 'radios', 'textarea', 'item', 'file', 'weight', 'markup');
+  return array('button', 'fieldset', 'select', 'textfield', 'checkbox', 'checkboxes', 'radio', 'radios', 'textarea', 'item', 'file', 'weight', 'markup','colorpicker_cck','optionwidgets_select');
 }
 
 /**
@@ -92,6 +91,7 @@ function _formfilter_filter_element(&$element, $recurse = TRUE) {
     case 'select':
     case 'checkboxes':
     case 'radios':
+    case 'optionwidgets_select':
       $value = isset($element['#default_value']) ? $element['#default_value'] : key($element['#options']);
       break;
     case 'weight':
@@ -99,19 +99,18 @@ function _formfilter_filter_element(&$element, $recurse = TRUE) {
       break;
     case 'checkbox':
     case 'radio':
-      // TBD: Why doesn't passing values work for checkbox elements?
-      //$value = isset($element['#default_value']) ? $element['#default_value'] : $element['#return_value'];
-      //break;
-      // For now, pass them as hidden elements.
-      $element['#type'] = 'hidden';
-      $element['#value'] = isset($element['#default_value']) ? $element['#default_value'] : $element['#return_value'];
-      return;
+      // If default_value is not empty (as a checkbox, that means checked) we return the return value.  Otherwise, 0 for unchecked.
+      $value = !empty($element['#default_value']) ? $element['#return_value'] : 0;
+      break;
     case 'textfield':
     case 'textarea':
       $value = isset($element['#default_value']) ? $element['#default_value'] : NULL;
       if (!$value && $element['#required']) {
         return;
       }
+      break;
+    case 'colorpicker_cck':
+      $value = isset($element['#default_value']) ? $element['#default_value']['value'] : NULL;
       break;
   }
   // Unset unneeded keys. We don't simply redefine the arrays as they may have

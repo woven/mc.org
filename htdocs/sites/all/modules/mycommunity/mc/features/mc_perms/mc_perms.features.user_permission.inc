@@ -206,7 +206,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add stuff group
   $permissions['add stuff group'] = array(
     'name' => 'add stuff group',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: add stuff link
@@ -395,7 +398,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer organic groups
   $permissions['administer organic groups'] = array(
     'name' => 'administer organic groups',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: administer page titles
@@ -600,13 +606,19 @@ function mc_perms_user_default_permissions() {
   // Exported permission: create group content
   $permissions['create group content'] = array(
     'name' => 'create group content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: create group sitewide
   $permissions['create group sitewide'] = array(
     'name' => 'create group sitewide',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: create link content
@@ -776,7 +788,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete any group content
   $permissions['delete any group content'] = array(
     'name' => 'delete any group content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any link content
@@ -889,7 +904,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete own group content
   $permissions['delete own group content'] = array(
     'name' => 'delete own group content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete own heartbeat activity logs
@@ -1029,7 +1047,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any group content
   $permissions['edit any group content'] = array(
     'name' => 'edit any group content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any link content
