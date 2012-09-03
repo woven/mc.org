@@ -419,7 +419,7 @@ function ft_landing_contexts_views_default_views() {
     'type' => array(
       'operator' => 'in',
       'value' => array(
-        'npage' => 'npage',
+        'page_general' => 'page_general',
       ),
       'group' => '0',
       'exposed' => FALSE,
@@ -431,21 +431,22 @@ function ft_landing_contexts_views_default_views() {
       'table' => 'node',
       'field' => 'type',
       'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
     ),
-    'field_page_type_value' => array(
+    'status' => array(
       'operator' => '=',
-      'value' => 'secondary',
+      'value' => '1',
       'group' => '0',
       'exposed' => FALSE,
       'expose' => array(
         'operator' => FALSE,
         'label' => '',
-        'optional' => FALSE,
       ),
-      'case' => 1,
-      'id' => 'field_page_type_value',
-      'table' => 'node_data_field_page_type',
-      'field' => 'field_page_type_value',
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
       'relationship' => 'none',
     ),
   ));

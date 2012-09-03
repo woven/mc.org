@@ -480,38 +480,6 @@ function ft_landing_contexts_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'landing_help';
-  $context->description = '';
-  $context->tag = 'Landing';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'help' => 'help',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-mc_page_menu-block_1' => array(
-          'module' => 'views',
-          'delta' => 'mc_page_menu-block_1',
-          'region' => 'left',
-          'weight' => 0,
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 0;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Landing');
-  $export['landing_help'] = $context;
-
-  $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'landing_homepage';
   $context->description = 'Context that contains the reactions to display the homepage properly';
   $context->tag = 'Landing';
@@ -779,6 +747,56 @@ function ft_landing_contexts_context_default_contexts() {
   t('Context that contains the reactions to display the Places Landing Page properly');
   t('Landing');
   $export['landing_places'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'page_general';
+  $context->description = 'Page General';
+  $context->tag = 'Node';
+  $context->conditions = array(
+    'context_og_condition_group_type' => array(
+      'values' => array(
+        '_none_' => '_none_',
+      ),
+      'options' => array(
+        'node_form' => 1,
+      ),
+    ),
+    'node' => array(
+      'values' => array(
+        'page_general' => 'page_general',
+      ),
+      'options' => array(
+        'node_form' => '0',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-mc_page_menu-block_1' => array(
+          'module' => 'views',
+          'delta' => 'mc_page_menu-block_1',
+          'region' => 'left',
+          'weight' => 0,
+        ),
+        'views-node_details-block_4' => array(
+          'module' => 'views',
+          'delta' => 'node_details-block_4',
+          'region' => 'content_top',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Node');
+  t('Page General');
+  $export['page_general'] = $context;
 
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
