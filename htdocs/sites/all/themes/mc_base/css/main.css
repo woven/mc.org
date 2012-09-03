@@ -2528,3 +2528,7 @@ margin: 0;
 .user-profile fieldset {
     margin-top: 40px;
 }
+
+.page-user  .view-mc-user-information .field-content {
+    color: black;
+}
