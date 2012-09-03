@@ -230,6 +230,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: add stuff page_general
+  $permissions['add stuff page_general'] = array(
+    'name' => 'add stuff page_general',
+    'roles' => array(),
+  );
+
   // Exported permission: add stuff place
   $permissions['add stuff place'] = array(
     'name' => 'add stuff place',
@@ -425,6 +431,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer quicktabs
   $permissions['administer quicktabs'] = array(
     'name' => 'administer quicktabs',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer search
+  $permissions['administer search'] = array(
+    'name' => 'administer search',
     'roles' => array(),
   );
 
@@ -657,6 +669,18 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: create page_general content
+  $permissions['create page_general content'] = array(
+    'name' => 'create page_general content',
+    'roles' => array(),
+  );
+
+  // Exported permission: create page_general sitewide
+  $permissions['create page_general sitewide'] = array(
+    'name' => 'create page_general sitewide',
+    'roles' => array(),
+  );
+
   // Exported permission: create place content
   $permissions['create place content'] = array(
     'name' => 'create place content',
@@ -812,6 +836,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: delete any page_general content
+  $permissions['delete any page_general content'] = array(
+    'name' => 'delete any page_general content',
+    'roles' => array(),
+  );
+
   // Exported permission: delete any place content
   $permissions['delete any place content'] = array(
     'name' => 'delete any place content',
@@ -931,6 +961,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete own npage content
   $permissions['delete own npage content'] = array(
     'name' => 'delete own npage content',
+    'roles' => array(),
+  );
+
+  // Exported permission: delete own page_general content
+  $permissions['delete own page_general content'] = array(
+    'name' => 'delete own page_general content',
     'roles' => array(),
   );
 
@@ -1068,6 +1104,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any npage content
   $permissions['edit any npage content'] = array(
     'name' => 'edit any npage content',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit any page_general content
+  $permissions['edit any page_general content'] = array(
+    'name' => 'edit any page_general content',
     'roles' => array(),
   );
 
@@ -1234,6 +1276,12 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit own page_general content
+  $permissions['edit own page_general content'] = array(
+    'name' => 'edit own page_general content',
+    'roles' => array(),
+  );
+
   // Exported permission: edit own place content
   $permissions['edit own place content'] = array(
     'name' => 'edit own place content',
@@ -1369,6 +1417,15 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: search content
+  $permissions['search content'] = array(
+    'name' => 'search content',
+    'roles' => array(
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: select different theme
   $permissions['select different theme'] = array(
     'name' => 'select different theme',
@@ -1396,6 +1453,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: use admin toolbar
   $permissions['use admin toolbar'] = array(
     'name' => 'use admin toolbar',
+    'roles' => array(),
+  );
+
+  // Exported permission: use advanced search
+  $permissions['use advanced search'] = array(
+    'name' => 'use advanced search',
     'roles' => array(),
   );
 
