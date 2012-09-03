@@ -12,14 +12,27 @@ function ft_audio_content_default_fields() {
     'type_name' => 'audio',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-83',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'emaudio',
+        'parent_id' => '',
+        'field_id' => 'field_embedtest',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-83',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -124,12 +137,12 @@ function ft_audio_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-88',
+      'ds_weight' => '-80',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'default',
+        'format' => 'medium__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -137,7 +150,7 @@ function ft_audio_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-88',
+        'weight' => '-80',
       ),
       'weight' => '5',
       'parent' => '',
