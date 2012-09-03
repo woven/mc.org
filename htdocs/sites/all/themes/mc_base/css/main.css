@@ -455,6 +455,7 @@ a .ico-small {
 	display: block;
 	width: 259px;
 	height: 67px;
+    margin-top: 8px;
 }
 
 #branding .site-name {
@@ -2527,4 +2528,8 @@ margin: 0;
 
 .user-profile fieldset {
     margin-top: 40px;
+}
+
+.page-user  .view-mc-user-information .field-content {
+    color: black;
 }
