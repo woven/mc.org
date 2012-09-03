@@ -50,3 +50,21 @@ function mc_profile_ui_user($op, &$edit, &$account, $category = NULL){
     unset($account->profile_gender, $account->profile_birthday, $account->profile_website, $account->profile_twitter, $account->profile_facebook, $account->picture, $account->profile_employer, $account->profile_position, $account->profile_employer_city, $account->profile_position_description);
   }
 }
+function mc_profile_ui_late_form_alter(&$form, &$form_state, $form_id){
+  if($form_id=='profile_form_profile' && isset($form['Personal Information']['profile_birthday'])){
+    $form['Personal Information']['profile_birthday']['#after_build'][] = '_mc_profile_ui_alter_date_element';
+  }
+  if($form_id=='user_profile_form'){
+    formfilter_filter_form($form,array(
+      array('timezone')
+    ));;
+  }
+}
+
+function _mc_profile_ui_alter_date_element($form_element) {
+  $year = date('Y');
+  for($i=$year+1; $i<=end($form_element['year']['#options']); $i++) {
+    unset($form_element['year']['#options'][$i]);
+  }
+  return $form_element;
+}

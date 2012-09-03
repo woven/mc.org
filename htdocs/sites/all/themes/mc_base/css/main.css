@@ -2520,3 +2520,11 @@ margin: 0;
 #block-quicktabs-hidden {
     display: none;
 }
+
+.user-profile label {
+    text-transform: uppercase;
+}
+
+.user-profile fieldset {
+    margin-top: 40px;
+}
