@@ -20,11 +20,20 @@ function ft_group_og_home_blocks_alter(&$blocks,$node){
  *
  */
 function ft_group_late_form_alter(&$form, &$form_state, $form_id){
+  global $user;
+
+  /**
+   * hide color fields from non admin users
+   * @tags temp
+   */
   if(is_ct_form($form,'group')){
-    formfilter_filter_form($form,array(
-      array('field_header_title_color'),
-      array('field_header_color')
-    ));;
+    if($user->uid > 1){
+      formfilter_filter_form($form,array(
+        array('field_header_title_color')
+      ));;
+
+      $form['field_header_color']['#access'] = FALSE;
+    }
   }
 
 
