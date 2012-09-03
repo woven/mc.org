@@ -17,12 +17,12 @@ function ft_article_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-81',
+      'ds_weight' => '-87',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'default',
+        'format' => 'medium__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -30,7 +30,7 @@ function ft_article_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-81',
+        'weight' => '-87',
       ),
       'weight' => '7',
       'parent' => '',
@@ -117,7 +117,7 @@ function ft_article_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-80',
+      'ds_weight' => '-83',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -130,7 +130,7 @@ function ft_article_content_default_fields() {
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-80',
+        'weight' => '-83',
       ),
       'weight' => '12',
       'parent' => '',
@@ -206,12 +206,12 @@ function ft_article_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-75',
+      'ds_weight' => '-77',
       'full' => array(
         'label' => array(
           'format' => 'inline',
         ),
-        'format' => 'default',
+        'format' => 'medium__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -219,7 +219,7 @@ function ft_article_content_default_fields() {
         'field_id' => 'field_upload_file',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-75',
+        'weight' => '-77',
       ),
       'teaser' => array(
         'format' => 'default',

@@ -9,8 +9,16 @@ function is_ct_form($form,$ct){
   if($form['#id'] == "node-form"){
     if(isset($form['#node'])){
       $node = $form['#node'];
-      if($ct == $node->type){
-        return TRUE;
+
+      switch($ct){
+        case 'form':
+          return true;
+        break;
+        default:
+          if($ct == $node->type){
+            return TRUE;
+          }
+        break;
       }
     }
   }

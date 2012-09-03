@@ -16,19 +16,20 @@ function og_sitewide_perm_perm(){
 
 function og_sitewide_perm_late_form_alter(&$form, &$form_state, $form_id){
 
-  //check if it's node form
-  if ($form['#id'] != 'node-form' || !is_object($form['#node'])){
-    //it's not a node form
-    return;
+  //check if it's node form and check it's group post type
+  if(!is_ct_form($form,'form') && og_is_group_post_type($form['#node']->type)){
+      return;
   }
 
+  $node = $form['#node'];
+
   //Check if has permissions to post sitewide permissions
-  $postSitewide = user_access("create " . $type->type . " sitewide");
+  $postSitewide = user_access("create " . $node->type . " sitewide");
 
   if ($postSitewide){
     $none = array(0);
     if(is_array($form['og_nodeapi']['visible']['og_groups']['#options']))
       $ops = &$form['og_nodeapi']['visible']['og_groups']['#options'];
-      array_unshift_assoc($ops,0,"-- None --");
+      $ops = array_unshift_assoc($ops,0,"-- None --");
     }
 }
