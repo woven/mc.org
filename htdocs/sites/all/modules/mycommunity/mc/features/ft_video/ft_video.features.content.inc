@@ -17,7 +17,7 @@ function ft_video_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-87',
+      'ds_weight' => '-84',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -30,7 +30,7 @@ function ft_video_content_default_fields() {
         'field_id' => 'field_editorial',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-87',
+        'weight' => '-84',
       ),
       'weight' => '9',
       'parent' => '',
@@ -91,12 +91,12 @@ function ft_video_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-86',
+      'ds_weight' => '-83',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'default',
+        'format' => 'medium__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -104,7 +104,7 @@ function ft_video_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-86',
+        'weight' => '-83',
       ),
       'weight' => '5',
       'parent' => '',
@@ -191,7 +191,7 @@ function ft_video_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-84',
+      'ds_weight' => '-85',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -204,7 +204,7 @@ function ft_video_content_default_fields() {
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-84',
+        'weight' => '-85',
       ),
       'weight' => '10',
       'parent' => '',

@@ -44,16 +44,9 @@ function ft_video_ui_ds_default_settings() {
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
-            'related_stuff' => array(
-              'region' => 'footer',
-              'weight' => '-95',
-              'format' => 'ds_eval_code',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-            ),
             'facebook_like' => array(
               'region' => 'footer',
-              'weight' => '-19',
+              'weight' => '-95',
               'format' => '',
               'css-class' => '',
               'labelformat' => 'hidden',

@@ -17,12 +17,12 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-66',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'featured_slideshow__colorbox',
+        'format' => 'medium__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -30,7 +30,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-66',
+        'weight' => '-19',
       ),
       '5' => array(
         'label' => array(
@@ -122,14 +122,27 @@ function ft_event_content_default_fields() {
     'type_name' => 'event',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'number_integer',
+        'parent_id' => '',
+        'field_id' => 'field_online_event',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -193,7 +206,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-67',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -206,7 +219,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_place',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-67',
+        'weight' => '-19',
       ),
       '5' => array(
         'label' => array(
@@ -328,7 +341,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-70',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -341,7 +354,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-70',
+        'weight' => '-19',
       ),
       '5' => array(
         'label' => array(
@@ -431,12 +444,12 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-80',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'inline',
         ),
-        'format' => 'featured_slideshow__colorbox',
+        'format' => 'medium__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -444,7 +457,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_upload_file',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-80',
+        'weight' => '-19',
       ),
       'teaser' => array(
         'format' => 'default',
