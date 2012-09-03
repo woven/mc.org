@@ -35,6 +35,8 @@ fieldset legend {
 
 /** thememing content-multiple-table **/
 
+
+
 .content-multiple-wrapper{
     border-collapse: separate;
     border: 1px solid #CCC;
@@ -91,11 +93,25 @@ fieldset legend {
     padding:0;
 }
 
-/** /theming content-multiple-table **/
+/** end theming content-multiple-table **/
 
 /**
-** removing fieldset legend for now
+** removing fieldset legend for now on node forms
 */
 #node-form fieldset legend {
     display: none;
+}
+
+.filefield-element .widget-preview{
+    display: block;
+    width: 300px;
+    float: left;
+}
+
+.filefield-element .filemime{
+    display: inline;
+}
+
+.filefield-element .widget-edit{
+    float: left;
 }

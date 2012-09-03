@@ -34,6 +34,7 @@ scripts[] = "js/qtip.js"
 ; Stylesheets disable core styles
 stylesheets[all][] = "system-menus.css"
 stylesheets[all][] = "system.css"
+stylesheets[all][] = "filefield.css"
 
 ; theme stylesheets
 stylesheets[screen][] = "css/reset.css"

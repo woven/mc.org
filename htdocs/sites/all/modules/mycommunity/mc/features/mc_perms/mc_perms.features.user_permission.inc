@@ -72,11 +72,15 @@ function mc_perms_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      '0' => 'administrator',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-      '3' => 'community manager',
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
     ),
+  );
+
+  // Exported permission: access environment indicator
+  $permissions['access environment indicator'] = array(
+    'name' => 'access environment indicator',
+    'roles' => array(),
   );
 
   // Exported permission: access own webform results
@@ -316,6 +320,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer form filters
+  $permissions['administer form filters'] = array(
+    'name' => 'administer form filters',
+    'roles' => array(),
+  );
+
   // Exported permission: administer forums
   $permissions['administer forums'] = array(
     'name' => 'administer forums',
@@ -331,10 +341,7 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer groupadmin
   $permissions['administer groupadmin'] = array(
     'name' => 'administer groupadmin',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'community manager',
-    ),
+    'roles' => array(),
   );
 
   // Exported permission: administer imageapi
@@ -352,12 +359,6 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer jquery media
   $permissions['administer jquery media'] = array(
     'name' => 'administer jquery media',
-    'roles' => array(),
-  );
-
-  // Exported permission: administer mc_deploy
-  $permissions['administer mc_deploy'] = array(
-    'name' => 'administer mc_deploy',
     'roles' => array(),
   );
 
@@ -382,10 +383,7 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer nodes
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'community manager',
-    ),
+    'roles' => array(),
   );
 
   // Exported permission: administer og menu
@@ -1127,12 +1125,6 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: edit mimemail user settings
-  $permissions['edit mimemail user settings'] = array(
-    'name' => 'edit mimemail user settings',
-    'roles' => array(),
-  );
-
   // Exported permission: edit own article content
   $permissions['edit own article content'] = array(
     'name' => 'edit own article content',
@@ -1383,10 +1375,7 @@ function mc_perms_user_default_permissions() {
   // Exported permission: use admin toolbar
   $permissions['use admin toolbar'] = array(
     'name' => 'use admin toolbar',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'community manager',
-    ),
+    'roles' => array(),
   );
 
   // Exported permission: use php in custom pagers
@@ -1416,6 +1405,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view advanced help topic
   $permissions['view advanced help topic'] = array(
     'name' => 'view advanced help topic',
+    'roles' => array(),
+  );
+
+  // Exported permission: view forms without filtering
+  $permissions['view forms without filtering'] = array(
+    'name' => 'view forms without filtering',
     'roles' => array(),
   );
 
@@ -1491,6 +1486,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: view imagecache profile_picture
+  $permissions['view imagecache profile_picture'] = array(
+    'name' => 'view imagecache profile_picture',
+    'roles' => array(),
+  );
+
   // Exported permission: view imagecache reg
   $permissions['view imagecache reg'] = array(
     'name' => 'view imagecache reg',
@@ -1530,12 +1531,6 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view imagecache tiny
   $permissions['view imagecache tiny'] = array(
     'name' => 'view imagecache tiny',
-    'roles' => array(),
-  );
-
-  // Exported permission: view imagecache user_account_thum
-  $permissions['view imagecache user_account_thum'] = array(
-    'name' => 'view imagecache user_account_thum',
     'roles' => array(),
   );
 
