@@ -2221,8 +2221,6 @@ border-width: 1px 0 !important;
 .filefield-icon{position: relative; top: 3px;}
 .node-type-file .field-file-view{width: 400px; float: left;}
 .node-type-file .field-body{clear: both;}
-.filefield-file iframe{width: 785px !important; height: 400px !important;}
-.filefield-file {position: absolute;}
 .node-type-file #cboxTitle{display: none !important}
 .node-type-article #cboxTitle{display: none !important}
 .node-type-event #cboxTitle{display: none !important}
