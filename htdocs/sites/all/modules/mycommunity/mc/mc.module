@@ -531,8 +531,8 @@ function mc_events_grouped_by_dates($view_name, $display_id, $max_items){
   }
   
   if ($items_count < 1){
-    $link = l(t('add an event?'), 'node/add/event');
-    $output = t("<p>It's quiet around here. Why not $link</p>");
+    $link = l(t('add an event'), 'node/add/event');
+    $output = t("<p>It's quiet around here. Why not $link?</p>");
   }
   
   print $output;
