@@ -565,6 +565,7 @@ function mc_admin_bulk_views_default_views() {
     ),
   ));
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->override_option('title', 'Manage Content');
   $handler->override_option('empty', 'There is no content in this community. Add stuff using the button at the top of the page.');
   $handler->override_option('empty_format', '5');
   $handler->override_option('style_options', array(
@@ -786,7 +787,7 @@ function mc_admin_bulk_views_default_views() {
   ));
   $handler->override_option('path', 'admin/content/node/bulk');
   $handler->override_option('menu', array(
-    'type' => 'tab',
+    'type' => 'none',
     'title' => 'Bulk Editor',
     'description' => '',
     'weight' => '0',
