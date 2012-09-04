@@ -107,8 +107,8 @@
     float: left;
     margin-right: 4px;
 }
-.page-search #search-form input.form-submit{
-    line-height: 13px;
+.page-search #search-form input.form-submit,.page-search #search-form .button{
+    line-height: 13px !important;
 }
 
 body.page-search #search-form label{
