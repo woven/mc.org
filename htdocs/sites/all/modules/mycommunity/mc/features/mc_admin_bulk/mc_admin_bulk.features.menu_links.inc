@@ -65,7 +65,7 @@ function mc_admin_bulk_menu_default_menu_links() {
     'menu_name' => 'menu-manage-community',
     'link_path' => 'admin/menu/help/config',
     'router_path' => 'admin/menu/help/config',
-    'link_title' => 'Manage Help Menu',
+    'link_title' => 'Manage Pages Submenu',
     'options' => array(
       'attributes' => array(
         'title' => '',
@@ -82,7 +82,7 @@ function mc_admin_bulk_menu_default_menu_links() {
   // Included for use with string extractors like potx.
   t('Manage Content');
   t('Manage Groups');
-  t('Manage Help Menu');
+  t('Manage Pages Submenu');
   t('Manage Users');
 
 
