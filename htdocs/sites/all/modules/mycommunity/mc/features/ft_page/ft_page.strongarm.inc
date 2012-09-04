@@ -557,6 +557,13 @@ function ft_page_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_visibility_npage';
+  $strongarm->value = '0';
+  $export['og_visibility_npage'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'page_title_type_npage';
   $strongarm->value = '';
   $export['page_title_type_npage'] = $strongarm;
@@ -640,6 +647,16 @@ function ft_page_strongarm() {
     1 => 'node_group',
   );
   $export['skinr_settings_npage'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_npage';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_npage'] = $strongarm;
 
   return $export;
 }

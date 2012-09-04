@@ -451,7 +451,8 @@ function ft_landing_contexts_views_default_views() {
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'none',
+    'type' => 'perm',
+    'perm' => 'administer nodes',
   ));
   $handler->override_option('cache', array(
     'type' => 'none',
@@ -459,6 +460,9 @@ function ft_landing_contexts_views_default_views() {
   $handler->override_option('items_per_page', 0);
   $handler->override_option('style_plugin', 'draggabletable');
   $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->override_option('access', array(
+    'type' => 'none',
+  ));
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
     'grouping' => '',
@@ -559,6 +563,8 @@ function ft_landing_contexts_views_default_views() {
       'relationship' => 'none',
     ),
   ));
+  $handler->override_option('empty', 'There are no pages to build a menu from. Would you like to <a href="/node/add/page-general">add a page<a>?');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('style_options', array(
     'override' => 1,
     'sticky' => 0,
