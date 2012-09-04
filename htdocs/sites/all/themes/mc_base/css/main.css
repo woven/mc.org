@@ -1772,16 +1772,22 @@ a.orange span {
 
 
 /* Follow us block */
-.follow-block a.button:hover{
+.follow-block .button:hover{
   text-decoration:none;
 }
-.subscribe .button span {
-  width: 185px;
+
+.follow-block #anonymous-follow {
+    width: 185px;
+}
+
+
+.subscribe .button {
+  width: 235px;
   text-align: center;
   text-transform:uppercase;
-  padding:0 0 0 23px;
+  /*padding:0 0 0 23px;*/
 }
-.subscribe button, .button{
+.subscribe .button, .button{
   float:none;
 }
 .subscribe p {
@@ -1795,7 +1801,7 @@ a.orange span {
 .follow-block .member-count a {
 	color: #00c0ff;
 }
-.follow-block a.button{
+.follow-block .button{
   margin-bottom:10px;
 }
 

@@ -9,6 +9,21 @@ function ft_group_ui_default_box() {
   $box = new stdClass;
   $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
   $box->api_version = 1;
+  $box->delta = 'follow_form';
+  $box->plugin_key = 'simple';
+  $box->title = '';
+  $box->description = 'Follow Form';
+  $box->options = array(
+    'body' => '<?php 
+echo drupal_get_form(\'mc_og_follow_group_form\');
+?>',
+    'format' => '3',
+  );
+  $export['follow_form'] = $box;
+
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
   $box->delta = 'group_follow_box';
   $box->plugin_key = 'simple';
   $box->title = '';
