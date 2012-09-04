@@ -282,6 +282,7 @@ a .ico-small {
 }
 
 .block-overlay .block-signup .why li {
+    list-style: none;
 	padding: 10px 0 10px 33px;
 	font-size: 1.25em;
 	background: url(../images/common/bullet-tick.png) 0 6px no-repeat;
