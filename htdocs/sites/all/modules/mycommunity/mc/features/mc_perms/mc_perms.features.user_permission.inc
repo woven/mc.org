@@ -33,7 +33,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: access admin theme
   $permissions['access admin theme'] = array(
     'name' => 'access admin theme',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: access administration menu
@@ -117,8 +120,10 @@ function mc_perms_user_default_permissions() {
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
     'roles' => array(
-      '0' => 'anonymous user',
-      '1' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'community manager',
     ),
   );
 
@@ -392,7 +397,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer nodes
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: administer og menu
@@ -479,7 +487,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer users
   $permissions['administer users'] = array(
     'name' => 'administer users',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: administer views
@@ -1453,7 +1464,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: use admin toolbar
   $permissions['use admin toolbar'] = array(
     'name' => 'use admin toolbar',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: use advanced search
@@ -1570,15 +1584,15 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: view imagecache profile_picture
-  $permissions['view imagecache profile_picture'] = array(
-    'name' => 'view imagecache profile_picture',
-    'roles' => array(),
-  );
-
   // Exported permission: view imagecache reg
   $permissions['view imagecache reg'] = array(
     'name' => 'view imagecache reg',
+    'roles' => array(),
+  );
+
+  // Exported permission: view imagecache search_result_image
+  $permissions['view imagecache search_result_image'] = array(
+    'name' => 'view imagecache search_result_image',
     'roles' => array(),
   );
 
@@ -1615,6 +1629,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view imagecache tiny
   $permissions['view imagecache tiny'] = array(
     'name' => 'view imagecache tiny',
+    'roles' => array(),
+  );
+
+  // Exported permission: view imagecache user_account_thum
+  $permissions['view imagecache user_account_thum'] = array(
+    'name' => 'view imagecache user_account_thum',
     'roles' => array(),
   );
 
