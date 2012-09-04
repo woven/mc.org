@@ -823,6 +823,8 @@ function mc_admin_bulk_views_default_views() {
   $handler->override_option('footer', '<a href="mailto:support@woven.org">Add a new group</a>');
   $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
+  $handler->override_option('empty', 'There are no groups in this community. Please contact <a href="http://woven.org/support" target="blank">Woven Support</a>.');
+  $handler->override_option('empty_format', '5');
   $handler->override_option('path', 'admin/content/group/bulk');
   $handler->override_option('menu', array(
     'type' => 'none',
