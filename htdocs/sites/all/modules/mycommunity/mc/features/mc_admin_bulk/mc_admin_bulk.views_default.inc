@@ -313,10 +313,8 @@ function mc_admin_bulk_views_default_views() {
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'role',
-    'role' => array(
-      3 => 3,
-    ),
+    'type' => 'perm',
+    'perm' => 'administer nodes',
   ));
   $handler->override_option('cache', array(
     'type' => 'none',

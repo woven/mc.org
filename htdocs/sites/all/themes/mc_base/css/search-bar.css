@@ -103,6 +103,10 @@
     width: 600px;
 }
 
+.page-search #tabs{
+    display: none;
+}
+
 .page-search #search-form input{
     float: left;
     margin-right: 4px;
@@ -110,6 +114,7 @@
 .page-search #search-form input.form-submit,.page-search #search-form .button{
     line-height: 13px !important;
 }
+
 
 body.page-search #search-form label{
     text-transform: uppercase;

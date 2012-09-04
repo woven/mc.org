@@ -16,7 +16,7 @@ function ft_page_ctools_plugin_api() {
 function ft_page_node_info() {
   $items = array(
     'npage' => array(
-      'name' => t('Page'),
+      'name' => t('Landing Page'),
       'module' => 'features',
       'description' => t('This is a page of the website that doesn\'t show up in listings of Articles, etc.'),
       'has_title' => '1',

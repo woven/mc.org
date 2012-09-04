@@ -99,11 +99,9 @@ function ft_admin_strongarm() {
     'position' => 'ne',
     'behavior' => 'df',
     'blocks' => array(
-      'admin-theme' => 1,
       'admin-account' => -1,
       'admin-menu' => 1,
-      'menu-menu-addstuff' => -1,
-      'menu-menu-cms' => -1,
+      'menu-menu-manage-community' => -1,
     ),
   );
   $export['admin_toolbar'] = $strongarm;

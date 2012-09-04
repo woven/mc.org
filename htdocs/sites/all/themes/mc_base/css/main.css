@@ -282,6 +282,7 @@ a .ico-small {
 }
 
 .block-overlay .block-signup .why li {
+    list-style: none;
 	padding: 10px 0 10px 33px;
 	font-size: 1.25em;
 	background: url(../images/common/bullet-tick.png) 0 6px no-repeat;
@@ -621,7 +622,6 @@ a .ico-small {
 #navigation .primary-links li.last {
 	float: right;
 }
-*/
 
 #navigation .primary-links li.last {
     -webkit-border-radius: 0;
@@ -635,6 +635,8 @@ a .ico-small {
 	border-radius: 0 6px 6px 0;
 	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
 }
+
+*/
 
 #navigation .primary-links a,
 #navigation .primary-links a:visited {
