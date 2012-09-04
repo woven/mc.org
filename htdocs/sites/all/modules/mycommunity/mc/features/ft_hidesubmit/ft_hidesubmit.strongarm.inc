@@ -90,7 +90,7 @@ search_form';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'hide_submit_keypress';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['hide_submit_keypress'] = $strongarm;
 
   $strongarm = new stdClass;
