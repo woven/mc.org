@@ -2024,6 +2024,7 @@ a.orange span {
 
 #sitemap {
 	margin: 20px 65px;
+    display: none;
 }
 
 #sitemap .block-content {
@@ -2064,7 +2065,6 @@ a.orange span {
 #footer .prose {
 	margin: 0 30px;
 	text-align: center;
-	border-top: 1px solid #eee;
 }
 #footer .prose p {
 	margin: 15px 0;
