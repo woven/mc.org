@@ -96,3 +96,10 @@ function mc_update_6009() {
   function mc_update_6010() {
     module_enable(array('pass_reset_autologin'));
   }
+
+/**
+ * enable pass_reset_autologin
+ */
+function mc_update_6011() {
+  module_enable(array('ft_search_drupal'));
+}
