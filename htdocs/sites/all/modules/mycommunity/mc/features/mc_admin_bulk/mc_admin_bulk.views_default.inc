@@ -1096,7 +1096,7 @@ function mc_admin_bulk_views_default_views() {
     'grouping' => '',
     'override' => 1,
     'sticky' => 0,
-    'order' => 'asc',
+    'order' => 'desc',
     'summary' => '',
     'columns' => array(
       'name' => 'name',
@@ -1126,7 +1126,7 @@ function mc_admin_bulk_views_default_views() {
         'separator' => '',
       ),
     ),
-    'default' => 'access',
+    'default' => 'created',
     'execution_type' => '2',
     'max_performance' => 1,
     'display_type' => '0',
