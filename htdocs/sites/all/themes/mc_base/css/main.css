@@ -621,7 +621,6 @@ a .ico-small {
 #navigation .primary-links li.last {
 	float: right;
 }
-*/
 
 #navigation .primary-links li.last {
     -webkit-border-radius: 0;
@@ -635,6 +634,8 @@ a .ico-small {
 	border-radius: 0 6px 6px 0;
 	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
 }
+
+*/
 
 #navigation .primary-links a,
 #navigation .primary-links a:visited {
