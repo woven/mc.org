@@ -98,7 +98,7 @@ function mc_update_6009() {
   }
 
 /**
- * enable pass_reset_autologin
+ * enable ft_search_drupal
  */
 function mc_update_6011() {
   module_enable(array('ft_search_drupal'));
