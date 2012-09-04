@@ -17,7 +17,7 @@ function og_sitewide_perm_perm(){
 function og_sitewide_perm_late_form_alter(&$form, &$form_state, $form_id){
 
   //check if it's node form and check it's group post type
-  if(!is_ct_form($form,'form') && og_is_group_post_type($form['#node']->type)){
+  if(!is_ct_form($form,'form') AND !og_is_group_post_type($form['#node']->type)){
       return;
   }
 

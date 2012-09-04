@@ -98,15 +98,15 @@ function formfilter_ui_form_alter(&$form, &$form_state, $form_id) {
       drupal_set_message(t('To register filters for this form, select which filters to apply and then submit the form normally.'));
     }
     else {
-      $form['#suffix'] .= '<div>'. l(t('Filter this form'), $_GET['q'], array('query' => 'formfilter_id='. $form_id)) .'</div>';
+      $form['#suffix'] .= '<div class="form-filter-ui">'. l(t('Filter this form'), $_GET['q'], array('query' => 'formfilter_id='. $form_id)) .'</div>';
       if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
     $node = $form['#node'];
-        $form['#suffix'] .= '<div>'. l(t('Filter all node forms'), 'formfilter-ui/node', array('query' => 'formfilter_id=formfilter_ui_node_form')) .'</div>';
+        $form['#suffix'] .= '<div class="form-filter-ui">'. l(t('Filter all node forms'), 'formfilter-ui/node', array('query' => 'formfilter_id=formfilter_ui_node_form')) .'</div>';
       }
       // If the user applying a filter had permission to view forms without filtering,
       // give her or him a link to preview the filtering if a filter exists on the form.
       if (array_key_exists($form_id, $filters) && user_access('view forms without filtering') && !$_REQUEST['formfilter_preview']) {
-        $form['#suffix'] .= '<div>'. l(t('Preview a filtered version of this form'), $_GET['q'], array('query' => 'formfilter_preview=1')) .'</div>';
+        $form['#suffix'] .= '<div class="form-filter-ui">'. l(t('Preview a filtered version of this form'), $_GET['q'], array('query' => 'formfilter_preview=1')) .'</div>';
       }
     }
   }

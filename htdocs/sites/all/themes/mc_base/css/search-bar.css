@@ -5,6 +5,11 @@
 	margin: 30px 0 0 0;
 }
 
+/* Drupal Search styles*/
+#search-bar .block-title,#search-bar .form-filter-ui{
+    display: none;
+}
+
 #search-bar #block-google_cse-0, #search-bar .block-search {
 	float: left;
 }
@@ -92,3 +97,74 @@
 }
 
 #search input{border: none !important;}
+
+/* Search page /search */
+.page-search #search-form{
+    width: 600px;
+}
+
+.page-search #search-form input{
+    float: left;
+    margin-right: 4px;
+}
+.page-search #search-form input.form-submit,.page-search #search-form .button{
+    line-height: 13px !important;
+}
+
+body.page-search #search-form label{
+    text-transform: uppercase;
+}
+
+.page-search #search-form:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden
+}
+
+body.page-search h1.page-title{
+    display: none;
+}
+
+body.page-search h2.title{
+    color: #676767;
+    font-size: 13px;
+}
+
+.search-results{
+    border-top-color: #E9E9E9;
+    border-top-style: solid;
+    border-top-width: 1px;
+    margin-top: 10px;
+    padding-top:  10px;
+}
+
+.search-results .result{
+    width: 600px;
+    margin-bottom: 35px;
+}
+
+.search-results .result .result-pic{
+    float: left;
+    margin-right: 10px;
+    width: 62px;
+    height: 100%;
+}
+
+.search-results .result .result-info{
+    margin-left: 72px;
+    font-size: 13px;
+}
+
+.search-results .result .result-info .title{
+    font-size: 16px;
+}
+.search-results .result .result-info .title a{
+    text-decoration: underline;
+}
+
+.search-results .result .result-info .search-url{
+    color: green;
+    font-weight: bold;
+}

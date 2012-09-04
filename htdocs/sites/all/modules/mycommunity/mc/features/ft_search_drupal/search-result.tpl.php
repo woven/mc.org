@@ -45,6 +45,7 @@
  * @see template_preprocess_search_result()
  */
 ?>
+
 <div class="result">
 	<?php if ($picture) : ?>
 		<div class="result-pic">
