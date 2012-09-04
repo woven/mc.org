@@ -103,3 +103,10 @@ function mc_update_6009() {
 function mc_update_6011() {
   module_enable(array('ft_search_drupal'));
 }
+
+  /**
+   * enable ft_search_drupal_ui
+   */
+  function mc_update_6012() {
+    module_enable(array('ft_search_drupal_ui'));
+  }
