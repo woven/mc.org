@@ -532,7 +532,6 @@ return false;
         'group' => 0,
       ),
       'validate_argument_php' => '$user = user_load($argument);
-dpm($user);
 if(!empty($user->profile_gender) || !empty($user->profile_birthday) || !empty($user->profile_city) || !empty($user->profile_website) || !empty($user->profile_twitter) || !empty($user->profile_facebook) ){
 return true;
 }
