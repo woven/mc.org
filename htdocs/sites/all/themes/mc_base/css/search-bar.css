@@ -107,6 +107,9 @@
     float: left;
     margin-right: 4px;
 }
+.page-search #search-form input.form-submit{
+    line-height: 13px;
+}
 
 body.page-search #search-form label{
     text-transform: uppercase;
@@ -156,6 +159,9 @@ body.page-search h2.title{
 
 .search-results .result .result-info .title{
     font-size: 16px;
+}
+.search-results .result .result-info .title a{
+    text-decoration: underline;
 }
 
 .search-results .result .result-info .search-url{
