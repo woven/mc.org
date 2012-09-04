@@ -9,7 +9,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: Allow Reordering
   $permissions['Allow Reordering'] = array(
     'name' => 'Allow Reordering',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: Use PHP input for field settings (dangerous - grant with care)
