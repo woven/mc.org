@@ -216,7 +216,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'add stuff group',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
@@ -241,7 +240,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add stuff page_general
   $permissions['add stuff page_general'] = array(
     'name' => 'add stuff page_general',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: add stuff place
@@ -686,7 +688,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: create page_general content
   $permissions['create page_general content'] = array(
     'name' => 'create page_general content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: create page_general sitewide
@@ -853,7 +858,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete any page_general content
   $permissions['delete any page_general content'] = array(
     'name' => 'delete any page_general content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any place content
@@ -981,7 +989,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete own page_general content
   $permissions['delete own page_general content'] = array(
     'name' => 'delete own page_general content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: delete own place content
@@ -1124,7 +1134,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any page_general content
   $permissions['edit any page_general content'] = array(
     'name' => 'edit any page_general content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any place content
@@ -1293,7 +1306,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit own page_general content
   $permissions['edit own page_general content'] = array(
     'name' => 'edit own page_general content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: edit own place content
