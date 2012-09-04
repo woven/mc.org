@@ -563,6 +563,13 @@ function ft_landing_contexts_views_default_views() {
       'relationship' => 'none',
     ),
   ));
+  $handler->override_option('access', array(
+    'type' => 'role',
+    'role' => array(
+      3 => 3,
+      4 => 4,
+    ),
+  ));
   $handler->override_option('empty', 'There are no pages to build a menu from. Would you like to <a href="/node/add/page-general">add a page<a>?');
   $handler->override_option('empty_format', '2');
   $handler->override_option('style_options', array(

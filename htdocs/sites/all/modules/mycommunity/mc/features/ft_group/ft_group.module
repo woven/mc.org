@@ -134,9 +134,15 @@ function ft_group_init(){
       $node=node_load($nid);
       $user->og_groups[$nid]=array(
           'title' => $node->title,
+        'status' => '1',
+        'nid' => $nid,
+        'og_role' => '0',
+        'is_active' => '1',
+        'uid', $user->uid,
+        'created' => '0',
+        'changed' => '0',
       );
       follow_group($nid);
-      unset($_SESSION['anonymous_must_follow']);
     }
   }
 }

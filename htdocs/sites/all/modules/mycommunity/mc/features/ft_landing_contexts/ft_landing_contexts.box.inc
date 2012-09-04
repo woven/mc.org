@@ -52,8 +52,12 @@ function ft_landing_contexts_default_box() {
   $box->description = 'Latest Audio and Video';
   $box->options = array(
     'body' => '<?php
-print views_embed_view(\'latest_pages\', \'block_3\');
-print views_embed_view(\'latest_pages\', \'block_2\');
+$block1 = views_embed_view(\'latest_pages\', \'block_3\');
+$block2 = print views_embed_view(\'latest_pages\', \'block_2\');
+
+if(strstr($block1, \'Nothing to show here\') && strstr($block2, \'Nothing to show here\')){
+print "<p>Nothing to show here.</p>";
+}
 ?>',
     'format' => '3',
   );
