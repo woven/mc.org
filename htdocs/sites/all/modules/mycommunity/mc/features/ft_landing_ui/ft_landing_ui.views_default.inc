@@ -2993,7 +2993,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'See All\', \'latest\' )); ?>');
   $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
-  $handler->override_option('empty', 'Nothing to show here');
+  $handler->override_option('empty', 'Nothing to show here.');
   $handler->override_option('empty_format', '2');
   $handler->override_option('use_ajax', TRUE);
   $handler->override_option('items_per_page', 4);
