@@ -177,7 +177,7 @@ $is_same_user = $account->uid==$user->uid;
 
 ?>
 <div class="default-message">
-Nothing to show here.<?php if($is_same_user): ?> Would you like to <a href="/node/add/group">add a group</a>?<?php endif; ?>
+Nothing to show here.<?php if($is_same_user): ?> Would you like to <a href="/groups">browse groups<a/> in this community <?php endif; ?>
 </div>');
   $handler->override_option('empty_format', '3');
   $handler->override_option('use_ajax', TRUE);

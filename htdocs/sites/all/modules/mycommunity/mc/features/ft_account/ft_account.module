@@ -93,7 +93,7 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
     }
 
     $form['submit']['#attributes']['class'] = 'btn-orange';
-    $form['submit']['#value'] = 'Join';
+    //$form['submit']['#value'] = 'Join';
 
     //force removing og_registration
     if($form['og_register']){

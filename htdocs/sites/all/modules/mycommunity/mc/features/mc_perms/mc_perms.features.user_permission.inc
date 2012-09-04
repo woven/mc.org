@@ -636,7 +636,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'create group content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
