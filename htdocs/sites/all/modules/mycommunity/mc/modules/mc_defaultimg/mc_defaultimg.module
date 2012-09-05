@@ -28,7 +28,11 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
 
   if(!isset($element['#item']) OR empty($element['#item'])){
     //first check if it has og groups attached
-    $ogs = og_get_node_groups($node);
+    if(og_is_group_type($node->type)){
+      $ogs = array($node->nid => $node->nid);
+    }else{
+      $ogs = og_get_node_groups($node);
+    }
 
     if(!empty($ogs)){
       $gnid = key($ogs);
