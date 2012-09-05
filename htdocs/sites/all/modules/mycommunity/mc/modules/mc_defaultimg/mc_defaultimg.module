@@ -1,5 +1,6 @@
 <?php
 
+define("MC_DEFAULT_NAME","{MC Default Image}");
 /**
  *  Implementation of hook_menu
  */
@@ -13,6 +14,83 @@ function mc_defaultimg_menu() {
   );
 
   return $items;
+}
+
+function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'default'){
+  dsm($element);
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function mc_defaultimg_theme() {
+  $theme = array();
+
+  $theme['imagecache_mc_defaultimg'] = array(
+    'arguments' => array(
+      'element' => NULL,
+      'imagecache_formatter' => 'default'
+  ));
+
+  foreach (imagecache_presets() as $preset) {
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_default_mc_defaultimg'] = array(
+      'arguments' => array('element' => NULL,'imagecache_formatter' => 'default'),
+      'function' => 'theme_imagecache_mc_defaultimg',
+    );
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_linked_mc_defaultimg'] = array(
+      'arguments' => array('element' => NULL,'imagecache_formatter' => 'linked'),
+      'function' => 'theme_imagecache_mc_defaultimg',
+    );
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_imagelink_mc_defaultimg'] = array(
+      'arguments' => array('element' => NULL,'imagecache_formatter' => 'imgelink'),
+      'function' => 'theme_imagecache_mc_defaultimg',
+    );
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_path_mc_defaultimg'] = array(
+      'arguments' => array('element' => NULL,'imagecache_formatter' => 'path'),
+      'function' => 'theme_imagecache_mc_defaultimg',
+    );
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_url_mc_defaultimg'] = array(
+      'arguments' => array('element' => NULL,'imagecache_formatter' => 'url'),
+      'function' => 'theme_imagecache_mc_defaultimg',
+    );
+  }
+
+  return $theme;
+}
+
+/**
+ * Implementation of hook_field_formatter_info().
+ *
+ * imagecache formatters are named as $presetname_$style
+ * $style is used to determine how the preset should be rendered.
+ * If you are implementing custom imagecache formatters please treat _ as
+ * reserved.
+ */
+function mc_defaultimg_field_formatter_info() {
+  $formatters = array();
+  foreach (imagecache_presets() as $preset) {
+    $formatters[$preset['presetname'] .'_default_mc_defaultimg'] = array(
+      'label' => t('@preset image @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
+      'field types' => array('image', 'filefield'),
+    );
+    $formatters[$preset['presetname'] .'_linked_mc_defaultimg'] = array(
+      'label' => t('@preset image linked to node @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
+      'field types' => array('image', 'filefield'),
+    );
+    $formatters[$preset['presetname'] .'_imagelink_mc_defaultimg'] = array(
+      'label' => t('@preset image linked to image @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
+      'field types' => array('image', 'filefield'),
+    );
+    $formatters[$preset['presetname'] .'_path_mc_defaultimg'] = array(
+      'label' => t('@preset file path @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
+      'field types' => array('image', 'filefield'),
+    );
+    $formatters[$preset['presetname'] .'_url_mc_defaultimg'] = array(
+      'label' => t('@preset URL @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
+      'field types' => array('image', 'filefield'),
+    );
+  }
+  return $formatters;
 }
 
 function mc_defaultimg_admin_settings(&$form_state) {
@@ -112,7 +190,7 @@ function _mc_defaultimg_admin_settings_submit($form, &$form_state) {
 /**
  * Implementation of hook_nodeapi
  */
-function mc_defaultimg_nodeapi(&$node, $op) {
+function _mc_defaultimg_nodeapi(&$node, $op) {
   if ($node->type != 'page' || $node->type!='taxonomy_feature' || $node->type!='taxonomy_topic' ) {
     $vid = db_result(db_query("select vid from vocabulary where module='features_topic'"));
     switch ($op) {
@@ -191,7 +269,7 @@ function mc_defaultimg_nodeapi(&$node, $op) {
 }
 
 
-function mc_defaultimg_file_references($file) {
+function _mc_defaultimg_file_references($file) {
   $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
   if(arg(0)=='node' && arg(2)=='delete'){
     $node=node_load(arg(1));
