@@ -8492,6 +8492,8 @@ if (is_numeric($nid)){
     ),
   ));
   $handler->override_option('title', 'Latest Stuff');
+  $handler->override_option('empty', 'This group is not sharing any content with you.');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 10);
   $handler->override_option('use_pager', '1');
   $handler->override_option('path', 'groups/%/latest');
@@ -8944,7 +8946,8 @@ if (is_numeric($nid)){
     ),
   ));
   $handler->override_option('title', 'Events');
-  $handler->override_option('empty', 'There are no events in this group.');
+  $handler->override_option('empty', 'This group is not sharing any events with you.');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 10);
   $handler->override_option('use_pager', '1');
   $handler->override_option('path', 'groups/%/events');
@@ -9172,7 +9175,8 @@ if (is_numeric($nid)){
     ),
   ));
   $handler->override_option('title', 'Articles');
-  $handler->override_option('empty', 'There are no articles in this group.');
+  $handler->override_option('empty', 'This group is not sharing any articles with you.');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 10);
   $handler->override_option('use_pager', '1');
   $handler->override_option('path', 'groups/%/articles');
@@ -9400,7 +9404,8 @@ if (is_numeric($nid)){
     ),
   ));
   $handler->override_option('title', 'Files');
-  $handler->override_option('empty', 'There are no files in this group.');
+  $handler->override_option('empty', 'This group is not sharing any files with you.');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 10);
   $handler->override_option('use_pager', '1');
   $handler->override_option('path', 'groups/%/files');
@@ -9751,7 +9756,8 @@ $node = node_load($nid);
 Check out photos from <?php echo $node->title; ?>.  Please choose an album.');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
-  $handler->override_option('empty', 'There are no photos in this group.');
+  $handler->override_option('empty', 'This group is not sharing any photos with you.');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 12);
   $handler->override_option('use_pager', '1');
   $handler->override_option('style_plugin', 'grid');
@@ -9999,7 +10005,8 @@ if (is_numeric($nid)){
     ),
   ));
   $handler->override_option('title', 'Videos');
-  $handler->override_option('empty', 'There are no videos in this group.');
+  $handler->override_option('empty', 'This group is not sharing any videos with you.');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 10);
   $handler->override_option('use_pager', '1');
   $handler->override_option('path', 'groups/%/videos');

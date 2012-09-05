@@ -327,7 +327,7 @@ body #navigation {
   display: none;
 }
 
-.default-message {
+.default-message, .view .view-empty {
   color: #CCC;
 }
 

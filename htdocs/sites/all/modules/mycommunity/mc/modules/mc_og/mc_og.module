@@ -141,6 +141,10 @@ function mc_og_follow_group_form(&$form_state) {
   $form['#attributes'] = array('class' => 'follow-block subscribe');
   $sql = 'SELECT COUNT(*) FROM og_uid ou INNER JOIN users u ON ou.uid = u.uid WHERE ou.nid = %d AND u.status > 0 AND ou.is_active >= 1 AND ou.is_admin >= 0';
   $count = db_result( db_query($sql, $group->nid) );
+  $form['count'] =  array(
+    '#type' => 'hidden',
+    '#value' => $count,
+  );
   if($user->uid!='0'){
     if (!og_is_group_member($group->nid, FALSE) && (!$_SESSION['anonymous_must_follow'] && !$_SESSION['anonymous_group']  )){
       $form['follow_button'] = array(
@@ -159,9 +163,9 @@ function mc_og_follow_group_form(&$form_state) {
           'class' => 'button'
         ),
       );
-      $output_follow = '<a rel="nofollow" href="/og/unsubscribe/'.$data->nid.'/'.$user->uid.'?'.drupal_get_destination().'" class="button" id="unfollow"><span>Unfollow</span></a>';
+      $output_follow = '';
       $output_follow .= '<p id="text-follow">Follow us to show your support, get updates and contribute.</p>';
-      $output_follow .= '<p class="member-count">' . l($count, "og/users/$data->nid/faces") . ' following</p>';
+      $output_follow .= '<p class="member-count">' . $count /* l($count, "og/users/$group->nid/faces") */ . ' following</p>';
       $form['users-following'] = array(
         '#type' => 'markup',
         '#value' => $output_follow,
@@ -170,8 +174,7 @@ function mc_og_follow_group_form(&$form_state) {
       );
     }
     else {
-      $output =  '<p class="member-count">You and ' . l($count, "og/users/$group->nid/faces") . ' more people are following this group</p>';
-      $output .= l(t('Unfollow'), "og/unsubscribe/$group->nid/$user->uid", array('attributes' => array('rel' => 'nofollow'), 'query' => drupal_get_destination()));
+      $output = _mc_og_following_text($group->nid, $count, $user);
       $form['unfollow'] = array(
         '#type' => 'markup',
         '#value' => $output,
@@ -185,13 +188,26 @@ function mc_og_follow_group_form(&$form_state) {
   else {
     $output_anonymous = '<a href="#" class="button" id="anonymous-follow">Follow</a>';
     $output_anonymous .= '<p id="text-follow">Follow us to show your support, get updates and contribute.</p>';
-    $output_anonymous .= '<p class="member-count">' . l($count, "og/users/$group->nid/faces") . ' following</p>';
+    $output_anonymous .= '<p class="member-count">' . $count /* l($count, "og/users/$group->nid/faces") */ . ' following</p>';
     $form['follow-button-anonymous'] = array(
       '#type' => 'markup',
       '#value' => $output_anonymous,
     );
   }
   return $form;
+}
+
+function _mc_og_following_text($gid, $count, $user){
+  $count--;
+  $output = '';
+  if($count==0){
+    $output =  '<p class="member-count">You are following this group.</p>';
+  }
+  else {
+    $output =  '<p class="member-count">You and ' . $count /*l($count, "og/users/$gid/faces")*/ . ' more people are following this group.</p>';
+  }
+  $output .= l(t('Unfollow'), "og/unsubscribe/$gid/$user->uid", array('attributes' => array('rel' => 'nofollow'), 'query' => 'destination=' . urlencode('node/' . $gid ) ));
+  return $output;
 }
 
 function mc_og_follow_group_form_submit(&$form, &$form_state) {
@@ -219,19 +235,14 @@ function mc_og_follow_group_js(){
   // This call recreates the form relying solely on the form_state that the
   // drupal_process_form set up.
   $gid = $form_state['values']['gid'];
+  $count = $form_state['values']['count'] + 1;
   $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
   // Render the new output.
-  $output_unfollow = l(t('Unfollow'), "og/unsubscribe/$gid/$user->uid", array('attributes' => array('rel' => 'nofollow'), 'query' => 'destination=' . urlencode('node/' . $gid )));
+  $output_unfollow = _mc_og_following_text($gid, $count, $user);
   $new_form['unfollow'] = array(
     '#type' => 'markup',
     '#value' => $output_unfollow,
     '#weight' => 0,
-  );
-  $output_unfollow_text = '<p id="text-follow">You are now following this group</p>';
-  $new_form['unfollow_text'] = array(
-    '#type' => 'markup',
-    '#value' => $output_unfollow_text,
-    '#weight' => 1,
   );
   $output = theme('status_messages') . drupal_render($new_form);
 
