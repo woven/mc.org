@@ -196,7 +196,7 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
     unset($form['options']);
   }
   
-  if ($form_id == 'user_register'){
+  if ($form_id == 'user_register' && $_REQUEST['q']!='admin/user/user/create'){
     $form['#action'] = url('user/register');
   }
 
