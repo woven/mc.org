@@ -56,6 +56,7 @@ function mc_defaultimg_admin_settings(&$form_state) {
 }
 
 function _mc_defaultimg_admin_settings_submit($form, &$form_state) {
+  global $user;
   $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
   if (!function_exists('mime_content_type')) { 
    function mime_content_type($f) { 
