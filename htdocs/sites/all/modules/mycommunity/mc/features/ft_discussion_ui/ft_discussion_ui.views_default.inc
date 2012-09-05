@@ -763,10 +763,7 @@ global $user;
     }
 ?>
 
-<div class="field light-text">
-  Not discussions yet. <?php echo $link; ?> now!
-</div>
-');
+<div class="default-message">This group is not sharing any discussions with you.</div>');
   $handler->override_option('empty_format', '3');
   $handler->override_option('use_pager', '1');
   $handler->override_option('path', 'groups/%/discussions');
