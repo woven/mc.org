@@ -257,6 +257,31 @@ function ft_group_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'groupadmin';
+  $strongarm->value = array(
+    'x_show_on_node_page' => 1,
+    'x_show_on_members_page' => 1,
+    'x_use_standard_path' => 0,
+    'x_remove_standard_link' => 1,
+    'n_help_node' => '',
+    'n_member_help_node' => '',
+    'n_admin_help_node' => '',
+    'x_help_collapsed' => 1,
+    'n_pagelen' => '10',
+    'x_reset_on_add' => 0,
+    'l_basic_access' => '1',
+    'l_show_admins' => '1',
+    'l_show_members' => '1',
+    'l_show_non-members' => '2',
+    'l_show_email' => '0',
+    'l_show_real_names' => '0',
+    'x_more_permissions' => 1,
+  );
+  $export['groupadmin'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'heartbeat_activity_grouping_how_many';
   $strongarm->value = '5';
   $export['heartbeat_activity_grouping_how_many'] = $strongarm;

@@ -2,8 +2,7 @@
 var submit_hidden = 0;
 Drupal.behaviors.hide_submit = function(context) {
   // Hide button and siblings
-
-    function hide_submit_button(obj, message, context) {
+  function hide_submit_button(obj, message, context) {
         if(!submit_hidden){
             cls = $(obj, context).attr("class");
             msg = '<div class="button '+cls+'">'+message+'</div>';
@@ -13,6 +12,7 @@ Drupal.behaviors.hide_submit = function(context) {
 
         //$(obj, context).hide().siblings('input:submit').hide().end().after(message);
   }
+
   // Disable button and siblings
   function disable_submit_button(obj, context) {
     var $obj = $(obj, context).first();
@@ -33,14 +33,17 @@ Drupal.behaviors.hide_submit = function(context) {
     $('input:submit', context).css({border:'6px red solid'});
     $(settings.selector, context).css({border:'6px green solid'});
   }
+
   // Hide buttons and inject message
   if (settings.mode == 'hide') {
         if (settings.image) {
             $("<img>").attr("src",settings.image);
         }
-    $(settings.selector, context).click(function() {
+
+    $(settings.selector, context).click(function(e) {
+      //console.log(e);
       hide_submit_button(this, settings.message, context);
-    })
+    });
     // Submit when ENTER is pressed
     if (settings.keypress) {
       $(settings.selector, context).keypress(function() {
