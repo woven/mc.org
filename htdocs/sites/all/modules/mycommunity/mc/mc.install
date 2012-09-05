@@ -110,3 +110,10 @@ function mc_update_6011() {
   function mc_update_6012() {
     module_enable(array('ft_search_drupal_ui'));
   }
+
+/**
+ * enable ft_search_drupal_ui
+*/
+function mc_update_6013() {
+  module_enable(array('mc_defaultimg'));
+}

@@ -17,7 +17,55 @@ function mc_defaultimg_menu() {
 }
 
 function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'default'){
-  dsm($element);
+
+  $newfid = null;
+
+  $element['#formatter'] = str_replace('_mcdefaultimg','',$element['#formatter']);
+  $imagecache_info = explode("_",$element['#formatter']);
+  $preset = $imagecache_info[0];
+  $style = $imagecache_info[1];
+  $node = $element['#node'];
+
+  if(!isset($element['#item']) OR empty($element['#item'])){
+    //first check if it has og groups attached
+    $ogs = og_get_node_groups($node);
+
+    if(!empty($ogs)){
+      $gnid = key($ogs);
+      $sql = "SELECT flogo.field_logo_fid AS fid FROM {node} AS n INNER JOIN content_field_logo AS flogo ON flogo.vid = n.vid AND flogo.nid = n.nid AND flogo.field_logo_list = 1 WHERE n.nid = %d";
+      $logo_fid = db_result(db_query($sql,$gnid));
+
+      if($logo_fid){
+        $fid = field_file_load($logo_fid);
+        $fid['destination'] = $fid['filepath'];
+        $fid['nid'] = $node->nid;
+        $fid['default'] = false;
+        $newfid = $fid;
+      }
+    }
+
+    if(is_null($newfid)){
+      $fid_ct = variable_get('default_img_'.$node->type,false);
+      if($fid_ct){
+        $newfid = field_file_load($fid_ct);
+      }
+    }
+
+    if(is_null($newfid)){
+      $fid_ct = variable_get('default_img_generic',false);
+      if($fid_ct){
+        $newfid = field_file_load($fid_ct);
+      }
+    }
+
+    if($newfid){
+      $element['#item'] = $newfid;
+    }
+  }
+
+  $calllback = "theme_imagecache_formatter_".$style;
+
+  return $calllback($element);
 }
 
 /**
@@ -33,23 +81,23 @@ function mc_defaultimg_theme() {
   ));
 
   foreach (imagecache_presets() as $preset) {
-    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_default_mc_defaultimg'] = array(
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_default_mcdefaultimg'] = array(
       'arguments' => array('element' => NULL,'imagecache_formatter' => 'default'),
       'function' => 'theme_imagecache_mc_defaultimg',
     );
-    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_linked_mc_defaultimg'] = array(
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_linked_mcdefaultimg'] = array(
       'arguments' => array('element' => NULL,'imagecache_formatter' => 'linked'),
       'function' => 'theme_imagecache_mc_defaultimg',
     );
-    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_imagelink_mc_defaultimg'] = array(
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_imagelink_mcdefaultimg'] = array(
       'arguments' => array('element' => NULL,'imagecache_formatter' => 'imgelink'),
       'function' => 'theme_imagecache_mc_defaultimg',
     );
-    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_path_mc_defaultimg'] = array(
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_path_mcdefaultimg'] = array(
       'arguments' => array('element' => NULL,'imagecache_formatter' => 'path'),
       'function' => 'theme_imagecache_mc_defaultimg',
     );
-    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_url_mc_defaultimg'] = array(
+    $theme['mc_defaultimg_formatter_'. $preset['presetname'] .'_url_mcdefaultimg'] = array(
       'arguments' => array('element' => NULL,'imagecache_formatter' => 'url'),
       'function' => 'theme_imagecache_mc_defaultimg',
     );
@@ -69,23 +117,23 @@ function mc_defaultimg_theme() {
 function mc_defaultimg_field_formatter_info() {
   $formatters = array();
   foreach (imagecache_presets() as $preset) {
-    $formatters[$preset['presetname'] .'_default_mc_defaultimg'] = array(
+    $formatters[$preset['presetname'] .'_default_mcdefaultimg'] = array(
       'label' => t('@preset image @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
       'field types' => array('image', 'filefield'),
     );
-    $formatters[$preset['presetname'] .'_linked_mc_defaultimg'] = array(
+    $formatters[$preset['presetname'] .'_linked_mcdefaultimg'] = array(
       'label' => t('@preset image linked to node @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
       'field types' => array('image', 'filefield'),
     );
-    $formatters[$preset['presetname'] .'_imagelink_mc_defaultimg'] = array(
+    $formatters[$preset['presetname'] .'_imagelink_mcdefaultimg'] = array(
       'label' => t('@preset image linked to image @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
       'field types' => array('image', 'filefield'),
     );
-    $formatters[$preset['presetname'] .'_path_mc_defaultimg'] = array(
+    $formatters[$preset['presetname'] .'_path_mcdefaultimg'] = array(
       'label' => t('@preset file path @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
       'field types' => array('image', 'filefield'),
     );
-    $formatters[$preset['presetname'] .'_url_mc_defaultimg'] = array(
+    $formatters[$preset['presetname'] .'_url_mcdefaultimg'] = array(
       'label' => t('@preset URL @mcdefault', array('@preset' => $preset['presetname'],'@mcdefault' => MC_DEFAULT_NAME)),
       'field types' => array('image', 'filefield'),
     );
@@ -105,13 +153,16 @@ function mc_defaultimg_admin_settings(&$form_state) {
   );
   $content_types = $temp_array + $content_types;
   foreach ($content_types as $content_type) {
+
     $form[$content_type->type] = array(
         '#type' => 'fieldset',
         '#title' => $content_type->name . ' Default Image Settings',
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
     );
+
     $existing_variable = variable_get('default_img_' . $content_type->type, '');
+
     if (!empty($existing_variable)) {
       $file = field_file_load($existing_variable);
       $image = theme('imagecache', "medium", $file['filepath']);
@@ -122,10 +173,12 @@ function mc_defaultimg_admin_settings(&$form_state) {
       $form[$content_type->type]['delete_existing_img_' . $content_type->type] = array('#type' => 'checkbox', '#title' => t('Delete picture'),
           '#description' => t('Check this box to delete your current picture.'));
     }
+
     $form[$content_type->type]['default_img_' . $content_type->type] = array(
         '#type' => 'file',
         '#title' => t('Default image for ' . $content_type->name),
     );
+
   }
   $form = system_settings_form($form);
   unset($form['#submit']);
@@ -136,16 +189,18 @@ function mc_defaultimg_admin_settings(&$form_state) {
 function _mc_defaultimg_admin_settings_submit($form, &$form_state) {
   global $user;
   $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
+
   if (!function_exists('mime_content_type')) { 
    function mime_content_type($f) { 
        $f = escapeshellarg($f); 
        return trim( `file -bi $f` ); 
    } 
-  } 
+  }
+
   foreach ($_FILES['files']['tmp_name'] as $key => $path) {
     if (!empty($path)) {
       $file_temp = file_get_contents($path);
-      $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_taxonomy_default_image['file_path'] . '/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
+      $file_temp = file_save_data($file_temp, file_directory_path() . '/defaultimgs/' . basename($_FILES['files']['name'][$key]), FILE_EXISTS_RENAME);
       $file = new stdClass();
       $file->filename = basename($file_temp);
       $file->filepath = $file_temp;
