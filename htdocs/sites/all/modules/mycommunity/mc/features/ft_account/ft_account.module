@@ -135,6 +135,12 @@ function ft_account_late_form_alter(&$form, &$form_state, $form_id){
   _mc_user_pages_form_alter($form, $form_state, $form_id);
 }
 
+function ft_account_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'user_register' && $_REQUEST['q']!='admin/user/user/create'){
+    $form['#action'] = url('user/register');
+  }
+}
+
 function ft_account_theme($existing, $type, $theme, $path) {
   return array(
     'mc_account_head' => array(
