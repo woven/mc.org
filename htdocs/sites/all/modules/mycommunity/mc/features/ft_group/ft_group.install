@@ -14,3 +14,13 @@ function ft_group_update_6001(){
 function ft_group_update_6002(){
   module_enable(array('groupadmin'));
 }
+
+/**
+ * disable by_term/by_subject view
+ */
+function ft_group_update_6003(){
+  //module_enable(array('groupadmin'));
+  $views_status = variable_get('views_defaults', array());
+  $views_status['posts_by_term'] = TRUE; // True is disabled
+  variable_set('views_defaults', $views_status);
+}

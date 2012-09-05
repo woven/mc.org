@@ -602,15 +602,6 @@ function mt_init(){
   }
 }
 
-function mt_menu_alter(&$items) {
-  unset($items['node/%views_arg/by_subject']['access arguments']);
-  $items['node/%views_arg/by_subject']['access arguments']['0']['0']='views_check_roles';
-  $items['node/%views_arg/by_subject']['access arguments']['0']['1']['0']['4']='4';
-
-  unset($items['node/%views_arg/by_subject']['access arguments']);
-  $items['admin/content/node']['access arguments'] =  array('mt admin nodes');
-}
-
 function _mt_node_permissions($op, $node, $account = NULL){
   global $user;
   if(array_search('publisher', $user->roles)){
