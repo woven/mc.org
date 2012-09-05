@@ -92,7 +92,9 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
     }
 
     $form['submit']['#attributes']['class'] = 'btn-orange';
-    $form['submit']['#value'] = 'Join';
+    if($_REQUEST['q']!='admin/user/user/create'){
+      $form['submit']['#value'] = 'Join';
+    }
 
     //force removing og_registration
     if($form['og_register']){
@@ -131,6 +133,12 @@ function ft_account_menu_alter(&$items){
 
 function ft_account_late_form_alter(&$form, &$form_state, $form_id){
   _mc_user_pages_form_alter($form, $form_state, $form_id);
+}
+
+function ft_account_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'user_register' && $_REQUEST['q']!='admin/user/user/create'){
+    $form['#action'] = url('user/register');
+  }
 }
 
 function ft_account_theme($existing, $type, $theme, $path) {
