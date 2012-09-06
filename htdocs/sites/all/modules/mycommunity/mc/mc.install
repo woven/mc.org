@@ -121,7 +121,7 @@ function mc_update_6013() {
 /**
  * delete file field from all except file
 */
-function ft_group_update_6014(){
+function mc_update_6014(){
   //module_enable(array('groupadmin'));
   module_load_include('inc', 'content', 'includes/content.crud');
   content_field_instance_delete('field_upload_file', 'article',TRUE);
