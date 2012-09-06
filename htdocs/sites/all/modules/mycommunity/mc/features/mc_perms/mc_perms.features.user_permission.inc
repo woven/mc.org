@@ -548,6 +548,26 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: collapse format fieldset by default
+  $permissions['collapse format fieldset by default'] = array(
+    'name' => 'collapse format fieldset by default',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: collapsible format selection
+  $permissions['collapsible format selection'] = array(
+    'name' => 'collapsible format selection',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: configure heartbeat
   $permissions['configure heartbeat'] = array(
     'name' => 'configure heartbeat',
@@ -1495,6 +1515,46 @@ function mc_perms_user_default_permissions() {
   $permissions['set page title'] = array(
     'name' => 'set page title',
     'roles' => array(),
+  );
+
+  // Exported permission: show format selection for blocks
+  $permissions['show format selection for blocks'] = array(
+    'name' => 'show format selection for blocks',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: show format selection for comments
+  $permissions['show format selection for comments'] = array(
+    'name' => 'show format selection for comments',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: show format selection for nodes
+  $permissions['show format selection for nodes'] = array(
+    'name' => 'show format selection for nodes',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: show format tips
+  $permissions['show format tips'] = array(
+    'name' => 'show format tips',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: show more format tips link
+  $permissions['show more format tips link'] = array(
+    'name' => 'show more format tips link',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
   );
 
   // Exported permission: submit latitude/longitude
