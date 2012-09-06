@@ -21,13 +21,15 @@ function mc_defaultimg_menu() {
  * @todo check if files exist, and use site generic if it does
  */
 function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'default'){
-
   $newfid = null;
 
   $element['#formatter'] = str_replace('_mcdefaultimg','',$element['#formatter']);
-  $imagecache_info = explode("_",$element['#formatter']);
-  $preset = $imagecache_info[0];
-  $style = $imagecache_info[1];
+  $preset = substr($element['#formatter'], 0, strrpos($element['#formatter'], '_'));
+  $style = str_replace($preset."_","",$element['#formatter']);
+  $calllback = "theme_imagecache_formatter_".$style;
+
+  dsm($element,$preset."-".$style);
+
   $node = $element['#node'];
 
   if(!isset($element['#item']) OR empty($element['#item'])){
@@ -71,9 +73,31 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
     }
   }
 
-  $calllback = "theme_imagecache_formatter_".$style;
+  /*
+  //check if item is assignedthen check if it's
+  if(isset($element['#item']) && isset($element['#item']['fid'])){
+    $f = $element['#item'];
 
-  return $calllback($element);
+    //check if the item really exist
+    if(!file_exists($f['filepath'])){
+      $fid_generic = variable_get('default_img_generic',false);
+      if($fid_generic){
+        $fid = &$element['#item'];
+        $fid = field_file_load($fid_generic);
+        $fid['destination'] = $fid['filepath'];
+        $fid['nid'] = $node->nid;
+        $fid['default'] = false;
+      }
+      dsm($fid,'im not here');
+    };
+  }else{
+    return '';
+  }
+  */
+
+  if(function_exists($calllback)){
+    return $calllback($element);
+  }
 }
 
 /**
