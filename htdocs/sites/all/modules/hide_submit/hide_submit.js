@@ -1,10 +1,6 @@
 // $Id$
 var submit_hidden = 0;
 
-Drupal.behaviors.disableaha = function(context){
-
-}
-
 Drupal.behaviors.hide_submit = function(context) {
   // Hide button and siblings
   function hide_submit_button(obj, message, context) {
