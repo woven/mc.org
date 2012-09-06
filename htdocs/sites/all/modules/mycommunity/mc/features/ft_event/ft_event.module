@@ -6,7 +6,17 @@ include_once('ft_event.features.inc');
  * Implementation of hook_theme()
  *
  */
- 
+
+function ft_event_late_form_alter(&$form, &$form_state, $form_id){
+  global $user;
+  if(is_ct_form($form,'event')){
+    if($user->uid > 1){
+      $form['field_place']['#access'] = FALSE;
+      $form['field_online_event']['#access'] = FALSE;
+    }
+  }
+}
+
 function ft_event_form_alter(&$form, &$form_state, $form_id){
 	if($form_id == "event_node_form" && arg(0) == "node" && arg(1) == "add" ){
 
