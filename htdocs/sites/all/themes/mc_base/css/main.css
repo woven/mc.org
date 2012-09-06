@@ -2540,3 +2540,7 @@ margin: 0;
 .page-user  .view-mc-user-information .field-content {
     color: black;
 }
+
+#group-follow .ahah-progress {
+    display: none;
+}

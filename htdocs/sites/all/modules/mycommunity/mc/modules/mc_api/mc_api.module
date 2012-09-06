@@ -516,3 +516,50 @@ function _mc_api_format_location($location){
   }
   return $location_output;
 }
+
+function _mc_api_format_twitter($input){
+  $input = trim($input);
+  $output = '';
+  if(empty($input)){
+    return $output;
+  }
+  elseif(preg_match('/^http:\/\/www\.twitter\.com\//i', $input)){
+    $username = preg_replace('/^http:\/\/www\.twitter\.com\//i', '', $input);
+  }
+  elseif(preg_match('/^http:\/\/twitter\.com\//i', $input)){
+    $username = preg_replace('/^http:\/\/twitter\.com\//i', '', $input);
+  }
+  elseif(preg_match('/^@/i', $input)){
+    $username = preg_replace('/^@/i', '', $input);
+  }
+  else{
+    $username = $input;
+  }
+  $output = '<a href="http://www.twitter.com/' . $username  . '" target="_blank">' . $username . '</a>';
+  return $output;
+}
+
+function _mc_api_format_facebook($input){
+  $input = trim($input);
+  $output = '';
+  if(empty($input)){
+    return $output;
+  }
+  elseif(preg_match('/^(http|https):\/\/www\.facebook\.com\//i', $input)){
+    $username = preg_replace('/^(http|https):\/\/www\.facebook\.com\//i', '', $input);
+  }
+  elseif(preg_match('/^http:\/\/facebook\.com\//i', $input)){
+    $username = preg_replace('/^http:\/\/facebook\.com\//i', '', $input);
+  }
+  elseif(preg_match('/^www\.facebook\.com\//i', $input)){
+    $username = preg_replace('/^www\.facebook\.com\//i', '', $input);
+  }
+  elseif(preg_match('/^(www\.|)facebook\.com\//i', $input)){
+    $username = preg_replace('/^(www\.|)facebook\.com\//i', '', $input);
+  }
+  else{
+    $username = $input;
+  }
+  $output = '<a href="http://www.facebook.com/' . $username  . '" target="_blank">' . $username . '</a>';
+  return $output;
+}

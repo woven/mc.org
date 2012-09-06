@@ -33,7 +33,7 @@ function mc_account_quicktabs_default_quicktabs() {
       'vid' => 'my_groups',
       'display' => 'block_1',
       'args' => '',
-      'get_displays' => 'vdisp_1',
+      'get_displays' => 'vdisp_2',
       'title' => 'My Groups',
       'weight' => '-98',
       'type' => 'view',
