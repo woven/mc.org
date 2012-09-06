@@ -165,7 +165,7 @@ function _og_prepopulate_menu_create_links($node){
     $webform_node = new stdClass;
     $webform_node->title = t('Contact');
     $webform_node->type = 'webform';
-    $webform_node->body = 'You can leave a message to the group administrator using the contact form below.';
+    //$webform_node->body = 'You can leave a message to the group administrator using the contact form below.';
     $webform_node->webform['roles'] = array();
     
     //Add the node to the group.
