@@ -317,7 +317,7 @@ function _mc_api_save_facebook_user_image($picture_path, $filename = ''){
  * Return a date with a specific format time.
  */
 
-function mc_api_format_day($unix_date){
+function mc_api_format_day($unix_date, $uppercase = false){
 
   $today = mktime(0, 0, 0);
   $tomorrow = $today + 24 * 3600;
@@ -334,7 +334,12 @@ function mc_api_format_day($unix_date){
     $day = "<span class=\"day\">".date('l', $unix_date)."</span> ";
   }
   if ($unix_date >= $yesterday && $unix_date < $today){
-    $output .= t('yesterday');
+    if($uppercase){
+      $output .= t('Yesterday');
+    }
+    else {
+      $output .= t('yesterday');
+    }
   }elseif ($unix_date >= $today && $unix_date < $tomorrow){
     $output .= t('Today');
   }elseif ($unix_date >= $tomorrow && $unix_date < $afterTomorrow){
