@@ -148,3 +148,10 @@ function mc_update_6016(){
 function mc_update_6017(){
     variable_set('formfilter',array());
 }
+
+  /**
+   * Clear variable 'pathauto_node_pattern'
+   */
+  function mc_update_6018(){
+    variable_set('pathauto_node_pattern','');
+  }
