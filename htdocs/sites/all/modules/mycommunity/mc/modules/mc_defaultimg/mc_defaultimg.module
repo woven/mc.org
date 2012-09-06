@@ -28,7 +28,7 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
   $style = str_replace($preset."_","",$element['#formatter']);
   $calllback = "theme_imagecache_formatter_".$style;
 
-  dsm($element,$preset."-".$style);
+  //dsm($element,$preset."-".$style);
 
   $node = $element['#node'];
 
