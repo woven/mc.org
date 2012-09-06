@@ -24,3 +24,13 @@ function ft_group_update_6003(){
   $views_status['posts_by_term'] = TRUE; // True is disabled
   variable_set('views_defaults', $views_status);
 }
+
+/**
+ * delete file field from all except file (was added by mistake, meant to be on mc.install
+ */
+function ft_group_update_6014(){
+  //module_enable(array('groupadmin'));
+  module_load_include('inc', 'content', 'includes/content.crud');
+  content_field_instance_delete('field_upload_file', 'article',TRUE);
+  content_field_instance_delete('field_upload_file', 'event',TRUE);
+}

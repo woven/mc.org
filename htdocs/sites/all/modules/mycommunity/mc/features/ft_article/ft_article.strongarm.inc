@@ -177,6 +177,13 @@ function ft_article_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'default_img_article';
+  $strongarm->value = '12077';
+  $export['default_img_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'enable_revisions_page_article';
   $strongarm->value = 0;
   $export['enable_revisions_page_article'] = $strongarm;
@@ -625,6 +632,13 @@ function ft_article_strongarm() {
   $strongarm->name = 'og_content_type_usage_article';
   $strongarm->value = 'group_post_standard';
   $export['og_content_type_usage_article'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_article';
+  $strongarm->value = '';
+  $export['og_max_groups_article'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

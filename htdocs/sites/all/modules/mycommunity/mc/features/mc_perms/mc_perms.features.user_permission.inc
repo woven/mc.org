@@ -130,6 +130,30 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: act as a member for any group
+  $permissions['act as a member for any group'] = array(
+    'name' => 'act as a member for any group',
+    'roles' => array(),
+  );
+
+  // Exported permission: act as a visitor for any group
+  $permissions['act as a visitor for any group'] = array(
+    'name' => 'act as a visitor for any group',
+    'roles' => array(),
+  );
+
+  // Exported permission: act as an admin for any group
+  $permissions['act as an admin for any group'] = array(
+    'name' => 'act as an admin for any group',
+    'roles' => array(),
+  );
+
+  // Exported permission: act as the manager for any group
+  $permissions['act as the manager for any group'] = array(
+    'name' => 'act as the manager for any group',
+    'roles' => array(),
+  );
+
   // Exported permission: add group content
   $permissions['add group content'] = array(
     'name' => 'add group content',
@@ -519,7 +543,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: change own username
   $permissions['change own username'] = array(
     'name' => 'change own username',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: configure heartbeat
@@ -1717,6 +1743,18 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view user map
   $permissions['view user map'] = array(
     'name' => 'view user map',
+    'roles' => array(),
+  );
+
+  // Exported permission: view/search email addresses
+  $permissions['view/search email addresses'] = array(
+    'name' => 'view/search email addresses',
+    'roles' => array(),
+  );
+
+  // Exported permission: view/search real names
+  $permissions['view/search real names'] = array(
+    'name' => 'view/search real names',
     'roles' => array(),
   );
 
