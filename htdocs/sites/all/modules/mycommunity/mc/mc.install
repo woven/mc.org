@@ -127,3 +127,10 @@ function mc_update_6014(){
   content_field_instance_delete('field_upload_file', 'article',TRUE);
   content_field_instance_delete('field_upload_file', 'event',TRUE);
 }
+
+/**
+ * default format set to become 1
+ */
+function mc_update_6015(){
+  variable_set("filter_default_format",1);
+}
