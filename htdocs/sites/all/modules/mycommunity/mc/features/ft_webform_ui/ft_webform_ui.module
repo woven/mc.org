@@ -28,7 +28,7 @@ function ft_webform_ui_ds_fields($type_name, $build_mode, $extra) {
 
 
 function _webform_og_body($element){
-  dsm($element);
+  //dsm($element);
   $node =  $element['object'];
   if(!empty($node->og_groups_both)){
     $gnid = key($node->og_groups_both);
