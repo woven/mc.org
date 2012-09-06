@@ -857,8 +857,10 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -873,9 +875,10 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'medium_linked',
+      'format' => 'medium_imagelink_mcdefaultimg',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -898,8 +901,10 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -914,9 +919,10 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'medium_linked',
+      'format' => 'medium_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -1975,7 +1981,7 @@ Nothing to show here.
     'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
   $handler = $view->new_display('page', 'Page: latest by type', 'page_1');
   $handler->override_option('arguments', array(
     'type' => array(
@@ -2206,8 +2212,10 @@ return true;
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -2222,9 +2230,10 @@ return true;
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -2247,8 +2256,10 @@ return true;
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -2263,9 +2274,10 @@ return true;
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -2788,7 +2800,7 @@ echo theme("mc_event_view_header",$view, \'latest/audio/all\');
     'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
   $handler = $view->new_display('block', 'Video', 'block_3');
   $handler->override_option('fields', array(
     'field_gallery_image_fid' => array(
@@ -2798,8 +2810,10 @@ echo theme("mc_event_view_header",$view, \'latest/audio/all\');
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -2814,9 +2828,10 @@ echo theme("mc_event_view_header",$view, \'latest/audio/all\');
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -2839,8 +2854,10 @@ echo theme("mc_event_view_header",$view, \'latest/audio/all\');
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -2855,9 +2872,10 @@ echo theme("mc_event_view_header",$view, \'latest/audio/all\');
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -3376,7 +3394,7 @@ echo theme("mc_event_view_header",$view);
     'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
   $handler = $view->new_display('page', 'Page: most popular', 'page_4');
   $handler->override_option('sorts', array(
     'totalcount' => array(

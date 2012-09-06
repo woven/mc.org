@@ -171,7 +171,7 @@ function ft_video_content_default_fields() {
         'timestamp' => 1297655448,
         'fid' => '51253',
       ),
-      'use_default_image' => 1,
+      'use_default_image' => 0,
       'label' => 'Images',
       'weight' => '9',
       'description' => 'Upload an image to be displayed on the lists of content',

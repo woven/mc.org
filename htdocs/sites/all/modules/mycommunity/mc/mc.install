@@ -34,21 +34,21 @@ function mc_install() {
 
 /**
  * Disable less
- */
+*/
 function mc_update_6002() {
   module_disable(array('less'));
 }
 
 /**
  * Disable spaces
- */
+*/
 function mc_update_6003() {
   module_disable(array('spaces'));
 }
 
 /**
  * Disable ft_formats, enable hidesubmit feature
- */
+*/
 function mc_update_6004() {
   module_disable(array('ft_formats'));
   module_enable(array('ft_hidesubmit'));
@@ -56,35 +56,35 @@ function mc_update_6004() {
 
 /**
  * enable nodeformcols
- */
+*/
 function mc_update_6005() {
   module_enable(array('nodeformcols'));
 }
 
 /**
  * enable mc_og
- */
+*/
 function mc_update_6006() {
   module_enable(array('mc_og','og_access','og_access_roles'));
 }
 
 /**
  * enable mc_roles
- */
+*/
 function mc_update_6007() {
   module_enable(array('mc_roles'));
 }
 
 /**
  * enable mc_perms
- */
+*/
 function mc_update_6008() {
   module_enable(array('mc_perms'));
 }
 
 /**
  * enable nodeformsettings
- */
+*/
 function mc_update_6009() {
   module_enable(array('nodeformsettings'));
 }
@@ -99,14 +99,31 @@ function mc_update_6009() {
 
 /**
  * enable ft_search_drupal
- */
+*/
 function mc_update_6011() {
   module_enable(array('ft_search_drupal'));
 }
 
-  /**
-   * enable ft_search_drupal_ui
-   */
+/**
+ * enable ft_search_drupal_ui
+*/
   function mc_update_6012() {
     module_enable(array('ft_search_drupal_ui'));
   }
+
+/**
+ * enable ft_search_drupal_ui
+*/
+function mc_update_6013() {
+  module_enable(array('mc_defaultimg'));
+}
+
+/**
+ * delete file field from all except file
+*/
+function ft_group_update_6014(){
+  //module_enable(array('groupadmin'));
+  module_load_include('inc', 'content', 'includes/content.crud');
+  content_field_instance_delete('field_upload_file', 'article',TRUE);
+  content_field_instance_delete('field_upload_file', 'event',TRUE);
+}

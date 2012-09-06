@@ -2213,8 +2213,10 @@ if ($count){
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -2229,9 +2231,10 @@ if ($count){
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -2243,6 +2246,9 @@ if ($count){
       'table' => 'node_data_field_list_image',
       'field' => 'field_list_image_fid',
       'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
     ),
     'type' => array(
       'label' => '',
@@ -3154,16 +3160,11 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'relationship' => 'none',
     ),
   ));
-  $handler->override_option('cache', array(
-    'type' => 'time',
-    'results_lifespan' => '21600',
-    'output_lifespan' => '21600',
-  ));
   $handler->override_option('title', 'Most Popular');
   $handler->override_option('footer', '<?php print (theme_ghh_see_all(\'See All\', \'latest/most-popular\' )); ?>');
   $handler->override_option('link_display', 'page_2');
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
 
   $views[$view->name] = $view;
 

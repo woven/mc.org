@@ -184,22 +184,23 @@ echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"];
     'nodes_slideshow' => array(
       'title' => 'Nodes Slideshow',
       'exclude' => array(
-        'image' => 'image',
-        'gallery' => 'gallery',
-        'gallery_image' => 'gallery_image',
         'group' => 'group',
         'webform' => 'webform',
+        'gallery' => 'gallery',
+        'gallery_image' => 'gallery_image',
         'article' => 0,
         'audio' => 0,
         'event' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'page_general' => 0,
         'place' => 0,
-        'simplenews' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
         'video' => 0,
+        'forum' => 0,
       ),
       'type' => 5,
       'status' => 3,
@@ -208,12 +209,11 @@ echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"];
           'ds_eval_code' => 'Default',
         ),
         'code' => '<?php 
-  $module_path = drupal_get_path(\'module\', \'mc_defaultimg\');
-  if ( $object->field_list_image && count($object->field_list_image) == 1 && strpos($object->field_list_image[0][\'filepath\'], $module_path) === 0){
-    // only default image found, do not show slideshow
-    return \'\';
-  }
+if(!isset($object->field_list_image[0][\'fid\'])){
+   return \'\';
+}else{
     return views_embed_view("node_details","block_2",$object->nid);
+}
 ?>',
         'token' => 0,
       ),
