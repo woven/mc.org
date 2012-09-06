@@ -543,7 +543,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: change own username
   $permissions['change own username'] = array(
     'name' => 'change own username',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: configure heartbeat
