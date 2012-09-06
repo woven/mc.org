@@ -141,3 +141,10 @@ function mc_update_6015(){
 function mc_update_6016(){
   module_enable(array('better_formats'));
 }
+
+/**
+ * Clear variable 'formfilter'
+ */
+function mc_update_6017(){
+    variable_set('formfilter',array());
+}
