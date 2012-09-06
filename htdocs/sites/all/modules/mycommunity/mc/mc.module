@@ -219,7 +219,7 @@ function _mc_form_user_register_alter(&$form, &$form_state,$form_id){
       '#weight' => -31,  
     );
   }
-  /* TODO: this code snipsset needs to be moved to the appropiate module.
+  /* TODO: this code snipsset needs to be moved to the appropriate module.
   This is adding the checkbox called Spread the love to the Join Page
   $form['facebook-share'] = array(
     '#type' => 'checkbox',
