@@ -1877,9 +1877,7 @@ if ($type == \'news\'){
     'type' => 'none',
   ));
   $handler->override_option('cache', array(
-    'type' => 'time',
-    'results_lifespan' => '3600',
-    'output_lifespan' => '3600',
+    'type' => 'none',
   ));
   $handler->override_option('header_format', '4');
   $handler->override_option('header_empty', 0);
