@@ -816,96 +816,6 @@ function ft_landing_slideshow_views_default_views() {
       ),
       'relationship' => 'field_featured_items_nid',
     ),
-    'field_feature_image_fid' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'featured_slideshow_linked',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_feature_image_fid',
-      'table' => 'node_data_field_feature_image',
-      'field' => 'field_feature_image_fid',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'field_featured_items_nid',
-    ),
-    'phpcode_2' => array(
-      'label' => 'Feature Image',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'value' => '<?php
-if($data->node_node_data_field_featured_items_node_data_field_feature_image_field_feature_image_fid!=null){
-  $file=field_file_load($data->node_node_data_field_featured_items_node_data_field_feature_image_field_feature_image_fid);
-  $details=unserialize($data->node_node_data_field_featured_items_node_data_field_feature_image_field_feature_image_data);
-}
-elseif($data->node_data_field_list_image_field_list_image_fid[\'0\'][\'fid\']!=null){
-  $file=field_file_load($data->node_data_field_list_image_field_list_image_fid[\'0\'][\'fid\']);
-  $details=unserialize($data->node_data_field_list_image_field_list_image_fid[\'0\'][\'data\']);
-}
-elseif($data->node_node_data_field_featured_items_node_data_field_gallery_image_field_gallery_image_fid!=null){
-  $file=field_file_load($data->node_node_data_field_featured_items_node_data_field_gallery_image_field_gallery_image_fid);
-  $details=unserialize($data->node_node_data_field_featured_items_node_data_field_gallery_image_field_gallery_image_data);
-}
-$image=theme(\'imagecache\', "featured_slideshow" ,$file[\'filepath\'], $details[\'alt\'], $details[\'title\']); 
-$link=l($image,\'node/\'.$data-> node_node_data_field_featured_items_nid, array(\'html\'=>TRUE));
-print $link;
-?>',
-      'exclude' => 1,
-      'id' => 'phpcode_2',
-      'table' => 'customfield',
-      'field' => 'phpcode',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
     'phpcode' => array(
       'label' => '',
       'alter' => array(
@@ -947,11 +857,13 @@ print theme("feature_badge",$data->node_node_data_field_featured_items_nid, 2);
     'nothing_1' => array(
       'label' => '',
       'alter' => array(
-        'text' => '[phpcode_2] [phpcode]',
+        'text' => '[field_list_image_fid] [field_gallery_image_fid]  [phpcode]',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -966,6 +878,7 @@ print theme("feature_badge",$data->node_node_data_field_featured_items_nid, 2);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'exclude' => 0,
       'id' => 'nothing_1',
       'table' => 'views',

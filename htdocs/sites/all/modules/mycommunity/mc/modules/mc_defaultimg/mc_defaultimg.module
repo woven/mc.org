@@ -21,16 +21,18 @@ function mc_defaultimg_menu() {
  * @todo check if files exist, and use site generic if it does
  */
 function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'default'){
-  $newfid = null;
-
-  $element['#formatter'] = str_replace('_mcdefaultimg','',$element['#formatter']);
-  $preset = substr($element['#formatter'], 0, strrpos($element['#formatter'], '_'));
-  $style = str_replace($preset."_","",$element['#formatter']);
-  $calllback = "theme_imagecache_formatter_".$style;
-
-  //dsm($element,$preset."-".$style);
 
   $node = $element['#node'];
+
+  //if($node->nid == 978){
+
+    $newfid = null;
+
+    $element['#formatter'] = str_replace('_mcdefaultimg','',$element['#formatter']);
+    $preset = substr($element['#formatter'], 0, strrpos($element['#formatter'], '_'));
+    $style = str_replace($preset."_","",$element['#formatter']);
+
+    $calllback = "theme_imagecache_formatter_".$style;
 
   if(!isset($element['#item']) OR empty($element['#item'])){
     //first check if it has og groups attached
@@ -47,9 +49,6 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
 
       if($logo_fid){
         $fid = field_file_load($logo_fid);
-        $fid['destination'] = $fid['filepath'];
-        $fid['nid'] = $node->nid;
-        $fid['default'] = false;
         $newfid = $fid;
       }
     }
@@ -70,8 +69,16 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
 
     if($newfid){
       $element['#item'] = $newfid;
+      $element['#item']['nid'] = $node->nid;
     }
   }
+
+    if(function_exists($calllback)){
+      //dsm($element,$preset."-".$style);
+      return $calllback($element);
+    }
+
+  //}//end debug
 
   /*
   //check if item is assignedthen check if it's
@@ -94,10 +101,6 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
     return '';
   }
   */
-
-  if(function_exists($calllback)){
-    return $calllback($element);
-  }
 }
 
 /**
