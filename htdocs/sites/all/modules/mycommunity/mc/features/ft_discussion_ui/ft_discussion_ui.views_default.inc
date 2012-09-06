@@ -82,7 +82,7 @@ function ft_discussion_ui_views_default_views() {
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -1021,15 +1021,43 @@ if (is_numeric($nid)){
       'relationship' => 'none',
     ),
   ));
-  $handler->override_option('header', '<div class="block-quicktabs">
+  $handler->override_option('header', '<?php 
+$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
+$nid = db_result(db_query($sql, arg(1)));
+global $user;
+    if ($user->uid){
+      $link = l("post a new topic", "node/add/forum/" . $nid);
+    }else{
+      $addLinkOptions[\'query\'][\'message\'] = \'register-first\';
+      $link = l("post a new topic", "user/register", $addLinkOptions);
+    }
+$node=node_load($nid);
+$tid=_get_group_or_forum(\'\', $nid);
+$femail_emails = variable_get(\'femail_emails\', array());
+$email = $femail_emails[$tid];
+//$email=$node->field_small_name[\'0\'][\'value\'] . \'@dev.gethealthyharlem.org\';
+$email=\'<a href="mailto:\' . $email . \'">\'. $email.\'</a>\';
+
+$sql = \'SELECT COUNT(*) FROM {og_uid} ou INNER JOIN {users} u ON ou.uid = u.uid WHERE ou.nid = %d AND u.status > 0 AND ou.is_active >= 1 AND ou.is_admin >= 0\';
+  $count = db_result( db_query($sql, $nid) );
+$follows=true;
+  if (!og_is_group_member($nid, FALSE)){
+   $follows=false;
+   $follow= \'<a href="javascript: void(0);" onClick="follow_group(\'.$nid.\');"><span>Follow</span></a>\';
+}
+
+
+?>
+
+<div class="block-quicktabs">
 <div class="block-content">
 <div class="block-title" style="border-bottom: none; ">
   <ul class="tabs">
           <li>
-            <a href="/groups/nycsafh/discussions">Latest topics</a>
+            <a href="/groups/<?php echo $node->field_small_name[\'0\'][\'value\']; ?>/discussions" style="line-height: 1.5em;">Latest topics</a>
          </li>
-         <li class="active">
-             <a href="/groups/nycsafh/discussions/top" style="line-height: 1.5em;">Hot topics</a>
+          <li class="active">
+             <a href="/groups/<?php echo $node->field_small_name[\'0\'][\'value\']; ?>/discussions/top">Hot topics</a>
          </li>
   </ul>
 </div>
