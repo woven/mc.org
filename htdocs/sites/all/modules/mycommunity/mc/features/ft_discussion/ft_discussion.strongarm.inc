@@ -417,7 +417,7 @@ function ft_discussion_strongarm() {
     'nfs_publishingoptions' => '0',
     'nfs_comments' => '0',
     'nfs_taxonomy' => '0',
-    'nfs_preview' => '0',
+    'nfs_preview' => '1',
     'nfs_cancel' => array(
       'nfs_cancel_status' => '1',
       'nfs_cancel_behaviour' => '0',
