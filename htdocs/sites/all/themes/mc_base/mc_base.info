@@ -49,6 +49,7 @@ stylesheets[screen][] = "css/mt.css"
 stylesheets[screen][] = "css/jquery.qtip.min.css"
 stylesheets[screen][] = "js/colorbox/colorbox.css"
 
+stylesheets[all][] = "css/node-webform.css"
 stylesheets[all][] = "views_gallery.css"
 stylesheets[screen][] = "css/buttons.css"
 stylesheets[screen][] = "css/form-confirm.css"
