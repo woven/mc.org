@@ -1,3 +1,26 @@
 <?php
 
 include_once('mc_node_ui.features.inc');
+
+function _mc_node_ui_posted_date($unix_date_start, $has_time = true){
+  $today = mktime(0, 0, 0);
+  $yesterday = $today - 24 * 3600;
+  $one_week_ago = $today - 7 * (24 * 3600);
+  $output = '';
+  $occurring = FALSE;
+
+  $output .= mc_api_format_day($unix_date_start, true);
+
+  // if it has a time, and it's not a past date
+  if ($has_time){
+    $time = mc_api_format_time($unix_date_start, null, $occurring);
+    $output .= ', ';
+    $output .= $time;
+  }
+  else {
+    $time = mc_api_format_whole_day_event($unix_date_start, null, $occurring);
+    $output .= $time;
+  }
+
+  return $output;
+}
