@@ -16,6 +16,10 @@ function mc_defaultimg_menu() {
   return $items;
 }
 
+/*
+ * @todo make it work with default image settings per field
+ * @todo check if files exist, and use site generic if it does
+ */
 function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'default'){
 
   $newfid = null;
