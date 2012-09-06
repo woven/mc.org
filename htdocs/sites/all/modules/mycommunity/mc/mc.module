@@ -523,6 +523,10 @@ function mc_events_grouped_by_dates($view_name, $display_id, $max_items){
   if ($items_to_display){
     $view = mc_events_grouped_by_dates_view($view_name, $display_id, 'upcoming', $items_to_display);
     if ($view){
+      $temp = array();
+      $items_count_upcoming = 0;
+      mc_events_grouped_by_dates_process_view($view, $display_id, $items_count_upcoming, $temp);
+      $items_count += $items_count_upcoming;
       $output .= mc_events_grouped_by_dates_process_view2($view, $display_id, $items_to_display, $exclude_nids);
     }
   }

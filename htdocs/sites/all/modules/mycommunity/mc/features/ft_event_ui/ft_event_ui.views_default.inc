@@ -400,9 +400,7 @@ function ft_event_ui_views_default_views() {
     'type' => 'none',
   ));
   $handler->override_option('cache', array(
-    'type' => 'time',
-    'results_lifespan' => '3600',
-    'output_lifespan' => '3600',
+    'type' => 'none',
   ));
   $handler->override_option('header', '<?php
   // Important: Pager should be turned on, otherwise count will not work.
@@ -837,7 +835,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/this-week\');
     ),
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
 
   $views[$view->name] = $view;
 
