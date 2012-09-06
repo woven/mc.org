@@ -703,7 +703,7 @@ function ft_landing_slideshow_views_default_views() {
     'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
   $handler = $view->new_display('block', 'Featured Items - Home', 'block_2');
   $handler->override_option('relationships', array(
     'field_featured_items_nid' => array(
@@ -735,8 +735,10 @@ function ft_landing_slideshow_views_default_views() {
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -751,9 +753,10 @@ function ft_landing_slideshow_views_default_views() {
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'featured_slideshow_linked',
+      'format' => 'featured_slideshow_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -776,8 +779,10 @@ function ft_landing_slideshow_views_default_views() {
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -792,9 +797,10 @@ function ft_landing_slideshow_views_default_views() {
       'empty' => '',
       'hide_empty' => 1,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'featured_slideshow_linked',
+      'format' => 'featured_slideshow_linked_mcdefaultimg',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -1267,7 +1273,7 @@ print theme_ghh_node_categories($data->node_node_data_field_featured_items_nid, 
     'skip_blank' => 1,
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
   $handler = $view->new_display('block', 'Featured Events - Events', 'block_3');
   $handler->override_option('relationships', array(
     'field_featured_events_nid' => array(
@@ -1366,8 +1372,10 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
         'text' => '[field_list_image_fid][phpcode]',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -1382,9 +1390,10 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'featured_slideshow_linked',
+      'format' => 'featured_slideshow_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -1823,7 +1832,7 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
     'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
   $handler = $view->new_display('block', 'Featured Places - Places', 'block_4');
   $handler->override_option('relationships', array(
     'field_featured_places_nid' => array(
@@ -1847,8 +1856,10 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -1863,9 +1874,10 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'featured_slideshow_linked',
+      'format' => 'featured_slideshow_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -2048,7 +2060,7 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
     'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
   $handler = $view->new_display('block', 'Featured Audio-Video - Audio-Video', 'block_5');
   $handler->override_option('relationships', array(
     'field_featured_audio_video_items_nid' => array(
@@ -2072,8 +2084,10 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -2088,9 +2102,10 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'featured_slideshow_linked',
+      'format' => 'featured_slideshow_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -2334,7 +2349,7 @@ print theme_ghh_node_categories($data->node_node_data_field_featured_audio_video
     'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
 
   $views[$view->name] = $view;
 
