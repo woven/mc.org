@@ -1399,7 +1399,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: post by femail
   $permissions['post by femail'] = array(
     'name' => 'post by femail',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'community manager',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: post comments
