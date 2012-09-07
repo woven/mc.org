@@ -18,10 +18,10 @@ function og_post_visibility($node){
   if(!empty($node->og_access_roles)){
     $is_auth = array_search('2',$node->og_access_roles);
   }else{
-    $is_auth = false;
+    $is_auth = FALSE;
   }
 
-  if(!($is_auth === false)){
+  if(!($is_auth === FALSE)){
     $is_auth = 1;
   }else{
     $is_auth = 0;
@@ -250,11 +250,11 @@ function mc_og_follow_group_js(){
 }
 
 function mc_og_menu(){
+
   $items['mc/group/follow/js'] = array(
     'title' => 'Javascript Follow Group',
     'page callback' => 'mc_og_follow_group_js',
-    'access callback' => true,
+    'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-  return $items;
 }

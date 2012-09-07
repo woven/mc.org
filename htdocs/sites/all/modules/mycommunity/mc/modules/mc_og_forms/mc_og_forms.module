@@ -1,0 +1,117 @@
+<?php
+
+/**
+ * @todo add the correct classes to the page (maybe use context as well)
+ * #todo display suite url not to be accessable though any other node but webform http://local.sje.mycommunity.org/admin/content/node-type/webform/display/mc_og_forms
+ *
+*/
+
+//default value for var: mc_og_forms_contact_nid
+define('MC_OG_FORMS_CONTACT_NID_DEFAULT',989);
+
+/**
+ * hook_nodeapi
+ * @param $node
+ * @param $op
+ * @param null $a3
+ * @param null $a4
+ * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_nodeapi/6
+ */
+function mc_og_forms_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if($node->webform & variable_get("mc_og_forms_contact_nid",MC_OG_FORMS_CONTACT_NID_DEFAULT) == $node->nid){
+    switch($op){
+      case 'presave':
+        if(isset($node->webform['email'])){
+          $node->webform['email'] = array();
+        }
+      case 'load';
+        if(isset($node->webform) && !empty($node->og_groups)){
+          $webform = &$node->webform;
+          $email = &$webform['emails'][1];
+          $email = array(
+            'nid' => $node->nid,
+            'eid' => 1,
+            'email' => 'someone@test.com',
+            'subject' => 'Email Subject',
+            'from_name' => 'GROUP NAME',
+            'from_address' => 'test',
+            'template' => 'default',
+            'excluded_components' => array(),
+            'html' => '',
+            'attachments' => ''
+          );
+        }
+    }
+  }
+}
+
+
+/**
+ * hook_menu
+ * @return array
+ * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_menu/6
+ */
+function mc_og_forms_menu(){
+  $items['node/%node/contact'] = array(
+    'title' => 'Contact',
+    'page callback' => '_mc_og_forms_contact',
+    'page arguments' => array(1),
+    'access callback' => '_mc_og_forms_access',
+    'access arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * hook_content_build_modes
+ * @see http://drupalcontrib.org/api/drupal/contributions%21cck%21content.module/function/node_content_build_modes/6
+ * @see http://drupal.org/node/697320#hook_content_build_modes
+ * @return array
+ */
+function mc_og_forms_content_build_modes() {
+
+  $build_modes = array(
+    'mc_og_forms' => array(
+      'title' => t('MC OG Contact'),
+      'build modes' => array(
+        'mc_og_forms_contact' => array(
+          'title' => t('MC OG Contact'),
+          //'weight' => 1,
+          //'module' => 'mc_og_forms_contact',
+          //'views style' => TRUE,
+        ),
+      )
+    )
+  );
+
+  return $build_modes;
+}
+
+/**
+ * check if the current node is group node
+ * @param $node
+ * @return bool
+*/
+function _mc_og_forms_access($node){
+  return og_is_group_type($node->type);
+}
+
+/**
+ * node/%og/contact callback function
+ * @param $node
+ * @return mixed|string
+ */
+function _mc_og_forms_contact($node){
+  $web_nid = variable_get("mc_og_forms_contact_nid",MC_OG_FORMS_CONTACT_NID_DEFAULT);
+
+  if($web_nid){
+    $contact_node = node_load($web_nid);
+    $contact_node->build_mode = 'mc_og_forms_contact';
+
+    return node_page_view($contact_node);
+  }
+
+  return drupal_not_found();
+}
