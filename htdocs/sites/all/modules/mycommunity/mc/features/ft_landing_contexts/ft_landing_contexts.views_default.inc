@@ -485,7 +485,7 @@ function ft_landing_contexts_views_default_views() {
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
-  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler = $view->new_display('page', 'Manage Pages Submenu', 'page_1');
   $handler->override_option('fields', array(
     'title' => array(
       'label' => '',

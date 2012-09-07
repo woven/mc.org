@@ -9,8 +9,8 @@ function mc_admin_bulk_views_default_views() {
   // Exported view: admin_node_bulk
   $view = new view;
   $view->name = 'admin_node_bulk';
-  $view->description = '';
-  $view->tag = '';
+  $view->description = 'Manage Groups/Content';
+  $view->tag = 'mc_admin_bulk';
   $view->base_table = 'node';
   $view->core = 6;
   $view->api_version = '2';
@@ -313,8 +313,11 @@ function mc_admin_bulk_views_default_views() {
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'perm',
-    'perm' => 'administer nodes',
+    'type' => 'role',
+    'role' => array(
+      3 => 3,
+      4 => 4,
+    ),
   ));
   $handler->override_option('cache', array(
     'type' => 'none',
@@ -849,8 +852,8 @@ function mc_admin_bulk_views_default_views() {
   // Exported view: admin_user_bulk
   $view = new view;
   $view->name = 'admin_user_bulk';
-  $view->description = '';
-  $view->tag = '';
+  $view->description = 'Manage Users';
+  $view->tag = 'mc_admin_bulk';
   $view->base_table = 'users';
   $view->core = 6;
   $view->api_version = '2';
@@ -1086,7 +1089,11 @@ function mc_admin_bulk_views_default_views() {
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'none',
+    'type' => 'role',
+    'role' => array(
+      3 => 3,
+      4 => 4,
+    ),
   ));
   $handler->override_option('cache', array(
     'type' => 'none',
@@ -1224,6 +1231,7 @@ function mc_admin_bulk_views_default_views() {
     ),
   ));
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->override_option('title', 'Manage Users');
   $handler->override_option('path', 'admin/content/user/bulk');
   $handler->override_option('menu', array(
     'type' => 'none',
