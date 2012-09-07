@@ -1184,7 +1184,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any npage content
   $permissions['edit any npage content'] = array(
     'name' => 'edit any npage content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any page_general content
