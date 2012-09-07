@@ -460,32 +460,6 @@ function ft_landing_contexts_views_default_views() {
   $handler->override_option('items_per_page', 0);
   $handler->override_option('style_plugin', 'draggabletable');
   $handler = $view->new_display('block', 'Block', 'block_1');
-  $handler->override_option('access', array(
-    'type' => 'none',
-  ));
-  $handler->override_option('style_plugin', 'semanticviews_default');
-  $handler->override_option('style_options', array(
-    'grouping' => '',
-    'group' => array(
-      'element_type' => 'h3',
-      'class' => 'title',
-    ),
-    'list' => array(
-      'element_type' => 'ul',
-      'class' => 'menu',
-    ),
-    'row' => array(
-      'element_type' => 'li',
-      'class' => 'leaf',
-      'last_every_nth' => '0',
-      'first_class' => 'first',
-      'last_class' => 'last',
-      'striping_classes' => 'odd even',
-    ),
-  ));
-  $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', -1);
-  $handler = $view->new_display('page', 'Manage Pages Submenu', 'page_1');
   $handler->override_option('fields', array(
     'title' => array(
       'label' => '',
@@ -514,11 +488,11 @@ function ft_landing_contexts_views_default_views() {
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'link_to_node' => 1,
+      'exclude' => 1,
       'spaces' => array(
         'type' => NULL,
         'frontpage' => FALSE,
       ),
-      'exclude' => 0,
       'id' => 'title',
       'table' => 'node',
       'field' => 'title',
@@ -527,8 +501,8 @@ function ft_landing_contexts_views_default_views() {
         'button' => 'Use default',
       ),
     ),
-    'value0' => array(
-      'label' => 'Order',
+    'phpcode' => array(
+      'label' => '',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -550,13 +524,22 @@ function ft_landing_contexts_views_default_views() {
         'strip_tags' => 0,
       ),
       'empty' => '',
-      'hide_empty' => 0,
+      'hide_empty' => 1,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
+      'value' => '<?php
+$link_title = \'\';
+if(strlen($data->node_title)>=15){
+$link_title = \'title="\' . $data->node_title . \'"\';
+}
+$title = $data->node_title;
+$url = \'/\' . drupal_get_path_alias(\'node/\' . $data->nid);
+?>
+<a href="<?php echo $url; ?>" <?php echo $link_title; ?> ><?php echo $title; ?></a>',
       'exclude' => 0,
-      'id' => 'value0',
-      'table' => 'draggableviews_structure_node0',
-      'field' => 'value0',
+      'id' => 'phpcode',
+      'table' => 'customfield',
+      'field' => 'phpcode',
       'override' => array(
         'button' => 'Use default',
       ),
@@ -564,86 +547,40 @@ function ft_landing_contexts_views_default_views() {
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'role',
-    'role' => array(
-      3 => 3,
-      4 => 4,
-    ),
+    'type' => 'none',
   ));
-  $handler->override_option('empty', 'There are no pages to build a menu from. Would you like to <a href="/node/add/page-general">add a page<a>?');
-  $handler->override_option('empty_format', '2');
+  $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
-    'override' => 1,
-    'sticky' => 0,
-    'order' => 'asc',
-    'summary' => '',
-    'columns' => array(
-      'value0' => 'value0',
-      'title' => 'title',
+    'grouping' => '',
+    'group' => array(
+      'element_type' => 'h3',
+      'class' => 'title',
     ),
-    'info' => array(
-      'value0' => array(
-        'sortable' => 0,
-        'separator' => '',
+    'list' => array(
+      'element_type' => 'ul',
+      'class' => 'menu',
+    ),
+    'row' => array(
+      'element_type' => 'li',
+      'class' => 'leaf',
+      'last_every_nth' => '0',
+      'first_class' => 'first',
+      'last_class' => 'last',
+      'striping_classes' => 'odd even',
+    ),
+  ));
+  $handler->override_option('row_plugin', 'semanticviews_fields');
+  $handler->override_option('row_options', array(
+    'semantic_html' => array(
+      'phpcode' => array(
+        'element_type' => 'div',
+        'class' => 'views-field-title',
       ),
-      'title' => array(
-        'sortable' => 0,
-        'separator' => '',
-      ),
     ),
-    'default' => -1,
-    'tabledrag_order' => array(
-      'field' => 'value0',
-      'handler' => 'native',
-    ),
-    'tabledrag_order_visible' => array(
-      'visible' => 0,
-    ),
-    'tabledrag_hierarchy' => array(
-      'field' => 'none',
-      'handler' => 'native',
-    ),
-    'tabledrag_hierarchy_visible' => array(
-      'visible' => 0,
-    ),
-    'draggableviews_depth_limit' => '0',
-    'draggableviews_repair' => array(
-      'repair' => 'repair',
-    ),
-    'tabledrag_types_add' => 'Add type',
-    'tabledrag_expand' => array(
-      'expand_links' => 0,
-      'collapsed' => 0,
-      'by_uid' => 0,
-    ),
-    'draggableviews_extensions' => array(
-      'extension_top' => '3',
-      'extension_bottom' => '3',
-    ),
-    'tabledrag_lock' => array(
-      'lock' => 0,
-    ),
-    'draggableviews_default_on_top' => '1',
-    'draggableviews_button_text' => 'Save order',
-    'draggableviews_arguments' => array(
-      'use_args' => 0,
-    ),
+    'skip_blank' => 0,
   ));
-  $handler->override_option('path', 'admin/menu/help/config');
-  $handler->override_option('menu', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
 
   $views[$view->name] = $view;
 
