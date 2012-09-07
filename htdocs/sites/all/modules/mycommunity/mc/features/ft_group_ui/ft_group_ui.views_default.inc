@@ -249,7 +249,7 @@ function ft_group_ui_views_default_views() {
       'hide_empty' => 0,
       'empty_zero' => 0,
       'value' => '<?php 
-print theme_ghh_node_categories($data->nid, 2); 
+print theme_ghh_node_categories($data->nid); 
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_1',
@@ -5328,7 +5328,7 @@ print theme("feature_badge",$data->nid, 2);
       'hide_empty' => 0,
       'empty_zero' => 0,
       'value' => '<?php 
-print theme_ghh_node_categories($data->nid, 2); 
+print theme_ghh_node_categories($data->nid); 
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_3',

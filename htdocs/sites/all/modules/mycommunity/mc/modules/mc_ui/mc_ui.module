@@ -163,7 +163,10 @@ function theme_ghh_authoring_info($uid, $uname, $gnid = 0, $gtitle = '', $pictur
   return $output;
 }
 
-function theme_ghh_node_categories($nid, $vocabulary_id){
+function theme_ghh_node_categories($nid, $vocabulary_id = null){
+  if($vocabulary_id==null){
+    $vocabulary_id = db_result(db_query("SELECT vid FROM vocabulary WHERE name='Topic' LIMIT 1"));
+  }
   $output = '';
   $node = node_load($nid);
   $terms = taxonomy_node_get_terms($node);

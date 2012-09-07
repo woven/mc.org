@@ -727,10 +727,17 @@ $follows=true;
    $follow= \'<a href="javascript: void(0);" onClick="follow_group(\'.$nid.\');"><span>Follow</span></a>\';
 }
 
-
+$uid = $user->uid;
+$forum_options = l(\'forum options\', "user/$uid/femail");
 ?>
 <div class="field light-text" style="font-size: 12px;">
-<p>Join the discussion. Reply to an existing topic or <?php echo $link; ?> now! </p><p>You can also choose to participate via email by sending to <?php echo $email; ?>.</p> <?php if(!$follows): ?> <?php if ($user->uid): ?><div id="follow">You must <?php echo $follow; ?> to participate. </div><?php else: ?><div>You must <a href="#" id="anonymous-follow">follow this group</a> to participate</div><?php endif; ?><?php endif; ?>
+<?php if($follows): ?>
+<p>Join the discussion. Reply to an existing topic or <?php echo $link; ?> now! </p><p>You can also choose to participate via email by sending to <?php echo $email; ?>. Visit the <?php echo $forum_options?> section of your profile to manage email addresses and notification settings.</p> 
+<?php endif; ?>
+<?php 
+if(false): 
+//if(!$follows): 
+?> <?php if ($user->uid): ?><div id="follow">You must <?php echo $follow; ?> to participate. </div><?php else: ?><div>You must <a href="#" id="anonymous-follow">follow this group</a> to participate</div><?php endif; ?><?php endif; ?>
 </div>
 
 <div class="block-quicktabs">
