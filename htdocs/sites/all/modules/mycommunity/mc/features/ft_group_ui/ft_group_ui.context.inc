@@ -82,8 +82,6 @@ function ft_group_ui_context_default_contexts() {
     'context' => array(
       'values' => array(
         '~group_homepage' => '~group_homepage',
-        '~group_manage_pages' => '~group_manage_pages',
-        '~node_ingroup' => '~node_ingroup',
       ),
     ),
     'context_og_condition_group_type' => array(
@@ -92,17 +90,6 @@ function ft_group_ui_context_default_contexts() {
       ),
       'options' => array(
         'node_form' => 0,
-      ),
-    ),
-    'php' => array(
-      'values' => array(
-        0 => TRUE,
-      ),
-      'options' => array(
-        'phpcode' => '$object = menu_get_object();
-if (!is_object($object)){
-  return true;
-}',
       ),
     ),
   );

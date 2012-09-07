@@ -1,5 +1,40 @@
 <?php
 
+
+function og_prepopulate_menu_menu(){
+  $items = array();
+
+  $menuitems = array(
+    'latest' => 'page_1',
+    'events' => 'page_4',
+    'articles' => 'page_5',
+    'files' => 'page_6',
+    'photos' => 'page_7',
+    'videos' => 'page_8'
+  );
+
+  foreach($menuitems as $key => $display){
+    $items['node/%node/'.$key] = array(
+      'page callback' => '_mc_load_view_page',
+      'page arguments' => array(1,$display),
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+    );
+  }
+
+  return $items;
+}
+
+function _mc_load_view_page($node,$display){
+
+  if(og_is_group_type($node->type)){
+    //return 'assa';
+    return views_embed_view('og_posts',$display);
+  }
+
+  return drupal_not_found();
+}
+
 function _og_prepopulate_menu_create_custom_menu($node){
   $menu_name = 'menu-og-' . $node->nid;
   $sql = "SELECT COUNT(*) FROM {menu_custom} WHERE menu_name = '%s'";
@@ -18,6 +53,7 @@ function _og_prepopulate_menu_create_links($node){
   
   $small_path = $node->field_small_name[0]['value'];
   $other_path = "groups/".$node->field_small_name[0]['value'];
+  $node_path = 'node/'.$node->nid;
   
   //Insert menu items
   $items = array();
@@ -25,7 +61,7 @@ function _og_prepopulate_menu_create_links($node){
   //HOME
   $items[] = array(
     'link_title' => 'Home',
-    'link_path' => $node->path,
+    'link_path' => $node_path,
     'mlid' => 0,       
     'plid' => 0,
     'menu_name' => $menu_name,
@@ -40,7 +76,7 @@ function _og_prepopulate_menu_create_links($node){
   
   $items[] = array(
       'link_title' => 'About',
-      'link_path' => 'groups/' . $small_path . '/about',
+      'link_path' => $node_path . '/about',
       'mlid' => 0,       
       'plid' => 0,
       'menu_name' => $menu_name,
@@ -54,7 +90,7 @@ function _og_prepopulate_menu_create_links($node){
     );
   $items[] = array(
       'link_title' => 'Latest',
-      'link_path' => 'groups/' . $small_path . '/latest',
+      'link_path' => $node_path . '/latest',
       'mlid' => 0,       
       'plid' => 0,
       'menu_name' => $menu_name,
@@ -68,7 +104,7 @@ function _og_prepopulate_menu_create_links($node){
     );
   $items[] = array(
       'link_title' => 'Events',
-      'link_path' => 'groups/' . $small_path . '/events',
+      'link_path' => $node_path. '/events',
       'mlid' => 0,       
       'plid' => 0,
       'menu_name' => $menu_name,
@@ -82,7 +118,7 @@ function _og_prepopulate_menu_create_links($node){
     );
   $items[] = array(
       'link_title' => 'Articles',
-      'link_path' => 'groups/' . $small_path . '/articles',
+      'link_path' => $node_path . '/articles',
       'mlid' => 0,       
       'plid' => 0,
       'menu_name' => $menu_name,
@@ -96,7 +132,7 @@ function _og_prepopulate_menu_create_links($node){
     );
   $items[] = array(
       'link_title' => 'Files',
-      'link_path' => 'groups/' . $small_path . '/files',
+      'link_path' => $node_path . '/files',
       'mlid' => 0,       
       'plid' => 0,
       'menu_name' => $menu_name,
@@ -126,7 +162,7 @@ function _og_prepopulate_menu_create_links($node){
   */
   $items[] = array(
       'link_title' => 'Videos',
-      'link_path' => 'groups/' . $small_path . '/videos',
+      'link_path' => $node_path . '/videos',
       'mlid' => 0,       
       'plid' => 0,
       'menu_name' => $menu_name,
@@ -139,11 +175,11 @@ function _og_prepopulate_menu_create_links($node){
       'customized' => 0,
     );
   
-  $disabled_discussions = ($group->field_enable_discussions['0']['value'] == '0');
+  $disabled_discussions = ($node->field_enable_discussions['0']['value'] == '0');
   if (!$disabled_discussions){
     $items[] = array(
       'link_title' => 'Discussions',
-      'link_path' => 'groups/' . $small_path . '/discussions',
+      'link_path' => $node_path . '/discussions',
       'mlid' => 0,       
       'plid' => 0,
       'menu_name' => $menu_name,
@@ -157,11 +193,34 @@ function _og_prepopulate_menu_create_links($node){
     );
   }
 
-    
+  // Create menu item
+  $items[] = array(
+    'link_title' => 'Contact',
+    'link_path' => $node_path .'/contact',
+    'mlid' => 0,
+    'plid' => 0,
+    'menu_name' => $menu_name,
+    'weight' => 8,
+    'options' => array(),
+    'module' => 'og_prepopulate_menu',
+    'expanded' => 0,
+    'hidden' => 0,
+    'has_children' => 0,
+    'customized' => 0,
+  );
+
+  // SAVE MENU
+  foreach($items as $item){
+    menu_link_save($item);
+  }
+}
+
+
+function old_webformcreate(){
   // Create webform
-    
+
   if(module_exists('webform')){
-      
+
     module_load_include('inc', 'webform', 'includes/webform.components');
     $webform_node = new stdClass;
     $webform_node->title = t('Contact');
@@ -176,16 +235,16 @@ function _og_prepopulate_menu_create_links($node){
     $webform_node->path = $other_path . '/contact';
     //$webform_node->old_alias = $other_path . '/contact';
     $webform_node->pathauto_perform_alias = 0;
-    
+
     if ($webform_node = node_submit($webform_node)){
-      
+
       // set group manager as owner
       $webform_node->uid = $node->uid;
       $webform_node->pathauto_perform_alias = 0;
       node_save($webform_node);
-      
+
       // add components
-      
+
       $components = array();
       $components[] = array(
         'type' => 'textfield',
@@ -231,50 +290,32 @@ function _og_prepopulate_menu_create_links($node){
         'mandatory' => TRUE,
         'weight' => 3
       );
-      
+
       // insert components
       foreach($components as $component){
         webform_component_insert($component);
       }
-      
-      // create menu item
-      $items[] = array(
-        'link_title' => 'Contact',
-        'link_path' => 'node/'.$webform_node->nid,
-        'mlid' => 0,       
-        'plid' => 0,
-        'menu_name' => $menu_name,
-        'weight' => 8,
-        'options' => array(),
-        'module' => 'og_prepopulate_menu',
-        'expanded' => 0,
-        'hidden' => 0,
-        'has_children' => 0,
-        'customized' => 0,
-      );
-      
-  
-	  // Add permissions to submit
-	  
-	  db_query("INSERT INTO webform_roles (nid, rid) VALUES (".$webform_node->nid." , 1)");
-	  db_query("INSERT INTO webform_roles (nid, rid) VALUES (".$webform_node->nid." , 2)");
-	  
-	  // Re - save the node
-	  
-	  $nodeWebform = node_load($webform_node->nid);
-	  node_save($nodeWebform);
-      
+
+
+
+
+      // Add permissions to submit
+
+      db_query("INSERT INTO webform_roles (nid, rid) VALUES (".$webform_node->nid." , 1)");
+      db_query("INSERT INTO webform_roles (nid, rid) VALUES (".$webform_node->nid." , 2)");
+
+      // Re - save the node
+
+      $nodeWebform = node_load($webform_node->nid);
+      node_save($nodeWebform);
+
     }else{
       drupal_set_message(t('Error creating webform node for the group'), 'error');
     }
-    
-    
+
+
   }
 
-  // SAVE MENU
-  foreach($items as $item){
-    menu_link_save($item);
-  }
 }
 
 /**

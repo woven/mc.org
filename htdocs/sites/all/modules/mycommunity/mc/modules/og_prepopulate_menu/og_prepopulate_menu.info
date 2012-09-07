@@ -2,8 +2,7 @@ name = OG Prepopulate Group Menu
 description = Custom module that prepopulates the menu created with each group
 dependencies[] = og
 dependencies[] = og_menu
-dependencies[] = webform
+dependencies[] = mc_og_forms
 package = "Organic groups"
 core = 6.x
 version = "6.x-1.0"
-
