@@ -1,5 +1,6 @@
 // $Id$
 var submit_hidden = 0;
+
 Drupal.behaviors.hide_submit = function(context) {
   // Hide button and siblings
   function hide_submit_button(obj, message, context) {
@@ -28,6 +29,9 @@ Drupal.behaviors.hide_submit = function(context) {
   }
   var settings = Drupal.settings.hide_submit;
 
+   //console.log(settings);
+  //$('input:submit',context).filter('.ahah-processed').addClass('.hide-submit-exclude');
+
   if (settings.dbg) {
     // For debugging, this addtion to the script will paint included and excluded buttons
     $('input:submit', context).css({border:'6px red solid'});
@@ -41,14 +45,18 @@ Drupal.behaviors.hide_submit = function(context) {
         }
 
     $(settings.selector, context).click(function(e) {
-      //console.log(e);
-      hide_submit_button(this, settings.message, context);
+        //dont trigger hide_submit if the target has ahah-processed
+        etarget = $(e.currentTarget);
+        if(!etarget.hasClass('ahah-processed')){
+            hide_submit_button(this, settings.message, context);
+        }
     });
+
     // Submit when ENTER is pressed
     if (settings.keypress) {
-      $(settings.selector, context).keypress(function() {
-        $(this).parents("form").submit();
-        hide_submit_button(this, settings.message, context);
+      $(settings.selector, context).keypress(function(e) {
+              $(this).parents("form").submit();
+              hide_submit_button(this, settings.message, context);
       })
     }
   }

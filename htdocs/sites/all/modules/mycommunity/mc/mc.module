@@ -58,32 +58,12 @@ function mc_late_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   //add different butoons submit/delete/cancel styles
   if($form['#id'] == "node-form"){
-    /**
-    $fields = array('og_nodeapi','title','body_field');
-    $start = -500;
-    foreach($fields as $field){
-      if(isset($form[$field])){
-        switch($field){
-          case 'body_field':
-            $form['body_field']['#weight'] = $start++;;
-            break;
-
-          default:
-            $form[$field]['#weight'] = $start++;;
-            break;
-        }
-      }
-
-    }
-       */
     /*
      * removing format selectors and field_related
      * @todo clean this up or use another method
      */
 
     if($user->uid != 1){
-      //$form['body_field']['format']['#access'] = false;
-
       if(isset($form['field_related'])){
         $form['field_related']['#access'] = false;
       }
@@ -239,7 +219,7 @@ function _mc_form_user_register_alter(&$form, &$form_state,$form_id){
       '#weight' => -31,  
     );
   }
-  /* TODO: this code snipsset needs to be moved to the appropiate module.
+  /* TODO: this code snipsset needs to be moved to the appropriate module.
   This is adding the checkbox called Spread the love to the Join Page
   $form['facebook-share'] = array(
     '#type' => 'checkbox',

@@ -16,10 +16,10 @@ function ft_webform_ui_ds_default_settings() {
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
-            'body' => array(
+            'webform_og_body' => array(
               'region' => 'middle',
               'weight' => '-99',
-              'format' => 'nd_bodyfield',
+              'format' => '_webform_og_body',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),

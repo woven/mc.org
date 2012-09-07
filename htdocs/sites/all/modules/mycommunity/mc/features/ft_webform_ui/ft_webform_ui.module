@@ -5,3 +5,40 @@
  */
 
 include_once 'ft_webform_ui.features.inc';
+
+function ft_webform_ui_late_form_alter(&$form, &$form_state, $form_id) {
+
+}
+
+function ft_webform_ui_ds_fields($type_name, $build_mode, $extra) {
+
+  $fields = array(
+    'webform_og_body' => array(
+      'title' => t('Webform Og Body'),
+      'type' => DS_FIELD_TYPE_FUNCTION,
+      'status' => DS_FIELD_STATUS_STATIC,
+      'properties' => array(
+        'formatters' => array(
+          '_webform_og_body' => t('Default'),
+        ),
+      ),
+    ),
+  );
+
+  return array('nd' => $fields);
+}
+
+
+
+function _webform_og_body($element){
+  $node =  $element['object'];
+  if(!empty($node->og_groups_both)){
+    $gnid = key($node->og_groups_both);
+    $gtitle = $node->og_groups_both[$gnid];
+    $gl = l($gtitle,'node/'.$gnid);
+    return t('<p>Contact !gl by completing this form.</p>',array(
+      '!gl' => $gl
+    ));
+  }
+ return '';
+}

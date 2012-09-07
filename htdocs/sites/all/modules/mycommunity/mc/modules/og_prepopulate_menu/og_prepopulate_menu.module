@@ -17,6 +17,7 @@ function _og_prepopulate_menu_create_links($node){
   $menu_name = 'menu-og-'. $node->nid;
   
   $small_path = $node->field_small_name[0]['value'];
+  $other_path = "groups/".$node->field_small_name[0]['value'];
   
   //Insert menu items
   $items = array();
@@ -165,21 +166,22 @@ function _og_prepopulate_menu_create_links($node){
     $webform_node = new stdClass;
     $webform_node->title = t('Contact');
     $webform_node->type = 'webform';
-    $webform_node->body = 'You can leave a message to the group administrator using the contact form below.';
+    //$webform_node->body = 'You can leave a message to the group administrator using the contact form below.';
     $webform_node->webform['roles'] = array();
-    
+
     //Add the node to the group.
     $webform_node->og_groups = array($node->nid => $node->nid);
     $webform_node->og_groups_both = array($node->nid => $node->title);
     // setup path
-    $webform_node->path = $small_path . '/contact';
+    $webform_node->path = $other_path . '/contact';
+    //$webform_node->old_alias = $other_path . '/contact';
     $webform_node->pathauto_perform_alias = 0;
     
     if ($webform_node = node_submit($webform_node)){
       
       // set group manager as owner
       $webform_node->uid = $node->uid;
-        
+      $webform_node->pathauto_perform_alias = 0;
       node_save($webform_node);
       
       // add components

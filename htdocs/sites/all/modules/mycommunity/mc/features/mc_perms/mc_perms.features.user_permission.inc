@@ -63,7 +63,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: access all webform results
   $permissions['access all webform results'] = array(
     'name' => 'access all webform results',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: access comments
@@ -133,25 +135,37 @@ function mc_perms_user_default_permissions() {
   // Exported permission: act as a member for any group
   $permissions['act as a member for any group'] = array(
     'name' => 'act as a member for any group',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: act as a visitor for any group
   $permissions['act as a visitor for any group'] = array(
     'name' => 'act as a visitor for any group',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: act as an admin for any group
   $permissions['act as an admin for any group'] = array(
     'name' => 'act as an admin for any group',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: act as the manager for any group
   $permissions['act as the manager for any group'] = array(
     'name' => 'act as the manager for any group',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: add group content
@@ -363,12 +377,6 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: administer form filters
-  $permissions['administer form filters'] = array(
-    'name' => 'administer form filters',
-    'roles' => array(),
-  );
-
   // Exported permission: administer forums
   $permissions['administer forums'] = array(
     'name' => 'administer forums',
@@ -384,7 +392,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer groupadmin
   $permissions['administer groupadmin'] = array(
     'name' => 'administer groupadmin',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: administer imageapi
@@ -545,6 +556,26 @@ function mc_perms_user_default_permissions() {
     'name' => 'change own username',
     'roles' => array(
       '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: collapse format fieldset by default
+  $permissions['collapse format fieldset by default'] = array(
+    'name' => 'collapse format fieldset by default',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: collapsible format selection
+  $permissions['collapsible format selection'] = array(
+    'name' => 'collapsible format selection',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
     ),
   );
 
@@ -1153,7 +1184,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any npage content
   $permissions['edit any npage content'] = array(
     'name' => 'edit any npage content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any page_general content
@@ -1452,7 +1485,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: post to all the groups
   $permissions['post to all the groups'] = array(
     'name' => 'post to all the groups',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: revert revisions
@@ -1495,6 +1530,46 @@ function mc_perms_user_default_permissions() {
   $permissions['set page title'] = array(
     'name' => 'set page title',
     'roles' => array(),
+  );
+
+  // Exported permission: show format selection for blocks
+  $permissions['show format selection for blocks'] = array(
+    'name' => 'show format selection for blocks',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: show format selection for comments
+  $permissions['show format selection for comments'] = array(
+    'name' => 'show format selection for comments',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: show format selection for nodes
+  $permissions['show format selection for nodes'] = array(
+    'name' => 'show format selection for nodes',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: show format tips
+  $permissions['show format tips'] = array(
+    'name' => 'show format tips',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: show more format tips link
+  $permissions['show more format tips link'] = array(
+    'name' => 'show more format tips link',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
   );
 
   // Exported permission: submit latitude/longitude
@@ -1551,12 +1626,6 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view advanced help topic
   $permissions['view advanced help topic'] = array(
     'name' => 'view advanced help topic',
-    'roles' => array(),
-  );
-
-  // Exported permission: view forms without filtering
-  $permissions['view forms without filtering'] = array(
-    'name' => 'view forms without filtering',
     'roles' => array(),
   );
 
@@ -1749,13 +1818,19 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view/search email addresses
   $permissions['view/search email addresses'] = array(
     'name' => 'view/search email addresses',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: view/search real names
   $permissions['view/search real names'] = array(
     'name' => 'view/search real names',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   return $permissions;
