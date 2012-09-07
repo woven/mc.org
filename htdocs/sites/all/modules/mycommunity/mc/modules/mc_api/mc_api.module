@@ -1,5 +1,10 @@
 <?php
 
+
+function mc_module_update_weight($module,$weight = 0){
+  return db_query("UPDATE {system} SET weight = %d WHERE name = '%s'",$weight,$module);
+}
+
 /**
  * @param $form
  * @param $ct

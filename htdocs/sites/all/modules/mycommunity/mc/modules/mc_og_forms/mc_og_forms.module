@@ -9,45 +9,72 @@
 //default value for var: mc_og_forms_contact_nid
 define('MC_OG_FORMS_CONTACT_NID_DEFAULT',989);
 
-/**
- * hook_nodeapi
- * @param $node
- * @param $op
- * @param null $a3
- * @param null $a4
- * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_nodeapi/6
- */
-function mc_og_forms_nodeapi_(&$node, $op, $a3 = NULL, $a4 = NULL) {
-  if($node->webform & variable_get("mc_og_forms_contact_nid",MC_OG_FORMS_CONTACT_NID_DEFAULT) == $node->nid){
-    switch($op){
-      case 'presave':
-        if(isset($node->webform['email'])){
-          $node->webform['email'] = array();
-        }
-      case 'load';
-        if(isset($node->webform) && !empty($node->og_groups)){
-          $gnid = key($node->og_groups_both);
-          $gname = $node->og_groups_both[$gnid];
-
-          $webform = &$node->webform;
-          $email = &$webform['emails'][1];
-          $email = array(
-            'nid' => $node->nid,
-            'eid' => 1,
-            'email' => 'someone@test.com',
-            'subject' => 'Email Subject',
-            'from_name' => $gname,
-            'from_address' => 'support@woven.org',
-            'template' => 'default',
-            'excluded_components' => array(),
-            'html' => '',
-            'attachments' => ''
-          );
-        }
-    }
-  }
+function mc_og_forms_theme(){
+  return array(
+    'mc_og_forms_contact' => array(
+      'arguments' => array('forums' => NULL, 'topics' => NULL, 'parents' => NULL, 'tid' => NULL, 'sortby' => NULL, 'forum_per_page' => NULL),
+      'template' => 'og-form-contact',
+    ),
+  );
 }
 
+function mc_og_forms_contact($form_stats,$nid){
+
+  $form = array();
+
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => "Your Name",
+    '#required' => true
+  );
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => "Your E-mail",
+    '#required' => true
+  );
+
+  $form['subject'] = array(
+    '#type' => 'textfield',
+    '#title' => "Subject",
+    '#required' => true
+  );
+
+  $form['message'] = array(
+    '#type' => 'textarea',
+    '#title' => "Message",
+    '#required' => true
+  );
+
+  $form['nid'] = array('#type' => 'value', '#value' => $nid);
+
+  $form['submit'] = array('#type' => 'submit', '#value' => t('Submit'));
+
+  $form['#redirect'] = 'node/'.$nid;
+
+  return $form;
+}
+
+function mc_og_forms_contact_submit($form, &$form_state){
+  //fields
+  $fields = array('name','email','subject','message');
+
+  $nid = $form_state['values']['nid'];
+  $node = node_load($nid);
+
+  drupal_set_message(
+    t("Thank you for contacting !gname! We'll be in touch shortly.",array(
+      '!gname' => l($node->title,"node/".$node->nid)
+    ))
+  );
+}
+
+function is_mc_og_form_contact($node){
+  if(variable_get("mc_og_forms_contact_nid",MC_OG_FORMS_CONTACT_NID_DEFAULT) == $node->nid){
+    return true;
+  }
+  return false;
+}
 
 /**
  * hook_menu
@@ -68,31 +95,6 @@ function mc_og_forms_menu(){
 }
 
 /**
- * hook_content_build_modes
- * @see http://drupalcontrib.org/api/drupal/contributions%21cck%21content.module/function/node_content_build_modes/6
- * @see http://drupal.org/node/697320#hook_content_build_modes
- * @return array
- */
-function mc_og_forms_content_build_modes() {
-
-  $build_modes = array(
-    'mc_og_forms' => array(
-      'title' => t('MC OG Contact'),
-      'build modes' => array(
-        'mc_og_forms_contact' => array(
-          'title' => t('MC OG Contact'),
-          //'weight' => 1,
-          //'module' => 'mc_og_forms_contact',
-          //'views style' => TRUE,
-        ),
-      )
-    )
-  );
-
-  return $build_modes;
-}
-
-/**
  * check if the current node is group node
  * @param $node
  * @return bool
@@ -107,14 +109,5 @@ function _mc_og_forms_access($node){
  * @return mixed|string
  */
 function _mc_og_forms_contact($node){
-  $web_nid = variable_get("mc_og_forms_contact_nid",MC_OG_FORMS_CONTACT_NID_DEFAULT);
-
-  if($web_nid){
-    $contact_node = node_load($web_nid);
-    $contact_node->build_mode = 'mc_og_forms_contact';
-
-    return node_page_view($contact_node);
-  }
-
-  return drupal_not_found();
+  return drupal_get_form("mc_og_forms_contact",$node->nid);
 }
