@@ -1242,5 +1242,270 @@ function mc_admin_bulk_views_default_views() {
 
   $views[$view->name] = $view;
 
+  // Exported view: mc_page_menu_admin
+  $view = new view;
+  $view->name = 'mc_page_menu_admin';
+  $view->description = '';
+  $view->tag = '';
+  $view->base_table = 'node';
+  $view->core = 6;
+  $view->api_version = '2';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+  $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->override_option('fields', array(
+    'title' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '15',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 1,
+      'spaces' => array(
+        'type' => NULL,
+        'frontpage' => FALSE,
+      ),
+      'exclude' => 0,
+      'id' => 'title',
+      'table' => 'node',
+      'field' => 'title',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+  ));
+  $handler->override_option('sorts', array(
+    'value0' => array(
+      'id' => 'value0',
+      'table' => 'draggableviews_structure_node0',
+      'field' => 'value0',
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'page_general' => 'page_general',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('access', array(
+    'type' => 'perm',
+    'perm' => 'administer nodes',
+  ));
+  $handler->override_option('cache', array(
+    'type' => 'none',
+  ));
+  $handler->override_option('items_per_page', 0);
+  $handler->override_option('style_plugin', 'draggabletable');
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->override_option('fields', array(
+    'title' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '15',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 1,
+      'spaces' => array(
+        'type' => NULL,
+        'frontpage' => FALSE,
+      ),
+      'exclude' => 0,
+      'id' => 'title',
+      'table' => 'node',
+      'field' => 'title',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+    ),
+    'value0' => array(
+      'label' => 'Order',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 0,
+      'id' => 'value0',
+      'table' => 'draggableviews_structure_node0',
+      'field' => 'value0',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('access', array(
+    'type' => 'role',
+    'role' => array(
+      3 => 3,
+      4 => 4,
+    ),
+  ));
+  $handler->override_option('empty', 'There are no pages to build a menu from. Would you like to <a href="/node/add/page-general">add a page<a>?');
+  $handler->override_option('empty_format', '2');
+  $handler->override_option('style_options', array(
+    'override' => 1,
+    'sticky' => 0,
+    'order' => 'asc',
+    'summary' => '',
+    'columns' => array(
+      'value0' => 'value0',
+      'title' => 'title',
+    ),
+    'info' => array(
+      'value0' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'title' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+    ),
+    'default' => -1,
+    'tabledrag_order' => array(
+      'field' => 'value0',
+      'handler' => 'native',
+    ),
+    'tabledrag_order_visible' => array(
+      'visible' => 0,
+    ),
+    'tabledrag_hierarchy' => array(
+      'field' => 'none',
+      'handler' => 'native',
+    ),
+    'tabledrag_hierarchy_visible' => array(
+      'visible' => 0,
+    ),
+    'draggableviews_depth_limit' => '0',
+    'draggableviews_repair' => array(
+      'repair' => 'repair',
+    ),
+    'tabledrag_types_add' => 'Add type',
+    'tabledrag_expand' => array(
+      'expand_links' => 0,
+      'collapsed' => 0,
+      'by_uid' => 0,
+    ),
+    'draggableviews_extensions' => array(
+      'extension_top' => '3',
+      'extension_bottom' => '3',
+    ),
+    'tabledrag_lock' => array(
+      'lock' => 0,
+    ),
+    'draggableviews_default_on_top' => '1',
+    'draggableviews_button_text' => 'Save order',
+    'draggableviews_arguments' => array(
+      'use_args' => 0,
+    ),
+  ));
+  $handler->override_option('path', 'admin/menu/help/config');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+
+  $views[$view->name] = $view;
+
   return $views;
 }

@@ -1507,7 +1507,7 @@ body.node-type-group #page .node {
 }
 
 #page #main .block-content .block {
-	margin: 0 0 20px;
+	margin: 0 0 10px;
 }
 
 /* Comments */
@@ -2543,4 +2543,8 @@ margin: 0;
 
 #group-follow .ahah-progress {
     display: none;
+}
+
+#left .view-mc-page-menu ul.menu li.leaf {
+    font-size: 12px;
 }
