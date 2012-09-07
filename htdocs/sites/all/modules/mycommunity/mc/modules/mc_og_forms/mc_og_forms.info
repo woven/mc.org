@@ -1,0 +1,5 @@
+name = "MC OG Forms"
+description = "contains webform logic for MC (contact form)"
+core = "6.x"
+package = "MyCommunity.org OG"
+dependencies[] = "webform"

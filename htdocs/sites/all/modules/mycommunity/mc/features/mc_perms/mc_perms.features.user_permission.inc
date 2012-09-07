@@ -394,7 +394,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'administer groupadmin',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
@@ -1820,7 +1819,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'view/search email addresses',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
@@ -1829,7 +1827,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'view/search real names',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
