@@ -17,7 +17,7 @@ define('MC_OG_FORMS_CONTACT_NID_DEFAULT',989);
  * @param null $a4
  * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_nodeapi/6
  */
-function mc_og_forms_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+function mc_og_forms_nodeapi_(&$node, $op, $a3 = NULL, $a4 = NULL) {
   if($node->webform & variable_get("mc_og_forms_contact_nid",MC_OG_FORMS_CONTACT_NID_DEFAULT) == $node->nid){
     switch($op){
       case 'presave':
@@ -26,6 +26,9 @@ function mc_og_forms_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
         }
       case 'load';
         if(isset($node->webform) && !empty($node->og_groups)){
+          $gnid = key($node->og_groups_both);
+          $gname = $node->og_groups_both[$gnid];
+
           $webform = &$node->webform;
           $email = &$webform['emails'][1];
           $email = array(
@@ -33,8 +36,8 @@ function mc_og_forms_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
             'eid' => 1,
             'email' => 'someone@test.com',
             'subject' => 'Email Subject',
-            'from_name' => 'GROUP NAME',
-            'from_address' => 'test',
+            'from_name' => $gname,
+            'from_address' => 'support@woven.org',
             'template' => 'default',
             'excluded_components' => array(),
             'html' => '',

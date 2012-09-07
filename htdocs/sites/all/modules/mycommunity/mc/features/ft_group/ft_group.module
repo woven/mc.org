@@ -334,6 +334,7 @@ function follow_group($group){
 
   db_query("INSERT into og_uid (nid, og_role, is_active, is_admin, uid) VALUES (".$group.", 0, 1, 0, ".$user->uid.")");
   // Autmatically subscribe the user to all notifications
+
   $tid = db_result(db_query("SELECT tid FROM {og_forum_reference} WHERE nid = %d", $group));
   db_query("INSERT INTO {femail_ext_user_subscription} (uid, tid, setting) VALUES (%d, %d, %d)", $user->uid, $tid, 0);
   // End of Automatically...
