@@ -162,3 +162,11 @@ function mc_update_6018(){
 function mc_update_6019(){
     module_enable(array('mc_search_core',true));
 }
+
+
+/**
+ * enable mc_site
+ */
+function mc_update_6020(){
+  module_enable(array('mc_site',true));
+}
