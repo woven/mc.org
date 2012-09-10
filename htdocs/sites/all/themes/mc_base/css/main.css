@@ -271,7 +271,6 @@ a .ico-small {
 
 .block-overlay .block-signup {
 	padding: 30px;
-	width: 616px;
 	color: #666666;
 }
 
@@ -304,8 +303,7 @@ a .ico-small {
 }
 
 .block-overlay .block-signup form .form-item {
-	margin: 5px 0;
-	width: 280px;
+
 }
 
 .block-overlay .block-signup form a,
