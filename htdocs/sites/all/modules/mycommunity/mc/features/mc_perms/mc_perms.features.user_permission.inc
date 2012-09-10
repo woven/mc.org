@@ -137,7 +137,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'act as a member for any group',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
@@ -146,7 +145,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'act as a visitor for any group',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
@@ -155,7 +153,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'act as an admin for any group',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
@@ -164,7 +161,6 @@ function mc_perms_user_default_permissions() {
     'name' => 'act as the manager for any group',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
     ),
   );
 
