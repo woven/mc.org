@@ -1,0 +1,14 @@
+diff --git a/quicktabs.module b/quicktabs.module
+old mode 100755
+new mode 100644
+index 5f24480..07f59cc
+--- a/quicktabs.module
++++ b/quicktabs.module
+@@ -687,6 +687,7 @@ function quicktabs_render_tabpage($tab, $hide_empty = FALSE) {
+  * Helper function to determine active tab from the url.
+  */
+ function _quicktabs_get_active_tab($quicktabs) {
++  reset($quicktabs['tabs']);
+   $active_tab = isset($quicktabs['default_tab']) && $quicktabs['default_tab'] !== false ? $quicktabs['default_tab'] : key($quicktabs['tabs']);
+   $active_tab = isset($_GET['quicktabs_'. $quicktabs['machine_name']]) ? $_GET['quicktabs_'. $quicktabs['machine_name']] : $active_tab;
+   if (isset($active_tab) && isset($quicktabs['tabs'][$active_tab])) {

@@ -12,7 +12,7 @@ function mt_account_quicktabs_default_quicktabs() {
   $quicktabs->machine_name = 'mt_userprofile';
   $quicktabs->ajax = 0;
   $quicktabs->hide_empty_tabs = 1;
-  $quicktabs->default_tab = FALSE;
+  $quicktabs->default_tab = 0;
   $quicktabs->title = 'User Information';
   $quicktabs->tabs = array(
     0 => array(
