@@ -286,6 +286,8 @@ function _mc_api_get_user_name($user){
  * @return array
  */
 function _mc_api_save_facebook_user_image($picture_path, $filename = ''){
+  global $user;
+
   if (!function_exists('mime_content_type')) { 
    function mime_content_type($f) { 
        $f = escapeshellarg($f); 
