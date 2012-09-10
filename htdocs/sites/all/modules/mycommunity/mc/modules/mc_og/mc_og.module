@@ -250,10 +250,67 @@ function mc_og_follow_group_js(){
 }
 
 function mc_og_menu(){
+  $items = array();
   $items['mc/group/follow/js'] = array(
     'title' => 'Javascript Follow Group',
     'page callback' => 'mc_og_follow_group_js',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['admin/settings/mcwelcomemail'] = array(
+    'title' => 'MC Welcome Email',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_mc_og_welcome_email_form'),
+    'access arguments' => array('administer organic groups'),
+  );
+  return $items;
+}
+
+function _mc_og_welcome_email_form(&$form_state) {
+  $form = array();
+  $form['mc_welcome_email_discussions_enabled'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Welcome Email for Groups with Discussions Enabled'),
+    '#default_value' => variable_get('mc_welcome_email_discussions_enabled', _mc_og_welcome_email_default_text(TRUE)),
+    '#required' => TRUE,
+    '#rows' => '15',
+  );
+
+  $form['mc_welcome_email_discussions_disabled'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Welcome Email for Groups with Discussions Disabled'),
+    '#default_value' => variable_get('mc_welcome_email_discussions_disabled', _mc_og_welcome_email_default_text(FALSE)),
+    '#required' => TRUE,
+    '#rows' => '10',
+  );
+  $form = system_settings_form($form);
+//  unset($form['#submit']);
+//  $form['#submit'] = array('_mc_disclaimer_admin_settings_submit');
+  return $form;
+}
+
+function _mc_og_welcome_email_default_text($discussions_enabled = false){
+  $first_part = "Hi there,
+
+Thanks for following [large_name] on [site_name]!";
+
+  $second_part = "
+
+Please note: You're automatically set to receive emails when there is new activity in our group's discussion forum, but you can always change this.
+
+You can find options for your account at [user_profile], and learn more about our discussion forum at [group_discussion].";
+  $third_part = "
+
+Please contact us through our group page at [group_address] with any questions.
+
+See you around!
+
+-- [large_name]";
+  if($discussions_enabled){
+    $result = $first_part . $second_part . $third_part;
+  }
+  else{
+    $result = $first_part . $third_part;
+  }
+  return $result;
 }

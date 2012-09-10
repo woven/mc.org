@@ -161,32 +161,7 @@ function mc_femail_ext_form_alter(&$form, &$form_state, $form_id){
     else {
       $form['field_small_name']['0']['#description']="A short name to be used for generating the friendly urls and email for this group. Be careful choosing this name, it cannot be changed later.";
     }
-    //If the admin has not modified the welcome email, the system hast to use the default one.
-    if (empty($form['field_welcome_email']['0']['#default_value']['value']) || !isset($form['field_welcome_email']['0']['#default_value']['value'])){
-      $form['field_welcome_email']['0']['#default_value']['value'] = check_markup("Hi there,
-
-Thanks for following [large_name] on [site_name]!
-
-By following us, you're demonstrating your support for our vital work.  You also get access to a variety of ways to participate and even contribute!
-
-You can now add your comments to anything we post, and you can even use the Add Stuff menu to post your own articles, videos and other content in support of our group.  Get involved!
-
-You're now also eligible to participate in our group's discussion forum.  We've tried to make it real easy for you to participate however you prefer -- via the website or email.
-
-Website: Visit [group_discussion] to browse and post topics. Be sure you're signed in to the website.
-
-Email:  Email [email_group] to start a new topic, or just reply to existing topics from your inbox. Be sure you're sending from an email address associated with your account.
-
-Please note: You're automatically set to receive emails when there is new activity in the discussion forum, but you can always change this.  You can find options for your account at [user_profile].
-
-Please contact [small_name] through our group page at [group_address] with any questions, and don't hesitate to let us know how this works for you.
-
-See you around!
-
---The [small_name] team");
-      
-      
-    }
+ 
     //Discussions are on by default when a new group is created.  
     if ($_GET['q'] == 'node/add/group'){
       $form['field_enable_discussions']['#default_value']['0']['value'] = 1;
