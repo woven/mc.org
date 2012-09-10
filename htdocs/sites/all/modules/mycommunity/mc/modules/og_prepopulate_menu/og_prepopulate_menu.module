@@ -2,86 +2,102 @@
 
 define("MC_OG_MENU_DEFAULT",'og_posts');
 
-define("MC_OG_MENU", array(
-  'home' => array(
-    'title' => 'Latest',
-    'link' => 'node/!nid'
-  ),
-  'about' => array(
-    'title' => 'About',
-    'view' => MC_OG_MENU_DEFAULT,
-    'display_id' => 'page_1',
-    'link' => 'node/!nid/about'
-  ),
-  'latest' => array(
-    'title' => 'Latest',
-    'view' => MC_OG_MENU_DEFAULT,
-    'display_id' => 'page_1',
-    'link' => 'node/!nid/latest'
-  ),
-  'events' => array(
-    'title' => "Events",
-    'view' => MC_OG_MENU_DEFAULT,
-    'display_id' => 'page_4',
-    'link' => 'node/!nid/events'
-  ),
-  'articles' => array(
-    'title' => "Events",
-    'view' => MC_OG_MENU_DEFAULT,
-    'display_id' => 'page_5',
-    'link' => 'node/!nid/articles'
-  ),
-  'files' => array(
-    'title' => "Events",
-    'view' => MC_OG_MENU_DEFAULT,
-    'display_id' => 'page_6',
-    'link' => 'node/!nid/files'
-  ),
-  'photos' => array(
-    'title' => "Photos",
-    'view' => MC_OG_MENU_DEFAULT,
-    'display_id' => 'page_7',
-    'link' => 'node/!nid/photos'
-  ),
-  'videos' => array(
-    'title' => "Video",
-    'view' => MC_OG_MENU_DEFAULT,
-    'display_id' => 'page_8',
-    'link' => 'node/!nid/videos'
-  ),
-  'contact' => array(
-    'title' => "Contact",
-    'link' => 'node/!nid/videos'
-  )
-));
+function _mc_og_menu_items(){
+  array(
+    'home' => array(
+      'title' => 'Latest',
+      'link' => 'node/!nid'
+    ),
+    'about' => array(
+      'title' => 'About',
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_1',
+      'link' => 'node/!nid/about',
+      'is_menu_item' => TRUE
+    ),
+    'latest' => array(
+      'title' => 'Latest',
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_1',
+      'link' => 'node/!nid/latest',
+      'is_menu_item' => TRUE
+    ),
+    'events' => array(
+      'title' => "Events",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_4',
+      'link' => 'node/!nid/events',
+      'is_menu_item' => TRUE
+    ),
+    'articles' => array(
+      'title' => "Events",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_5',
+      'link' => 'node/!nid/articles',
+      'is_menu_item' => TRUE
+    ),
+    'files' => array(
+      'title' => "Events",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_6',
+      'link' => 'node/!nid/files',
+      'is_menu_item' => TRUE
+    ),
+    'photos' => array(
+      'title' => "Photos",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_7',
+      'link' => 'node/!nid/photos',
+      'is_menu_item' => TRUE
+    ),
+    'discussions' => array(
+      'title' => "Discussions",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_8',
+      'link' => 'node/!nid/discussions',
+      'is_menu_item' => TRUE
+    ),
+    'videos' => array(
+      'title' => "Video",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_8',
+      'link' => 'node/!nid/videos',
+      'is_menu_item' => TRUE
+    ),
+    'contact' => array(
+      'title' => "Contact",
+      'link' => 'node/!nid/videos'
+    )
+  );
+}
 
 function og_prepopulate_menu_menu(){
   $items = array();
 
-  $menuitems = array(
-    'latest' => 'page_1',
-    'events' => 'page_4',
-    'articles' => 'page_5',
-    'files' => 'page_6',
-    'photos' => 'page_7',
-    'videos' => 'page_8'
-  );
-
-  foreach($menuitems as $key => $item){
-    $view = $item['view'];
-    $display = $item['display_id'];
-    $items['node/%node/'.$key] = array(
-      'page callback' => '_mc_load_view_page',
-      'page arguments' => array(1,$display),
-      'access arguments' => array('access content'),
-      'type' => MENU_CALLBACK,
-    );
+  foreach(_mc_og_menu_items() as $key => $item){
+    if($item['is_menu_item']){
+      $view = $item['view'];
+      $display = $item['display_id'];
+      $path = t($item['link'],array('!nid' => '%node'));
+      $items[$path] = array(
+        'page callback' => '_mc_load_view_page',
+        'page arguments' => array(1,$item),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+      );
+    }
   }
 
   return $items;
 }
 
-function _mc_load_view_page($node,$display){
+/**
+ * mc_og_menu page callback
+ * @param $node current og node
+ * @param $item menu item from _mc_og_menu_items()
+ * @return bool|void
+ */
+function _mc_load_view_page($node,$item){
 
   if(og_is_group_type($node->type)){
     //return 'assa';
@@ -377,7 +393,7 @@ function old_webformcreate(){
 /**
  * Implementation of hook_nodeapi
  */
-function og_prepopulate_menu_nodeapi(&$node, $op){
+function _og_prepopulate_menu_nodeapi(&$node, $op){
   if ($node->type == group){
     if ($op == 'insert' || $op == 'update'){
       // verify menu
