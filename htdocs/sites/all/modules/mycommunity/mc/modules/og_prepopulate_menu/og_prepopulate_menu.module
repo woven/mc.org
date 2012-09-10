@@ -1,5 +1,59 @@
 <?php
 
+define("MC_OG_MENU_DEFAULT",'og_posts');
+
+define("MC_OG_MENU", array(
+  'home' => array(
+    'title' => 'Latest',
+    'link' => 'node/!nid'
+  ),
+  'about' => array(
+    'title' => 'About',
+    'view' => MC_OG_MENU_DEFAULT,
+    'display_id' => 'page_1',
+    'link' => 'node/!nid/about'
+  ),
+  'latest' => array(
+    'title' => 'Latest',
+    'view' => MC_OG_MENU_DEFAULT,
+    'display_id' => 'page_1',
+    'link' => 'node/!nid/latest'
+  ),
+  'events' => array(
+    'title' => "Events",
+    'view' => MC_OG_MENU_DEFAULT,
+    'display_id' => 'page_4',
+    'link' => 'node/!nid/events'
+  ),
+  'articles' => array(
+    'title' => "Events",
+    'view' => MC_OG_MENU_DEFAULT,
+    'display_id' => 'page_5',
+    'link' => 'node/!nid/articles'
+  ),
+  'files' => array(
+    'title' => "Events",
+    'view' => MC_OG_MENU_DEFAULT,
+    'display_id' => 'page_6',
+    'link' => 'node/!nid/files'
+  ),
+  'photos' => array(
+    'title' => "Photos",
+    'view' => MC_OG_MENU_DEFAULT,
+    'display_id' => 'page_7',
+    'link' => 'node/!nid/photos'
+  ),
+  'videos' => array(
+    'title' => "Video",
+    'view' => MC_OG_MENU_DEFAULT,
+    'display_id' => 'page_8',
+    'link' => 'node/!nid/videos'
+  ),
+  'contact' => array(
+    'title' => "Contact",
+    'link' => 'node/!nid/videos'
+  )
+));
 
 function og_prepopulate_menu_menu(){
   $items = array();
@@ -13,7 +67,9 @@ function og_prepopulate_menu_menu(){
     'videos' => 'page_8'
   );
 
-  foreach($menuitems as $key => $display){
+  foreach($menuitems as $key => $item){
+    $view = $item['view'];
+    $display = $item['display_id'];
     $items['node/%node/'.$key] = array(
       'page callback' => '_mc_load_view_page',
       'page arguments' => array(1,$display),
