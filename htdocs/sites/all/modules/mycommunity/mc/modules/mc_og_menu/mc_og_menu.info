@@ -1,0 +1,7 @@
+name = MC OG Menu
+description = left side menu pages and links that appears in group pages/nodes, Home/latest/about
+dependencies[] = og
+dependencies[] = mc_og_forms
+package = "Organic groups"
+core = 6.x
+version = "6.x-1.0"

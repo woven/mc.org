@@ -5,13 +5,13 @@ define("MC_OG_MENU_DEFAULT",'og_posts');
 function _mc_og_menu_items(){
   return array(
     'home' => array(
-      'title' => 'Latest',
+      'title' => 'Home',
       'link' => 'node/!nid'
     ),
     'about' => array(
       'title' => 'About',
-      'view' => MC_OG_MENU_DEFAULT,
-      'display_id' => 'page_1',
+      //'view' => MC_OG_MENU_DEFAULT,
+      //'display_id' => 'page_1',
       'link' => 'node/!nid/about',
       'is_menu_item' => TRUE
     ),
@@ -66,12 +66,68 @@ function _mc_og_menu_items(){
     ),
     'contact' => array(
       'title' => "Contact",
-      'link' => 'node/!nid/videos'
+      'link' => 'node/!nid/contact'
     )
   );
 }
 
-function og_prepopulate_menu_menu(){
+/*
+ * hook_block
+ * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_block/6
+*/
+function mc_og_menu_block($op = 'list', $delta = 0, $edit = array()){
+  switch($op){
+    case 'list':
+    $blocks = array();
+    $blocks[0] = array(
+      'info' => "MC OG Menu",
+      'cache' => BLOCK_NO_CACHE,
+    );
+
+    return $blocks;
+    break;
+    case 'view':
+      switch ($delta) {
+        case 0:
+          $block = array(
+            'subject' => '',//t('MC OG Menu'),
+            'content' => _mc_og_menu_block(),
+          );
+          break;
+        break;
+      }
+
+      return $block;
+    break;
+  }
+}
+
+function _mc_og_menu_block(){
+  $og = og_get_group_context();
+  $links = array();
+
+  if(!empty($og)){
+    $nid = $og->nid;
+    $og_menu = _mc_og_menu_items();
+
+    foreach($og_menu as $og_item){
+      $link = &$links[];
+      $link['title'] = $og_item['title'];
+      $link['href'] = t($og_item['link'],array('!nid' => $nid));
+    }
+
+    return theme('links',$links,array('class' => 'menu mc-og-menu'));
+  }
+
+  return '';
+}
+
+/**
+ * hook_menu
+ * @return array
+ * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_menu/6
+ */
+function mc_og_menu_menu(){
   $items = array();
 
   $menu_list = _mc_og_menu_items();
@@ -108,17 +164,4 @@ function _mc_load_view_page($node,$item){
   }
 
   return drupal_not_found();
-}
-
-function _og_prepopulate_menu_create_custom_menu($node){
-  $menu_name = 'menu-og-' . $node->nid;
-  $sql = "SELECT COUNT(*) FROM {menu_custom} WHERE menu_name = '%s'";
-  if (db_result(db_query($sql, $menu_name))){
-    // already created
-    return;
-  }
-  $title = t('GROUP') . ' - ' . $node->title;
-  $description = t('Menu created automatically for group: ' . $node->title);
-  $sql = "INSERT INTO {menu_custom} (menu_name, title, description) VALUES ('%s', '%s', '%s')";
-  db_query($sql, $menu_name, $title, $description);
 }

@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * disable og_menu module, no longer needed
+ */
+function mc_og_menu_update_6001(){
+	module_disable(array("og_menu"),true);
+}
