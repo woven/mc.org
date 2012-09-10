@@ -1,6 +1,6 @@
 <?php
 
-define("MC_OG_MENU_DEFAULT",'og_posts');
+define("MC_OG_MENU_DEFAULT",'og_menu_pages ');
 
 function _mc_og_menu_items(){
   return array(

@@ -31,8 +31,8 @@ function ft_group_ui_context_default_contexts() {
           'region' => 'group_logo',
           'weight' => 0,
         ),
-        'og_menu-0' => array(
-          'module' => 'og_menu',
+        'mc_og_menu-0' => array(
+          'module' => 'mc_og_menu',
           'delta' => 0,
           'region' => 'left',
           'weight' => 0,
@@ -102,8 +102,8 @@ function ft_group_ui_context_default_contexts() {
           'region' => 'group_logo',
           'weight' => 0,
         ),
-        'og_menu-0' => array(
-          'module' => 'og_menu',
+        'mc_og_menu-0' => array(
+          'module' => 'mc_og_menu',
           'delta' => 0,
           'region' => 'left',
           'weight' => 0,
