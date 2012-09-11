@@ -86,39 +86,29 @@ function ft_account_ui_default_box() {
   $box->title = '';
   $box->description = 'Join Overlay Box';
   $box->options = array(
-    'body' => '<?php
-    global $user;
-    $sitename = variable_get("site_name","My Community");
-    $sitename_the = preg_replace(\'/^the /i\', \'\', $sitename);
-    if (!$user->uid) : ?>
-<div style="display: none;">
-      <div id="register" class="block block-overlay" >
+    'body' => '      <div id="register" class="block block-overlay" >
         <div class="block-content">
-    
           <div class="block block-signup clear-block">
-            <h1>Join the <?php echo $sitename_the; ?> community!</h1>
-<p>Once you\'ve joined, you can enjoy the full benefits of our community. Get involved!</p>
-
+			<p>Once you\'ve joined, you can enjoy the full benefits of our community. Get involved!</p>
             <div class="why">
               <ul>
-<li>Add stuff like articles, videos and more</li>
-<li>Follow groups and join discussions</li>
-<li>Get notifications and stay connected</li>
-<li>Interact with others in our community</li>
-<li>We\'re adding new things all the time!</li>
+					<li>Add stuff like articles, videos and more</li>
+					<li>Follow groups and join discussions</li>
+					<li>Get notifications and stay connected</li>
+					<li>Interact with others in our community</li>
+					<li>We\'re adding new things all the time!</li>
               </ul>
-            </div>
+            </div> <!-- /why -->
+            
             <div class="user-register">
               <?php
                 print drupal_get_form(\'user_register\');
               ?>
-            </div>
-    
-          </div>
-        </div>
-      </div>
-      </div>
-  <?php endif; ?>',
+            </div> <!-- /user-register -->
+            
+          </div> <!-- /.block-sign up -->
+        </div> <!-- /.block-content -->
+      </div> <!-- /@register -->',
     'format' => '3',
   );
   $export['join_overlay_box'] = $box;

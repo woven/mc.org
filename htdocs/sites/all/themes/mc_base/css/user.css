@@ -1,0 +1,4 @@
+/* hide the page title at user register pages */
+body.not-logged-in.page-user h1.page-title{
+
+}
