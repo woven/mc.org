@@ -128,14 +128,6 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
     $form['#submit'][]="mc_redirect_when_session_variable_set";
   }
 
-  if($form['form_id']['#value']=='forum_node_form'){
-    $form['field_list_image']['#access']=false;
-  }
-
-  if($form['form_id']['#value']=='file_node_form'){
-    $form['field_upload_file']['0']['#required']=true;
-  }
-
   if ($form['#id'] == 'node-form') {
     unset($form['revision_information']);
     unset($form['options']['promote']);

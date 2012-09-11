@@ -3,6 +3,21 @@
 include_once('ft_discussion.features.inc');
 
 
+function ft_discussion_late_form_alter(&$form, &$form_state, $form_id){
+  if(!is_ct_form($form,'forum')){
+    return;
+  }
+
+  /* hide image field if it exists
+   * @todo why not simply delete the field from the content type?
+   */
+  if($form['field_list_image']){
+    $form['field_list_image']['#access'] = false;
+  }
+
+}
+
+
 function _ft_discussion_box_theme(&$title, &$content, &$region = 'main') {
 	if($title=='Subscriptions'){
     $title="<h1 class='title'>Email Notifications</h1>";
