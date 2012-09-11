@@ -687,12 +687,20 @@ function quicktabs_render_tabpage($tab, $hide_empty = FALSE) {
  * Helper function to determine active tab from the url.
  */
 function _quicktabs_get_active_tab($quicktabs) {
-  reset($quicktabs['tabs']);
-  $active_tab = isset($quicktabs['default_tab']) && $quicktabs['default_tab'] !== false ? $quicktabs['default_tab'] : key($quicktabs['tabs']);
-  $active_tab = isset($_GET['quicktabs_'. $quicktabs['machine_name']]) ? $_GET['quicktabs_'. $quicktabs['machine_name']] : $active_tab;
-  if (isset($active_tab) && isset($quicktabs['tabs'][$active_tab])) {
-    return $active_tab;
+  //check on the default tab if set,and tab exists, simply return that tab id
+  $qtdefault = $quicktabs['default_tab'];
+  $qtdefault = isset($_GET['quicktabs_'. $quicktabs['machine_name']]) ? $_GET['quicktabs_'. $quicktabs['machine_name']] : $qtdefault;
+  if(isset($qtdefault) && $qtdefault !== false && isset($quicktabs['tabs'][$qtdefault])){
+    return $qtdefault;
   }
+
+  //default tab does not exist or default tab was invalid, loop through all tabs, through the first one that does exist or not null
+  foreach($quicktabs['tabs'] as $qtabid => $qt){
+    if(!is_null($qt)){
+      return $qtabid;
+    }
+  }
+
   return NULL;
 }
 
