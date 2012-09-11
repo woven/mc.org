@@ -765,7 +765,7 @@ function ft_landing_contexts_context_default_contexts() {
     ),
     'node' => array(
       'values' => array(
-        'page_general' => 'page_general',
+        'page' => 'page',
       ),
       'options' => array(
         'node_form' => '0',

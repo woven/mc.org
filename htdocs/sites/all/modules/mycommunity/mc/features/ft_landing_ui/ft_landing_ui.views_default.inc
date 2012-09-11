@@ -2961,7 +2961,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
         'file' => 'file',
         'npage' => 'npage',
         'link' => 'link',
-        'page_general' => 'page_general',
+        'page' => 'page',
         'webform' => 'webform',
       ),
       'group' => '0',

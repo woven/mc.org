@@ -6,7 +6,7 @@
 function ft_page_general_ds_default_settings() {
   $data = array(
     'nd' => array(
-      'page_general' => array(
+      'page' => array(
         'full' => array(
           'fields' => array(
             'body' => array(

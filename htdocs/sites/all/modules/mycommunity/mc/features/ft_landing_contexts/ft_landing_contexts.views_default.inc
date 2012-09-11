@@ -419,7 +419,7 @@ function ft_landing_contexts_views_default_views() {
     'type' => array(
       'operator' => 'in',
       'value' => array(
-        'page_general' => 'page_general',
+        'page' => 'page',
       ),
       'group' => '0',
       'exposed' => FALSE,

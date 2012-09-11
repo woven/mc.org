@@ -443,7 +443,6 @@ dsm($object);
         'group' => 'group',
         'link' => 'link',
         'news' => 'news',
-        'page' => 'page',
         'place' => 'place',
         'simplenews' => 'simplenews',
         'video' => 'video',
