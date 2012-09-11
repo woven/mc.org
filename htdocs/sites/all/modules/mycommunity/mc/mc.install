@@ -149,9 +149,24 @@ function mc_update_6017(){
     variable_set('formfilter',array());
 }
 
-  /**
-   * Clear variable 'pathauto_node_pattern'
-   */
-  function mc_update_6018(){
+/**
+ * Clear variable 'pathauto_node_pattern'
+*/
+function mc_update_6018(){
     variable_set('pathauto_node_pattern','');
-  }
+}
+
+/**
+ * enable mc_search_core
+*/
+function mc_update_6019(){
+    module_enable(array('mc_search_core',true));
+}
+
+
+/**
+ * enable mc_site
+ */
+function mc_update_6020(){
+  module_enable(array('mc_site',true));
+}

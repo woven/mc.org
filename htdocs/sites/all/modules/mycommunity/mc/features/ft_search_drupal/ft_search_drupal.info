@@ -1,5 +1,0 @@
-name = "Feature Search Drupal"
-description = "Contains all the hooks for the Drupal Search Functionality"
-core = 6.x
-dependencies[] = "search"
-dependencies[] = "ft_search_drupal_ui"

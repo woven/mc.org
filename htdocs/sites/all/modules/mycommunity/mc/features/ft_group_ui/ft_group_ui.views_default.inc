@@ -3793,7 +3793,7 @@ og_set_group_context($node);
     ),
   ));
   $handler->override_option('arguments', array(
-    'null' => array(
+    'group_nid' => array(
       'default_action' => 'ignore',
       'style_plugin' => 'default_summary',
       'style_options' => array(),
@@ -3803,158 +3803,68 @@ og_set_group_context($node);
       'breadcrumb' => '',
       'default_argument_type' => 'fixed',
       'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
-      'must_not_be' => 0,
-      'id' => 'null',
-      'table' => 'views',
-      'field' => 'null',
+      'validate_type' => 'og_group_types',
+      'validate_fail' => 'empty',
+      'break_phrase' => 0,
+      'not' => 0,
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
         2 => 0,
-        4 => 0,
         3 => 0,
+        4 => 0,
+        5 => 0,
       ),
       'override' => array(
         'button' => 'Use default',
       ),
       'relationship' => 'none',
       'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
       'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
+      'default_argument_fixed' => '',
       'default_argument_php' => '',
       'validate_argument_node_type' => array(
-        'blog' => 0,
-        'image' => 0,
-        'forum' => 0,
         'article' => 0,
         'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
         'event' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
-        'front_picture' => 0,
         'group' => 0,
-        'healthcare_facility' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'place_to_exercise' => 0,
-        'place_to_get_food' => 0,
-        'place_to_get_online' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
+        'nnews' => 0,
+        'webform' => 0,
+        'npage' => 0,
+        'page_general' => 0,
+        'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
         'video' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        5 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-    ),
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'php',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        4 => 0,
-        5 => 0,
-        3 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);  
-  return $nid;
-}',
-      'validate_argument_node_type' => array(
-        'image' => 0,
         'gallery' => 0,
         'gallery_image' => 0,
-        'article' => 0,
-        'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
-        'event' => 0,
-        'feature_spot' => 0,
-        'feedapi_node' => 0,
-        'file' => 0,
-        'front_picture' => 0,
-        'group' => 0,
-        'healthcare_facility' => 0,
-        'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
-        'video' => 0,
-        'webform' => 0,
+        'forum' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
         1 => 0,
         2 => 0,
-        7 => 0,
-        5 => 0,
-        6 => 0,
         3 => 0,
       ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
       'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
+      'validate_argument_is_member' => '0',
       'validate_argument_group_node_type' => array(
-        'group' => 0,
+        'group' => 'group',
       ),
       'validate_argument_php' => '',
     ),
@@ -5003,6 +4913,1580 @@ return false;',
 
   $views[$view->name] = $view;
 
+  // Exported view: og_menu_pages
+  $view = new view;
+  $view->name = 'og_menu_pages';
+  $view->description = 'og_menu pages like latest/articles/vidoes etc..';
+  $view->tag = 'og';
+  $view->base_table = 'node';
+  $view->core = 6;
+  $view->api_version = '2';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+  $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->override_option('relationships', array(
+    'group_nid' => array(
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
+      'label' => 'Group',
+      'required' => 1,
+      'relationship' => 'none',
+    ),
+    'field_place_nid' => array(
+      'label' => 'Place',
+      'required' => 0,
+      'delta' => -1,
+      'id' => 'field_place_nid',
+      'table' => 'node_data_field_place',
+      'field' => 'field_place_nid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('fields', array(
+    'nid' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_node' => 0,
+      'exclude' => 1,
+      'id' => 'nid',
+      'table' => 'node',
+      'field' => 'nid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'field_gallery_image_fid_1' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'label_type' => 'none',
+      'format' => 'medium_linked_mcdefaultimg',
+      'multiple' => array(
+        'group' => TRUE,
+        'multiple_number' => '',
+        'multiple_from' => '',
+        'multiple_reversed' => FALSE,
+      ),
+      'exclude' => 1,
+      'id' => 'field_gallery_image_fid_1',
+      'table' => 'node_data_field_gallery_image',
+      'field' => 'field_gallery_image_fid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'field_list_image_fid_1' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'label_type' => 'none',
+      'format' => 'medium_linked_mcdefaultimg',
+      'multiple' => array(
+        'group' => 1,
+        'multiple_number' => '1',
+        'multiple_from' => '',
+        'multiple_reversed' => 0,
+      ),
+      'exclude' => 1,
+      'id' => 'field_list_image_fid_1',
+      'table' => 'node_data_field_list_image',
+      'field' => 'field_list_image_fid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'phpcode' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php 
+print theme("feature_badge",$data->nid, 2);
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'nothing' => array(
+      'label' => '',
+      'alter' => array(
+        'text' => '[field_list_image_fid_1][field_gallery_image_fid_1][phpcode]',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'exclude' => 0,
+      'id' => 'nothing',
+      'table' => 'views',
+      'field' => 'nothing',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'type' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_node' => 0,
+      'machine_name' => 0,
+      'exclude' => 1,
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'tid' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 1,
+        'text' => 'in <a class="term-[tid-tid]" href="/latest/all/[tid-tid]">[tid]</a>',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'type' => 'separator',
+      'separator' => ', ',
+      'link_to_taxonomy' => 0,
+      'limit' => 1,
+      'vids' => array(
+        2 => 2,
+        1 => 0,
+        7 => 0,
+        5 => 0,
+        6 => 0,
+        3 => 0,
+      ),
+      'exclude' => 1,
+      'id' => 'tid',
+      'table' => 'term_node',
+      'field' => 'tid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'phpcode_3' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'value' => '<?php 
+print theme_ghh_node_categories($data->nid); 
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_3',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'relationship' => 'none',
+    ),
+    'nothing_2' => array(
+      'label' => '',
+      'alter' => array(
+        'text' => '[type] [phpcode_3]',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'exclude' => 0,
+      'id' => 'nothing_2',
+      'table' => 'views',
+      'field' => 'nothing',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'title' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_node' => 1,
+      'spaces' => array(
+        'type' => NULL,
+        'frontpage' => FALSE,
+      ),
+      'exclude' => 0,
+      'id' => 'title',
+      'table' => 'node',
+      'field' => 'title',
+      'relationship' => 'none',
+    ),
+    'unix_event_start' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'date_format' => 'small',
+      'custom_date_format' => '',
+      'exclude' => 1,
+      'id' => 'unix_event_start',
+      'table' => 'event',
+      'field' => 'unix_event_start',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'unix_event_end' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'date_format' => 'small',
+      'custom_date_format' => '',
+      'exclude' => 1,
+      'id' => 'unix_event_end',
+      'table' => 'event',
+      'field' => 'unix_event_end',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'has_end_date' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'type' => 'yes-no',
+      'not' => 0,
+      'exclude' => 1,
+      'id' => 'has_end_date',
+      'table' => 'event',
+      'field' => 'has_end_date',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'has_time' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'type' => 'yes-no',
+      'not' => 0,
+      'exclude' => 1,
+      'id' => 'has_time',
+      'table' => 'event',
+      'field' => 'has_time',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'phpcode_1' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'value' => '<?php 
+  if ($data->event_unix_event_start){
+    print theme_mc_event_date($data->event_unix_event_start, $data->event_unix_event_end, $data->event_has_end_date, $data->event_has_time);
+  }
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_1',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'title_1' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 1,
+        'max_length' => '50',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'link_to_node' => 1,
+      'spaces' => array(
+        'type' => NULL,
+        'frontpage' => FALSE,
+      ),
+      'exclude' => 1,
+      'id' => 'title_1',
+      'table' => 'node',
+      'field' => 'title',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'field_place_nid',
+    ),
+    'title_2' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 1,
+        'text' => 'at [title_1]',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'link_to_node' => 0,
+      'spaces' => array(
+        'type' => NULL,
+        'frontpage' => FALSE,
+      ),
+      'exclude' => 1,
+      'id' => 'title_2',
+      'table' => 'node',
+      'field' => 'title',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'field_place_nid',
+    ),
+    'nothing_3' => array(
+      'label' => '',
+      'alter' => array(
+        'text' => '[phpcode_1] [title_2]',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'exclude' => 0,
+      'id' => 'nothing_3',
+      'table' => 'views',
+      'field' => 'nothing',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'body' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 1,
+        'max_length' => '150',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 1,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'exclude' => 0,
+      'id' => 'body',
+      'table' => 'node_revisions',
+      'field' => 'body',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'picture' => array(
+      'label' => 'Picture',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'imagecache_preset' => 'header_mini_avatar',
+      'exclude' => 1,
+      'id' => 'picture',
+      'table' => 'users',
+      'field' => 'picture',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'name' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_user' => 1,
+      'overwrite_anonymous' => 0,
+      'anonymous_text' => '',
+      'exclude' => 1,
+      'id' => 'name',
+      'table' => 'users',
+      'field' => 'name',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+    'created' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'date_format' => 'custom',
+      'custom_date_format' => 'F jS, Y',
+      'exclude' => 1,
+      'id' => 'created',
+      'table' => 'node',
+      'field' => 'created',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+    'phpcode_2' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'value' => '<?php 
+print theme_ghh_post_date($data->node_created);
+print \' \';
+print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_og_ancestry_nid, $data->node_og_ancestry_title, $data->users_picture);
+?>',
+      'exclude' => 0,
+      'id' => 'phpcode_2',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('sorts', array(
+    'created' => array(
+      'order' => 'DESC',
+      'granularity' => 'second',
+      'id' => 'created',
+      'table' => 'node',
+      'field' => 'created',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('arguments', array(
+    'group_nid' => array(
+      'default_action' => 'default',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '',
+      'breadcrumb' => '',
+      'default_argument_type' => 'og_group_node',
+      'default_argument' => '',
+      'validate_type' => 'og_group_types',
+      'validate_fail' => 'empty',
+      'break_phrase' => 0,
+      'not' => 0,
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        2 => 0,
+        3 => 0,
+        4 => 0,
+        5 => 0,
+      ),
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
+      'default_argument_user' => 0,
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'webform' => 0,
+        'npage' => 0,
+        'page_general' => 0,
+        'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
+      'validate_argument_type' => 'tid',
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'validate_argument_is_member' => '0',
+      'validate_argument_group_node_type' => array(
+        'group' => 'group',
+      ),
+      'validate_argument_php' => '',
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => 0,
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'relationship' => 'field_group_featured_items_nid',
+      'expose_button' => array(
+        'button' => 'Expose',
+      ),
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'gallery_image' => 'gallery_image',
+        'forum' => 'forum',
+        'article' => 'article',
+        'audio' => 'audio',
+        'event' => 'event',
+        'file' => 'file',
+        'place' => 'place',
+        'video' => 'video',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+  ));
+  $handler->override_option('access', array(
+    'type' => 'none',
+    'role' => array(),
+    'perm' => '',
+  ));
+  $handler->override_option('cache', array(
+    'type' => 'none',
+  ));
+  $handler->override_option('title', 'Group Posts');
+  $handler->override_option('empty_format', '1');
+  $handler->override_option('use_ajax', TRUE);
+  $handler->override_option('items_per_page', 4);
+  $handler->override_option('use_pager', '0');
+  $handler->override_option('use_more', 0);
+  $handler->override_option('use_more_always', 0);
+  $handler->override_option('use_more_text', 'See All');
+  $handler->override_option('distinct', 0);
+  $handler->override_option('style_plugin', 'semanticviews_default');
+  $handler->override_option('style_options', array(
+    'grouping' => '',
+    'group' => array(
+      'element_type' => 'h3',
+      'class' => 'title',
+    ),
+    'list' => array(
+      'element_type' => '',
+      'class' => '',
+    ),
+    'row' => array(
+      'element_type' => 'div',
+      'class' => '',
+      'last_every_nth' => '0',
+      'first_class' => 'first',
+      'last_class' => 'last',
+      'striping_classes' => 'odd even',
+    ),
+  ));
+  $handler->override_option('row_plugin', 'semanticviews_fields');
+  $handler->override_option('row_options', array(
+    'semantic_html' => array(
+      'nothing' => array(
+        'element_type' => 'div',
+        'class' => 'field-view-image',
+      ),
+      'nothing_2' => array(
+        'element_type' => 'div',
+        'class' => 'field-nodeinfo',
+      ),
+      'title' => array(
+        'element_type' => 'h5',
+        'class' => '',
+      ),
+      'nothing_3' => array(
+        'element_type' => 'p',
+        'class' => 'location-link',
+      ),
+      'body' => array(
+        'element_type' => 'div',
+        'class' => 'field-body',
+      ),
+      'phpcode_2' => array(
+        'element_type' => 'div',
+        'class' => 'field-author',
+      ),
+    ),
+    'skip_blank' => 0,
+  ));
+  $handler = $view->new_display('page', 'Latest Page', 'page_1');
+  $handler->override_option('title', 'Latest Stuff');
+  $handler->override_option('empty', 'This group is not sharing any content with you.');
+  $handler->override_option('empty_format', '2');
+  $handler->override_option('items_per_page', 10);
+  $handler->override_option('use_pager', '1');
+  $handler->override_option('path', 'groups/%/latest');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler = $view->new_display('page', 'Most Popular Page', 'page_2');
+  $handler->override_option('sorts', array(
+    'totalcount' => array(
+      'order' => 'DESC',
+      'id' => 'totalcount',
+      'table' => 'node_counter',
+      'field' => 'totalcount',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('title', 'Most Popular Posts');
+  $handler->override_option('items_per_page', 10);
+  $handler->override_option('use_pager', '1');
+  $handler->override_option('path', 'groups/%/most-popular');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler = $view->new_display('page', 'Events Page', 'page_4');
+  $handler->override_option('sorts', array(
+    'unix_event_start' => array(
+      'order' => 'DESC',
+      'granularity' => 'second',
+      'id' => 'unix_event_start',
+      'table' => 'event',
+      'field' => 'unix_event_start',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+    'created' => array(
+      'order' => 'DESC',
+      'granularity' => 'second',
+      'id' => 'created',
+      'table' => 'node',
+      'field' => 'created',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'status' => array(
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'operator' => '=',
+      'value' => 1,
+      'group' => 0,
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'relationship' => 'none',
+      'expose_button' => array(
+        'button' => 'Expose',
+      ),
+    ),
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'event' => 'event',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('title', 'Events');
+  $handler->override_option('empty', 'This group is not sharing any events with you.');
+  $handler->override_option('empty_format', '2');
+  $handler->override_option('items_per_page', 10);
+  $handler->override_option('use_pager', '1');
+  $handler->override_option('path', 'groups/%/events');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler = $view->new_display('page', 'Articles Page', 'page_5');
+  $handler->override_option('filters', array(
+    'status' => array(
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'operator' => '=',
+      'value' => 1,
+      'group' => 0,
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'relationship' => 'none',
+      'expose_button' => array(
+        'button' => 'Expose',
+      ),
+    ),
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'article' => 'article',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('title', 'Articles');
+  $handler->override_option('empty', 'This group is not sharing any articles with you.');
+  $handler->override_option('empty_format', '2');
+  $handler->override_option('items_per_page', 10);
+  $handler->override_option('use_pager', '1');
+  $handler->override_option('path', 'groups/%/articles');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler = $view->new_display('page', 'Files Page', 'page_6');
+  $handler->override_option('filters', array(
+    'status' => array(
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'operator' => '=',
+      'value' => 1,
+      'group' => 0,
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'relationship' => 'none',
+      'expose_button' => array(
+        'button' => 'Expose',
+      ),
+    ),
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'file' => 'file',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('title', 'Files');
+  $handler->override_option('empty', 'This group is not sharing any files with you.');
+  $handler->override_option('empty_format', '2');
+  $handler->override_option('items_per_page', 10);
+  $handler->override_option('use_pager', '1');
+  $handler->override_option('path', 'groups/%/files');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler = $view->new_display('page', 'Photos Page', 'page_7');
+  $handler->override_option('fields', array(
+    'nid' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_node' => 0,
+      'spaces' => array(
+        'type' => NULL,
+        'frontpage' => FALSE,
+      ),
+      'exclude' => 1,
+      'id' => 'nid',
+      'table' => 'node',
+      'field' => 'nid',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+    'field_gallery_image_fid' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'label_type' => 'none',
+      'format' => 'photo_gallery_thumbnail_linked_mcdefaultimg',
+      'multiple' => array(
+        'group' => TRUE,
+        'multiple_number' => '',
+        'multiple_from' => '',
+        'multiple_reversed' => FALSE,
+      ),
+      'exclude' => 0,
+      'id' => 'field_gallery_image_fid',
+      'table' => 'node_data_field_gallery_image',
+      'field' => 'field_gallery_image_fid',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+    'title' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_node' => 1,
+      'spaces' => array(
+        'type' => NULL,
+        'frontpage' => FALSE,
+      ),
+      'exclude' => 0,
+      'id' => 'title',
+      'table' => 'node',
+      'field' => 'title',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'status' => array(
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'operator' => '=',
+      'value' => 1,
+      'group' => 0,
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'relationship' => 'none',
+      'expose_button' => array(
+        'button' => 'Expose',
+      ),
+    ),
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'gallery' => 'gallery',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('title', 'Photos');
+  $handler->override_option('header', '<?php
+$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
+$nid = db_result(db_query($sql, arg(1)));
+$node = node_load($nid);
+?>
+<?php //drupal_set_message("<pre>".print_r($node, true)."</pre>test"); ?>
+
+Check out photos from <?php echo $node->title; ?>.  Please choose an album.');
+  $handler->override_option('header_format', '3');
+  $handler->override_option('header_empty', 0);
+  $handler->override_option('empty', 'This group is not sharing any photos with you.');
+  $handler->override_option('empty_format', '2');
+  $handler->override_option('items_per_page', 12);
+  $handler->override_option('use_pager', '1');
+  $handler->override_option('style_plugin', 'grid');
+  $handler->override_option('style_options', array(
+    'grouping' => '',
+    'columns' => '3',
+    'alignment' => 'horizontal',
+    'fill_single_line' => 1,
+  ));
+  $handler->override_option('row_options', array(
+    'semantic_html' => array(
+      'field_gallery_image_fid' => array(
+        'element_type' => 'div',
+        'class' => '',
+      ),
+      'title' => array(
+        'element_type' => 'div',
+        'class' => 'gallery-title',
+      ),
+    ),
+    'skip_blank' => 0,
+  ));
+  $handler->override_option('path', 'groups/%/photos');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler = $view->new_display('page', 'Videos Page', 'page_8');
+  $handler->override_option('filters', array(
+    'status' => array(
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'operator' => '=',
+      'value' => 1,
+      'group' => 0,
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'relationship' => 'none',
+      'expose_button' => array(
+        'button' => 'Expose',
+      ),
+    ),
+    'type' => array(
+      'operator' => 'in',
+      'value' => array(
+        'video' => 'video',
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'type',
+      'table' => 'node',
+      'field' => 'type',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('title', 'Videos');
+  $handler->override_option('empty', 'This group is not sharing any videos with you.');
+  $handler->override_option('empty_format', '2');
+  $handler->override_option('items_per_page', 10);
+  $handler->override_option('use_pager', '1');
+  $handler->override_option('path', 'groups/%/videos');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+
+  $views[$view->name] = $view;
+
   // Exported view: og_posts
   $view = new view;
   $view->name = 'og_posts';
@@ -5875,7 +7359,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'breadcrumb' => '',
       'default_argument_type' => 'og_group_node',
       'default_argument' => '',
-      'validate_type' => 'none',
+      'validate_type' => 'og_group_types',
       'validate_fail' => 'not found',
       'break_phrase' => 0,
       'not' => 0,
@@ -5885,66 +7369,57 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
         2 => 0,
+        3 => 0,
         4 => 0,
         5 => 0,
-        3 => 0,
       ),
       'relationship' => 'none',
       'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
       'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => 'return arg(1);',
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
       'validate_argument_node_type' => array(
-        'image' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
         'article' => 0,
         'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
         'event' => 0,
-        'feature_spot' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
-        'front_picture' => 0,
         'group' => 0,
-        'healthcare_facility' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
-        'video' => 0,
+        'nnews' => 0,
         'webform' => 0,
+        'npage' => 0,
+        'page_general' => 0,
+        'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
         1 => 0,
         2 => 0,
-        7 => 0,
-        5 => 0,
-        6 => 0,
         3 => 0,
       ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
       'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
+      'validate_argument_is_member' => '0',
       'validate_argument_group_node_type' => array(
-        'group' => 0,
+        'group' => 'group',
       ),
       'validate_argument_php' => '',
-      'override' => array(
-        'button' => 'Override',
-      ),
     ),
   ));
   $handler->override_option('filters', array(
@@ -6740,88 +8215,6 @@ print theme_ghh_authoring_info($data->node_node_data_field_group_featured_items_
         'button' => 'Use default',
       ),
       'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'node',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        4 => 0,
-        5 => 0,
-        3 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '',
-      'validate_argument_node_type' => array(
-        'image' => 0,
-        'article' => 0,
-        'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
-        'event' => 0,
-        'feature_spot' => 0,
-        'feedapi_node' => 0,
-        'file' => 0,
-        'front_picture' => 0,
-        'group' => 0,
-        'healthcare_facility' => 0,
-        'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'photo' => 0,
-        'photo_gallery' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
-        'video' => 0,
-        'webform' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        5 => 0,
-        6 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
     ),
   ));
   $handler->override_option('filters', array(
@@ -8350,717 +9743,6 @@ $date = strtotime($node->event[\'start\']);
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
-  $handler = $view->new_display('page', 'Latest Page', 'page_1');
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => 'Latest Stuff ',
-      'breadcrumb' => '',
-      'default_argument_type' => 'og_group_node',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'empty',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        3 => 0,
-        4 => 0,
-        5 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);
-  return $nid;
-}',
-      'validate_argument_node_type' => array(
-        'group' => 'group',
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'webform' => 0,
-        'npage' => 0,
-        'page_general' => 0,
-        'place' => 0,
-        'taxonomy_feature' => 0,
-        'taxonomy_topic' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => 'if($argument > 0){
-$node = node_load($argument);
-if(og_is_group_type($node->type)){
- og_set_group_context($node,true);
-  return true;
-}
-}
-return false;
-}
-',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-    ),
-  ));
-  $handler->override_option('title', 'Latest Stuff');
-  $handler->override_option('empty', 'This group is not sharing any content with you.');
-  $handler->override_option('empty_format', '2');
-  $handler->override_option('items_per_page', 10);
-  $handler->override_option('use_pager', '1');
-  $handler->override_option('path', 'groups/%/latest');
-  $handler->override_option('menu', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler = $view->new_display('page', 'Most Popular Page', 'page_2');
-  $handler->override_option('sorts', array(
-    'totalcount' => array(
-      'order' => 'DESC',
-      'id' => 'totalcount',
-      'table' => 'node_counter',
-      'field' => 'totalcount',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'og_group_node',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        3 => 0,
-        4 => 0,
-        5 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  return $nid;
-}',
-      'validate_argument_node_type' => array(
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'webform' => 0,
-        'npage' => 0,
-        'page_general' => 0,
-        'place' => 0,
-        'taxonomy_feature' => 0,
-        'taxonomy_topic' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-    ),
-  ));
-  $handler->override_option('title', 'Most Popular Posts');
-  $handler->override_option('items_per_page', 10);
-  $handler->override_option('use_pager', '1');
-  $handler->override_option('path', 'groups/%/most-popular');
-  $handler->override_option('menu', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler = $view->new_display('page', 'Events Page', 'page_4');
-  $handler->override_option('sorts', array(
-    'unix_event_start' => array(
-      'order' => 'DESC',
-      'granularity' => 'second',
-      'id' => 'unix_event_start',
-      'table' => 'event',
-      'field' => 'unix_event_start',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-    'created' => array(
-      'order' => 'DESC',
-      'granularity' => 'second',
-      'id' => 'created',
-      'table' => 'node',
-      'field' => 'created',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'og_group_node',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        3 => 0,
-        4 => 0,
-        5 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);
-  return $nid;
-}',
-      'validate_argument_node_type' => array(
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'webform' => 0,
-        'npage' => 0,
-        'page_general' => 0,
-        'place' => 0,
-        'taxonomy_feature' => 0,
-        'taxonomy_topic' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-    ),
-  ));
-  $handler->override_option('filters', array(
-    'status' => array(
-      'id' => 'status',
-      'table' => 'node',
-      'field' => 'status',
-      'operator' => '=',
-      'value' => 1,
-      'group' => 0,
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'relationship' => 'none',
-      'expose_button' => array(
-        'button' => 'Expose',
-      ),
-    ),
-    'type' => array(
-      'operator' => 'in',
-      'value' => array(
-        'event' => 'event',
-      ),
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'id' => 'type',
-      'table' => 'node',
-      'field' => 'type',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('title', 'Events');
-  $handler->override_option('empty', 'This group is not sharing any events with you.');
-  $handler->override_option('empty_format', '2');
-  $handler->override_option('items_per_page', 10);
-  $handler->override_option('use_pager', '1');
-  $handler->override_option('path', 'groups/%/events');
-  $handler->override_option('menu', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler = $view->new_display('page', 'Articles Page', 'page_5');
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'og_group_node',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'empty',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        3 => 0,
-        4 => 0,
-        5 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);
-  return $nid;
-}',
-      'validate_argument_node_type' => array(
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'webform' => 0,
-        'npage' => 0,
-        'page_general' => 0,
-        'place' => 0,
-        'taxonomy_feature' => 0,
-        'taxonomy_topic' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-    ),
-  ));
-  $handler->override_option('filters', array(
-    'status' => array(
-      'id' => 'status',
-      'table' => 'node',
-      'field' => 'status',
-      'operator' => '=',
-      'value' => 1,
-      'group' => 0,
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'relationship' => 'none',
-      'expose_button' => array(
-        'button' => 'Expose',
-      ),
-    ),
-    'type' => array(
-      'operator' => 'in',
-      'value' => array(
-        'article' => 'article',
-      ),
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'id' => 'type',
-      'table' => 'node',
-      'field' => 'type',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('title', 'Articles');
-  $handler->override_option('empty', 'This group is not sharing any articles with you.');
-  $handler->override_option('empty_format', '2');
-  $handler->override_option('items_per_page', 10);
-  $handler->override_option('use_pager', '1');
-  $handler->override_option('path', 'groups/%/articles');
-  $handler->override_option('menu', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler = $view->new_display('page', 'Files Page', 'page_6');
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'og_group_node',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'empty',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        3 => 0,
-        4 => 0,
-        5 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);
-  return $nid;
-}',
-      'validate_argument_node_type' => array(
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'webform' => 0,
-        'npage' => 0,
-        'page_general' => 0,
-        'place' => 0,
-        'taxonomy_feature' => 0,
-        'taxonomy_topic' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-    ),
-  ));
-  $handler->override_option('filters', array(
-    'status' => array(
-      'id' => 'status',
-      'table' => 'node',
-      'field' => 'status',
-      'operator' => '=',
-      'value' => 1,
-      'group' => 0,
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'relationship' => 'none',
-      'expose_button' => array(
-        'button' => 'Expose',
-      ),
-    ),
-    'type' => array(
-      'operator' => 'in',
-      'value' => array(
-        'file' => 'file',
-      ),
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'id' => 'type',
-      'table' => 'node',
-      'field' => 'type',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('title', 'Files');
-  $handler->override_option('empty', 'This group is not sharing any files with you.');
-  $handler->override_option('empty_format', '2');
-  $handler->override_option('items_per_page', 10);
-  $handler->override_option('use_pager', '1');
-  $handler->override_option('path', 'groups/%/files');
-  $handler->override_option('menu', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
   $handler = $view->new_display('page', 'Photos Page', 'page_7');
   $handler->override_option('relationships', array());
   $handler->override_option('fields', array(
@@ -9183,96 +9865,6 @@ if (is_numeric($nid)){
       ),
     ),
   ));
-  $handler->override_option('arguments', array(
-    'group_nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'og_group_node',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'empty',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'group_nid',
-      'table' => 'og_ancestry',
-      'field' => 'group_nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        3 => 0,
-        4 => 0,
-        5 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);
-  return $nid;
-}',
-      'validate_argument_node_type' => array(
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'webform' => 0,
-        'npage' => 0,
-        'page_general' => 0,
-        'place' => 0,
-        'taxonomy_feature' => 0,
-        'taxonomy_topic' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-    ),
-  ));
   $handler->override_option('filters', array(
     'status' => array(
       'id' => 'status',
@@ -9347,155 +9939,6 @@ Check out photos from <?php echo $node->title; ?>.  Please choose an album.');
     'skip_blank' => 0,
   ));
   $handler->override_option('path', 'groups/%/photos');
-  $handler->override_option('menu', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
-    'name' => 'navigation',
-  ));
-  $handler = $view->new_display('page', 'Videos Page', 'page_8');
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'og_group_node',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'empty',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        3 => 0,
-        4 => 0,
-        5 => 0,
-      ),
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'group_nid',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);
-  return $nid;
-}',
-      'validate_argument_node_type' => array(
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'webform' => 0,
-        'npage' => 0,
-        'page_general' => 0,
-        'place' => 0,
-        'taxonomy_feature' => 0,
-        'taxonomy_topic' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-        2 => 0,
-        3 => 0,
-      ),
-    ),
-  ));
-  $handler->override_option('filters', array(
-    'status' => array(
-      'id' => 'status',
-      'table' => 'node',
-      'field' => 'status',
-      'operator' => '=',
-      'value' => 1,
-      'group' => 0,
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'relationship' => 'none',
-      'expose_button' => array(
-        'button' => 'Expose',
-      ),
-    ),
-    'type' => array(
-      'operator' => 'in',
-      'value' => array(
-        'video' => 'video',
-      ),
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'id' => 'type',
-      'table' => 'node',
-      'field' => 'type',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('title', 'Videos');
-  $handler->override_option('empty', 'This group is not sharing any videos with you.');
-  $handler->override_option('empty_format', '2');
-  $handler->override_option('items_per_page', 10);
-  $handler->override_option('use_pager', '1');
-  $handler->override_option('path', 'groups/%/videos');
   $handler->override_option('menu', array(
     'type' => 'none',
     'title' => '',
@@ -9901,85 +10344,6 @@ if (is_numeric($nid)){
         'button' => 'Use default',
       ),
       'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('arguments', array(
-    'group_nid' => array(
-      'default_action' => 'default',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'php',
-      'default_argument' => '',
-      'validate_type' => 'og_group_types',
-      'validate_fail' => 'not found',
-      'break_phrase' => 0,
-      'not' => 0,
-      'id' => 'group_nid',
-      'table' => 'og_ancestry',
-      'field' => 'group_nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        4 => 0,
-        5 => 0,
-        3 => 0,
-      ),
-      'relationship' => 'none',
-      'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
-      'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => 'return arg(1);',
-      'validate_argument_node_type' => array(
-        'image' => 0,
-        'forum' => 0,
-        'article' => 0,
-        'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
-        'event' => 0,
-        'feedapi_node' => 0,
-        'file' => 0,
-        'front_picture' => 0,
-        'group' => 0,
-        'healthcare_facility' => 0,
-        'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
-        'video' => 0,
-        'webform' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-        2 => 0,
-        5 => 0,
-        3 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => 'OG_VIEWS_VALIDATE_GROUP_ADMIN',
-      'validate_argument_group_node_type' => array(
-        'group' => 'group',
-      ),
-      'validate_argument_php' => '',
-      'override' => array(
-        'button' => 'Use default',
-      ),
     ),
   ));
   $handler->override_option('filters', array(

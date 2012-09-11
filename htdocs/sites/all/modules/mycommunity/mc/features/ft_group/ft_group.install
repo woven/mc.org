@@ -34,3 +34,18 @@ function ft_group_update_6014(){
   content_field_instance_delete('field_upload_file', 'article',TRUE);
   content_field_instance_delete('field_upload_file', 'event',TRUE);
 }
+
+/**
+ * enable mc_og_menu
+ */
+function ft_group_update_6015(){
+  module_enable(array('mc_og_menu'),true);
+}
+
+
+/**
+ * enable extended path aliases
+ */
+function ft_group_update_6016(){
+  module_enable(array('path_alias_xt'),true);
+}

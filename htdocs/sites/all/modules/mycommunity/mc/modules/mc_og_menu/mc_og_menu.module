@@ -1,0 +1,167 @@
+<?php
+
+define("MC_OG_MENU_DEFAULT",'og_menu_pages');
+
+function _mc_og_menu_items(){
+  return array(
+    'home' => array(
+      'title' => 'Home',
+      'link' => 'node/!nid'
+    ),
+    'about' => array(
+      'title' => 'About',
+      'view' => "og_details",
+      'display_id' => 'page_1',
+      'link' => 'node/!nid/about',
+      'is_menu_item' => TRUE
+    ),
+    'latest' => array(
+      'title' => 'Latest',
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_1',
+      'link' => 'node/!nid/latest',
+      'is_menu_item' => TRUE
+    ),
+    'events' => array(
+      'title' => "Events",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_4',
+      'link' => 'node/!nid/events',
+      'is_menu_item' => TRUE
+    ),
+    'articles' => array(
+      'title' => "Articles",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_5',
+      'link' => 'node/!nid/articles',
+      'is_menu_item' => TRUE
+    ),
+    'files' => array(
+      'title' => "Files",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_6',
+      'link' => 'node/!nid/files',
+      'is_menu_item' => TRUE
+    ),
+    'photos' => array(
+      'title' => "Photos",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_7',
+      'link' => 'node/!nid/photos',
+      'is_menu_item' => TRUE
+    ),
+    'discussions' => array(
+      'title' => "Discussions",
+      'view' => 'discussions',
+      'display_id' => 'page_1',
+      'link' => 'node/!nid/discussions',
+      'is_menu_item' => TRUE
+    ),
+    'videos' => array(
+      'title' => "Videos",
+      'view' => MC_OG_MENU_DEFAULT,
+      'display_id' => 'page_8',
+      'link' => 'node/!nid/videos',
+      'is_menu_item' => TRUE
+    ),
+    'contact' => array(
+      'title' => "Contact",
+      'link' => 'node/!nid/contact'
+    )
+  );
+}
+
+/*
+ * hook_block
+ * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_block/6
+*/
+function mc_og_menu_block($op = 'list', $delta = 0, $edit = array()){
+  switch($op){
+    case 'list':
+    $blocks = array();
+    $blocks[0] = array(
+      'info' => "MC OG Menu",
+      'cache' => BLOCK_NO_CACHE,
+    );
+
+    return $blocks;
+    break;
+    case 'view':
+      switch ($delta) {
+        case 0:
+          $block = array(
+            'subject' => '',//t('MC OG Menu'),
+            'content' => _mc_og_menu_block(),
+          );
+          break;
+        break;
+      }
+
+      return $block;
+    break;
+  }
+}
+
+function _mc_og_menu_block(){
+  $og = og_get_group_context();
+  $links = array();
+
+  if(!empty($og)){
+    $nid = $og->nid;
+    $og_menu = _mc_og_menu_items();
+
+    foreach($og_menu as $og_item){
+      $link = &$links[];
+      $link['title'] = $og_item['title'];
+      $link['href'] = t($og_item['link'],array('!nid' => $nid));
+    }
+
+    return theme('links',$links,array('class' => 'menu mc-og-menu'));
+  }
+
+  return '';
+}
+
+/**
+ * hook_menu
+ * @return array
+ * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_menu/6
+ */
+function mc_og_menu_menu(){
+  $items = array();
+
+  $menu_list = _mc_og_menu_items();
+  foreach($menu_list as $key => $item){
+    if($item['is_menu_item']){
+      $view = $item['view'];
+      $display = $item['display_id'];
+      $path = t($item['link'],array('!nid' => '%node'));
+      $items[$path] = array(
+        'title' => $item['title'],
+        'page callback' => '_mc_load_view_page',
+        'page arguments' => array(1,$item),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+      );
+    }
+  }
+
+  return $items;
+}
+
+/**
+ * mc_og_menu page callback
+ * @param $node current og node
+ * @param $item menu item from _mc_og_menu_items()
+ * @return bool|void
+ */
+function _mc_load_view_page($node,$item){
+  $view = $item['view'];
+  $display = $item['display_id'];
+
+  if(og_is_group_type($node->type)){
+    return views_embed_view($view,$display);
+  }
+
+  return drupal_not_found();
+}
