@@ -159,6 +159,11 @@ function _mc_load_view_page($node,$item){
   $view = $item['view'];
   $display = $item['display_id'];
 
+  dsm($node,'node');
+  dsm($item,'item');
+
+  return "I'm here";
+
   if(og_is_group_type($node->type)){
     return views_embed_view($view,$display);
   }

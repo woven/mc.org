@@ -41,3 +41,11 @@ function ft_group_update_6014(){
 function ft_group_update_6015(){
   module_enable(array('mc_og_menu'),true);
 }
+
+
+/**
+ * enable extended path aliases
+ */
+function ft_group_update_6016(){
+  module_enable(array('path_alias_xt'),true);
+}
