@@ -359,6 +359,23 @@ function ft_landing_slideshow_views_default_views() {
       ),
       'relationship' => 'none',
     ),
+    'nid' => array(
+      'operator' => '=',
+      'value' => '',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'nid',
+      'table' => 'node_access',
+      'field' => 'nid',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
   ));
   $handler->override_option('access', array(
     'type' => 'none',
@@ -428,7 +445,7 @@ function ft_landing_slideshow_views_default_views() {
   $handler = $view->new_display('block', 'Featured Groups - Groups', 'block_1');
   $handler->override_option('relationships', array(
     'field_featured_groups_nid' => array(
-      'label' => 'Groups',
+      'label' => 'Featured',
       'required' => 1,
       'delta' => '-1',
       'id' => 'field_featured_groups_nid',
@@ -656,9 +673,26 @@ function ft_landing_slideshow_views_default_views() {
       'table' => 'node',
       'field' => 'status',
       'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'nid' => array(
+      'operator' => '=',
+      'value' => '',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'nid',
+      'table' => 'node_access',
+      'field' => 'nid',
+      'relationship' => 'field_featured_groups_nid',
+      'override' => array(
         'button' => 'Use default',
       ),
-      'relationship' => 'field_featured_groups_nid',
     ),
   ));
   $handler->override_option('style_plugin', 'semanticviews_default');
@@ -1139,6 +1173,42 @@ print theme_ghh_node_categories($data->node_node_data_field_featured_items_nid);
       'table' => 'node_data_field_featured_items',
       'field' => 'delta',
       'relationship' => 'none',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'nid' => array(
+      'operator' => '=',
+      'value' => '',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'nid',
+      'table' => 'node_access',
+      'field' => 'nid',
+      'relationship' => 'field_featured_items_nid',
       'override' => array(
         'button' => 'Use default',
       ),
@@ -1694,9 +1764,26 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
       'table' => 'node',
       'field' => 'status',
       'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'nid' => array(
+      'operator' => '=',
+      'value' => '',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'nid',
+      'table' => 'node_access',
+      'field' => 'nid',
+      'relationship' => 'field_featured_events_nid',
+      'override' => array(
         'button' => 'Use default',
       ),
-      'relationship' => 'field_featured_events_nid',
     ),
   ));
   $handler->override_option('style_plugin', 'semanticviews_default');
@@ -1927,6 +2014,42 @@ print theme("feature_badge",$data->node_node_data_field_featured_events_nid, 2);
         'button' => 'Use default',
       ),
       'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'nid' => array(
+      'operator' => '=',
+      'value' => '',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'nid',
+      'table' => 'node_access',
+      'field' => 'nid',
+      'relationship' => 'field_featured_places_nid',
+      'override' => array(
+        'button' => 'Use default',
+      ),
     ),
   ));
   $handler->override_option('style_plugin', 'semanticviews_default');
@@ -2214,6 +2337,42 @@ print theme_ghh_node_categories($data->node_node_data_field_featured_audio_video
         'button' => 'Use default',
       ),
       'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('filters', array(
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'nid' => array(
+      'operator' => '=',
+      'value' => '',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'nid',
+      'table' => 'node_access',
+      'field' => 'nid',
+      'relationship' => 'field_featured_audio_video_items_nid',
+      'override' => array(
+        'button' => 'Use default',
+      ),
     ),
   ));
   $handler->override_option('style_plugin', 'semanticviews_default');
