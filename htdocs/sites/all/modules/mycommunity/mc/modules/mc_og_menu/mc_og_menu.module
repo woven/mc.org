@@ -1,6 +1,6 @@
 <?php
 
-define("MC_OG_MENU_DEFAULT",'og_menu_pages ');
+define("MC_OG_MENU_DEFAULT",'og_menu_pages');
 
 function _mc_og_menu_items(){
   return array(
@@ -158,11 +158,6 @@ function mc_og_menu_menu(){
 function _mc_load_view_page($node,$item){
   $view = $item['view'];
   $display = $item['display_id'];
-
-  dsm($node,'node');
-  dsm($item,'item');
-
-  return "I'm here";
 
   if(og_is_group_type($node->type)){
     return views_embed_view($view,$display);
