@@ -20,7 +20,7 @@ function mc_addstuff_update_1(){
     'forum' => '-7',
     'audio' => '-6',
     'video' => '-5',
-    'page_general' => '-4',
+    'page' => '-4',
   );
 
   foreach($types as $name => $weight){
