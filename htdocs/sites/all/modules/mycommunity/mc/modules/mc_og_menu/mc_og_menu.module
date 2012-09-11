@@ -52,8 +52,8 @@ function _mc_og_menu_items(){
     ),
     'discussions' => array(
       'title' => "Discussions",
-      'view' => MC_OG_MENU_DEFAULT,
-      'display_id' => 'page_8',
+      'view' => 'discussions',
+      'display_id' => 'page_1',
       'link' => 'node/!nid/discussions',
       'is_menu_item' => TRUE
     ),
