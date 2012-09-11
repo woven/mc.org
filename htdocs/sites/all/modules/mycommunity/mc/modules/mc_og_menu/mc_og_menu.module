@@ -13,60 +13,77 @@ function _mc_og_menu_items(){
       'view' => "og_details",
       'display_id' => 'page_1',
       'link' => 'node/!nid/about',
-      'is_menu_item' => TRUE
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
     ),
     'latest' => array(
       'title' => 'Latest',
       'view' => MC_OG_MENU_DEFAULT,
       'display_id' => 'page_1',
       'link' => 'node/!nid/latest',
-      'is_menu_item' => TRUE
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
     ),
     'events' => array(
       'title' => "Events",
       'view' => MC_OG_MENU_DEFAULT,
       'display_id' => 'page_4',
       'link' => 'node/!nid/events',
-      'is_menu_item' => TRUE
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
     ),
     'articles' => array(
       'title' => "Articles",
       'view' => MC_OG_MENU_DEFAULT,
       'display_id' => 'page_5',
       'link' => 'node/!nid/articles',
-      'is_menu_item' => TRUE
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
     ),
     'files' => array(
       'title' => "Files",
       'view' => MC_OG_MENU_DEFAULT,
       'display_id' => 'page_6',
       'link' => 'node/!nid/files',
-      'is_menu_item' => TRUE
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
     ),
     'photos' => array(
       'title' => "Photos",
       'view' => MC_OG_MENU_DEFAULT,
       'display_id' => 'page_7',
       'link' => 'node/!nid/photos',
-      'is_menu_item' => TRUE
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
     ),
     'discussions' => array(
       'title' => "Discussions",
       'view' => 'discussions',
       'display_id' => 'page_1',
       'link' => 'node/!nid/discussions',
-      'is_menu_item' => TRUE
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
+    ),
+    'discussions/top' => array(
+      'title' => "Discussions",
+      'view' => 'discussions',
+      'display_id' => 'page_2',
+      'link' => 'node/!nid/discussions/top',
+      'is_menu_item' => TRUE,
+      'show_block' => FALSE,
     ),
     'videos' => array(
       'title' => "Videos",
       'view' => MC_OG_MENU_DEFAULT,
       'display_id' => 'page_8',
       'link' => 'node/!nid/videos',
-      'is_menu_item' => TRUE
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
     ),
     'contact' => array(
       'title' => "Contact",
-      'link' => 'node/!nid/contact'
+      'link' => 'node/!nid/contact',
+      'show_block' => TRUE,
     )
   );
 }
@@ -111,9 +128,11 @@ function _mc_og_menu_block(){
     $og_menu = _mc_og_menu_items();
 
     foreach($og_menu as $og_item){
-      $link = &$links[];
-      $link['title'] = $og_item['title'];
-      $link['href'] = t($og_item['link'],array('!nid' => $nid));
+      if($og_item['show_block']){
+        $link = &$links[];
+        $link['title'] = $og_item['title'];
+        $link['href'] = t($og_item['link'],array('!nid' => $nid));
+      }
     }
 
     return theme('links',$links,array('class' => 'menu mc-og-menu'));

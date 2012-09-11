@@ -15,7 +15,7 @@ function ft_page_general_ctools_plugin_api() {
  */
 function ft_page_general_node_info() {
   $items = array(
-    'page_general' => array(
+    'page' => array(
       'name' => t('Page'),
       'module' => 'features',
       'description' => '',
