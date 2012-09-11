@@ -47,29 +47,24 @@ function mc_addstuff_display_block_add_stuff(){
   $map = og_types_map();
   
   $rows = array();
-  
-  // get node types and sort them by name
-  $types = node_get_types();
-  usort($types, '_mc_addstuff_sort_by_name');
+
   
   // if in a node page, load node
   $node = NULL;
   if (arg(0) == 'node' && is_numeric(arg(1))){
     $node = node_load(arg(1));
   }
-  
-  $add_stuff_types = array('article', 'event', 'gallery_image', 'gallery', 'audio', 'video', 'place', 'file', 'npage', 'group', 'forum','event_feed');
-  $add_stuff_types = array_keys(node_get_types('types'));
+
+  $types = array();
+  $result = db_query('SELECT * FROM node_type ORDER BY weight');
+  while ($row = db_fetch_object($result)) {
+    $types[] = $row;
+  }
   //dsm($add_stuff_types);
   //dsm(node_get_types('types'));
 
 
   foreach ($types as $type) {
-
-    if (!in_array($type->type, $add_stuff_types)){
-      continue;
-    }
-    
     $type_url_str = str_replace('_', '-', $type->type);
     $usage = variable_get('og_content_type_usage_'. $type->type, 'omitted');
     
@@ -223,3 +218,78 @@ function mc_addstuff_perm(){
   }
   return $perms;
 }
+
+function mc_addstuff_menu(){
+  $items = array();
+  $items['admin/settings/mcaddstuff'] = array(
+    'title' => 'MC Add Stuff Block',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_addstuff_order_form'),
+    'access arguments' => array('administer nodes'),
+  );
+  return $items;
+}
+
+function mc_addstuff_order_form(){
+  $form = array('#tree' => TRUE);
+  $types = node_get_types('types');
+  foreach($types as $type){
+    $weight = db_result(db_query("SELECT weight FROM node_type WHERE type='$type->type'"));
+    $form[$type->type] = array(
+      'name' => array('#value' => check_plain($type->name)),
+      'weight' => array('#type' => 'weight', '#delta' => 10, '#default_value' => $weight),
+      '#weight' => $weight,
+    );
+  }
+  if (count($types) > 1) {
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Save'));
+  }
+  elseif (isset($type)) {
+    unset($form[$type->type]['weight']);
+  }
+  return $form;
+}
+
+function theme_mc_addstuff_order_form($form) {
+  $rows = array();
+  foreach (element_children($form) as $key) {
+    if (isset($form[$key]['name'])) {
+      $type = &$form[$key];
+
+      $row = array();
+      $row[] = drupal_render($type['name']);
+      if (isset($type['weight'])) {
+        $type['weight']['#attributes']['class'] = 'mc_addstuff-weight';
+        $row[] = drupal_render($type['weight']);
+      }
+      $rows[] = array('data' => $row, 'class' => 'draggable');
+    }
+  }
+  if (empty($rows)) {
+    $rows[] = array(array('data' => t('No content types available.'), 'colspan' => '5'));
+  }
+
+  $header = array(t('Name'));
+  if (isset($form['submit'])) {
+    $header[] = t('Weight');
+    drupal_add_tabledrag('mc_addstuff', 'order', 'sibling', 'mc_addstuff-weight');
+  }
+  return theme('table', $header, $rows, array('id' => 'mc_addstuff')) . drupal_render($form);
+}
+
+function mc_addstuff_theme(){
+  return array(
+    'mc_addstuff_order_form' => array(
+      'arguments' => array('form' => array()),
+    ),
+  );
+}
+
+function mc_addstuff_order_form_submit($form, &$form_state) {
+  foreach ($form_state['values'] as $type_name => $attributes) {
+    if(is_array($attributes) && isset($attributes['weight'])){
+      db_query('UPDATE node_type SET weight='. $attributes['weight'] . " WHERE type='" . $type_name . "'");
+    }
+  }
+}
+
