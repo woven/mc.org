@@ -295,6 +295,7 @@ a .ico-small {
 .block-overlay .block-signup .why {
 	float: left;
 	width: 330px;
+    padding: 20px 0;
 	border-right: 1px solid #f0f0f0;
 }
 
@@ -2447,10 +2448,6 @@ a.ical-link {
 
 #main #register {
 	position: initial;
-}
-
-#main #register h1{
-	padding-bottom: 20px;
 }
 
 #main #register .block-signup {
