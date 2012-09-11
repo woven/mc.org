@@ -210,13 +210,6 @@ function ft_file_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'emvideo_twistage_playerprofile';
-  $strongarm->value = '';
-  $export['emvideo_twistage_playerprofile'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'enable_revisions_page_file';
   $strongarm->value = 1;
   $export['enable_revisions_page_file'] = $strongarm;
@@ -277,13 +270,6 @@ function ft_file_strongarm() {
   $strongarm->name = 'flag_content_node_type_file';
   $strongarm->value = 0;
   $export['flag_content_node_type_file'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'flowplayer3_mediaplayer_file';
-  $strongarm->value = 'flowplayer-3.0.7.swf';
-  $export['flowplayer3_mediaplayer_file'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -466,7 +452,7 @@ function ft_file_strongarm() {
     ),
     'body_field' => array(
       'region' => 'main',
-      'weight' => '2',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -521,14 +507,14 @@ function ft_file_strongarm() {
     ),
     'taxonomy' => array(
       'region' => 'main',
-      'weight' => '3',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
     ),
     'field_upload_file' => array(
       'region' => 'main',
-      'weight' => '4',
+      'weight' => '2',
       'has_required' => TRUE,
       'title' => 'File',
     ),
@@ -702,29 +688,9 @@ function ft_file_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_file';
-  $strongarm->value = '';
-  $export['og_max_groups_file'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'og_visibility_file';
   $strongarm->value = '0';
   $export['og_visibility_file'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'onepageprofile_weights';
-  $strongarm->value = array(
-    'account' => -10,
-    'Personal information' => -9,
-    'picture' => -8,
-    'theme_select' => -7,
-    'timezone' => -6,
-  );
-  $export['onepageprofile_weights'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -792,13 +758,6 @@ function ft_file_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'realname_profile_module';
-  $strongarm->value = 'profile';
-  $export['realname_profile_module'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'show_diff_inline_file';
   $strongarm->value = 0;
   $export['show_diff_inline_file'] = $strongarm;
@@ -854,13 +813,6 @@ function ft_file_strongarm() {
     5 => 'c_pub',
   );
   $export['subscriptions_workflow_file'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'swftools_grant_access_to_private_files';
-  $strongarm->value = 0;
-  $export['swftools_grant_access_to_private_files'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

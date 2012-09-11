@@ -242,28 +242,23 @@ if(!isset($object->field_list_image[0][\'fid\'])){
     'nodes_print_email' => array(
       'title' => 'Nodes Print and Email',
       'exclude' => array(
-        'image' => 'image',
-        'gallery' => 'gallery',
-        'gallery_image' => 'gallery_image',
-        'feature_spot' => 'feature_spot',
-        'front_picture' => 'front_picture',
         'group' => 'group',
         'webform' => 'webform',
+        'gallery' => 'gallery',
+        'gallery_image' => 'gallery_image',
         'article' => 0,
         'audio' => 0,
-        'embmedia' => 0,
-        'environmental_resource' => 0,
         'event' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
-        'healthcare_facility' => 0,
         'link' => 0,
-        'news' => 0,
+        'nnews' => 0,
+        'npage' => 0,
         'page' => 0,
         'place' => 0,
-        'simplenews' => 0,
-        'spirit_and_mind' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
         'video' => 0,
+        'forum' => 0,
       ),
       'type' => 5,
       'status' => 3,
@@ -271,12 +266,16 @@ if(!isset($object->field_list_image[0][\'fid\'])){
         'formatters' => array(
           'ds_eval_code' => 'Default',
         ),
-        'code' => '<?php print l(t(\'Print\'), \'print/\' . $object->nid, array(\'attributes\'=>array(\'class\' => \'button-like button-print\') ) ); ?>
-<?php 
-  $emailSubject = \'Found a great article in gethealthyharlem.org\'; 
-  $emailBody =  \'I just wanted to share with you a great article I found: \' . urlencode( url(\'node/\' . $object->nid, array(\'absolute\' => TRUE) ) );
+        'code' => '<?php
+global $user;
+global $base_url;
+$ctname = strtolower(node_get_types("name",$object));
+$node_url = urlencode( url(\'node/\' . $object->nid, array(\'absolute\' => TRUE)));
+$emailSubject = t(\'Found a great !ctname in !url\',array("!url"=> $base_url, \'!ctname\' => $ctname));
+$emailBody =  t(\'I just wanted to share with you a great !ctname I found: !node_url\',array("!ctname"=>$ctname,"!node_url" => $node_url))
 ?>
-<a class="button-like button-email" href="mailto: ?subject=<?php print $emailSubject; ?>&amp;body=<?php print $emailBody ?>">Email</a>',
+<?php print l(t(\'Print\'), \'print/\' . $object->nid, array(\'attributes\'=>array(\'class\' => \'button-like button-print\') ) ); ?>
+<a class="button-like button-email" target="_blank" href="mailto:?subject=<?php print $emailSubject; ?>&amp;body=<?php print $emailBody ?>">Email</a>',
         'token' => 0,
         'css-class' => 'field-print-email',
       ),

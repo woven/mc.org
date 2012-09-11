@@ -178,13 +178,6 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'emvideo_yahoomusic_event_handler';
-  $strongarm->value = '';
-  $export['emvideo_yahoomusic_event_handler'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'enable_revisions_page_event';
   $strongarm->value = 0;
   $export['enable_revisions_page_event'] = $strongarm;
@@ -431,19 +424,19 @@ function ft_event_strongarm() {
     ),
     'body_field' => array(
       'region' => 'main',
-      'weight' => '5',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
     ),
     'menu' => array(
       'region' => 'right',
-      'weight' => '2',
+      'weight' => '0',
       'hidden' => 0,
     ),
     'comment_settings' => array(
       'region' => 'right',
-      'weight' => '5',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Comment settings',
       'collapsed' => 1,
@@ -451,7 +444,7 @@ function ft_event_strongarm() {
     ),
     'path' => array(
       'region' => 'right',
-      'weight' => '6',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => 'URL path settings',
       'collapsed' => 1,
@@ -459,7 +452,7 @@ function ft_event_strongarm() {
     ),
     'options' => array(
       'region' => 'right',
-      'weight' => '4',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => 'Publishing options',
       'collapsed' => 1,
@@ -467,7 +460,7 @@ function ft_event_strongarm() {
     ),
     'author' => array(
       'region' => 'right',
-      'weight' => '3',
+      'weight' => '1',
       'has_required' => FALSE,
       'title' => 'Authoring information',
       'collapsed' => 1,
@@ -517,7 +510,7 @@ function ft_event_strongarm() {
     ),
     'taxonomy' => array(
       'region' => 'main',
-      'weight' => '3',
+      'weight' => '5',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -538,8 +531,8 @@ function ft_event_strongarm() {
       'hidden' => 0,
     ),
     'revision_information' => array(
-      'region' => 'main',
-      'weight' => '4',
+      'region' => 'right',
+      'weight' => '5',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -634,13 +627,6 @@ function ft_event_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'nodewords_filter_modules_output_event';
-  $strongarm->value = array();
-  $export['nodewords_filter_modules_output_event'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'nodewords_filter_regexp_event';
   $strongarm->value = '';
   $export['nodewords_filter_regexp_event'] = $strongarm;
@@ -709,20 +695,6 @@ function ft_event_strongarm() {
   $strongarm->name = 'og_content_type_usage_event';
   $strongarm->value = 'group_post_standard';
   $export['og_content_type_usage_event'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_event';
-  $strongarm->value = '';
-  $export['og_max_groups_event'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_event_feed';
-  $strongarm->value = '';
-  $export['og_max_groups_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

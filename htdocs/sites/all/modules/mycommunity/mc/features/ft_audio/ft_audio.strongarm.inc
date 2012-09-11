@@ -103,18 +103,17 @@ function ft_audio_strongarm() {
   $strongarm->name = 'content_extra_weights_audio';
   $strongarm->value = array(
     'title' => '4',
-    'body_field' => '6',
+    'body_field' => '5',
     'revision_information' => '10',
-    'author' => '11',
-    'options' => '12',
+    'author' => '12',
+    'options' => '13',
     'comment_settings' => '15',
     'menu' => '9',
     'taxonomy' => '2',
     'path' => '14',
     'og_nodeapi' => '3',
-    'path_redirect' => '30',
-    'print' => '13',
-    'nodewords' => '10',
+    'xmlsitemap' => '16',
+    'nodewords' => '11',
   );
   $export['content_extra_weights_audio'] = $strongarm;
 
