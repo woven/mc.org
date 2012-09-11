@@ -89,6 +89,7 @@ function ft_account_ui_default_box() {
     'body' => '      <div id="register" class="block block-overlay" >
         <div class="block-content">
           <div class="block block-signup clear-block">
+                <h1><?php echo theme("mc_page_register_title"); ?></h1>
 			<p>Once you\'ve joined, you can enjoy the full benefits of our community. Get involved!</p>
             <div class="why">
               <ul>
