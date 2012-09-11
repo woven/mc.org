@@ -541,7 +541,7 @@ print "Last reply was " . theme_ghh_post_date($data-> node_comment_statistics_la
   $handler->override_option('block_caching', -1);
   $handler = $view->new_display('page', 'Discussions: Page', 'page_1');
   $handler->override_option('arguments', array(
-    'nid' => array(
+    'group_nid' => array(
       'default_action' => 'default',
       'style_plugin' => 'default_summary',
       'style_options' => array(),
@@ -549,77 +549,68 @@ print "Last reply was " . theme_ghh_post_date($data-> node_comment_statistics_la
       'wildcard_substitution' => 'All',
       'title' => '',
       'breadcrumb' => '',
-      'default_argument_type' => 'php',
+      'default_argument_type' => 'og_group_node',
       'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
+      'validate_type' => 'og_group_types',
+      'validate_fail' => 'empty',
       'break_phrase' => 0,
       'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
         2 => 0,
+        3 => 0,
         4 => 0,
         5 => 0,
-        3 => 0,
       ),
       'override' => array(
         'button' => 'Use default',
       ),
-      'relationship' => 'group_nid',
+      'relationship' => 'none',
       'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
       'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);
-  return $nid;
-}',
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
       'validate_argument_node_type' => array(
-        'group' => 0,
-        'image' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
         'article' => 0,
         'audio' => 0,
         'event' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
+        'group' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'video' => 0,
+        'nnews' => 0,
         'webform' => 0,
+        'npage' => 0,
+        'page_general' => 0,
+        'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
         1 => 0,
         2 => 0,
-        7 => 0,
-        5 => 0,
-        8 => 0,
-        6 => 0,
         3 => 0,
       ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
       'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
+      'validate_argument_is_member' => '0',
       'validate_argument_group_node_type' => array(
         'group' => 0,
       ),
@@ -628,7 +619,7 @@ if (is_numeric($nid)){
   ));
   $handler->override_option('header', '<?php 
 $sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
+$nid = arg(1);
 global $user;
     if ($user->uid){
       $link = l("post a new topic", "node/add/forum/" . $nid);
@@ -669,10 +660,10 @@ if(false):
 <div class="block-title" style="border-bottom: none; ">
   <ul class="tabs">
           <li class="active">
-            <a href="/groups/<?php echo $node->field_small_name[\'0\'][\'value\']; ?>/discussions" style="line-height: 1.5em;">Latest topics</a>
+            <a href="http://<?php echo $_SERVER[\'HTTP_HOST\'] . \'/\' . $node->field_small_name[\'0\'][\'value\']; ?>/discussions" style="line-height: 1.5em;">Latest topics</a>
          </li>
          <li>
-             <a href="/groups/<?php echo $node->field_small_name[\'0\'][\'value\']; ?>/discussions/top">Hot topics</a>
+             <a href="http://<?php echo $_SERVER[\'HTTP_HOST\'] . \'/\' . $node->field_small_name[\'0\'][\'value\']; ?>/discussions/top">Hot topics</a>
          </li>
   </ul>
 </div>
@@ -734,7 +725,7 @@ This group is not sharing any discussions with you.');
     ),
   ));
   $handler->override_option('arguments', array(
-    'nid' => array(
+    'group_nid' => array(
       'default_action' => 'default',
       'style_plugin' => 'default_summary',
       'style_options' => array(),
@@ -742,77 +733,68 @@ This group is not sharing any discussions with you.');
       'wildcard_substitution' => 'All',
       'title' => '',
       'breadcrumb' => '',
-      'default_argument_type' => 'php',
+      'default_argument_type' => 'og_group_node',
       'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
+      'validate_type' => 'og_group_types',
+      'validate_fail' => 'empty',
       'break_phrase' => 0,
       'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
         2 => 0,
+        3 => 0,
         4 => 0,
         5 => 0,
-        3 => 0,
       ),
       'override' => array(
         'button' => 'Use default',
       ),
-      'relationship' => 'group_nid',
+      'relationship' => 'none',
       'default_options_div_prefix' => '',
-      'default_argument_fixed' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        2 => 0,
+        3 => 0,
+      ),
       'default_argument_user' => 0,
-      'default_argument_image_size' => '_original',
-      'default_argument_php' => '$sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
-if (is_numeric($nid)){
-  $node = node_load($nid);
-  drupal_set_title(\'Latest posts from \' . $node->title);
-  og_set_group_context($node);
-  return $nid;
-}',
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
       'validate_argument_node_type' => array(
-        'group' => 0,
-        'image' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
         'article' => 0,
         'audio' => 0,
         'event' => 0,
-        'feedapi_node' => 0,
         'file' => 0,
+        'group' => 0,
         'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'video' => 0,
+        'nnews' => 0,
         'webform' => 0,
+        'npage' => 0,
+        'page_general' => 0,
+        'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
         1 => 0,
         2 => 0,
-        7 => 0,
-        5 => 0,
-        8 => 0,
-        6 => 0,
         3 => 0,
       ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
       'validate_user_restrict_roles' => 0,
-      'image_size' => array(
-        '_original' => '_original',
-        'thumbnail' => 'thumbnail',
-        'preview' => 'preview',
-      ),
-      'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
+      'validate_argument_is_member' => '0',
       'validate_argument_group_node_type' => array(
         'group' => 0,
       ),
@@ -878,7 +860,7 @@ if (is_numeric($nid)){
   ));
   $handler->override_option('header', '<?php 
 $sql = "SELECT nid from {content_type_group} WHERE field_small_name_value LIKE \'%s\'";
-$nid = db_result(db_query($sql, arg(1)));
+$nid = arg(1);
 global $user;
     if ($user->uid){
       $link = l("post a new topic", "node/add/forum/" . $nid);
@@ -909,10 +891,10 @@ $follows=true;
 <div class="block-title" style="border-bottom: none; ">
   <ul class="tabs">
           <li>
-            <a href="/groups/<?php echo $node->field_small_name[\'0\'][\'value\']; ?>/discussions" style="line-height: 1.5em;">Latest topics</a>
+            <a href="http://<?php echo $_SERVER[\'HTTP_HOST\'] . \'/\' . $node->field_small_name[\'0\'][\'value\']; ?>/discussions" style="line-height: 1.5em;">Latest topics</a>
          </li>
           <li class="active">
-             <a href="/groups/<?php echo $node->field_small_name[\'0\'][\'value\']; ?>/discussions/top">Hot topics</a>
+             <a href="http://<?php echo $_SERVER[\'HTTP_HOST\'] . \'/\' . $node->field_small_name[\'0\'][\'value\']; ?>/discussions/top">Hot topics</a>
          </li>
   </ul>
 </div>
