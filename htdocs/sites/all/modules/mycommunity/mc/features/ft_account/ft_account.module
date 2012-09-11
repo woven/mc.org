@@ -110,8 +110,8 @@ function mc_user_page($where){
 
   switch($where){
     case 'register':
-      //drupal_set_title(MC_USER_PAGE_REGISTER);      
-      drupal_set_title('');
+      //drupal_set_title(MC_USER_PAGE_REGISTER);
+      drupal_set_title(theme("mc_page_register_title"));
       $box = boxes_load('join_overlay_box');
       $box_content = $box->render();
       $output = preg_replace(array('/^<div style="display: none;">/i', '/<\/div>\z/m'),'',$box_content['content']);
@@ -146,8 +146,19 @@ function ft_account_theme($existing, $type, $theme, $path) {
     'mc_account_head' => array(
       'arguments' => array(),
       'template' => "mc_account_head"
+    ),
+    'mc_page_register_title' => array(
+      'arguments' => array(),
+      'function' => 'theme_mc_account_register_title'
     )
   );
+}
+
+function theme_mc_account_register_title(){
+  $sitename = variable_get("site_name","My Community");
+  $sitename_the = preg_replace('/^the /i', '', $sitename);
+
+  return "Join the $sitename_the community!";
 }
 
 function ft_account_block($op = 'list', $delta = 0, $edit = array()) {
