@@ -760,7 +760,7 @@ function ft_landing_contexts_context_default_contexts() {
         '_none_' => '_none_',
       ),
       'options' => array(
-        'node_form' => 1,
+        'node_form' => 0,
       ),
     ),
     'node' => array(
@@ -779,12 +779,6 @@ function ft_landing_contexts_context_default_contexts() {
           'module' => 'views',
           'delta' => 'mc_page_menu-block_1',
           'region' => 'left',
-          'weight' => 0,
-        ),
-        'views-node_details-block_4' => array(
-          'module' => 'views',
-          'delta' => 'node_details-block_4',
-          'region' => 'content_top',
           'weight' => 0,
         ),
       ),
