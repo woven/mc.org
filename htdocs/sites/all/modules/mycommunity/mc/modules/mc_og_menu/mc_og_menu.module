@@ -10,8 +10,8 @@ function _mc_og_menu_items(){
     ),
     'about' => array(
       'title' => 'About',
-      //'view' => MC_OG_MENU_DEFAULT,
-      //'display_id' => 'page_1',
+      'view' => "og_details",
+      'display_id' => 'page_1',
       'link' => 'node/!nid/about',
       'is_menu_item' => TRUE
     ),
