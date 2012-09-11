@@ -5,4 +5,26 @@
  */
 function mc_addstuff_install(){
   db_query("UPDATE {system} SET weight = 20 WHERE name = 'mc_addstuff'");
+  $ret = array();
+  db_add_field($ret, 'node_type', 'weight', array('type' => 'int', 'not null' => TRUE, 'default' => '1'));
+}
+
+function mc_addstuff_update_1(){
+  $ret = array();
+  db_add_field($ret, 'node_type', 'weight', array('type' => 'int', 'not null' => TRUE, 'default' => '10'));
+
+  $types = array(
+    'article' => '-10',
+    'event' => '-9',
+    'file' => '-8',
+    'forum' => '-7',
+    'audio' => '-6',
+    'video' => '-5',
+    'page_general' => '-4',
+  );
+
+  foreach($types as $name => $weight){
+    db_query('UPDATE node_type SET weight=' . $weight . " WHERE type='" . $name . "'");
+  }
+  return $ret;
 }
