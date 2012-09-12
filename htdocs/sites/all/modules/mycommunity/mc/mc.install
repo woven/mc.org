@@ -170,3 +170,10 @@ function mc_update_6019(){
 function mc_update_6020(){
   module_enable(array('mc_site',true));
 }
+
+/**
+ * enable globalredirect
+ */
+function mc_update_6021(){
+  module_enable(array('globalredirect',true));
+}

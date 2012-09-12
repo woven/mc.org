@@ -667,11 +667,6 @@ function mc_events_grouped_by_dates_view($view_name, $display_id, $time_key, $it
  * Implementation of hook_init()
  */
 function mc_init(){
-//  if(drupal_is_front_page() && !empty($GLOBALS['HTTP_GET_VARS'])){
-//    $domain = $_SERVER['HTTP_HOST'];
-//    header("Location: http://$domain/");
-//    exit;
-//  }
 
   //Avoid 404 page in user/register for authenticated users.
   if ($GLOBALS['user']->uid != 0){
