@@ -2,6 +2,7 @@
 
 
 define("VID_CATEGORY", 2);
+
 /**
  * Implementation of hook_block()
  *
@@ -14,7 +15,6 @@ function mc_block($op = 'list', $delta =   0, $edit = array()) {
         'info' => t('Related Content'),
         'weight' => 0,
         'status' => 1,
-        'region' => 'right',
         'cache' => BLOCK_CACHE_PER_PAGE
       );
       return $blocks;
