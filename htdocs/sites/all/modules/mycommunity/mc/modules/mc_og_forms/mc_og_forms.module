@@ -55,12 +55,47 @@ function mc_og_forms_contact($form_stats,$nid){
   return $form;
 }
 
+function mc_og_forms_mail($key, &$message, $params){
+  $account = $params['account'];
+  $vars = $params['vars'];
+
+  $vars += user_mail_tokens($account,language_default());
+
+  //dsm($vars,'emailvars');
+
+  switch($key){
+    case 'contact':
+      $message['subject'] =  'Subject of Contact form';
+      $message['body'][] = t('
+                        !name
+                        !email
+                        !subject
+                        ',$vars);
+    break;
+  }
+}
+
 function mc_og_forms_contact_submit($form, &$form_state){
+  global $user;
+
   //fields
   $fields = array('name','email','subject','message');
 
   $nid = $form_state['values']['nid'];
   $node = node_load($nid);
+  $params['account'] = $user;
+
+  $params = array();
+  $params['nid'] = $nid;
+  $params['node'] = $node;
+  $params['vars'] = array();
+  $params['vars']['!nid'] = $nid;
+  $params['vars']['!name'] = $form_state['values']['name'];
+  $params['vars']['!email'] = $form_state['values']['email'];
+  $params['vars']['!subject'] = $form_state['values']['subject'];
+  $params['vars']['!message'] = $form_state['values']['message'];
+
+  drupal_mail("mc_og_forms",'contact','support@woven.org',language_default(),$params);
 
   drupal_set_message(
     t("Thank you for contacting !gname! We'll be in touch shortly.",array(
