@@ -191,7 +191,7 @@ var GHH = {
 		});
 		if(!(/iPhone|iPod/i.test(navigator.userAgent))){
 			$("#anonymous-follow").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
-		$("#register-button").colorbox({width:"720", height:"500", inline:true, href:"#register", opacity: 0.6});
+		$("#register-button").colorbox({width:"720", height:"445", inline:true, href:"#register", opacity: 0.6});
 			$("#view-pdf").colorbox({width:"830", height:"500", inline:true, href:".filefield-file", opacity: 0.6});
 			$('#block-boxes-join_mc a[href$="/user/register"]').colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register [name=mail]').focus(); }});
 			$("#fb-friends").colorbox({
