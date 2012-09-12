@@ -360,7 +360,7 @@ function ft_audio_strongarm() {
     ),
     'buttons' => array(
       'region' => 'main',
-      'weight' => '9',
+      'weight' => '10',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -381,14 +381,14 @@ function ft_audio_strongarm() {
     ),
     'field_list_image' => array(
       'region' => 'main',
-      'weight' => '5',
+      'weight' => '6',
       'has_required' => FALSE,
       'title' => 'Images',
       'hidden' => 0,
     ),
     'field_embedtest' => array(
       'region' => 'main',
-      'weight' => '8',
+      'weight' => '5',
       'has_required' => FALSE,
       'title' => 'Audio Embed',
       'hidden' => 0,
@@ -402,7 +402,7 @@ function ft_audio_strongarm() {
     ),
     'xmlsitemap' => array(
       'region' => 'main',
-      'weight' => '7',
+      'weight' => '8',
       'has_required' => FALSE,
       'title' => 'XML sitemap',
       'collapsed' => 1,
@@ -410,9 +410,17 @@ function ft_audio_strongarm() {
     ),
     'nodewords' => array(
       'region' => 'main',
-      'weight' => '6',
+      'weight' => '7',
       'has_required' => FALSE,
       'title' => 'Meta tags',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'print' => array(
+      'region' => 'main',
+      'weight' => '9',
+      'has_required' => FALSE,
+      'title' => 'Printer, email and PDF versions',
       'collapsed' => 1,
       'hidden' => 0,
     ),

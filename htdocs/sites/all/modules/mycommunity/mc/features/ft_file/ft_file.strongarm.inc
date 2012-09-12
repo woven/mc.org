@@ -563,7 +563,7 @@ function ft_file_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'nodeformsettings_file';
   $strongarm->value = array(
-    'nfs_submission_body_rows' => '20',
+    'nfs_submission_body_rows' => '10',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
     'nfs_revisionlog' => '1',
