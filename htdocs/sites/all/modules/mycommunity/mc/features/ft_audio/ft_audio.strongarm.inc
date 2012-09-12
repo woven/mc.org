@@ -432,10 +432,10 @@ function ft_audio_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'nodeformsettings_audio';
   $strongarm->value = array(
-    'nfs_submission_body_rows' => '20',
+    'nfs_submission_body_rows' => '10',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '1',
+    'nfs_revisionlog' => '0',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
