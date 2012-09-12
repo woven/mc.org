@@ -274,7 +274,7 @@ $node_url = urlencode( url(\'node/\' . $object->nid, array(\'absolute\' => TRUE)
 $emailSubject = t(\'Check out this !ctname!\',array("!url"=> $base_url, \'!ctname\' => $ctname));
 $emailBody =  t("I wanted to share a !ctname I found on !site_name.%0D%0A%0D%0A!node_url",array("!ctname"=>$ctname,"!node_url" => $node_url,"!site_name"=>variable_get("site_name","MyCommunity.org")))
 ?>
-<?php print l(t(\'Print\'), \'print/\' . $object->nid, array(\'attributes\'=>array(\'class\' => \'button-like button-print\') ) ); ?>
+<?php // print l(t(\'Print\'), \'print/\' . $object->nid, array(\'attributes\'=>array(\'class\' => \'button-like button-print\') ) ); ?>
 <a class="button-like button-email" target="_blank" href="mailto:?subject=<?php print $emailSubject; ?>&amp;body=<?php print $emailBody ?>">Email</a>',
         'token' => 0,
         'css-class' => 'field-print-email',
