@@ -102,7 +102,7 @@ function wysiwyg_fckeditor_settings($editor, $config, $theme) {
     'SkinPath' => base_path() . $editor['library path'] . '/editor/skins/' . $theme . '/',
     'CustomConfigurationsPath' => base_path() . drupal_get_path('module', 'wysiwyg') . '/editors/js/fckeditor.config.js',
     'Width' => '100%',
-    'Height' => 420,
+    'Height' => isset($config['height']) ? $config['height'] : '400',
     'LinkBrowser' => FALSE,
     'LinkUpload' => FALSE,
     'ImageBrowser' => FALSE,

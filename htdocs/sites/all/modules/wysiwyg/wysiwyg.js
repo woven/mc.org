@@ -113,7 +113,7 @@ Drupal.wysiwygAttach = function(context, params) {
     }
     // Attach editor, if enabled by default or last state was enabled.
     if (params.status) {
-      Drupal.wysiwyg.editor.attach[params.editor](context, params, (Drupal.settings.wysiwyg.configs[params.editor] ? jQuery.extend(true, {}, Drupal.settings.wysiwyg.configs[params.editor][params.format]) : {}));
+      Drupal.wysiwyg.editor.attach[params.editor](context, params, (Drupal.settings.wysiwyg.configs[params.editor] ? jQuery.extend(true, {}, Drupal.settings.wysiwyg.configs[params.editor][params.format][params.field]) : {}));
     }
     // Otherwise, attach default behaviors.
     else {

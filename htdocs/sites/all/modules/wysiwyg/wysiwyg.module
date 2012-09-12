@@ -179,10 +179,14 @@ function wysiwyg_process_form(&$form) {
               // Check editor theme (and reset it if not/no longer available).
               $theme = wysiwyg_get_editor_themes($profile, (isset($profile->settings['theme']) ? $profile->settings['theme'] : ''));
 
+              // Rough estimate of textarea height in pixels:
+              // 40 for the toolbar, 29 for the first row, and 15 for the rest.
+              $profile->settings['height'] = !empty($field['#rows']) ? 40 + 29 + 15 * ($field['#rows'] - 1) : 400;
+
               // Add plugin settings (first) for this input format.
               wysiwyg_add_plugin_settings($profile);
-              // Add profile settings for this input format.
-              wysiwyg_add_editor_settings($profile, $theme);
+              // Add profile settings for this field and input format.
+              wysiwyg_add_editor_settings($field, $profile, $theme);
             }
 
             // Use a prefix/suffix for a single input format, or attach to input
@@ -354,20 +358,13 @@ function wysiwyg_load_editor($profile) {
 }
 
 /**
- * Add editor settings for a given input format.
+ * Add editor settings for a given field and input format.
  */
-function wysiwyg_add_editor_settings($profile, $theme) {
-  static $formats = array();
-
-  if (!isset($formats[$profile->format])) {
-    $config = wysiwyg_get_editor_config($profile, $theme);
-    // drupal_to_js() does not properly convert numeric array keys, so we need
-    // to use a string instead of the format id.
-    if ($config) {
-      drupal_add_js(array('wysiwyg' => array('configs' => array($profile->editor => array('format' . $profile->format => $config)))), 'setting');
-    }
-    $formats[$profile->format] = TRUE;
-  }
+function wysiwyg_add_editor_settings($field, $profile, $theme) {
+  $config = wysiwyg_get_editor_config($profile, $theme);
+  // drupal_to_js() does not properly convert numeric array keys, so we need
+  // to use a string instead of the format id.
+  drupal_add_js(array('wysiwyg' => array('configs' => array($profile->editor => array('format' . $profile->format => array($field['#id'] => $config))))), 'setting');
 }
 
 /**

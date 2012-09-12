@@ -8,6 +8,7 @@ Drupal.wysiwyg.editor.attach.fckeditor = function(context, params, settings) {
   // Apply editor instance settings.
   FCKinstance.BasePath = settings.EditorPath;
   FCKinstance.Config.wysiwygFormat = params.format;
+  FCKinstance.Config.wysiwygField = params.field;
   FCKinstance.Config.CustomConfigurationsPath = settings.CustomConfigurationsPath;
 
   // Load Drupal plugins and apply format specific settings.

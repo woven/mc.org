@@ -9,7 +9,8 @@ Drupal = window.parent.Drupal;
  * FCKConfig.PageConfig.
  */
 var wysiwygFormat = FCKConfig.PageConfig.wysiwygFormat;
-var wysiwygSettings = Drupal.settings.wysiwyg.configs.fckeditor[wysiwygFormat];
+var wysiwygField = FCKConfig.PageConfig.wysiwygField;
+var wysiwygSettings = Drupal.settings.wysiwyg.configs.fckeditor[wysiwygFormat][wysiwygField];
 var pluginSettings = (Drupal.settings.wysiwyg.plugins[wysiwygFormat] ? Drupal.settings.wysiwyg.plugins[wysiwygFormat] : { 'native': {}, 'drupal': {} });
 
 /**

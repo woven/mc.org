@@ -147,6 +147,7 @@ function wysiwyg_tinymce_settings($editor, $config, $theme) {
     'plugins' => array(),
     'theme' => $theme,
     'width' => '100%',
+    'height' => isset($config['height']) ? $config['height'] : '400',
     // Strict loading mode must be enabled; otherwise TinyMCE would use
     // document.write() in IE and Chrome.
     'strict_loading_mode' => TRUE,
