@@ -11,8 +11,15 @@ function ft_page_general_ds_default_settings() {
           'fields' => array(
             'body' => array(
               'region' => 'middle',
-              'weight' => '-99',
+              'weight' => '-98',
               'format' => 'nd_bodyfield',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'nodes_slideshow' => array(
+              'region' => 'middle',
+              'weight' => '-99',
+              'format' => 'ds_eval_code',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),

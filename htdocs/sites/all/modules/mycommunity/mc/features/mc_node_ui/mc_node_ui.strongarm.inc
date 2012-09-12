@@ -216,7 +216,7 @@ echo $object->content[\'custom_pager_top\'][$custom_pager_id->pid]["#value"];
         'link' => 0,
         'nnews' => 0,
         'npage' => 0,
-        'page_general' => 0,
+        'page' => 0,
         'place' => 0,
         'taxonomy_feature' => 0,
         'taxonomy_topic' => 0,
@@ -314,39 +314,6 @@ $emailBody =  t("I wanted to share a !ctname I found on !site_name.%0D%0A%0D%0A!
         ),
         'code' => '<?php return views_embed_view("node_details","block_3",$object->nid) ?>',
         'token' => 0,
-      ),
-    ),
-    'nodes_slideshow_code' => array(
-      'title' => 'Slideshow (Images list field)',
-      'exclude' => array(
-        'image' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'feedapi_node' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'news' => 0,
-        'page' => 0,
-        'place' => 0,
-        'simplenews' => 0,
-        'video' => 0,
-        'webform' => 0,
-      ),
-      'type' => 5,
-      'status' => 3,
-      'properties' => array(
-        'formatters' => array(
-          'ds_eval_code' => 'Default',
-        ),
-        'code' => '<?php
-dsm($object);
-?>',
-        'token' => 0,
-        'css-class' => 'slideshow',
       ),
     ),
     'address_formatted' => array(
