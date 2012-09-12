@@ -5,10 +5,11 @@ include_once('ft_page.features.inc');
 function ft_page_late_form_alter(&$form, &$form_state, $form_id){
   global $user;
 
-  if(is_ct_form($form,'npage')){
-    if($user->uid > 1){
-      //hide help block fieldset from non admin users
-      $form['group_block']['#access'] = false;
-    }
+  if(!is_ct_form($form,'npage')){
+    return;
+  }
+
+  if($user->uid > 1){
+    $form['group_block']['#access'] = false;
   }
 }
