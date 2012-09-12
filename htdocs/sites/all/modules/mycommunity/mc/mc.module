@@ -173,12 +173,12 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
  if ($form['#id'] == 'user-login-form'){
    $form['name']['#description'] = 'Enter your username or e-mail address.';
    $form['name']['#title'] = 'Username';
-   $form['#validate'][]= "mc_validate_user_send_eror";
+   $form['#validate'][]= "mc_validate_user_send_error";
    $form['submit']['#value']="Sign in";
  }
 }
 
-function mc_validate_user_send_eror($form, &$form_state){
+function mc_validate_user_send_error($form, &$form_state){
   global $user;
   if (!$user->uid) {
     drupal_goto($form['#action']);
