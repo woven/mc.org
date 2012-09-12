@@ -337,8 +337,10 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -353,22 +355,9 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'value' => '<?php 
-if($data-> node_comment_statistics_comment_count==1){
-$sufix=$data-> node_comment_statistics_comment_count." reply";
-}
-elseif($data-> node_comment_statistics_comment_count==0){
-$sufix="Be the first to reply!";
-}
-else{
-$sufix=$data-> node_comment_statistics_comment_count." replies";
-}
-print "<a href=\\"/node/". $data->nid . "#comments\\">" . $sufix . "</a>";
-if($data-> node_comment_statistics_comment_count==0){
-return;
-}
-print " | ";
-print "Last reply was " . theme_ghh_post_date($data-> node_comment_statistics_last_comment_timestamp);
+_ft_discussion_ui_reply_link($data);
 ?>',
       'exclude' => 0,
       'id' => 'phpcode_1',

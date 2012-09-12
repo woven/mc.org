@@ -106,9 +106,11 @@ function femail_form_alter($form, $form_state, $form_id){
       $part = 'comment_filter';
     }
     $format = variable_get('femail_input_format', 4);
-    foreach($form[$part]['format'] as $key => $array){
-      if(is_numeric($key) && isset($array['#default_value'])){
-        $form[$part]['format'][$key]['#default_value'] = $format;
+    if(isset($form[$part]['format'])){
+      foreach($form[$part]['format'] as $key => $array){
+        if(is_numeric($key) && isset($array['#default_value'])){
+          $form[$part]['format'][$key]['#default_value'] = $format;
+        }
       }
     }
   }
