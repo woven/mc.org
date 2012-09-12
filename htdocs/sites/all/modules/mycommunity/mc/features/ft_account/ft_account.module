@@ -169,15 +169,44 @@ function ft_account_block($op = 'list', $delta = 0, $edit = array()) {
       'status' => 1,
       'cache' => BLOCK_CACHE_PER_USER
     );
+    $blocks['mc_join_overlay'] = array(
+      'info' => t('ft_account: Join Overlay'),
+      'weight' => 0,
+      'status' => 1,
+      'cache' => BLOCK_CACHE_PER_USER,
+      'visibility' => 2,
+      'pages' => user_is_anonymous() && variable_get('user_register', 1)
+    );
+    $blocks['mc_login_overlay'] = array(
+      'info' => t('ft_account: Login Overlay'),
+      'weight' => 0,
+      'status' => 1,
+      'cache' => BLOCK_CACHE_PER_USER,
+      'visibility' => 2,
+      'pages' => user_is_anonymous()
+    );
+
     return $blocks;
-  }else if ($op == 'view') {
+  }elseif($op == 'view'){
     switch ($delta) {
       case 0:
         $block = array(
           'subject' => '',
           'content' => theme('mc_account_head'),
         );
-        break;
+      break;
+      case 'mc_join_overlay':
+        $block = array(
+          'subject' => '',
+          'content' => 'joinoverlay',
+        );
+      break;
+      case 'mc_login_overlay':
+      $block = array(
+         'subject' => '',
+         'content' => 'loginoverlay',
+      );
+      break;
     }
     return $block;
   }

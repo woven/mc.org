@@ -86,7 +86,8 @@ function ft_account_ui_default_box() {
   $box->title = '';
   $box->description = 'Join Overlay Box';
   $box->options = array(
-    'body' => '      <div id="register" class="block block-overlay" >
+    'body' => '<?php if(user_is_anonymous()){ ?>
+      <div id="register" class="block block-overlay" >
         <div class="block-content">
           <div class="block block-signup clear-block">
                 <h1><?php echo theme("mc_page_register_title"); ?></h1>
@@ -109,7 +110,8 @@ function ft_account_ui_default_box() {
             
           </div> <!-- /.block-sign up -->
         </div> <!-- /.block-content -->
-      </div> <!-- /@register -->',
+      </div> <!-- /@register -->
+<?php } //end user_is_anonymous ?>',
     'format' => '3',
   );
   $export['join_overlay_box'] = $box;
