@@ -283,7 +283,7 @@ a .ico-small {
 .block-overlay .block-signup .why {
     float: left;
     width: 330px;
-    padding: 10px 0;
+    padding: 6px 0;
     border-right: 1px solid #f0f0f0;
 }
 
@@ -315,6 +315,7 @@ a .ico-small {
 .block-overlay .block-signup p {
     font-size: 1.5em;
     margin: 0px;
+    margin-bottom: 10px;
 }
 
 .block-overlay .close {
