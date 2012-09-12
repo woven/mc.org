@@ -13,3 +13,4 @@ dependencies[] = semanticviews_plus
 dependencies[] = mc_perms
 dependencies[] = nodeformsettings
 dependencies[] = better_formats
+dependencies[] = globalredirect
