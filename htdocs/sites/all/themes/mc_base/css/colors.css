@@ -1,7 +1,7 @@
 /* Custom styles specific to MiamiTech.org */
 
 body {
-	background: #f7f7f7;
+	background: #F1F1F1;
 	font: 75%/1.25 Arial, Helvetica, sans-serif;
 }	
 
@@ -50,7 +50,7 @@ body {
 /* Navigation */
 
 #navigation .primary-links {
-	background: #0070B6 repeat-x;
+	background: #117AAC repeat-x;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
@@ -71,7 +71,7 @@ body {
 #navigation .primary-links .active-trail a,
 #navigation .primary-links .active-trail a:visited {
 	color: #fff;
-	background-color: #09F;
+	background-color: #333;
 	background-image: none;
 }
 
@@ -79,7 +79,7 @@ body {
 #navigation .primary-links a,
 #navigation .primary-links a:visited {
 	background: none;
-	color: #fff;
+	color: #f4f4f4;
 	-webkit-text-shadow: none;
 	-moz-text-shadow: none;
 	text-shadow: none;
@@ -91,7 +91,7 @@ body {
 }
 
 #navigation .primary-links a:hover {
-	color: #f7f7f7;
+	color: #fff;
 	text-decoration: none;
 }
 
