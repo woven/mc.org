@@ -8,7 +8,7 @@ define("VID_CATEGORY", 2);
  *
  * Implements one block: the 'Related Content' of a node.
  */
-function mc_block($op = 'list', $delta =   0, $edit = array()) {
+function mc_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
     case 'list':
       $blocks[0] = array(
@@ -199,8 +199,7 @@ function _mc_form_user_register_alter(&$form, &$form_state,$form_id){
   unset($form['terms_of_use']['#title']);
   $terms_link = l('Terms of Service', 'disclaimer', array('attributes'=> array('target' => '_blank')));
   $form['terms_of_use']['terms_of_use']['#title'] = "I agree to the $terms_link";
-  
-  //$form['account']['mail']['#size'] = 40;
+
   //Functionality to add the Facebook Connect button in the register form.
   if(function_exists('fbconnect_render_button')){
     $form['facebook-button'] = array(
@@ -220,7 +219,6 @@ function _mc_form_user_register_alter(&$form, &$form_state,$form_id){
     '#value' => 1,
   );
   */
-  
 }
 
 /**

@@ -1,11 +1,8 @@
 <?php
 
-
-
 function mc_addstuff_block($op = 'list', $delta = 0, $edit = array()) {
     
   if ($op == 'list') {
-    
     $blocks[0] = array(
       'info' => t('Add Stuff block'), 
       'weight' => 0, 
@@ -28,8 +25,6 @@ function mc_addstuff_block($op = 'list', $delta = 0, $edit = array()) {
   }
   
 }
-
-
 
 /**
  * Block content callback. Retrieves the list of content types that are group posts and display them in a group.
