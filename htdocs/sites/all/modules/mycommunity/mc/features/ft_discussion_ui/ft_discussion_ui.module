@@ -1,3 +1,52 @@
 <?php
 
 include_once('ft_discussion_ui.features.inc');
+
+function _ft_discussion_ui_reply_link($data){
+  global $user;
+  if($data->node_comment_statistics_comment_count==1){
+    $content = $data->node_comment_statistics_comment_count." reply";
+  }
+  elseif($data-> node_comment_statistics_comment_count==0){
+    $content="Be the first to reply!";
+  }
+  else{
+    $content=$data-> node_comment_statistics_comment_count." replies";
+  }
+
+  if($user->uid=='0'){
+    $href = '/user';
+    $attributes = 'id="anonymous-follow"';
+  }
+  else{
+    $href = "/node/". $data->nid;
+    $attributes = '';
+    $group = og_get_group_context();
+    $gid = $group->nid;
+    if (!og_is_group_member($gid, FALSE)){
+      $href .= '?not_follow=1';
+      $_SESSION['not_follow'] = '1';
+    }
+    else {
+      $href .= "#comments";
+    }
+  }
+
+  print "<a href=\"$href\" $attributes>" . $content . "</a>";
+  if($data-> node_comment_statistics_comment_count==0){
+    return;
+  }
+  print " | ";
+  print "Last reply was " . theme_ghh_post_date($data-> node_comment_statistics_last_comment_timestamp);
+}
+
+function ft_discussion_ui_init(){
+  if(isset($_GET['not_follow']) && $_GET['not_follow']=='1' && isset($_SESSION['not_follow']) && $_SESSION['not_follow']=='1'){
+    unset($_SESSION['not_follow']);
+    $node = node_load(arg(1));
+    $gid = reset($node->og_groups);
+    $link = '<a href="javascript: void(0);" onClick="follow_group_comments('.$gid.');">join this group</a>';
+    $text = "You must $link to participate in its discussions.";
+    drupal_set_message($text);
+  }
+}
