@@ -729,15 +729,27 @@ function mc_menu_alter(&$items){
   $items['node/%node/og_menu/add']['type'] = MENU_CALLBACK;
 }
 
+function mc_admin_home(){
+  return 'MyCommunity Admin Home Page';
+}
+
 //TODO: Facebook Likes. It is gonna be moved to the feature for activities.
 /**
  * Implementation of hook_menu()
  */
 function mc_menu(){
+
+  $items['admin/mc'] = array(
+    'type' => MENU_SUGGESTED_ITEM,
+    'page callback' => 'mc_admin_home',
+    'access arguments' => array(true),
+    'title' => 'My Community'
+  );
+
   $items['facebook/like/%'] = array(
      'type' => MENU_CALLBACK,
      'page callback' => 'mc_facebook_like',
-     'access callback' => true,
+     'access callback' => array(true),
      'page arguments' => array(2),
      'title' => 'Facebook like'
   );
@@ -749,11 +761,9 @@ function mc_facebook_like($nid){
   $node=node_load($nid);
   if(isset($node->og_groups) and count($node->og_groups)>0){
     $gid=array_pop($node->og_groups);
-  }
-  else{
+  }else{
     $gid=0;
   }
-
 
   // Heartbeat record activity
   $variables = array(

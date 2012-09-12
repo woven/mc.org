@@ -75,6 +75,7 @@ function mc_og_forms_mail($key, &$message, $params){
   }
 }
 
+
 function mc_og_forms_contact_submit($form, &$form_state){
   global $user;
 
@@ -111,12 +112,79 @@ function is_mc_og_form_contact($node){
   return false;
 }
 
+
+function mc_og_forms_contact_settings(){
+  $form = array();
+  $form['mc_og_forms_contact_admin'] = array(
+    '#type' => "checkbox",
+    '#title' => "Email Administrator (user 1)",
+    "#default_value" => variable_get('mc_og_forms_contact_admin',0)
+  );
+
+  $form['mc_og_forms_contact_subject'] = array(
+    '#title' => 'Subject',
+    '#type' => 'textfield',
+    "#default_value" => variable_get('mc_og_forms_contact_subject',NULL)
+  );
+
+  $form['mc_og_forms_contact_body'] = array(
+    '#title' => 'Body',
+    '#type' => 'textarea',
+    "#default_value" => variable_get('mc_og_forms_contact_body',NULL)
+  );
+
+  $form['mc_og_forms_contact_cc'] = array(
+      '#title' => 'CC',
+      '#type' => 'textfield',
+      "#default_value" => variable_get('mc_og_forms_contact_cc',NULL)
+  );
+
+  $form['mc_og_forms_contact_bcc'] = array(
+    '#title' => 'BCC',
+    '#type' => 'textfield',
+    "#default_value" => variable_get('mc_og_forms_contact_bcc',NULL)
+  );
+
+  $form['tokens_help'] = array(
+    '#title' => 'Available Tokens',
+    '#value' => 'textarea'
+  );
+
+  return system_settings_form($form);
+}
+
+function get_available_tokens(){
+  return array(
+    '!nid' => '',
+    '!name' => '',
+    '!email' => '',
+    '!subject' => '',
+    '!message' => ''
+  );
+}
+
 /**
  * hook_menu
  * @return array
  * @see http://api.drupal.org/api/drupal/developer%21hooks%21core.php/function/hook_menu/6
  */
 function mc_og_forms_menu(){
+
+  $items['admin/mc/mc_og_forms'] = array(
+    'type' => MENU_NORMAL_ITEM,
+    'title' => 'OG Forms',
+    'access arguments' => array(true),
+    'page callback' => 'mc_admin_home'
+  );
+
+  $items['admin/mc/mc_og_forms/contact'] = array(
+    'title' => 'Contact form settings',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array("mc_og_forms_contact_settings"),
+    'access arguments' => array(true),
+  );
+
   $items['node/%node/contact'] = array(
     'title' => 'Contact',
     'page callback' => '_mc_og_forms_contact',
