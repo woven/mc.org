@@ -90,7 +90,7 @@ function ft_account_ui_default_box() {
         <div class="block-content">
           <div class="block block-signup clear-block">
                 <h1><?php echo theme("mc_page_register_title"); ?></h1>
-			<p>Once you\'ve joined, you can enjoy the full benefits of our community. Get involved!</p>
+			<p>Once you\'ve joined, you can enjoy the full benefits of our community.</p>
             <div class="why">
               <ul>
 					<li>Add stuff like articles, videos and more</li>
