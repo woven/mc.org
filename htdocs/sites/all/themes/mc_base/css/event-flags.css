@@ -161,7 +161,3 @@ overide the .quicktabs_tabpage .block .block-title hiding block titles at the us
 .page-user .flag-events-bookmarks a:hover{
     background-image: url("../images/icons/ico-delete.png");
 }
-
-.page-user #page .block-content .block-content{
-    margin: 5px;
-}
