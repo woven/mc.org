@@ -114,7 +114,7 @@ function ft_news_content_default_fields() {
       'enforce_minimum' => 0,
       'label' => 'Images',
       'weight' => '35',
-      'description' => 'Upload an image to be displayed on the lists of content',
+      'description' => 'You may upload an image to be associated with this post.',
       'type' => 'imagefield_crop_widget',
       'module' => 'imagefield_crop',
     ),

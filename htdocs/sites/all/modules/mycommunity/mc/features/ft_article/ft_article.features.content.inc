@@ -100,7 +100,7 @@ function ft_article_content_default_fields() {
       'enforce_minimum' => 0,
       'label' => 'Images',
       'weight' => '5',
-      'description' => 'Upload an image to be displayed on the lists of content',
+      'description' => 'You may upload an image to be associated with this post.',
       'type' => 'imagefield_widget',
       'module' => 'imagefield',
     ),

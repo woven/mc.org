@@ -730,7 +730,7 @@ function ft_place_content_default_fields() {
       'use_default_image' => 1,
       'label' => 'Images',
       'weight' => '13',
-      'description' => 'Upload an image to be displayed on the lists of content',
+      'description' => 'You may upload an image to be associated with this post.',
       'type' => 'imagefield_crop_widget',
       'module' => 'imagefield_crop',
     ),

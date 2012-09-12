@@ -104,7 +104,7 @@ function ft_discussion_content_default_fields() {
       'use_default_image' => 0,
       'label' => 'Images',
       'weight' => '17',
-      'description' => 'Upload an image to be displayed on the lists of content',
+      'description' => 'You may upload an image to be associated with this post.',
       'type' => 'imagefield_widget',
       'module' => 'imagefield',
     ),

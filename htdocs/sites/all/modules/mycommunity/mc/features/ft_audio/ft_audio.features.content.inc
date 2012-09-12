@@ -220,7 +220,7 @@ function ft_audio_content_default_fields() {
       'use_default_image' => 0,
       'label' => 'Images',
       'weight' => '8',
-      'description' => 'Upload an image to be displayed on the lists of content',
+      'description' => 'You may upload an image to be associated with this post.',
       'type' => 'imagefield_widget',
       'module' => 'imagefield',
     ),
