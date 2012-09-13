@@ -21,7 +21,7 @@ function mc_og_forms_strongarm() {
 Email: !form_email
 Group: !og_title
 
-Subject: !form 
+Subject: !form_subject
 Message: !form_message';
   $export['mc_og_forms_contact_body'] = $strongarm;
 
