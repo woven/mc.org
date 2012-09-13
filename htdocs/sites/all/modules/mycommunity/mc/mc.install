@@ -177,3 +177,10 @@ function mc_update_6020(){
 function mc_update_6021(){
   module_enable(array('globalredirect',true));
 }
+
+/**
+ * disable og_menu
+ */
+function mc_update_6022(){
+  module_disable(array('globalredirect',true));
+}
