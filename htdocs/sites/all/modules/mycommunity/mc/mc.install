@@ -184,3 +184,10 @@ function mc_update_6021(){
 function mc_update_6022(){
   module_disable(array('globalredirect',true));
 }
+
+/**
+ * enable smartcrop module
+ */
+function mc_update_6023(){
+  module_disable(array('smartcrop',true));
+}

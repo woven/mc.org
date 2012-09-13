@@ -44,7 +44,10 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
 
     if(!empty($ogs)){
       $gnid = key($ogs);
-      $sql = "SELECT flogo.field_logo_fid AS fid FROM {node} AS n INNER JOIN content_field_logo AS flogo ON flogo.vid = n.vid AND flogo.nid = n.nid AND flogo.field_logo_list = 1 WHERE n.nid = %d";
+
+      //the field id, it has to be file , unlimited field
+      $field_id = 'field_logo_standalone';
+      $sql = t("SELECT flogo.!fid_fid AS fid FROM {node} AS n INNER JOIN content_!fid AS flogo ON flogo.vid = n.vid AND flogo.nid = n.nid AND flogo.!fid_list = 1 WHERE n.nid = %d",array('!fid' => $field_id));
       $logo_fid = db_result(db_query($sql,$gnid));
 
       if($logo_fid){

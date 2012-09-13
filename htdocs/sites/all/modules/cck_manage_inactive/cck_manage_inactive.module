@@ -1,0 +1,347 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function cck_manage_inactive_menu() {
+  $items = array();
+
+  $items['admin/content/types/fields-inactive'] = array(
+    'title' => 'Inactive fields',
+    'page callback' => 'cck_manage_inactive_overview',
+    'page arguments' => array(3),
+    'access arguments' => array('administer content types'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 20,
+  );
+
+  foreach (array_keys(content_inactive_fields()) as $type_name) {
+    $path = cck_manage_inactive_manage_path($type_name, $exists, $wildcard_index);
+    $items[$path] = array(
+      'title' => 'Manage inactive fields',
+      'page callback' => 'cck_manage_inactive_manage',
+      'page arguments' => array($wildcard_index),
+      'access arguments' => array('administer content types'),
+      'type' => $exists ? MENU_LOCAL_TASK : MENU_CALLBACK,
+      'weight' => 20,
+    );
+  }
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cck_manage_inactive_theme() {
+  $hooks['cck_manage_inactive_fields_tableselect'] = array(
+    'arguments' => array('element' => NULL),
+  );
+  return $hooks;
+}
+
+/**
+ * Overview page listing all inactive fields.
+ */
+function cck_manage_inactive_overview() {
+  drupal_set_title(t('Inactive fields'));
+
+  drupal_add_css(drupal_get_path('module', 'cck_manage_inactive') . '/cck-manage-inactive.css');
+  $output = '';
+
+  $inactive_types = content_inactive_fields();
+
+  if (!empty($inactive_types)) {
+    $header = array(
+      t('Field'),
+      t('Type'),
+      t('Widget'),
+    );
+
+    $field_types = _content_field_types();
+    $widget_types = _content_widget_types($type_name);
+
+    foreach ($inactive_types as $type_name => $inactive) {
+      $content_type = content_types($type_name);
+
+      if (!empty($content_type['tables'])) {
+        $output .= '<h2 class="content-type-name">' . $content_type['name'] . '</h2>';
+      }
+      else {
+        $output .= '<h2 class="content-type-name machine-name">' . $type_name . ' (missing)</h2>';
+      }
+
+      $output .= '<p>' . l(t('Manage inactive fields'), cck_manage_inactive_manage_path($type_name)) . '</p>';
+
+      $rows = array();
+      foreach ($inactive as $field_name => $field) {
+        $rows[] = array(
+          $field['widget']['label'],
+          isset($field_types[$field['type']]) ? $field_types[$field['type']]['label'] : $field['type'],
+          isset($widget_types[$field['widget']['type']]) ? $widget_types[$field['widget']['type']]['label'] : $field['widget']['type'],
+        );
+      }
+      $output .= theme('table', $header, $rows, array('class' => 'cck-manage-inactive-fields'));
+    }
+  }
+  else {
+    $output = '<p>' . t('There are no inactive fields.') . '</p>';
+  }
+
+  return $output;
+}
+
+/**
+ * Helper function for determining the path for managing fields for a type.
+ */
+function cck_manage_inactive_manage_path($type_name, &$type_exists = NULL, &$type_wildcard_index = NULL) {
+  $type_url_str = strtr($type_name, '_', '-');
+  $content_type = content_types($type_name);
+  if (empty($content_type['tables'])) {
+    $type_exists = FALSE;
+    $type_wildcard_index = 4;
+    return 'admin/content/types/fields-inactive/' . $type_url_str;
+  }
+  else {
+    $type_exists = TRUE;
+    $type_wildcard_index = 3;
+    return 'admin/content/node-type/' . $type_url_str . '/fields-inactive';
+  }
+}
+
+/**
+ * Page callback to display an admin UI for inactive fields.
+ */
+function cck_manage_inactive_manage($type_url_str) {
+  $type_name = strtr($type_url_str, '-', '_');
+  return drupal_get_form('cck_manage_inactive_fields_form', $type_name);
+}
+
+/**
+ * Present field administration form.
+ */
+function cck_manage_inactive_fields_form($form_state, $type_name) {
+  if ($form_state['fields_action']) {
+    // Confirm form
+    return cck_manage_inactive_action_form($form_state, $type_name, array_keys(array_filter($form_state['values']['fields'])), $form_state['fields_action']);
+  }
+
+  drupal_add_css(drupal_get_path('module', 'cck_manage_inactive') . '/cck-manage-inactive.css');
+  drupal_add_js(drupal_get_path('module', 'cck_manage_inactive') . '/cck-manage-inactive.js');
+
+  $form['type_name'] = array(
+    '#type' => 'value',
+    '#value' => $type_name,
+  );
+
+  $content_type = content_types($type_name);
+  $content_type_exists = !empty($content_type['tables']);
+  if ($content_type_exists) {
+    $form['type_title'] = array(
+      '#value' => '<h2 class="content-type-name">' . $content_type['name'] . '</h2>',
+    );
+  }
+  else {
+    $form['type_title'] = array(
+      '#value' => '<h2 class="content-type-name machine-name">' . $type_name . ' (missing)</h2>',
+    );
+  }
+
+  // List actions
+  $actions = array();
+  if ($content_type_exists) {
+    $actions['activate'] = t('Activate');
+  }
+  $actions['remove'] = t('Remove');
+
+  $inactive = content_inactive_fields($type_name);
+
+  if (!empty($inactive)) {
+    $field_types = _content_field_types();
+    $widget_types = _content_widget_types($type_name);
+
+    $form['fields'] = array(
+      '#theme' => 'cck_manage_inactive_fields_tableselect',
+      '#tree' => TRUE,
+    );
+    foreach ($inactive as $field_name => $field) {
+      $form['fields'][$field_name] = array(
+        '#type' => 'checkbox',
+        '#title' => $field['widget']['label'],
+        '#field_type' => isset($field_types[$field['type']]) ? $field_types[$field['type']]['label'] : $field['type'],
+        '#widget_type' => isset($widget_types[$field['widget']['type']]) ? $widget_types[$field['widget']['type']]['label'] : $field['widget']['type'],
+      );
+    }
+
+    $form['actions'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="cck-manage-inactive-fields-form-actions clearfix"><div class="prefix">With selected fields:</div><div class="content">',
+      '#suffix' => '</div></div>',
+    );
+    $form['actions']['action_type'] = array(
+      '#type' => 'select',
+      '#options' => $actions,
+    );
+    $form['actions']['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit'),
+    );
+
+    $form['warning'] = array(
+      '#value' => '<p>' . t('Warning: removing a field will PERMANENTLY delete the data associated with it.') . '</p>',
+    );
+  }
+  else {
+    $form['empty'] = array(
+      '#value' => '<p>' . t('There are no inactive fields for this content type.') . '</p>',
+    );
+  }
+
+  return $form;
+}
+
+/**
+ * Render tableselect for selecting fields.
+ */
+function theme_cck_manage_inactive_fields_tableselect($elements) {
+  drupal_add_css(drupal_get_path('module', 'cck_manage_inactive') . '/cck-manage-inactive.css');
+
+  // Build table
+  $header = array(
+    array(
+      'class' => 'field-selector select-all',
+    ),
+    t('Field'),
+    t('Label'),
+    t('Type'),
+    t('Widget'),
+  );
+
+  $rows = array();
+  foreach (element_children($elements) as $child) {
+    $element = &$elements[$child];
+
+    $title = $element['#title'];
+    unset($element['#title']);
+
+    $rows[] = array(
+      array(
+        'class' => 'field-selector',
+        'data' => drupal_render($element),
+      ),
+      $child,
+      $title,
+      $element['#field_type'],
+      $element['#widget_type'],
+    );
+  }
+
+  return theme('table', $header, $rows, array('class' => 'cck-manage-inactive-fields-tableselect'));
+}
+
+/**
+ * Intermediate validator.
+ */
+function cck_manage_inactive_fields_form_validate($form, $form_state) {
+  if (!count(array_filter($form_state['values']['fields']))) {
+    form_set_error('fields', t('At least one field must be selected to perform this action.'));
+  }
+}
+
+/**
+ * Intermediate handler.
+ */
+function cck_manage_inactive_fields_form_submit($form, &$form_state) {
+  $form_state['fields_action'] = $form_state['values']['action_type'];
+  $form_state['rebuild'] = TRUE;
+}
+
+/**
+ * Confirm form for selected fields.
+ */
+function cck_manage_inactive_action_form($form_state, $type_name, array $fields, $action, $action_label = NULL) {
+  $form['type_name'] = array(
+    '#type' => 'value',
+    '#value' => $type_name,
+  );
+  $form['fields'] = array(
+    '#type' => 'value',
+    '#value' => $fields,
+  );
+  $form['action'] = array(
+    '#type' => 'value',
+    '#value' => $action,
+  );
+
+  /**
+  @TODO Refactor code to split everything from this point onward into separate
+  functions. In fact, it'd be better if the whole "actions" thing is separated.
+  However, the module as it stands is really small so I couldn't be bothered.
+  */
+
+  // Formulate text for the confirm form
+  if (!isset($action_label)) {
+    $action_label = t($action);
+  }
+  $question = t('Are you sure you want to @action these fields?', array(
+    '@action' => $action_label,
+  ));
+
+  $inactive = content_inactive_fields($type_name);
+  $field_types = _content_field_types();
+  $widget_types = _content_widget_types($type_name);
+
+  $field_descriptions = array();
+  foreach ($fields as $field_name) {
+    $field = $inactive[$field_name];
+    $field_descriptions[] = t('@field_label (@field_name): @field_type field, using @widget_type widget', array(
+      '@field_label' => $field['widget']['label'],
+      '@field_name' => $field_name,
+      '@field_type' => isset($field_types[$field['type']]) ? $field_types[$field['type']]['label'] : $field['type'],
+      '@widget_type' => isset($widget_types[$field['widget']['type']]) ? $widget_types[$field['widget']['type']]['label'] : $field['widget']['type'],
+    ));
+  }
+
+  $description = theme('item_list', $field_descriptions);
+  $description .= '<p>' . t('This action cannot be undone.') . '</p>';
+
+  $form['#submit'][] = 'cck_manage_inactive_action_form_submit';
+
+  return confirm_form($form, $question, cck_manage_inactive_manage_path($type_name), $description);
+}
+
+/**
+ * Perform action.
+ */
+function cck_manage_inactive_action_form_submit($form, &$form_state) {
+  $type_name = $form_state['values']['type_name'];
+  $fields = $form_state['values']['fields'];
+  $action = $form_state['values']['action'];
+
+  $inactive = content_inactive_fields($type_name);
+
+  module_load_include('inc', 'content', 'includes/content.crud');
+  foreach ($fields as $field_name) {
+    // For any action to be done, the field itself must be activated
+    // Just to be safe, only activate on specified actions
+    if ($action == 'activate' || $action == 'remove') {
+      if (!$inactive[$field_name]['active']) {
+        db_query("UPDATE {" . content_field_tablename() . "} SET active = 1 WHERE field_name = '%s'", $field_name);
+      }
+      if (!$inactive[$field_name]['widget_active']) {
+        db_query("UPDATE {" . content_instance_tablename() . "} SET widget_active = 1 WHERE field_name = '%s' AND type_name = '%s'", $field_name, $type_name);
+      }
+
+      if ($action == 'remove') {
+        // Additionally, delete the field instance
+        content_field_instance_delete($field_name, $type_name, FALSE);
+      }
+    }
+  }
+
+  content_clear_type_cache(TRUE);
+  menu_rebuild();
+
+  drupal_set_message(t('The action has been successfully completed.'));
+  $form_state['redirect'] = cck_manage_inactive_manage_path($type_name);
+}

@@ -1,0 +1,9 @@
+h2.content-type-name.machine-name {
+  font-style: italic;
+}
+table.cck-manage-inactive-fields-tableselect .field-selector {
+  width: 1px;
+}
+.cck-manage-inactive-fields-form-actions {
+  margin-top: 2em;
+}

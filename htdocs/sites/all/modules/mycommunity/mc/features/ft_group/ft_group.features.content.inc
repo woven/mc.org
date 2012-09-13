@@ -11,7 +11,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_about',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '35',
+      'weight' => '37',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -66,7 +66,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'About',
-      'weight' => '35',
+      'weight' => '37',
       'description' => '',
       'type' => 'text_textarea',
       'module' => 'text',
@@ -78,7 +78,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_featured_items',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '37',
+      'weight' => '39',
       'parent' => '',
       'label' => array(
         'format' => 'above',
@@ -155,7 +155,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Featured Items',
-      'weight' => '37',
+      'weight' => '39',
       'description' => 'Start typing and the select the items you want to be featured in this group',
       'type' => 'nodereference_autocomplete',
       'module' => 'nodereference',
@@ -167,7 +167,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_url',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '38',
+      'weight' => '40',
       'parent' => '',
       'label' => array(
         'format' => 'above',
@@ -229,7 +229,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'What’s the URL of your group’s homepage?',
-      'weight' => '38',
+      'weight' => '40',
       'description' => 'The URL of your group’s homepage on a service like Meetup.com. Leave blank if you don’t have one.',
       'type' => 'link',
       'module' => 'link',
@@ -241,7 +241,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_header_color',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '33',
+      'weight' => '35',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -314,7 +314,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Header Color',
-      'weight' => '33',
+      'weight' => '35',
       'description' => '',
       'type' => 'colorpicker_cck',
       'module' => 'colorpicker_cck',
@@ -326,7 +326,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_header_title_color',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '34',
+      'weight' => '36',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -403,7 +403,7 @@ black',
       ),
       'default_value_php' => NULL,
       'label' => 'Header Title Color',
-      'weight' => '34',
+      'weight' => '36',
       'description' => '',
       'type' => 'optionwidgets_select',
       'module' => 'optionwidgets',
@@ -415,7 +415,7 @@ black',
     'field_name' => 'field_list_image',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '36',
+      'weight' => '38',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -489,7 +489,7 @@ black',
       ),
       'use_default_image' => 0,
       'label' => 'Images',
-      'weight' => '36',
+      'weight' => '38',
       'description' => 'You may upload an image to be associated with this post.',
       'type' => 'imagefield_crop_widget',
       'module' => 'imagefield_crop',
@@ -501,7 +501,7 @@ black',
     'field_name' => 'field_logo',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '32',
+      'weight' => '33',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -556,11 +556,104 @@ black',
       'default_image' => NULL,
       'use_default_image' => 0,
       'file_widgets' => NULL,
+      'focus' => 0,
+      'focus_min_size' => '',
+      'focus_lock_ratio' => 0,
       'label' => 'Logo',
-      'weight' => '32',
+      'weight' => '33',
       'description' => '',
       'type' => 'imagefield_crop_widget',
       'module' => 'imagefield_crop',
+    ),
+  );
+
+  // Exported field: field_logo_standalone
+  $fields['group-field_logo_standalone'] = array(
+    'field_name' => 'field_logo_standalone',
+    'type_name' => 'group',
+    'display_settings' => array(
+      'weight' => '34',
+      'parent' => '',
+      'label' => array(
+        'format' => 'above',
+      ),
+      'teaser' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'image_plain',
+        'exclude' => 1,
+      ),
+      '4' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      'secondary_page' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      'search' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'image_plain',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'filefield',
+    'required' => '0',
+    'multiple' => '1',
+    'module' => 'filefield',
+    'active' => '1',
+    'list_field' => '0',
+    'list_default' => 1,
+    'description_field' => '0',
+    'widget' => array(
+      'file_extensions' => 'png gif jpg jpeg',
+      'file_path' => '',
+      'progress_indicator' => 'bar',
+      'max_filesize_per_file' => '',
+      'max_filesize_per_node' => '',
+      'max_resolution' => '0',
+      'min_resolution' => '0',
+      'alt' => '',
+      'custom_alt' => 0,
+      'title' => '',
+      'custom_title' => 0,
+      'title_type' => 'textfield',
+      'default_image' => NULL,
+      'use_default_image' => 0,
+      'focus' => 0,
+      'focus_min_size' => '',
+      'focus_lock_ratio' => 0,
+      'label' => 'Logo Standalone',
+      'weight' => '34',
+      'description' => 'Standalone version of the logo, recommended is 500x500 where the logo is on half of the image and taking around half of the image space (300x300)',
+      'type' => 'imagefield_widget',
+      'module' => 'imagefield',
     ),
   );
 
@@ -569,7 +662,7 @@ black',
     'field_name' => 'field_small_name',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '30',
+      'weight' => '29',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -663,6 +756,7 @@ black',
   t('Header Title Color');
   t('Images');
   t('Logo');
+  t('Logo Standalone');
   t('Short Name');
   t('What’s the URL of your group’s homepage?');
 

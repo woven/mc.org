@@ -115,7 +115,7 @@ function ft_discussion_content_default_fields() {
     'field_name' => 'field_enable_discussions',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '30',
+      'weight' => '31',
       'parent' => '',
       'label' => array(
         'format' => 'above',
@@ -188,7 +188,7 @@ function ft_discussion_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Enable or Disable Discussions',
-      'weight' => '30',
+      'weight' => '31',
       'description' => 'Should this group allow to create discussions?',
       'type' => 'optionwidgets_onoff',
       'module' => 'optionwidgets',

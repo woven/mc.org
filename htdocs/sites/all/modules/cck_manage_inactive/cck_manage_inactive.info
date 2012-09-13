@@ -1,0 +1,13 @@
+name = CCK manage inactive fields
+description = Show and perform basic administration tasks for inactive CCK fields.
+dependencies[] = content
+dependencies[] = node
+package = Development
+core = 6.x
+
+; Information added by drupal.org packaging script on 2011-09-22
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "cck_manage_inactive"
+datestamp = "1316693050"
+

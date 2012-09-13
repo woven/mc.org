@@ -10,11 +10,12 @@ function ft_landing_slideshow_imagecache_default_presets() {
       'actions' => array(
         '0' => array(
           'weight' => '0',
-          'module' => 'imagecache',
-          'action' => 'imagecache_scale_and_crop',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
           'data' => array(
-            'width' => '256',
+            'width' => '259',
             'height' => '149',
+            'upscale' => 0,
           ),
         ),
       ),
