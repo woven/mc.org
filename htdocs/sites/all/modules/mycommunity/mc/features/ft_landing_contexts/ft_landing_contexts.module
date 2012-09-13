@@ -14,3 +14,9 @@ function ft_landing_contexts_theme_registry_alter(&$theme_registry) {
   $originalpath = array_shift($theme_registry['block']['theme paths']);
   array_unshift($theme_registry['block']['theme paths'], $originalpath, $modulepath);
 }
+
+function ft_landing_contexts_views_query_alter(&$view, &$query){
+  if($view->name=='mc_page_menu' && $view->current_display=='block_1'){
+    $view->display['block_1']->handler->handlers['field']['title']->query->table_queue['draggableviews_structure_node0']['join']->extra[1]['value'] = 'mc_page_menu_admin';
+  }
+}
