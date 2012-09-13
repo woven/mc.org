@@ -16,7 +16,7 @@ function feedapi_mc_nodeapi(&$node, $op, $teaser) {
     case 'prepare':
       $drupal_path = drupal_get_normal_path($_GET['q']);
       $is_same_node = arg(1, $drupal_path)==$node->nid;
-      if($node->type=='event' && $is_same_node){
+      if($node->type=='event' && $is_same_node && isset($node->feedapi_node) && is_object($node->feedapi_node)){
         if(isset($node->nid) && _feedapi_mc_is_updatable($node->nid)){
           drupal_set_message('This event was automatically created from a feed. If you apply manual edits, we will stop updating it automatically.');
         }
