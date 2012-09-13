@@ -58,23 +58,50 @@ function mc_og_forms_contact($form_stats,$nid){
 function mc_og_forms_mail($key, &$message, $params){
   $account = $params['account'];
   $vars = $params['vars'];
-
   $vars += user_mail_tokens($account,language_default());
 
   //dsm($vars,'emailvars');
 
   switch($key){
     case 'contact':
-      $message['subject'] =  'Subject of Contact form';
-      $message['body'][] = t('
-                        !name
-                        !email
-                        !subject
-                        ',$vars);
+      //adding cc field/header
+      if(variable_get("mc_og_forms_contact_cc",null)){
+        $message['headers']['Cc'] = variable_get("mc_og_forms_contact_cc","");
+      }
+
+      //adding bcc field/header
+      if(variable_get("mc_og_forms_contact_bcc",null)){
+        $message['headers']['Bcc'] = variable_get("mc_og_forms_contact_bcc",null);
+      }
+
+      //message subject and body from the form settings
+      $message['subject'] = t(variable_get("mc_og_forms_contact_subject",""),$vars);
+      $message['body'][] = t(variable_get("mc_og_forms_contact_body",""),$vars);
+
     break;
   }
 }
 
+function _og_managers_emails($nid){
+  $sql = og_list_users_sql(1,1);
+  $result = db_query($sql,$nid);
+  $mangers = array();
+  while($row = db_fetch_object($result)){
+    $mangers[$row->uid] = $row->mail;
+  }
+
+  return $mangers;
+}
+
+function mc_og_forms_contact_validate($form,&$form_state){
+
+  $mail = $form_state['values']['email'];
+
+  //validate email address
+  if(!valid_email_address($mail)){
+    form_set_error('email',"invalid email address");
+  }
+}
 
 function mc_og_forms_contact_submit($form, &$form_state){
   global $user;
@@ -83,7 +110,10 @@ function mc_og_forms_contact_submit($form, &$form_state){
   $fields = array('name','email','subject','message');
 
   $nid = $form_state['values']['nid'];
+  $form_vals = $form_state['values'];
   $node = node_load($nid);
+  $managers = _og_managers_emails($nid);
+  $from = '"'. addslashes(mime_header_encode($form_vals['name'])) .'" <'. $form_vals['email'] .'>';
   $params['account'] = $user;
 
   $params = array();
@@ -96,7 +126,7 @@ function mc_og_forms_contact_submit($form, &$form_state){
   $params['vars']['!subject'] = $form_state['values']['subject'];
   $params['vars']['!message'] = $form_state['values']['message'];
 
-  drupal_mail("mc_og_forms",'contact','support@woven.org',language_default(),$params);
+  drupal_mail("mc_og_forms",'contact',implode(", ",$managers),language_default(),$params,$form);
 
   drupal_set_message(
     t("Thank you for contacting !gname! We'll be in touch shortly.",array(
@@ -212,5 +242,6 @@ function _mc_og_forms_access($node){
  * @return mixed|string
  */
 function _mc_og_forms_contact($node){
+  _og_managers_emails($node->nid);
   return drupal_get_form("mc_og_forms_contact",$node->nid);
 }
