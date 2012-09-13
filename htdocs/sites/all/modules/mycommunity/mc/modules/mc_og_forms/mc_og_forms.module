@@ -1,22 +1,10 @@
 <?php
 
+include_once('mc_og_forms.features.inc');
+
 /**
  * @todo add the correct classes to the page (maybe use context as well)
- * #todo display suite url not to be accessable though any other node but webform http://local.sje.mycommunity.org/admin/content/node-type/webform/display/mc_og_forms
- *
 */
-
-//default value for var: mc_og_forms_contact_nid
-define('MC_OG_FORMS_CONTACT_NID_DEFAULT',989);
-
-function _mc_og_forms_theme(){
-  return array(
-    'mc_og_forms_contact' => array(
-      'arguments' => array('forums' => NULL, 'topics' => NULL, 'parents' => NULL, 'tid' => NULL, 'sortby' => NULL, 'forum_per_page' => NULL),
-      //'template' => 'og-form-contact',
-    ),
-  );
-}
 
 function mc_og_forms_contact($form_stats,$nid){
 
@@ -103,6 +91,20 @@ function mc_og_forms_contact_validate($form,&$form_state){
   }
 }
 
+function _mc_forms_contact_tokens(){
+  return array(
+    '!og_nid : Current Group id',
+    '!og_title : Group Name',
+    '!og_link : Group Link',
+    '!og_url : Group URL',
+    '!form_name : Form: Name',
+    '!form_email : Form: Mail',
+    '!form_subject : Form: Subject',
+    '!form_message :  Form: Message'
+  );
+}
+
+
 function mc_og_forms_contact_submit($form, &$form_state){
   global $user;
 
@@ -110,29 +112,35 @@ function mc_og_forms_contact_submit($form, &$form_state){
   $fields = array('name','email','subject','message');
 
   $nid = $form_state['values']['nid'];
-  $form_vals = $form_state['values'];
+  $values = $form_state['values'];
   $node = node_load($nid);
   $managers = _og_managers_emails($nid);
-  $from = '"'. addslashes(mime_header_encode($form_vals['name'])) .'" <'. $form_vals['email'] .'>';
+
+  $from = '"'. addslashes(mime_header_encode($values['name'])) .'" <'. $values['email'] .'>';
+
   $params['account'] = $user;
 
   $params = array();
   $params['nid'] = $nid;
   $params['node'] = $node;
   $params['vars'] = array();
-  $params['vars']['!nid'] = $nid;
-  $params['vars']['!name'] = $form_state['values']['name'];
-  $params['vars']['!email'] = $form_state['values']['email'];
-  $params['vars']['!subject'] = $form_state['values']['subject'];
-  $params['vars']['!message'] = $form_state['values']['message'];
+  $params['vars']['!form_name'] = $form_state['values']['name'];
+  $params['vars']['!form_email'] = $form_state['values']['email'];
+  $params['vars']['!form_subject'] = $form_state['values']['subject'];
+  $params['vars']['!form_message'] = $form_state['values']['message'];
+  $params['vars']['!og_title'] = $node->title;
+  $params['vars']['!og_url'] = url('node/'.$node->nid);
+  $params['vars']['!og_link'] = l($node->title,'node/'.$node->nid);
+  $params['vars']['!og_nid'] = $node->nid;
 
-  drupal_mail("mc_og_forms",'contact',implode(", ",$managers),language_default(),$params,$form);
+  drupal_mail("mc_og_forms",'contact',implode(", ",$managers),language_default(),$params,$from);
 
   drupal_set_message(
     t("Thank you for contacting !gname! We'll be in touch shortly.",array(
       '!gname' => l($node->title,"node/".$node->nid)
     ))
   );
+
 }
 
 function is_mc_og_form_contact($node){
@@ -145,28 +153,19 @@ function is_mc_og_form_contact($node){
 
 function mc_og_forms_contact_settings(){
   $form = array();
+
+  /*
   $form['mc_og_forms_contact_admin'] = array(
     '#type' => "checkbox",
     '#title' => "Email Administrator (user 1)",
     "#default_value" => variable_get('mc_og_forms_contact_admin',0)
   );
-
-  $form['mc_og_forms_contact_subject'] = array(
-    '#title' => 'Subject',
-    '#type' => 'textfield',
-    "#default_value" => variable_get('mc_og_forms_contact_subject',NULL)
-  );
-
-  $form['mc_og_forms_contact_body'] = array(
-    '#title' => 'Body',
-    '#type' => 'textarea',
-    "#default_value" => variable_get('mc_og_forms_contact_body',NULL)
-  );
+  */
 
   $form['mc_og_forms_contact_cc'] = array(
-      '#title' => 'CC',
-      '#type' => 'textfield',
-      "#default_value" => variable_get('mc_og_forms_contact_cc',NULL)
+    '#title' => 'CC',
+    '#type' => 'textfield',
+    "#default_value" => variable_get('mc_og_forms_contact_cc',NULL)
   );
 
   $form['mc_og_forms_contact_bcc'] = array(
@@ -175,22 +174,30 @@ function mc_og_forms_contact_settings(){
     "#default_value" => variable_get('mc_og_forms_contact_bcc',NULL)
   );
 
-  $form['tokens_help'] = array(
+  $form['email_content'] = array(
+    '#type' => 'fieldset',
+    '#title' => "Email Content"
+  );
+
+  $form['email_content']['mc_og_forms_contact_subject'] = array(
+    '#title' => 'Subject',
+    '#type' => 'textfield',
+    "#default_value" => variable_get('mc_og_forms_contact_subject',NULL)
+  );
+
+  $form['email_content']['mc_og_forms_contact_body'] = array(
+    '#title' => 'Body',
+    '#type' => 'textarea',
+    "#default_value" => variable_get('mc_og_forms_contact_body',NULL)
+  );
+
+  $form['email_content']['tokens_help'] = array(
+    '#type' => 'item',
     '#title' => 'Available Tokens',
-    '#value' => 'textarea'
+    '#value' => theme("item_list",_mc_forms_contact_tokens())
   );
 
   return system_settings_form($form);
-}
-
-function get_available_tokens(){
-  return array(
-    '!nid' => '',
-    '!name' => '',
-    '!email' => '',
-    '!subject' => '',
-    '!message' => ''
-  );
 }
 
 /**
