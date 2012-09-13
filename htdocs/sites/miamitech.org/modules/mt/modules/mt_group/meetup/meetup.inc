@@ -34,7 +34,7 @@ class MeetupParser{
         $this->group_url = $result['0'];
         $no_domain = preg_replace('/[a-z0-9-]+\.\w+(\/|)$/i','',$this->group_url);
         $domain = str_replace($no_domain, '', $this->group_url);
-        $this->small_name = str_replace('/','', $domain);
+        $this->small_name = preg_replace('/\..+$/i','', $domain);
         if(!empty($this->small_name)){
           $domain = str_replace('/','', $this->group_url);
           $this->event_feed = 'http://' . $domain . '/events/ical';
