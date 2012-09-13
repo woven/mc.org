@@ -44,3 +44,13 @@ function _mc_page_general_default_about_submit($form, &$form_state) {
   variable_set('mc_default_about_nid', $nid, '', '');
   path_set_alias('node/'.$nid , 'about');
 }
+
+
+/*
+ * The view mc_page_menu is in the feature ft_landing_contexts.
+ */
+function ft_page_general_views_query_alter(&$view, &$query){
+  if($view->name=='mc_page_menu' && $view->current_display=='block_1'){
+    $view->display['block_1']->handler->handlers['field']['title']->query->table_queue['draggableviews_structure_node0']['join']->extra[1]['value'] = 'mc_page_menu_admin';
+  }
+}
