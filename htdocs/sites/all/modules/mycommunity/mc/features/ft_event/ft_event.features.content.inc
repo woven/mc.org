@@ -6,6 +6,93 @@
 function ft_event_content_default_fields() {
   $fields = array();
 
+  // Exported field: field_event_url
+  $fields['event-field_event_url'] = array(
+    'field_name' => 'field_event_url',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-91',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'middle',
+        'type' => 'link',
+        'parent_id' => '',
+        'field_id' => 'field_event_url',
+        'label_value' => '',
+        'exclude' => 0,
+        'weight' => '-91',
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'link',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'link',
+    'active' => '1',
+    'attributes' => array(
+      'target' => 'default',
+      'rel' => 'nofollow',
+      'class' => '',
+      'title' => '',
+    ),
+    'display' => array(
+      'url_cutoff' => '80',
+    ),
+    'url' => 0,
+    'title' => 'none',
+    'title_value' => '',
+    'enable_tokens' => 0,
+    'validate_url' => 1,
+    'widget' => array(
+      'default_value' => array(
+        '0' => array(
+          'title' => '',
+          'url' => '',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Event URL',
+      'weight' => '34',
+      'description' => '',
+      'type' => 'link',
+      'module' => 'link',
+    ),
+  );
+
   // Exported field: field_list_image
   $fields['event-field_list_image'] = array(
     'field_name' => 'field_list_image',
@@ -17,7 +104,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-66',
+      'ds_weight' => '-63',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -30,7 +117,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-66',
+        'weight' => '-63',
       ),
       '5' => array(
         'label' => array(
@@ -122,14 +209,27 @@ function ft_event_content_default_fields() {
     'type_name' => 'event',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-73',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'number_integer',
+        'parent_id' => '',
+        'field_id' => 'field_online_event',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-73',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -193,7 +293,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-67',
+      'ds_weight' => '-58',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -206,7 +306,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_place',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-67',
+        'weight' => '-58',
       ),
       '5' => array(
         'label' => array(
@@ -328,7 +428,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-70',
+      'ds_weight' => '-57',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -341,7 +441,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-70',
+        'weight' => '-57',
       ),
       '5' => array(
         'label' => array(
@@ -431,7 +531,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-80',
+      'ds_weight' => '-59',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -444,7 +544,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_upload_file',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-80',
+        'weight' => '-59',
       ),
       'teaser' => array(
         'format' => 'default',
@@ -516,6 +616,7 @@ function ft_event_content_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Event URL');
   t('File');
   t('Images');
   t('Online Event');

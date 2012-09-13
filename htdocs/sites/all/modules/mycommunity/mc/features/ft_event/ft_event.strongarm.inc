@@ -165,12 +165,11 @@ function ft_event_strongarm() {
     'options' => '19',
     'comment_settings' => '16',
     'menu' => '13',
-    'taxonomy' => '10',
     'path' => '17',
-    'mollom' => '20',
+    'locations' => '9',
     'og_nodeapi' => '6',
-    'path_redirect' => '30',
     'print' => '15',
+    'xmlsitemap' => '30',
     'nodewords' => '10',
   );
   $export['content_extra_weights_event'] = $strongarm;
@@ -202,8 +201,8 @@ function ft_event_strongarm() {
   $strongarm->name = 'event_range_next';
   $strongarm->value = array(
     'year' => 2013,
-    'month' => '01',
-    'day' => '28',
+    'month' => '03',
+    'day' => '11',
     'hour' => '21',
     'minute' => '00',
     'second' => '00',
@@ -373,7 +372,7 @@ function ft_event_strongarm() {
       ),
     ),
     'display' => array(
-      'weight' => '0',
+      'weight' => '9',
       'hide' => array(
         'name' => 0,
         'street' => 0,
@@ -468,35 +467,35 @@ function ft_event_strongarm() {
     ),
     'buttons' => array(
       'region' => 'main',
-      'weight' => '9',
+      'weight' => '13',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
     ),
     'field_list_image' => array(
       'region' => 'main',
-      'weight' => '6',
+      'weight' => '7',
       'has_required' => FALSE,
       'title' => 'Images',
       'hidden' => 0,
     ),
     'field_place' => array(
       'region' => 'main',
-      'weight' => '5',
+      'weight' => '6',
       'has_required' => FALSE,
       'title' => 'Place',
       'hidden' => 0,
     ),
     'field_related' => array(
       'region' => 'main',
-      'weight' => '8',
+      'weight' => '9',
       'has_required' => FALSE,
       'title' => 'Reference Related Content',
       'hidden' => 0,
     ),
     'field_upload_file' => array(
       'region' => 'main',
-      'weight' => '7',
+      'weight' => '8',
       'has_required' => FALSE,
       'title' => 'File',
       'hidden' => 0,
@@ -510,7 +509,7 @@ function ft_event_strongarm() {
     ),
     'locations' => array(
       'region' => 'main',
-      'weight' => '4',
+      'weight' => '5',
       'has_required' => TRUE,
       'title' => 'Location',
     ),
@@ -520,6 +519,37 @@ function ft_event_strongarm() {
       'has_required' => TRUE,
       'title' => 'Groups',
       'collapsed' => 0,
+    ),
+    'field_event_url' => array(
+      'region' => 'main',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => 'Event URL',
+      'hidden' => 0,
+    ),
+    'print' => array(
+      'region' => 'main',
+      'weight' => '10',
+      'has_required' => FALSE,
+      'title' => 'Printer, email and PDF versions',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'xmlsitemap' => array(
+      'region' => 'main',
+      'weight' => '11',
+      'has_required' => FALSE,
+      'title' => 'XML sitemap',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'nodewords' => array(
+      'region' => 'main',
+      'weight' => '12',
+      'has_required' => FALSE,
+      'title' => 'Meta tags',
+      'collapsed' => 1,
+      'hidden' => 0,
     ),
   );
   $export['nodeformscols_field_placements_event_default'] = $strongarm;
