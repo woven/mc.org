@@ -1,10 +1,55 @@
 <?php
 
 /*
+ * @todo fix for jquery_update missing constant that needed for ctools
+ * @see http://drupal.org/node/1067290#comment-6208188
+ */
+define('JQUERY_UPDATE_REPLACE_PATH', drupal_get_path('module', 'jquery_update') .'/replace');
+
+function ctools_ajax_command_select2_val($selector,$nid,$val,$val_title) {
+  return array(
+    'command' => 'select2_val',
+    'selector' => $selector,
+    'value' => $val,
+    'value_title' => $val_title,
+    'nid' => $nid
+  );
+}
+
+function select2_jqmulti_libraries(){
+  return ("select2");
+}
+
+/*
  * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
  * @todo imrpove the speed and logic of auto-complete callback
  * @todo use the hooks of jqmulti to add the jq1.8 dependecies
+ * @todo avoid hacking line 978 @ nodereference.module
+ * @todo package jquery_update options at http://w.miamitech.org/admin/settings/jquery_update
+ * @todo find a fix for the drupal_to_json fix @ includes.inc
 */
+
+
+function select2_late_form_alter(&$form, $form_state, $form_id) {
+  // Alter node form.
+  if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
+
+    //$form['#noderelationships_child'] = array('referrer_type' => $referrer_type, 'field_name' => $field_name);
+
+    // Append our submit handler so we can tell the parent window to close
+    // the modal frame and update the node reference field.
+    $form['buttons']['submit']['#submit'][] = '_select2_modalframe_node_form_submit';
+
+  }
+}
+
+function _select2_modalframe_node_form_submit($form, &$form_state){
+  $node = node_load($form_state['nid'], NULL, TRUE);
+  modalframe_close_dialog(array(
+    'operation' => 'updateSingleValue',
+    'value' => $node->title .' [nid:'. $form_state['nid'] .']',
+  ));
+}
 
 function select2_init(){
   $path = drupal_get_path("module",'select2');
@@ -20,6 +65,15 @@ function select2_init(){
    * add select2 auto-complete behaviour, overrides the current drupal auto-complete
   */
   drupal_add_js($path."/select2.js");
+
+  /*
+   * add modaframe child js
+   */
+  if($_GET['modalframe']){
+    modalframe_child_js();
+  }else{
+    modalframe_parent_js();
+  }
 }
 
 
@@ -32,22 +86,207 @@ function select2_menu(){
     'type' => MENU_SUGGESTED_ITEM,
   );
 
+  $items['select2/%ctools_js/add/%'] = array(
+    //'title' => 'Login',
+    'page callback' => 'modal_forms_login',
+    'page arguments' => array(1,3,4),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
+/*
+ * Converts drupal default auto-complete response to an array of objects, {id: "",text:"","nid": "if nodereference"}
+ */
+function _drupal_ac_to_object($vals,$is_nr = false){
+  $vals_ob = array();
+
+  if(!empty($vals)){
+    foreach($vals as $key => &$val){
+      $val_ob = new stdClass();
+      $val_ob->id = $key;
+
+      //parse back the string as it was before it passed through check_plain
+      $val_ob->text = html_entity_decode(strip_tags($val),ENT_QUOTES,'UTF-8');
+
+      if($is_nr){
+        //parse node id and attach it to the select data for easier access on the client side
+        preg_match('/^(?:\s*|(.*) )?\[\s*nid\s*:\s*(\d+)\s*\]$/', $val_ob->id, $matches);
+        if (!empty($matches)) {
+          // Explicit [nid:n].
+          list(, $title, $nid) = $matches;
+          $val_ob->nid = $nid;
+        }
+      }
+
+      array_push($vals_ob,$val_ob);
+    }
+  }
+
+  return $vals_ob;
+}
+
+function _allowed_cck_node_type($var){
+  if(!$var){
+    return false;
+  }
+
+  return true;
+}
+
+function _allowed_cck_node_names(&$val,$key){
+  $types = node_get_types("names");
+  $val = $types[$val];
+}
 
 function _select2_autocomplete(){
-  $url = $_GET['url'];
-  $query = $_GET['term'];
 
-  $fullpath = $url."/".$query;
+  $url = $_GET['url'];
+  $term = $_GET['term'];
+  $field_id = $_GET['field_id'];
+
+  $fullpath = $url."/".$term;
+
+  //detect and remove the host, clean up the first backslash
+  $url_parse = parse_url($fullpath);
+  $real_path = ltrim($url_parse['path'],"/");
+
+  //change the url to become the real autocomplete path
+  $_GET['q'] = $real_path;
+
+  //start capturing output events
+  ob_start();
+  menu_execute_active_handler();
+  $output = ob_get_clean();
+
+  //decode the values that you got from ob_get_clean
+  $vals = json_decode($output,true);
+
+  //starting the response object
+  $ob = new stdClass();
+  $ob->term = $term;
+  $ob->input_id = $_GET['field_id'];
+  $ob->custom = false;
+
+  if(arg(0) == 'nodereference'){
+    $fields = content_fields();
+
+    $ob->cck_field = arg(2);
+    $ob->cck = $fields[$ob->cck_field];
+
+    $ob->allow_nodes = array_filter($ob->cck['referenceable_types'],'_allowed_cck_node_type');
+    array_walk($ob->allow_nodes, '_allowed_cck_node_names');
+
+    $ob->is_nr = true;
+  }else{
+    $ob->is_nr = false;
+  }
+
+  //convert the drupal ac json response to object of arrays
+  $ob->vals = _drupal_ac_to_object($vals,$ob->is_nr);
+
+  //output the response object
+  print drupal_json($ob);
+  exit();
+}
+
+function _add_node_form(){
+  static $already_added = FALSE;
+
+
+  // Include the CTools tools that we need.
+  ctools_include('ajax');
+  ctools_include('modal');
+
+  // Add CTools' javascript to the page.
+  ctools_modal_add_js();
+
+  //adding bootstrap css
+  ctools_add_css("select2-modal",'select2','');
+
+  $js_settings = array(
+    'modal-node-form' => array(
+      'modalTheme' => 'CToolsModalNodeForm',
+      'modalSize' => array(
+        'type' => 'scale',
+        'width' => .8,
+        'height' => .8,
+        'addWidth' => 0,
+        'addHeight' => 30,
+        'contentRight' => 25,
+        'contentBottom' => 33
+      ),
+      'modalOptions' => array(
+        'opacity' => 0.8,
+        'background' => 'black',
+      ),
+      'animation' => 'slideDown',
+      'animationSpeed' => 'medium',
+      'closeText' => t('Close'),
+    ),
+
+  );
+
+  drupal_add_js($js_settings, 'setting');
+}
+
+function modal_forms_login($js = NULL,$ct = NULL,$input_id) {
+  global $user;
+
+  ctools_include('node.pages','node',"");
+
+  //set up a dummy node to make sure the form comes in right
+  $node_form = $ct."_node_form";
+  $node = new stdClass();
+  $node->uid = $user->uid;
+  $node->type = $ct;
+  node_object_prepare($node);
 
   /*
-   * detect the current host and remove it automatically
+   * @todo add logic if it's not js callback, maybe simply redirect to the add form page.
    */
-  $real_path = str_replace("http://w.miamitech.org/","",$fullpath);
+  if (!$js) {
+    return drupal_get_form($node_form,$node);
+  }
 
-  //change the url to become
-  $_GET['q'] = $real_path;
-  menu_execute_active_handler();
+  $form = drupal_get_form($node_form,$node);
+
+  ctools_include('modal');
+  ctools_include('ajax');
+
+  $ct_name = node_get_types('name',$node);
+  $form_state = array(
+    'title' => t('Add New ' . $ct_name),
+    'ajax' => TRUE,
+    'args' => array($node)
+  );
+
+  $output = ctools_modal_form_wrapper($node_form, $form_state);
+
+  if (!empty($form_state['executed'])) {
+
+    //initiate the output ajax command array
+    $output = array();
+
+    //the new node that has been created
+    $nid = $form_state['nid'];
+
+    ctools_add_js('ajax-responder');
+
+    //return the new node id back to the select list
+    if($nid){
+      $node = node_load($nid);
+      $val = $node->title . " [nid:$node->nid]";
+      $output[] = ctools_ajax_command_select2_val($input_id,$nid,$val,$node->title);
+    }
+
+    $output[] = ctools_modal_command_dismiss();
+
+  }
+
+  //render output array/string to back to drupal
+  print ctools_ajax_render($output);
+  exit;
 }

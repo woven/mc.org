@@ -4,3 +4,5 @@ package = MC.org
 core = 6.x
 dependencies[] = jquery_ui
 dependencies[] = jqmulti
+dependencies[] = modalframe
+dependencies[] = onbeforeunload
