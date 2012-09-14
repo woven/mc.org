@@ -3,7 +3,6 @@ if(jq180){
 Drupal.select2 = {};
 
 
-
 Drupal.select2.nodecreate = function(ct,input_id,title){
     query_ob = {'modalframe':1,'select2_input':input_id,'title':title};
     query_str = jQuery.param(query_ob);
@@ -45,27 +44,75 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
 
 (function($){
 
+    Drupal.select2.getnid = function(value){
+        var regexp = "/.*?\[nid:(.*?)\]/i";
+        var match = regexp.exec(value);
+        if (match != null) {
+            nid = match[1];
+        } else {
+            nid = "";
+        }
+
+        return nid;
+    }
+
+    Drupal.select2.gettitle = function(value){
+        var regexp = /(.*?)\[nid:.*?\]/i;
+        var match = regexp.exec(value);
+        if (match != null) {
+            title = match[1];
+        } else {
+            title = "";
+        }
+
+        return title;
+    }
+
     /*
         scope fo the function is jquery object of the input field
     */
-    Drupal.select2.setVal = function(val){
-        console(val);
+    Drupal.select2.setval = function(val){
         this.val(val);
         select2 = $("#"+this.attr("id")+'-select2');
         data = {id: val, text: val};
-        console(data);
         select2.select2("data",[data]);
+    }
+
+    Drupal.select2.setnr = function(title,nid){
+
+        $this = $(this);
+        $select = $("#"+$this.attr("id")+'-select2');
+
+        //set val & and select 2 data
+        val = title + " [nid:"+nid+"]";
+        data = [{id: val, text: title}];
+        console.log(Drupal.select2.getnid(val));
+        //set the original node reference value
+        $this.val(val);
+
+        //set the select2 value
+        $select.select2("data",data);
     }
 
     Drupal.select2.NodeSubmitCallback = function(args, statusMessages){
         if(args && args.operation == "updateSingleValue"){
-            input = $(args.input);
 
-            this.val(args.value);
-            select2 = $("#"+this.attr("id")+'-select2');
-            data = {id: args.value, text: args.value};
-            console.log(data);
-            select2.select2("data",[data]);
+
+            $this = $("#"+args.input);
+            $select = $("#"+$this.attr("id")+'-select2');
+
+            nid = args.nid;
+            title = args.title;
+
+            //set val & and select 2 data
+            val = title + " [nid:"+nid+"]";
+            data = [{id: val, text: title}];
+
+            //set the original node reference value
+            $this.val(val);
+
+            //set the select2 value
+            $select.select2("data",data);
         }
     };
 
@@ -85,7 +132,7 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
 
                 var select2 = $("<input />").attr("id",input_select2_id).attr("type","hidden");
 
-                //input.hide();
+                input.hide();
                 select2.insertAfter(input);
                 select2.data("input_id",input_id);
 
@@ -127,17 +174,19 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
 
 
                 //on change for the original input field
-                input.on("DISABle-change", function(e) {
+                input.on("change", function(e) {
+
                     var input = $(this);
                     var select2 = $("#"+this.id+"-select2");
                     if(input.val().length){
+                        //nid = Drupal.select2.getnid(input.val());
                         data = {id: input.val(), text: input.val()};
                         select2.select2("data",[data]);
                     }
                 });
 
                 //trigger the change event right away
-                //input.change();
+                input.change();
 
                 //on change select2 logic to sync between original input and select2
                 select2.on("change", function(e){
@@ -145,10 +194,10 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                     var input = $("#"+$.data(this,"input_id"));
                     var select2 = $(this);
 
-                    if(e.val[0] == undefined){
-                        value = "";
-                    }else{
+                    if(e.val.length && e.val[0] != undefined){
                         value = e.val[0];
+                    }else{
+                        value = "";
                     }
 
                     var val_arr = value.split(":::");
@@ -157,6 +206,8 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                         switch(val_arr[0]){
                             case 'newnode':
                                 $term = val_arr[2];
+                                input.val("");
+                                select2.select2("data",[]);
                                 Drupal.select2.nodecreate(val_arr[1],input.attr("id"),val_arr[2]);
                                 break;
                         }

@@ -39,7 +39,7 @@ function select2_late_form_alter(&$form, $form_state, $form_id) {
 
       $form['select2_input'] = array('#type' => 'value', '#value' => $_GET['select2_input']);
 
-      $form['title']['#default_value'] = $_GET['title'];
+      $form['title']['#default_value'] = $_GET['term'];
 
       // Append our submit handler so we can tell the parent window to close
       // the modal frame and update the node reference field.
@@ -50,11 +50,13 @@ function select2_late_form_alter(&$form, $form_state, $form_id) {
 
 function _select2_modalframe_node_form_submit($form, &$form_state){
   $node = node_load($form_state['nid'], NULL, TRUE);
+
   modalframe_close_dialog(array(
     'operation' => 'updateSingleValue',
     'value' => $node->title .' [nid:'. $form_state['nid'] .']',
     'nid'=> $form_state['nid'],
-    'input' => $form_state['values']['select2_input']
+    'input' => $form_state['values']['select2_input'],
+    'title' => $node->title
   ));
 }
 
