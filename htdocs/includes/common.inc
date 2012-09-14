@@ -2527,6 +2527,8 @@ function drupal_clear_js_cache() {
  * We use HTML-safe strings, i.e. with <, > and & escaped.
  */
 function drupal_to_js($var) {
+  return json_encode($var,JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+
   switch (gettype($var)) {
     case 'boolean':
       return $var ? 'true' : 'false'; // Lowercase necessary!
