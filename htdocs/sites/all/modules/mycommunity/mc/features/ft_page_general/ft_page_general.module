@@ -34,15 +34,8 @@ function _mc_page_general_default_about(&$form_state) {
 }
 
 function _mc_page_general_default_about_submit($form, &$form_state) {
-  $alias = 'about';
-  $language = '';
-  $existing = db_fetch_array(db_query("SELECT src, language, pid FROM {url_alias} WHERE dst = '%s' AND language IN('%s', '') ORDER BY language DESC, pid DESC", $alias, $language));
-  if ($existing) {
-    path_set_alias(null, null, $existing['pid']);
-  }
   $nid = $form_state['values']['mc_default_about'];
-  variable_set('mc_default_about_nid', $nid, '', '');
-  path_set_alias('node/'.$nid , 'about');
+  _ft_page_general_change_alias($nid);
 }
 
 
@@ -53,4 +46,28 @@ function ft_page_general_views_query_alter(&$view, &$query){
   if($view->name=='mc_page_menu' && $view->current_display=='block_1'){
     $view->display['block_1']->handler->handlers['field']['title']->query->table_queue['draggableviews_structure_node0']['join']->extra[1]['value'] = 'mc_page_menu_admin';
   }
+}
+
+function ft_page_general_late_form_alter(&$form, &$form_state, $form_id){
+  if($form_id=='draggableviews_view_draggabletable_form_mc_page_menu_admin_page_1'){
+    $form['#submit'][] = '_ft_page_general_about_page_submit';
+  }
+}
+
+function _ft_page_general_about_page_submit($form, &$form_state){
+  foreach($form_state['clicked_button']['#post'] as $name => $value){
+    if(preg_match('/^value0_/i',$name) && $value=='0'){
+      $nid = str_replace('value0_', '',$name);
+      _ft_page_general_change_alias($nid);
+    }
+  }
+}
+
+function _ft_page_general_change_alias($nid ,$alias = 'about', $language = ''){
+  $existing = db_fetch_array(db_query("SELECT src, language, pid FROM {url_alias} WHERE dst = '%s' AND language IN('%s', '') ORDER BY language DESC, pid DESC", $alias, $language));
+  if ($existing) {
+    path_set_alias(null, null, $existing['pid']);
+  }
+  variable_set('mc_default_about_nid', $nid, '', '');
+  path_set_alias('node/'.$nid , 'about');
 }
