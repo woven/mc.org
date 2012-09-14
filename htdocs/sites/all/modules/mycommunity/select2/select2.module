@@ -31,15 +31,20 @@ function select2_jqmulti_libraries(){
 
 
 function select2_late_form_alter(&$form, $form_state, $form_id) {
-  // Alter node form.
-  if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
+  //dsm($form);
+  if($_GET['modalframe']){
+    //dsm($_GET);
+    // Alter node form.
+    if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
 
-    //$form['#noderelationships_child'] = array('referrer_type' => $referrer_type, 'field_name' => $field_name);
+      $form['select2_input'] = array('#type' => 'value', '#value' => $_GET['select2_input']);
 
-    // Append our submit handler so we can tell the parent window to close
-    // the modal frame and update the node reference field.
-    $form['buttons']['submit']['#submit'][] = '_select2_modalframe_node_form_submit';
+      $form['title']['#default_value'] = $_GET['title'];
 
+      // Append our submit handler so we can tell the parent window to close
+      // the modal frame and update the node reference field.
+      $form['buttons']['submit']['#submit'][] = '_select2_modalframe_node_form_submit';
+    }
   }
 }
 
@@ -48,6 +53,8 @@ function _select2_modalframe_node_form_submit($form, &$form_state){
   modalframe_close_dialog(array(
     'operation' => 'updateSingleValue',
     'value' => $node->title .' [nid:'. $form_state['nid'] .']',
+    'nid'=> $form_state['nid'],
+    'input' => $form_state['values']['select2_input']
   ));
 }
 

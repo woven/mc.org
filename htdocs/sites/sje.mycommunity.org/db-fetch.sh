@@ -1,4 +1,4 @@
-dbfile=http://sje.mycommunity.org/db.sql.gz
+dbfile=$1
 branch=sje
 #
 #remove db file if already existing

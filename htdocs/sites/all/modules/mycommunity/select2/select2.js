@@ -1,42 +1,11 @@
-/**
- * Provide the HTML to create the modal dialog.
-
-Drupal.theme.prototype.CToolsModalNodeForm = function () {
-    var html = '';
-    html += '  <div id="ctools-modal">';
-    html += '    <div class="ctools-modal-content">'; // panels-modal-content
-    html += '      <div class="modal-header">';
-    html += '        <a class="close" href="#">X</a>';
-    html += '        <h3 id="modal-title" class="modal-title">&nbsp;</h3>';
-    html += '      </div>';
-    html += '      <div id="modal-content" class="modal-content"></div>';
-    //html += '    <div id="modal-footer" class="modal-footer"><input value="Save" class="button form-submit"> <input type="submit" name="op" id="edit-submit" value="Close" class="button form-cancel"></div>';
-    html += '    </div>';
-    html += '  </div>';
-
-    return html;
-};
-*/
-
-/**
- * Overrides the default modal_display so it would scroll to top automatically after form submit
-
-Drupal.CTools.AJAX.commands.modal_display = function(command) {
-    $('#modal-title').html(command.title);
-    $('#modal-content').html(command.output).scrollTop(0);
-    Drupal.attachBehaviors();
-};
-
-*/
+if(jq180){
 
 Drupal.select2 = {};
 
-Drupal.select2.syncvalue = function(input,key,value){
 
-};
 
-Drupal.select2.nodecreate = function(ct,input_id){
-    query_ob = {'modalframe':1,'input_id':input_id};
+Drupal.select2.nodecreate = function(ct,input_id,title){
+    query_ob = {'modalframe':1,'select2_input':input_id,'title':title};
     query_str = jQuery.param(query_ob);
 
     url = '/node/add/'+ct.replace("_","-")+"?"+query_str;
@@ -45,18 +14,25 @@ Drupal.select2.nodecreate = function(ct,input_id){
         url: url,
         width: $(window).width() - 100,
         height: $(window).height() - 100,
-        autoFit: true,
+        autoFit: false,
         draggable: false,
-        //onSubmit: onSubmitCallback,
+        onSubmit: Drupal.select2.NodeSubmitCallback
+        /*
         customDialogOptions:{
-            autoOpen: false,
+            autoOpen: true,
             buttons : {
                 "Create an account": function() {
                     alert("haha");
                 }
             }
-        }
+        }  */
     };
+
+    //check if modaFrame exists
+    if(!Drupal.modalFrame){
+        console.log("Can't find Drupal.modalFrame/ModalFrame api");
+        return;
+    }
 
     // Open the modal frame.
     Drupal.modalFrame.open(modalOptions);
@@ -68,20 +44,31 @@ Drupal.select2.nodecreate = function(ct,input_id){
 */
 
 (function($){
-/**
-    Drupal.CTools.AJAX.commands.select2_val = function(data){
-        //define the input and select2 shadow input
-        var input = $("#"+data.selector);
-        var select2 = $("#"+data.selector+"-select2");
 
-        //select2 value array
-        select2_data = [{id: data.value, text: data.value_title}];
+    /*
+        scope fo the function is jquery object of the input field
+    */
+    Drupal.select2.setVal = function(val){
+        console(val);
+        this.val(val);
+        select2 = $("#"+this.attr("id")+'-select2');
+        data = {id: val, text: val};
+        console(data);
+        select2.select2("data",[data]);
+    }
 
-        //update both select2 and input with the new node value
-        select2.select2("data",select2_data);
-        input.val(data.value);
+    Drupal.select2.NodeSubmitCallback = function(args, statusMessages){
+        if(args && args.operation == "updateSingleValue"){
+            input = $(args.input);
+
+            this.val(args.value);
+            select2 = $("#"+this.attr("id")+'-select2');
+            data = {id: args.value, text: args.value};
+            console.log(data);
+            select2.select2("data",[data]);
+        }
     };
-*/
+
     Drupal.behaviors.select2 = function (context) {
             $('input.autocomplete:not(.autocomplete-processed)', context).each(function () {
 
@@ -98,7 +85,7 @@ Drupal.select2.nodecreate = function(ct,input_id){
 
                 var select2 = $("<input />").attr("id",input_select2_id).attr("type","hidden");
 
-                input.hide();
+                //input.hide();
                 select2.insertAfter(input);
                 select2.data("input_id",input_id);
 
@@ -128,7 +115,7 @@ Drupal.select2.nodecreate = function(ct,input_id){
                             results: function(data,page){
                                 if(data.is_nr){
                                     for (var node in data.allow_nodes){
-                                        data.vals.push({id:"newnode:::"+node,"text":"Add new "+data.allow_nodes[node]+' ...',custom: true});
+                                        data.vals.push({id:"newnode:::"+node+":::"+data.term,"text":"Add new "+data.allow_nodes[node]+' ...',custom: true});
                                     }
                                 }
 
@@ -140,7 +127,7 @@ Drupal.select2.nodecreate = function(ct,input_id){
 
 
                 //on change for the original input field
-                input.on("change", function(e) {
+                input.on("DISABle-change", function(e) {
                     var input = $(this);
                     var select2 = $("#"+this.id+"-select2");
                     if(input.val().length){
@@ -150,10 +137,11 @@ Drupal.select2.nodecreate = function(ct,input_id){
                 });
 
                 //trigger the change event right away
-                input.change();
+                //input.change();
 
                 //on change select2 logic to sync between original input and select2
-                select2.on("change", function(e) {
+                select2.on("change", function(e){
+
                     var input = $("#"+$.data(this,"input_id"));
                     var select2 = $(this);
 
@@ -168,18 +156,15 @@ Drupal.select2.nodecreate = function(ct,input_id){
                     if(val_arr.length > 1){
                         switch(val_arr[0]){
                             case 'newnode':
-                                //l = $("<a></a>").attr('href',"/select2/ajax/add/"+val_arr[1]+"/"+input.attr("id")).addClass('ctools-use-modal-processed ctools-use-modal ctools-modal-modal-node-form');
-                                //Drupal.CTools.Modal.clickAjaxLink.apply(l);
-
-                                Drupal.select2.nodecreate(val_arr[1],input.attr("id"));
+                                $term = val_arr[2];
+                                Drupal.select2.nodecreate(val_arr[1],input.attr("id"),val_arr[2]);
                                 break;
                         }
                     }else{
                         input.val(value);
                     }
                 });
-
             });
-
     };
 })(jq180);
+}
