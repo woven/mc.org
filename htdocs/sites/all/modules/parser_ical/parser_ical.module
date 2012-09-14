@@ -75,7 +75,9 @@ function _parser_ical_feedapi_parse($feed, $cache = FALSE) {
   }
 
   //* fix incorrect url encoding **/
-  $url = encode_basename($url);
+  if($feed->settings['upload_method']!='url'){
+    $url = encode_basename($url);
+  }
 
   $downloaded_string = _parser_ical_download($url);
 
