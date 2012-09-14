@@ -9,11 +9,14 @@ include_once('ft_event.features.inc');
 
 function ft_event_late_form_alter(&$form, &$form_state, $form_id){
   global $user;
-  if(is_ct_form($form,'event')){
-    if($user->uid > 1){
-      $form['field_place']['#access'] = FALSE;
+
+  if(!is_ct_form($form,'event')){
+    return;
+  }
+
+  if($user->uid > 1){
+      //$form['field_place']['#access'] = FALSE;
       $form['field_online_event']['#access'] = FALSE;
-    }
   }
 }
 
