@@ -32,37 +32,36 @@ scripts[] = "js/elastic.js"
 scripts[] = "js/qtip.js"
 
 ; Stylesheets disable core styles
-stylesheets[all][] = "system-menus.css"
-stylesheets[all][] = "system.css"
-stylesheets[all][] = "filefield.css"
-
-; theme stylesheets
-stylesheets[screen][] = "css/reset.css"
-stylesheets[screen][] = "css/drupal.css"
-stylesheets[all][] = "css/tabs.css"
-stylesheets[screen][] = "css/base.css"
-stylesheets[screen][] = "css/main.css"
-stylesheets[screen][] = "css/custom.css"
-stylesheets[screen][] = "css/fieldset.css"
-stylesheets[screen][] = "css/custom-less.css"
-stylesheets[screen][] = "css/mt.css"
-stylesheets[screen][] = "css/jquery.qtip.min.css"
-stylesheets[screen][] = "js/colorbox/colorbox.css"
-
-stylesheets[all][] = "css/node-webform.css"
-stylesheets[all][] = "views_gallery.css"
-stylesheets[screen][] = "css/buttons.css"
-stylesheets[screen][] = "css/form-confirm.css"
-stylesheets[screen][] = "css/event-flags.css"
-stylesheets[screen][] = "css/search-bar.css"
-stylesheets[screen][] = "css/user.css"
-stylesheets[screen][] = "css/colors.css"
-
-;disable core css files
 stylesheets[all][] = "user.css"
 stylesheets[all][] = "node.css"
 stylesheets[all][] = "ctools.css"
 stylesheets[all][] = "defaults.css"
+stylesheets[all][] = "system-menus.css"
+stylesheets[all][] = "system.css"
+stylesheets[all][] = "filefield.css"
+stylesheets[all][] = "modalframe/css/modalframe.parent.css"
+
+;theme stylesheets
+stylesheets[all][] = "css/reset.css"
+stylesheets[all][] = "css/drupal.css"
+stylesheets[all][] = "css/tabs.css"
+stylesheets[all][] = "css/base.css"
+stylesheets[all][] = "css/main.css"
+stylesheets[all][] = "css/custom.css"
+stylesheets[all][] = "css/fieldset.css"
+stylesheets[all][] = "css/custom-less.css"
+stylesheets[all][] = "css/mt.css"
+stylesheets[all][] = "css/jquery.qtip.min.css"
+stylesheets[all][] = "js/colorbox/colorbox.css"
+stylesheets[all][] = "css/modalframe.parent.css"
+stylesheets[all][] = "css/node-webform.css"
+stylesheets[all][] = "views_gallery.css"
+stylesheets[all][] = "css/buttons.css"
+stylesheets[all][] = "css/form-confirm.css"
+stylesheets[all][] = "css/event-flags.css"
+stylesheets[all][] = "css/search-bar.css"
+stylesheets[all][] = "css/user.css"
+stylesheets[all][] = "css/colors.css"
 
 ; conditional styles for ie 7 and 6
 conditional-stylesheets[if lte IE 7][all][] = css/ie.css

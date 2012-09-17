@@ -1,5 +1,0 @@
-name = "SJE MC Theme" 
-description = "Theme for SJE.org"
-core = "6.x"
-engine = "phptemplate"
-base theme = mc_base
