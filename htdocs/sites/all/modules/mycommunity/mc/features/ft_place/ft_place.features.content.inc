@@ -873,8 +873,7 @@ Open in the evening',
     'widget' => array(
       'default_value' => array(
         '0' => array(
-          'value' => 0,
-          '_error_element' => 'default_value_widget][field_open_in_evening][value',
+          'value' => 'Not open in the evening',
         ),
       ),
       'default_value_php' => NULL,
@@ -943,8 +942,7 @@ Open on weekends',
     'widget' => array(
       'default_value' => array(
         '0' => array(
-          'value' => 'Open on weekends',
-          '_error_element' => 'default_value_widget][field_open_on_weekends][value',
+          'value' => 'Not open on weekends',
         ),
       ),
       'default_value_php' => NULL,
