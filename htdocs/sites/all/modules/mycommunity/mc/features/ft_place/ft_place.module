@@ -26,4 +26,6 @@ function ft_place_late_form_alter(&$form, &$form_state, $form_id){
     $form['body_field']['#access'] = false;
   }
 
+  $form['field_list_image']['#description'] = t("Add photos for this place. The first photo will be used as the main photo for this place.");
+
 }
