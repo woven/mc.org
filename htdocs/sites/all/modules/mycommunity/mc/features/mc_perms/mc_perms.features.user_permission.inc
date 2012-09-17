@@ -750,7 +750,8 @@ function mc_perms_user_default_permissions() {
     'name' => 'create place content',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'community manager',
+      '1' => 'authenticated user',
+      '2' => 'community manager',
     ),
   );
 
