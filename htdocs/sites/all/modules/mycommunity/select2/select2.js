@@ -20,8 +20,8 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
 
     var modalOptions = {
         url: url,
-        //width: $(window).width() - 100,
-        width: 500,
+        width: $(window).width() - 100,
+        //width: 500,
         height: $(window).height() - 100,
         autoFit: false,
         draggable: false,
@@ -158,7 +158,7 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                         multiple: true,
                         minimumInputLength: 1,
                         maximumSelectionSize: 1,
-                        width: '90%',
+                        width: '70%',
                         formatResult: Drupal.select2.template,
                         //formatSelection: Drupal.select2.template,
                         ajax: {
