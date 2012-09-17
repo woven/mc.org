@@ -22,16 +22,13 @@ function select2_jqmulti_libraries(){
 
 /*
  * @todo remove misc/autocomplete.js through hooks instead of manually removing the file.
- * @todo imrpove the speed and logic of auto-complete callback
  * @todo use the hooks of jqmulti to add the jq1.8 dependecies
- * @todo avoid hacking line 978 @ nodereference.module
  * @todo package jquery_update options at http://w.miamitech.org/admin/settings/jquery_update
  * @todo find a fix for the drupal_to_json fix @ includes.inc
 */
 
 
 function select2_late_form_alter(&$form, $form_state, $form_id) {
-  //dsm($form);
   if($_GET['modalframe']){
     //dsm($_GET);
     // Alter node form.
