@@ -3,6 +3,15 @@ if(jq180){
 Drupal.select2 = {};
 
 
+Drupal.select2.template = function(item){
+
+    if(item.custom != undefined && item.custom){
+        return "<div class='select2-result-special'>"+item.text+"</div>";
+    }
+
+    return item.text;
+}
+
 Drupal.select2.nodecreate = function(ct,input_id,title){
     query_ob = {'modalframe':1,'select2_input':input_id,'term':title};
     query_str = jQuery.param(query_ob);
@@ -86,7 +95,7 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
         //set val & and select 2 data
         val = title + " [nid:"+nid+"]";
         data = [{id: val, text: title}];
-        console.log(Drupal.select2.getnid(val));
+        //console.log(Drupal.select2.getnid(val));
         //set the original node reference value
         $this.val(val);
 
@@ -149,6 +158,8 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                         minimumInputLength: 1,
                         maximumSelectionSize: 1,
                         width: '60%',
+                        formatResult: Drupal.select2.template,
+                        //formatSelection: Drupal.select2.template,
                         ajax: {
                             url: "/select2/autocomplete",
                             dataType: 'json',

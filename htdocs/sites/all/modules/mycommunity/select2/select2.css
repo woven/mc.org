@@ -1,0 +1,15 @@
+
+#select2-container-multi .select2-choices .select2-search-choice{
+    line-height: 26px;
+    border: none;
+    margin: 0px;
+}
+
+.select2-container-multi .select2-choices {
+
+}
+
+.select2-result .select2-result-label .select2-result-special{
+    text-align: center;
+    font-weight: bold;
+}

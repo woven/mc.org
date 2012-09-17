@@ -29,6 +29,7 @@ function select2_jqmulti_libraries(){
 
 
 function select2_late_form_alter(&$form, $form_state, $form_id) {
+  dsm($form);
   if($_GET['modalframe']){
     //dsm($_GET);
     // Alter node form.
@@ -77,6 +78,7 @@ function select2_init(){
    * add select2 auto-complete behaviour, overrides the current drupal auto-complete
   */
   drupal_add_js($path."/select2.js");
+  drupal_add_css($path."/select2.css");
 
   /*
    * add modaframe child js
