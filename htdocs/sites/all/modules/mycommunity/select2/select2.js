@@ -20,7 +20,8 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
 
     var modalOptions = {
         url: url,
-        width: $(window).width() - 100,
+        //width: $(window).width() - 100,
+        width: 500,
         height: $(window).height() - 100,
         autoFit: false,
         draggable: false,
@@ -172,14 +173,15 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                             },
                             results: function(data,page){
                                 if(data.is_nr){
+                                    //add newnode field
                                     for (var node in data.allow_nodes){
-                                        data.vals.push({id:"newnode:::"+node+":::"+data.term,"text":"Add new "+data.allow_nodes[node]+' ...',custom: true});
+                                       data.vals.push({id:"newnode:::"+node+":::"+data.term,"text":"Add new "+data.allow_nodes[node]+' ...',custom: true});
                                     }
-                                }
 
-                                //check if the noderefcreate is enabled (auto create of nodes through title);
-                                if(data.cck.widget.type == "noderefcreate_autocomplete"){
-                                    data.vals.push({id:'justuse:::'+data.term,"text":"Just use: " + data.term,custom: true});
+                                    //check if the noderefcreate is enabled (auto create of nodes through title);
+                                    if(data.cck.widget.type == "noderefcreate_autocomplete"){
+                                        data.vals.push({id:'justuse:::'+data.term,"text":"Just use: " + data.term,custom: true});
+                                    }
                                 }
 
                                 return {results: data.vals };
@@ -215,18 +217,18 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                         value = "";
                     }
 
-                    var val_arr = value.split(":::");
+                    var vals = value.split(":::");
 
-                    if(val_arr.length > 1){
-                        switch(val_arr[0]){
+                    if(vals.length > 1){
+                        switch(vals[0]){
                             case 'newnode':
-                                term = val_arr[2];
+                                term = vals[2];
                                 input.val("");
                                 select2.select2("data",[]);
-                                Drupal.select2.nodecreate(val_arr[1],input.attr("id"),term);
+                                Drupal.select2.nodecreate(vals[1],input.attr("id"),term);
                             break;
                             case 'justuse':
-                                term = val_arr[1];
+                                term = vals[1];
                                 input.val(term);
                                 select2.select2("data",[{id:term,text:term}]);
                             break;
