@@ -4,7 +4,7 @@ Drupal.select2 = {};
 
 
 Drupal.select2.nodecreate = function(ct,input_id,title){
-    query_ob = {'modalframe':1,'select2_input':input_id,'title':title};
+    query_ob = {'modalframe':1,'select2_input':input_id,'term':title};
     query_str = jQuery.param(query_ob);
 
     url = '/node/add/'+ct.replace("_","-")+"?"+query_str;

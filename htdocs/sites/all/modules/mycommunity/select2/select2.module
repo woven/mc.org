@@ -45,16 +45,22 @@ function select2_late_form_alter(&$form, $form_state, $form_id) {
   }
 }
 
+function _get_nr_value($nid,$title){
+  return $title .' [nid:'. $nid .']';
+}
+
 function _select2_modalframe_node_form_submit($form, &$form_state){
   $node = node_load($form_state['nid'], NULL, TRUE);
 
-  modalframe_close_dialog(array(
-    'operation' => 'updateSingleValue',
-    'value' => $node->title .' [nid:'. $form_state['nid'] .']',
-    'nid'=> $form_state['nid'],
-    'input' => $form_state['values']['select2_input'],
-    'title' => $node->title
-  ));
+  if($node->nid && !empty($form_state['values']['select2_input'])){
+    modalframe_close_dialog(array(
+      'operation' => 'updateSingleValue',
+      'value' => _get_nr_value($node->nid,$node->title),
+      'nid'=> $node->nid,
+      'input' => $form_state['values']['select2_input'],
+      'title' => $node->title
+    ));
+  }
 }
 
 function select2_init(){
