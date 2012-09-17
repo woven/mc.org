@@ -201,11 +201,11 @@ function ft_event_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'event_range_next';
   $strongarm->value = array(
-    'year' => 2012,
-    'month' => '09',
-    'day' => '12',
-    'hour' => '21',
-    'minute' => '11',
+    'year' => 2013,
+    'month' => '02',
+    'day' => '10',
+    'hour' => '07',
+    'minute' => '30',
     'second' => '00',
   );
   $export['event_range_next'] = $strongarm;
@@ -215,11 +215,11 @@ function ft_event_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'event_range_prev';
   $strongarm->value = array(
-    'year' => 0,
-    'month' => '00',
-    'day' => '00',
-    'hour' => '00',
-    'minute' => '00',
+    'year' => 2012,
+    'month' => '09',
+    'day' => '14',
+    'hour' => '23',
+    'minute' => '07',
     'second' => '00',
   );
   $export['event_range_prev'] = $strongarm;

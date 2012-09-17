@@ -149,7 +149,7 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
 
                 select2.select2({
                         createSearchChoice: function (term,data){
-                            return {id:term, text:"Just use: " + term,custom: data};
+                            //return {id:term, text:"Just use: " + term,custom: data};
                         },
                         dropdownCssClass: "drupal-autocomplete-select2",
                         //placeholder: "Search for a movie",
@@ -157,7 +157,7 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                         multiple: true,
                         minimumInputLength: 1,
                         maximumSelectionSize: 1,
-                        width: '60%',
+                        width: '90%',
                         formatResult: Drupal.select2.template,
                         //formatSelection: Drupal.select2.template,
                         ajax: {
@@ -177,7 +177,11 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                                     }
                                 }
 
-                                data.vals.push({id:data.term,"text":"Just use: " + data.term,custom: true});
+                                //check if the noderefcreate is enabled (auto create of nodes through title);
+                                if(data.cck.widget.type == "noderefcreate_autocomplete"){
+                                    data.vals.push({id:'justuse:::'+data.term,"text":"Just use: " + data.term,custom: true});
+                                }
+
                                 return {results: data.vals };
                             }
                         }
@@ -216,11 +220,16 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                     if(val_arr.length > 1){
                         switch(val_arr[0]){
                             case 'newnode':
-                                $term = val_arr[2];
+                                term = val_arr[2];
                                 input.val("");
                                 select2.select2("data",[]);
-                                Drupal.select2.nodecreate(val_arr[1],input.attr("id"),val_arr[2]);
-                                break;
+                                Drupal.select2.nodecreate(val_arr[1],input.attr("id"),term);
+                            break;
+                            case 'justuse':
+                                term = val_arr[1];
+                                input.val(term);
+                                select2.select2("data",[{id:term,text:term}]);
+                            break;
                         }
                     }else{
                         input.val(value);

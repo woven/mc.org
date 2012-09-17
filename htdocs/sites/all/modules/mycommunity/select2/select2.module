@@ -29,7 +29,6 @@ function select2_jqmulti_libraries(){
 
 
 function select2_late_form_alter(&$form, $form_state, $form_id) {
-  dsm($form);
   if($_GET['modalframe']){
     //dsm($_GET);
     // Alter node form.
