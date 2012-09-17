@@ -25,6 +25,18 @@ function mc_event_ui_views_default_views() {
       'field' => 'group_nid',
       'relationship' => 'none',
     ),
+    'field_place_nid' => array(
+      'label' => 'Place',
+      'required' => 0,
+      'delta' => -1,
+      'id' => 'field_place_nid',
+      'table' => 'node_data_field_place',
+      'field' => 'field_place_nid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('fields', array(
     'phpcode_5' => array(
@@ -788,7 +800,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'override' => array(
         'button' => 'Override',
       ),
-      'relationship' => 'none',
+      'relationship' => 'field_place_nid',
     ),
     'field_online_event_value' => array(
       'label' => '',
@@ -862,7 +874,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'hide_alter_empty' => 1,
       'value' => '<?php 
 if($data->location_name!=\'Exact Location TBD\'){
-echo _mc_event_section_formatted_location($data->location_name, $data->node_data_field_place_field_online_event_value);
+echo _mc_event_section_formatted_location($data->node_node_data_field_place__location_name, $data->node_data_field_online_event_field_online_event_value);
 }
 ?>',
       'exclude' => 1,
