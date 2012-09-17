@@ -19,13 +19,11 @@ function ft_place_late_form_alter(&$form, &$form_state, $form_id){
 
   global $user;
 
-  dsm($form);
-  formfilter_filter_form($form,array(
-     array('group_hideus')
-  ));
-
+  //hide group_hideus and taxonomy fieldset
   if($user > 0){
     $form['group_hideus']['#access'] = false;
+    $form['taxonomy']['#access'] = false;
+    $form['body_field']['#access'] = false;
   }
 
 }

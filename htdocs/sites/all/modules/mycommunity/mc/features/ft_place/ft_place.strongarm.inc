@@ -158,18 +158,19 @@ function ft_place_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'content_extra_weights_place';
   $strongarm->value = array(
-    'title' => '10',
-    'body_field' => '11',
-    'revision_information' => '35',
-    'author' => '34',
-    'options' => '36',
-    'comment_settings' => '39',
-    'menu' => '33',
-    'taxonomy' => '14',
-    'path' => '37',
-    'locations' => '31',
+    'title' => '9',
+    'body_field' => '10',
+    'revision_information' => '22',
+    'author' => '21',
+    'options' => '23',
+    'comment_settings' => '25',
+    'menu' => '20',
+    'taxonomy' => '15',
+    'path' => '24',
+    'locations' => '17',
     'og_nodeapi' => '8',
-    'print' => '38',
+    'xmlsitemap' => '16',
+    'nodewords' => '19',
   );
   $export['content_extra_weights_place'] = $strongarm;
 
@@ -421,7 +422,7 @@ function ft_place_strongarm() {
       'add' => '1',
     ),
     'form' => array(
-      'weight' => '31',
+      'weight' => '17',
       'collapsible' => 0,
       'collapsed' => 0,
       'fields' => array(
@@ -447,6 +448,7 @@ function ft_place_strongarm() {
         ),
         'province' => array(
           'collect' => '1',
+          'widget' => 'autocomplete',
           'default' => '',
           'weight' => '10',
         ),
@@ -467,7 +469,7 @@ function ft_place_strongarm() {
       ),
     ),
     'display' => array(
-      'weight' => '31',
+      'weight' => '17',
       'hide' => array(
         'name' => 0,
         'street' => 0,
@@ -711,24 +713,24 @@ function ft_place_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'nodeformsettings_place';
   $strongarm->value = array(
-    'nfs_submission_body_rows' => '20',
+    'nfs_submission_body_rows' => '5',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
-    'nfs_revisionlog' => '0',
+    'nfs_revisionlog' => '1',
     'nfs_author_information' => '0',
     'nfs_path' => '0',
     'nfs_menu' => '0',
     'nfs_publishingoptions' => '0',
     'nfs_comments' => '0',
     'nfs_taxonomy' => '0',
-    'nfs_preview' => '0',
+    'nfs_preview' => '1',
     'nfs_cancel' => array(
-      'nfs_cancel_status' => '1',
+      'nfs_cancel_status' => '0',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_place'] = $strongarm;
@@ -816,7 +818,7 @@ function ft_place_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'og_content_type_usage_place';
-  $strongarm->value = 'group_post_standard';
+  $strongarm->value = 'omitted';
   $export['og_content_type_usage_place'] = $strongarm;
 
   $strongarm = new stdClass;
