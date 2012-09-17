@@ -85,12 +85,6 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: access environment indicator
-  $permissions['access environment indicator'] = array(
-    'name' => 'access environment indicator',
-    'roles' => array(),
-  );
-
   // Exported permission: access own webform results
   $permissions['access own webform results'] = array(
     'name' => 'access own webform results',
@@ -271,13 +265,10 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: add stuff page_general
-  $permissions['add stuff page_general'] = array(
-    'name' => 'add stuff page_general',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'community manager',
-    ),
+  // Exported permission: add stuff page
+  $permissions['add stuff page'] = array(
+    'name' => 'add stuff page',
+    'roles' => array(),
   );
 
   // Exported permission: add stuff place
@@ -408,6 +399,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer jquery media
   $permissions['administer jquery media'] = array(
     'name' => 'administer jquery media',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer mc_deploy
+  $permissions['administer mc_deploy'] = array(
+    'name' => 'administer mc_deploy',
     'roles' => array(),
   );
 
@@ -736,25 +733,25 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: create page_general content
-  $permissions['create page_general content'] = array(
-    'name' => 'create page_general content',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'community manager',
-    ),
+  // Exported permission: create page content
+  $permissions['create page content'] = array(
+    'name' => 'create page content',
+    'roles' => array(),
   );
 
-  // Exported permission: create page_general sitewide
-  $permissions['create page_general sitewide'] = array(
-    'name' => 'create page_general sitewide',
+  // Exported permission: create page sitewide
+  $permissions['create page sitewide'] = array(
+    'name' => 'create page sitewide',
     'roles' => array(),
   );
 
   // Exported permission: create place content
   $permissions['create place content'] = array(
     'name' => 'create place content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: create place sitewide
@@ -906,19 +903,19 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: delete any page_general content
-  $permissions['delete any page_general content'] = array(
-    'name' => 'delete any page_general content',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'community manager',
-    ),
+  // Exported permission: delete any page content
+  $permissions['delete any page content'] = array(
+    'name' => 'delete any page content',
+    'roles' => array(),
   );
 
   // Exported permission: delete any place content
   $permissions['delete any place content'] = array(
     'name' => 'delete any place content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any taxonomy_feature content
@@ -1037,12 +1034,10 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: delete own page_general content
-  $permissions['delete own page_general content'] = array(
-    'name' => 'delete own page_general content',
-    'roles' => array(
-      '0' => 'authenticated user',
-    ),
+  // Exported permission: delete own page content
+  $permissions['delete own page content'] = array(
+    'name' => 'delete own page content',
+    'roles' => array(),
   );
 
   // Exported permission: delete own place content
@@ -1184,13 +1179,10 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: edit any page_general content
-  $permissions['edit any page_general content'] = array(
-    'name' => 'edit any page_general content',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'community manager',
-    ),
+  // Exported permission: edit any page content
+  $permissions['edit any page content'] = array(
+    'name' => 'edit any page content',
+    'roles' => array(),
   );
 
   // Exported permission: edit any place content
@@ -1265,6 +1257,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit meta tag ROBOTS
   $permissions['edit meta tag ROBOTS'] = array(
     'name' => 'edit meta tag ROBOTS',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit mimemail user settings
+  $permissions['edit mimemail user settings'] = array(
+    'name' => 'edit mimemail user settings',
     'roles' => array(),
   );
 
@@ -1356,12 +1354,10 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: edit own page_general content
-  $permissions['edit own page_general content'] = array(
-    'name' => 'edit own page_general content',
-    'roles' => array(
-      '0' => 'authenticated user',
-    ),
+  // Exported permission: edit own page content
+  $permissions['edit own page content'] = array(
+    'name' => 'edit own page content',
+    'roles' => array(),
   );
 
   // Exported permission: edit own place content
@@ -1369,6 +1365,7 @@ function mc_perms_user_default_permissions() {
     'name' => 'edit own place content',
     'roles' => array(
       '0' => 'authenticated user',
+      '1' => 'community manager',
     ),
   );
 
@@ -1506,6 +1503,18 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: search by category
+  $permissions['search by category'] = array(
+    'name' => 'search by category',
+    'roles' => array(),
+  );
+
+  // Exported permission: search by node type
+  $permissions['search by node type'] = array(
+    'name' => 'search by node type',
+    'roles' => array(),
+  );
+
   // Exported permission: search content
   $permissions['search content'] = array(
     'name' => 'search content',
@@ -1591,6 +1600,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: use advanced search
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
+    'roles' => array(),
+  );
+
+  // Exported permission: use keyword search
+  $permissions['use keyword search'] = array(
+    'name' => 'use keyword search',
     'roles' => array(),
   );
 
