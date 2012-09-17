@@ -9,5 +9,23 @@ function ft_place_preprocess($vars,$hook){
             $cblock->subject = t("Where it's at"); 
         }
     }
-    
+}
+
+
+function ft_place_late_form_alter(&$form, &$form_state, $form_id){
+  if(!is_ct_form($form,'place')){
+      return;
+  }
+
+  global $user;
+
+  dsm($form);
+  formfilter_filter_form($form,array(
+     array('group_hideus')
+  ));
+
+  if($user > 0){
+    $form['group_hideus']['#access'] = false;
+  }
+
 }
