@@ -116,7 +116,12 @@ function _miamitech_get_featured_carousel_array($field_array){
 }
 
 function miamitech_nd_location_address($field) {
-  $node = node_load($field['object']->field_place[0]['nid']);
+  if($field['object']->type=='event'){
+    $node = node_load($field['object']->field_place[0]['nid']);
+  }
+  else{
+    $node = $field['object'];
+  }
   if($node->field_online_event[0]['value']==1){
     return 'Online Event';
   }

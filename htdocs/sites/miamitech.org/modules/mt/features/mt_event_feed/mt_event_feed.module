@@ -304,17 +304,84 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
               $node->field_online_event['0']['value'] = 1;
             }
             else {
-              $node->locations['0']['name'] = $parts['name'];
-              $node->locations['0']['street'] = $parts['address'];
-              $node->locations['0']['city'] = $parts['city'];
-              $node->locations['0']['province'] = $parts['state'];
-              $node->locations['0']['postal_code'] = $parts['zip'];
+              $temp_node = node_load($node->nid);
+              if((!isset($temp_node->field_place['0']['nid']) || empty($temp_node->field_place['0']['nid'])) && !isset($node->field_place['0']['nid'])){
+                $nid = _mt_event_feed_find_similar_place($parts['name'], $parts['address']);
+                if(!empty($nid)){
+                  $location_node = node_load($nid);
+                }
+                else {
+                  global $user;
+                  $location_node = new StdClass();
+                  $location_node->type = 'place';
+                  $location_node->status = 1;
+                  $location_node->title = $parts['name'];
+                  $location_node->uid = $user->uid;
+
+                  $location_node->locations['0']['name'] = $parts['name'];
+                  $location_node->locations['0']['street'] = $parts['address'];
+                  $location_node->locations['0']['city'] = $parts['city'];
+                  $location_node->locations['0']['province'] = $parts['state'];
+                  $location_node->locations['0']['postal_code'] = $parts['zip'];
+
+                  node_save($location_node);
+                }
+
+                $node->field_place['0']['nid'] = $location_node->nid;
+              }
+              else {
+                if(isset($node->field_place['0']['nid'])){
+                  $location_node = node_load($node->field_place['0']['nid']);
+                }
+                else{
+                  $location_node = node_load($temp_node->field_place['0']['nid']);
+                }
+                $location_node->title = $parts['name'];
+                $location_node->locations['0']['name'] = $parts['name'];
+                $location_node->locations['0']['street'] = $parts['address'];
+                $location_node->locations['0']['city'] = $parts['city'];
+                $location_node->locations['0']['province'] = $parts['state'];
+                $location_node->locations['0']['postal_code'] = $parts['zip'];
+
+                node_save($location_node);
+              }
             }
           }
           if($sub_field=='geo'){
-            $parts = explode(';', $feed_element);
-            $node->locations['0']['latitude'] = $parts['0'];
-            $node->locations['0']['longitude'] = $parts['1'];
+            $temp_node = node_load($node->nid);
+            if((!isset($temp_node->field_place['0']['nid']) || empty($temp_node->field_place['0']['nid'])) && !isset($node->field_place['0']['nid'])){
+              global $user;
+
+              $location_node = new StdClass();
+              $location_node->type = 'place';
+              $location_node->status = 1;
+              $location_node->title = $parts['name'];
+              $location_node->uid = $user->uid;
+
+              $parts = explode(';', $feed_element);
+              $location_node->locations['0']['latitude'] = $parts['0'];
+              $location_node->locations['0']['longitude'] = $parts['1'];
+
+              node_save($location_node);
+
+              $node->field_place['0']['nid'] = $location_node->nid;
+
+            }
+            else{
+              if(isset($node->field_place['0']['nid'])){
+                $location_node = node_load($node->field_place['0']['nid']);
+              }
+              else{
+                $location_node = node_load($temp_node->field_place['0']['nid']);
+              }
+
+              $parts = explode(';', $feed_element);
+              $location_node->locations['0']['latitude'] = $parts['0'];
+              $location_node->locations['0']['longitude'] = $parts['1'];
+
+              node_save($location_node);
+            }
+
           }
         }
 
@@ -322,6 +389,13 @@ function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
       return $node;
     }
   }
+}
+
+function _mt_event_feed_find_similar_place($name, $address){
+  $name = trim($name);
+  $address = trim($address);
+  $nid = db_result(db_query("SELECT li.nid FROM location l JOIN location_instance li ON l.lid=li.lid WHERE SOUNDEX(name)=SOUNDEX('%s') AND SOUNDEX(street)=SOUNDEX('%s') LIMIT 1", $name, $address));
+  return $nid;
 }
 
 function mt_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
