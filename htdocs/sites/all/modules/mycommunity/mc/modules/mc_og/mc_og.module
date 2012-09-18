@@ -111,7 +111,7 @@ function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
       '#type' => 'select',
       '#options' => array(
           'members' => 'Members',
-          'non-members' => 'Non Members',
+          //'non-members' => 'Non Members',
           'admins' => 'Group Managers',
           'all' => 'All'
        ),
