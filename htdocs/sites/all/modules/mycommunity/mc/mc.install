@@ -149,6 +149,7 @@ function mc_update_6017(){
     variable_set('formfilter',array());
 }
 
+
 /**
  * Clear variable 'pathauto_node_pattern'
 */
@@ -190,4 +191,11 @@ function mc_update_6022(){
  */
 function mc_update_6023(){
   module_disable(array('smartcrop',true));
+}
+
+/**
+ * enable fast_404 module
+ */
+function mc_update_6024(){
+  module_disable(array('fast_404',true));
 }

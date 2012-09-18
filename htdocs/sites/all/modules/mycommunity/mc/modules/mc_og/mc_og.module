@@ -75,6 +75,15 @@ function _mc_og_post_visibility_validate($form, &$form_state) {
 
 function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
 
+
+  if($form_id == "_groupadmin_manage"){
+    //dsm($form);
+    $form['filter']['#type'] = 'item';
+    $form['filter']['#prefix'] = '<div class="search-area">';
+    $form['filter']['#suffix'] = '</div>';
+    //dsm($form);
+  }
+
   if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form' && og_is_group_post_type($form['#node']->type)) {
     $og = &$form['og_nodeapi'];
     $og_visible = &$og['visible'];

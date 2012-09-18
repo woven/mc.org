@@ -64,6 +64,7 @@ stylesheets[all][] = "css/event-flags.css"
 stylesheets[all][] = "css/search-bar.css"
 stylesheets[all][] = "css/user.css"
 stylesheets[all][] = "css/colors.css"
+stylesheets[all][] = "css/groupadmin.css"
 
 ; conditional styles for ie 7 and 6
 conditional-stylesheets[if lte IE 7][all][] = css/ie.css
