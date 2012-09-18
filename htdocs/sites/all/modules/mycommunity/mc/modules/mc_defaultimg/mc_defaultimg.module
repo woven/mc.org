@@ -17,6 +17,14 @@ function mc_defaultimg_menu() {
   return $items;
 }
 
+function file_load_default($type = "generic"){
+  $file = field_file_load('');
+  $lib = libraries_get_path('mc_defaultimage');
+  $path = $lib . "/" . $type . ".png";
+
+  return $fid;
+}
+
 /*
  * @todo make it work with default image settings per field
  * @todo check if files exist, and use site generic if it does
@@ -70,6 +78,10 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
         $newfid = field_file_load($fid_ct);
       }
     }
+     /*
+    if(is_null($newfid)){
+        $newfid = file_load_default($node->type);
+    }  */
 
     if($newfid){
       $element['#item'] = $newfid;
