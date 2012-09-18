@@ -4,7 +4,6 @@
  * hook_disable
  * disables google_cse on module uninstall;
  */
-
 function ft_search_cse_disable(){
   module_disable(array("google_cse"));
 }
