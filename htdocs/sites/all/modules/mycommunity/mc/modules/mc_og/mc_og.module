@@ -118,15 +118,12 @@ function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
       '#default_value' => $active_filter
     );
 
-
-
     $form['filter']['filter_submit'] = array(
       '#type' => 'submit',
       '#value' => 'Filter'
     );
 
-    $active_filter = $form['filter']['filter_select']['#default_value'];
-    dsm(_groupadmin_session('sticky'));
+
     // Show page title with description of list and name of Group.
     $tvars = array(
       '@status' => $form['filter']['filter_select']['#options'][$active_filter],
