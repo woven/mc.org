@@ -15,7 +15,7 @@ function mc_search_core_theme_registry_alter(&$theme_registry) {
 
 function mc_search_core_preprocess_search_result(&$variables){
   $variables['template_files'][]='search-result';
-  if(function_exists('mc_search_core_ui_imagecache_default_presets')){
+  if(function_exists('mc_search_core_imagecache_default_presets')){
     $file=$variables['result']['node']->field_list_image['0'];
     $image = theme('imagecache', "search_result_image" ,$file['filepath']);
     $link=l($image, $variables['url'], array('html'=>TRUE));
