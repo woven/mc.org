@@ -16,8 +16,16 @@ fieldset{
     border: 1px solid #CCC;
     -moz-border-radius: 4px 4px 4px 4px;
     -webkit-border-radius: 4px 4px 4px 4px;
-    margin: 20px 0;
+    margin: 25px 0;
     position: relative;
+}
+
+fieldset .fieldset-content:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
 fieldset legend {
