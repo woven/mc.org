@@ -6,7 +6,8 @@ define("MC_DEFAULT_NAME","{MC Default Image}");
  */
 function mc_defaultimg_menu() {
   $items = array();
-  $items['admin/settings/defaultimg'] = array(
+  $items['admin/mc/defaultimg'] = array(
+      'type' => MENU_NORMAL_ITEM,
       'title' => 'Default Image Config',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('mc_defaultimg_admin_settings'),

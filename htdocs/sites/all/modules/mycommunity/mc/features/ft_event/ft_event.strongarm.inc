@@ -353,6 +353,7 @@ function ft_event_strongarm() {
         ),
         'province' => array(
           'collect' => '1',
+          'widget' => 'autocomplete',
           'default' => '',
           'weight' => '10',
         ),
@@ -560,7 +561,7 @@ function ft_event_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'nodeformsettings_event';
   $strongarm->value = array(
-    'nfs_submission_body_rows' => '20',
+    'nfs_submission_body_rows' => '10',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '0',
     'nfs_revisionlog' => '1',
