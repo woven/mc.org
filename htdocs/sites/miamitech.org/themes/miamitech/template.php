@@ -116,12 +116,13 @@ function _miamitech_get_featured_carousel_array($field_array){
 }
 
 function miamitech_nd_location_address($field) {
-  if($field['object']->field_online_event[0]['value']==1){
+  $node = node_load($field['object']->field_place[0]['nid']);
+  if($node->field_online_event[0]['value']==1){
     return 'Online Event';
   }
 
   // Get the location field settings for this node type
-  $settings = variable_get('location_settings_node_'. $field['object']->type, array());
+  $settings = variable_get('location_settings_node_'. $node->type, array());
 
   // Loop through and collect the address fields we want to output in the order specified in node location settings,
   // and check that they are not set to be hidden in node location setting
@@ -130,15 +131,15 @@ function miamitech_nd_location_address($field) {
 
 
   foreach ($settings['form']['fields'] as $fieldname => $fieldsettings) {
-    if (!$settings['display']['hide'][$fieldname] && !empty($field['object']->location[$fieldname]) && !is_array($field['object']->location[$fieldname])) {
+    if (!$settings['display']['hide'][$fieldname] && !empty($node->location[$fieldname]) && !is_array($node->location[$fieldname])) {
 
       // Replace country code with full country name.
       if ($fieldname == 'country') {
         module_load_include('inc', 'location', 'location');
-        $field['object']->location[$fieldname] = location_country_name($field['object']->location[$fieldname]);
+        $node->location[$fieldname] = location_country_name($node->location[$fieldname]);
       }
       // Add this field to our array of fields to output.
-      $address[$fieldname] = check_plain($field['object']->location[$fieldname]);
+      $address[$fieldname] = check_plain($node->location[$fieldname]);
     }
   }
   if($address['name']=='Exact Location TBD'){
@@ -147,11 +148,11 @@ function miamitech_nd_location_address($field) {
     unset($address['postal_code']);
   }
   if(empty($address) || (count($address)==1 && isset($address['country'])) ){
-    $has_address = $field['object']->location['name'] && $field['object']->location['street']
-      && $field['object']->location['city'] && $field['object']->location['province'];
-    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'] && $field['object']->location['latitude']!='0.000000' && $field['object']->location['longitude']!='0.000000';
+    $has_address = $node->location['name'] && $node->location['street']
+      && $node->location['city'] && $node->location['province'];
+    $has_lat_and_lon = $node->location['latitude'] && $node->location['longitude'] && $node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000';
     if(!$has_address && $has_lat_and_lon){
-      $parts = mt_event_feed_reverse_getAddressParts($field['object']->locations['0']['latitude'], $field['object']->locations['0']['longitude']);
+      $parts = mt_event_feed_reverse_getAddressParts($node->locations['0']['latitude'], $node->locations['0']['longitude']);
       $address['city'] = $parts['city'];
       $address['province'] = $parts['state'];
     }
