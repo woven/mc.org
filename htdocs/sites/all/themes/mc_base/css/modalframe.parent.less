@@ -1,4 +1,5 @@
 .modalframe {
+    background-color: white;
     border: 1px solid #999;
     border: 1px solid rgba(0, 0, 0, 0.3);
     *border: 1px solid #999;
@@ -14,12 +15,17 @@
 
   .ui-dialog-titlebar{
     display: block;
-    height: 30px;
+    padding: 9px 15px;
+    border-bottom: 1px solid #EEE;
+
     a.ui-state-hover, a.ui-state-focus {
-      background-position:0 -20px;
+
     }
     .ui-dialog-title {
-          padding: 5px;
+        font-size: 24px;
+        line-height: 32px;
+        margin: 0;
+        font-weight: bold;
     }
     .ui-dialog-titlebar-close {
           display:block;
@@ -28,19 +34,20 @@
           right:0;
           margin:2px 2px 2px 0.5em;
           padding:0;
-          width:23px;
-          height:20px;
-          background:url(../images/close.gif) no-repeat 0 0;
+          width:32px;
+          height:32px;
+          line-height: 32px;
+          background:url(images/modalframe/close.png) no-repeat 0 0;
           span {
               display:none;
           }
     }
   }
   .ui-dialog-content {
-    color:#292929;
-    background-color:#f8f8f8;
+
   }
 }
+
 .ui-widget-overlay {
   position:absolute;
   top:0;
@@ -51,21 +58,25 @@
   opacity:0.4;
   filter:alpha(opacity=40);
 }
+
 #modalframe-container {
   margin:0;
   padding:0;
   background:url(../images/loading.gif) no-repeat 50% 50%;
   overflow:visible;
 }
+
 #modalframe-container.modalframe-loaded {
   background:none;
 }
+
 #modalframe-element {
   margin:0;
   padding:0;
   border:none;
   border-bottom:1px solid #1b5084;
 }
+
 .modalframe-throbber {
   display:inline-block;
   width:13px;
