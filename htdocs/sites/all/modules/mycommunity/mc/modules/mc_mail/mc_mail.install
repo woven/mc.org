@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * remove mimemail mail and name settings
+ */
+function mc_mail_update_6002(){
+	variable_set("mimemail_mail","");
+	variable_set("mimemail_name","");
+}

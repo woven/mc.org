@@ -176,26 +176,36 @@ function mc_update_6020(){
  * enable globalredirect
  */
 function mc_update_6021(){
-  module_enable(array('globalredirect',true));
+  module_enable(array('globalredirect'));
 }
 
 /**
  * disable og_menu
  */
 function mc_update_6022(){
-  module_disable(array('globalredirect',true));
+  module_disable(array('globalredirect'));
 }
 
 /**
  * enable smartcrop module
  */
 function mc_update_6023(){
-  module_disable(array('smartcrop',true));
+  module_disable(array('smartcrop'));
 }
 
 /**
  * enable fast_404 module
  */
 function mc_update_6024(){
-  module_disable(array('fast_404',true));
+  module_disable(array('fast_404'));
+}
+
+/**
+ * enable mc_mail & fix for updates 21-24 for using module_disable instead of module_enable
+ */
+function mc_update_6025(){
+  module_enable(array('globalredirect',true));
+  module_enable(array('smartcrop'),true);
+  module_enable(array('fast_404',true));
+  module_enable(array('mc_mail',true));
 }
