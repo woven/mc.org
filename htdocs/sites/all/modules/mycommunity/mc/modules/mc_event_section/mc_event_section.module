@@ -419,8 +419,8 @@ function mc_event_section_views_query_alter(&$view, &$query) {
   }
 }
 
-function _mc_event_section_print_location($data){
-  $location = location_load_location($data->node_node_data_field_place__location_lid);
+function _mc_event_section_print_location($lid){
+  $location = location_load_location($lid);
   $node = new stdClass();
   $node->location = $location;
   $node->type = 'place';

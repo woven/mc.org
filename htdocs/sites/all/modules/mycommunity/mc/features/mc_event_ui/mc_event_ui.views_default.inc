@@ -1066,7 +1066,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php 
-_mc_event_section_print_location($data);
+_mc_event_section_print_location($data->node_node_data_field_place__location_lid);
 ?>',
       'exclude' => 0,
       'id' => 'phpcode_4',

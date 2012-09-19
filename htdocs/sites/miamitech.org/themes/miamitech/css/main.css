@@ -2530,6 +2530,6 @@ a.ical-link {
 	padding: 0;
 }
 
-.event .location-hidden {
-    display: none;
+.location-hidden {
+    display: none !important;
 }
