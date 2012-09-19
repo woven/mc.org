@@ -31,6 +31,7 @@ scripts[] = "js/jquery.elastic.source.js"
 scripts[] = "js/elastic.js"
 scripts[] = "js/qtip.js"
 
+;========= Stylesheets & CSS =========
 ; Stylesheets disable core styles
 stylesheets[all][] = "user.css"
 stylesheets[all][] = "node.css"
@@ -42,30 +43,34 @@ stylesheets[all][] = "filefield.css"
 stylesheets[all][] = "modalframe/css/modalframe.parent.css"
 stylesheets[all][] = "modalframe/css/modalframe.child.css"
 stylesheets[all][] = "event/event.css"
+stylesheets[all][] = "views_gallery.css"
 
-; Styles: theme/styles stylesheets
+; Styles: from http://drupal.org/project/tao
 stylesheets[all][] = "css/reset.css"
 stylesheets[all][] = "css/drupal.css"
-stylesheets[all][] = "css/tabs.css"
 stylesheets[all][] = "css/base.css"
+
+; Styles: theme/styles stylesheets
+stylesheets[all][] = "css/tabs.css"
 stylesheets[all][] = "css/main.css"
 stylesheets[all][] = "css/custom.css"
 stylesheets[all][] = "css/fieldset.css"
 stylesheets[all][] = "css/custom-less.css"
 stylesheets[all][] = "css/mt.css"
-stylesheets[all][] = "css/buttons.css"
 stylesheets[all][] = "css/event-flags.css"
+
+; Styles known components
 stylesheets[all][] = "css/search-bar.css"
+stylesheets[all][] = "css/buttons.css"
 
 ; Styles: stand alone css component
-stylesheets[all][] = "views_gallery.css"
 stylesheets[all][] = "css/jquery.qtip.min.css"
 stylesheets[all][] = "js/colorbox/colorbox.css"
 stylesheets[all][] = "css/modalframe.parent.css"
 stylesheets[all][] = "css/modalframe.child.css"
 stylesheets[all][] = "css/groupadmin.css"
 
-; Styles: mc.org colors
+; Styles: MC.org Colors
 stylesheets[all][] = "css/colors.css"
 
 ; conditional styles for ie 7 and 6
