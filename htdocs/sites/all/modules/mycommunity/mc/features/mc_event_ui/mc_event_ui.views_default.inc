@@ -1040,7 +1040,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'relationship' => 'none',
     ),
     'phpcode_4' => array(
-      'label' => 'Event hash',
+      'label' => '',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -1066,11 +1066,9 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php 
-$node = node_load($data->nid);
-$field = array(\'object\' => $node);
-print theme(\'miamitech_nd_location_address\', $field);
+_mc_event_section_print_location($data);
 ?>',
-      'exclude' => 1,
+      'exclude' => 0,
       'id' => 'phpcode_4',
       'table' => 'customfield',
       'field' => 'phpcode',
@@ -1078,6 +1076,41 @@ print theme(\'miamitech_nd_location_address\', $field);
         'button' => 'Override',
       ),
       'relationship' => 'none',
+    ),
+    'lid' => array(
+      'label' => 'Lid',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 1,
+      'id' => 'lid',
+      'table' => 'location',
+      'field' => 'lid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'field_place_nid',
     ),
   ));
   $handler->override_option('sorts', array(
@@ -1268,6 +1301,10 @@ print theme(\'miamitech_nd_location_address\', $field);
       'body' => array(
         'element_type' => 'p',
         'class' => 'description  {itemprop=description}',
+      ),
+      'phpcode_4' => array(
+        'element_type' => 'div',
+        'class' => 'location-hidden',
       ),
     ),
     'skip_blank' => 0,

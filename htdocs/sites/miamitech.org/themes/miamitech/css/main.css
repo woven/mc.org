@@ -2529,3 +2529,7 @@ a.ical-link {
 #main #register .block-signup {
 	padding: 0;
 }
+
+.view-mc-events-by-dates.view-display-id-block_5 .event .location-hidden {
+    display: none;
+}
