@@ -415,8 +415,7 @@ a .ico-small {
 	color: #5c5c5c;
 }
 
-#header .block-user img,
-#header .block-user img {
+#header .block-user img{
 	border: 1px solid #d0d0d0;
 	margin: 0 5px -3px 0;
 }
@@ -1115,8 +1114,7 @@ a .ico-small {
 	margin-top: 0;
 }
 
-#page .location-link,
-#page .location-link {
+#page .location-link{
 	margin: 5px 0;
 	font-size: 0.9em;
 	color: #333;
@@ -1625,8 +1623,8 @@ textarea {
   text-transform:inherit;
 }
 
-#comments #edit-admin-subscriptions-notify-wrapper `label`,
-.block form li.cbox label {
+#comments #edit-admin-subscriptions-notify-wrapper label,
+.block form li.cbox label{
 	display: inline;
 	font-weight: normal;
 	font-size: 1.1em;
@@ -1638,77 +1636,6 @@ textarea {
 	float: right;
 	margin-top: 5px;
 }
-
-/** Button style
-button,
-.button,
-button span,
-.button span  {
-	display: block;
-	height: 31px;
-	width: auto;
-	overflow: visible;
-	outline: 0;
-	margin: 0;
-	border: 0;
-	line-height: 31px;
-	text-decoration: none;
-	background: url(../images/common/bg-button.png) 0 0 no-repeat;
-	cursor: pointer;
-}
-
-button,
-.button  {
-	float: right;
-	padding: 0 23px 0 0;
-	background-position: 100% 0;
-}
-
-button::-moz-focus-inner {
-	padding: 0;
-	border: none;
-}
-
-button span,
-.button span {
-	position: relative;
-	padding: 0 0 0 23px;
-	font-size: 14px;
-	font-weight: bold;
-	text-transform: uppercase;
-	white-space: no-wrap;
-	background-position: 0 0;
-	color: #fff;
-    line-height: 31px;
-    /* shadow disablled to match static version
-	-webkit-text-shadow: 0 -1px #0569be;
-	-moz-text-shadow: 0 -1px #0569be;
-	text-shadow: 0 -1px #0569be;
-    */
-	white-space: nowrap;
-}
-
-/*
-button:hover span,
-button.hover span,
-.button:hover span {
-	color: #efefef;
-}
-
-button.orange,
-a.orange {
-	background-position: 100% -34px;
-}
-
-button.orange span,
-a.orange span {
-	-webkit-text-shadow: 0 -1px #cc5205;
-	-moz-text-shadow: 0 -1px #cc5205;
-	text-shadow: 0 -1px #cc5205;
-	background-position: 0 -34px;
-}
-**/
-/** Button style **/
 
 /* Newsletter form */
 .newsletter-block input.form-text {
@@ -2166,10 +2093,8 @@ border-width: 1px 0 !important;
 .page-user .view-og-community .views-row{min-height: 0 !important;}
 .field-facebook-like{clear: both;}
 .field-facebook-like , .field-facebook-like .block, .field-facebook-like .block-content, .block-google_plusone, .field-google-plus .block-content{margin:0 !important;}
-/*.field-facebook-like iframe{height: 30px !important;}*/
 .g-plusone-wrapper{margin: 0 !important;}
 .cursor-pointer{cursor: pointer;}
-/*.node-type-gallery-image .field-gallery{font-size: 2.5em; font-weight: bold; color: #FF7F00 !important;}*/
 .node-type-gallery-image .field-title{text-align: center; margin-bottom: 40px !important;}
 .node-type-gallery-image .field-gallery{display: none;}
 #unfollow{display: none;}
@@ -2374,7 +2299,7 @@ clear: initial;
   list-style: decimal;
 }
 
-#block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit, #block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit span {
+#block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit{
 	height: 37px;
 	line-height: 37px;
 	background-image: url(/sites/miamitech.org/themes/miamitech/images/common/btn-gray.png);
