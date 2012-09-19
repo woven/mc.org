@@ -52,15 +52,8 @@ stylesheets[all][] = "css/base.css"
 
 ; Styles: theme/styles stylesheets
 stylesheets[all][] = "css/tabs.css"
-
 stylesheets[all][] = "css/all.css"
 
-;stylesheets[all][] = "css/main.css"
-;stylesheets[all][] = "css/custom.css"
-;stylesheets[all][] = "css/fieldset.css"
-;stylesheets[all][] = "css/custom-less.css"
-;stylesheets[all][] = "css/mt.css"
-;stylesheets[all][] = "css/event-flags.css"
 
 ; Styles known components
 stylesheets[all][] = "css/search.css"
