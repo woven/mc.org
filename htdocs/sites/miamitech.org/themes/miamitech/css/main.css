@@ -2530,6 +2530,6 @@ a.ical-link {
 	padding: 0;
 }
 
-.view-mc-events-by-dates.view-display-id-block_5 .event .location-hidden {
+.event .location-hidden {
     display: none;
 }
