@@ -54,10 +54,8 @@ stylesheets[all][] = "css/fieldset.css"
 stylesheets[all][] = "css/custom-less.css"
 stylesheets[all][] = "css/mt.css"
 stylesheets[all][] = "css/buttons.css"
-stylesheets[all][] = "css/form-confirm.css"
 stylesheets[all][] = "css/event-flags.css"
 stylesheets[all][] = "css/search-bar.css"
-stylesheets[all][] = "css/user.css"
 
 ; Styles: stand alone css component
 stylesheets[all][] = "views_gallery.css"

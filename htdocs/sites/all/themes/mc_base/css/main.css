@@ -2468,3 +2468,7 @@ margin: 0;
 #left .view-mc-page-menu ul.menu li.leaf {
     font-size: 12px;
 }
+
+form.confirmation .undone{
+    margin-bottom: 15px;
+}

@@ -530,3 +530,12 @@
 .block-og_menu .block-title { display:none; }
 #block-boxes-latest_page_title { margin-bottom:0px !important; }
 #block-boxes-latest_page_title .block-content { display:none; }
+
+
+.block-signup h1{
+    display: none;
+}
+
+#cboxContent .block-signup h1{
+    display: block;
+}
