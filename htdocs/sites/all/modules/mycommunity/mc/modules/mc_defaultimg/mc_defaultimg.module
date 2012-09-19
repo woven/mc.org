@@ -22,7 +22,7 @@ function file_load_default($type = "generic"){
   $lib = libraries_get_path('mc_defaultimage');
   $path = $lib . "/" . $type . ".png";
 
-  return $fid;
+  return $file;
 }
 
 /*

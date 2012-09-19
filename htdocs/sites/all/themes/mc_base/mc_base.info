@@ -54,7 +54,6 @@ stylesheets[all][] = "css/base.css"
 stylesheets[all][] = "css/tabs.css"
 stylesheets[all][] = "css/all.css"
 
-
 ; Styles known components
 stylesheets[all][] = "css/search.css"
 stylesheets[all][] = "css/buttons.css"

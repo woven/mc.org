@@ -1,0 +1,77 @@
+#navigation {
+    margin-bottom:20px;
+    .primary-links {
+        height:39px;
+        background:#fdd471 url(../images/common/bg-navigation.png) repeat-x;
+        -webkit-border-radius:6px;
+        -moz-border-radius:6px;
+        border-radius:6px;
+        behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
+        a, a:visited {
+            display:block;
+            padding:11px 27px 10px;
+            height:18px;
+            font-size:1.25em;
+            font-weight:bold;
+            color:#333333;
+            background:#fdd471 url(../images/common/bg-navigation.png) 0 0 repeat-x;
+            -webkit-text-shadow:0 1px 0 #ffffff;
+            -moz-text-shadow:0 1px 0 #ffffff;
+            text-shadow:0 1px 0 #ffffff;
+        }
+        .active a, .active a:visited, .active-trail a, .active-trail a:visited {
+            background-position:0 -38px;
+            background-color:#ff8a0c;
+            text-shadow:none;
+            text-shadow:none;
+            color:#ffffff;
+            -webkit-text-shadow:none;
+            -moz-text-shadow:none;
+        }
+        li {
+            padding-left:3px;
+            background:url(../images/common/bg-navigation-separator.png) 0 0 no-repeat;
+        }
+        li.first {
+            padding:0;
+            background:transparent;
+            a {
+                -webkit-border-radius:6px 0 0 6px;
+                -moz-border-radius:6px 0 0 6px;
+                border-radius:6px 0 0 6px;
+                behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
+            }
+        }
+        a:hover {
+            color:#000000;
+            text-decoration:none;
+        }
+        a:active {
+            text-decoration:none;
+        }
+    }
+    .ico-menu {
+        display:inline-block;
+        width:19px;
+        height:19px;
+        text-indent:-999em;
+        margin-bottom:-1px;
+        background:url(../images/common/sprite-menu-icons.png) -19px 0 no-repeat;
+        cursor:pointer;
+    }
+    .ico-home {
+        text-indent:-999em;
+    }
+    .active .ico-home {
+        background-position:0 0;
+    }
+    .active .ico-help {
+        background-position:0 -19px;
+    }
+    .ico-help {
+        background-position:-19px -19px;
+    }
+    a:hover .ico-help {
+        background-position:-38px -19px;
+    }
+}

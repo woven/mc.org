@@ -1,0 +1,111 @@
+#add-stuff {
+  float:right;
+  div {
+    position:absolute;
+    top:auto;
+    left:-999em;
+    padding:37px 3px 3px;
+    margin-top:-39px;
+    margin-left:-2px;
+    z-index:5;
+    background:#d4d4d4;
+    background:rgba(212,212,212,0.75);
+    -pie-background:rgba(212,212,212,0.75);
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border-radius:6px;
+    behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
+  }
+  ul {
+    width:117px;
+    padding:9px 9px;
+    background:#ffffff;
+    -webkit-border-radius:0 0 6px 6px;
+    -moz-border-radius:0 0 6px 6px;
+    border-radius:0 0 6px 6px;
+    behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
+  }
+  li {
+    padding:8px 10px 3px;
+    width:97px;
+    border-bottom:1px solid #efefef;
+    font-size:1.2em;
+    a, a:visited {
+      text-decoration:none;
+      color:#191919;
+    }
+  }
+  li.last {
+    border:0;
+  }
+  .ico-article {
+    background-position:0 0;
+  }
+  .ico-event {
+    background-position:0 -26px;
+  }
+  .ico-place {
+    background-position:0 -52px;
+  }
+  .ico-audio {
+    background-position:0 -78px;
+  }
+  .ico-video {
+    background-position:0 -104px;
+  }
+  .links .ico-add-stuff {
+    display:none;
+  }
+  .links .add-stuff-name {
+    width:80px;
+  }
+  .links .add-stuff-name:hover {
+    color:#808080;
+  }
+}
+#add-stuff-button, #add-stuff-button:visited {
+  position:relative;
+  display:block;
+  width:110px;
+  padding:0 28px 0 0;
+  height:37px;
+  line-height:39px;
+  font-weight:bold;
+  font-size:1.2em;
+  text-transform:uppercase;
+  text-decoration:none;
+  text-align:center;
+  background:url(../images/common/btn-add-stuff.png) no-repeat;
+  cursor:pointer;
+  z-index:10;
+  color:#ffffff;
+  text-shadow:0 -1px 0 #729a1e;
+  -webkit-border-radius:0 0 6px 6px;
+  -moz-border-radius:0 0 6px 6px;
+  border-radius:0 0 6px 6px;
+  behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
+}
+#add-stuff:hover #add-stuff-button, #add-stuff.hover #add-stuff-button {
+  -webkit-box-shadow:0 2px 6px #d4d4d4;
+  -moz-box-shadow:0 2px 6px #d4d4d4;
+  box-shadow:0 2px 6px #d4d4d4;
+}
+#add-stuff:hover div, #add-stuff.hover div {
+  left:auto;
+}
+.ico-add-stuff {
+  display:inline-block;
+  width:26px;
+  height:26px;
+  float:left;
+  margin-top:-5px;
+  margin-right:0;
+  vertical-align:middle;
+  background:url(../images/common/sprite-add-stuff-icons.png) 0 0 no-repeat;
+  cursor:pointer;
+}
+.add-stuff-name {
+  float:right;
+  padding-left:5px;
+  width:65px;
+}

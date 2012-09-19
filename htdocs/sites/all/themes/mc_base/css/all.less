@@ -1,3 +1,7 @@
+@import "object-add-stuff.less";
+@import "object-navigation.less";
+@import "object-group-header.less";
+
 .hide {
   position:absolute;
   top:-999em;
@@ -186,6 +190,7 @@ a .ico-small {
 .overlay {
   cursor:pointer;
 }
+
 .block-overlay {
   position:absolute;
   padding:8px;
@@ -370,194 +375,7 @@ a .ico-small {
     }
   }
 }
-#add-stuff {
-  float:right;
-  div {
-    position:absolute;
-    top:auto;
-    left:-999em;
-    padding:37px 3px 3px;
-    margin-top:-39px;
-    margin-left:-2px;
-    z-index:5;
-    background:#d4d4d4;
-    background:rgba(212,212,212,0.75);
-    -pie-background:rgba(212,212,212,0.75);
-    -webkit-border-radius:6px;
-    -moz-border-radius:6px;
-    border-radius:6px;
-    behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
-  }
-  ul {
-    width:117px;
-    padding:9px 9px;
-    background:#ffffff;
-    -webkit-border-radius:0 0 6px 6px;
-    -moz-border-radius:0 0 6px 6px;
-    border-radius:0 0 6px 6px;
-    behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
-  }
-  li {
-    padding:8px 10px 3px;
-    width:97px;
-    border-bottom:1px solid #efefef;
-    font-size:1.2em;
-    a, a:visited {
-      text-decoration:none;
-      color:#191919;
-    }
-  }
-  li.last {
-    border:0;
-  }
-  .ico-article {
-    background-position:0 0;
-  }
-  .ico-event {
-    background-position:0 -26px;
-  }
-  .ico-place {
-    background-position:0 -52px;
-  }
-  .ico-audio {
-    background-position:0 -78px;
-  }
-  .ico-video {
-    background-position:0 -104px;
-  }
-  .links .ico-add-stuff {
-    display:none;
-  }
-  .links .add-stuff-name {
-    width:80px;
-  }
-  .links .add-stuff-name:hover {
-    color:#808080;
-  }
-}
-#add-stuff-button, #add-stuff-button:visited {
-  position:relative;
-  display:block;
-  width:110px;
-  padding:0 28px 0 0;
-  height:37px;
-  line-height:39px;
-  font-weight:bold;
-  font-size:1.2em;
-  text-transform:uppercase;
-  text-decoration:none;
-  text-align:center;
-  background:url(../images/common/btn-add-stuff.png) no-repeat;
-  cursor:pointer;
-  z-index:10;
-  color:#ffffff;
-  text-shadow:0 -1px 0 #729a1e;
-  -webkit-border-radius:0 0 6px 6px;
-  -moz-border-radius:0 0 6px 6px;
-  border-radius:0 0 6px 6px;
-  behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
-}
-#add-stuff:hover #add-stuff-button, #add-stuff.hover #add-stuff-button {
-  -webkit-box-shadow:0 2px 6px #d4d4d4;
-  -moz-box-shadow:0 2px 6px #d4d4d4;
-  box-shadow:0 2px 6px #d4d4d4;
-}
-#add-stuff:hover div, #add-stuff.hover div {
-  left:auto;
-}
-.ico-add-stuff {
-  display:inline-block;
-  width:26px;
-  height:26px;
-  float:left;
-  margin-top:-5px;
-  margin-right:0;
-  vertical-align:middle;
-  background:url(../images/common/sprite-add-stuff-icons.png) 0 0 no-repeat;
-  cursor:pointer;
-}
-.add-stuff-name {
-  float:right;
-  padding-left:5px;
-  width:65px;
-}
-#navigation {
-  margin-bottom:20px;
-  .primary-links {
-    height:39px;
-    background:#fdd471 url(../images/common/bg-navigation.png) repeat-x;
-    -webkit-border-radius:6px;
-    -moz-border-radius:6px;
-    border-radius:6px;
-    behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
-    a, a:visited {
-      display:block;
-      padding:11px 27px 10px;
-      height:18px;
-      font-size:1.25em;
-      font-weight:bold;
-      color:#333333;
-      background:#fdd471 url(../images/common/bg-navigation.png) 0 0 repeat-x;
-      -webkit-text-shadow:0 1px 0 #ffffff;
-      -moz-text-shadow:0 1px 0 #ffffff;
-      text-shadow:0 1px 0 #ffffff;
-    }
-    .active a, .active a:visited, .active-trail a, .active-trail a:visited {
-      background-position:0 -38px;
-      background-color:#ff8a0c;
-      text-shadow:none;
-      text-shadow:none;
-      color:#ffffff;
-      -webkit-text-shadow:none;
-      -moz-text-shadow:none;
-    }
-    li {
-      padding-left:3px;
-      background:url(../images/common/bg-navigation-separator.png) 0 0 no-repeat;
-    }
-    li.first {
-      padding:0;
-      background:transparent;
-      a {
-        -webkit-border-radius:6px 0 0 6px;
-        -moz-border-radius:6px 0 0 6px;
-        border-radius:6px 0 0 6px;
-        behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
-      }
-    }
-    a:hover {
-      color:#000000;
-      text-decoration:none;
-    }
-    a:active {
-      text-decoration:none;
-    }
-  }
-  .ico-menu {
-    display:inline-block;
-    width:19px;
-    height:19px;
-    text-indent:-999em;
-    margin-bottom:-1px;
-    background:url(../images/common/sprite-menu-icons.png) -19px 0 no-repeat;
-    cursor:pointer;
-  }
-  .ico-home {
-    text-indent:-999em;
-  }
-  .active .ico-home {
-    background-position:0 0;
-  }
-  .active .ico-help {
-    background-position:0 -19px;
-  }
-  .ico-help {
-    background-position:-19px -19px;
-  }
-  a:hover .ico-help {
-    background-position:-38px -19px;
-  }
-}
+
 #page {
   margin-bottom:10px;
   h4 a, h4 a:visited, h5 a, h5 a:visited {
@@ -2339,25 +2157,7 @@ body.node-type-group #page .node {
 #edit-comment-wrapper {
   clear:both;
 }
-#google-cse-results-searchbox-form {
-  overflow:hidden;
-  .form-item {
-    margin:0 10px 0 0;
-    padding:0;
-    float:left;
-    label {
-      height:15px;
-    }
-  }
-  .submit-wrapper {
-    margin:0;
-    padding:17px 0 0;
-    float:left;
-  }
-  .button {
-    float:left;
-  }
-}
+
 #block-menu-menu-browse-by-date li {
   margin:10px 0;
   a {
@@ -2369,6 +2169,7 @@ body.node-type-group #page .node {
   color:#ff7f00 !important;
   text-decoration:none !important;
 }
+
 .page-user {
   .flag-events-bookmarks a.unflag-action, .flag-events-bookmarks a:active, .flag-events-bookmarks.flag-waiting a.flag-action {
     background-image:url("../images/icons/ico-delete-default.png");
@@ -2479,6 +2280,11 @@ body.node-type-group #page .node {
 .cursor-pointer {
   cursor:pointer;
 }
+
+.node-type-gallery-image{
+
+}
+
 .node-type-gallery-image .field-title {
   text-align:center;
   margin-bottom:40px !important;
@@ -3541,37 +3347,7 @@ body.page-user .view-my-groups ul {
   float:left;
   padding-left:0px;
 }
-#group-page-head .wrapper {
-  margin-top:0px;
-  margin-bottom:10px;
-  -webkit-border-radius:6px;
-  -moz-border-radius:6px;
-  border-radius:6px;
-  padding:10px;
-  a {
-    color:inherit !important;
-    display:block;
-    text-decoration:none;
-    height:80px;
-    line-height:80px;
-    float:left;
-  }
-  h1 {
-    color:inherit !important;
-    margin:0px !important;
-    margin-left:17px !important;
-    white-space:nowrap;
-    overflow:hidden;
-  }
-  img {
-    margin-right:15px;
-  }
-}
-#group-page-head a img {
-  vertical-align:middle;
-  position:relative;
-  margin-left:16px;
-}
+
 .nd-region-header {
   margin-bottom:0px;
 }
