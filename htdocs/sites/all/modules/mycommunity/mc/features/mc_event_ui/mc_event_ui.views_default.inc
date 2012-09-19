@@ -1066,9 +1066,9 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php 
-$string = $data->event_unix_event_start . $data->node_title . $data->location_name;
-$hash = md5($string);
-echo $hash;
+$node = node_load($data->nid);
+$field = array(\'object\' => $node);
+print theme(\'miamitech_nd_location_address\', $field);
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_4',
