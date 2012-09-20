@@ -317,7 +317,12 @@ function mt_access_user_default_permissions() {
   // Exported permission: add stuff place
   $permissions['add stuff place'] = array(
     'name' => 'add stuff place',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: add stuff video
@@ -424,6 +429,12 @@ function mt_access_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer flags
+  $permissions['administer flags'] = array(
+    'name' => 'administer flags',
+    'roles' => array(),
+  );
+
   // Exported permission: administer flash
   $permissions['administer flash'] = array(
     'name' => 'administer flash',
@@ -478,6 +489,12 @@ function mt_access_user_default_permissions() {
   // Exported permission: administer jquery media
   $permissions['administer jquery media'] = array(
     'name' => 'administer jquery media',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer mc_deploy
+  $permissions['administer mc_deploy'] = array(
+    'name' => 'administer mc_deploy',
     'roles' => array(),
   );
 
@@ -920,6 +937,8 @@ function mt_access_user_default_permissions() {
     'name' => 'create place content',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
     ),
   );
 
@@ -928,6 +947,8 @@ function mt_access_user_default_permissions() {
     'name' => 'create place sitewide',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
     ),
   );
 
@@ -1553,6 +1574,16 @@ function mt_access_user_default_permissions() {
   // Exported permission: edit field_embedtest
   $permissions['edit field_embedtest'] = array(
     'name' => 'edit field_embedtest',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_event_url
+  $permissions['edit field_event_url'] = array(
+    'name' => 'edit field_event_url',
     'roles' => array(
       '0' => 'administrator',
       '1' => 'authenticated user',
@@ -2334,6 +2365,12 @@ function mt_access_user_default_permissions() {
     ),
   );
 
+  // Exported permission: use flag import
+  $permissions['use flag import'] = array(
+    'name' => 'use flag import',
+    'roles' => array(),
+  );
+
   // Exported permission: use permission select
   $permissions['use permission select'] = array(
     'name' => 'use permission select',
@@ -2513,6 +2550,17 @@ function mt_access_user_default_permissions() {
   // Exported permission: view field_embedtest
   $permissions['view field_embedtest'] = array(
     'name' => 'view field_embedtest',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_event_url
+  $permissions['view field_event_url'] = array(
+    'name' => 'view field_event_url',
     'roles' => array(
       '0' => 'administrator',
       '1' => 'anonymous user',

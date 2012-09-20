@@ -202,8 +202,8 @@ function ft_event_strongarm() {
   $strongarm->value = array(
     'year' => 2013,
     'month' => '03',
-    'day' => '11',
-    'hour' => '21',
+    'day' => '18',
+    'hour' => '22',
     'minute' => '00',
     'second' => '00',
   );
@@ -305,14 +305,14 @@ function ft_event_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'location_defaultnum_event';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['location_defaultnum_event'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'location_maxnum_event';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['location_maxnum_event'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -321,9 +321,9 @@ function ft_event_strongarm() {
   $strongarm->name = 'location_settings_node_event';
   $strongarm->value = array(
     'multiple' => array(
-      'min' => '1',
-      'max' => '1',
-      'add' => '1',
+      'min' => '0',
+      'max' => '0',
+      'add' => '0',
     ),
     'form' => array(
       'weight' => '9',
