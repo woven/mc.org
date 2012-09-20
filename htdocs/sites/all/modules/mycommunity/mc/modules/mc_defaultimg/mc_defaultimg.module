@@ -1,7 +1,12 @@
 <?php
 
 define("MC_DEFAULT_NAME","{MC Default Image}");
-/**
+
+
+function mc_defaultimg_default_value(&$form, &$form_state, $field, $delta) {
+  dsm($field);
+}
+  /**
  *  Implementation of hook_menu
  */
 function mc_defaultimg_menu() {
