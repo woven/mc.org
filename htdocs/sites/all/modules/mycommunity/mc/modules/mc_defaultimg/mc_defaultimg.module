@@ -103,6 +103,10 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
       }
     }
 
+    if(_is_file_exists($newfid)){
+      $element['#item'] = $newfid;
+    }
+
   }
 
   //additional checks to provide default image if #item is still empty, even if the file was set but doesnot exist
