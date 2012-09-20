@@ -498,7 +498,6 @@ function mc_femail_ext_taxonomy($op, $type, $array = NULL){
  */
 
 function mc_femail_ext_preprocess_mimemail_message(&$variables) {
-  $variables['template_files'][] = "mimemail-message--" . str_replace("-", "_", $variables['mailkey']);
   if ($variables['mailkey'] == 'mail-femail-message') {
     $femail_emails = variable_get('femail_emails', array());
     if (!empty($femail_emails)) {

@@ -31,7 +31,8 @@ scripts[] = "js/jquery.elastic.source.js"
 scripts[] = "js/elastic.js"
 scripts[] = "js/qtip.js"
 
-; Stylesheets disable core styles
+;========= START: Stylesheets & CSS =========
+;disable core styles
 stylesheets[all][] = "user.css"
 stylesheets[all][] = "node.css"
 stylesheets[all][] = "ctools.css"
@@ -41,30 +42,33 @@ stylesheets[all][] = "system.css"
 stylesheets[all][] = "filefield.css"
 stylesheets[all][] = "modalframe/css/modalframe.parent.css"
 stylesheets[all][] = "modalframe/css/modalframe.child.css"
+stylesheets[all][] = "event/event.css"
+stylesheets[all][] = "views_gallery.css"
 
-;theme stylesheets
+; Styles: from http://drupal.org/project/tao
 stylesheets[all][] = "css/reset.css"
 stylesheets[all][] = "css/drupal.css"
-stylesheets[all][] = "css/tabs.css"
 stylesheets[all][] = "css/base.css"
-stylesheets[all][] = "css/main.css"
-stylesheets[all][] = "css/custom.css"
-stylesheets[all][] = "css/fieldset.css"
-stylesheets[all][] = "css/custom-less.css"
-stylesheets[all][] = "css/mt.css"
+
+; Styles: theme/styles stylesheets
+stylesheets[all][] = "css/tabs.css"
+stylesheets[all][] = "css/all.css"
+
+; Styles known components
+stylesheets[all][] = "css/search.css"
+stylesheets[all][] = "css/buttons.css"
+
+; Styles: stand alone css component
 stylesheets[all][] = "css/jquery.qtip.min.css"
 stylesheets[all][] = "js/colorbox/colorbox.css"
 stylesheets[all][] = "css/modalframe.parent.css"
 stylesheets[all][] = "css/modalframe.child.css"
-stylesheets[all][] = "css/node-webform.css"
-stylesheets[all][] = "views_gallery.css"
-stylesheets[all][] = "css/buttons.css"
-stylesheets[all][] = "css/form-confirm.css"
-stylesheets[all][] = "css/event-flags.css"
-stylesheets[all][] = "css/search-bar.css"
-stylesheets[all][] = "css/user.css"
+stylesheets[all][] = "css/groupadmin.css"
+
+; Styles: MC.org Colors
 stylesheets[all][] = "css/colors.css"
 
 ; conditional styles for ie 7 and 6
 conditional-stylesheets[if lte IE 7][all][] = css/ie.css
 conditional-stylesheets[if lte IE 6][all][] = css/ie6.css
+;========= END: Stylesheets & CSS =========

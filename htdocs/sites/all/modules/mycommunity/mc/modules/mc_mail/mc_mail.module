@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Code for the mc_mail feature.
+ */
+
+include_once 'mc_mail.features.inc';
+
+/*
+ * provides per email id template file
+ */
+function mc_mail_preprocess_mimemail_message(&$variables) {
+  $variables['template_files'][] = "mimemail-message--" . str_replace("-", "_", $variables['mailkey']);
+}

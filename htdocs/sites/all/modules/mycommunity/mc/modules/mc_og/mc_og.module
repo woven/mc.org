@@ -73,7 +73,64 @@ function _mc_og_post_visibility_validate($form, &$form_state) {
   }
 }
 
+function _mc_og_groupadmin_manage_validate($form, &$form_state){
+
+  if($form_state['clicked_button']['#value'] == 'Filter'){
+    $selectbtn = $form_state['values']['filter_select'];
+    $form_state['clicked_button']['#value'] = $selectbtn;
+    $form_state['clicked_button']['#default_value'] = $selectbtn;
+  }
+}
+
 function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
+
+  if($form_id == "_groupadmin_manage"){
+
+    //sticky
+
+
+    //add validation
+    $form['#validate'][] = '_mc_og_groupadmin_manage_validate';
+
+    //get current node/og group
+    $node = node_load(arg(1));
+
+    //active filter
+    $filters = array('members', 'non-members', 'admins', 'all');
+    $sticky = _groupadmin_session('sticky');
+    $active_filter = in_array($sticky['filter'], $filters)? $sticky['filter'] : $filters[0];
+
+    //hide all submit buttons
+    foreach($form['filter'] as &$item){
+      if($item['#type'] == 'submit'){
+        $item['#attributes']['style'] = 'display:none';
+      }
+    }
+
+    $form['filter']['filter_select'] = array(
+      '#type' => 'select',
+      '#options' => array(
+          'members' => 'Members',
+          //'non-members' => 'Non Members',
+          'admins' => 'Group Managers',
+          'all' => 'All'
+       ),
+      '#default_value' => $active_filter
+    );
+
+    $form['filter']['filter_submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Filter'
+    );
+
+
+    // Show page title with description of list and name of Group.
+    $tvars = array(
+      '@status' => $form['filter']['filter_select']['#options'][$active_filter],
+      '%group' => $node->title
+    );
+    drupal_set_title(ucfirst(t('@status of %group', $tvars)));
+  }
 
   if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form' && og_is_group_post_type($form['#node']->type)) {
     $og = &$form['og_nodeapi'];
