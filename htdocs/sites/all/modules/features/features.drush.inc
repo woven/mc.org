@@ -287,11 +287,11 @@ function drush_features_revert() {
             }
           }
         }
-        // Only revert components that are detected to be Overridden/Needs review.
+        // Only revert components that are detected to be Overridden/Needs review/rebuildable.
         else {
           $states = features_get_component_states(array($feature->name), FALSE);
           foreach ($states[$feature->name] as $component => $state) {
-            if (in_array($state, array(FEATURES_OVERRIDDEN, FEATURES_NEEDS_REVIEW)) && features_hook($component, 'features_revert')) {
+            if (in_array($state, array(FEATURES_OVERRIDDEN, FEATURES_NEEDS_REVIEW, FEATURES_REBUILDABLE)) && features_hook($component, 'features_revert')) {
               $components[] = $component;
             }
           }
@@ -327,26 +327,48 @@ function drush_features_revert() {
 }
 
 /**
- * Revert all enabled features to their definitions in code. Optionally pass in
- * a list of features to exclude from being reverted.
+ * Revert all enabled features to their definitions in code.
+ *
+ * @param ...
+ *   (Optional) A list of features to exclude from being reverted.
  */
 function drush_features_revert_all() {
-  $features_to_revert = array();
-  $features_to_exclude = func_get_args();
+  module_load_include('inc', 'features', 'features.export');
   $force = drush_get_option('force');
-  foreach (features_get_features() as $module) {
+  $features_to_exclude = func_get_args();
+
+  $features_to_revert = array();
+  foreach (features_get_features(NULL, TRUE) as $module) {
     if ($module->status && !in_array($module->name, $features_to_exclude)) {
-      $features_to_revert[] = $module->name;
+      // If forced, add module regardless of status.
+      if ($force) {
+        $features_to_revert[] = $module->name;
+      }
+      else {
+        switch (features_get_storage($module->name)) {
+          case FEATURES_OVERRIDDEN:
+          case FEATURES_NEEDS_REVIEW:
+          case FEATURES_REBUILDABLE:
+            $features_to_revert[] = $module->name;
+            break;
+        }
+      }
     }
   }
-  drush_print(dt('The following modules will be reverted: !modules', array('!modules' => implode(', ', $features_to_revert))));
-  if (drush_confirm(dt('Do you really want to continue?'))) {
-    foreach ($features_to_revert as $module_name) {
-      drush_invoke_process(drush_sitealias_get_record('@self'), 'features-revert', array($module_name), array('force' => $force, '#integrate' => TRUE));
+
+  if ($features_to_revert) {
+    drush_print(dt('The following modules will be reverted: !modules', array('!modules' => implode(', ', $features_to_revert))));
+    if (drush_confirm(dt('Do you really want to continue?'))) {
+      foreach ($features_to_revert as $module) {
+        drush_invoke_process(drush_sitealias_get_record('@self'), 'features-revert', array($module), array('force' => $force, '#integrate' => TRUE));
+      }
+    }
+    else {
+      drush_die('Aborting.');
     }
   }
   else {
-    drush_die('Aborting.');
+    drush_log(dt('Current state already matches defaults, aborting.'), 'ok');
   }
 }
 

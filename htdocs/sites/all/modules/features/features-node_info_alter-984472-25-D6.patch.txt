@@ -1,0 +1,84 @@
+From 3b251016cb99144557ca808a773da1185bffbf49 Mon Sep 17 00:00:00 2001
+From: Mike Potter <mpotter@phase2technology.com>
+Date: Fri, 16 Mar 2012 13:53:02 -0400
+Subject: [PATCH] Issue #984472 by hefox, goron, Sarenc, mpotter: Added
+ hook_node_info_alter(), and alter_type(), alter_hook() to
+ features_info().
+
+---
+ features.api.php    |    8 ++++++++
+ features.export.inc |   17 +++++++++++++++--
+ features.module     |    3 +++
+ 3 files changed, 26 insertions(+), 2 deletions(-)
+
+diff --git a/features.api.php b/features.api.php
+index 8094846..696d81b 100644
+--- a/features.api.php
++++ b/features.api.php
+@@ -40,6 +40,14 @@
+  *   'base': Optional. An alternative base key to use when calling features
+  *   hooks for this component. Can be used for features component types that
+  *   are declared "dynamically" or are part of a family of components.
++ *
++ *   'alter_type': What type of alter hook this hook uses. 'normal' is called
++ *   after the main hook is called. 'inline' is embeded within the default hook
++ *   and may not be implemented by some default hooks.
++ *   'none' is no alter hook exists. Defaults to 'normal'
++ *
++ *   'alter_hook': What the name of the alter hook for this component is.
++ *    Do not include the '_alter' part. Defaults to 'default_hook'.
+  */
+ function hook_features_api() {
+   return array(
+diff --git a/features.export.inc b/features.export.inc
+index 5de7984..9842c47 100644
+--- a/features.export.inc
++++ b/features.export.inc
+@@ -351,6 +351,16 @@ function features_get_default_hooks($component = NULL, $reset = FALSE) {
+ }
+ 
+ /**
++ * Gets the available default hooks keyed by components.
++ */
++function features_get_default_alter_hook($component) {
++  $default_hook = features_get_components($component, 'default_hook');
++  $alter_hook = features_get_components($component, 'alter_hook');
++  $alter_type = features_get_components($component, 'alter_type');
++  return empty($alter_type) || $alter_type != 'none' ? ($alter_hook ? $alter_hook : $default_hook) : FALSE;
++}
++
++/**
+  * Return a code string representing an implementation of a defaults module hook.
+  */
+ function features_export_render_defaults($module, $hook, $code, $args = '') {
+@@ -650,8 +660,11 @@ function features_get_default($component, $module_name = NULL, $alter = TRUE, $r
+       else {
+         if ($default_hook && function_exists("{$m}_{$default_hook}")) {
+           $cache[$component][$m] = call_user_func("{$m}_{$default_hook}");
+-          if ($alter) {
+-            drupal_alter($default_hook, $cache[$component][$m]);
++          $alter_type = features_get_components('alter_type', $component);
++          if ($alter && (!isset($alter_type) || $alter_type == FEATURES_ALTER_TYPE_NORMAL)) {
++            if ($alter_hook = features_get_default_alter_hook($component)) {
++              drupal_alter($alter_hook, $cache[$component][$m]);
++            }
+           }
+         }
+         else {
+diff --git a/features.module b/features.module
+index a225d8c..a8e06bd 100644
+--- a/features.module
++++ b/features.module
+@@ -18,6 +18,9 @@ define('FEATURES_NEEDS_REVIEW', 2);
+ define('FEATURES_REBUILDING', 3);
+ define('FEATURES_CONFLICT', 4);
+ define('FEATURES_DISABLED', 5);
++define('FEATURES_ALTER_TYPE_NORMAL', 'normal');
++define('FEATURES_ALTER_TYPE_INLINE', 'inline');
++define('FEATURES_ALTER_TYPE_NONE', 'none');
+ 
+ // Duration of rebuild semaphore: 10 minutes.
+ define('FEATURES_SEMAPHORE_TIMEOUT', 10 * 60);
+-- 
+1.7.5.4
+
