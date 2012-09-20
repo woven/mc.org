@@ -386,20 +386,13 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 
   if($form_id=='event_node_form'){
     if(isset($form['field_online_event'])){
-      array_unshift($form['#submit'], '_mt_event_submit_form');
-      $form['locations']['0']['field_online_event'] = $form['field_online_event'];
-      $form['locations'][0]['field_online_event']['#weight'] = '-99';
-      unset($form['field_online_event']);
+      $form['field_place']['0']['#prefix'] = '<div class="default-location-wrapper">';
+      $form['field_place']['0']['#suffix'] = "</div>";
       if(isset($form['#node'])){
         if($form['#node']->field_online_event[0]['value']){
-          $hidden_class = "hidden";
+          $form['field_place']['0']['#prefix'] = '<div class="default-location-wrapper hidden">';
         }
       }
-      if(!isset($hidden_class)){
-        $hidden_class = "";
-      }
-      $form['locations']['0']['field_online_event']['#suffix'] = '<div class="default-location-wrapper '.$hidden_class . '">';
-      //$form['locations'][0]['#suffix'] = "</div>";
       drupal_add_js((drupal_get_path('module', 'mt') .'/js/mt_online_location.js'));
       drupal_add_css((drupal_get_path('module', 'mt') .'/css/mt_online_location.css'));
     }
@@ -439,10 +432,6 @@ function mt_form_alter(&$form, &$form_state, $form_id){
 
 }
 
-function _mt_event_submit_form($form, &$form_state) {
-  $form_state['values']['field_online_event'] = $form_state['values']['locations'][0]['field_online_event'];
-  unset($form_state['values']['locations'][0]['field_online_event']);
-}
 
 function _schema_meta_date($ts,$itemprop = 'startDate'){
   $iso_start = date('c',$ts);
