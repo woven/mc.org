@@ -237,14 +237,14 @@ function mc_defaultimg_admin_settings(&$form_state) {
 
   }
   $form = system_settings_form($form);
-  //unset($form['#submit']);
-  //$form['#submit'] = array('_mc_defaultimg_admin_settings_submit');
-  return $form;
+  unset($form['#submit']);
+  $form['#submit'] = array('mc_defaultimg_admin_settings_submit');
+  return system_settings_form($form);
 }
 
 function mc_defaultimg_admin_settings_submit($form, &$form_state) {
   global $user;
-  $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
+  //$field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
 
   if (!function_exists('mime_content_type')) {
    function mime_content_type($f) {
