@@ -17,12 +17,35 @@ function mc_defaultimg_menu() {
   return $items;
 }
 
-function file_load_default($type = "generic"){
-  $file = field_file_load('');
-  $lib = libraries_get_path('mc_defaultimage');
-  $path = $lib . "/" . $type . ".png";
+function _is_file_exists($file){
 
-  return $file;
+  if(empty($file) OR is_null($file)){
+    return false;
+  }
+
+  if(file_exists($file['filepath'])){
+    return true;
+  }
+
+  return true;
+}
+
+function file_load_default($type = "generic"){
+  $path = libraries_get_path('mc_defaultimage');
+  $filename = $type.".png";
+  $fullpath = $path . "/" . $filename;
+
+  if(file_exists($fullpath)){
+    $file = field_file_load('');
+    $file['fid'] = 1;
+    $file['filepath'] = $fullpath;
+    $file['filename'] = $filename;
+    $file['filemime'] = 'image/png';
+    $file['filesize'] = filesize($fullpath);
+    return $file;
+  }
+
+  return;
 }
 
 /*
@@ -33,7 +56,7 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
 
   $node = $element['#node'];
 
-  //if($node->nid == 978){
+  //if($node->nid == 1061){
 
     $newfid = null;
 
@@ -65,58 +88,40 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
       }
     }
 
-    if(is_null($newfid)){
+    if(!_is_file_exists($newfid)){
       $fid_ct = variable_get('default_img_'.$node->type,false);
       if($fid_ct){
         $newfid = field_file_load($fid_ct);
       }
     }
 
-    if(is_null($newfid)){
+    if(!_is_file_exists($newfid)){
       $fid_ct = variable_get('default_img_generic',false);
       if($fid_ct){
         $newfid = field_file_load($fid_ct);
       }
     }
-     /*
-    if(is_null($newfid)){
-        $newfid = file_load_default($node->type);
-    }  */
 
-    if($newfid){
+    if(_is_file_exists($newfid)){
       $element['#item'] = $newfid;
       $element['#item']['nid'] = $node->nid;
     }
   }
 
-    if(function_exists($calllback)){
-      //dsm($element,$preset."-".$style);
-      return $calllback($element);
-    }
+  //additional checks to provide default image if #item is still empty, even if the file was set but doesnot exist
+  if(!_is_file_exists($element['#item'])){
+    $element['#item'] = file_load_default($node->type);
+  }
+
+  if(!_is_file_exists($element['#item'])){
+    $element['#item'] = file_load_default();
+  }
+
+  if(function_exists($calllback)){
+     return $calllback($element);
+  }
 
   //}//end debug
-
-  /*
-  //check if item is assignedthen check if it's
-  if(isset($element['#item']) && isset($element['#item']['fid'])){
-    $f = $element['#item'];
-
-    //check if the item really exist
-    if(!file_exists($f['filepath'])){
-      $fid_generic = variable_get('default_img_generic',false);
-      if($fid_generic){
-        $fid = &$element['#item'];
-        $fid = field_file_load($fid_generic);
-        $fid['destination'] = $fid['filepath'];
-        $fid['nid'] = $node->nid;
-        $fid['default'] = false;
-      }
-      dsm($fid,'im not here');
-    };
-  }else{
-    return '';
-  }
-  */
 }
 
 /**
@@ -232,20 +237,20 @@ function mc_defaultimg_admin_settings(&$form_state) {
 
   }
   $form = system_settings_form($form);
-  unset($form['#submit']);
-  $form['#submit'] = array('_mc_defaultimg_admin_settings_submit');
+  //unset($form['#submit']);
+  //$form['#submit'] = array('_mc_defaultimg_admin_settings_submit');
   return $form;
 }
 
-function __mc_defaultimg_admin_settings_submit($form, &$form_state) {
+function mc_defaultimg_admin_settings_submit($form, &$form_state) {
   global $user;
   $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
 
-  if (!function_exists('mime_content_type')) { 
-   function mime_content_type($f) { 
-       $f = escapeshellarg($f); 
-       return trim( `file -bi $f` ); 
-   } 
+  if (!function_exists('mime_content_type')) {
+   function mime_content_type($f) {
+       $f = escapeshellarg($f);
+       return trim( `file -bi $f` );
+   }
   }
 
   foreach ($_FILES['files']['tmp_name'] as $key => $path) {
@@ -291,132 +296,4 @@ function __mc_defaultimg_admin_settings_submit($form, &$form_state) {
       }
     }
   }
-}
-
-/**
- * Implementation of hook_nodeapi
- */
-function _mc_defaultimg_nodeapi(&$node, $op) {
-  if ($node->type != 'page' || $node->type!='taxonomy_feature' || $node->type!='taxonomy_topic' ) {
-    $vid = db_result(db_query("select vid from vocabulary where module='features_topic'"));
-    switch ($op) {
-      case 'prepare':
-
-        // remove default image before presenting the form
-        $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
-        $default_path = 'sites/default/files/' . $field_taxonomy_default_image['file_path'];
-        if ($node->field_list_image && count($node->field_list_image) == 1 &&
-                strpos($node->field_list_image[0]['filepath'], $default_path) === 0) {
-
-          unset($node->field_list_image[0]);
-        }
-
-        break;
-      case 'delete':
-        $a=4;
-      break;
-      case 'presave':
-        if ($node->field_list_image && ( empty($node->field_list_image[0]) || empty($node->field_list_image[0]['fid']))) {
-
-          // add default image
-
-          $use_generic_image = TRUE;
-
-          // get category terms
-
-          if (is_array($node->taxonomy) && !empty($node->taxonomy[$vid])) {
-            foreach ($node->taxonomy[$vid] as $tid) {
-              $nid = _taxonomynode_get_nid_from_tid($tid);
-              $node_taxonomy = node_load($nid);
-              if (isset($node_taxonomy->field_taxonomy_default_image['0']['fid'])) {
-                $file = field_file_load($node_taxonomy->field_taxonomy_default_image['0']['fid']);
-                $filename = $file['filepath'];
-                $use_generic_image = FALSE;
-                break;
-              }
-            }
-          }
-
-          // if no term found, add generic one
-          if ($use_generic_image) {
-            $type_default_image_fid = variable_get("default_img_" . $node->type, '');
-            if ($type_default_image_fid != '') {
-              $file = field_file_load($type_default_image_fid);
-              $filename = $file['filepath'];
-            } else {
-              $generic_default_image_fid = variable_get("default_img_generic", '');
-              if ($generic_default_image_fid != '') {
-                $file = field_file_load($generic_default_image_fid);
-                $filename = $file['filepath'];
-              } else {
-                return;
-              }
-            }
-          }
-
-          $node->field_list_image = array(
-              array(
-                  'fid' => $file['fid'],
-                  'title' => basename($file['filename']),
-                  'filename' => $file['filename'],
-                  'filepath' => $file['filepath'],
-                  'filesize' => $file['filesize'],
-                  'mimetype' => $file['filemime'],
-                  'data' => array(
-                      'description' => basename($file['filename']),
-                  ),
-                  'list' => 1,
-              ),
-          );
-        }
-        break;
-    }
-  }
-}
-
-
-function _mc_defaultimg_file_references($file) {
-  $field_taxonomy_default_image = _mc_defaultimg_nodefield_widget_settings('field_taxonomy_default_image');
-  if(arg(0)=='node' && arg(2)=='delete'){
-    $node=node_load(arg(1));
-  }
-  else {
-    $node=new stdClass();
-    $node->type = 'taxonomy_term';
-  }
-  $path = 'sites/default/files/' . $field_taxonomy_default_image['file_path'];
-  $belongs_to_module = strstr($file->filepath, $path);
-  if ($belongs_to_module) {
-    $count_node = db_result(db_query("SELECT COUNT(*) FROM {content_field_list_image} WHERE field_list_image_fid=%d", $file->fid));
-    $count_terms = db_result(db_query("SELECT COUNT(*) FROM {content_type_taxonomy_topic} WHERE field_taxonomy_default_image_fid=%d", $file->fid));
-    
-    $content_types = node_get_types();
-    $generic = new stdClass();
-    $generic->name = 'Generic';
-    $generic->type = 'generic';
-    $temp_array = array(
-        'generic' => $generic,
-    );
-    $content_types = $temp_array + $content_types;
-    $count_defaults=0;
-    foreach ($content_types as $content_type) {
-      $variable = variable_get('default_img_' . $content_type->type, '');
-      if($variable==$file->fid){
-        $count_defaults++;
-      }
-    }
-    if($node->type=='taxonomy_term'){
-      $count_terms--;
-    }
-    else{
-      $count_node--;
-    }
-    $total_count=$count_defaults+$count_node+$count_terms;
-    return array('mc_defaultimg' => $total_count);
-  }
-}
-
-function _mc_defaultimg_nodefield_widget_settings($field_name) {
-  $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
-  return unserialize(db_result(db_query($sql, $field_name)));
 }
