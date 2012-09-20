@@ -185,7 +185,8 @@ function _ical_feed_generate($title,$filename,$sql_result){
     $node = node_load($row->nid);
     if($node->type=='event' && $node->status){
       $event = _event_node_ical($node);
-      $location = $node->locations['0'];
+      $location_node = node_load($node->field_place['0']['nid']);
+      $location = $location_node->locations['0'];
       $event['location'] = _mc_api_format_location($location);
       $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
       $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
@@ -211,7 +212,8 @@ function _mc_event_feed_ical_sitewide(){
 function mc_event_feed_event_node_ical() {
   $node = node_load(arg(1));
   $event = _event_node_ical($node);
-  $location = $node->locations['0'];
+  $location_node = node_load($node->field_place['0']['nid']);
+  $location = $location_node->locations['0'];
   $event['location'] = _mc_api_format_location($location);
   $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
   $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
@@ -236,7 +238,8 @@ function mc_event_feed_ical() {
     $event_start_unixtime = strtotime($node->event['start_utc']);
     if($node->type=='event' && $event_start_unixtime>=$threeMonthsAgo){
       $event = _event_node_ical($node);
-      $location = $node->locations['0'];
+      $location_node = node_load($node->field_place['0']['nid']);
+      $location = $location_node->locations['0'];
       $event['location'] = _mc_api_format_location($location);
       $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
       $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
