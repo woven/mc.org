@@ -235,7 +235,7 @@ function ft_link_content_default_fields() {
         'timestamp' => 1297655448,
         'fid' => '51253',
       ),
-      'use_default_image' => 1,
+      'use_default_image' => 0,
       'resolution' => '0',
       'enforce_ratio' => 0,
       'croparea' => '400x400',

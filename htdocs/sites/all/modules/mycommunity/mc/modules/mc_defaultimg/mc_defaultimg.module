@@ -1,7 +1,8 @@
 <?php
 
 define("MC_DEFAULT_NAME","{MC Default Image}");
-/**
+
+  /**
  *  Implementation of hook_menu
  */
 function mc_defaultimg_menu() {
@@ -104,8 +105,8 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
 
     if(_is_file_exists($newfid)){
       $element['#item'] = $newfid;
-      $element['#item']['nid'] = $node->nid;
     }
+
   }
 
   //additional checks to provide default image if #item is still empty, even if the file was set but doesnot exist
@@ -117,9 +118,14 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
     $element['#item'] = file_load_default();
   }
 
+  if($element['#item'] && !$element['#item']['nid']){
+    $element['#item']['nid'] = $node->nid;
+  }
+
   if(function_exists($calllback)){
      return $calllback($element);
   }
+
 
   //}//end debug
 }
