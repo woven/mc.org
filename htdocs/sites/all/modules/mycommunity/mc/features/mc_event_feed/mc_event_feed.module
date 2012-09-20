@@ -1,0 +1,685 @@
+<?php
+/**
+ * @file
+ * Code for the MiamiTech Event Feed feature.
+ */
+
+include_once 'mc_event_feed.features.inc';
+
+
+
+function mc_event_feed_late_form_alter(&$form, &$form_state, $form_id){
+
+  if($form_id == 'event_feed_node_form'){
+    if($submit = &$form['buttons']['submit']){
+      unset($form['#redirect']);
+      $submit['#submit'][] = '_mc_event_feed_form_submit';
+    }
+  }
+
+}
+
+function _mc_event_feed_form_submit($form, &$form_state){
+  if(!empty($form_state['values']['og_groups'])){
+    $gid = array_shift(array_values($form_state['values']['og_groups']));
+
+    if($gid){
+      /*
+       * @todo improve this logic of hiding messages
+       * @see mc_event_feed_init
+      */
+      $_SESSION['new_event_feed'] = TRUE;
+      $form_state['redirect'] = 'node/'.$gid;
+    }else{
+      // @todo what to do if it's site wide event_feed?
+    }
+  }
+
+}
+
+function mc_event_feed_form_alter(&$form, &$form_state, $form_id){
+
+  if($form_id == 'event_feed_node_form'){
+    $form['#validate'][] = '_mc_event_feed_node_form_validate';
+  }
+}
+
+function _mc_event_feed_node_form_validate($form, &$form_state) {
+  //current event_node node
+  $node = $form['#node'];
+
+  //current feedapi settings from the form submit
+  $feedapi = &$form_state['values']['feedapi'];
+
+  /*
+  * replace webcal with http on if webcal exists
+  */
+  if(preg_match('/^webcal:\/\//i',$form_state['values']['feedapi']['feedapi_url']) ){
+    $form_state['values']['feedapi']['feedapi_url'] = str_replace('webcal://', 'http://', $form_state['values']['feedapi']['feedapi_url']);
+  }
+
+  /*
+   * change refresh time to never if the upload method is file
+  */
+  if($form_state['values']['feedapi']['upload_method'] == 'upload'){
+    $form_state['values']['feedapi']['refresh_time'] = FEEDAPI_CRON_NEVER_REFRESH;
+  }
+
+  /*
+  * auto set the title of the event_feed 'Feed from LOCATION'
+  */
+  if (empty($form_state['values']['title'])) {
+    switch($feedapi['upload_method']){
+      case 'upload':
+        //@todo find away to grap the filename
+        form_set_value($form['title'], 'Feed from file', $form_state);
+      break;
+      case 'url':
+        $new_title = 'Feed from ' . str_replace('http://', '', $form_state['values']['feedapi']['feedapi_url']);
+        form_set_value($form['title'], $new_title, $form_state);
+      break;
+    }
+  }
+}
+
+
+function mc_event_feed_menu(){
+  $items = array();
+  $event_path = drupal_get_path('module', 'event');
+  $items['group/%/ical'] = array(
+    'title' => 'Group iCal feed',
+    'page callback' => 'mc_event_feed_ical',
+    'access arguments' => array('access content'),
+  );
+  $items['events/ical'] = array(
+    'title' => 'MiamiTech.org Events',
+    'page callback' => '_mc_event_feed_ical_sitewide',
+    'access arguments' => array('access content'),
+  );
+
+  $items['user/%user/myevents/ical'] = array(
+    'title' => 'MiamiTech.org User Events',
+    'page callback' => '_mc_event_feed_ical_user',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+  );
+
+  return $items;
+}
+
+function mc_event_feed_menu_alter(&$items){
+  $items['node/%/ical']['page callback'] = 'mc_event_feed_event_node_ical';
+}
+
+function _mt_user_myevents(){
+  global $user; $cuid = arg(1);
+
+  if(!($user->uid == $cuid & $user->uid > 0)){
+    return;
+  }
+
+  print '<div class="two-cols"><div class="col-main">';
+
+    if(function_exists('_mc_event_section_all')){
+      print  _mc_event_section_all('events_bookmarks');
+    }
+
+  print '</div>';
+
+  $webcal_url = webcal_url("user/$user->uid/myevents/ical",array("absolute"=>true));
+  $url = url("user/$user->uid/myevents/ical",array("absolute"=>true));
+
+  $link = '<div class="user_addcal">
+                <ul>
+                  <li><span class="ical-ico">Image</span><a href="'.$webcal_url.'" class="ical-link">Subscribe to my events (iCal)</a></li>
+                  <li><span class="ical-ico">Image</span><a href="'.$url.'" class="ical-link">Download my events (iCal)</a></li>
+                </ul>
+          </div>';
+
+  $addtocalender = '<div class="block block-ds">
+    	<div class="block-title">Add to calendar</div>
+        <div class="block-content clear-block">
+            '.$link.'
+        </div>';
+  print  '<div class="col-right">'.$link.'</div>';
+
+  print '</div>';
+}
+
+function webcal_url($path = NULL, $options = array()){
+  $url = url($path,$options);
+  return str_replace("http://","webcal://",$url);
+}
+
+function _mc_event_feed_ical_user($user){
+  $uid = $user->uid;
+  $today = mktime(0, 0, 0);
+  $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
+  $sql = "SELECT DISTINCT
+      n.nid
+      FROM
+      node AS n
+      INNER JOIN flag_content AS f ON n.nid = f.content_id AND f.fid = %d AND f.uid = %d AND f.content_type = 'node'
+      INNER JOIN `event` AS e ON e.nid = n.nid
+      WHERE
+      n.type = 'event' AND e.unix_event_start >= %d
+      ORDER BY
+      e.event_start ASC
+  ";
+
+  //get the default flag to use for events
+  $flag = flag_get_flag('events_bookmarks');
+
+  //if flag is loaded and you can find fid, go on and output the feed
+  if($flag){
+    $result = db_query($sql,$flag->fid,$uid,$threeMonthsAgo);
+    _ical_feed_generate("User Calender","calender-user-$uid.ics",$result);
+  }
+}
+
+function _ical_feed_generate($title,$filename,$sql_result){
+  $events = array();
+  $result = $sql_result;
+
+  while ($row = db_fetch_object($result)) {
+    $node = node_load($row->nid);
+    if($node->type=='event' && $node->status){
+      $event = _event_node_ical($node);
+      $location = $node->locations['0'];
+      $event['location'] = _mc_api_format_location($location);
+      $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
+      $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
+      $group_name = array_pop($node->og_groups_both);
+      $event['summary'] = $event['summary'] . ' | ' . str_replace(array("\r", "\r\n", "\n"),'',$group_name);
+      $event['description'] = 'More info: ' . $event['url'];
+      $events[] = $event;
+    }
+  }
+
+  drupal_set_header('Content-Type: text/calendar; charset=utf-8');
+  drupal_set_header('Content-Disposition: attachment; filename="'.$filename.'"; ');
+  print str_replace('\:',':',ical_export($events, $title));
+}
+
+function _mc_event_feed_ical_sitewide(){
+  $today = mktime(0, 0, 0);
+  $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
+  $result = db_query("select nid from event where unix_event_start>=%d",$threeMonthsAgo );
+  _ical_feed_generate("All upcoming events",'calendar.ics',$result);
+}
+
+function mc_event_feed_event_node_ical() {
+  $node = node_load(arg(1));
+  $event = _event_node_ical($node);
+  $location = $node->locations['0'];
+  $event['location'] = _mc_api_format_location($location);
+  $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
+  $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
+  drupal_set_header('Content-Type: text/calendar; charset=utf-8');
+  drupal_set_header('Content-Disposition: attachment; filename="calendar.ics"; ');
+  print ical_export(array($event), $event['summary']);
+}
+
+function mc_event_feed_ical() {
+  $gid = arg(1);
+  $group = node_load($gid);
+  if($group->type!='group'){
+    return;
+  }
+  $today = mktime(0, 0, 0);
+  $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
+  $nids = og_group_child_nids($gid);
+  $events = array();
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    date_default_timezone_set('UTC');
+    $event_start_unixtime = strtotime($node->event['start_utc']);
+    if($node->type=='event' && $event_start_unixtime>=$threeMonthsAgo){
+      $event = _event_node_ical($node);
+      $location = $node->locations['0'];
+      $event['location'] = _mc_api_format_location($location);
+      $event['location'] = str_replace(array("\r", "\r\n", "\n"), '', $event['location']);
+      $event['uid'] = url("node/$node->nid", array('absolute' => TRUE, 'alias' => TRUE));
+      $events[] = $event;
+    }
+  }
+
+  drupal_set_header('Content-Type: text/calendar; charset=utf-8');
+  drupal_set_header('Content-Disposition: attachment; filename="calendar.ics"; ');
+  print ical_export($events, $group->title);
+}
+
+
+function mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $field_name = '', $sub_field = '') {
+  if ($op == 'describe') {
+    return t('Maps a string or an array of strings to myfields.');
+  }
+  else if ($op == 'list') {
+    $myfields = array('event' => array(
+      'start' => 'start',
+      'end' => 'end',
+      'timezone' => 'timezone',
+      'location' => 'location',
+      'geo' => 'geo',
+    ));
+    return $myfields;
+  }
+  else if ($op == 'map') {
+      if ($field_name == 'event') {
+        $group = node_load($node->feedapi->feed_nid);
+        $node->og_groups = $group->og_groups;
+        $node->og_groups_both = $group->og_groups_both;
+        if (is_string($feed_element)) {
+          if($sub_field=='start' || $sub_field=='end'){
+            $node->event[$sub_field] = $feed_element;
+            if($sub_field=='start'){
+              $node->event['has_time'] = '1';
+            }
+            if($sub_field=='end'){
+              $node->event['has_end_date'] = '1';
+            }
+            $node->event[$sub_field . '_exploded']['year'] = date('Y', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['month'] = date('m', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['day'] = date('d', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['hour'] = date('G', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['minute'] = date('i', strtotime($feed_element));
+            $node->event[$sub_field . '_exploded']['second'] = date('s', strtotime($feed_element));
+            if(date('G', strtotime($feed_element))=='12'){
+              $node->event[$sub_field . '_exploded']['ampm'] = 'pm';
+            }
+          }
+          if($sub_field=='timezone'){
+            if($feed_element=='UTC'){
+              $feed_element = 'Etc/GMT';
+            }
+            $timezone = event_zone_by_name(str_replace('_', ' ',$feed_element));
+            $node->event['dst_region'] = $timezone['dst_region'];;
+            $node->event['offset'] = $timezone['offset'];
+            $node->event['offset_dst'] = $timezone['offset_dst'];
+            $node->event['timezone'] = $timezone['timezone'];
+          }
+          if($sub_field=='location'){
+            $parts = mc_event_feed_getAddressParts($feed_element);
+            if($parts['name']=='webinar'){
+              $node->field_online_event['0']['value'] = 1;
+            }
+            else {
+              $temp_node = node_load($node->nid);
+              if((!isset($temp_node->field_place['0']['nid']) || empty($temp_node->field_place['0']['nid'])) && !isset($node->field_place['0']['nid'])){
+                $nid = _mc_event_feed_find_similar_place($parts['name'], $parts['address']);
+                if(!empty($nid)){
+                  $location_node = node_load($nid);
+                }
+                else {
+                  global $user;
+                  $location_node = new StdClass();
+                  $location_node->type = 'place';
+                  $location_node->status = 1;
+                  $location_node->title = $parts['name'];
+                  $location_node->uid = $user->uid;
+
+                  $location_node->locations['0']['name'] = $parts['name'];
+                  $location_node->locations['0']['street'] = $parts['address'];
+                  $location_node->locations['0']['city'] = $parts['city'];
+                  $location_node->locations['0']['province'] = $parts['state'];
+                  $location_node->locations['0']['postal_code'] = $parts['zip'];
+
+                  node_save($location_node);
+                }
+
+                $node->field_place['0']['nid'] = $location_node->nid;
+              }
+              else {
+                if(isset($node->field_place['0']['nid'])){
+                  $location_node = node_load($node->field_place['0']['nid']);
+                }
+                else{
+                  $location_node = node_load($temp_node->field_place['0']['nid']);
+                }
+                $location_node->title = $parts['name'];
+                $location_node->locations['0']['name'] = $parts['name'];
+                $location_node->locations['0']['street'] = $parts['address'];
+                $location_node->locations['0']['city'] = $parts['city'];
+                $location_node->locations['0']['province'] = $parts['state'];
+                $location_node->locations['0']['postal_code'] = $parts['zip'];
+
+                node_save($location_node);
+              }
+            }
+          }
+          if($sub_field=='geo'){
+            $temp_node = node_load($node->nid);
+            if((!isset($temp_node->field_place['0']['nid']) || empty($temp_node->field_place['0']['nid'])) && !isset($node->field_place['0']['nid'])){
+              global $user;
+
+              $location_node = new StdClass();
+              $location_node->type = 'place';
+              $location_node->status = 1;
+              $location_node->title = $parts['name'];
+              $location_node->uid = $user->uid;
+
+              $parts = explode(';', $feed_element);
+              $location_node->locations['0']['latitude'] = $parts['0'];
+              $location_node->locations['0']['longitude'] = $parts['1'];
+
+              node_save($location_node);
+
+              $node->field_place['0']['nid'] = $location_node->nid;
+
+            }
+            else{
+              if(isset($node->field_place['0']['nid'])){
+                $location_node = node_load($node->field_place['0']['nid']);
+              }
+              else{
+                $location_node = node_load($temp_node->field_place['0']['nid']);
+              }
+
+              $parts = explode(';', $feed_element);
+              $location_node->locations['0']['latitude'] = $parts['0'];
+              $location_node->locations['0']['longitude'] = $parts['1'];
+
+              node_save($location_node);
+            }
+
+          }
+        }
+
+      //force the node to always become published
+      return $node;
+    }
+  }
+}
+
+function _mc_event_feed_find_similar_place($name, $address){
+  $name = trim($name);
+  $address = trim($address);
+  $nid = db_result(db_query("SELECT li.nid FROM location l JOIN location_instance li ON l.lid=li.lid WHERE SOUNDEX(name)=SOUNDEX('%s') AND SOUNDEX(street)=SOUNDEX('%s') LIMIT 1", $name, $address));
+  return $nid;
+}
+
+function mc_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+
+  if($node->type=='event_feed' && $op=='validate' && (!isset($node->nid) || empty($node->nid))){
+
+    //check if it it has feedapi url and if upload method is url
+    if(isset($node->feedapi['feedapi_url']) && !empty($node->feedapi['feedapi_url']) && $node->feedapi['upload_method'] == "url"){
+
+      $feed_url = $node->feedapi['feedapi_url'];
+      _mc_event_feed_check_group_url_exists($feed_url);
+
+      $result = db_query("select nid from feedapi where url='%s'", $node->feedapi['feedapi_url']);
+      while ($row = db_fetch_object($result)) {
+        $other_node = node_load($row->nid);
+        if(isset($other_node->og_groups)){
+          $gid = current($node->og_groups);
+          $other_gid = current($other_node->og_groups);
+          if($gid==$other_gid){
+            form_set_error('', t("Woops, we're already importing that very feed.  Try a different one?"));
+          }
+        }
+      }
+    }
+  }
+
+  if($node->type=='event_feed' && $op=='insert'){
+    $mapping = 'a:5:{s:91:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:5:"DTEND";i:4;s:8:"datetime";}";s:61:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:3:"end";}";s:93:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:8:"datetime";}";s:63:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:5:"start";}";s:87:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:2:"tz";}";s:66:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:8:"timezone";}";s:60:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:8:"LOCATION";}";s:66:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:8:"location";}";s:55:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:3:"GEO";}";s:61:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:3:"geo";}";}';
+    $record = new stdClass();
+    $record->nid = $node->nid;
+    $record->mapping = $mapping;
+    drupal_write_record('feedapi_mapper', $record);
+  }
+
+  if($node->type=='event' && ($op=='presave') && isset($node->feedapi_node->feed_nids) && isset($node->feedapi->feed_nid)){
+    $node->og_public = TRUE;
+    if((empty($node->event['dst_region']) || $node->event['dst_region']==NULL) && (empty($node->event['timezone']) || $node->event['timezone']==NULL)){
+      $timezone = event_zone_by_name(str_replace('_', ' ', 'America/New_York'));
+      $node->event['dst_region'] = $timezone['dst_region'];;
+      $node->event['offset'] = $timezone['offset'];
+      $node->event['offset_dst'] = $timezone['offset_dst'];
+      $node->event['timezone'] = $timezone['timezone'];
+    }
+//    if(isset($node->locations['0']) && is_array($node->locations['0']) && (empty($node->locations['0']['street']) && empty($node->locations['0']['city'])  && empty($node->locations['0']['province'])) && (!empty($node->locations['0']['latitude']) && !empty($node->locations['0']['longitude'])))  {
+//      $parts = mc_event_feed_reverse_getAddressParts($node->locations['0']['latitude'], $node->locations['0']['longitude']);
+//      $node->locations['0']['name'] = $parts['name'];
+//      $node->locations['0']['street'] = $parts['address'];
+//      $node->locations['0']['city'] = $parts['city'];
+//      $node->locations['0']['province'] = $parts['state'];
+//      $node->locations['0']['postal_code'] = $parts['zip'];
+//    }
+  }
+}
+
+function mc_event_feed_init(){
+  /*
+   *  hide messages, on event feed import
+   *  @see _mc_event_feed_form_submit
+   */
+  if(isset($_SESSION['new_event_feed']) && $_SESSION['new_event_feed']==TRUE){
+    foreach ($_SESSION['messages']['status'] as $key => $value) {
+      if(!preg_match("/^You're done!/", $value)){
+        unset($_SESSION['messages']['status'][$key]);
+      }
+    }
+    $message = array_shift($_SESSION['messages']['status']);
+    unset($_SESSION['messages']['status']);
+    $_SESSION['messages']['status'][] = $message;
+    unset($_SESSION['new_event_feed']);
+  }
+}
+
+function mc_event_feed_feedapi_message(&$msg){
+  flog_it($msg);
+  $msg['message'] = "cool new stuff";
+}
+
+function mc_event_feed_reverse_getAddressParts($latitude, $longitude){
+  $address = $latitude . ',' . $longitude;
+  $address_encoded = urlencode($address);
+  $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $address_encoded . '&sensor=false');
+  $results = json_decode($json);
+  if($results->status=='OK'){
+    $parts = array( 
+          'name'=>array('point_of_interest','establishment'),   
+          'address'=>array('street_number','route'), 
+          'city'=>array('locality'), 
+          'state'=>array('administrative_area_level_1'), 
+          'zip'=>array('postal_code'), 
+        ); 
+    if (!empty($results->results['0']->address_components)){ 
+      $ac = $results->results['0']->address_components; 
+      foreach($parts as $need=>&$types) { 
+        foreach($ac as &$a) { 
+          if (in_array($a->types['0'],$types)){
+            if(!empty($address_out[$need])){
+              $address_out[$need] .= ' ' . $a->short_name; 
+            }
+            else {
+              $address_out[$need] = $a->short_name; 
+            }
+          }
+          elseif (empty($address_out[$need])){
+            $address_out[$need] = ''; 
+          }
+        } 
+      } 
+    }
+    return $address_out;
+  }
+  else {
+    return array();
+  }
+}
+
+
+function mc_event_feed_getAddressParts($address){ 
+  if($address=='webinar'){
+    return array(
+      'name' => $address,
+      'address'=>'', 
+      'city'=>'', 
+      'state'=>'', 
+      'zip'=>'', 
+    );
+  }
+
+  if(preg_match('/\(.+,{1,}.+\)/i', $address)){
+    $address_parts = array();
+    $parts = explode('(', $address);
+
+    $address_parts['name'] = $parts['0'];
+    $parts = explode(')', $parts['1']);
+    $parts = $parts['0'];
+    $parts = explode(', ', $parts);
+
+    $address_parts['address'] = $parts['0'];
+    $address_parts['city'] = $parts[count($parts) - 2];
+    $parts = explode(' ', $parts[count($parts) - 1]);
+    $address_parts['state'] = $parts['0'];
+    $address_parts['zip'] = $parts['1'];
+    return $address_parts;
+  } 
+  $address_with_no_floor = preg_replace('/(floor \d((th|st|nd|rd|)))|(\d(th|st|nd|rd|)) floor/i', '', $address);
+  $address_encoded = urlencode($address_with_no_floor);
+  $address_out = mc_event_feed_google_map_call($address_with_no_floor);
+  if(count($address_out)){
+    if(empty($address_out['address'])){
+      $new_address = ereg_replace("[^A-Za-z0-9 ]", "", $address_with_no_floor);
+      $address_parts = preg_split('/ [0-9]+ /', $new_address);
+      if(preg_match('/ [0-9]+ /', $new_address, $matches)){
+        $address_number = $matches['0'];
+        $address_filtered = $address_number .' ' . $address_parts['1'];
+        $address_out = mc_event_feed_google_map_call($address_filtered);
+        if(!preg_match('/^[0-9]{1,}\s/i', $address_parts['address'])){
+          $address_filtered = preg_replace('/[A-Z]{2}|[0-9]{5}$/', '', $address_filtered);
+          $address_out = mc_event_feed_google_map_call($address_filtered);
+        }
+      }
+    }
+    if(!preg_match('/ - \#[0-9]{1,} - /i', $address_parts['address'])){
+      $address_filtered = preg_replace('/ - \#[0-9]{1,} -/i', '', $address);
+      $address_out = mc_event_feed_google_map_call($address_filtered);
+    }
+    if(empty($address_out['zip'])){
+      $new_address = ereg_replace("[^A-Za-z0-9 ]", "", $address_with_no_floor);
+      $address_parts = preg_split('/ [0-9]+ /', $new_address);
+      if(preg_match('/ [0-9]+ /', $new_address, $matches)){
+        $address_number = $matches['0'];
+        $address_filtered = $address_number .' ' . $address_parts['1'];
+        $new_address = preg_replace('/\b\w{2} \d{5}| \d{5}|\d{5}/i', '', $address_filtered);
+        $address_out = mc_event_feed_google_map_call($new_address);
+      }
+    }
+
+    $address_parts = explode(' ', !empty($address_out['address'])? $address_out['address'] : $address_out['city']);
+    $address_start = $address_parts['0'];
+    if(!empty($address_start)){
+      $address_parts = explode($address_start, $address);
+    }
+    $address_out['name'] = preg_replace("/[^A-Za-z0-9 #\-&]/", "", $address_parts['0']);
+    $address_out['name'] = preg_replace('/\s$|^\s/i', '', $address_out['name']);
+    $address_out['name']= str_replace(' -', '', $address_out['name']);
+    return $address_out;
+  }
+  else {
+    return array();
+  }
+}
+
+function mc_event_feed_google_map_call($address){
+  $address_encoded = urlencode($address);
+  $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $address_encoded . '&sensor=false');
+  $results = json_decode($json);
+  if($results->status=='OK'){
+    $parts = array( 
+          'name'=>array('point_of_interest','establishment'),   
+          'address'=>array('street_number','route'), 
+          'city'=>array('locality'), 
+          'state'=>array('administrative_area_level_1'), 
+          'zip'=>array('postal_code'), 
+        ); 
+    if (!empty($results->results['0']->address_components)){ 
+      $ac = $results->results['0']->address_components; 
+      foreach($parts as $need=>&$types) { 
+        foreach($ac as &$a) { 
+          if (in_array($a->types['0'],$types)){
+            if(!empty($address_out[$need])){
+              $address_out[$need] .= ' ' . $a->short_name; 
+            }
+            else {
+              $address_out[$need] = $a->short_name; 
+            }
+          }
+          elseif (empty($address_out[$need])){
+            $address_out[$need] = ''; 
+          }
+        } 
+      } 
+    }
+    return $address_out;
+  }
+  else {
+    return array();
+  }
+}
+
+
+
+function mc_event_feed_google_get_georeference($address){
+  $address_encoded = urlencode($address);
+  $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $address_encoded . '&sensor=false');
+  $results = json_decode($json);
+  if($results->status=='OK'){
+    $address_out['latitude'] = $results->results['0']->geometry->location->lat;
+    $address_out['longitude'] = $results->results['0']->geometry->location->lng;;
+    return $address_out;
+  }
+  else {
+    return array();
+  }
+}
+
+
+function _mc_event_feed_check_group_url_exists($group_url){
+  if(preg_match('/(meetup\.com|facebook\.com)/i', $group_url)){
+    $group_url = preg_replace('/^(http|webcal):\/{2}w{3}\.|^http:\/{2}|^w{3}\./i', '',$group_url);
+    $replace_string = preg_replace('/\w+\.\w{2,3}\/[a-z-]+(\/|)/i', '', $group_url);
+    $group_url = str_replace($replace_string, '', $group_url);
+    $group_url = preg_replace('/\/$/i', '', $group_url);
+    $group_result = db_result(db_query('SELECT count(*) FROM content_type_group WHERE field_group_url_url IS NOT NULL AND field_group_url_url LIKE \'%' . $group_url .  '%\''));
+    $feed_result = db_result(db_query('SELECT count(*) FROM feedapi WHERE url IS NOT NULL AND url LIKE \'%' . $group_url .  '%\''));
+    $result = $group_result + $feed_result;
+    if($result){
+      if($group_result){
+        $nid = db_result(db_query('SELECT nid FROM content_type_group WHERE field_group_url_url IS NOT NULL AND field_group_url_url LIKE \'%' . $group_url .  '%\''));
+        $link = '<a href="/node/' . $nid . '">find it here</a>';
+        form_set_error('', 'Hmm, seems like we already know about this group. You can ' . $link  . ' or try another.');
+      }
+      elseif ($feed_result) {
+        $nid = db_result(db_query('SELECT nid FROM feedapi WHERE url IS NOT NULL AND url LIKE \'%' . $group_url .  '%\''));
+        $link = '<a href="/node/' . $nid . '">find it here</a>';
+        form_set_error('', 'Hmm, seems like we already know about this feed. You can ' . $link  . ' or try another.');
+      }
+    }
+  }
+  else{
+    $group_url = preg_replace('/^(http|webcal):\/{2}w{3}\.|^http:\/{2}|^w{3}\./i', '',$group_url);
+    $group_url = str_replace('/', '', $group_url);
+    $sql = 'SELECT count(*) FROM content_type_group WHERE field_group_url_url IS NOT NULL AND field_group_url_url LIKE \'%%%' . $group_url .  '%\'';
+    $group_result = db_result(db_query($sql));
+    $feed_result = db_result(db_query('SELECT count(*) FROM feedapi WHERE url IS NOT NULL AND url LIKE \'%' . $group_url .  '%\''));
+    $result = $group_result + $feed_result;
+    if($result){
+      if($group_result){
+        $nid = db_result(db_query('SELECT nid FROM content_type_group WHERE field_group_url_url IS NOT NULL AND field_group_url_url LIKE \'%%%' . $group_url .  '%\''));
+        $link = '<a href="/node/' . $nid . '">find it here</a>';
+        form_set_error('', 'Hmm, seems like we already know about this group. You can ' . $link  . ' or try another.');
+      }
+      elseif ($feed_result) {
+        $nid = db_result(db_query('SELECT nid FROM feedapi WHERE url IS NOT NULL AND url LIKE \'%' . $group_url .  '%\''));
+        $link = '<a href="/node/' . $nid . '">find it here</a>';
+        form_set_error('', 'Hmm, seems like we already know about this feed. You can ' . $link  . ' or try another.');
+      }
+    }
+  }
+}
