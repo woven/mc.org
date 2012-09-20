@@ -114,7 +114,7 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
     $element['#item'] = file_load_default();
   }
 
-  if($element['#item']){
+  if($element['#item'] && !$element['#item']['nid']){
     $element['#item'] = $newfid;
     $element['#item']['nid'] = $node->nid;
   }
