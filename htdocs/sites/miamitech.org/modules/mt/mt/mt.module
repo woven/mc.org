@@ -438,16 +438,6 @@ function _schema_meta_date($ts,$itemprop = 'startDate'){
   return "<meta itemprop=\"$itemprop\" content=\"$iso_start\">";
 }
 
-function mt_preprocess_page(&$vars){
-  if(arg(0)=='latest' && isset($_GET['title'])){
-    $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
-  }
-
-  if(arg(0)=='user' && arg(1)=='register'){
-    $vars['head_title'] = MC_USER_PAGE_REGISTER . ' ' . $vars['head_title'];
-  }
-}
-
 
 function mt_ds_fields_alter(&$fields) {
   $fields['nd_directions']['properties']['formatters']['mt_location_directions'] = 'MT Format';
@@ -554,6 +544,17 @@ function theme_mt_location_textfield($field) {
   }
 }
 
+function theme_myevents_flag_link($field){
+  $node = $field['object'];
+  global $user;
+
+  if($user->uid){
+    return flag_create_link('events_bookmarks', $node->nid);
+  }else{
+    return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
+  }
+}
+
 function mt_theme() {
   $theme_functions = array(
   'mt_location_textfield' => array(
@@ -570,17 +571,6 @@ function mt_theme() {
    )
   );
   return $theme_functions;
-}
-
-function theme_myevents_flag_link($field){
-  $node = $field['object'];
-  global $user;
-
-  if($user->uid){
-    return flag_create_link('events_bookmarks', $node->nid);
-  }else{
-    return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
-  }
 }
 
 function mt_init(){
