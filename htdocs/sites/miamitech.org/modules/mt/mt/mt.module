@@ -51,7 +51,6 @@ function theme_imgplaceholder($gname,$gid){
   return "<div class=\"img-placeholder\"><a class=\"img\" href='$glink'><img src='/sites/miamitech.org/themes/miamitech/images/icons/ico-event.png'/></a></div>";
 }
 
-
 function mt_ds_fields($type_name, $build_mode, $extra) {
   $fields = array(
     'mt_add_ical' => array(
@@ -423,63 +422,4 @@ function mt_init(){
       drupal_add_js((drupal_get_path('module', 'mt') .'/js/mt.js'));
     }
   }
-}
-
-/* Disabled Section */
-function _mt_mail_alter(&$message){
-  $site_name = variable_get('site_name', '');
-  $message['from'] = '"' . $site_name . '" <' .  $message['from'] . '>';
-  $message['headers']['From'] = $message['from'];
-  $message['headers']['Sender'] = $message['from'];
-}
-
-function _mt_preprocess_views_view_field(&$variables, $hook) {
-  if($variables['view']->name=='og_details'){
-    if($variables['field']->field=="field_header_color_value"){
-      $field = $variables['field'];
-      $alias = $field->field_alias;
-      if(!isset($variables['row']->$alias)){
-        $widget = _mt_defaultimg_nodefield_widget_settings('field_header_color');
-        $default_value = $widget['default_value']['0']['value'];
-        $variables['row']->$alias = $default_value;
-      }
-    }
-  }
-}
-
-function _mt_defaultimg_nodefield_widget_settings($field_name) {
-  $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
-  return unserialize(db_result(db_query($sql, $field_name)));
-}
-
-function NO_mt_node_permissions($op, $node, $account = NULL){
-  global $user;
-  if(array_search('publisher', $user->roles)){
-    return false;
-  }
-  return node_access($op, $node);
-}
-
-function NO_mt_access_node_edit($node) {
-  // Am I a group admin for this group post?
-  if (!module_exists('og_access') && isset($node->og_groups)) {
-    foreach ($node->og_groups as $gid) {
-      if (og_is_group_admin(node_load($gid))) {
-        return TRUE;
-      }
-    }
-  }
-
-  // Am I group admin for this group node?
-  if (!module_exists('og_access') && og_is_group_admin($node)) {
-    return TRUE;
-  }
-
-  global $user;
-  if($node->type!='group' && $node->type!='event' && $node->type!='event_feed'){
-    if(array_search('publisher', $user->roles)){
-      return false;
-    }
-  }
-  return node_access('update', $node);
 }
