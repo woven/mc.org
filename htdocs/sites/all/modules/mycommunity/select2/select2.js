@@ -175,7 +175,7 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                                 if(data.is_nr){
                                     //add newnode field
                                     for (var node in data.allow_nodes){
-                                       data.vals.push({id:"newnode:::"+node+":::"+data.term,"text":"Add new "+data.allow_nodes[node]+' ...',custom: true});
+                                       data.vals.push({id:"newnode:::"+node+":::"+data.term,"text":"Add a "+data.allow_nodes[node]+'...',custom: true});
                                     }
 
                                     //check if the noderefcreate is enabled (auto create of nodes through title);

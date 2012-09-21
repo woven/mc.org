@@ -253,13 +253,6 @@ function ft_location_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'location_defaultnum_page';
-  $strongarm->value = '0';
-  $export['location_defaultnum_page'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'location_defaultnum_photo';
   $strongarm->value = '1';
   $export['location_defaultnum_photo'] = $strongarm;
@@ -536,13 +529,6 @@ function ft_location_strongarm() {
   $strongarm->name = 'location_maxnum_image';
   $strongarm->value = '1';
   $export['location_maxnum_image'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'location_maxnum_page';
-  $strongarm->value = '0';
-  $export['location_maxnum_page'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1188,87 +1174,6 @@ function ft_location_strongarm() {
     ),
   );
   $export['location_settings_node_image'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'location_settings_node_page';
-  $strongarm->value = array(
-    'multiple' => array(
-      'min' => '1',
-      'max' => '0',
-      'add' => '0',
-    ),
-    'form' => array(
-      'weight' => '9',
-      'collapsible' => 1,
-      'collapsed' => 1,
-      'fields' => array(
-        'name' => array(
-          'collect' => '1',
-          'default' => '',
-          'weight' => '2',
-        ),
-        'street' => array(
-          'collect' => '1',
-          'default' => '',
-          'weight' => '4',
-        ),
-        'additional' => array(
-          'collect' => '0',
-          'default' => '',
-          'weight' => '6',
-        ),
-        'city' => array(
-          'collect' => '0',
-          'default' => '',
-          'weight' => '8',
-        ),
-        'province' => array(
-          'collect' => '0',
-          'default' => '',
-          'weight' => '10',
-        ),
-        'postal_code' => array(
-          'collect' => '0',
-          'default' => '',
-          'weight' => '12',
-        ),
-        'country' => array(
-          'collect' => '1',
-          'default' => 'us',
-          'weight' => '14',
-        ),
-        'locpick' => array(
-          'collect' => '1',
-          'weight' => '20',
-        ),
-      ),
-    ),
-    'display' => array(
-      'weight' => '0',
-      'hide' => array(
-        'name' => 0,
-        'street' => 0,
-        'additional' => 0,
-        'city' => 0,
-        'province' => 0,
-        'postal_code' => 0,
-        'country' => 0,
-        'locpick' => 0,
-        'province_name' => 0,
-        'country_name' => 0,
-        'map_link' => 0,
-        'coords' => 0,
-      ),
-      'teaser' => 1,
-      'full' => 1,
-    ),
-    'rss' => array(
-      'mode' => 'w3c',
-    ),
-  );
-  $export['location_settings_node_page'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

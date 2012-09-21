@@ -453,7 +453,7 @@ function ft_place_strongarm() {
           'weight' => '10',
         ),
         'postal_code' => array(
-          'collect' => '0',
+          'collect' => '1',
           'default' => '',
           'weight' => '12',
         ),
