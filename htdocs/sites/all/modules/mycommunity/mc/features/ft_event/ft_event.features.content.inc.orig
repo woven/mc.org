@@ -104,12 +104,16 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
+<<<<<<< HEAD
+      'ds_weight' => '-19',
+=======
       'ds_weight' => '-63',
+>>>>>>> mt
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'featured_slideshow__colorbox',
+        'format' => 'medium__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -117,7 +121,11 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
+<<<<<<< HEAD
+        'weight' => '-19',
+=======
         'weight' => '-63',
+>>>>>>> mt
       ),
       '5' => array(
         'label' => array(
@@ -214,7 +222,11 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
+<<<<<<< HEAD
+      'ds_weight' => '-19',
+=======
       'ds_weight' => '-73',
+>>>>>>> mt
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -227,7 +239,11 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_online_event',
         'label_value' => '',
         'exclude' => 1,
+<<<<<<< HEAD
+        'weight' => '-19',
+=======
         'weight' => '-73',
+>>>>>>> mt
       ),
       'teaser' => array(
         'format' => 'default',
@@ -293,7 +309,11 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
+<<<<<<< HEAD
+      'ds_weight' => '-19',
+=======
       'ds_weight' => '-58',
+>>>>>>> mt
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -306,7 +326,11 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_place',
         'label_value' => '',
         'exclude' => 1,
+<<<<<<< HEAD
+        'weight' => '-19',
+=======
         'weight' => '-58',
+>>>>>>> mt
       ),
       '5' => array(
         'label' => array(
@@ -391,8 +415,6 @@ function ft_event_content_default_fields() {
       'taxonomy_topic' => 0,
       'video' => 0,
       'webform' => 0,
-      'video' => 0,
-      'webform' => 0,
     ),
     'advanced_view' => '--',
     'advanced_view_args' => '',
@@ -425,7 +447,11 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
+<<<<<<< HEAD
+      'ds_weight' => '-19',
+=======
       'ds_weight' => '-57',
+>>>>>>> mt
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -438,7 +464,11 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
+<<<<<<< HEAD
+        'weight' => '-19',
+=======
         'weight' => '-57',
+>>>>>>> mt
       ),
       '5' => array(
         'label' => array(
@@ -517,6 +547,10 @@ function ft_event_content_default_fields() {
     ),
   );
 
+<<<<<<< HEAD
+  // Translatables
+  // Included for use with string extractors like potx.
+=======
   // Exported field: field_upload_file
   $fields['event-field_upload_file'] = array(
     'field_name' => 'field_upload_file',
@@ -615,6 +649,7 @@ function ft_event_content_default_fields() {
   // Included for use with string extractors like potx.
   t('Event URL');
   t('File');
+>>>>>>> mt
   t('Images');
   t('Online Event');
   t('Place');

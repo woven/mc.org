@@ -2528,3 +2528,7 @@ a.ical-link {
 #main #register .block-signup {
 	padding: 0;
 }
+
+.location-hidden {
+    display: none !important;
+}

@@ -25,6 +25,18 @@ function mc_event_ui_views_default_views() {
       'field' => 'group_nid',
       'relationship' => 'none',
     ),
+    'field_place_nid' => array(
+      'label' => 'Place',
+      'required' => 0,
+      'delta' => -1,
+      'id' => 'field_place_nid',
+      'table' => 'node_data_field_place',
+      'field' => 'field_place_nid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('fields', array(
     'phpcode_5' => array(
@@ -788,7 +800,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'override' => array(
         'button' => 'Override',
       ),
-      'relationship' => 'none',
+      'relationship' => 'field_place_nid',
     ),
     'field_online_event_value' => array(
       'label' => '',
@@ -862,7 +874,7 @@ print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\
       'hide_alter_empty' => 1,
       'value' => '<?php 
 if($data->location_name!=\'Exact Location TBD\'){
-echo _mc_event_section_formatted_location($data->location_name, $data->node_data_field_place_field_online_event_value);
+echo _mc_event_section_formatted_location($data->node_node_data_field_place__location_name, $data->node_data_field_online_event_field_online_event_value);
 }
 ?>',
       'exclude' => 1,
@@ -1028,7 +1040,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'relationship' => 'none',
     ),
     'phpcode_4' => array(
-      'label' => 'Event hash',
+      'label' => '',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -1054,11 +1066,9 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php 
-$string = $data->event_unix_event_start . $data->node_title . $data->location_name;
-$hash = md5($string);
-echo $hash;
+_mc_event_section_print_location($data->node_node_data_field_place__location_lid);
 ?>',
-      'exclude' => 1,
+      'exclude' => 0,
       'id' => 'phpcode_4',
       'table' => 'customfield',
       'field' => 'phpcode',
@@ -1066,6 +1076,41 @@ echo $hash;
         'button' => 'Override',
       ),
       'relationship' => 'none',
+    ),
+    'lid' => array(
+      'label' => 'Lid',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 1,
+      'id' => 'lid',
+      'table' => 'location',
+      'field' => 'lid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'field_place_nid',
     ),
   ));
   $handler->override_option('sorts', array(
@@ -1256,6 +1301,10 @@ echo $hash;
       'body' => array(
         'element_type' => 'p',
         'class' => 'description  {itemprop=description}',
+      ),
+      'phpcode_4' => array(
+        'element_type' => 'div',
+        'class' => 'location-hidden',
       ),
     ),
     'skip_blank' => 0,

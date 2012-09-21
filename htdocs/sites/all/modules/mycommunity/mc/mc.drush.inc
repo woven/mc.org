@@ -60,6 +60,15 @@ function mc_drush_command() {
     'aliases' => array('fr-all-smart', 'fras'),
   );
 
+  $items['migrate-places'] = array(
+    'description' => "Migrates the places to its own content type",
+    'examples' => array(
+      'drush mcplaces' => 'Migrates all the places to its own content type',
+    ),
+    'aliases' => array('mcplaces'),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL, // No bootstrap at all.
+  );
+
   return $items;
 }
 
@@ -117,6 +126,8 @@ function drush_mc_features_revert_all_smart() {
  */
 function mc_drush_help($section) {
   switch ($section) {
+    case 'drush:migrate-places':
+      return dt("This command will move all the existing places into its own content type");
     case 'drush:update-mc-dfimg':
       return dt("This command will update the files table in the database (This is targeted for GHH, for now)");
     // The 'title' meta item is used to name a group of
@@ -241,3 +252,24 @@ function drush_mc_update_mc_dfimg($vid = '2') {
   
 }
 
+function drush_mc_migrate_places() {
+  set_time_limit(0);
+  $result = db_query("SELECT nid, lid FROM location_instance");
+
+  while ($row = db_fetch_object($result)) {
+    $old_node = node_load($row->nid);
+    if($old_node->type=='event'){
+      $node = new StdClass();
+      $node->type = 'place';
+      $node->status = 1;
+      $node->title = $old_node->location['name'];
+      node_save($node);
+
+      $old_node->field_place['0']['nid'] = $node->nid;
+
+      node_save($old_node);
+
+      db_query('UPDATE location_instance SET nid=' . $node->nid . ', vid=' . $node->nid . ' WHERE lid=' . $row->lid);
+    }
+  }
+}

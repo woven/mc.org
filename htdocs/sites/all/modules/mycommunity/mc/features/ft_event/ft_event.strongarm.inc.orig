@@ -165,11 +165,9 @@ function ft_event_strongarm() {
     'options' => '19',
     'comment_settings' => '16',
     'menu' => '13',
-    'taxonomy' => '10',
     'path' => '17',
     'locations' => '9',
     'og_nodeapi' => '6',
-    'path_redirect' => '30',
     'print' => '15',
     'xmlsitemap' => '30',
     'nodewords' => '10',
@@ -203,10 +201,17 @@ function ft_event_strongarm() {
   $strongarm->name = 'event_range_next';
   $strongarm->value = array(
     'year' => 2013,
+<<<<<<< HEAD
+    'month' => '02',
+    'day' => '10',
+    'hour' => '07',
+    'minute' => '30',
+=======
     'month' => '03',
     'day' => '18',
     'hour' => '22',
     'minute' => '00',
+>>>>>>> mt
     'second' => '00',
   );
   $export['event_range_next'] = $strongarm;
@@ -216,11 +221,11 @@ function ft_event_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'event_range_prev';
   $strongarm->value = array(
-    'year' => 1999,
-    'month' => '11',
-    'day' => '30',
-    'hour' => '00',
-    'minute' => '00',
+    'year' => 2012,
+    'month' => '09',
+    'day' => '14',
+    'hour' => '23',
+    'minute' => '07',
     'second' => '00',
   );
   $export['event_range_prev'] = $strongarm;
@@ -420,25 +425,25 @@ function ft_event_strongarm() {
   $strongarm->value = array(
     'title' => array(
       'region' => 'main',
-      'weight' => '0',
+      'weight' => '1',
       'has_required' => TRUE,
       'title' => 'Title',
     ),
     'body_field' => array(
       'region' => 'main',
-      'weight' => '3',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
     ),
     'menu' => array(
       'region' => 'right',
-      'weight' => '2',
+      'weight' => '0',
       'hidden' => 0,
     ),
     'comment_settings' => array(
       'region' => 'right',
-      'weight' => '5',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Comment settings',
       'collapsed' => 1,
@@ -446,7 +451,7 @@ function ft_event_strongarm() {
     ),
     'path' => array(
       'region' => 'right',
-      'weight' => '6',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => 'URL path settings',
       'collapsed' => 1,
@@ -454,7 +459,7 @@ function ft_event_strongarm() {
     ),
     'options' => array(
       'region' => 'right',
-      'weight' => '4',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => 'Publishing options',
       'collapsed' => 1,
@@ -462,7 +467,7 @@ function ft_event_strongarm() {
     ),
     'author' => array(
       'region' => 'right',
-      'weight' => '3',
+      'weight' => '1',
       'has_required' => FALSE,
       'title' => 'Authoring information',
       'collapsed' => 1,
@@ -470,7 +475,11 @@ function ft_event_strongarm() {
     ),
     'buttons' => array(
       'region' => 'main',
+<<<<<<< HEAD
+      'weight' => '12',
+=======
       'weight' => '13',
+>>>>>>> mt
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -496,6 +505,8 @@ function ft_event_strongarm() {
       'title' => 'Reference Related Content',
       'hidden' => 0,
     ),
+<<<<<<< HEAD
+=======
     'field_upload_file' => array(
       'region' => 'main',
       'weight' => '8',
@@ -503,6 +514,7 @@ function ft_event_strongarm() {
       'title' => 'File',
       'hidden' => 0,
     ),
+>>>>>>> mt
     'event' => array(
       'region' => 'main',
       'weight' => '2',
@@ -510,19 +522,36 @@ function ft_event_strongarm() {
       'title' => 'Events',
       'hidden' => 0,
     ),
+<<<<<<< HEAD
+=======
     'locations' => array(
       'region' => 'main',
       'weight' => '5',
       'has_required' => TRUE,
       'title' => 'Location',
     ),
+>>>>>>> mt
     'og_nodeapi' => array(
       'region' => 'main',
-      'weight' => '1',
+      'weight' => '0',
       'has_required' => TRUE,
       'title' => 'Groups',
       'collapsed' => 0,
     ),
+<<<<<<< HEAD
+    'taxonomy' => array(
+      'region' => 'main',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'field_online_event' => array(
+      'region' => 'main',
+      'weight' => '11',
+      'has_required' => FALSE,
+      'title' => 'Online Event',
+=======
     'field_event_url' => array(
       'region' => 'main',
       'weight' => '4',
@@ -536,16 +565,22 @@ function ft_event_strongarm() {
       'has_required' => FALSE,
       'title' => 'Printer, email and PDF versions',
       'collapsed' => 1,
+>>>>>>> mt
       'hidden' => 0,
     ),
     'xmlsitemap' => array(
       'region' => 'main',
+<<<<<<< HEAD
+      'weight' => '9',
+=======
       'weight' => '11',
+>>>>>>> mt
       'has_required' => FALSE,
       'title' => 'XML sitemap',
       'collapsed' => 1,
       'hidden' => 0,
     ),
+<<<<<<< HEAD
     'revision_information' => array(
       'region' => 'right',
       'weight' => '5',
@@ -555,7 +590,12 @@ function ft_event_strongarm() {
     ),
     'nodewords' => array(
       'region' => 'main',
+      'weight' => '10',
+=======
+    'nodewords' => array(
+      'region' => 'main',
       'weight' => '12',
+>>>>>>> mt
       'has_required' => FALSE,
       'title' => 'Meta tags',
       'collapsed' => 1,

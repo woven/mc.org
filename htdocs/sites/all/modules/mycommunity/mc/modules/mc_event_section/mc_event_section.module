@@ -62,7 +62,8 @@ function _mc_event_section_next_two_weeks(&$content,$flag = null){
       END AS 'Section'
   FROM node as n 
   JOIN event as e on n.nid=e.nid
-  JOIN location_instance AS li on n.nid=li.nid
+  JOIN content_type_event AS cte ON n.nid=cte.nid
+  JOIN location_instance AS li ON cte.field_place_nid=li.nid
   JOIN location AS l on li.lid=l.lid
   $flag_join
   WHERE n.status=1 AND ((e.unix_event_start between '%s' and '%s') OR (e.unix_event_end between '%s' and '%s')) $flag_where
@@ -289,7 +290,8 @@ function _mc_event_section_after_two_weeks(&$content,$flag){
       END AS 'Section'
   FROM node as n 
   JOIN event as e on n.nid=e.nid
-  JOIN location_instance AS li on n.nid=li.nid
+  JOIN content_type_event AS cte ON n.nid=cte.nid
+  JOIN location_instance AS li ON cte.field_place_nid=li.nid
   JOIN location AS l on li.lid=l.lid
   $flag_join
   WHERE n.status=1 AND  e.unix_event_start > '%s' $flag_where
@@ -415,4 +417,13 @@ function mc_event_section_views_query_alter(&$view, &$query) {
       $query->orderby['0'] = $another_condition;
     }
   }
+}
+
+function _mc_event_section_print_location($lid){
+  $location = location_load_location($lid);
+  $node = new stdClass();
+  $node->location = $location;
+  $node->type = 'place';
+  $field = array('object' => $node);
+  print theme('nd_location_address', $field);
 }
