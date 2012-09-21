@@ -1,0 +1,9 @@
+  Configuration
+=================
+
+This module lets you configure the /about page.
+
+There are two ways for this:
+    * Go to admin/settings/mcabout and enter the nid of the node that you wish to use as the /about page.
+    * If you have the module mc_admin_bulk enabled, you can also go to: admin/menu/help/config, rearrange the order of
+      the items of the menu, and the first item will be used as the /about page
