@@ -4,8 +4,6 @@
  * Code for the mt feature.
  */
 
-include_once 'mt.features.inc';
-
 /*
  * @todo: https://app.asana.com/0/1947405877174/1947670111015
  */
