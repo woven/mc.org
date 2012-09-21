@@ -20,9 +20,9 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
 
     var modalOptions = {
         url: url,
-        width: $(window).width() - 100,
-        //width: 500,
-        height: $(window).height() - 100,
+        //width: $(window).width() - 100,
+        width: 600,
+        height: 650,
         autoFit: false,
         draggable: false,
         onSubmit: Drupal.select2.NodeSubmitCallback
