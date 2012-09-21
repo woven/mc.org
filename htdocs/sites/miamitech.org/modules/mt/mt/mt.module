@@ -51,10 +51,6 @@ function theme_imgplaceholder($gname,$gid){
   return "<div class=\"img-placeholder\"><a class=\"img\" href='$glink'><img src='/sites/miamitech.org/themes/miamitech/images/icons/ico-event.png'/></a></div>";
 }
 
-function mt_count_user_ct($type){
-  global $user;
-  return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
-}
 
 function mt_ds_fields($type_name, $build_mode, $extra) {
   $fields = array(
