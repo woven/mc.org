@@ -391,8 +391,6 @@ function ft_event_content_default_fields() {
       'taxonomy_topic' => 0,
       'video' => 0,
       'webform' => 0,
-      'video' => 0,
-      'webform' => 0,
     ),
     'advanced_view' => '--',
     'advanced_view_args' => '',
