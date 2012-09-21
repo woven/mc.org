@@ -678,14 +678,16 @@ function mc_user_pass_reset(&$form_state, $uid, $timestamp, $hashed_pass, $actio
 }
 
 
-function mt_mail_alter(&$message){
+/* Disabled Section */
+
+function _mt_mail_alter(&$message){
   $site_name = variable_get('site_name', '');
   $message['from'] = '"' . $site_name . '" <' .  $message['from'] . '>';
   $message['headers']['From'] = $message['from'];
   $message['headers']['Sender'] = $message['from'];
 }
 
-function mt_preprocess_views_view_field(&$variables, $hook) {
+function _mt_preprocess_views_view_field(&$variables, $hook) {
   if($variables['view']->name=='og_details'){
     if($variables['field']->field=="field_header_color_value"){
       $field = $variables['field'];
@@ -702,14 +704,4 @@ function mt_preprocess_views_view_field(&$variables, $hook) {
 function _mt_defaultimg_nodefield_widget_settings($field_name) {
   $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
   return unserialize(db_result(db_query($sql, $field_name)));
-}
-
-function mt_preprocess_node(&$variables){
-  if($variables['type']=='group' && (!isset($variables['body']) || $variables['body']==NULL || empty($variables['body']))){
-    $gid = $variables['nid'];
-    $nids = og_group_child_nids($gid);
-    if(count($nids)==1){
-      $variables['content'] = '<div id="mission" class="og-mission">This group isn\'t sharing anything yet.</div>';
-    }
-  }
 }
