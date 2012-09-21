@@ -52,3 +52,11 @@ $sites = array(
   'community.thesje.org' => 'sje.mycommunity.org',
   'www.community.thesje.org' => 'sje.mycommunity.org'
 );
+  
+$sites += array(
+  //local/dev and staging for mt.org
+  'mt.mycommunity.org' => 'miamitech.org',
+  'mt.staging.mycommunity.org' => 'miamitech.org',
+  'mt.dev.mycommunity.org' => 'miamitech.org',
+  'local.mt.mycommunity.org' => 'miamitech.org'
+);
