@@ -510,12 +510,6 @@ function ft_event_strongarm() {
       'title' => 'Events',
       'hidden' => 0,
     ),
-    'locations' => array(
-      'region' => 'main',
-      'weight' => '5',
-      'has_required' => TRUE,
-      'title' => 'Location',
-    ),
     'og_nodeapi' => array(
       'region' => 'main',
       'weight' => '1',
@@ -559,6 +553,13 @@ function ft_event_strongarm() {
       'has_required' => FALSE,
       'title' => 'Meta tags',
       'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'field_online_event' => array(
+      'region' => 'main',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Online Event',
       'hidden' => 0,
     ),
   );
