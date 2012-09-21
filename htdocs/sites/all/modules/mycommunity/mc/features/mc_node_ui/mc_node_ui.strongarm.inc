@@ -299,8 +299,22 @@ $emailBody =  t("I wanted to share a !ctname I found on !site_name.%0D%0A%0D%0A!
         'formatters' => array(
           'ds_eval_code' => 'Default',
         ),
-        'code' => '[location-street_0]<br/>
-[location-city_0], [location-province_name_0] [location-postal_code_0]',
+        'code' => '<div itemprop="location" itemscope itemtype="http://schema.org/Place">
+<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+<?php if((isset($object->location[\'street\']) && !empty($object->location[\'street\'])) || (isset($object->location[\'city\']) && !empty($object->location[\'city\'])) || (isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])) ): ?>
+
+<?php if(isset($object->location[\'street\']) && !empty($object->location[\'street\'])): ?>
+   [location-street_0]<br/>
+   <?php endif; ?>
+   <?php if(isset($object->location[\'city\']) && !empty($object->location[\'city\'])): ?>[location-city_0]<?php if((isset($object->location[\'province\']) && !empty($object->location[\'province\'])) || (isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\']))): ?>,<?php endif; ?> <?php endif; ?><?php if(isset($object->location[\'province\']) && !empty($object->location[\'province\'])): ?>[location-province_name_0] <?php endif; ?><?php if(isset($object->location[\'postal_code\']) && !empty($object->location[\'postal_code\'])): ?>[location-postal_code_0]<?php endif; ?>
+<?php elseif(!empty($object->location[\'latitude\']) && !empty($object->location[\'longitude\']) ): ?>
+<?php else: ?>
+<div class="no-location">
+A location wasn\'t provided.
+</div>
+<?php endif; ?>
+</div>
+</div>',
         'token' => 1,
       ),
     ),
@@ -360,6 +374,7 @@ $emailBody =  t("I wanted to share a !ctname I found on !site_name.%0D%0A%0D%0A!
         'group' => 'group',
         'link' => 'link',
         'news' => 'news',
+        'page' => 'page',
         'place' => 'place',
         'simplenews' => 'simplenews',
         'video' => 'video',
@@ -660,6 +675,61 @@ if ( !empty($object->feedapi_node->feed_nids) ){
       'properties' => array(
         'block' => 'views|node_files-block_1',
         'render' => '1',
+      ),
+    ),
+    'node_event_dates_print' => array(
+      'title' => 'Event Dates Print',
+      'exclude' => array(
+        'article' => 'article',
+        'audio' => 'audio',
+        'file' => 'file',
+        'group' => 'group',
+        'link' => 'link',
+        'nnews' => 'nnews',
+        'npage' => 'npage',
+        'place' => 'place',
+        'video' => 'video',
+        'gallery' => 'gallery',
+        'gallery_image' => 'gallery_image',
+        'event_feed' => 'event_feed',
+        'webform' => 'webform',
+        'forum' => 'forum',
+        'event' => 0,
+      ),
+      'type' => 5,
+      'status' => 3,
+      'properties' => array(
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php return views_embed_view("node_details","block_5",$object->nid) ?>',
+        'token' => 0,
+      ),
+    ),
+    'tweet_button' => array(
+      'type' => 6,
+      'status' => 3,
+      'title' => 'Tweet button',
+      'exclude' => array(
+        'group' => 'group',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'event_feed' => 0,
+        'webform' => 0,
+        'forum' => 0,
+      ),
+      'properties' => array(
+        'block' => 'boxes|tweet_button',
+        'render' => '3',
       ),
     ),
   );

@@ -75,5 +75,26 @@ $myUrl = $_SERVER[\'HTTP_HOST\'];
   );
   $export['google_plusone'] = $box;
 
+  $box = new stdClass;
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'tweet_button';
+  $box->plugin_key = 'simple';
+  $box->title = '';
+  $box->description = 'Tweet Button';
+  $box->options = array(
+    'body' => '<?php
+$node = node_load(arg(1));
+$group_name = array_pop($node->og_groups_both);
+$string = trim($node->title) . \' | \' . trim($group_name) . \' | #miamitech\';
+$string = str_replace(\'"\',\'\', $string);
+$string = str_replace(array("\r", "\r\n", "\n"), "", $string);
+?>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="<?php echo $string; ?>">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>',
+    'format' => '3',
+  );
+  $export['tweet_button'] = $box;
+
   return $export;
 }
