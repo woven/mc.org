@@ -6,6 +6,9 @@
 
 include_once 'mt.features.inc';
 
+/*
+ * @todo: https://app.asana.com/0/1947405877174/1947670111015
+ */
 function mt_jqmulti_files(){
   $theme = drupal_get_path("theme","miamitech");
   return array(
@@ -13,6 +16,9 @@ function mt_jqmulti_files(){
   );
 }
 
+/*
+ * @todo: https://app.asana.com/0/1947405877174/1955527457973
+ */
 function theme_imgplaceholder($gname,$gid){
 
   $range_colors = array(
@@ -43,49 +49,6 @@ function theme_imgplaceholder($gname,$gid){
 
   $glink = url("node/".$gid);
   return "<div class=\"img-placeholder\"><a class=\"img\" href='$glink'><img src='/sites/miamitech.org/themes/miamitech/images/icons/ico-event.png'/></a></div>";
-}
-
-function theme_imgplaceholder_old($gname,$height = "83px",$width = "83px"){
-  global $range_colors;
-
-  $range_colors = array(
-    'a-f' => array("red","white"),
-    'f-l' => array("orange","black"),
-    'l-s' => array("purple","white"),
-    's-z' => array("green","white"),
-    'else' => array("green","white")
-  );
-
-  $colors_use = array();
-  $gfirst = strtolower($gname[0]);
-
-  foreach($range_colors as $range => $colors){
-    $lt = explode("-",$range);
-    if(count($lt) > 1){
-      if(in_array($gfirst,range($lt[0], $lt[1]))){
-         $colors_use = $colors;
-         break 1;
-      }
-    }
-  }
-
-  if(empty($colors_use)){
-    $colors_use =  $range_colors['else'];
-  }
-
-  return "<div class=\"img-placeholder\" style='width: $width; height: $height' ><div class=\"img\" style='background-color: $colors_use[0]; line-height: $height;height: $height'><span style='color: $colors_use[1]'>$gname</span></div></div>";
-}
-
-function mt_preprocess($vars,$hook){
-    if($hook == 'block'){
-        $cblock = $vars['block'];
-        if($cblock->module == 'ds' && $cblock->bid == 'ds-0b596e3199de270de74a2f6e8f0d1525'){
-            $cblock->subject = t("Where it's at"); 
-        }
-        if($cblock->module == 'ds' && $cblock->bid == 'ds-5c755d31699c072160e29da9599e28f3'){
-            $cblock->subject = t("Add to calendar");
-        }
-    }
 }
 
 function mt_count_user_ct($type){
@@ -258,8 +221,25 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
       ),
     ),
   );
-
   return array('nd' => $fields);
+}
+
+function mt_theme() {
+  $theme_functions = array(
+    'mt_location_textfield' => array(
+      'arguments' => array('field' => NULL),
+    ),
+    'mt_location_gmap_default' => array(
+      'arguments' => array('field' => NULL),
+    ),
+    'mt_location_directions' => array(
+      'arguments' => array('field' => NULL),
+    ),
+    'myevents_flag_link' => array(
+      'arguments' => array('field' => NULL),
+    )
+  );
+  return $theme_functions;
 }
 
 function mt_add_group_rss($node){
@@ -438,24 +418,6 @@ function theme_myevents_flag_link($field){
   }else{
     return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
   }
-}
-
-function mt_theme() {
-  $theme_functions = array(
-  'mt_location_textfield' => array(
-      'arguments' => array('field' => NULL),
-    ),
-  'mt_location_gmap_default' => array(
-      'arguments' => array('field' => NULL),
-    ),
-  'mt_location_directions' => array(
-      'arguments' => array('field' => NULL),
-    ),
-   'myevents_flag_link' => array(
-     'arguments' => array('field' => NULL),
-   )
-  );
-  return $theme_functions;
 }
 
 function mt_init(){
