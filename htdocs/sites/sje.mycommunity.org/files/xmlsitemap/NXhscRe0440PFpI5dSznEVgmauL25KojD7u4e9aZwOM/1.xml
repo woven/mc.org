@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>http://sje.mycommunity.org/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://sje.mycommunity.org/sje</loc><lastmod>2012-09-11T23:51Z</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>http://sje.mycommunity.org/jett</loc><lastmod>2012-09-06T13:50Z</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>http://sje.mycommunity.org/sje/events/2013-first-annual-sje-golft-tournament</loc><lastmod>2012-09-13T12:38Z</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>http://sje.mycommunity.org/events/nice-event-place</loc><lastmod>2012-09-17T17:28Z</lastmod><changefreq>daily</changefreq></url>
+<url><loc>http://sje.mycommunity.org/sje/events/new-event-new-place</loc><lastmod>2012-09-18T15:09Z</lastmod><changefreq>daily</changefreq></url>
+</urlset>

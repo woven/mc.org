@@ -9,6 +9,7 @@ local.deploy.sh
 
 #phpstorm
 .idea/*
+htdocs/.idea
 atlassian-ide-plugin.xml
 
 #eclipse specific files
