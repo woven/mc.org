@@ -95,40 +95,6 @@ function mt_count_user_ct($type){
 
 function mt_ds_fields($type_name, $build_mode, $extra) {
   $fields = array(
-    'mt_event_image' => array(
-      'title' => t('Image'),
-      'exclude' => array(
-        'group' => 'group',
-        'link' => 'link',
-        'webform' => 'webform',
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'feeds' => 0,
-        'file' => 0,
-        'nnews' => 0,
-        'npage' => 0,
-        'place' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'forum' => 0,
-        'taxonomy_feature' => 0,
-      ),
-      'type' => DS_FIELD_TYPE_CODE,
-      'status' => DS_FIELD_STATUS_CUSTOM,
-      'properties' => array(
-        'css-class' => 'field-nodes-slideshow',
-        'formatters' => array(
-          'ds_eval_code' => 'Default',
-        ),
-        'code' => '<?php 
-          print mt_event_image($object);
-        ?>',
-        'token' => 0,
-      ),
-    ),
-
     'mt_add_ical' => array(
       'title' => t('Add to Calendar'),
       'exclude' => array(
@@ -162,7 +128,6 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
         'token' => 0,
       ),
     ),
-
     'mt_add_group_ical' => array(
       'title' => t('Add Group to Calendar iCal'),
       'exclude' => array(
@@ -196,7 +161,6 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
         'token' => 0,
       ),
     ),
-
     'mt_add_myevents' => array(
       'title' => t('Add To My events'),
       'exclude' => array(
@@ -227,7 +191,6 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
         'token' => 0,
       ),
     ),
-
     'mt_add_group_rss' => array(
       'title' => t('Add Group to Calendar RSS'),
       'exclude' => array(
@@ -261,7 +224,6 @@ function mt_ds_fields($type_name, $build_mode, $extra) {
         'token' => 0,
       ),
     ),
-
     'mt_add_gcal' => array(
       'title' => t('Add to Google Calendar'),
       'exclude' => array(
@@ -327,12 +289,6 @@ function mt_add_gcal($node){
   $start_date = event_format_date($node->event['start_utc'], 'custom', "Ymd\THis\Z");
   $end_date = event_format_date($node->event['end_utc'], 'custom', "Ymd\THis\Z");
   return '<span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="http://www.google.com/calendar/render?action=TEMPLATE&text=' . $title . '&details=' . $description . '&dates=' . $start_date .'/' . $end_date . '&location='. $location  .'">Just this event (gCal)</a>';
-}
-
-function mt_event_image($node){
-  if(count($node->field_list_image)>0 && isset($node->field_list_image['0']['fid'])){
-    return views_embed_view("node_details","block_2", $node->nid);
-  }
 }
 
 function mt_form_alter(&$form, &$form_state, $form_id){
