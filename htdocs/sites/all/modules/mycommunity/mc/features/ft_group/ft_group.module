@@ -42,6 +42,21 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
   }
 }
 
+
+/*
+ * If there is no group body and nothing is being shared
+ * @todo improve this for later
+ */
+function ft_group_preprocess_node(&$variables){
+  if($variables['type']=='group' && (!isset($variables['body']) || $variables['body']==NULL || empty($variables['body']))){
+    $gid = $variables['nid'];
+    $nids = og_group_child_nids($gid);
+    if(count($nids)==1){
+      $variables['content'] = '<div id="mission" class="og-mission">This group isn\'t sharing anything yet.</div>';
+    }
+  }
+}
+
 /**
  * @todo remove this code/logic after making sure that we dont need this field anymore: field_group_manager
  *

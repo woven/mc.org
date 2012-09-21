@@ -745,3 +745,20 @@ function mc_base_content_multiple_values($element) {
     return $output;
   }
 }
+
+
+function mc_base_og_mission(&$variables) {
+  $node = $variables['form']['#node'];
+  $format = $variables['form']['#node']->format;
+
+  //pass the missing statement through the input format from body field
+  $variables['mission'] = check_markup($variables['mission'],$format);
+
+  //expose the group url to the templates
+  $url = $node->field_group_url[0]['url'];
+  if(!empty($url)){
+    $opts = array('attributes'=> array('target'=>"_blank"),'absolute' => true);
+    $variables['url'] = l($url,$url,$opts);
+  }
+
+}

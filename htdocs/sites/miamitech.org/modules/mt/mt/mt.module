@@ -77,10 +77,6 @@ function theme_imgplaceholder_old($gname,$height = "83px",$width = "83px"){
 }
 
 function mt_preprocess($vars,$hook){
-    //dsm($hook);
-  if($hook == 'views_view_field'){
-      //dsm($vars,$hook);
-  }
     if($hook == 'block'){
         $cblock = $vars['block'];
         if($cblock->module == 'ds' && $cblock->bid == 'ds-0b596e3199de270de74a2f6e8f0d1525'){
@@ -89,50 +85,12 @@ function mt_preprocess($vars,$hook){
         if($cblock->module == 'ds' && $cblock->bid == 'ds-5c755d31699c072160e29da9599e28f3'){
             $cblock->subject = t("Add to calendar");
         }
-	if($cblock->module == 'views' && $cblock->delta == '-exp-latest_pages-page_7'){
-            $cblock->subject = t("By group"); 
-        }
     }
-    
 }
 
 function mt_count_user_ct($type){
   global $user;
   return db_result(db_query("SELECT Count(node.nid) FROM node WHERE node.type = '%s'  AND node.uid = %d",$type,$user->uid));
-}
-
-function mt_init_(){
-        global $user;
-
-        if($user->uid > 1){
-          $cgroups = mt_count_user_ct("group");
-          $cevents = mt_count_user_ct("event");
-          $glink = l("Add a Group","node/add/group");
-          $elink = l("Add an Event","node/add/event");
-          $icallink = l("Import an iCal Feed","node/add/event");
-          $profilelink = l("Update your personal profile","user/$user->uid/edit/Personal%20information");
-          $hasprofile = db_result(db_query("SELECT count(fid) FROM profile_values WHERE uid = %d AND fid = 1",$user->uid));
-
-          if(!$hasprofile){
-            $actions[]="<li><b>$profilelink</b></li>";
-          }else{
-            $actions[]="<li>$profilelink</li>";
-          }
-
-          if($cgroups > 0){
-              $actions[]="<li>$glink</li>";
-          }else{
-              $actions[]="<li><b>$glink</b></li>";
-          }
-
-          if(!$cevents && $cgroups){
-            $actions[]="<li><b>$elink OR $icallink</b></li>";
-          }elseif($cevents){
-            $actions[]="<li>$elink OR $icallink</li>";
-          }
-
-          drupal_set_message("<div class=\"wizard\"><p>Please do the following to complete your MiamiTech.org Experience</p>"."<ul>".implode($actions,"")."</ul></div>");
-        }
 }
 
 function mt_ds_fields($type_name, $build_mode, $extra) {
@@ -375,10 +333,6 @@ function mt_event_image($node){
   if(count($node->field_list_image)>0 && isset($node->field_list_image['0']['fid'])){
     return views_embed_view("node_details","block_2", $node->nid);
   }
-  //else{
-  //  $gid = array_pop($node->og_groups);
-  //  return views_embed_view("node_details","block_2", $gid);
-  //}
 }
 
 function mt_form_alter(&$form, &$form_state, $form_id){
@@ -399,19 +353,6 @@ function mt_form_alter(&$form, &$form_state, $form_id){
   }
 
   if ($form['#id'] == 'node-form') {
-    /*
-    if(isset($form['author'])){
-      $form['author']['name']['#type'] = 'hidden';
-      $form['author']['date']['#type'] = 'hidden';
-
-      $form['name'] = $form['author']['name'];
-      $form['date'] = $form['author']['date'];
-      unset($form['author']);
-    }
-    */
-    if($form['og_nodeapi']['visible']['og_groups']['#options']['0']=='- None -'){
-      unset($form['og_nodeapi']['visible']['og_groups']['#options']['0']);
-    }
     if (isset($form['locations'][0]) && $form['locations'][0]['#default_value']['province']=='NY' && $form['locations'][0]['#default_value']['city']=='Harlem' ) {
       $form['locations'][0]['#default_value'] = array(
         'city' => '',
@@ -419,35 +360,13 @@ function mt_form_alter(&$form, &$form_state, $form_id){
         'country' => 'us'
       );
     }
-    if(isset($form['field_related']['#access']) && $form['field_related']['#access']==TRUE){
-      $form['field_related']['#access']=FALSE;
-    }
-    if(isset($form['field_list_image']['#access']) && $form['field_list_image']['#access']==TRUE){
-      $form['field_list_image']['#access']=FALSE;
-    }
   }
-  if($form['#id']=='views-exposed-form-latest-pages-page-7'){
-    $form['title']['#attributes']['placeholder']= "Start typing a group's name...";
-  }
-
 }
-
 
 function _schema_meta_date($ts,$itemprop = 'startDate'){
   $iso_start = date('c',$ts);
   return "<meta itemprop=\"$itemprop\" content=\"$iso_start\">";
 }
-
-function mt_preprocess_page(&$vars){
-  if(arg(0)=='latest' && isset($_GET['title'])){
-    $vars['head_title'] = str_replace('Events', 'Events from ' . $_GET['title'], $vars['head_title']);
-  }
-
-  if(arg(0)=='user' && arg(1)=='register'){
-    $vars['head_title'] = MC_USER_PAGE_REGISTER . ' ' . $vars['head_title'];
-  }
-}
-
 
 function mt_ds_fields_alter(&$fields) {
   $fields['nd_directions']['properties']['formatters']['mt_location_directions'] = 'MT Format';
@@ -554,6 +473,17 @@ function theme_mt_location_textfield($field) {
   }
 }
 
+function theme_myevents_flag_link($field){
+  $node = $field['object'];
+  global $user;
+
+  if($user->uid){
+    return flag_create_link('events_bookmarks', $node->nid);
+  }else{
+    return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
+  }
+}
+
 function mt_theme() {
   $theme_functions = array(
   'mt_location_textfield' => array(
@@ -572,17 +502,6 @@ function mt_theme() {
   return $theme_functions;
 }
 
-function theme_myevents_flag_link($field){
-  $node = $field['object'];
-  global $user;
-
-  if($user->uid){
-    return flag_create_link('events_bookmarks', $node->nid);
-  }else{
-    return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
-  }
-}
-
 function mt_init(){
   if(arg(0)=='node' && is_numeric(arg(1))){
     $node = node_load(arg(1));
@@ -592,7 +511,34 @@ function mt_init(){
   }
 }
 
-function _mt_node_permissions($op, $node, $account = NULL){
+/* Disabled Section */
+function _mt_mail_alter(&$message){
+  $site_name = variable_get('site_name', '');
+  $message['from'] = '"' . $site_name . '" <' .  $message['from'] . '>';
+  $message['headers']['From'] = $message['from'];
+  $message['headers']['Sender'] = $message['from'];
+}
+
+function _mt_preprocess_views_view_field(&$variables, $hook) {
+  if($variables['view']->name=='og_details'){
+    if($variables['field']->field=="field_header_color_value"){
+      $field = $variables['field'];
+      $alias = $field->field_alias;
+      if(!isset($variables['row']->$alias)){
+        $widget = _mt_defaultimg_nodefield_widget_settings('field_header_color');
+        $default_value = $widget['default_value']['0']['value'];
+        $variables['row']->$alias = $default_value;
+      }
+    }
+  }
+}
+
+function _mt_defaultimg_nodefield_widget_settings($field_name) {
+  $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
+  return unserialize(db_result(db_query($sql, $field_name)));
+}
+
+function NO_mt_node_permissions($op, $node, $account = NULL){
   global $user;
   if(array_search('publisher', $user->roles)){
     return false;
@@ -600,7 +546,7 @@ function _mt_node_permissions($op, $node, $account = NULL){
   return node_access($op, $node);
 }
 
-function _mt_access_node_edit($node) {
+function NO_mt_access_node_edit($node) {
   // Am I a group admin for this group post?
   if (!module_exists('og_access') && isset($node->og_groups)) {
     foreach ($node->og_groups as $gid) {
@@ -621,111 +567,5 @@ function _mt_access_node_edit($node) {
       return false;
     }
   }
-  return node_access('update', $node);  
-}
-
-
-/**
- * Menu callback; process one time login link and redirects to the user page on success.
- */
-function mc_user_pass_reset(&$form_state, $uid, $timestamp, $hashed_pass, $action = NULL) {
-  global $user;
-
-  // Check if the user is already logged in. The back button is often the culprit here.
-  if ($user->uid) {
-    drupal_set_message(t('You have already used this one-time login link. It is not necessary to use this link to login anymore. You are already logged in.'));
-    drupal_goto();
-  }
-  else {
-    // Time out, in seconds, until login URL expires. 24 hours = 86400 seconds.
-    $timeout = 86400;
-    $current = time();
-    // Some redundant checks for extra security ?
-    if ($timestamp < $current && $account = user_load(array('uid' => $uid, 'status' => 1)) ) {
-      // Deny one-time login to blocked accounts.
-      if (drupal_is_denied('user', $account->name) || drupal_is_denied('mail', $account->mail)) {
-        drupal_set_message(t('You have tried to use a one-time login for an account which has been blocked.'), 'error');
-        drupal_goto();
-      }
-
-      // No time out for first time login.
-      if ($account->login && $current - $timestamp > $timeout) {
-        drupal_set_message(t('You have tried to use a one-time login link that has expired. Please request a new one using the form below.'));
-        drupal_goto('user/password');
-      }
-      else if ($account->uid && $timestamp > $account->login && $timestamp < $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login)) {
-        // First stage is a confirmation form, then login
-          watchdog('user', 'User %name used one-time login link at time %timestamp.', array('%name' => $account->name, '%timestamp' => $timestamp));
-          // Set the new user.
-          $user = $account;
-          // user_authenticate_finalize() also updates the login timestamp of the
-          // user, which invalidates further use of the one-time login link.
-          user_authenticate_finalize($form_state['values']);
-          drupal_set_message(t('You have just used your one-time login link. It is no longer necessary to use this link to login. Please change your password.'));
-          drupal_goto('user/'. $user->uid .'/edit');
-      }
-      else {
-        drupal_set_message(t('You have tried to use a one-time login link which has either been used or is no longer valid. Please request a new one using the form below.'));
-        drupal_goto('user/password');
-      }
-    }
-    else {
-      // Deny access, no more clues.
-      // Everything will be in the watchdog's URL for the administrator to check.
-      drupal_access_denied();
-    }
-  }
-}
-
-
-function mt_mail_alter(&$message){
-  $site_name = variable_get('site_name', '');
-  $message['from'] = '"' . $site_name . '" <' .  $message['from'] . '>';
-  $message['headers']['From'] = $message['from'];
-  $message['headers']['Sender'] = $message['from'];
-}
-
-function mt_preprocess_views_view_field(&$variables, $hook) {
-  if($variables['view']->name=='og_details'){
-    if($variables['field']->field=="field_header_color_value"){
-      $field = $variables['field'];
-      $alias = $field->field_alias;
-      if(!isset($variables['row']->$alias)){
-        $widget = _mt_defaultimg_nodefield_widget_settings('field_header_color');
-        $default_value = $widget['default_value']['0']['value'];
-        $variables['row']->$alias = $default_value;
-      }
-    }
-  }
-}
-
-function _mt_defaultimg_nodefield_widget_settings($field_name) {
-  $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
-  return unserialize(db_result(db_query($sql, $field_name)));
-}
-
-function mt_preprocess_node(&$variables){
-  if($variables['type']=='group' && (!isset($variables['body']) || $variables['body']==NULL || empty($variables['body']))){
-    $gid = $variables['nid'];
-    $nids = og_group_child_nids($gid);
-    if(count($nids)==1){
-      $variables['content'] = '<div id="mission" class="og-mission">This group isn\'t sharing anything yet.</div>';
-    }
-  }
-}
-
-function mt_preprocess_og_mission(&$variables) {
-  $node = $variables['form']['#node'];
-  $format = $variables['form']['#node']->format;
-
-  //pass the missing statement through the input format from body field
-  $variables['mission'] = check_markup($variables['mission'],$format);
-
-  //expose the group url to the templates
-  $url = $node->field_group_url[0]['url'];
-  if(!empty($url)){
-    $opts = array('attributes'=> array('target'=>"_blank"),'absolute' => true);
-    $variables['url'] = l($url,$url,$opts);
-  }
-
+  return node_access('update', $node);
 }
