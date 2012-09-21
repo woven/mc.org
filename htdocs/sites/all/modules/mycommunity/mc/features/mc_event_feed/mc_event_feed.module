@@ -397,7 +397,7 @@ function mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
 function _mc_event_feed_find_similar_place($name, $address){
   $name = trim($name);
   $address = trim($address);
-  $nid = db_result(db_query("SELECT li.nid FROM location l JOIN location_instance li ON l.lid=li.lid WHERE SOUNDEX(name)=SOUNDEX('%s') AND SOUNDEX(street)=SOUNDEX('%s') LIMIT 1", $name, $address));
+  $nid = db_result(db_query("SELECT li.nid FROM location l JOIN location_instance li ON l.lid=li.lid JOIN node n ON li.nid=n.nid WHERE SOUNDEX(name)=SOUNDEX('%s') AND SOUNDEX(street)=SOUNDEX('%s') AND n.type<>'event' LIMIT 1", $name, $address));
   return $nid;
 }
 

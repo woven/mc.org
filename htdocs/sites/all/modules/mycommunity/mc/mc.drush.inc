@@ -259,17 +259,36 @@ function drush_mc_migrate_places() {
   while ($row = db_fetch_object($result)) {
     $old_node = node_load($row->nid);
     if($old_node->type=='event'){
-      $node = new StdClass();
-      $node->type = 'place';
-      $node->status = 1;
-      $node->title = $old_node->location['name'];
-      node_save($node);
+      if(function_exists('_mt_event_feed_find_similar_place')){
+        $location_nid = _mt_event_feed_find_similar_place($old_node->location['name'], $old_node->location['street']);
+      }
+      elseif(function_exists('_mc_event_feed_find_similar_place')){
+        $location_nid = _mc_event_feed_find_similar_place($old_node->location['name'], $old_node->location['street']);
+      }
+      $location_node = node_load($location_nid);
+      if(!empty($location_nid) && $location_node->type!='event'){
+        $node = $location_node;
+        $locations = array();
+        location_save_locations($locations, array('nid' => $old_node->nid));
+      }
+      else{
+        $node = new StdClass();
+        $node->type = 'place';
+        $node->status = 1;
+        if(!empty($old_node->location['name'])){
+          $node->title = trim($old_node->location['name']);
+        }
+        elseif(!empty($old_node->location['street'])){
+          $node->title = trim($old_node->location['street']);
+        }
+        $node->uid = $old_node->uid;
+        node_save($node);
 
+        db_query('UPDATE location_instance SET nid=' . $node->nid . ', vid=' . $node->nid . ' WHERE lid=' . $row->lid);
+      }
       $old_node->field_place['0']['nid'] = $node->nid;
 
       node_save($old_node);
-
-      db_query('UPDATE location_instance SET nid=' . $node->nid . ', vid=' . $node->nid . ' WHERE lid=' . $row->lid);
     }
   }
 }
