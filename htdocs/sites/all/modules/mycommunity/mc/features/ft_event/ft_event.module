@@ -2,6 +2,228 @@
 
 include_once('ft_event.features.inc');
 
+
+function ft_event_theme() {
+  $theme_functions = array(
+    'myevents_flag_link' => array(
+      'arguments' => array('field' => NULL),
+    ),
+    'mc_event_view_header' => array('variables' => array('view' => NULL)),
+    'mc_event_header' => array('title' => null,'count' => null,'url' => null),
+    'mc_event_date' => array('variables' => array('unix_date_start' => NULL, 'unix_date_end' => NULL, 'has_end_date' => NULL, 'has_time' => NULL, 'hide_day' => NULL))
+  );
+  return $theme_functions;
+}
+
+function theme_myevents_flag_link($field){
+  $node = $field['object'];
+  global $user;
+
+  if($user->uid){
+    return flag_create_link('events_bookmarks', $node->nid);
+  }else{
+    return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
+  }
+}
+
+function ft_event_ds_fields($type_name, $build_mode, $extra) {
+  $fields = array(
+    'mt_add_ical' => array(
+      'title' => t('Add to Calendar'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'field-ical',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php
+          print mt_add_ical($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
+    'mt_add_group_ical' => array(
+      'title' => t('Add Group to Calendar iCal'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'field-group-ical',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php
+          print mt_add_group_ical($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
+    'mt_add_myevents' => array(
+      'title' => t('Add To My events'),
+      'exclude' => array(
+        'group' => 0,
+        'link' => 0,
+        'webform' => 0,
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_THEME,
+      'status' => DS_FIELD_STATUS_DEFAULT,
+      'properties' => array(
+        'css-class' => 'field-add-myevents',
+        'formatters' => array(
+          'myevents_flag_link' => t('Default'),
+        ),
+        'token' => 0,
+      ),
+    ),
+    'mt_add_group_rss' => array(
+      'title' => t('Add Group to Calendar RSS'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'field-group-ical',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php
+          print mt_add_group_rss($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
+    'mt_add_gcal' => array(
+      'title' => t('Add to Google Calendar'),
+      'exclude' => array(
+        'group' => 'group',
+        'link' => 'link',
+        'webform' => 'webform',
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'feeds' => 0,
+        'file' => 0,
+        'nnews' => 0,
+        'npage' => 0,
+        'place' => 0,
+        'video' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+        'taxonomy_feature' => 0,
+      ),
+      'type' => DS_FIELD_TYPE_CODE,
+      'status' => DS_FIELD_STATUS_CUSTOM,
+      'properties' => array(
+        'css-class' => 'field-gcal',
+        'formatters' => array(
+          'ds_eval_code' => 'Default',
+        ),
+        'code' => '<?php
+          print mt_add_gcal($object);
+        ?>',
+        'token' => 0,
+      ),
+    ),
+  );
+  return array('nd' => $fields);
+}
+
+function mt_add_group_rss($node){
+  foreach ($node->og_groups as $key => $value) {
+    $gid=$key;
+    break;
+  }
+  return '<span class="rss-group-ico"> </span><a class="ical-link" href="http://'. $_SERVER["SERVER_NAME"] .'/groups/' . $gid . '/rss">All events from this group (RSS)</a>';
+}
+
+function mt_add_group_ical($node){
+  foreach ($node->og_groups as $key => $value) {
+    $gid=$key;
+    break;
+  }
+  return '<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://'. $_SERVER["SERVER_NAME"] .'/group/' . $gid . '/ical">All events from this group (iCal)</a>';
+}
+
+function mt_add_ical($node){
+  return '<span class="ical-ico">Image</span><a class="ical-link" href="webcal://'. $_SERVER["SERVER_NAME"] .'/node/' . $node->nid . '/ical">Just this event (iCal)</a>';
+}
+
+function mt_add_gcal($node){
+  $title = urlencode($node->title);
+  $description = urlencode(strip_tags($node->content['body']['#value']));
+  $location = _mc_api_format_location($node->location);
+  $start_date = event_format_date($node->event['start_utc'], 'custom', "Ymd\THis\Z");
+  $end_date = event_format_date($node->event['end_utc'], 'custom', "Ymd\THis\Z");
+  return '<span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="http://www.google.com/calendar/render?action=TEMPLATE&text=' . $title . '&details=' . $description . '&dates=' . $start_date .'/' . $end_date . '&location='. $location  .'">Just this event (gCal)</a>';
+}
+
+
 /**
  * Implementation of hook_theme()
  *
@@ -33,15 +255,6 @@ function ft_event_form_alter(&$form, &$form_state, $form_id){
 		$form['event']['end_exploded'] = $form['event']['start_exploded'];
 	}
 }
-
-function ft_event_theme($existing, $type, $theme, $path){
-	  return array(
-	        'mc_event_view_header' => array('variables' => array('view' => NULL)),
-	        'mc_event_header' => array('title' => null,'count' => null,'url' => null),
-	        'mc_event_date' => array('variables' => array('unix_date_start' => NULL, 'unix_date_end' => NULL, 'has_end_date' => NULL, 'has_time' => NULL, 'hide_day' => NULL)),
-    	);
-}
-
 
 /**
  * Implementation of theme_mcc_event_header
@@ -173,6 +386,7 @@ function theme_mc_event_print_date($unix_date_start = NULL, $unix_date_end = NUL
 }
 
 function mc_event_print_format_day($unix_date){
+  $output = "";
   if (date('Y') == date('Y', $unix_date)){ // same year
     $output .= date('l F jS', $unix_date);
   }else{ // different year
