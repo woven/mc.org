@@ -592,38 +592,6 @@ function mt_init(){
   }
 }
 
-function _mt_node_permissions($op, $node, $account = NULL){
-  global $user;
-  if(array_search('publisher', $user->roles)){
-    return false;
-  }
-  return node_access($op, $node);
-}
-
-function _mt_access_node_edit($node) {
-  // Am I a group admin for this group post?
-  if (!module_exists('og_access') && isset($node->og_groups)) {
-    foreach ($node->og_groups as $gid) {
-      if (og_is_group_admin(node_load($gid))) {
-        return TRUE;
-      }
-    }
-  }
-
-  // Am I group admin for this group node?
-  if (!module_exists('og_access') && og_is_group_admin($node)) {
-    return TRUE;
-  }
-
-  global $user;
-  if($node->type!='group' && $node->type!='event' && $node->type!='event_feed'){
-    if(array_search('publisher', $user->roles)){
-      return false;
-    }
-  }
-  return node_access('update', $node);  
-}
-
 /* Disabled Section */
 
 function _mt_mail_alter(&$message){
@@ -650,4 +618,36 @@ function _mt_preprocess_views_view_field(&$variables, $hook) {
 function _mt_defaultimg_nodefield_widget_settings($field_name) {
   $sql = " SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' ";
   return unserialize(db_result(db_query($sql, $field_name)));
+}
+
+function NO_mt_node_permissions($op, $node, $account = NULL){
+  global $user;
+  if(array_search('publisher', $user->roles)){
+    return false;
+  }
+  return node_access($op, $node);
+}
+
+function NO_mt_access_node_edit($node) {
+  // Am I a group admin for this group post?
+  if (!module_exists('og_access') && isset($node->og_groups)) {
+    foreach ($node->og_groups as $gid) {
+      if (og_is_group_admin(node_load($gid))) {
+        return TRUE;
+      }
+    }
+  }
+
+  // Am I group admin for this group node?
+  if (!module_exists('og_access') && og_is_group_admin($node)) {
+    return TRUE;
+  }
+
+  global $user;
+  if($node->type!='group' && $node->type!='event' && $node->type!='event_feed'){
+    if(array_search('publisher', $user->roles)){
+      return false;
+    }
+  }
+  return node_access('update', $node);
 }
