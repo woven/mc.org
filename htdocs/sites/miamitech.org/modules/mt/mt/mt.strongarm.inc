@@ -21,15 +21,9 @@ function mt_strongarm() {
       'feedapi|update_existing' => '1',
       'feedapi|refresh_time' => '1',
       'feedapi|items_delete' => '1',
-      'feedapi|processors' => '1',
-      'options' => '1',
-      'path' => '1',
-      'comment_settings' => '1',
+      'feedapi|processors' => '1'
     ),
     'group_node_form' => array(
-      'body_field|teaser_js' => '1',
-      'body_field|teaser_include' => '1',
-      'body_field|format' => '1',
       'field_header_title_color|value' => '1',
       'og_register' => '1',
       'og_menu' => '1',
@@ -37,29 +31,10 @@ function mt_strongarm() {
       'og_selective' => '1',
       'themes' => '1',
       'field_about|0|value' => '1',
-      'field_about|value|format' => '1',
-      'options' => '1',
-      'comment_settings' => '1',
-      'path' => '1',
-    ),
-    'event_node_form' => array(
-      'body_field|teaser_js' => '1',
-      'body_field|teaser_include' => '1',
-      'body_field|format' => '1',
-      'field_place|0|nid|nid' => '1',
-      'comment_settings' => '1',
-      'path' => '1',
-      'options' => '1',
+      'field_about|value|format' => '1'
     ),
   );
   $export['formfilter'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'pathauto_update_action';
-  $strongarm->value = '0';
-  $export['pathauto_update_action'] = $strongarm;
 
   return $export;
 }
