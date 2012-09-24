@@ -1,5 +1,0 @@
-<?php
-
-function mt_feedbackify_disable(){
-	module_disable(array('feedbackify'));
-}
