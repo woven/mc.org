@@ -176,6 +176,7 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 }
 
 function _mt_group_save_file($url){
+  global $user;
   if (!function_exists('mime_content_type')) { 
    function mime_content_type($f) { 
        $f = escapeshellarg($f); 
