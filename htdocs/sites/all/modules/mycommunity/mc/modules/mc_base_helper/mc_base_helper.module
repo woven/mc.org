@@ -1,12 +1,25 @@
 <?php
 
+/*
+ * @todo: https://app.asana.com/0/1947405877174/1947670111015
+ */
+function mc_base_helper_jqmulti_libraries(){
+  return array(
+    "qtip2"
+  );
+}
+
 function mc_base_helper_preprocess_page(){
-	if(!module_exists('conditional_styles')){
-		drupal_set_message('The module conditional_styles must be enabled for the theme to work properly.');
-	}
+  if(!module_exists('conditional_styles')){
+	drupal_set_message('The module conditional_styles must be enabled for the theme to work properly.');
+  }
+
+  if(!module_exists('jqmulti')){
+    drupal_set_message('The module jqmulti must be enabled for the theme to work properly.');
+  }
 
 	if(!module_exists('advagg')){
-		drupal_set_message('The module advagg must be enabled for the theme to work properly.');
+		//drupal_set_message('The module advagg must be enabled for the theme to work properly.');
 	}else{
 		//drupal_add_js('https://apis.google.com/js/plusone.js', 'external');
 	}
