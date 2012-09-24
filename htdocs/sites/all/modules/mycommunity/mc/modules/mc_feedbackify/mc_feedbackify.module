@@ -1,0 +1,18 @@
+<?php
+/**
+ * @file
+ * Code for the mc_feedbackify feature.
+ */
+
+include_once 'mc_feedbackify.features.inc';
+
+function mc_feedbackify_footer() {
+  $feedbackify_id = check_plain(variable_get('feedbackify_id', ''));
+
+  $mpath = drupal_get_path("module","mc_feedbackify");
+  $jspath = $mpath . "/feedbackify.js";
+
+  drupal_add_js(array("feedbackify" => array("feedbackify_id" => $feedbackify_id)),"setting");
+  drupal_add_js($jspath,"module",'footer');
+
+}

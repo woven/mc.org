@@ -1,5 +1,5 @@
-name = "mt_feedbackify"
-description = "feedbackify settings"
+name = "Mc Feedbackify"
+description = "Mc Feedbackify Feature"
 core = "6.x"
 package = "Features"
 dependencies[] = "ctools"

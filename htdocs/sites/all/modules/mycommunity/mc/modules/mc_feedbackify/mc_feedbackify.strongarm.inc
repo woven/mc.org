@@ -3,7 +3,7 @@
 /**
  * Implementation of hook_strongarm().
  */
-function mt_feedbackify_strongarm() {
+function mc_feedbackify_strongarm() {
   $export = array();
 
   $strongarm = new stdClass;
