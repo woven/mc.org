@@ -15,7 +15,7 @@ function mc_account_default_box() {
   $box->description = 'My Events sections';
   $box->options = array(
     'body' => '<?php
-
+_mc_user_myevents();
 ?>',
     'format' => '3',
   );

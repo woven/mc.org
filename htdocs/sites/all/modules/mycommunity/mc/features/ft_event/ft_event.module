@@ -3,6 +3,69 @@
 include_once('ft_event.features.inc');
 
 
+function _mc_user_myevents(){
+  global $user; $cuid = arg(1);
+
+  if(!($user->uid == $cuid & $user->uid > 0)){
+    return;
+  }
+
+  print '<div class="two-cols"><div class="col-main">';
+
+    if(function_exists('_mc_event_section_all')){
+      print  _mc_event_section_all('events_bookmarks');
+    }
+
+  print '</div>';
+
+  $webcal_url = webcal_url("user/$user->uid/myevents/ical",array("absolute"=>true));
+  $url = url("user/$user->uid/myevents/ical",array("absolute"=>true));
+
+  $link = '<div class="user_addcal">
+                <ul>
+                  <li><span class="ical-ico">Image</span><a href="'.$webcal_url.'" class="ical-link">Subscribe to my events (iCal)</a></li>
+                  <li><span class="ical-ico">Image</span><a href="'.$url.'" class="ical-link">Download my events (iCal)</a></li>
+                </ul>
+          </div>';
+
+  $addtocalender = '<div class="block block-ds">
+    	<div class="block-title">Add to calendar</div>
+        <div class="block-content clear-block">
+            '.$link.'
+        </div>';
+  print  '<div class="col-right">'.$link.'</div>';
+
+  print '</div>';
+}
+
+
+function _mc_event_feed_ical_user($user){
+  $uid = $user->uid;
+  $today = mktime(0, 0, 0);
+  $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
+  $sql = "SELECT DISTINCT
+      n.nid
+      FROM
+      node AS n
+      INNER JOIN flag_content AS f ON n.nid = f.content_id AND f.fid = %d AND f.uid = %d AND f.content_type = 'node'
+      INNER JOIN `event` AS e ON e.nid = n.nid
+      WHERE
+      n.type = 'event' AND e.unix_event_start >= %d
+      ORDER BY
+      e.event_start ASC
+  ";
+
+  //get the default flag to use for events
+  $flag = flag_get_flag('events_bookmarks');
+
+  //if flag is loaded and you can find fid, go on and output the feed
+  if($flag){
+    $result = db_query($sql,$flag->fid,$uid,$threeMonthsAgo);
+    _ical_feed_generate("User Calender","calender-user-$uid.ics",$result);
+  }
+}
+
+
 function ft_event_preprocess($vars,$hook){
   if($hook == 'block'){
     $cblock = $vars['block'];
