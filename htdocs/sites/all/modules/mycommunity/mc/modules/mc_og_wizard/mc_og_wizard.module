@@ -2,38 +2,36 @@
 
 define("MEETUP_FORMAT", '2');
 
-function mt_group_late_form_alter(&$form, &$form_state, $form_id){
+function mc_og_wizard_late_form_alter(&$form, &$form_state, $form_id){
 
     if($form_id !='group_node_form'){
       return;
     }
 
-    $form['title']['#required'] = false;
-    $form['field_small_name']['0']['#required'] = false;
-    $form['field_small_name']['#required'] = false;
-    $form['#validate'][] = '_mt_group_validate_alter';
+    switch(arg(3)){
+      case 'full':
+        $form['field_group_url']['0']['#default_value']['url'] = $_GET['url'];
+      break;
+      default:
+        $blocked = array('title','body_field');
 
-    if(arg(3)=='full'){
-      $form['title']['#required'] = true;
-      $form['field_small_name']['0']['#required'] = true;
-      $form['field_small_name']['#required'] = true;
-      $form['field_group_url']['0']['#default_value']['url'] = $_GET['url'];
-    }
+        foreach($form as $key => &$item){
+          if((startsWith($key,"field_") OR in_array($key,$blocked)) && $key != "field_group_url"){
+            $item['#access'] = false;
+          };
+        }
 
-    if(!is_numeric(arg(1)) && arg(1)=='add' && arg(3)!='full'){
-      $form['title']['#access']= false;
-      $form['body_field']['#access']= false;
-      $form['field_small_name']['#access']= false;
-      $form['field_logo']['#access']= false;
-      $form['buttons']['submit']['#value'] = 'Next';
+        $form['#validate'][] = '_mc_og_wizard_validate_alter';
+        $form['buttons']['submit']['#value'] = 'Next';
+      break;
     }
 }
 
-function _mt_group_validate_alter($form, &$form_state){
+function _mc_og_wizard_validate_alter($form, &$form_state){
   if(empty($form_state['values']['title']) && empty($form_state['values']['field_small_name']['0']['value'])){
     $group_url = $form_state['values']['field_group_url']['0']['url'];
     if(!empty($group_url)){
-      $meetupparser_path = drupal_get_path('module', 'mt_group') . '/meetup/meetup.inc';
+      $meetupparser_path = drupal_get_path('module', 'mc_og_wizard') . '/meetup/meetup.inc';
       include_once $meetupparser_path;
       $querypath_path = drupal_get_path('module', 'querypath') . '/QueryPath/QueryPath.php';
       try {
@@ -51,7 +49,7 @@ function _mt_group_validate_alter($form, &$form_state){
   }
 }
 
-function _mt_group_check_group_url_exists($group_url){
+function _mc_og_wizard_check_group_url_exists($group_url){
   if(preg_match('/(meetup\.com|facebook\.com)/i', $group_url)){
   $group_url = preg_replace('/^(http|webcal):\/{2}w{3}\.|^http:\/{2}|^w{3}\./i', '',$group_url);
   $replace_string = preg_replace('/\w+\.\w{2,3}\/[a-z-]+(\/|)/i', '', $group_url);
@@ -97,9 +95,9 @@ function _mt_group_check_group_url_exists($group_url){
 
 
 
-function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+function mc_og_wizard_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   if($node->type=='group') {
-    module_load_include('inc', 'mt_group', 'meetup/meetup');
+    module_load_include('inc', 'mc_og_wizard', 'meetup/meetup');
     module_load_include('php', 'querypath', 'QueryPath/QueryPath');
     switch($op){
       case 'view':
@@ -130,7 +128,7 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
       case 'validate':
         if(!empty($node->field_group_url['0']['url']) && (!isset($node->nid) || empty($node->nid))){
           $group_url = $node->field_group_url['0']['url'];
-          _mt_group_check_group_url_exists($group_url);
+          _mc_og_wizard_check_group_url_exists($group_url);
         }
         break;
       case 'presave':
@@ -153,7 +151,7 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
           }
           $logo_url =$obj->logoUrl();
           if(!empty($logo_url) && (!isset($node->field_logo['0']['fid']) || empty($node->field_logo['0']['fid'])) ){
-            $file = _mt_group_save_file($obj->logoUrl());
+            $file = _mc_og_wizard_save_file($obj->logoUrl());
             if(isset($file->fid)){
               $node->field_logo = array(
                 array(
@@ -180,7 +178,7 @@ function mt_group_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   }
 }
 
-function _mt_group_save_file($url){
+function _mc_og_wizard_save_file($url){
   global $user;
   if (!function_exists('mime_content_type')) { 
    function mime_content_type($f) { 
@@ -189,7 +187,7 @@ function _mt_group_save_file($url){
    } 
   } 
   
-  $field_logo = _mt_group_nodefield_widget_settings('field_logo');
+  $field_logo = _mc_og_wizard_nodefield_widget_settings('field_logo');
   $file_temp = file_get_contents($url);
   $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_logo['file_path'] . '/' . basename($url), FILE_EXISTS_RENAME);
   $file = new stdClass();
@@ -204,7 +202,7 @@ function _mt_group_save_file($url){
   return $file;
 }
 
-function _mt_group_nodefield_widget_settings($field_name) {
+function _mc_og_wizard_nodefield_widget_settings($field_name) {
   $sql = "SELECT widget_settings FROM {content_node_field_instance} WHERE field_name = '%s' LIMIT 1";
   return unserialize(db_result(db_query($sql, $field_name)));
 }

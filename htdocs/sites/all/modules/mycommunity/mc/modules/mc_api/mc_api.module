@@ -38,6 +38,22 @@ function theme_imgplaceholder($gname,$gid){
 }
  */
 
+function startsWith($haystack, $needle)
+{
+  $length = strlen($needle);
+  return (substr($haystack, 0, $length) === $needle);
+}
+
+function endsWith($haystack, $needle)
+{
+  $length = strlen($needle);
+  if ($length == 0) {
+    return true;
+  }
+
+  return (substr($haystack, -$length) === $needle);
+}
+
 function _schema_meta_date($ts,$itemprop = 'startDate'){
   $iso_start = date('c',$ts);
   return "<meta itemprop=\"$itemprop\" content=\"$iso_start\">";
