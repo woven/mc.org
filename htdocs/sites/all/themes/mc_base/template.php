@@ -23,7 +23,7 @@ function mc_base_ud_profile_field_urlfilter($field) {
   return "";
 }
 
-function miamitech_ud_user_created($field) {
+function mc_base_ud_user_created($field) {
     return ' &ndash; Member for ' . format_interval(time() - $field['object']->created);
 }
 
@@ -216,7 +216,7 @@ function mc_base_nd_location_address($field) {
   return '<div itemprop="location" itemscope itemtype="http://schema.org/Place">' . $part1 . $part2 . '</div>';
 }
 
-function miamitech_ds_field($field) {
+function mc_base_ds_field($field) {
   $output = '';
 
   $attr = array();
@@ -633,7 +633,7 @@ function mc_base_preprocess_comment_wrapper(&$vars) {
 }
 
 
-function miamitech_nd_location_gmap($field, $latitude, $longitude, $width, $height, $zoom, $autoclick = FALSE) {
+function mc_base_nd_location_gmap($field, $latitude, $longitude, $width, $height, $zoom, $autoclick = FALSE) {
   $map = array();
   $bubble_content = _nd_location_theme_bubble($field);
   if (!empty($bubble_content)) {

@@ -15,41 +15,6 @@ function mt_jqmulti_files(){
 }
 
 /*
- * @todo: https://app.asana.com/0/1947405877174/1955527457973
- */
-function theme_imgplaceholder($gname,$gid){
-
-  $range_colors = array(
-    '1-15' => array("red","white"),
-    '16-25' => array("orange","black"),
-    '26-35' => array("purple","white"),
-	'35-50' => array("green","white"),
-    'else' => array("blue","white")
-  );
-
-  $colors_use = array();
-  $gfirst = strtolower($gname[0]);
-
-  foreach($range_colors as $range => $colors){
-    $lt = explode("-",$range);
-
-    if(count($lt) > 1){
-      if(strlen($gname) >= $lt[0] && strlen($gname) <= $lt[1]){
-        $colors_use = $colors;
-        break 1;
-      }
-    }
-  }
-
-  if(empty($colors_use)){
-    $colors_use =  $range_colors['else'];
-  }
-
-  $glink = url("node/".$gid);
-  return "<div class=\"img-placeholder\"><a class=\"img\" href='$glink'><img src='/sites/miamitech.org/themes/miamitech/images/icons/ico-event.png'/></a></div>";
-}
-
-/*
  * @todo: https://app.asana.com/0/1947405877174/1955527457993
  */
 function mt_form_alter(&$form, &$form_state, $form_id){
