@@ -283,9 +283,9 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 1,
         ),
-        'boxes-upcoming_events_blocks' => array(
+        'boxes-mc_event_sections_box' => array(
           'module' => 'boxes',
-          'delta' => 'upcoming_events_blocks',
+          'delta' => 'mc_event_sections_box',
           'region' => 'below_content',
           'weight' => 0,
         ),
@@ -324,9 +324,6 @@ function ft_landing_contexts_context_default_contexts() {
           'views-help_block-block_1' => array(
             'class' => 'important',
           ),
-          'views-popular_places-block_2' => array(
-            'class' => '',
-          ),
           'views-featured_blocks-block_1' => array(
             'class' => '',
           ),
@@ -335,7 +332,7 @@ function ft_landing_contexts_context_default_contexts() {
       'below_content' => array(
         'class' => '',
         'blocks' => array(
-          'boxes-upcoming_events_blocks' => array(
+          'boxes-profile_myevents' => array(
             'class' => '',
           ),
         ),

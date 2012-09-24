@@ -55,141 +55,17 @@ function ft_event_ui_views_default_views() {
       'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
         'multiple_from' => '',
         'multiple_reversed' => 0,
       ),
-      'exclude' => 1,
+      'exclude' => 0,
       'id' => 'field_list_image_fid',
       'table' => 'node_data_field_list_image',
       'field' => 'field_list_image_fid',
-      'relationship' => 'none',
-    ),
-    'phpcode_1' => array(
-      'label' => 'PHP code',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'absolute' => 0,
-        'link_class' => '',
-        'alt' => '',
-        'rel' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'hide_alter_empty' => 1,
-      'value' => '<?php
-if(empty($data->node_og_ancestry_node_data_field_logo_field_logo_fid) || $data->node_og_ancestry_node_data_field_logo_field_logo_fid==null ){
-$title = $data->node_og_ancestry_title;
-$title_clean = str_replace(" ","+",$title);
-print theme_imgplaceholder($title);
-}
-/**
-//$img = url("sites/miamitech.org/files/textimage/home-group_logo_default/$title.png");
-$imgraw = "sites/miamitech.org/files/textimage/home-group_logo_default/$title.png";
-print "<div style=\\"width:84px;height:84px;background-color:#ccc;\\"><img src=\\"$imgraw\\" ></div>";
-//print \'<img src="http://placehold.it/83x83&text=\' . $title . \'" >\';
-//}
-*/
-?>',
-      'exclude' => 1,
-      'id' => 'phpcode_1',
-      'table' => 'customfield',
-      'field' => 'phpcode',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
-    'field_logo_fid' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'absolute' => 0,
-        'link_class' => '',
-        'alt' => '',
-        'rel' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'hide_alter_empty' => 1,
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'mt_home_event_linked',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 1,
-      'id' => 'field_logo_fid',
-      'table' => 'node_data_field_logo',
-      'field' => 'field_logo_fid',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'group_nid',
-    ),
-    'nothing_2' => array(
-      'label' => '',
-      'alter' => array(
-        'text' => '[phpcode_1] [field_logo_fid]',
-        'make_link' => 0,
-        'path' => '',
-        'absolute' => 0,
-        'link_class' => '',
-        'alt' => '',
-        'rel' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'hide_alter_empty' => 1,
-      'exclude' => 0,
-      'id' => 'nothing_2',
-      'table' => 'views',
-      'field' => 'nothing',
       'relationship' => 'none',
       'override' => array(
         'button' => 'Override',
@@ -767,7 +643,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/current\');
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
-      'nothing_2' => array(
+      'field_list_image_fid' => array(
         'element_type' => 'div',
         'class' => 'field-view-image',
       ),
@@ -1172,7 +1048,7 @@ echo theme("mc_event_view_header",$view, \'latest/events/this-week\');
     ),
   ));
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '8');
+  $handler->override_option('block_caching', '-1');
 
   $views[$view->name] = $view;
 
