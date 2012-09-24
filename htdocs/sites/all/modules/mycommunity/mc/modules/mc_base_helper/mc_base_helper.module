@@ -10,6 +10,13 @@ function mc_base_helper_jqmulti_libraries(){
 }
 
 function mc_base_helper_preprocess_page(){
+
+  $lib = libraries_get_path("qtip2");
+  if($lib){
+      drupal_add_js($lib."/".'jquery.qtip.min.js');
+      drupal_add_css($lib."/".'jquery.qtip.min.css');
+  }
+
   if(!module_exists('conditional_styles')){
 	drupal_set_message('The module conditional_styles must be enabled for the theme to work properly.');
   }
@@ -18,9 +25,4 @@ function mc_base_helper_preprocess_page(){
     drupal_set_message('The module jqmulti must be enabled for the theme to work properly.');
   }
 
-	if(!module_exists('advagg')){
-		//drupal_set_message('The module advagg must be enabled for the theme to work properly.');
-	}else{
-		//drupal_add_js('https://apis.google.com/js/plusone.js', 'external');
-	}
 }

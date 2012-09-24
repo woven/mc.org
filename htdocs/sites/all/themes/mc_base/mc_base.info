@@ -24,7 +24,6 @@ regions[overlay] = Overlay
 scripts[] = "js/jcarousel/lib/jquery.jcarousel.js"
 scripts[] = "js/jquery.livequery.js"
 scripts[] = "js/jquery.tools.min.js"
-scripts[] = "jquery.qtip.min.js"
 scripts[] = "js/main.js"
 scripts[] = "js/custom.js"
 scripts[] = "js/jquery.elastic.source.js"
@@ -59,7 +58,6 @@ stylesheets[all][] = "css/search.css"
 stylesheets[all][] = "css/buttons.css"
 
 ; Styles: stand alone css component
-stylesheets[all][] = "css/jquery.qtip.min.css"
 stylesheets[all][] = "js/colorbox/colorbox.css"
 stylesheets[all][] = "css/modalframe.parent.css"
 stylesheets[all][] = "css/modalframe.child.css"

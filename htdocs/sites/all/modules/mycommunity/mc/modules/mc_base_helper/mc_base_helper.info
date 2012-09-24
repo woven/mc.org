@@ -3,4 +3,4 @@ description = "Contains all the code that's related to the code"
 core = 6.x
 
 dependencies[] = conditional_styles
-dependencies[] = advagg
+dependencies[] = jqmulti

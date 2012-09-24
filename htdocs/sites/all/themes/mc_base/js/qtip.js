@@ -1,5 +1,5 @@
 //check if jq180 exists
-if(jq180 && jq180.qtip){
+if(jq180){
     (function($){
         Drupal.behaviors.staringtooltip = function (context) {
 
