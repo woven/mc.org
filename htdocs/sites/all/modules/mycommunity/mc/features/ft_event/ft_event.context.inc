@@ -25,15 +25,15 @@ function ft_event_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'ds-5c755d31699c072160e29da9599e28f3' => array(
-          'module' => 'ds',
-          'delta' => '5c755d31699c072160e29da9599e28f3',
-          'region' => 'right',
-          'weight' => 0,
-        ),
         'ds-0b596e3199de270de74a2f6e8f0d1525' => array(
           'module' => 'ds',
           'delta' => '0b596e3199de270de74a2f6e8f0d1525',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+        'ds-5c755d31699c072160e29da9599e28f3' => array(
+          'module' => 'ds',
+          'delta' => '5c755d31699c072160e29da9599e28f3',
           'region' => 'right',
           'weight' => 1,
         ),

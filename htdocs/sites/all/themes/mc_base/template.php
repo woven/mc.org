@@ -1,5 +1,22 @@
 <?php
 
+function mc_base_nd_location_gmap($field, $latitude, $longitude, $width, $height, $zoom, $autoclick = FALSE) {
+  $map = array();
+  $bubble_content = _nd_location_theme_bubble($field);
+  if (!empty($bubble_content)) {
+    $map['markers'][] = array(
+      'latitude' => $latitude,
+      'longitude' => $longitude,
+      'text' => $bubble_content,
+      'autoclick' => $autoclick,
+      'link' => 'http://maps.google.com/?q=' . strip_tags(theme('nd_location_address', $field)),
+    );
+  }
+
+  return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
+}
+
+
 function mc_base_ud_profile_field_urlfilter($field) {
 
   $key = $field['key'];
@@ -109,111 +126,6 @@ function _mc_base_get_featured_carousel_array($field_array){
     }
   }
   return $featured_items;
-}
-
-function mc_base_nd_location_address($field) {
-  if($field['object']->field_online_event[0]['value']==1){
-    return 'Online Event';
-  }
-
-  // Get the location field settings for this node type
-  $settings = variable_get('location_settings_node_'. $field['object']->type, array());
-
-  // Loop through and collect the address fields we want to output in the order specified in node location settings,
-  // and check that they are not set to be hidden in node location setting
-  // also ignore arrays (eg. locpick)
-  $address = array();
-
-
-  foreach ($settings['form']['fields'] as $fieldname => $fieldsettings) {
-    if (!$settings['display']['hide'][$fieldname] && !empty($field['object']->location[$fieldname]) && !is_array($field['object']->location[$fieldname])) {
-
-      // Replace country code with full country name.
-      if ($fieldname == 'country') {
-        module_load_include('inc', 'location', 'location');
-        $field['object']->location[$fieldname] = location_country_name($field['object']->location[$fieldname]);
-      }
-      // Add this field to our array of fields to output.
-      $address[$fieldname] = check_plain($field['object']->location[$fieldname]);
-    }
-  }
-  if($address['name']=='Exact Location TBD'){
-    unset($address['name']);
-    unset($address['street']);
-    unset($address['postal_code']);
-  }
-  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
-    $has_address = $field['object']->location['name'] && $field['object']->location['street']
-      && $field['object']->location['city'] && $field['object']->location['province'];
-    $has_lat_and_lon = $field['object']->location['latitude'] && $field['object']->location['longitude'] && $field['object']->location['latitude']!='0.000000' && $field['object']->location['longitude']!='0.000000';
-    if(!$has_address && $has_lat_and_lon && function_exists('mc_event_feed_reverse_getAddressParts')){
-      $parts = mc_event_feed_reverse_getAddressParts($field['object']->locations['0']['latitude'], $field['object']->locations['0']['longitude']);
-      $address['city'] = $parts['city'];
-      $address['province'] = $parts['state'];
-    }
-  }
-
-  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
-     return '<div class="no-location"> A location wasn\'t provided.</div>';
-  }
-
-  $lines = array(
-    0 => array('name'),
-    1 => array('street'),
-    2 => array('city','province','postal_code')
-  );
-
-  $lines_value = array();
-
-  foreach($lines as $key => $parts){
-
-    foreach($parts as $part){
-       if(!empty($address[$part])){
-         $value = $address[$part];
-        switch($part){
-          case 'name':
-            $lines_value[$key][] = '<span itemprop="name" class="loc-name">'.$value.'</span>';
-          break;
-          case 'street':
-            $lines_value[$key][] = '<span itemprop="streetAddress" class="loc-street">'.$value.'</span>';
-          break;
-          case 'city':
-            $lines_value[$key][] = '<span itemprop="addressLocality" class="loc-city">'.$value.'</span>';
-          break;
-          case 'province':
-            $lines_value[$key][] = '<span itemprop="addressRegion" class="loc-state">'.$value.'</span>';
-          break;
-          case 'postal_code':
-            $lines_value[$key][] = '<span itemprop="postalCode" class="loc-postalcode">'.$value.'</span>';
-            break;
-        };
-      }
-    }
-  };
-
-  $content = "";
-
-  $part1 = "";
-  $part2 = "";
-
-  foreach($lines_value as $key => $values){
-
-    if($key == 0){
-      if(count($values)){
-        $part1 = "<div class='line-$key'>".implode($values, ', ')."</div>";
-      }
-    }
-
-    if($key > 0){
-      if(count($values)){
-        $part2 .= "<div class='line-$key'>".implode($values, ', ')."</div>";
-      }
-    }
-  }
-
-  $part2 = '<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">'.$part2.'</div>';
-
-  return '<div itemprop="location" itemscope itemtype="http://schema.org/Place">' . $part1 . $part2 . '</div>';
 }
 
 function mc_base_ds_field($field) {
@@ -631,24 +543,6 @@ function mc_base_preprocess_comment_wrapper(&$vars) {
     
   }  
 }
-
-
-function mc_base_nd_location_gmap($field, $latitude, $longitude, $width, $height, $zoom, $autoclick = FALSE) {
-  $map = array();
-  $bubble_content = _nd_location_theme_bubble($field);
-  if (!empty($bubble_content)) {
-    $map['markers'][] = array(
-      'latitude' => $latitude,
-      'longitude' => $longitude,
-      'text' => $bubble_content,
-      'autoclick' => $autoclick,
-      'link' => 'http://maps.google.com/?q=' . strip_tags(theme('nd_location_address', $field)),
-    );
-  }
-
-  return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
-}
-
 
 /** theme_fieldset
  * @todo add back the collapse logic if needed, right now commenting two links to avoid collapsible and collapsed classes

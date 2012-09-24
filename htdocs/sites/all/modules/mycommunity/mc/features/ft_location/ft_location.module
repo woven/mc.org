@@ -3,34 +3,54 @@
 include_once('ft_location.features.inc');
 
 
-function ft_location_ds_fields_alter(&$fields) {
-  $fields['nd_directions']['properties']['formatters']['mt_location_directions'] = 'MT Format';
-  $fields['nd_location_name'] = $fields['name'];
-  $fields['nd_location_name']['properties']['formatters']['mt_location_textfield'] = t('MT Textfield');
-  unset($fields['name']);
+function ft_location_ds_fields($type_name, $build_mode, $extra) {
 
-  unset($fields['nd_location_gmap']['properties']['formatters']['nd_location_gmap_default']);
-  $fields['nd_location_gmap']['properties']['formatters']['mt_location_gmap_default'] = 'Gmap MT';
+    //since the event node has no location, we need to stimulate as if we are passing place ct instead
+    if($type_name == "event"){
+      return nd_location_ds_fields("place",$build_mode,$extra);
+    }
+
+    return array("nd"=>array());
 }
 
+function ft_location_ds_fields_alter(&$fields) {
+  if($fields['nd_directions']){
+    $fields['nd_directions']['properties']['formatters']['mc_nd_location_directions'] = t('MC: Direction link');
+  }
+
+  if($fields['nd_location_gmap']){
+    $fields['nd_location_gmap']['properties']['formatters']['mc_location_gmap_default'] = t('MC: Gmap with bubble link');
+  }
+
+  if($fields['nd_location_address']){
+    $fields['nd_location_address']['properties']['formatters']['mc_nd_location_address'] = t('MC: Address, includes name');
+  }
+}
 
 function ft_location_theme() {
+
   $theme_functions = array(
-    'mt_location_textfield' => array(
+    'mc_location_gmap_default' => array(
       'arguments' => array('field' => NULL),
     ),
-    'mt_location_gmap_default' => array(
+    'mc_nd_location_directions' => array(
       'arguments' => array('field' => NULL),
     ),
-    'mt_location_directions' => array(
+    'mc_nd_location_address' => array(
       'arguments' => array('field' => NULL),
     ),
   );
+
   return $theme_functions;
 }
 
-function theme_mt_location_directions($field) {
-  $node = node_load($field['object']->field_place[0]['nid']);
+
+function theme_mc_nd_location_directions($field) {
+  $node = $field['object'];
+  if(isset($node->field_place) && $node->field_place[0]['nid'] > 0){
+    $node = node_load($field['object']->field_place[0]['nid']);
+  }
+
   if(empty($node->location['street'])){
     return;
   }
@@ -47,7 +67,7 @@ function theme_mt_location_directions($field) {
   }
 }
 
-function theme_mt_location_gmap_default($field) {
+function theme_mc_location_gmap_default($field) {
   $field['format'] = 'nd_location_gmap';
   $field['formatter'] = 'nd_location_gmap_default';
   $node = node_load($field['object']->field_place[0]['nid']);
@@ -82,44 +102,121 @@ function theme_mt_location_gmap_default($field) {
       if($is_only_state_provided){
         $zoom = '7';
       }
+
       return theme('nd_location_gmap', $field, $latitude, $longitude, $width, $height, $zoom, $autoclick);
     }
   }
 }
 
-function theme_mt_location_textfield($field) {
-  if($field['key']=='nd_location_name'){
-    $field['key']='name';
+
+function theme_mc_nd_location_address($field) {
+
+  //if it's node and has field_online_event, return Online Event
+  if($field['object']->field_online_event[0]['value']==1){
+    return 'Online Event';
   }
-  if (!empty($field['object']->location[$field['key']])) {
-    $value = $field['object']->location[$field['key']];
-    if ($field['key'] == 'country') {
-      $value = $field['object']->location['country_name'];
-    }
-    if ($field['key'] == 'province') {
-      $value = $field['object']->location['province_name'];
-    }
-    if ($field['key'] == 'locpick') {
-      // Latitude.
-      $value  = '';
-      list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($field['object']->location['latitude']);
-      $value .= "${degrees}° ${minutes}' ${seconds}\" ";
-      if (!$negative) {
-        $value .= 'N';
-      }
-      else {
-        $value .= 'S';
-      }
-      // Longitude
-      list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($field['object']->location['longitude']);
-      $value .= ", ${degrees}° ${minutes}' ${seconds}\" ";
-      if (!$negative) {
-        $value .= 'E';
-      }
-      else {
-        $value .= 'W';
-      }
-    }
-    return check_plain($value);
+
+  $node = $field['object'];
+  if(isset($node->field_place) && $node->field_place[0]['nid'] > 0){
+    $node = node_load($field['object']->field_place[0]['nid']);
   }
+
+  // Get the location field settings for this node type
+  $settings = variable_get('location_settings_node_'. $node->type, array());
+
+  // Loop through and collect the address fields we want to output in the order specified in node location settings,
+  // and check that they are not set to be hidden in node location setting
+  // also ignore arrays (eg. locpick)
+  $address = array();
+
+
+  foreach ($settings['form']['fields'] as $fieldname => $fieldsettings) {
+    if (!$settings['display']['hide'][$fieldname] && !empty($node->location[$fieldname]) && !is_array($node->location[$fieldname])) {
+
+      // Replace country code with full country name.
+      if ($fieldname == 'country') {
+        module_load_include('inc', 'location', 'location');
+        $node->location[$fieldname] = location_country_name($node->location[$fieldname]);
+      }
+      // Add this field to our array of fields to output.
+      $address[$fieldname] = check_plain($node->location[$fieldname]);
+    }
+  }
+  if($address['name']=='Exact Location TBD'){
+    unset($address['name']);
+    unset($address['street']);
+    unset($address['postal_code']);
+  }
+  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
+    $has_address = $node->location['name'] && $node->location['street']
+      && $node->location['city'] && $node->location['province'];
+    $has_lat_and_lon = $node->location['latitude'] && $node->location['longitude'] && $node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000';
+    if(!$has_address && $has_lat_and_lon && function_exists('mc_event_feed_reverse_getAddressParts')){
+      $parts = mc_event_feed_reverse_getAddressParts($node->locations['0']['latitude'], $node->locations['0']['longitude']);
+      $address['city'] = $parts['city'];
+      $address['province'] = $parts['state'];
+    }
+  }
+
+  if(empty($address) || (count($address)==1 && isset($address['country'])) ){
+    return '<div class="no-location"> A location wasn\'t provided.</div>';
+  }
+
+  $lines = array(
+    0 => array('name'),
+    1 => array('street'),
+    2 => array('city','province','postal_code')
+  );
+
+  $lines_value = array();
+
+  foreach($lines as $key => $parts){
+
+    foreach($parts as $part){
+      if(!empty($address[$part])){
+        $value = $address[$part];
+        switch($part){
+          case 'name':
+            $lines_value[$key][] = '<span itemprop="name" class="loc-name">'.$value.'</span>';
+            break;
+          case 'street':
+            $lines_value[$key][] = '<span itemprop="streetAddress" class="loc-street">'.$value.'</span>';
+            break;
+          case 'city':
+            $lines_value[$key][] = '<span itemprop="addressLocality" class="loc-city">'.$value.'</span>';
+            break;
+          case 'province':
+            $lines_value[$key][] = '<span itemprop="addressRegion" class="loc-state">'.$value.'</span>';
+            break;
+          case 'postal_code':
+            $lines_value[$key][] = '<span itemprop="postalCode" class="loc-postalcode">'.$value.'</span>';
+            break;
+        };
+      }
+    }
+  };
+
+  $content = "";
+
+  $part1 = "";
+  $part2 = "";
+
+  foreach($lines_value as $key => $values){
+
+    if($key == 0){
+      if(count($values)){
+        $part1 = "<div class='line-$key'>".implode($values, ', ')."</div>";
+      }
+    }
+
+    if($key > 0){
+      if(count($values)){
+        $part2 .= "<div class='line-$key'>".implode($values, ', ')."</div>";
+      }
+    }
+  }
+
+  $part2 = '<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">'.$part2.'</div>';
+
+  return '<div itemprop="location" itemscope itemtype="http://schema.org/Place">' . $part1 . $part2 . '</div>';
 }

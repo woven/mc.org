@@ -9,6 +9,41 @@ function ft_event_ui_ds_default_settings() {
       'event' => array(
         'full' => array(
           'fields' => array(
+            'nd_location_gmap' => array(
+              'region' => 'right',
+              'weight' => '-90',
+              'format' => 'mc_location_gmap_default',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'nd_directions' => array(
+              'region' => 'right',
+              'weight' => '-88',
+              'format' => 'mc_nd_location_directions',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'nd_location_address' => array(
+              'region' => 'right',
+              'weight' => '-89',
+              'format' => 'mc_nd_location_address',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'field_event_url' => array(
+              'region' => 'middle',
+              'weight' => '-91',
+              'format' => 'default',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'body' => array(
+              'region' => 'middle',
+              'weight' => '-92',
+              'format' => 'nd_bodyfield',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
             'mt_add_ical' => array(
               'region' => 'left',
               'weight' => '-98',
@@ -41,41 +76,6 @@ function ft_event_ui_ds_default_settings() {
               'region' => 'left',
               'weight' => '-97',
               'format' => 'ds_eval_code',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-            ),
-            'nd_location_gmap' => array(
-              'region' => 'right',
-              'weight' => '-90',
-              'format' => 'mt_location_gmap_default',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-            ),
-            'nd_directions' => array(
-              'region' => 'right',
-              'weight' => '-88',
-              'format' => 'mt_location_directions',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-            ),
-            'nd_location_address' => array(
-              'region' => 'right',
-              'weight' => '-89',
-              'format' => 'nd_location_address',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-            ),
-            'field_event_url' => array(
-              'region' => 'middle',
-              'weight' => '-91',
-              'format' => 'default',
-              'css-class' => '',
-              'labelformat' => 'hidden',
-            ),
-            'body' => array(
-              'region' => 'middle',
-              'weight' => '-92',
-              'format' => 'nd_bodyfield',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
