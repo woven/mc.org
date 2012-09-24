@@ -3663,6 +3663,9 @@ body.page-user .view-my-groups ul li {
 .field-view-image img {
   border: 1px solid #d0d0d0;
 }
+.view-mc-events-by-dates .location-hidden {
+  display: none;
+}
 .view-mc-events-by-dates .img-placeholder {
   height: 85px;
   width: 85px;
