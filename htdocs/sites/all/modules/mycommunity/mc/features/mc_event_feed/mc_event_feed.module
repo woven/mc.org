@@ -86,21 +86,25 @@ function _mc_event_feed_node_form_validate($form, &$form_state) {
 function mc_event_feed_menu(){
   $items = array();
   $event_path = drupal_get_path('module', 'event');
-  $items['group/%/ical'] = array(
+  $items['node/%node/ical'] = array(
     'title' => 'Group iCal feed',
     'page callback' => 'mc_event_feed_ical',
-    'access arguments' => array('access content'),
+    'page arguments' => array(1),
+    'access callback' => 'user_access',
+    'access arguments' => array('access content')
   );
   $items['events/ical'] = array(
     'title' => 'MiamiTech.org Events',
     'page callback' => '_mc_event_feed_ical_sitewide',
-    'access arguments' => array('access content'),
+    'access callback' => 'user_access',
+    'access arguments' => array('access content')
   );
 
   $items['user/%user/myevents/ical'] = array(
     'title' => 'MiamiTech.org User Events',
     'page callback' => '_mc_event_feed_ical_user',
     'page arguments' => array(1),
+    'access callback' => 'user_access',
     'access arguments' => array('access content'),
   );
 
@@ -117,6 +121,8 @@ function webcal_url($path = NULL, $options = array()){
 }
 
 function _ical_feed_generate($title,$filename,$sql_result){
+  module_load_include("inc","event","ical");
+
   $events = array();
   $result = $sql_result;
 
@@ -161,12 +167,17 @@ function mc_event_feed_event_node_ical() {
   print ical_export(array($event), $event['summary']);
 }
 
-function mc_event_feed_ical() {
-  $gid = arg(1);
-  $group = node_load($gid);
+function mc_event_feed_ical($node) {
+  module_load_include("inc","event","ical");
+
+
+  $group = $node;
+  $gid = $node->nid;
+
   if($group->type!='group'){
     return;
   }
+
   $today = mktime(0, 0, 0);
   $threeMonthsAgo = $today - (3 * 30)*(24 * 3600);
   $nids = og_group_child_nids($gid);
