@@ -168,6 +168,7 @@ function mc_base_ds_field($field) {
  */
 function mc_base_preprocess_page(&$variables){
 
+  //per site colors.css file
     $site_colors = conf_path(). "/colors.css";
     if(file_exists($site_colors)){
       $variables['colors_style'] = $site_colors;
