@@ -18,7 +18,7 @@ function ft_place_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
   switch($op){
     case 'presave':
-      if(!$node->title != $node->locations[0]['name']){
+      if(!empty($node->title) && (!$node->title != $node->locations[0]['name'])){
         $node->locations[0]['name'] = $node->title;
       }
     break;
