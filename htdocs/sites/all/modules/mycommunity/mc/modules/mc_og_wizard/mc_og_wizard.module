@@ -14,9 +14,11 @@ function mc_og_wizard_late_form_alter(&$form, &$form_state, $form_id){
       break;
       default:
         $blocked = array('title','body_field');
+        //added enable discuessions because it was caushing conflict due to invalid value.
+        $excluded = array("field_group_url","field_enable_discussions");
 
         foreach($form as $key => &$item){
-          if((startsWith($key,"field_") OR in_array($key,$blocked)) && $key != "field_group_url"){
+          if((startsWith($key,"field_") OR in_array($key,$blocked)) && !in_array($key,$excluded)){
             $item['#access'] = false;
           };
         }
