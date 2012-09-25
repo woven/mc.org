@@ -2,6 +2,6 @@ name = "Mc Og Wizard"
 description = "Mc Og Wizard Feature"
 core = "6.x"
 package = "MiamiTech.org"
-
 dependencies[] = "querypath"
 dependencies[] = "ft_group"
+dependencies[] = "mc_event_feed"

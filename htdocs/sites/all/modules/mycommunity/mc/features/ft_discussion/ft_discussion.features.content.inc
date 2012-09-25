@@ -181,12 +181,10 @@ function ft_discussion_content_default_fields() {
 1|Enable Discussions in this Group',
     'allowed_values_php' => '',
     'widget' => array(
-      'default_value' => array(
-        '0' => array(
-          'value' => 0,
-        ),
-      ),
-      'default_value_php' => NULL,
+      'default_value' => NULL,
+      'default_value_php' => 'return array(
+array("value"=> 1)
+);',
       'label' => 'Enable or Disable Discussions',
       'weight' => '31',
       'description' => 'Should this group allow to create discussions?',
