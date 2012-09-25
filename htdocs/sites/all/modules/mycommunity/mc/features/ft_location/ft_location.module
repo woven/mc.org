@@ -103,7 +103,10 @@ function theme_mc_location_gmap_default($field) {
         $zoom = '7';
       }
 
-      return theme('nd_location_gmap', $field, $latitude, $longitude, $width, $height, $zoom, $autoclick);
+      $newfield = arrayCopy($field);
+      $newfield['object'] = $node;
+
+      return theme('nd_location_gmap', $newfield, $latitude, $longitude, $width, $height, $zoom, $autoclick);
     }
   }
 }

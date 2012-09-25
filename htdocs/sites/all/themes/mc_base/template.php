@@ -1,6 +1,18 @@
 <?php
 
 function mc_base_nd_location_gmap($field, $latitude, $longitude, $width, $height, $zoom, $autoclick = FALSE) {
+  //dsm(theme('nd_location_address', $field));
+
+  $gurl = url(
+    "http://maps.google.com/",
+    array(
+      'query' => array(
+        'q' => html_entity_decode(strip_tags(theme('nd_location_address', $field))),
+        'external' => true
+      )
+    )
+  );
+
   $map = array();
   $bubble_content = _nd_location_theme_bubble($field);
   if (!empty($bubble_content)) {
@@ -9,7 +21,7 @@ function mc_base_nd_location_gmap($field, $latitude, $longitude, $width, $height
       'longitude' => $longitude,
       'text' => $bubble_content,
       'autoclick' => $autoclick,
-      'link' => 'http://maps.google.com/?q=' . strip_tags(theme('nd_location_address', $field)),
+      'link' => $gurl
     );
   }
 

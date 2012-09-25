@@ -1,5 +1,18 @@
 <?php
 
+function arrayCopy( array $array ) {
+  $result = array();
+  foreach( $array as $key => $val ) {
+    if( is_array( $val ) ) {
+      $result[$key] = arrayCopy( $val );
+    } elseif ( is_object( $val ) ) {
+      $result[$key] = clone $val;
+    } else {
+      $result[$key] = $val;
+    }
+  }
+  return $result;
+}
 
 /*
  * @todo: https://app.asana.com/0/1947405877174/1955527457973
