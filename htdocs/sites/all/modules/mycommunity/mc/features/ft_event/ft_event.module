@@ -39,6 +39,21 @@ function _mc_user_myevents(){
 }
 
 
+function ft_event_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  switch($op){
+    case 'load':
+      if($node->type == "event"){
+        if(isset($node->field_place) && $node->field_place[0]['nid'] > 0){
+          $place_nid = $node->field_place[0]['nid'];
+          $place = node_load($place_nid);
+          $node->locations = $place->locations;
+          $node->location = $place->location;
+        }
+      }
+    break;
+  }
+}
+
 function _mc_event_feed_ical_user($user){
   $uid = $user->uid;
   $today = mktime(0, 0, 0);
@@ -445,8 +460,7 @@ function theme_mc_event_date($unix_date_start = NULL, $unix_date_end = NULL, $ha
 function theme_mc_event_print_date($unix_date_start = NULL, $unix_date_end = NULL, $has_end_date = NULL, $has_time = NULL, $hide_day = FALSE){
   
   $output = '';
-  
-  
+
   $output .= '<span class="event-time">';
     
   $output .= mc_event_print_format_day($unix_date_start);
