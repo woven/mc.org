@@ -283,7 +283,7 @@ function mt_add_group_ical($node){
     $gid=$key;
     break;
   }
-  return '<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://'. $_SERVER["SERVER_NAME"] .'/group/' . $gid . '/ical">All events from this group (iCal)</a>';
+  return '<span class="ical-group-ico"> </span><a class="ical-link" href="webcal://'. $_SERVER["SERVER_NAME"] .'/node/' . $gid . '/gical">All events from this group (iCal)</a>';
 }
 
 function mt_add_ical($node){
