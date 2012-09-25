@@ -62,7 +62,16 @@ function theme_mc_nd_location_directions($field) {
     }
   }
   if (!empty($destination)) {
-    $link ='<a href="http://maps.google.com/?daddr='. urlencode(implode($destination, '+')) .'" target="_blank">'. t('Get Directions') .'</a>';
+     $gurl = url(
+       'http://maps.google.com',
+       array(
+         'query' => array(
+           'daddr' => implode($destination, ' ')
+         ),
+         'external' => true
+       )
+     );
+    $link ='<a href="'.url($gurl).'" target="_blank">'. t('Get Directions') .'</a>';
     return $link;
   }
 }

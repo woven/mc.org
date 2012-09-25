@@ -306,12 +306,27 @@ function mt_add_ical($node){
 }
 
 function mt_add_gcal($node){
-  $title = urlencode($node->title);
-  $description = urlencode(strip_tags($node->content['body']['#value']));
-  $location = _mc_api_format_location($node->location);
+
+  $place = node_load($node->field_place[0]['nid']);
+  $title = $node->title;
+  $description = strip_tags($node->content['body']['#value']);
+  $location = _mc_api_format_location($place->location);
   $start_date = event_format_date($node->event['start_utc'], 'custom', "Ymd\THis\Z");
   $end_date = event_format_date($node->event['end_utc'], 'custom', "Ymd\THis\Z");
-  return '<span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="http://www.google.com/calendar/render?action=TEMPLATE&text=' . $title . '&details=' . $description . '&dates=' . $start_date .'/' . $end_date . '&location='. $location  .'">Just this event (gCal)</a>';
+
+  $gical_url = url(
+    "http://www.google.com/calendar/render",
+    array(
+      'query' => array(
+        'action' => "TEMPLATE",
+        'text' => html_entity_decode($title),
+        'details' => html_entity_decode($description),
+        'dates' => $start_date .'/' . $end_date,
+        'location' => html_entity_decode($location)
+      )
+    )
+  );
+  return '<span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="'.$gical_url.'">Just this event (gCal)</a>';
 }
 
 
