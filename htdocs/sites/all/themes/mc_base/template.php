@@ -168,8 +168,14 @@ function mc_base_ds_field($field) {
  */
 function mc_base_preprocess_page(&$variables){
 
+    $site_colors = conf_path(). "/colors.css";
+    if(file_exists($site_colors)){
+      $variables['colors_style'] = $site_colors;
+    }
+
   //adding schema variables
   $variables['page_attr']  = array();
+
   if($variables['node']){
     $node = $variables['node'];
     if($node->type == "event"){

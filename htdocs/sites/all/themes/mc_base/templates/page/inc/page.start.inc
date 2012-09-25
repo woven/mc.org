@@ -3,5 +3,9 @@
   <head>
     <?php print $head ?>
     <?php print $styles ?>
+
+    <?php if($colors_style){ ?>
+      <link type="text/css" rel="stylesheet" media="all" href="<?php echo $colors_style ?>" />
+    <?php } ?>
     <title><?php print $head_title ?></title>
   </head>
