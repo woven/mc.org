@@ -11,7 +11,6 @@ function ft_place_preprocess($vars,$hook){
     }
 }
 
-
 function ft_place_late_form_alter(&$form, &$form_state, $form_id){
   if(!is_ct_form($form,'place')){
       return;
@@ -28,5 +27,4 @@ function ft_place_late_form_alter(&$form, &$form_state, $form_id){
 
   $form['field_list_image']['#title'] = "Photos";
   $form['field_list_image']['#description'] = t("Add photos for this place. The first photo will be used as the main photo for this place.");
-
 }

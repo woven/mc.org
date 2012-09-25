@@ -1,0 +1,1 @@
+drush sql-dump --result-file=sites/default/scripts/input_formats/if.sql --tables-list=filter_formats,filters,wysiwyg
