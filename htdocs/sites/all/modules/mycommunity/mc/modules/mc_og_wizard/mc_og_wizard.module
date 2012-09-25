@@ -4,7 +4,11 @@ define("MEETUP_FORMAT", '2');
 
 function mc_og_wizard_late_form_alter(&$form, &$form_state, $form_id){
 
-    if($form_id !='group_node_form'){
+    if($form_id != 'group_node_form'){
+      return;
+    }
+
+    if(arg(2) != "add"){
       return;
     }
 

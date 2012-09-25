@@ -641,7 +641,7 @@ function mc_base_content_multiple_values($element) {
 }
 
 
-function mc_base_og_mission(&$variables) {
+function mc_base_preprocess_og_mission(&$variables) {
   $node = $variables['form']['#node'];
   $format = $variables['form']['#node']->format;
 
