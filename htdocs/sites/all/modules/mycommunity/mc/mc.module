@@ -4,6 +4,18 @@
 define("VID_CATEGORY", 2);
 
 /**
+ * get allowed content types, currently using a simple hook
+ * @return array
+ */
+function mc_allowed_cts(){
+  if(function_exists('mc_site_mc_ct')){
+    return mc_site_mc_ct();
+  }
+
+  return array();
+}
+
+/**
  * Implementation of hook_block()
  *
  * Implements one block: the 'Related Content' of a node.
@@ -65,7 +77,7 @@ function mc_late_form_alter(&$form, &$form_state, $form_id) {
 
     if($user->uid != 1){
       if(isset($form['field_related'])){
-        $form['field_related']['#access'] = false;
+        $form['field_related']['#access'] = FALSE;
       }
     }
 
@@ -312,7 +324,7 @@ function mc_arg_handler($argument, &$view) {
     case 'featured':
       break;
   }
-  return true;
+  return TRUE;
 }
 
 /* put in the header region of the 'categories' view */
@@ -742,14 +754,14 @@ function mc_menu(){
   $items['admin/mc'] = array(
     'type' => MENU_SUGGESTED_ITEM,
     'page callback' => 'mc_admin_home',
-    'access arguments' => array(true),
+    'access arguments' => array(TRUE),
     'title' => 'My Community'
   );
 
   $items['facebook/like/%'] = array(
      'type' => MENU_CALLBACK,
      'page callback' => 'mc_facebook_like',
-     'access callback' => array(true),
+     'access callback' => array(TRUE),
      'page arguments' => array(2),
      'title' => 'Facebook like'
   );

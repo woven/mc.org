@@ -5,3 +5,9 @@
  */
 
 include_once 'mc_site.features.inc';
+
+function mc_site_mc_ct(){
+  return array(
+    'event','event_feed','group','npage'
+  );
+}

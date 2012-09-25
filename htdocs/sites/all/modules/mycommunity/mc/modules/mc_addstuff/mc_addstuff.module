@@ -100,7 +100,10 @@ function mc_addstuff_display_block_add_stuff(){
     
     // check if the user has permissions to create this type of node
     }elseif (user_access("create " . $type->type . " content") || ($type->type=='forum' && user_access("create forum topics"))){
-      if(user_access('add stuff ' . $type->type )){
+
+      $allowed_types = mc_allowed_cts();
+
+      if(user_access('add stuff ' . $type->type ) && in_array($type->type,$allowed_types)){
       // TODO: Fix this hack, it's really ugly 
       // Since we are using nodereference_url alread for the gallery-image type, 
       // we need to find a way for the user to choose the gallery, so we redirect

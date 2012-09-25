@@ -209,6 +209,15 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: add stuff event_feed
+  $permissions['add stuff event_feed'] = array(
+    'name' => 'add stuff event_feed',
+    'roles' => array(
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: add stuff file
   $permissions['add stuff file'] = array(
     'name' => 'add stuff file',
@@ -244,6 +253,8 @@ function mc_perms_user_default_permissions() {
     'name' => 'add stuff group',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'community manager',
     ),
   );
 
@@ -346,6 +357,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer feedapi
+  $permissions['administer feedapi'] = array(
+    'name' => 'administer feedapi',
+    'roles' => array(),
+  );
+
   // Exported permission: administer files
   $permissions['administer files'] = array(
     'name' => 'administer files',
@@ -358,6 +375,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer flags
+  $permissions['administer flags'] = array(
+    'name' => 'administer flags',
+    'roles' => array(),
+  );
+
   // Exported permission: administer flash
   $permissions['administer flash'] = array(
     'name' => 'administer flash',
@@ -367,6 +390,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer forums
   $permissions['administer forums'] = array(
     'name' => 'administer forums',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer google analytics
+  $permissions['administer google analytics'] = array(
+    'name' => 'administer google analytics',
     'roles' => array(),
   );
 
@@ -538,6 +567,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: advanced feedapi options
+  $permissions['advanced feedapi options'] = array(
+    'name' => 'advanced feedapi options',
+    'roles' => array(),
+  );
+
   // Exported permission: bypass advanced aggregation
   $permissions['bypass advanced aggregation'] = array(
     'name' => 'bypass advanced aggregation',
@@ -628,6 +663,21 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: create event_feed content
+  $permissions['create event_feed content'] = array(
+    'name' => 'create event_feed content',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: create event_feed sitewide
+  $permissions['create event_feed sitewide'] = array(
+    'name' => 'create event_feed sitewide',
+    'roles' => array(),
+  );
+
   // Exported permission: create file content
   $permissions['create file content'] = array(
     'name' => 'create file content',
@@ -686,6 +736,7 @@ function mc_perms_user_default_permissions() {
     'name' => 'create group content',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'authenticated user',
     ),
   );
 
@@ -851,6 +902,15 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: delete any event_feed content
+  $permissions['delete any event_feed content'] = array(
+    'name' => 'delete any event_feed content',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
+  );
+
   // Exported permission: delete any file content
   $permissions['delete any file content'] = array(
     'name' => 'delete any file content',
@@ -974,6 +1034,16 @@ function mc_perms_user_default_permissions() {
     'name' => 'delete own event content',
     'roles' => array(
       '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: delete own event_feed content
+  $permissions['delete own event_feed content'] = array(
+    'name' => 'delete own event_feed content',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'community manager',
     ),
   );
 
@@ -1125,6 +1195,15 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit any event_feed content
+  $permissions['edit any event_feed content'] = array(
+    'name' => 'edit any event_feed content',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
+  );
+
   // Exported permission: edit any file content
   $permissions['edit any file content'] = array(
     'name' => 'edit any file content',
@@ -1190,7 +1269,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any place content
   $permissions['edit any place content'] = array(
     'name' => 'edit any place content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any taxonomy_feature content
@@ -1292,6 +1374,14 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit own event_feed content
+  $permissions['edit own event_feed content'] = array(
+    'name' => 'edit own event_feed content',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: edit own file content
   $permissions['edit own file content'] = array(
     'name' => 'edit own file content',
@@ -1366,8 +1456,9 @@ function mc_perms_user_default_permissions() {
   $permissions['edit own place content'] = array(
     'name' => 'edit own place content',
     'roles' => array(
-      '0' => 'authenticated user',
-      '1' => 'community manager',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'community manager',
     ),
   );
 
@@ -1446,6 +1537,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: notify of path changes
   $permissions['notify of path changes'] = array(
     'name' => 'notify of path changes',
+    'roles' => array(),
+  );
+
+  // Exported permission: opt-in or out of tracking
+  $permissions['opt-in or out of tracking'] = array(
+    'name' => 'opt-in or out of tracking',
     'roles' => array(),
   );
 
@@ -1581,6 +1678,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: use PHP for tracking visibility
+  $permissions['use PHP for tracking visibility'] = array(
+    'name' => 'use PHP for tracking visibility',
+    'roles' => array(),
+  );
+
   // Exported permission: use admin toolbar
   $permissions['use admin toolbar'] = array(
     'name' => 'use admin toolbar',
@@ -1593,6 +1696,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: use advanced search
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
+    'roles' => array(),
+  );
+
+  // Exported permission: use flag import
+  $permissions['use flag import'] = array(
+    'name' => 'use flag import',
     'roles' => array(),
   );
 
@@ -1629,6 +1738,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view advanced help topic
   $permissions['view advanced help topic'] = array(
     'name' => 'view advanced help topic',
+    'roles' => array(),
+  );
+
+  // Exported permission: view date repeats
+  $permissions['view date repeats'] = array(
+    'name' => 'view date repeats',
     'roles' => array(),
   );
 
@@ -1683,6 +1798,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view imagecache medium
   $permissions['view imagecache medium'] = array(
     'name' => 'view imagecache medium',
+    'roles' => array(),
+  );
+
+  // Exported permission: view imagecache mt_home_event
+  $permissions['view imagecache mt_home_event'] = array(
+    'name' => 'view imagecache mt_home_event',
     'roles' => array(),
   );
 
