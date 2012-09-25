@@ -12,10 +12,12 @@ function mc_account_strongarm() {
   $strongarm->name = 'onepageprofile_weights';
   $strongarm->value = array(
     'account' => -10,
-    'Personal information' => -9,
-    'picture' => -8,
-    'theme_select' => -7,
-    'timezone' => -6,
+    'picture' => -7,
+    'Work and Education' => -8,
+    'Personal Information' => -9,
+    'theme_select' => -6,
+    'mimemail' => -5,
+    'nodewords' => -4,
   );
   $export['onepageprofile_weights'] = $strongarm;
 
