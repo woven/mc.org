@@ -1,0 +1,100 @@
+/* Custom styles specific to MiamiTech.org */
+
+body {
+	background: #f7f7f7;
+	font: 75%/1.25 Arial, Helvetica, sans-serif;
+}	
+
+#highlight {
+	display: none;
+}
+
+#header {
+	margin-bottom: 5px;
+}
+
+
+#page .block-title a span {
+	color: #39F;
+}
+
+#page h1 {
+	font-size: 2.5em;
+	color: #39F;
+}
+
+#page h4 {
+	margin-bottom: 5px;
+	font-size: 1.45em;
+	color: #ff6600;
+}
+
+#page h5 {
+	margin-bottom: 5px;
+	font-size: 1.1em;
+	color: #39F;
+}
+
+#page h4 a,
+#page h4 a:visited,
+#page h5 a,
+#page h5 a:visited {
+	text-decoration: none;
+	color: #09F;
+}
+
+#page .field-author a {
+	color: green;
+}
+
+/* Navigation */
+
+#navigation .primary-links {
+	background: #0070B6 repeat-x;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	behavior: url(/sites/default/themes/harlem2/PIE/PIE.htc);
+	color: #fff;
+}
+
+#navigation .primary-links a:visited {
+	background: #09C 0 0 repeat-x;
+	-webkit-text-shadow: 0;
+	-moz-text-shadow: 0;
+	text-shadow: 0;
+	background-image: none;
+}
+
+#navigation .primary-links .active a,
+#navigation .primary-links .active a:visited,
+#navigation .primary-links .active-trail a,
+#navigation .primary-links .active-trail a:visited {
+	color: #fff;
+	background-color: #09F;
+	background-image: none;
+}
+
+
+#navigation .primary-links a,
+#navigation .primary-links a:visited {
+	background: none;
+	color: #fff;
+	-webkit-text-shadow: none;
+	-moz-text-shadow: none;
+	text-shadow: none;
+}
+
+#navigation .primary-links li {
+	padding-left: 3px;
+	background: none;
+}
+
+#navigation .primary-links a:hover {
+	color: #f7f7f7;
+	text-decoration: none;
+}
+
+body.mt-og-homepage .node .more-link {
+	display: none;
+}
