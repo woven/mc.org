@@ -9,13 +9,15 @@ function mc_base_helper_jqmulti_libraries(){
   );
 }
 
-function mc_base_helper_preprocess_page(){
-
+function mc_base_helper_init(){
   $lib = libraries_get_path("qtip2");
   if(!empty($lib)){
-      drupal_add_js($lib."/".'jquery.qtip.min.js');
-      drupal_add_css($lib."/".'jquery.qtip.min.css');
+    drupal_add_js($lib."/".'jquery.qtip.min.js');
+    drupal_add_css($lib."/".'jquery.qtip.min.css');
   }
+}
+
+function mc_base_helper_preprocess_page(){
 
   if(!module_exists('conditional_styles')){
 	drupal_set_message('The module conditional_styles must be enabled for the theme to work properly.');
