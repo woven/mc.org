@@ -45,7 +45,7 @@ function mc_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_footer';
-  $strongarm->value = '';
+  $strongarm->value = 'MiamiTech.org hopes to be a helpful resource for the technology and creative community in Miami and all of South Florida.';
   $export['site_footer'] = $strongarm;
 
   $strongarm = new stdClass;
