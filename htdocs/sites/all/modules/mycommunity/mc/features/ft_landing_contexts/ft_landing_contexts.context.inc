@@ -762,6 +762,12 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'branding',
           'weight' => 0,
         ),
+        'search-0' => array(
+          'module' => 'search',
+          'delta' => 0,
+          'region' => 'branding',
+          'weight' => 1,
+        ),
         'boxes-join_overlay_box' => array(
           'module' => 'boxes',
           'delta' => 'join_overlay_box',
