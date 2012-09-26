@@ -13,9 +13,7 @@ function mc_admin_bulk_menu_default_menu_links() {
     'router_path' => 'admin/content',
     'link_title' => 'Manage Groups',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
     ),
     'module' => 'menu',
     'hidden' => '0',
@@ -31,9 +29,7 @@ function mc_admin_bulk_menu_default_menu_links() {
     'router_path' => 'admin/content/node',
     'link_title' => 'Manage Content',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
     ),
     'module' => 'menu',
     'hidden' => '0',
@@ -49,9 +45,7 @@ function mc_admin_bulk_menu_default_menu_links() {
     'router_path' => 'admin/content',
     'link_title' => 'Manage Users',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
     ),
     'module' => 'menu',
     'hidden' => '0',
@@ -67,9 +61,7 @@ function mc_admin_bulk_menu_default_menu_links() {
     'router_path' => 'admin/menu/help/config',
     'link_title' => 'Manage Pages Menu',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
     ),
     'module' => 'menu',
     'hidden' => '0',
