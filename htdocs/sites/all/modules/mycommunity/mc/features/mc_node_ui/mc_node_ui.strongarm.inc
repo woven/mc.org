@@ -46,6 +46,15 @@ imce*';
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nd_build_modes';
+  $strongarm->value = array(
+    'secondary_page' => 'Secondary Page',
+  );
+  $export['nd_build_modes'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nd_fields';
   $strongarm->value = array(
     'gallary_images' => array(
