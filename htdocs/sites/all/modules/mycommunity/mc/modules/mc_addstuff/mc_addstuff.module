@@ -76,10 +76,12 @@ function mc_addstuff_display_block_add_stuff(){
         $group = og_determine_context_get_group(node_load(arg(3)));
       }
     }
-    
+
+    $allowed_types = mc_allowed_cts();
+
     // Anonymous, will see add stuff containing links to the register page
     if (!$user->uid){
-      if(user_access('add stuff ' . $type->type )){
+      if(user_access('add stuff ' . $type->type ) && in_array($type->type,$allowed_types)){
         // show them only the types that can be posted in a group (except page and album)
         
           //$addLink = 'user/register';
@@ -101,9 +103,7 @@ function mc_addstuff_display_block_add_stuff(){
     // check if the user has permissions to create this type of node
     }elseif (user_access("create " . $type->type . " content") || ($type->type=='forum' && user_access("create forum topics"))){
 
-      $allowed_types = mc_allowed_cts();
-
-      if(user_access('add stuff ' . $type->type ) && in_array($type->type,$allowed_types)){
+      if((user_access('add stuff ' . $type->type ) && in_array($type->type,$allowed_types)) OR $user->uid == 1){
       // TODO: Fix this hack, it's really ugly 
       // Since we are using nodereference_url alread for the gallery-image type, 
       // we need to find a way for the user to choose the gallery, so we redirect

@@ -69,10 +69,10 @@ function mc_base_links($links, $attributes = array('class' => 'links')){
     
   if (strpos($attributes['class'], 'primary-links') !== FALSE){
     foreach($links as $lkey => &$link){
-      if ($link['href'] == '<front>'){
+      if ($link['href'] == '<front>' && variable_get('menu-home-icon',true)){
         $link['html'] = TRUE;
         $link['title'] = '<span class="ico-menu ico-home">'.$link['title'].'</span>';
-      }elseif ($link['title'] == 'Help'){
+      }elseif ($link['title'] == 'Help' && variable_get('menu-help-icon',true)){
         $link['html'] = TRUE;
         $link['title'] = '<span class="ico-menu ico-help">Site Help</span>';
       }

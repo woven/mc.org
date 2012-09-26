@@ -16,4 +16,6 @@ function mc_site_init(){
   global $conf;
   $conf['hide-search-bar'] = true;
   $conf['hide-og-menu'] = true;
+  $conf['menu-home-icon'] = false;
+  $conf['menu-help-icon'] = false;
 }
