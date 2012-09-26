@@ -508,13 +508,6 @@ function ft_group_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menutrails_og_group_menu';
-  $strongarm->value = 0;
-  $export['menutrails_og_group_menu'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'nd_switch_bm_map_group';
   $strongarm->value = array();
   $export['nd_switch_bm_map_group'] = $strongarm;
@@ -1039,13 +1032,6 @@ Join: !group_url
   $strongarm->name = 'og_max_groups_event';
   $strongarm->value = '';
   $export['og_max_groups_event'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'og_max_groups_event_feed';
-  $strongarm->value = '';
-  $export['og_max_groups_event_feed'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
