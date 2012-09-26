@@ -8,7 +8,7 @@ function mc_og_wizard_late_form_alter(&$form, &$form_state, $form_id){
       return;
     }
 
-    if(arg(2) != "add"){
+    if(arg(1) != "add"){
       return;
     }
 
