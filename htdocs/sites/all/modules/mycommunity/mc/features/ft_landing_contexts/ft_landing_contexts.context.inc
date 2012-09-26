@@ -298,6 +298,11 @@ function ft_landing_contexts_context_default_contexts() {
         'class' => '',
       ),
     ),
+    'theme' => array(
+      'title' => '',
+      'subtitle' => '',
+      'class' => 'two-columns',
+    ),
   );
   $context->condition_mode = 1;
 
