@@ -82,6 +82,7 @@ function ft_group_ui_context_default_contexts() {
     'context' => array(
       'values' => array(
         '~group_homepage' => '~group_homepage',
+        '~*group_homepage' => '~*group_homepage',
       ),
     ),
     'context_og_condition_group_type' => array(

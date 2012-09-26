@@ -16,6 +16,7 @@ function mc_site_strongarm() {
     'mt_landing_events' => TRUE,
     'landing_latest' => TRUE,
     'node_ingroup' => TRUE,
+    'group_homepage' => TRUE,
   );
   $export['context_status'] = $strongarm;
 
