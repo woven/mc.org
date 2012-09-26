@@ -1,5 +1,5 @@
-dbfile=http://www.miamitech.org/db.sql.gz
-branch=mt
+dbfile=$1
+branch=sje
 #
 #remove db file if already existing
 rm -f db.sql.gz
@@ -18,6 +18,6 @@ drush sql-cli < db.sql
 rm -f db.sql.gz
 rm -f db.sql
 #do some drupal clean up and cache cleaning
-drush cc all
-drush updb -y
-drush cc all
+#drush cc all
+#drush updb -y
+#drush cc all
