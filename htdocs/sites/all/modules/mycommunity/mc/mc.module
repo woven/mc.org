@@ -1,6 +1,5 @@
 <?php
 
-
 define("VID_CATEGORY", 2);
 
 /**

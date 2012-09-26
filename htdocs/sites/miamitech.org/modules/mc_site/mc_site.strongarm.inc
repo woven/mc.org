@@ -9,6 +9,19 @@ function mc_site_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'context_status';
+  $strongarm->value = array(
+    'landing_events' => FALSE,
+    'node_place' => FALSE,
+    'mt_landing_events' => TRUE,
+    'landing_latest' => TRUE,
+    'node_ingroup' => TRUE,
+  );
+  $export['context_status'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'feedbackify_id';
   $strongarm->value = '2616';
   $export['feedbackify_id'] = $strongarm;

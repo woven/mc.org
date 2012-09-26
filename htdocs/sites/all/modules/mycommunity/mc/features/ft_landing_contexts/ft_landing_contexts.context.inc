@@ -739,7 +739,7 @@ function ft_landing_contexts_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'sitewide';
   $context->description = '';
-  $context->tag = '';
+  $context->tag = 'mc';
   $context->conditions = array(
     'sitewide' => array(
       'values' => array(
@@ -784,6 +784,10 @@ function ft_landing_contexts_context_default_contexts() {
     ),
   );
   $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('mc');
   $export['sitewide'] = $context;
 
   return $export;

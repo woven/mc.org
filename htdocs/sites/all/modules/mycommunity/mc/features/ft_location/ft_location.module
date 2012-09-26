@@ -91,7 +91,7 @@ function theme_mc_location_gmap_default($field) {
       $longitude = $node->location['longitude'];
       if($latitude=='0.000000' && $longitude=='0.000000'){
         $address = $node->location['street'] . ' ' . $node->location['city'] . ' ' . $node->location['province'] . ' ' . $node->location['postal_code'];
-        $results = mt_event_feed_google_get_georeference($address);
+        $results = mc_event_feed_google_get_georeference($address);
         $longitude = $results['longitude'];
         $latitude = $results['latitude'];
       }

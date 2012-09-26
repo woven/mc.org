@@ -15,6 +15,11 @@ function ft_landing_contexts_theme_registry_alter(&$theme_registry) {
   array_unshift($theme_registry['block']['theme paths'], $originalpath, $modulepath);
 }
 
+/**
+ * used at landing page contexts to find out what is the current landing page name/type
+ * @param string $type
+ * @return bool
+ */
 function _is_landingpage($type = 'homepage'){
   $node = menu_get_object();
 
@@ -23,10 +28,21 @@ function _is_landingpage($type = 'homepage'){
       $node_type = $node->field_page_type[0]['value'];
       $node_subtype = $node->field_page_subtype[0]['value'];
       if($node_type == "landing" && $node_subtype == $type){
-        return true;
+        return TRUE;
       }
     }
   }
 
-  return false;
+  return FALSE;
+}
+
+function ft_landing_contexts_context_load_alter(&$context){
+
+  if($context->name == "sitewide" && variable_get("hide-search-bar",false)){
+    unset($context->reactions['block']['blocks']['search-0']);
+  }
+
+  if(variable_get("hide-og-menu",false) && isset($context->reactions['block']['blocks']['mc_og_menu-0'])){
+    unset($context->reactions['block']['blocks']['mc_og_menu-0']);
+  }
 }

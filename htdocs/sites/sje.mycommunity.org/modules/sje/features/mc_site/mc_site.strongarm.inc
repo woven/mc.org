@@ -9,6 +9,16 @@ function mc_site_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'context_status';
+  $strongarm->value = array(
+    'group_page_view' => TRUE,
+    'node_ingroup' => TRUE,
+  );
+  $export['context_status'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'site_footer';
   $strongarm->value = '<p>The Society of Jewish Entrepreneurs</p>
 
