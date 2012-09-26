@@ -16,3 +16,4 @@ dependencies[] = better_formats
 dependencies[] = globalredirect
 dependencies[] = smartcrop
 dependencies[] = fast_404
+dependencies[] = mc_base_helper
