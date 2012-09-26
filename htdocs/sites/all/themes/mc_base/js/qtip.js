@@ -2,7 +2,6 @@
 if(jq180){
     (function($){
         Drupal.behaviors.staringtooltip = function (context) {
-
             $(".flag-events-bookmarks.unknown a.flag-action",context).qtip({
                 content: {text: $("#event-staring-tooltip").html()},
                 position: {my: "top center",at: "bottom center",

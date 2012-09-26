@@ -12,7 +12,7 @@ function mc_base_helper_jqmulti_libraries(){
 function mc_base_helper_preprocess_page(){
 
   $lib = libraries_get_path("qtip2");
-  if($lib){
+  if(!empty($lib)){
       drupal_add_js($lib."/".'jquery.qtip.min.js');
       drupal_add_css($lib."/".'jquery.qtip.min.css');
   }
@@ -24,5 +24,4 @@ function mc_base_helper_preprocess_page(){
   if(!module_exists('jqmulti')){
     drupal_set_message('The module jqmulti must be enabled for the theme to work properly.');
   }
-
 }
