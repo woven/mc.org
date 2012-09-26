@@ -13,10 +13,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->description = 'Context that contains the reactions to display the Audio & Video Landing Page properly';
   $context->tag = 'Landing';
   $context->conditions = array(
-    'path' => array(
+    'php' => array(
       'values' => array(
-        'audio-and-video' => 'audio-and-video',
-        'audio-video' => 'audio-video',
+        0 => TRUE,
+      ),
+      'options' => array(
+        'phpcode' => 'return _is_landingpage(\'audio-video\');',
       ),
     ),
   );
@@ -121,7 +123,7 @@ function ft_landing_contexts_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -136,9 +138,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->description = 'Context that contains the reactions to display the Community Landing Page properly';
   $context->tag = 'Landing';
   $context->conditions = array(
-    'path' => array(
+    'php' => array(
       'values' => array(
-        'community' => 'community',
+        0 => TRUE,
+      ),
+      'options' => array(
+        'phpcode' => 'return _is_landingpage(\'community\');',
       ),
     ),
   );
@@ -177,71 +182,8 @@ function ft_landing_contexts_context_default_contexts() {
         ),
       ),
     ),
-    'block_class' => array(
-      'header' => array(
-        'class' => '',
-      ),
-      'branding' => array(
-        'class' => '',
-      ),
-      'featured' => array(
-        'class' => '',
-      ),
-      'group_logo' => array(
-        'class' => '',
-      ),
-      'footer' => array(
-        'class' => '',
-      ),
-      'content' => array(
-        'class' => '',
-      ),
-      'left' => array(
-        'class' => '',
-      ),
-      'right' => array(
-        'class' => '',
-        'blocks' => array(
-          'views-featured_members-block_1' => array(
-            'class' => '',
-          ),
-          'views-help_block-block_1' => array(
-            'class' => '',
-          ),
-          'views-community_popular-block_1' => array(
-            'class' => '',
-          ),
-          'views-featured_blocks-block_1' => array(
-            'class' => '',
-          ),
-        ),
-      ),
-      'below_content' => array(
-        'class' => '',
-        'blocks' => array(
-          'views-og_community-block_5' => array(
-            'class' => '',
-          ),
-        ),
-      ),
-      'above_content' => array(
-        'class' => '',
-      ),
-      'content_top' => array(
-        'class' => '',
-      ),
-      'content_bottom' => array(
-        'class' => '',
-      ),
-      'footer_above' => array(
-        'class' => '',
-      ),
-      'overlay' => array(
-        'class' => '',
-      ),
-    ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -256,9 +198,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->description = 'Context that contains the reactions to display the Events Landing Page properly';
   $context->tag = 'Landing';
   $context->conditions = array(
-    'path' => array(
+    'php' => array(
       'values' => array(
-        'events' => 'events',
+        0 => TRUE,
+      ),
+      'options' => array(
+        'phpcode' => 'return _is_landingpage(\'events\');',
       ),
     ),
   );
@@ -332,7 +277,7 @@ function ft_landing_contexts_context_default_contexts() {
       'below_content' => array(
         'class' => '',
         'blocks' => array(
-          'boxes-profile_myevents' => array(
+          'boxes-mc_event_sections_box' => array(
             'class' => '',
           ),
         ),
@@ -354,7 +299,7 @@ function ft_landing_contexts_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -369,9 +314,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->description = '';
   $context->tag = 'Landing';
   $context->conditions = array(
-    'path' => array(
+    'php' => array(
       'values' => array(
-        'groups' => 'groups',
+        0 => TRUE,
+      ),
+      'options' => array(
+        'phpcode' => 'return _is_landingpage(\'groups\');',
       ),
     ),
   );
@@ -481,9 +429,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->description = 'Context that contains the reactions to display the homepage properly';
   $context->tag = 'Landing';
   $context->conditions = array(
-    'path' => array(
+    'php' => array(
       'values' => array(
-        '<front>' => '<front>',
+        0 => TRUE,
+      ),
+      'options' => array(
+        'phpcode' => 'return _is_landingpage(\'home\');',
       ),
     ),
   );
@@ -573,9 +524,6 @@ function ft_landing_contexts_context_default_contexts() {
           'views-featured_blocks-block_4' => array(
             'class' => '',
           ),
-          'views-featured_blocks-block_5' => array(
-            'class' => '',
-          ),
           'views-og_community-block_2' => array(
             'class' => '',
           ),
@@ -588,12 +536,6 @@ function ft_landing_contexts_context_default_contexts() {
             'class' => '',
           ),
           'views-featured_blocks-block_1' => array(
-            'class' => '',
-          ),
-          'views-featured_blocks-block_2' => array(
-            'class' => '',
-          ),
-          'views-featured_blocks-block_3' => array(
             'class' => '',
           ),
         ),
@@ -615,7 +557,7 @@ function ft_landing_contexts_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -630,9 +572,12 @@ function ft_landing_contexts_context_default_contexts() {
   $context->description = 'Context that contains the reactions to display the Places Landing Page properly';
   $context->tag = 'Landing';
   $context->conditions = array(
-    'path' => array(
+    'php' => array(
       'values' => array(
-        'places' => 'places',
+        0 => TRUE,
+      ),
+      'options' => array(
+        'phpcode' => 'return _is_landingpage(\'places\');',
       ),
     ),
   );
@@ -811,17 +756,11 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'header',
           'weight' => 0,
         ),
-        'search-0' => array(
-          'module' => 'search',
-          'delta' => 0,
-          'region' => 'branding',
-          'weight' => 0,
-        ),
         'boxes-add_stuff' => array(
           'module' => 'boxes',
           'delta' => 'add_stuff',
           'region' => 'branding',
-          'weight' => 1,
+          'weight' => 0,
         ),
         'boxes-join_overlay_box' => array(
           'module' => 'boxes',

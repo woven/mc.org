@@ -14,3 +14,19 @@ function ft_landing_contexts_theme_registry_alter(&$theme_registry) {
   $originalpath = array_shift($theme_registry['block']['theme paths']);
   array_unshift($theme_registry['block']['theme paths'], $originalpath, $modulepath);
 }
+
+function _is_landingpage($type = 'homepage'){
+  $node = menu_get_object();
+
+  if($node){
+    if($node->type == "npage"){
+      $node_type = $node->field_page_type[0]['value'];
+      $node_subtype = $node->field_page_subtype[0]['value'];
+      if($node_type == "landing" && $node_subtype == $type){
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
