@@ -28,7 +28,7 @@ function _is_file_exists($file){
     return true;
   }
 
-  return true;
+  return false;
 }
 
 function file_load_default($type = "generic"){

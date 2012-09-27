@@ -14,7 +14,7 @@ function mc_site_strongarm() {
     'landing_events' => FALSE,
     'node_place' => FALSE,
     'mt_landing_events' => TRUE,
-    'landing_latest' => TRUE,
+    'landing_latest' => FALSE,
     'node_ingroup' => TRUE,
     'group_homepage' => TRUE,
   );

@@ -3953,7 +3953,7 @@ og_set_group_context($node);
       'hide_alter_empty' => 1,
       'link_to_node' => 1,
       'label_type' => 'none',
-      'format' => 'group_logo_default',
+      'format' => 'group_logo_default_mcdefaultimg',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
