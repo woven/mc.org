@@ -32,3 +32,15 @@ $db_url = array(
  */
 
 # $base_url = 'http://www.sample.org';  // NO trailing slash!
+
+/* sample configuration for auto deployment
+$conf += array(
+	"mc_deploy_active" => 1,
+	"mc_deploy_ssh_host" => "server02.wovenhosting.com",
+	"mc_deploy_shh_user" => "samer",
+	"mc_deploy_ssh_pass" => "samerwoven",
+	"mc_deploy_github_branch" => "sje",
+	"mc_deploy_dir_mirror" => "/home/www",
+	"mc_deploy_dir" => "/srv/www"
+);
+*/

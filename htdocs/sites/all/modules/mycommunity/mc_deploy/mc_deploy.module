@@ -14,11 +14,15 @@ function mc_deploy_menu(){
       $items['github/deploy'] = array(
         'title' => 'github deploy',
         'page callback' => '_github_deploy',
-        'access arguments' => array('access content'),
+        'access callback' => '_github_deploy_access',
         'type' => MENU_CALLBACK
       );
 
     return $items;
+}
+
+function _github_deploy_access(){
+  return variable_get("mc_deploy_active",0);
 }
 
 function mc_deploy_perm() {
@@ -36,6 +40,12 @@ function mc_deploy_late_form_alter(&$form, &$form_state, $form_id){
 
 function mc_deploy_form_settings(){
   $form = array();
+
+  $form['mc_deploy_active'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable deploy'),
+    '#default_value' => variable_get("mc_deploy_active",0)
+  );
 
   $form['mc_deploy_ssh_host'] = array(
     '#type' => 'textfield',

@@ -2,7 +2,7 @@ drush sql-query "UPDATE system SET status = 0 WHERE name LIKE 'rules%'"
 drush dis spaces -y
 drush dis views_bulk_operations -y
 drush dis rules -y
-drush en og_access_roles
+drush en og_access_roles -y
 drush cc all
 drush updb -y
 drush cc all
@@ -26,5 +26,5 @@ drush dis formfilter_ui -y
 drush dis og_menu -y
 drush en ft_page_general -y
 drush dis update -y
-drush cron
 drush migrate-places
+drush cron
