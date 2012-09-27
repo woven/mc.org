@@ -9,6 +9,59 @@ function ft_group_ui_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'events_group_homepage';
+  $context->description = 'Events Groups homage (used on mt)';
+  $context->tag = 'groups';
+  $context->conditions = array(
+    'node' => array(
+      'values' => array(
+        'group' => 'group',
+      ),
+      'options' => array(
+        'node_form' => '0',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-og_details-block_3' => array(
+          'module' => 'views',
+          'delta' => 'og_details-block_3',
+          'region' => 'group_logo',
+          'weight' => 0,
+        ),
+        'mc_og_menu-0' => array(
+          'module' => 'mc_og_menu',
+          'delta' => 0,
+          'region' => 'left',
+          'weight' => 0,
+        ),
+        'views-og_menu_pages-block_1' => array(
+          'module' => 'views',
+          'delta' => 'og_menu_pages-block_1',
+          'region' => 'below_content',
+          'weight' => 0,
+        ),
+      ),
+    ),
+    'theme' => array(
+      'title' => '',
+      'subtitle' => '',
+      'class' => 'events-og-homepage',
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Events Groups homage (used on mt)');
+  t('groups');
+  $export['events_group_homepage'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'group_homepage';
   $context->description = 'Group homepage (not including node edit)';
   $context->tag = 'groups';

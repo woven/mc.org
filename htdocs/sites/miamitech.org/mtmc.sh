@@ -26,5 +26,5 @@ drush dis formfilter_ui -y
 drush dis og_menu -y
 drush en ft_page_general -y
 drush dis update -y
+drush en mt -y
 drush migrate-places
-drush cron
