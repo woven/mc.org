@@ -13,6 +13,7 @@ function mc_site_strongarm() {
   $strongarm->value = array(
     'group_page_view' => TRUE,
     'node_ingroup' => TRUE,
+    'events_group_homepage' => TRUE,
   );
   $export['context_status'] = $strongarm;
 
