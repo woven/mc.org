@@ -30,9 +30,45 @@ var GHH = {
 		GHH.lightbox();
 		GHH.newsletterPlaceholder();
 		GHH.followButton();
+        GHH.starJoin();
 	},
 
-	likeButton: function(){
+    starJoin: function(){
+
+        $(document).bind('flagGlobalAfterLinkUpdate', function(event, data) {
+            if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $('body').hasClass('page-user')){
+
+                if ($(data.link).parents('.event').size()){
+                    $(data.link).hide().parents('.event').fadeOut('fast',function(){
+                        $(this).remove();
+
+                        if(!$('.col-main .event:visible').size()){
+                            $('.col-main').html("<p>Nothing to show here. Star some upcoming events and they'll show here.</p>");
+                        }
+                    });
+                }
+            }
+        });
+
+
+
+        $(".flag-events-bookmarks.unknown a.flag-action").click(function(e){
+            e.preventDefault();
+        });
+
+        /*
+         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
+         tip: '#event-staring-tooltip',
+         delay: 1250,
+         position: 'bottom center'
+         //offset: [-20,-2]
+         //layout: '<div><span class="b"></span></div>'
+         }).hover(GHH.tooltipOverStaring, function(){});
+         */
+    },
+
+
+    likeButton: function(){
 		var nid=$("#nid").val();
 		if(typeof FB!='undefined'){
 		FB.Event.subscribe('edge.create',
