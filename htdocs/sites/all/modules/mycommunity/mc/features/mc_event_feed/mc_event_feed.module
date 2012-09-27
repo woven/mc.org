@@ -209,6 +209,10 @@ function mc_event_feed_ical($node) {
 }
 
 
+function mt_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $field_name = '', $sub_field = '') {
+  return mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $field_name = '', $sub_field = '');
+}
+
 function mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $field_name = '', $sub_field = '') {
   if ($op == 'describe') {
     return t('Maps a string or an array of strings to myfields.');
