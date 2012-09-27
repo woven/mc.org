@@ -5,3 +5,7 @@
  */
 
 include_once 'mc_admin_bulk.features.inc';
+
+function mc_admin_bulk_perm(){
+  return array('admin mc bulk views');
+}
