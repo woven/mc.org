@@ -166,15 +166,16 @@ function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
         '#default_value' => ($node->og_post_visibility) ? $node->og_post_visibility : 0
     );
 
+    //hide og_public field
     $og_visible['og_public']['#prefix'] = '<div style="display:none;">';
     $og_visible['og_public']['#suffix'] = '</div>';
 
-
+    //hide og_access_roles
     $og['og_access_roles']['#prefix'] = '<div style="display:none;">';
     $og['og_access_roles']['#suffix'] = '</div>';
 
-    //force discussions forms to be always public
-    if($node->type == "forum"){
+    //force discussions & event_feed to be always public
+    if($node->type == "forum" OR $node->type == "event_feed"){
       unset($og_visible['og_post_visibility']);
       $og_visible['og_public']['#default_value'] = 1;
     }
