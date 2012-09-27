@@ -6,6 +6,12 @@
 function mc_perms_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: Administer imagecache external
+  $permissions['Administer imagecache external'] = array(
+    'name' => 'Administer imagecache external',
+    'roles' => array(),
+  );
+
   // Exported permission: Allow Reordering
   $permissions['Allow Reordering'] = array(
     'name' => 'Allow Reordering',
@@ -13,6 +19,18 @@ function mc_perms_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'community manager',
     ),
+  );
+
+  // Exported permission: Bypass black/white list
+  $permissions['Bypass black/white list'] = array(
+    'name' => 'Bypass black/white list',
+    'roles' => array(),
+  );
+
+  // Exported permission: Fetch external images
+  $permissions['Fetch external images'] = array(
+    'name' => 'Fetch external images',
+    'roles' => array(),
   );
 
   // Exported permission: Use PHP input for field settings (dangerous - grant with care)
@@ -24,6 +42,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: View IP addresses
   $permissions['View IP addresses'] = array(
     'name' => 'View IP addresses',
+    'roles' => array(),
+  );
+
+  // Exported permission: View external images
+  $permissions['View external images'] = array(
+    'name' => 'View external images',
     'roles' => array(),
   );
 
@@ -60,6 +84,14 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: access all webform results
+  $permissions['access all webform results'] = array(
+    'name' => 'access all webform results',
+    'roles' => array(
+      '0' => 'community manager',
+    ),
+  );
+
   // Exported permission: access comments
   $permissions['access comments'] = array(
     'name' => 'access comments',
@@ -74,6 +106,35 @@ function mc_perms_user_default_permissions() {
     'roles' => array(
       '0' => 'anonymous user',
       '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: access environment indicator
+  $permissions['access environment indicator'] = array(
+    'name' => 'access environment indicator',
+    'roles' => array(),
+  );
+
+  // Exported permission: access own webform results
+  $permissions['access own webform results'] = array(
+    'name' => 'access own webform results',
+    'roles' => array(),
+  );
+
+  // Exported permission: access own webform submissions
+  $permissions['access own webform submissions'] = array(
+    'name' => 'access own webform submissions',
+    'roles' => array(),
+  );
+
+  // Exported permission: access print
+  $permissions['access print'] = array(
+    'name' => 'access print',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
     ),
   );
 
@@ -141,6 +202,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add group content
   $permissions['add group content'] = array(
     'name' => 'add group content',
+    'roles' => array(),
+  );
+
+  // Exported permission: add members
+  $permissions['add members'] = array(
+    'name' => 'add members',
     'roles' => array(),
   );
 
@@ -233,8 +300,9 @@ function mc_perms_user_default_permissions() {
     'name' => 'add stuff group',
     'roles' => array(
       '0' => 'administrator',
-      '1' => 'authenticated user',
-      '2' => 'community manager',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'community manager',
     ),
   );
 
@@ -265,18 +333,6 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add stuff place
   $permissions['add stuff place'] = array(
     'name' => 'add stuff place',
-    'roles' => array(),
-  );
-
-  // Exported permission: add stuff taxonomy_feature
-  $permissions['add stuff taxonomy_feature'] = array(
-    'name' => 'add stuff taxonomy_feature',
-    'roles' => array(),
-  );
-
-  // Exported permission: add stuff taxonomy_topic
-  $permissions['add stuff taxonomy_topic'] = array(
-    'name' => 'add stuff taxonomy_topic',
     'roles' => array(),
   );
 
@@ -352,6 +408,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer feedbackify
+  $permissions['administer feedbackify'] = array(
+    'name' => 'administer feedbackify',
+    'roles' => array(),
+  );
+
   // Exported permission: administer files
   $permissions['administer files'] = array(
     'name' => 'administer files',
@@ -361,6 +423,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer filters
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer first login
+  $permissions['administer first login'] = array(
+    'name' => 'administer first login',
     'roles' => array(),
   );
 
@@ -433,6 +501,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer messages alter settings
+  $permissions['administer messages alter settings'] = array(
+    'name' => 'administer messages alter settings',
+    'roles' => array(),
+  );
+
   // Exported permission: administer meta tags
   $permissions['administer meta tags'] = array(
     'name' => 'administer meta tags',
@@ -452,12 +526,6 @@ function mc_perms_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'community manager',
     ),
-  );
-
-  // Exported permission: administer og menu
-  $permissions['administer og menu'] = array(
-    'name' => 'administer og menu',
-    'roles' => array(),
   );
 
   // Exported permission: administer organic groups
@@ -487,6 +555,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer print
+  $permissions['administer print'] = array(
+    'name' => 'administer print',
+    'roles' => array(),
+  );
+
   // Exported permission: administer quicktabs
   $permissions['administer quicktabs'] = array(
     'name' => 'administer quicktabs',
@@ -502,6 +576,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer site configuration
   $permissions['administer site configuration'] = array(
     'name' => 'administer site configuration',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer string overrides
+  $permissions['administer string overrides'] = array(
+    'name' => 'administer string overrides',
     'roles' => array(),
   );
 
@@ -559,6 +639,18 @@ function mc_perms_user_default_permissions() {
   // Exported permission: advanced feedapi options
   $permissions['advanced feedapi options'] = array(
     'name' => 'advanced feedapi options',
+    'roles' => array(),
+  );
+
+  // Exported permission: approve membership request
+  $permissions['approve membership request'] = array(
+    'name' => 'approve membership request',
+    'roles' => array(),
+  );
+
+  // Exported permission: broadcast to group
+  $permissions['broadcast to group'] = array(
+    'name' => 'broadcast to group',
     'roles' => array(),
   );
 
@@ -720,6 +812,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: create group administrator
+  $permissions['create group administrator'] = array(
+    'name' => 'create group administrator',
+    'roles' => array(),
+  );
+
   // Exported permission: create group content
   $permissions['create group content'] = array(
     'name' => 'create group content',
@@ -802,30 +900,6 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: create taxonomy_feature content
-  $permissions['create taxonomy_feature content'] = array(
-    'name' => 'create taxonomy_feature content',
-    'roles' => array(),
-  );
-
-  // Exported permission: create taxonomy_feature sitewide
-  $permissions['create taxonomy_feature sitewide'] = array(
-    'name' => 'create taxonomy_feature sitewide',
-    'roles' => array(),
-  );
-
-  // Exported permission: create taxonomy_topic content
-  $permissions['create taxonomy_topic content'] = array(
-    'name' => 'create taxonomy_topic content',
-    'roles' => array(),
-  );
-
-  // Exported permission: create taxonomy_topic sitewide
-  $permissions['create taxonomy_topic sitewide'] = array(
-    'name' => 'create taxonomy_topic sitewide',
-    'roles' => array(),
-  );
-
   // Exported permission: create url aliases
   $permissions['create url aliases'] = array(
     'name' => 'create url aliases',
@@ -855,6 +929,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: create webform sitewide
   $permissions['create webform sitewide'] = array(
     'name' => 'create webform sitewide',
+    'roles' => array(),
+  );
+
+  // Exported permission: delete all webform submissions
+  $permissions['delete all webform submissions'] = array(
+    'name' => 'delete all webform submissions',
     'roles' => array(),
   );
 
@@ -963,18 +1043,6 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: delete any taxonomy_feature content
-  $permissions['delete any taxonomy_feature content'] = array(
-    'name' => 'delete any taxonomy_feature content',
-    'roles' => array(),
-  );
-
-  // Exported permission: delete any taxonomy_topic content
-  $permissions['delete any taxonomy_topic content'] = array(
-    'name' => 'delete any taxonomy_topic content',
-    'roles' => array(),
-  );
-
   // Exported permission: delete any video content
   $permissions['delete any video content'] = array(
     'name' => 'delete any video content',
@@ -987,6 +1055,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete any webform content
   $permissions['delete any webform content'] = array(
     'name' => 'delete any webform content',
+    'roles' => array(),
+  );
+
+  // Exported permission: delete group administrator
+  $permissions['delete group administrator'] = array(
+    'name' => 'delete group administrator',
     'roles' => array(),
   );
 
@@ -1101,18 +1175,6 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: delete own taxonomy_feature content
-  $permissions['delete own taxonomy_feature content'] = array(
-    'name' => 'delete own taxonomy_feature content',
-    'roles' => array(),
-  );
-
-  // Exported permission: delete own taxonomy_topic content
-  $permissions['delete own taxonomy_topic content'] = array(
-    'name' => 'delete own taxonomy_topic content',
-    'roles' => array(),
-  );
-
   // Exported permission: delete own video content
   $permissions['delete own video content'] = array(
     'name' => 'delete own video content',
@@ -1127,15 +1189,33 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: delete own webform submissions
+  $permissions['delete own webform submissions'] = array(
+    'name' => 'delete own webform submissions',
+    'roles' => array(),
+  );
+
   // Exported permission: delete revisions
   $permissions['delete revisions'] = array(
     'name' => 'delete revisions',
     'roles' => array(),
   );
 
+  // Exported permission: deny membership request
+  $permissions['deny membership request'] = array(
+    'name' => 'deny membership request',
+    'roles' => array(),
+  );
+
   // Exported permission: display drupal links
   $permissions['display drupal links'] = array(
     'name' => 'display drupal links',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit all webform submissions
+  $permissions['edit all webform submissions'] = array(
+    'name' => 'edit all webform submissions',
     'roles' => array(),
   );
 
@@ -1246,18 +1326,6 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: edit any taxonomy_feature content
-  $permissions['edit any taxonomy_feature content'] = array(
-    'name' => 'edit any taxonomy_feature content',
-    'roles' => array(),
-  );
-
-  // Exported permission: edit any taxonomy_topic content
-  $permissions['edit any taxonomy_topic content'] = array(
-    'name' => 'edit any taxonomy_topic content',
-    'roles' => array(),
-  );
-
   // Exported permission: edit any video content
   $permissions['edit any video content'] = array(
     'name' => 'edit any video content',
@@ -1277,6 +1345,548 @@ function mc_perms_user_default_permissions() {
   $permissions['edit canonical URL meta tag'] = array(
     'name' => 'edit canonical URL meta tag',
     'roles' => array(),
+  );
+
+  // Exported permission: edit css
+  $permissions['edit css'] = array(
+    'name' => 'edit css',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit field_about
+  $permissions['edit field_about'] = array(
+    'name' => 'edit field_about',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_addphoto
+  $permissions['edit field_addphoto'] = array(
+    'name' => 'edit field_addphoto',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_block_body
+  $permissions['edit field_block_body'] = array(
+    'name' => 'edit field_block_body',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_block_link
+  $permissions['edit field_block_link'] = array(
+    'name' => 'edit field_block_link',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_block_title
+  $permissions['edit field_block_title'] = array(
+    'name' => 'edit field_block_title',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_computer_cost
+  $permissions['edit field_computer_cost'] = array(
+    'name' => 'edit field_computer_cost',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_computers_with_internet
+  $permissions['edit field_computers_with_internet'] = array(
+    'name' => 'edit field_computers_with_internet',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_contact_name
+  $permissions['edit field_contact_name'] = array(
+    'name' => 'edit field_contact_name',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_cost_per_session
+  $permissions['edit field_cost_per_session'] = array(
+    'name' => 'edit field_cost_per_session',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_editorial
+  $permissions['edit field_editorial'] = array(
+    'name' => 'edit field_editorial',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_email
+  $permissions['edit field_email'] = array(
+    'name' => 'edit field_email',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_embedtest
+  $permissions['edit field_embedtest'] = array(
+    'name' => 'edit field_embedtest',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_event_url
+  $permissions['edit field_event_url'] = array(
+    'name' => 'edit field_event_url',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_fax
+  $permissions['edit field_fax'] = array(
+    'name' => 'edit field_fax',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_audio_video_items
+  $permissions['edit field_featured_audio_video_items'] = array(
+    'name' => 'edit field_featured_audio_video_items',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_events
+  $permissions['edit field_featured_events'] = array(
+    'name' => 'edit field_featured_events',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_group
+  $permissions['edit field_featured_group'] = array(
+    'name' => 'edit field_featured_group',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_groups
+  $permissions['edit field_featured_groups'] = array(
+    'name' => 'edit field_featured_groups',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_items
+  $permissions['edit field_featured_items'] = array(
+    'name' => 'edit field_featured_items',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_members
+  $permissions['edit field_featured_members'] = array(
+    'name' => 'edit field_featured_members',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_photo
+  $permissions['edit field_featured_photo'] = array(
+    'name' => 'edit field_featured_photo',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_place
+  $permissions['edit field_featured_place'] = array(
+    'name' => 'edit field_featured_place',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_featured_places
+  $permissions['edit field_featured_places'] = array(
+    'name' => 'edit field_featured_places',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_gallery
+  $permissions['edit field_gallery'] = array(
+    'name' => 'edit field_gallery',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_gallery_image
+  $permissions['edit field_gallery_image'] = array(
+    'name' => 'edit field_gallery_image',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_group_featured_items
+  $permissions['edit field_group_featured_items'] = array(
+    'name' => 'edit field_group_featured_items',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: edit field_group_url
+  $permissions['edit field_group_url'] = array(
+    'name' => 'edit field_group_url',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_header_color
+  $permissions['edit field_header_color'] = array(
+    'name' => 'edit field_header_color',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: edit field_header_title_color
+  $permissions['edit field_header_title_color'] = array(
+    'name' => 'edit field_header_title_color',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: edit field_health_insurance
+  $permissions['edit field_health_insurance'] = array(
+    'name' => 'edit field_health_insurance',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_health_services
+  $permissions['edit field_health_services'] = array(
+    'name' => 'edit field_health_services',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_hours
+  $permissions['edit field_hours'] = array(
+    'name' => 'edit field_hours',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_link
+  $permissions['edit field_link'] = array(
+    'name' => 'edit field_link',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_list_image
+  $permissions['edit field_list_image'] = array(
+    'name' => 'edit field_list_image',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_logo
+  $permissions['edit field_logo'] = array(
+    'name' => 'edit field_logo',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_logo_standalone
+  $permissions['edit field_logo_standalone'] = array(
+    'name' => 'edit field_logo_standalone',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit field_media
+  $permissions['edit field_media'] = array(
+    'name' => 'edit field_media',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_online_event
+  $permissions['edit field_online_event'] = array(
+    'name' => 'edit field_online_event',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_open_in_evening
+  $permissions['edit field_open_in_evening'] = array(
+    'name' => 'edit field_open_in_evening',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_open_on_weekends
+  $permissions['edit field_open_on_weekends'] = array(
+    'name' => 'edit field_open_on_weekends',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_page_subtype
+  $permissions['edit field_page_subtype'] = array(
+    'name' => 'edit field_page_subtype',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_page_type
+  $permissions['edit field_page_type'] = array(
+    'name' => 'edit field_page_type',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_phone_number
+  $permissions['edit field_phone_number'] = array(
+    'name' => 'edit field_phone_number',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_place
+  $permissions['edit field_place'] = array(
+    'name' => 'edit field_place',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_place_type
+  $permissions['edit field_place_type'] = array(
+    'name' => 'edit field_place_type',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_public_album
+  $permissions['edit field_public_album'] = array(
+    'name' => 'edit field_public_album',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_related
+  $permissions['edit field_related'] = array(
+    'name' => 'edit field_related',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: edit field_small_name
+  $permissions['edit field_small_name'] = array(
+    'name' => 'edit field_small_name',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_special_features
+  $permissions['edit field_special_features'] = array(
+    'name' => 'edit field_special_features',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_tech_center_type
+  $permissions['edit field_tech_center_type'] = array(
+    'name' => 'edit field_tech_center_type',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_upload_file
+  $permissions['edit field_upload_file'] = array(
+    'name' => 'edit field_upload_file',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: edit field_video
+  $permissions['edit field_video'] = array(
+    'name' => 'edit field_video',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_website
+  $permissions['edit field_website'] = array(
+    'name' => 'edit field_website',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_wireless_cost
+  $permissions['edit field_wireless_cost'] = array(
+    'name' => 'edit field_wireless_cost',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
+  );
+
+  // Exported permission: edit field_wireless_hotspot
+  $permissions['edit field_wireless_hotspot'] = array(
+    'name' => 'edit field_wireless_hotspot',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'group manager',
+    ),
   );
 
   // Exported permission: edit meta tag ABSTRACT
@@ -1433,22 +2043,6 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: edit own taxonomy_feature content
-  $permissions['edit own taxonomy_feature content'] = array(
-    'name' => 'edit own taxonomy_feature content',
-    'roles' => array(
-      '0' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: edit own taxonomy_topic content
-  $permissions['edit own taxonomy_topic content'] = array(
-    'name' => 'edit own taxonomy_topic content',
-    'roles' => array(
-      '0' => 'authenticated user',
-    ),
-  );
-
   // Exported permission: edit own video content
   $permissions['edit own video content'] = array(
     'name' => 'edit own video content',
@@ -1460,6 +2054,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit own webform content
   $permissions['edit own webform content'] = array(
     'name' => 'edit own webform content',
+    'roles' => array(),
+  );
+
+  // Exported permission: edit own webform submissions
+  $permissions['edit own webform submissions'] = array(
+    'name' => 'edit own webform submissions',
     'roles' => array(),
   );
 
@@ -1499,6 +2099,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: node-specific print configuration
+  $permissions['node-specific print configuration'] = array(
+    'name' => 'node-specific print configuration',
+    'roles' => array(),
+  );
+
   // Exported permission: notify of path changes
   $permissions['notify of path changes'] = array(
     'name' => 'notify of path changes',
@@ -1509,17 +2115,6 @@ function mc_perms_user_default_permissions() {
   $permissions['opt-in or out of tracking'] = array(
     'name' => 'opt-in or out of tracking',
     'roles' => array(),
-  );
-
-  // Exported permission: post by femail
-  $permissions['post by femail'] = array(
-    'name' => 'post by femail',
-    'roles' => array(
-      '0' => 'administrator',
-      '1' => 'authenticated user',
-      '2' => 'community manager',
-      '3' => 'group manager',
-    ),
   );
 
   // Exported permission: post comments
@@ -1544,6 +2139,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(
       '0' => 'community manager',
     ),
+  );
+
+  // Exported permission: remove members
+  $permissions['remove members'] = array(
+    'name' => 'remove members',
+    'roles' => array(),
   );
 
   // Exported permission: revert revisions
@@ -1643,6 +2244,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: use PHP for link visibility
+  $permissions['use PHP for link visibility'] = array(
+    'name' => 'use PHP for link visibility',
+    'roles' => array(),
+  );
+
   // Exported permission: use PHP for tracking visibility
   $permissions['use PHP for tracking visibility'] = array(
     'name' => 'use PHP for tracking visibility',
@@ -1676,6 +2283,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: use permission select
+  $permissions['use permission select'] = array(
+    'name' => 'use permission select',
+    'roles' => array(),
+  );
+
   // Exported permission: use php in custom pagers
   $permissions['use php in custom pagers'] = array(
     'name' => 'use php in custom pagers',
@@ -1706,21 +2319,603 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: view date repeats
-  $permissions['view date repeats'] = array(
-    'name' => 'view date repeats',
+  // Exported permission: view field_about
+  $permissions['view field_about'] = array(
+    'name' => 'view field_about',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_addphoto
+  $permissions['view field_addphoto'] = array(
+    'name' => 'view field_addphoto',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_block_body
+  $permissions['view field_block_body'] = array(
+    'name' => 'view field_block_body',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_block_link
+  $permissions['view field_block_link'] = array(
+    'name' => 'view field_block_link',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_block_title
+  $permissions['view field_block_title'] = array(
+    'name' => 'view field_block_title',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_computer_cost
+  $permissions['view field_computer_cost'] = array(
+    'name' => 'view field_computer_cost',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_computers_with_internet
+  $permissions['view field_computers_with_internet'] = array(
+    'name' => 'view field_computers_with_internet',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_contact_name
+  $permissions['view field_contact_name'] = array(
+    'name' => 'view field_contact_name',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_cost_per_session
+  $permissions['view field_cost_per_session'] = array(
+    'name' => 'view field_cost_per_session',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_editorial
+  $permissions['view field_editorial'] = array(
+    'name' => 'view field_editorial',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_email
+  $permissions['view field_email'] = array(
+    'name' => 'view field_email',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_embedtest
+  $permissions['view field_embedtest'] = array(
+    'name' => 'view field_embedtest',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_event_url
+  $permissions['view field_event_url'] = array(
+    'name' => 'view field_event_url',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_fax
+  $permissions['view field_fax'] = array(
+    'name' => 'view field_fax',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_audio_video_items
+  $permissions['view field_featured_audio_video_items'] = array(
+    'name' => 'view field_featured_audio_video_items',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_events
+  $permissions['view field_featured_events'] = array(
+    'name' => 'view field_featured_events',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_group
+  $permissions['view field_featured_group'] = array(
+    'name' => 'view field_featured_group',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_groups
+  $permissions['view field_featured_groups'] = array(
+    'name' => 'view field_featured_groups',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_items
+  $permissions['view field_featured_items'] = array(
+    'name' => 'view field_featured_items',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_members
+  $permissions['view field_featured_members'] = array(
+    'name' => 'view field_featured_members',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_photo
+  $permissions['view field_featured_photo'] = array(
+    'name' => 'view field_featured_photo',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_place
+  $permissions['view field_featured_place'] = array(
+    'name' => 'view field_featured_place',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_featured_places
+  $permissions['view field_featured_places'] = array(
+    'name' => 'view field_featured_places',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_gallery
+  $permissions['view field_gallery'] = array(
+    'name' => 'view field_gallery',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_gallery_image
+  $permissions['view field_gallery_image'] = array(
+    'name' => 'view field_gallery_image',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_group_featured_items
+  $permissions['view field_group_featured_items'] = array(
+    'name' => 'view field_group_featured_items',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: view field_group_url
+  $permissions['view field_group_url'] = array(
+    'name' => 'view field_group_url',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_header_color
+  $permissions['view field_header_color'] = array(
+    'name' => 'view field_header_color',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_header_title_color
+  $permissions['view field_header_title_color'] = array(
+    'name' => 'view field_header_title_color',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_health_insurance
+  $permissions['view field_health_insurance'] = array(
+    'name' => 'view field_health_insurance',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_health_services
+  $permissions['view field_health_services'] = array(
+    'name' => 'view field_health_services',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_hours
+  $permissions['view field_hours'] = array(
+    'name' => 'view field_hours',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_link
+  $permissions['view field_link'] = array(
+    'name' => 'view field_link',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_list_image
+  $permissions['view field_list_image'] = array(
+    'name' => 'view field_list_image',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_logo
+  $permissions['view field_logo'] = array(
+    'name' => 'view field_logo',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_logo_standalone
+  $permissions['view field_logo_standalone'] = array(
+    'name' => 'view field_logo_standalone',
     'roles' => array(),
+  );
+
+  // Exported permission: view field_media
+  $permissions['view field_media'] = array(
+    'name' => 'view field_media',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_online_event
+  $permissions['view field_online_event'] = array(
+    'name' => 'view field_online_event',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_open_in_evening
+  $permissions['view field_open_in_evening'] = array(
+    'name' => 'view field_open_in_evening',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_open_on_weekends
+  $permissions['view field_open_on_weekends'] = array(
+    'name' => 'view field_open_on_weekends',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_page_subtype
+  $permissions['view field_page_subtype'] = array(
+    'name' => 'view field_page_subtype',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_page_type
+  $permissions['view field_page_type'] = array(
+    'name' => 'view field_page_type',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_phone_number
+  $permissions['view field_phone_number'] = array(
+    'name' => 'view field_phone_number',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_place
+  $permissions['view field_place'] = array(
+    'name' => 'view field_place',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_place_type
+  $permissions['view field_place_type'] = array(
+    'name' => 'view field_place_type',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_public_album
+  $permissions['view field_public_album'] = array(
+    'name' => 'view field_public_album',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_related
+  $permissions['view field_related'] = array(
+    'name' => 'view field_related',
+    'roles' => array(
+      '0' => 'administrator',
+    ),
+  );
+
+  // Exported permission: view field_small_name
+  $permissions['view field_small_name'] = array(
+    'name' => 'view field_small_name',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_special_features
+  $permissions['view field_special_features'] = array(
+    'name' => 'view field_special_features',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_tech_center_type
+  $permissions['view field_tech_center_type'] = array(
+    'name' => 'view field_tech_center_type',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_upload_file
+  $permissions['view field_upload_file'] = array(
+    'name' => 'view field_upload_file',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_video
+  $permissions['view field_video'] = array(
+    'name' => 'view field_video',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_website
+  $permissions['view field_website'] = array(
+    'name' => 'view field_website',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_wireless_cost
+  $permissions['view field_wireless_cost'] = array(
+    'name' => 'view field_wireless_cost',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
+  );
+
+  // Exported permission: view field_wireless_hotspot
+  $permissions['view field_wireless_hotspot'] = array(
+    'name' => 'view field_wireless_hotspot',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'group manager',
+    ),
   );
 
   // Exported permission: view heartbeat messages
   $permissions['view heartbeat messages'] = array(
     'name' => 'view heartbeat messages',
-    'roles' => array(),
-  );
-
-  // Exported permission: view imagecache comment_image
-  $permissions['view imagecache comment_image'] = array(
-    'name' => 'view imagecache comment_image',
     'roles' => array(),
   );
 
@@ -1814,12 +3009,6 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: view imagecache tagline_ico
-  $permissions['view imagecache tagline_ico'] = array(
-    'name' => 'view imagecache tagline_ico',
-    'roles' => array(),
-  );
-
   // Exported permission: view imagecache thumb
   $permissions['view imagecache thumb'] = array(
     'name' => 'view imagecache thumb',
@@ -1841,12 +3030,6 @@ function mc_perms_user_default_permissions() {
   // Exported permission: view imagecache user_account_thum
   $permissions['view imagecache user_account_thum'] = array(
     'name' => 'view imagecache user_account_thum',
-    'roles' => array(),
-  );
-
-  // Exported permission: view imagecache user_comment_image
-  $permissions['view imagecache user_comment_image'] = array(
-    'name' => 'view imagecache user_comment_image',
     'roles' => array(),
   );
 
