@@ -19,5 +19,10 @@ function mc_site_init(){
   $conf['menu-home-icon'] = false;
   $conf['menu-help-icon'] = false;
   $conf['hide-comment'] = true;
-
+  $conf['join-why'] = "<ul>
+                <li>Help others find your group</li>
+                <li>Add events or import from any iCal</li>
+                <li>We're just getting started!</li>
+              </ul>";
+  $conf['join-subheader'] = "<p></p>";
 }

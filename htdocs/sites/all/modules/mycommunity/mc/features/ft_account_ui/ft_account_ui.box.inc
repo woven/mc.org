@@ -86,31 +86,39 @@ function ft_account_ui_default_box() {
   $box->title = '';
   $box->description = 'Join Overlay Box';
   $box->options = array(
-    'body' => '<?php if(user_is_anonymous()){ ?>
-      <div id="register" class="block block-overlay" >
-        <div class="block-content">
-          <div class="block block-signup clear-block">
-                <h1><?php echo theme("mc_page_register_title"); ?></h1>
-			<p>Once you\'ve joined, you can enjoy the full benefits of our community.</p>
-            <div class="why">
-              <ul>
-					<li>Add stuff like articles, videos and more</li>
-					<li>Follow groups and join discussions</li>
-					<li>Get notifications and stay connected</li>
-					<li>Interact with others in our community</li>
-					<li>We\'re adding new things all the time!</li>
-              </ul>
-            </div> <!-- /why -->
-            
-            <div class="user-register">
-              <?php
-                print drupal_get_form(\'user_register\');
-              ?>
-            </div> <!-- /user-register -->
-            
-          </div> <!-- /.block-sign up -->
-        </div> <!-- /.block-content -->
-      </div> <!-- /@register -->
+    'body' => '<?php
+$join_why = variable_get("join-why","");
+$join_subheader = variable_get("join-subheader","");
+?>
+<?php if(user_is_anonymous()){ ?>
+<div id="register" class="block block-overlay" >
+  <div class="block-content">
+    <div class="block block-signup clear-block">
+      <h1><?php echo theme("mc_page_register_title"); ?></h1>
+      <?php if(empty($join_subheader)){ ?>
+      <p>Once you\'ve joined, you can enjoy the full benefits of our community.</p>
+      <?php }else{ print $join_subheader;} ?>
+      <div class="why">
+        <?php if(empty($join_why)){ ?>
+        <ul>
+          <li>Add stuff like articles, videos and more</li>
+          <li>Follow groups and join discussions</li>
+          <li>Get notifications and stay connected</li>
+          <li>Interact with others in our community</li>
+          <li>We\'re adding new things all the time!</li>
+        </ul>
+        <?php }else{ print $join_why;} ?>
+      </div> <!-- /why -->
+
+      <div class="user-register">
+        <?php
+        print drupal_get_form(\'user_register\');
+        ?>
+      </div> <!-- /user-register -->
+
+    </div> <!-- /.block-sign up -->
+  </div> <!-- /.block-content -->
+</div> <!-- /@register -->
 <?php } //end user_is_anonymous ?>',
     'format' => '3',
   );
