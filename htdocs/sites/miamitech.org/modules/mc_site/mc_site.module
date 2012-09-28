@@ -18,4 +18,6 @@ function mc_site_init(){
   $conf['hide-og-menu'] = true;
   $conf['menu-home-icon'] = false;
   $conf['menu-help-icon'] = false;
+  $conf['hide-comment'] = true;
+
 }

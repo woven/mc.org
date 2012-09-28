@@ -31,6 +31,7 @@
  * @see theme_comment_wrapper()
  */
  ?>
+<?php if(!variable_get("hide-comment",0)){ ?>
 <div class="block" id="comments">
   <?php if ($node->comment_count > 0) : ?>
     <div class="block-title">
@@ -42,3 +43,4 @@
     <?php print $content; ?>
   </div>
 </div>
+<?php } ?>
