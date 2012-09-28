@@ -6,8 +6,6 @@
 
 include_once 'mc_event_feed.features.inc';
 
-
-
 function mc_event_feed_late_form_alter(&$form, &$form_state, $form_id){
   global $user;
   if(!is_ct_form($form,"event_feed")){
