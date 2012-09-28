@@ -9,6 +9,82 @@ function ft_account_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_field_id';
+  $strongarm->value = '6';
+  $export['birthdays_field_id'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_hide_year';
+  $strongarm->value = '0';
+  $export['birthdays_hide_year'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_page_list_number';
+  $strongarm->value = '25';
+  $export['birthdays_page_list_number'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_page_settings';
+  $strongarm->value = '0';
+  $export['birthdays_page_settings'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_page_show_filters';
+  $strongarm->value = '0';
+  $export['birthdays_page_show_filters'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_remind';
+  $strongarm->value = '0';
+  $export['birthdays_remind'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_send_user';
+  $strongarm->value = '0';
+  $export['birthdays_send_user'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_send_user_message';
+  $strongarm->value = 'Hey !username,
+
+Happy birthday!
+We hope you have a great day
+
+The !site-team
+!uri_brief';
+  $export['birthdays_send_user_message'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_send_user_subject';
+  $strongarm->value = 'Happy Birthday, !username!';
+  $export['birthdays_send_user_subject'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'birthdays_show_starsign';
+  $strongarm->value = '0';
+  $export['birthdays_show_starsign'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_user_bulkupdate';
   $strongarm->value = 0;
   $export['pathauto_user_bulkupdate'] = $strongarm;

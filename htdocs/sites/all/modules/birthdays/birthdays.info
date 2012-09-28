@@ -1,0 +1,11 @@
+name = Birthdays
+description = Displays and reminds of upcoming users birthdays.
+dependencies[] = profile
+core = 6.x
+
+; Information added by drupal.org packaging script on 2012-05-05
+version = "6.x-1.0+7-dev"
+core = "6.x"
+project = "birthdays"
+datestamp = "1336219480"
+
