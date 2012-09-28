@@ -43,10 +43,18 @@ function _mc_og_wizard_validate_alter($form, &$form_state){
       try {
         $obj = new MeetupParser($group_url);
         $_SESSION['group_obj'] = $obj;
-      }
-      catch (Exception $e) {
-        $query = array('url' => $group_url);
-        drupal_goto('node/add/group/full', $query);
+      }catch (Exception $e) {
+        switch($e->getCode()){
+          case 1:
+            drupal_set_message($e->getMessage());
+            drupal_goto('node/add/group');
+          break;
+          case 2:
+            drupal_set_message($e->getMessage());
+            $query = array('url' => $group_url);
+            drupal_goto('node/add/group/full', $query);
+          break;
+        }
       }
     }
     else{
