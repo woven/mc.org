@@ -323,6 +323,22 @@ function mc_og_menu(){
   return $items;
 }
 
+
+function mc_og_menu_alter(&$items){
+  if($items['node/%/groupadmin']){
+    $items['node/%/groupadmin']['access callback'] = "_mc_og_groupadmin_access";
+  }
+}
+
+function _mc_og_groupadmin_access($gid){
+  //_groupadmin_access
+  if(_groupadmin_access($gid) && user_access('administer groupadmin')){
+    return true;
+  }
+
+  return false;
+}
+
 function _mc_og_welcome_email_form(&$form_state) {
   $form = array();
   $form['mc_welcome_email_discussions_enabled'] = array(
