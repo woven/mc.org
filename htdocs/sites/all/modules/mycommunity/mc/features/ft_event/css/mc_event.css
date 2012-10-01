@@ -19,3 +19,7 @@ div.default-location-wrapper.hidden {
     clear:both;
     visibility:hidden;
 }
+
+.group-place #edit-field-place-0-nid-nid-wrapper label{
+    display: none;
+}

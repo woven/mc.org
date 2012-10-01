@@ -40,10 +40,47 @@ function _mc_user_myevents(){
 
 
 function ft_event_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+
+  if($node->type != "event"){
+    return;
+  }
+
   switch($op){
     case 'load':
-      if($node->type == "event"){
 
+    break;
+    case 'validate':
+
+    break;
+    case 'presave':
+      $choice = &$node->field_place_choice[0]['value'];
+      switch($choice){
+        case 'nr':
+          //node reference is selected, delete locations if exists
+          $node->locations = array('0' => array());
+        break;
+        case 'new':
+          //empty the node reference field node reference node
+          $location = $node->locations[0];
+
+          //if location has a title
+          if(!empty($location['name'])){
+            //create a new place node and reference it, and change the choice to nr
+            $place = _place_new_from_location($location);
+            if($place->nid){
+              //change the choice to nr instead of new
+              $choice = 'nr';
+              //set the new nid for place as referenced node
+              $node->field_place['0']['nid'] = $place->nid;
+              //empty locations
+              $node->locations = array('0' => array());
+            }
+          }else{
+            //empty the place nid and leave locations/choice as its
+            $node->field_place['0']['nid'] = null;
+          }
+
+        break;
       }
     break;
   }
@@ -336,6 +373,9 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
     return;
   }
 
+  drupal_add_js((drupal_get_path('module', 'ft_event') .'/js/mc_event.js'));
+  drupal_add_css((drupal_get_path('module', 'ft_event') .'/css/mc_event.css'));
+
   if($form['locations']){
     //force place locations instead
     $form['group_place']['locations'] = $form['locations'];
@@ -354,8 +394,6 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
         $form['field_place']['0']['#prefix'] = '<div class="default-location-wrapper hidden">';
       }
     }
-    drupal_add_js((drupal_get_path('module', 'ft_event') .'/js/mc_online_location.js'));
-    drupal_add_css((drupal_get_path('module', 'ft_event') .'/css/mc_online_location.css'));
   }
 
 }
@@ -364,7 +402,7 @@ function _event_location_item_process($element){
   //unset($element['#title']);
 
   $element['#location_settings'] = variable_get('location_settings_node_place', array());
-  dsm($element);
+  //dsm($element);
   if($element['delete_location']){
     $element['delete_location']['#access'] = false;
   }

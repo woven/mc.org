@@ -256,27 +256,19 @@ function ft_place_strongarm() {
     'refresh_time' => '1800',
     'items_delete' => '0',
     'parsers' => array(
-      'parser_common_syndication' => array(
+      'parser_ical' => array(
         'enabled' => 0,
         'weight' => '0',
-        'accept_invalid_cert' => 0,
       ),
     ),
     'processors' => array(
       'feedapi_node' => array(
         'enabled' => 0,
         'weight' => '0',
-        'content_type' => 'image',
+        'content_type' => 'article',
         'input_format' => '1',
         'node_date' => 'feed',
         'x_dedupe' => '0',
-      ),
-      'feedapi_inherit' => array(
-        'enabled' => 0,
-        'weight' => '0',
-        'inherit_og' => 1,
-        'inherit_taxonomy' => 1,
-        'inherit_author' => 1,
       ),
     ),
   );
@@ -427,7 +419,7 @@ function ft_place_strongarm() {
       'collapsed' => 0,
       'fields' => array(
         'name' => array(
-          'collect' => '0',
+          'collect' => '1',
           'default' => '',
           'weight' => '2',
         ),
@@ -463,7 +455,7 @@ function ft_place_strongarm() {
           'weight' => '14',
         ),
         'locpick' => array(
-          'collect' => '1',
+          'collect' => '0',
           'weight' => '20',
         ),
       ),

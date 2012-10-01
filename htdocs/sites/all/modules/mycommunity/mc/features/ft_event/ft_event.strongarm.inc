@@ -166,10 +166,10 @@ function ft_event_strongarm() {
     'comment_settings' => '17',
     'menu' => '14',
     'path' => '18',
-    'locations' => '12',
+    'locations' => '13',
     'og_nodeapi' => '6',
     'print' => '16',
-    'xmlsitemap' => '21',
+    'xmlsitemap' => '23',
     'nodewords' => '10',
   );
   $export['content_extra_weights_event'] = $strongarm;
@@ -326,7 +326,7 @@ function ft_event_strongarm() {
       'add' => '1',
     ),
     'form' => array(
-      'weight' => '12',
+      'weight' => '13',
       'collapsible' => 0,
       'collapsed' => 0,
       'fields' => array(
@@ -373,7 +373,7 @@ function ft_event_strongarm() {
       ),
     ),
     'display' => array(
-      'weight' => '12',
+      'weight' => '13',
       'hide' => array(
         'name' => 0,
         'street' => 0,

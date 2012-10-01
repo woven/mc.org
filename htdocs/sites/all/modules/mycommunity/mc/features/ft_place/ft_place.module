@@ -2,6 +2,28 @@
 
 include_once('ft_place.features.inc');
 
+
+//create a new place from just location array/object (see location.module)
+function _place_new_from_location($location){
+  global $user;
+
+  //start creating a new node
+  $node = new StdClass();
+  $node->type = 'place';
+  $node->status = 1;
+
+  //inherit the name of the node from the location name
+  $node->title = $location['name'];
+  $node->uid = $user->uid;
+
+  //add location array/object to locations
+  $node->locations = array(0 => $location);
+
+  node_save($node);
+
+  return $node;
+};
+
 function ft_place_preprocess($vars,$hook){
     if($hook == 'block'){
         $cblock = $vars['block'];
