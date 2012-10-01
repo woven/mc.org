@@ -23,3 +23,22 @@ function late_form_alter_form_alter(&$form, &$form_state, $form_id) {
   $data['__drupal_alter_by_ref'] = array(&$form_state);
   drupal_alter('late_form', $data, $form_id);
 }
+
+function late_form_alter_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  node_invoke_late_nodeapi($node, $op, $a3 = NULL, $a4 = NULL);
+}
+
+function node_invoke_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  $return = array();
+  foreach (module_implements('late_nodeapi') as $name) {
+    $function = $name . '_late_nodeapi';
+    $result = $function($node, $op, $a3, $a4);
+    if (isset($result) && is_array($result)) {
+      $return = array_merge($return, $result);
+    }
+    else if (isset($result)) {
+      $return[] = $result;
+    }
+  }
+  return $return;
+}
