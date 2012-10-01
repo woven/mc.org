@@ -38,17 +38,29 @@ function _mc_user_myevents(){
   print '</div>';
 }
 
-
-function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
-
+function ft_event_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   if($node->type != "event"){
     return;
   }
 
   switch($op){
     case 'load':
+      if($node->field_place[0]['nid'] > 0){
+        $place_node = node_load($node->field_place[0]['nid']);
+        $locations = location_load_locations($place_node->vid);
+        $location = count($locations) ? $locations[0] : array();
+        return array('locations' => $locations, 'location' => $location);
+      }
+      break;
+  }
+}
 
-    break;
+function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  if($node->type != "event"){
+    return;
+  }
+
+  switch($op){
     case 'validate':
 
     break;
