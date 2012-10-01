@@ -86,7 +86,7 @@ function ft_event_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Event URL',
-      'weight' => '34',
+      'weight' => '24',
       'description' => '',
       'type' => 'link',
       'module' => 'link',
@@ -275,7 +275,7 @@ function ft_event_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Online Event',
-      'weight' => '33',
+      'weight' => '23',
       'description' => '',
       'type' => 'optionwidgets_onoff',
       'module' => 'optionwidgets',
@@ -378,17 +378,16 @@ function ft_event_content_default_fields() {
       'gallery' => 0,
       'article' => 0,
       'audio' => 0,
-      'forum' => 0,
       'event' => 0,
+      'event_feed' => 0,
       'file' => 0,
+      'forum' => 0,
       'group' => 0,
       'npage' => 0,
       'link' => 0,
       'nnews' => 0,
       'page' => 0,
       'gallery_image' => 0,
-      'taxonomy_feature' => 0,
-      'taxonomy_topic' => 0,
       'video' => 0,
       'webform' => 0,
     ),
@@ -405,10 +404,92 @@ function ft_event_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Place',
-      'weight' => '11',
+      'weight' => '27',
       'description' => 'If the place where the event is taking place has been already added, you can select it here. Start typing and then select the name of the place.',
       'type' => 'noderefcreate_autocomplete',
       'module' => 'noderefcreate',
+    ),
+  );
+
+  // Exported field: field_place_choice
+  $fields['event-field_place_choice'] = array(
+    'field_name' => 'field_place_choice',
+    'type_name' => 'event',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'secondary_page' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'search' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'number_integer',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'number',
+    'active' => '1',
+    'prefix' => '',
+    'suffix' => '',
+    'min' => '',
+    'max' => '',
+    'allowed_values' => 'nr|Choose existing...
+new|Create new...',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'default_value' => array(
+        '0' => array(
+          'value' => 'nr',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Place Choice',
+      'weight' => '26',
+      'description' => '',
+      'type' => 'optionwidgets_buttons',
+      'module' => 'optionwidgets',
     ),
   );
 
@@ -508,7 +589,7 @@ function ft_event_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Reference Related Content',
-      'weight' => '12',
+      'weight' => '11',
       'description' => '',
       'type' => 'nodereference_autocomplete',
       'module' => 'nodereference',
@@ -602,7 +683,7 @@ function ft_event_content_default_fields() {
       'max_filesize_per_file' => '',
       'max_filesize_per_node' => '',
       'label' => 'File',
-      'weight' => '32',
+      'weight' => '22',
       'description' => '',
       'type' => 'filefield_widget',
       'module' => 'filefield',
@@ -616,6 +697,7 @@ function ft_event_content_default_fields() {
   t('Images');
   t('Online Event');
   t('Place');
+  t('Place Choice');
   t('Reference Related Content');
 
   return $fields;

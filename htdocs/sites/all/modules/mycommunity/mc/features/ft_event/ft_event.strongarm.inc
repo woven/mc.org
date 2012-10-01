@@ -160,18 +160,16 @@ function ft_event_strongarm() {
   $strongarm->value = array(
     'title' => '7',
     'body_field' => '8',
-    'revision_information' => '14',
-    'author' => '18',
-    'options' => '19',
-    'comment_settings' => '16',
-    'menu' => '13',
-    'taxonomy' => '10',
-    'path' => '17',
-    'locations' => '9',
+    'revision_information' => '15',
+    'author' => '19',
+    'options' => '20',
+    'comment_settings' => '17',
+    'menu' => '14',
+    'path' => '18',
+    'locations' => '12',
     'og_nodeapi' => '6',
-    'path_redirect' => '30',
-    'print' => '15',
-    'xmlsitemap' => '30',
+    'print' => '16',
+    'xmlsitemap' => '21',
     'nodewords' => '10',
   );
   $export['content_extra_weights_event'] = $strongarm;
@@ -203,10 +201,10 @@ function ft_event_strongarm() {
   $strongarm->name = 'event_range_next';
   $strongarm->value = array(
     'year' => 2013,
-    'month' => '07',
-    'day' => '02',
-    'hour' => '22',
-    'minute' => '00',
+    'month' => '03',
+    'day' => '09',
+    'hour' => '13',
+    'minute' => '30',
     'second' => '00',
   );
   $export['event_range_next'] = $strongarm;
@@ -216,11 +214,11 @@ function ft_event_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'event_range_prev';
   $strongarm->value = array(
-    'year' => 2012,
-    'month' => '09',
-    'day' => '14',
-    'hour' => '23',
-    'minute' => '07',
+    'year' => 1999,
+    'month' => '11',
+    'day' => '30',
+    'hour' => '00',
+    'minute' => '00',
     'second' => '00',
   );
   $export['event_range_prev'] = $strongarm;
@@ -307,14 +305,14 @@ function ft_event_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'location_defaultnum_event';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['location_defaultnum_event'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'location_maxnum_event';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['location_maxnum_event'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -323,12 +321,12 @@ function ft_event_strongarm() {
   $strongarm->name = 'location_settings_node_event';
   $strongarm->value = array(
     'multiple' => array(
-      'min' => '0',
-      'max' => '0',
-      'add' => '0',
+      'min' => '1',
+      'max' => '1',
+      'add' => '1',
     ),
     'form' => array(
-      'weight' => '9',
+      'weight' => '12',
       'collapsible' => 0,
       'collapsed' => 0,
       'fields' => array(
@@ -375,7 +373,7 @@ function ft_event_strongarm() {
       ),
     ),
     'display' => array(
-      'weight' => '9',
+      'weight' => '12',
       'hide' => array(
         'name' => 0,
         'street' => 0,

@@ -329,7 +329,6 @@ function mt_add_gcal($node){
   return '<span class="gcal-ico">Image</span><a target="_blank" class="ical-link" href="'.$gical_url.'">Just this event (gCal)</a>';
 }
 
-
 /**
  * Implementation of hook_theme()
  *
@@ -340,6 +339,14 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
 
   if(!is_ct_form($form,'event')){
     return;
+  }
+
+  if($form['locations']){
+    //force place locations instead
+    $form['locations']['#location_settings'] = variable_get('location_settings_node_place', array());
+    $form['group_place']['locations'] = $form['locations'];
+    $form['group_place']['locations']['#weight'] = 40;
+    unset($form['locations']);
   }
 
   if(isset($form['field_online_event'])){
