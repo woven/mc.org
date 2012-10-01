@@ -1,3 +1,21 @@
 div.default-location-wrapper.hidden {
     display: none;
 }
+
+
+#edit-field-place-choice-value--wrapper{
+    display: none;
+}
+
+.group-place .form-radios .form-item{
+    float: left;
+    margin-right: 10px;
+}
+
+.group-place .form-radios:after{
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}

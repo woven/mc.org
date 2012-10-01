@@ -43,12 +43,7 @@ function ft_event_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   switch($op){
     case 'load':
       if($node->type == "event"){
-        if(isset($node->field_place) && $node->field_place[0]['nid'] > 0){
-          $place_nid = $node->field_place[0]['nid'];
-          $place = node_load($place_nid);
-          $node->locations = $place->locations;
-          $node->location = $place->location;
-        }
+
       }
     break;
   }
@@ -343,10 +338,12 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
 
   if($form['locations']){
     //force place locations instead
-    $form['locations']['#location_settings'] = variable_get('location_settings_node_place', array());
     $form['group_place']['locations'] = $form['locations'];
-    $form['group_place']['locations']['#weight'] = 40;
     unset($form['locations']);
+
+    $form_loc = &$form['group_place']['locations'];
+    $form_loc[0]['#pre_render'] = array('_event_location_item_process');
+    $form_loc['#weight'] = 40;
   }
 
   if(isset($form['field_online_event'])){
@@ -361,6 +358,17 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
     drupal_add_css((drupal_get_path('module', 'ft_event') .'/css/mc_online_location.css'));
   }
 
+}
+
+function _event_location_item_process($element){
+  //unset($element['#title']);
+
+  $element['#location_settings'] = variable_get('location_settings_node_place', array());
+  dsm($element);
+  if($element['delete_location']){
+    $element['delete_location']['#access'] = false;
+  }
+  return $element;
 }
 
 function ft_event_form_alter(&$form, &$form_state, $form_id){
