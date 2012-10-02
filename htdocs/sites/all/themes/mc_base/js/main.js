@@ -43,7 +43,7 @@ var GHH = {
                         $(this).remove();
 
                         if(!$('.col-main .event:visible').size()){
-                            $('.col-main').html("<p>Nothing to show here. Star some upcoming events and they'll show here.</p>");
+                            $('.col-main').html("<p class='default-message'>Nothing to show here. Star some upcoming events and they'll show here.</p>");
                         }
                     });
                 }
