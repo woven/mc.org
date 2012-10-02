@@ -2,9 +2,33 @@ div.default-location-wrapper.hidden {
     display: none;
 }
 
+.group-place fieldset.location{
+    border: none;
+    margin: 0px;
+}
+
+.group-place fieldset.location .fieldset-content{
+    padding: 0px;
+}
 
 #edit-field-place-choice-value--wrapper{
     display: none;
+}
+
+.group-place .form-radios .form-radio{
+    display: none;
+}
+
+.group-place .form-radios label{
+    color: #0000DD !important;
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 10px 5px;
+}
+
+.group-place .form-radios label.active{
+    color: #0000DD !important;
+    text-decoration: underline;
 }
 
 .group-place .form-radios .form-item{

@@ -9,12 +9,14 @@ Drupal.behaviors.EventOnlineEvent = function(context){
 
 Drupal.behaviors.EventPlaceSelect = function(context){
     if(context == document){
-        $choice = $('input:radio[name=field_place_choice[value]]');
+        var radioname = 'field_place_choice[value]';
+        $choice = $('input:radio[name={name}]'.replace('{name}',radioname));
         $choice.find(":first-child").hide();
         $choice.change(
             function(e){
                 $this= $(this);
-                cls = "input:radio[name=field_place_choice[value]]:checked";
+                id = $this.attr("id");
+                cls = "input:radio[name={name}]:checked".replace('{name}',radioname);
                 $selected = $(cls);
                 switch($selected.val()){
                     case 'nr':
@@ -30,6 +32,11 @@ Drupal.behaviors.EventPlaceSelect = function(context){
                         $("#edit-field-place-choice-value-nr").change();
                     break;
                 }
+
+                $('.group-place .form-radios label').removeClass('active');
+                label = "label[for={id}]".replace("{id}",id);
+                $(label).addClass('active');
+                console.log(label);
             }
         );
 
