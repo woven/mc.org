@@ -394,15 +394,16 @@ function _mc_event_section_after_two_weeks(&$content,$flag){
 }
 
 function _mc_event_section_formatted_location($location, $online){
-  if(preg_match("/webinar/i", $location)){
-    return $location;
+
+  if(preg_match("/webinar/i", $location['name'])){
+    return $location['name'];
   }
   elseif($online){
     return '<span class="location">' . 'Online Event' .'</span>';
   }
   else {
-    if(!empty($location) || $location!=NULL){
-      return 'at <span class="location">' . $location .'</span>';
+    if(!empty($location) && !empty($location['name'])){
+      return 'at <span class="location">' . $location['name'] .'</span>';
     }
   }
   return;
