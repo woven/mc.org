@@ -823,6 +823,11 @@ function mc_admin_bulk_views_default_views() {
     ),
   ));
   $handler->override_option('title', 'Manage Groups');
+  $handler->override_option('header', 'Please contact Woven Support to add a new group to your community:
+support@woven.org
+646-536-7502');
+  $handler->override_option('header_format', '1');
+  $handler->override_option('header_empty', 0);
   $handler->override_option('footer', '<a href="mailto:support@woven.org">Add a new group</a>');
   $handler->override_option('footer_format', '3');
   $handler->override_option('footer_empty', 0);
