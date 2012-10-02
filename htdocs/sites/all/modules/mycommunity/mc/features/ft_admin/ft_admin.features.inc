@@ -57,6 +57,43 @@ $rules = array(
       ),
     ),
   ),
+  '1' => array(
+    'rule' => array(
+      'property' => 'node:type',
+      'operator' => '=',
+      'value' => 'npage',
+      'theme' => 'ThemeKeyAdminTheme',
+      'enabled' => '1',
+      'wildcards' => array(),
+    ),
+    'string' => '"node:type = npage >>> ThemeKeyAdminTheme"',
+    'childs' => array(
+      '0' => array(
+        'rule' => array(
+          'property' => 'drupal:path',
+          'operator' => '=',
+          'value' => 'node/%/edit',
+          'theme' => 'ThemeKeyAdminTheme',
+          'enabled' => '1',
+          'wildcards' => array(),
+        ),
+        'string' => '"drupal:path = node/%/edit >>> ThemeKeyAdminTheme"',
+        'childs' => array(),
+      ),
+      '1' => array(
+        'rule' => array(
+          'property' => 'drupal:path',
+          'operator' => '=',
+          'value' => 'node/add/%',
+          'theme' => 'ThemeKeyAdminTheme',
+          'enabled' => '1',
+          'wildcards' => array(),
+        ),
+        'string' => '"drupal:path = node/add/% >>> ThemeKeyAdminTheme"',
+        'childs' => array(),
+      ),
+    ),
+  ),
 );
 
 return $rules;
