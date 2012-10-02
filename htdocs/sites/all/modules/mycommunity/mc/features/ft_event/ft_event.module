@@ -49,7 +49,13 @@ function ft_event_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
   switch($op){
     case 'load':
+      $isonline = $node->field_online_event[0]['value'];
       $choice = &$node->field_place_choice[0]['value'];
+
+      //if online. just return an empty arrays
+      if($isonline){
+        return array('locations' => array(0=>array()), 'location' => array());
+      }
 
       //incase place choice is not set (like in case existing events at mt.org), give it some smart logic
       if(!is_valid_place_choice($choice)){
@@ -68,7 +74,7 @@ function ft_event_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
       }
 
       //if choice is nr and there is node id exists, then load locations of the place node
-      if($node->field_place[0]['nid'] > 0 && $choice == "nr"){
+      if($node->field_place[0]['nid'] > 0 && $choice == "nr" && !$isonline){
         $place_node = node_load($node->field_place[0]['nid']);
         $locations = location_load_locations($place_node->vid);
         $location = count($locations) ? $locations[0] : array();
@@ -89,42 +95,59 @@ function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
     break;
     case 'prepare': //node about to be shown to the node add/edit forms
-
+      $isonline = $node->field_online_event[0]['value'];
       $choice = &$node->field_place_choice[0]['value'];
+
       if($choice == 'nr'){
         //remove local event node locations, so we don't confuse user
         $node->locations = array(0=>array());
         $node->location = array();
       }
+
+      //if is_online, remove all locations values, and it should not be selected anyway
+      if($isonline){
+        $node->locations = array('0' => array());
+        $node->location = array();
+        $node->field_place['0']['nid'] = null;
+      }
+
     break;
     case 'presave':
+      $isonline = $node->field_online_event[0]['value'];
       $choice = &$node->field_place_choice[0]['value'];
-      switch($choice){
-        case 'nr':
-          //node reference is selected, delete locations if exists
-          $node->locations = array('0' => array());
-        break;
-        case 'new':
-          //empty the node reference field node reference node
-          $location = $node->locations[0];
 
-          //if location has a title
-          if(!empty($location['name'])){
-            //create a new place node and reference it, and change the choice to nr
-            $place = _place_new_from_location($location);
-            if($place->nid){
-              //change the choice to nr instead of new
-              $choice = 'nr';
-              //set the new nid for place as referenced node
-              $node->field_place['0']['nid'] = $place->nid;
-              //empty locations
-              $node->locations = array('0' => array());
+      if($isonline){
+        $node->locations = array('0' => array());
+        $node->location = array();
+        $node->field_place['0']['nid'] = null;
+      }else{
+        switch($choice){
+          case 'nr':
+            //node reference is selected, delete locations if exists
+            $node->locations = array('0' => array());
+            break;
+          case 'new':
+            //empty the node reference field node reference node
+            $location = $node->locations[0];
+
+            //if location has a title
+            if(!empty($location['name'])){
+              //create a new place node and reference it, and change the choice to nr
+              $place = _place_new_from_location($location);
+              if($place->nid){
+                //change the choice to nr instead of new
+                $choice = 'nr';
+                //set the new nid for place as referenced node
+                $node->field_place['0']['nid'] = $place->nid;
+                //empty locations
+                $node->locations = array('0' => array());
+              }
+            }else{
+              //empty the place nid and leave locations/choice as its
+              $node->field_place['0']['nid'] = null;
             }
-          }else{
-            //empty the place nid and leave locations/choice as its
-            $node->field_place['0']['nid'] = null;
-          }
-        break;
+            break;
+        }
       }
     break;
   }
