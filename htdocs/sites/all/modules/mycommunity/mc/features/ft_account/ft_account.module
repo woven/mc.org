@@ -2,6 +2,7 @@
 
 include_once('ft_account.features.inc');
 
+
 /**
  *  Enhancing the user Pages titles and callbacks
  *  https://app.asana.com/0/1044037878840/1212366488866
@@ -26,6 +27,14 @@ function _mc_user_pages_menu_alter(&$items){
     $items[$path] = array_merge($items[$path],$menu,$callback);
   }
 }
+
+function ft_account_user($op, &$edit, &$account, $category = NULL){
+  switch($op){
+    case 'logout':
+      $_REQUEST['destination'] = '<front>';
+    break;
+  }
+};
 
 function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
   global $user;
