@@ -45,12 +45,19 @@ function ft_event_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
   switch($op){
     case 'load':
+      $choice = &$node->field_place_choice[0]['value'];
+
+      if(!($choice == 'nr' OR $choice == 'new')){
+        $choice = 'nr';
+      }
+
       if($node->field_place[0]['nid'] > 0){
         $place_node = node_load($node->field_place[0]['nid']);
         $locations = location_load_locations($place_node->vid);
         $location = count($locations) ? $locations[0] : array();
         return array('locations' => $locations, 'location' => $location);
       }
+
       break;
   }
 }
@@ -63,6 +70,14 @@ function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   switch($op){
     case 'validate':
 
+    break;
+    case 'prepare': //node about to be shown to the node add/edit forms
+      $choice = &$node->field_place_choice[0]['value'];
+      if($choice == 'nr'){
+        //dont fill in locations
+        $node->locations = array(0=>array());
+        $node->location = array();
+      }
     break;
     case 'presave':
       $choice = &$node->field_place_choice[0]['value'];
@@ -91,7 +106,6 @@ function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
             //empty the place nid and leave locations/choice as its
             $node->field_place['0']['nid'] = null;
           }
-
         break;
       }
     break;
