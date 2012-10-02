@@ -226,6 +226,7 @@ function mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
     return $myfields;
   }
   else if ($op == 'map') {
+      $choice = &$node->field_place_choice[0]['value'];
       if ($field_name == 'event') {
         $group = node_load($node->feedapi->feed_nid);
         $node->og_groups = $group->og_groups;
@@ -261,92 +262,39 @@ function mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
           }
           if($sub_field=='location'){
             $parts = mc_event_feed_getAddressParts($feed_element);
+
             if($parts['name']=='webinar'){
+              //it's webinar, or an online event
               $node->field_online_event['0']['value'] = 1;
             }
+            //it's not webinar, continue with the rest of logic
             else {
-              $temp_node = node_load($node->nid);
-              if((!isset($temp_node->field_place['0']['nid']) || empty($temp_node->field_place['0']['nid'])) && !isset($node->field_place['0']['nid'])){
-                $nid = _mc_event_feed_find_similar_place($parts['name'], $parts['address']);
-                if(!empty($nid)){
-                  $location_node = node_load($nid);
-                }
-                else {
-                  global $user;
-                  $location_node = new StdClass();
-                  $location_node->type = 'place';
-                  $location_node->status = 1;
-                  $location_node->title = $parts['name'];
-                  $location_node->uid = $user->uid;
-
-                  $location_node->locations['0']['name'] = $parts['name'];
-                  $location_node->locations['0']['street'] = $parts['address'];
-                  $location_node->locations['0']['city'] = $parts['city'];
-                  $location_node->locations['0']['province'] = $parts['state'];
-                  $location_node->locations['0']['postal_code'] = $parts['zip'];
-
-                  node_save($location_node);
-                }
-
-                $node->field_place['0']['nid'] = $location_node->nid;
-              }
-              else {
-                if(isset($node->field_place['0']['nid'])){
-                  $location_node = node_load($node->field_place['0']['nid']);
-                }
-                else{
-                  $location_node = node_load($temp_node->field_place['0']['nid']);
-                }
-                $location_node->title = $parts['name'];
-                $location_node->locations['0']['name'] = $parts['name'];
-                $location_node->locations['0']['street'] = $parts['address'];
-                $location_node->locations['0']['city'] = $parts['city'];
-                $location_node->locations['0']['province'] = $parts['state'];
-                $location_node->locations['0']['postal_code'] = $parts['zip'];
-
-                node_save($location_node);
-              }
+                //create new location, and set choice to new
+                $choice = 'new';
+                $node->locations[0] = array(
+                    'name' => $parts['name'],
+                    'street' => $parts['address'],
+                    'city' => $parts['city'],
+                    'province' => $parts['state'],
+                    'postal_code' => $parts['zip']
+                );
             }
           }
           if($sub_field=='geo'){
-            $temp_node = node_load($node->nid);
-            if((!isset($temp_node->field_place['0']['nid']) || empty($temp_node->field_place['0']['nid'])) && !isset($node->field_place['0']['nid'])){
-              global $user;
 
-              $location_node = new StdClass();
-              $location_node->type = 'place';
-              $location_node->status = 1;
-              $location_node->title = $parts['name'];
-              $location_node->uid = $user->uid;
+              $parts = explode(';', $feed_element); //parts explode
+              if(!is_array($node->locations[0])){
+                $node->locations[0] = array();
+              };
 
-              $parts = explode(';', $feed_element);
-              $location_node->locations['0']['latitude'] = $parts['0'];
-              $location_node->locations['0']['longitude'] = $parts['1'];
-
-              node_save($location_node);
-
-              $node->field_place['0']['nid'] = $location_node->nid;
-
-            }
-            else{
-              if(isset($node->field_place['0']['nid'])){
-                $location_node = node_load($node->field_place['0']['nid']);
-              }
-              else{
-                $location_node = node_load($temp_node->field_place['0']['nid']);
-              }
-
-              $parts = explode(';', $feed_element);
-              $location_node->locations['0']['latitude'] = $parts['0'];
-              $location_node->locations['0']['longitude'] = $parts['1'];
-
-              node_save($location_node);
-            }
-
+              $node->locations[0] += array(
+                'latitude' => $parts['0'],
+                'longitude' => $parts['1']
+              );
           }
         }
 
-      //force the node to always become published
+      //return the modified node.
       return $node;
     }
   }
@@ -468,11 +416,12 @@ function mc_event_feed_reverse_getAddressParts($latitude, $longitude){
 }
 
 
+
 function mc_event_feed_getAddressParts($address){ 
   if($address=='webinar'){
     return array(
       'name' => $address,
-      'address'=>'', 
+      'address'=>'',
       'city'=>'', 
       'state'=>'', 
       'zip'=>'', 

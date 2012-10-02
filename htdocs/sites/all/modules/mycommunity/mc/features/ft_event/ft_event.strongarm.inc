@@ -418,7 +418,7 @@ function ft_event_strongarm() {
   $strongarm->value = array(
     'title' => array(
       'region' => 'main',
-      'weight' => '2',
+      'weight' => '1',
       'has_required' => TRUE,
       'title' => 'Title',
     ),
@@ -468,7 +468,7 @@ function ft_event_strongarm() {
     ),
     'buttons' => array(
       'region' => 'main',
-      'weight' => '13',
+      'weight' => '14',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -484,7 +484,7 @@ function ft_event_strongarm() {
       'region' => 'main',
       'weight' => '5',
       'has_required' => FALSE,
-      'title' => 'Place',
+      'title' => NULL,
       'hidden' => 0,
     ),
     'field_related' => array(
@@ -503,14 +503,14 @@ function ft_event_strongarm() {
     ),
     'event' => array(
       'region' => 'main',
-      'weight' => '3',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => 'Events',
       'hidden' => 0,
     ),
     'og_nodeapi' => array(
       'region' => 'main',
-      'weight' => '1',
+      'weight' => '0',
       'has_required' => TRUE,
       'title' => 'Groups',
       'collapsed' => 0,
@@ -530,13 +530,6 @@ function ft_event_strongarm() {
       'collapsed' => 1,
       'hidden' => 0,
     ),
-    'revision_information' => array(
-      'region' => 'right',
-      'weight' => '5',
-      'has_required' => FALSE,
-      'title' => NULL,
-      'hidden' => 0,
-    ),
     'nodewords' => array(
       'region' => 'main',
       'weight' => '12',
@@ -547,17 +540,24 @@ function ft_event_strongarm() {
     ),
     'field_online_event' => array(
       'region' => 'main',
-      'weight' => '4',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Online Event',
       'hidden' => 0,
     ),
-    'taxonomy' => array(
+    'print' => array(
       'region' => 'main',
-      'weight' => '0',
+      'weight' => '13',
       'has_required' => FALSE,
-      'title' => NULL,
+      'title' => 'Printer, email and PDF versions',
+      'collapsed' => 1,
       'hidden' => 0,
+    ),
+    'group_place' => array(
+      'region' => 'main',
+      'weight' => '4',
+      'has_required' => TRUE,
+      'title' => 'Place',
     ),
   );
   $export['nodeformscols_field_placements_event_default'] = $strongarm;
