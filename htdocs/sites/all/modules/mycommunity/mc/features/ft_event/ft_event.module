@@ -89,6 +89,7 @@ function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
     break;
     case 'prepare': //node about to be shown to the node add/edit forms
+
       $choice = &$node->field_place_choice[0]['value'];
       if($choice == 'nr'){
         //remove local event node locations, so we don't confuse user

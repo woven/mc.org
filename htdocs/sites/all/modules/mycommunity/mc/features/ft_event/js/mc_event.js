@@ -28,6 +28,10 @@ Drupal.behaviors.EventPlaceSelect = function(context){
                         $(".group-place .location").show();
                         $(".group-place #edit-field-place-0-nid-nid-wrapper").hide();
                     break;
+                    default:
+                        $("#edit-field-place-choice-value-nr").attr('checked','checked');
+                        $("#edit-field-place-choice-value-nr").change();
+                    break;
                 }
             }
         );
