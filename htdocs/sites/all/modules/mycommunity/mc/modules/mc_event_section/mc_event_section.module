@@ -428,3 +428,16 @@ function _mc_event_section_print_location($lid){
   $field = array('object' => $node);
   print theme('nd_location_address', $field);
 }
+
+function _mc_event_section_print_location_hidden($location){
+
+  if(empty($location)){
+    return"";
+  }
+
+  $node = new stdClass();
+  $node->location = $location;
+  $node->type = 'place';
+  $field = array('object' => $node);
+  print "<div class=\"location-hidden\">" . theme('mc_nd_location_address', $field) . "</div";
+}

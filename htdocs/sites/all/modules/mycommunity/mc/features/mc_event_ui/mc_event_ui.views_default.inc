@@ -843,6 +843,8 @@ $location = location_load_location($static[\'lid\']);
 }
 
 echo _mc_event_section_formatted_location($location, $data->node_data_field_online_event_field_online_event_value);
+
+echo _mc_event_section_print_location_hidden($location);
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_2',
@@ -999,47 +1001,6 @@ return "Week of ". date(\'F jS\',$firstdayts);
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_3',
-      'table' => 'customfield',
-      'field' => 'phpcode',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
-    'phpcode_4' => array(
-      'label' => 'Location Rich snippet',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'absolute' => 0,
-        'link_class' => '',
-        'alt' => '',
-        'rel' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'hide_alter_empty' => 1,
-      'value' => '<?php 
-if($static[\'lid\']){
-_mc_event_section_print_location($static[\'lid\']);
-}
-
-?>',
-      'exclude' => 0,
-      'id' => 'phpcode_4',
       'table' => 'customfield',
       'field' => 'phpcode',
       'override' => array(
