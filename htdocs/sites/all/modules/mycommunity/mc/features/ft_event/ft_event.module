@@ -428,18 +428,16 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
     $form_loc = &$form['group_place']['locations'];
     $form_loc[0]['#pre_render'] = array('_event_location_item_process');
     $form_loc['#weight'] = 40;
-  }
 
-  if(isset($form['field_online_event'])){
-    $form['field_place']['0']['#prefix'] = '<div class="default-location-wrapper">';
-    $form['field_place']['0']['#suffix'] = "</div>";
-    if(isset($form['#node'])){
-      if($form['#node']->field_online_event[0]['value']){
-        $form['field_place']['0']['#prefix'] = '<div class="default-location-wrapper hidden">';
+    if(isset($form['field_online_event'])){
+      if(isset($form['#node'])){
+        if($form['#node']->field_online_event[0]['value']){
+          //$form['field_place']['0']['#prefix'] = '<div class="default-location-wrapper hidden">';
+          $form['group_place']['#attributes']['style'] ="display: none;";
+        }
       }
     }
   }
-
 }
 
 function _event_location_item_process($element){
