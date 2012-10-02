@@ -3801,6 +3801,9 @@ body.page-user .view-my-groups ul li {
   padding: 0 !important;
   margin: 0 20px !important;
 }
+.page-user .quicktabs_tabpage .block-content {
+  margin: 0px !important;
+}
 .page-user .user-profile #content {
   margin: 0 !important;
 }
