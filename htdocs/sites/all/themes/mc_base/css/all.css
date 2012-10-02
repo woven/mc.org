@@ -560,6 +560,12 @@ a .ico-small {
   margin: 0 100px;
   width: 100px;
 }
+.block-overlay .block-login #user-login-form .item-list {
+  margin-top: 15px;
+}
+.block-overlay .block-login #user-login-form .item-list li {
+  margin-bottom: 5px;
+}
 .limiter {
   position: relative;
   width: 940px;
