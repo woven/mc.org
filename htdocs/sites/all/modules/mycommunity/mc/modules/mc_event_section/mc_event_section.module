@@ -439,5 +439,5 @@ function _mc_event_section_print_location_hidden($location){
   $node->location = $location;
   $node->type = 'place';
   $field = array('object' => $node);
-  print "<div class=\"location-hidden\">" . theme('mc_nd_location_address', $field) . "</div";
+  print "<div class=\"display-none\">" . theme('mc_nd_location_address', $field) . "</div";
 }
