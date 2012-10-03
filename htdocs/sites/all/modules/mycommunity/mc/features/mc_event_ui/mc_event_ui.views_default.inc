@@ -1207,13 +1207,13 @@ return "Week of ". date(\'F jS\',$firstdayts);
   ));
   $handler = $view->new_display('block', 'today-tomorrow', 'block_5');
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '-1');
+  $handler->override_option('block_caching', '2');
   $handler = $view->new_display('block', 'this-next{week}', 'block_1');
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', -1);
+  $handler->override_option('block_caching', '2');
   $handler = $view->new_display('block', 'upcoming', 'block_2');
   $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', -1);
+  $handler->override_option('block_caching', '2');
 
   $views[$view->name] = $view;
 
