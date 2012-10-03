@@ -3224,7 +3224,7 @@ fieldset .fieldset-content:after {
   visibility: hidden;
 }
 fieldset .form-item {
-  margin: 0 0 5px 0;
+  margin: 0 0 7px 0;
 }
 fieldset legend {
   background-color: #cccccc;
