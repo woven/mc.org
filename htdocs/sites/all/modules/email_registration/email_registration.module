@@ -63,6 +63,10 @@ function email_registration_user($op, &$edit, &$account, $category = NULL) {
  *
  */
 function email_registration_form_alter(&$form, $form_state, $form_id) {
+  if(user_access('administer users')){ //Patch for admin user
+    return ; //do nothing
+  }
+
   switch ($form_id) {
     case 'user_register':
       if (isset($form['account']) && is_array($form['account'])) {
