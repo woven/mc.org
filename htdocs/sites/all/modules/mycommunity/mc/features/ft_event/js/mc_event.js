@@ -33,10 +33,11 @@ Drupal.behaviors.EventPlaceSelect = function(context){
                     break;
                 }
 
+                //remove any active class from radios labels if exists
                 $('.group-place .form-radios label').removeClass('active');
-                label = "label[for={id}]".replace("{id}",id);
+
+                label = "label[for={id}]".replace("{id}",$selected.attr("id"));
                 $(label).addClass('active');
-                console.log(label);
             }
         );
 
