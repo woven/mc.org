@@ -3002,9 +3002,13 @@ label.option {
   text-transform: none;
   color: inherit;
 }
+.form-item label {
+  margin-bottom: 5px;
+}
 .form-item,
 .form-item-labeled {
-  padding: 10px 0;
+  padding: 0 0 5px 0;
+  margin: 0 0 15px 0;
 }
 div.three-columns #right {
   width: 293px;
@@ -3206,7 +3210,7 @@ fieldset {
   border: 1px solid #cccccc;
   -moz-border-radius: 4px 4px 4px 4px;
   -webkit-border-radius: 4px 4px 4px 4px;
-  margin: 15 0;
+  margin: 0 0 15px 0;
   position: relative;
 }
 fieldset > div {
@@ -3218,6 +3222,9 @@ fieldset .fieldset-content:after {
   height: 0;
   clear: both;
   visibility: hidden;
+}
+fieldset .form-item {
+  margin: 0 0 5px 0;
 }
 fieldset legend {
   background-color: #cccccc;
