@@ -20,12 +20,12 @@ Drupal.behaviors.EventPlaceSelect = function(context){
                 $selected = $(cls);
                 switch($selected.val()){
                     case 'nr':
-                        $(".group-place .location").hide();
-                        $(".group-place #edit-field-place-0-nid-nid-wrapper").show();
+                        $(".group-place .location").slideUp();
+                        $(".group-place #edit-field-place-0-nid-nid-wrapper").slideDown();
                     break;
                     case 'new':
-                        $(".group-place .location").show();
-                        $(".group-place #edit-field-place-0-nid-nid-wrapper").hide();
+                        $(".group-place #edit-field-place-0-nid-nid-wrapper").slideUp();
+                        $(".group-place .location").slideDown();
                     break;
                     default:
                         $("#edit-field-place-choice-value-nr").attr('checked','checked');
@@ -41,6 +41,5 @@ Drupal.behaviors.EventPlaceSelect = function(context){
         );
 
         $choice.change();
-
     }
 }
