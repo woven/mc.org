@@ -15,8 +15,38 @@ function mc_search_core_theme_registry_alter(&$theme_registry) {
 
 function mc_search_core_preprocess_search_result(&$variables){
   $variables['template_files'][]='search-result';
+  $node = $variables['result']['node'];
+
   if(function_exists('mc_search_core_imagecache_default_presets')){
-    $file=$variables['result']['node']->field_list_image['0'];
+    $file = array();
+
+    if(isset($node->field_list_image['0'])){ //check if list_image field exists.
+      $file = $node->field_list_image['0'];
+    }
+    //@todo remove this logic and generalize it at mc_defaultimg function that takes node, file as argument
+    if(!_is_file_exists($file)){
+      $fid_ct = variable_get('default_img_'.$node->type,FALSE);
+      if($fid_ct){
+        $file = field_file_load($fid_ct);
+      }
+    }
+
+    if(!_is_file_exists($file)){
+      $fid_ct = variable_get('default_img_generic',FALSE);
+      if($fid_ct){
+        $file = field_file_load($fid_ct);
+      }
+    }
+
+    //additional checks to provide default image if #item is still empty, even if the file was set but doesnot exist
+    if(!_is_file_exists($file)){
+      $file = file_load_default($node->type);
+    }
+
+    if(!_is_file_exists($element['#item'])){
+      $file = file_load_default();
+    }
+
     $image = theme('imagecache', "search_result_image" ,$file['filepath']);
     $link=l($image, $variables['url'], array('html'=>TRUE));
     $variables['picture']=$link;

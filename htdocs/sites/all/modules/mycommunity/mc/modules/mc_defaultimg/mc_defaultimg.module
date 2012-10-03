@@ -52,6 +52,7 @@ function file_load_default($type = "generic"){
 /*
  * @todo make it work with default image settings per field
  * @todo check if files exist, and use site generic if it does
+ * @todo create a general function that could take file/node as argument to get the default image (see mc_search_core.module for cleanup)
  */
 function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'default'){
 
