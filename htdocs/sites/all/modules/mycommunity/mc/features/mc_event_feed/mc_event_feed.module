@@ -415,8 +415,6 @@ function mc_event_feed_reverse_getAddressParts($latitude, $longitude){
   }
 }
 
-
-
 function mc_event_feed_getAddressParts($address){ 
   if($address=='webinar'){
     return array(
@@ -528,8 +526,6 @@ function mc_event_feed_google_map_call($address){
   }
 }
 
-
-
 function mc_event_feed_google_get_georeference($address){
   $address_encoded = urlencode($address);
   $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $address_encoded . '&sensor=false');
@@ -543,7 +539,6 @@ function mc_event_feed_google_get_georeference($address){
     return array();
   }
 }
-
 
 function _mc_event_feed_check_group_url_exists($group_url){
   if(preg_match('/(meetup\.com|facebook\.com)/i', $group_url)){
