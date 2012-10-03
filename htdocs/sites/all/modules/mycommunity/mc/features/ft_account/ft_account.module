@@ -36,6 +36,20 @@ function ft_account_user($op, &$edit, &$account, $category = NULL){
   }
 };
 
+function _mc_user_delete_pathauto($form, &$form_state){
+
+  //force deletion of pathaliases of the user
+  $uid = $form['#uid'];
+  path_set_alias('user/'. $uid);
+
+  // They may have enabled these modules and/or feeds when the user was created, so let's try to delete all of them
+  path_set_alias('blog/'. $uid);
+  path_set_alias('blog/'. $uid .'/feed');
+  path_set_alias('user/'. $uid .'/track');
+  path_set_alias('user/'. $uid .'/track/feed');
+  path_set_alias('user/'. $uid .'/contact');
+}
+
 function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
   global $user;
 
@@ -44,7 +58,7 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
    */
   if($form_id == "user_login"){
     /*
-     * Changing some of the default values on the login fields
+     * Changing some of the default values on the login fields, put i
      */
     $form['submit']['#value'] = MC_USER_PAGE;
     $form['name']['#description'] = t("Enter your username or email address.");
@@ -53,6 +67,12 @@ function _mc_user_pages_form_alter(&$form, &$form_state, $form_id){
 
   //move the picture fieldset into Personal information.
   if($form_id=='user_profile_form'){
+
+    /*
+     *
+     * delete current pathauto so the module would regenerate it, put at the begning before the hook_user $op update/insert is called
+     */
+    $form['#submit'] = array_merge(array("_mc_user_delete_pathauto"),$form['#submit']);
 
     /*
      * redirect back to the user profile page
