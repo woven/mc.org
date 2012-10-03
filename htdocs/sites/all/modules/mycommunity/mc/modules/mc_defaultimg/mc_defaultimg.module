@@ -32,8 +32,13 @@ function _is_file_exists($file){
 }
 
 function file_load_default($type = "generic"){
-  $path = libraries_get_path('mc_defaultimage');
-  $filename = $type.".png";
+  if($type == "site_generic"){
+    $path = conf_path();
+    $filename = "generic.png";
+  }else{
+    $path = libraries_get_path('mc_defaultimage');
+    $filename = $type.".png";
+  }
   $fullpath = $path . "/" . $filename;
 
   if(file_exists($fullpath)){
@@ -115,6 +120,12 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
       $element['#item'] = $newfid;
     }
 
+  }
+
+
+  //additional checks to provide default image if #item is still empty, even if the file was set but doesnot exist
+  if(!_is_file_exists($element['#item'])){
+    $element['#item'] = file_load_default("site_generic");
   }
 
   //additional checks to provide default image if #item is still empty, even if the file was set but doesnot exist
