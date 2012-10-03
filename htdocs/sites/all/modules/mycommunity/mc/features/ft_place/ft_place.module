@@ -7,19 +7,26 @@ include_once('ft_place.features.inc');
 function _place_new_from_location($location){
   global $user;
 
-  //start creating a new node
-  $node = new StdClass();
-  $node->type = 'place';
-  $node->status = 1;
+  $nid = _mc_event_feed_find_similar_place($location['name'],$location['street']);
 
-  //inherit the name of the node from the location name
-  $node->title = $location['name'];
-  $node->uid = $user->uid;
+  if($nid > 0){ //found existing or similar place, then use it
+    $node = node_load($nid);
+  }else{ //did not find existing place, create a new node.
 
-  //add location array/object to locations
-  $node->locations = array(0 => $location);
+    //start creating a new node
+    $node = new StdClass();
+    $node->type = 'place';
+    $node->status = 1;
 
-  node_save($node);
+    //inherit the name of the node from the location name
+    $node->title = $location['name'];
+    $node->uid = $user->uid;
+
+    //add location array/object to locations
+    $node->locations = array(0 => $location);
+
+    node_save($node);
+  }
 
   return $node;
 };

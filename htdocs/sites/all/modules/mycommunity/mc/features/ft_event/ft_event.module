@@ -130,9 +130,15 @@ function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
             //empty the node reference field node reference node
             $location = $node->locations[0];
 
-            //if location has a title
-            if(!empty($location['name'])){
-              //create a new place node and reference it, and change the choice to nr
+            //trim values
+            foreach($node->locations[0] as &$val){
+              $val = trim($val);
+            }
+
+
+            if(!empty($location['name']) && !empty($location['street']) ){ //if location has a title & street address
+
+              //create a new place node/or find semilar and reference it, and change the choice to nr
               $place = _place_new_from_location($location);
               if($place->nid){
                 //change the choice to nr instead of new
