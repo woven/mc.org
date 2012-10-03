@@ -158,9 +158,9 @@ function theme_mc_nd_location_address($field) {
       && $node->location['city'] && $node->location['province'];
     $has_lat_and_lon = $node->location['latitude'] && $node->location['longitude'] && $node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000';
     if(!$has_address && $has_lat_and_lon && function_exists('mc_event_feed_reverse_getAddressParts')){
-      $parts = mc_event_feed_reverse_getAddressParts($node->locations['0']['latitude'], $node->locations['0']['longitude']);
-      $address['city'] = $parts['city'];
-      $address['province'] = $parts['state'];
+      //$parts = mc_event_feed_reverse_getAddressParts($node->locations['0']['latitude'], $node->locations['0']['longitude']);
+      //$address['city'] = $parts['city'];
+      //$address['province'] = $parts['state'];
     }
   }
 
