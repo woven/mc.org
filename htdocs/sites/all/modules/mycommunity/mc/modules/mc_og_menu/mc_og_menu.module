@@ -48,6 +48,7 @@ function _mc_og_menu_items(){
       'is_menu_item' => TRUE,
       'show_block' => TRUE,
     ),
+    /*
     'photos' => array(
       'title' => "Photos",
       'view' => MC_OG_MENU_DEFAULT,
@@ -56,6 +57,7 @@ function _mc_og_menu_items(){
       'is_menu_item' => TRUE,
       'show_block' => TRUE,
     ),
+    */
     'discussions' => array(
       'title' => "Discussions",
       'view' => 'discussions',
