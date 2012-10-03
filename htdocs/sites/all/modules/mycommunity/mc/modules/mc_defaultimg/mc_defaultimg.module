@@ -96,6 +96,7 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
       }
     }
 
+    /*
     if(!_is_file_exists($newfid)){
       $fid_ct = variable_get('default_img_'.$node->type,false);
       if($fid_ct){
@@ -109,7 +110,7 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
         $newfid = field_file_load($fid_ct);
       }
     }
-
+    */
     if(_is_file_exists($newfid)){
       $element['#item'] = $newfid;
     }
