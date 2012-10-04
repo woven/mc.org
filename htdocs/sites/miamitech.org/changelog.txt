@@ -1,3 +1,14 @@
+8/17/12
+---------------
+* Fixed: iCal feed is showing "no title" for some events 
+* Fixed: More location issues
+* Improved: Share to Twitter
+* Improved: Handle multi-day events better
+* Fixed: No city, state for some events
+* New: When you manually edit an event, automatic updates stop, and it gives notice as such
+* Improved: Handling of similar events
+* New: Star events, My Events page
+
 8/10/12
 ---------------
 * Retroactive fix for malformed location names for events created through a feed
