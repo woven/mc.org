@@ -1,5 +1,5 @@
 dbfile=$1
-branch=sje
+branch=$2
 #
 #remove db file if already existing
 rm -f db.sql.gz
