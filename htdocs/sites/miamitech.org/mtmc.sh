@@ -31,3 +31,4 @@ drush en taxonomynode -y
 drush en ft_admin
 drush en contextphp -y
 drush en mc_defaultimg -y
+drush en ft_node_context -y
