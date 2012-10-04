@@ -1,5 +1,5 @@
 dbfile=http://www.miamitech.org/db.sql.gz
-branch=mt
+branch=mt_production
 #
 #remove db file if already existing
 rm -f db.sql.gz
