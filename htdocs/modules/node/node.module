@@ -775,6 +775,9 @@ function node_load($param = array(), $revision = NULL, $reset = NULL) {
         $node->$key = $value;
       }
     }
+
+    node_invoke_nodeapi($node, 'load_alter');
+
     if ($cachable) {
       $nodes[$node->nid] = is_object($node) ? drupal_clone($node) : $node;
     }

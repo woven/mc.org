@@ -42,62 +42,45 @@ function is_valid_place_choice($val){
   return in_array($val,array('new','nr'));
 }
 
-function ft_event_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+function ft_event_latenodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   if($node->type != "event"){
     return;
   }
 
+  $isonline = $node->field_online_event[0]['value'];
+  $choice = &$node->field_place_choice[0]['value'];
+
   switch($op){
-    case 'load':
-      $isonline = $node->field_online_event[0]['value'];
+    case 'load_alter':
+      $isonline = &$node->field_online_event[0]['value'];
       $choice = &$node->field_place_choice[0]['value'];
 
       //if online. just return an empty arrays
       if($isonline){
-        return array('locations' => array(0=>array()), 'location' => array());
+        $node->locations = array(0=>array());
+        $node->location = array();
       }
 
       //in case place choice is not set (like in case existing events at mt.org), give it some smart logic
       if(!is_valid_place_choice($choice)){
         if($node->field_place['0']['nid'] > 0){
+          $choice = 'nr';
           $node->locations = array('0' => array());
           $node->location = array();
-          $choice = 'nr';
         }elseif($node->locations[0]['lid'] > 0){
           $choice = 'new';
         }
       }
 
-      //if choice is still invalid, force it to be default, which is nr
-      if(!is_valid_place_choice($choice)){
-        $choice = "nr";
-      }
-
       //if choice is nr and there is node id exists, then load locations of the place node
-      if($node->field_place[0]['nid'] > 0 && $choice == "nr" && !$isonline){
+      if($node->field_place[0]['nid'] > 0 && $choice == "nr"){
         $place_node = node_load($node->field_place[0]['nid']);
-        $locations = location_load_locations($place_node->vid);
-        $location = count($locations) ? $locations[0] : array();
-        return array('locations' => $locations, 'location' => $location);
+        $node->locations = location_load_locations($place_node->vid);
+        $node->location = count($node->locations) ? $node->locations[0] : array();
       }
-
-      break;
-  }
-}
-
-function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
-  if($node->type != "event"){
-    return;
-  }
-
-  switch($op){
-    case 'validate':
 
     break;
     case 'prepare': //node about to be shown to the node add/edit forms
-      $isonline = $node->field_online_event[0]['value'];
-      $choice = &$node->field_place_choice[0]['value'];
-
       if($choice == 'nr'){
         //remove local event node locations, so we don't confuse user
         $node->locations = array(0=>array());
@@ -111,11 +94,8 @@ function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
         $node->field_place['0']['nid'] = null;
       }
 
-    break;
+      break;
     case 'presave':
-      $isonline = $node->field_online_event[0]['value'];
-      $choice = &$node->field_place_choice[0]['value'];
-
       if($isonline){
         $node->locations = array('0' => array());
         $node->location = array();
@@ -131,10 +111,11 @@ function ft_event_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
             $location = $node->locations[0];
 
             //trim values
-            foreach($node->locations[0] as &$val){
-              $val = trim($val);
+            foreach($location as &$val){
+              if(!array($val)){
+                $val = trim($val);
+              }
             }
-
 
             if(!empty($location['name']) && !empty($location['street']) ){ //if location has a title & street address
 

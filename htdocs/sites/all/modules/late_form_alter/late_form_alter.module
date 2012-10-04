@@ -25,13 +25,13 @@ function late_form_alter_form_alter(&$form, &$form_state, $form_id) {
 }
 
 function late_form_alter_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
-  node_invoke_late_nodeapi($node, $op, $a3 = NULL, $a4 = NULL);
+  return _node_invoke_latenodeapi($node, $op, $a3 = NULL, $a4 = NULL);
 }
 
-function node_invoke_late_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+function _node_invoke_latenodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
   $return = array();
-  foreach (module_implements('late_nodeapi') as $name) {
-    $function = $name . '_late_nodeapi';
+  foreach (module_implements('latenodeapi') as $name) {
+    $function = $name . '_latenodeapi';
     $result = $function($node, $op, $a3, $a4);
     if (isset($result) && is_array($result)) {
       $return = array_merge($return, $result);
