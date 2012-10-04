@@ -27,3 +27,7 @@ drush en ft_page_general -y
 drush dis update -y
 drush dis jquery_ui select2 -y
 drush en mt -y
+drush en taxonomynode -y
+drush en ft_admin
+drush en contextphp -y
+drush en mc_defaultimg -y
