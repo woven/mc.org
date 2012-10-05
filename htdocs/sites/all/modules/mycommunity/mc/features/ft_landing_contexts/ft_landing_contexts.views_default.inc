@@ -461,48 +461,8 @@ function ft_landing_contexts_views_default_views() {
   $handler->override_option('style_plugin', 'draggabletable');
   $handler = $view->new_display('block', 'Block', 'block_1');
   $handler->override_option('fields', array(
-    'title' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'absolute' => 0,
-        'link_class' => '',
-        'alt' => '',
-        'rel' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '15',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'hide_alter_empty' => 1,
-      'link_to_node' => 1,
-      'exclude' => 1,
-      'spaces' => array(
-        'type' => NULL,
-        'frontpage' => FALSE,
-      ),
-      'id' => 'title',
-      'table' => 'node',
-      'field' => 'title',
-      'relationship' => 'none',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-    ),
-    'phpcode' => array(
-      'label' => '',
+    'phpcode_1' => array(
+      'label' => 'active status',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -524,22 +484,132 @@ function ft_landing_contexts_views_default_views() {
         'strip_tags' => 0,
       ),
       'empty' => '',
-      'hide_empty' => 1,
+      'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-$link_title = \'\';
-if(strlen($data->node_title)>=15){
-$link_title = \'title="\' . $data->node_title . \'"\';
+if($_GET[\'q\'] == "node/" . $data->nid){
+echo "active";
+}else{
+echo "";
 }
-$title = $data->node_title;
-$url = \'/\' . drupal_get_path_alias(\'node/\' . $data->nid);
-?>
-<a href="<?php echo $url; ?>" <?php echo $link_title; ?> ><?php echo $title; ?></a>',
-      'exclude' => 0,
-      'id' => 'phpcode',
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_1',
       'table' => 'customfield',
       'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+    'title' => array(
+      'label' => 'empty, trimmed',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '<li class="leaf [phpcode_1]">[title]</li>',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '15',
+        'word_boundary' => 0,
+        'ellipsis' => 0,
+        'html' => 1,
+        'strip_tags' => 1,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 1,
+      'exclude' => 1,
+      'spaces' => array(
+        'type' => NULL,
+        'frontpage' => FALSE,
+      ),
+      'id' => 'title',
+      'table' => 'node',
+      'field' => 'title',
+      'relationship' => 'none',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+    ),
+    'nid' => array(
+      'label' => 'Nid',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'exclude' => 1,
+      'id' => 'nid',
+      'table' => 'node',
+      'field' => 'nid',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+    'nothing' => array(
+      'label' => 'Custom text',
+      'alter' => array(
+        'text' => '<li class="leaf [phpcode_1]">
+[title]
+</li>',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 0,
+      'id' => 'nothing',
+      'table' => 'views',
+      'field' => 'nothing',
       'override' => array(
         'button' => 'Use default',
       ),
@@ -561,20 +631,22 @@ $url = \'/\' . drupal_get_path_alias(\'node/\' . $data->nid);
       'class' => 'menu',
     ),
     'row' => array(
-      'element_type' => 'li',
-      'class' => 'leaf',
-      'last_every_nth' => '0',
-      'first_class' => 'first',
-      'last_class' => 'last',
+      'element_type' => '',
+      'class' => '',
+      'last_every_nth' => '',
+      'first_class' => '',
+      'last_class' => '',
       'striping_classes' => 'odd even',
     ),
   ));
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
-      'phpcode' => array(
-        'element_type' => 'div',
-        'class' => 'views-field-title',
+      'nothing' => array(
+        'element_type' => '',
+        'class' => '',
+        'label_element_type' => '',
+        'label_class' => '',
       ),
     ),
     'skip_blank' => 0,
