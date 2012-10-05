@@ -23,15 +23,16 @@ div.default-location-wrapper.hidden {
 }
 
 .group-place .form-radios label{
-    color: #0000DD !important;
+    color: #007EFF !important;
     cursor: pointer;
     margin-right: 5px;
     padding: 10px 5px;
 }
 
 .group-place .form-radios label.active{
-    color: #0000DD !important;
-    text-decoration: underline;
+    color: #000000 !important;
+    font-weight: bold;
+    cursor: auto;
 }
 
 .group-place .form-radios .form-item{
