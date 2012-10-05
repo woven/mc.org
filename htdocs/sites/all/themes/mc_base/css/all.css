@@ -3003,7 +3003,11 @@ label.option {
   color: inherit;
 }
 .form-item label {
+  text-transform: uppercase;
   margin-bottom: 5px;
+}
+.form-item label.option {
+  text-transform: none;
 }
 .form-item,
 .form-item-labeled {
