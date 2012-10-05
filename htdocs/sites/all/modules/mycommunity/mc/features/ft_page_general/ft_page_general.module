@@ -6,14 +6,96 @@
 
 include_once 'ft_page_general.features.inc';
 
+function ft_page_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  if($node->type != 'page'){
+    return;
+  }
+
+  switch($op){
+    case 'insert':
+      //now add the node to the bottom of the list
+      $weight = _page_get_highest_weight() + 1;
+      db_query("INSERT INTO {draggableviews_structure} ( view_name , nid, delta , args, value) VALUES ('mc_page_menu_admin',%d,0,'',%d)",$node->nid,$weight);
+      break;
+  }
+}
+
 function ft_page_general_menu(){
+  /*
   $items['admin/settings/mcabout'] = array(
     'title' => 'MC Default About Page',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('_mc_page_general_default_about'),
     'access arguments' => array('administer users'),
   );
+  */
+
+  $items['about'] = array(
+    'title' => 'About',
+    'page callback' => 'load_about_page',
+    //'page arguments' => array('_mc_page_general_default_about'),
+    'access arguments' => array('access content'),
+  );
+
   return $items;
+}
+
+function load_about_page(){
+  $nid = _page_get_first_nid();
+
+  if($nid){
+    //change the url to become the real autocomplete path
+    $_GET['q'] = 'node/' . $nid;
+    return menu_execute_active_handler();
+  }else{
+    return "What are you doing here";
+  }
+}
+
+/*
+ * The view mc_page_menu is in the feature ft_landing_contexts.
+ */
+function ft_page_general_views_query_alter(&$view, &$query){
+  if($view->name=='mc_page_menu' && $view->current_display=='block_1'){
+    $view->display['block_1']->handler->handlers['field']['title']->query->table_queue['draggableviews_structure_node0']['join']->extra[1]['value'] = 'mc_page_menu_admin';
+  }
+}
+
+function ft_page_general_late_form_alter(&$form, &$form_state, $form_id){
+  if($form_id=='draggableviews_view_draggabletable_form_mc_page_menu_admin_page_1'){
+    $form['#submit'][] = '_ft_page_general_about_page_submit';
+  }
+}
+
+function _page_get_first_nid(){
+  return db_result(db_query("SELECT nid FROM draggableviews_structure WHERE draggableviews_structure.view_name = 'mc_page_menu_admin' ORDER BY `value` ASC"));
+}
+
+function _page_get_highest_weight(){
+  return db_result(db_query("SELECT `value` FROM draggableviews_structure WHERE draggableviews_structure.view_name = 'mc_page_menu_admin' ORDER BY `value` DESC"));
+}
+
+/*
+ * old code that might not be required at all for now
+ * Samer: I replaced it with hook menu about.
+ */
+
+function _ft_page_general_change_alias($nid ,$alias = 'about', $language = ''){
+  $existing = db_fetch_array(db_query("SELECT src, language, pid FROM {url_alias} WHERE dst = '%s' AND language IN('%s', '') ORDER BY language DESC, pid DESC", $alias, $language));
+  if ($existing) {
+    path_set_alias(NULL, NULL, $existing['pid']);
+  }
+  variable_set('mc_default_about_nid', $nid, '', '');
+  path_set_alias('node/'.$nid , 'about');
+}
+
+function _ft_page_general_about_page_submit($form, &$form_state){
+  foreach($form_state['clicked_button']['#post'] as $name => $value){
+    if(preg_match('/^value0_/i',$name) && $value=='0'){
+      $nid = str_replace('value0_', '',$name);
+      _ft_page_general_change_alias($nid);
+    }
+  }
 }
 
 function _mc_page_general_default_about(&$form_state) {
@@ -36,38 +118,4 @@ function _mc_page_general_default_about(&$form_state) {
 function _mc_page_general_default_about_submit($form, &$form_state) {
   $nid = $form_state['values']['mc_default_about'];
   _ft_page_general_change_alias($nid);
-}
-
-
-/*
- * The view mc_page_menu is in the feature ft_landing_contexts.
- */
-function ft_page_general_views_query_alter(&$view, &$query){
-  if($view->name=='mc_page_menu' && $view->current_display=='block_1'){
-    $view->display['block_1']->handler->handlers['field']['title']->query->table_queue['draggableviews_structure_node0']['join']->extra[1]['value'] = 'mc_page_menu_admin';
-  }
-}
-
-function ft_page_general_late_form_alter(&$form, &$form_state, $form_id){
-  if($form_id=='draggableviews_view_draggabletable_form_mc_page_menu_admin_page_1'){
-    $form['#submit'][] = '_ft_page_general_about_page_submit';
-  }
-}
-
-function _ft_page_general_about_page_submit($form, &$form_state){
-  foreach($form_state['clicked_button']['#post'] as $name => $value){
-    if(preg_match('/^value0_/i',$name) && $value=='0'){
-      $nid = str_replace('value0_', '',$name);
-      _ft_page_general_change_alias($nid);
-    }
-  }
-}
-
-function _ft_page_general_change_alias($nid ,$alias = 'about', $language = ''){
-  $existing = db_fetch_array(db_query("SELECT src, language, pid FROM {url_alias} WHERE dst = '%s' AND language IN('%s', '') ORDER BY language DESC, pid DESC", $alias, $language));
-  if ($existing) {
-    path_set_alias(null, null, $existing['pid']);
-  }
-  variable_set('mc_default_about_nid', $nid, '', '');
-  path_set_alias('node/'.$nid , 'about');
 }
