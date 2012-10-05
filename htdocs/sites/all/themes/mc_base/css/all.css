@@ -631,7 +631,6 @@ a .ico-small {
   display: block;
   width: 259px;
   height: 67px;
-  margin-top: 8px;
   position: relative;
   float: left;
 }
@@ -639,13 +638,11 @@ a .ico-small {
   display: block;
   width: 259px;
   height: 67px;
-  margin-top: 8px;
 }
 #branding .site-name a img {
   display: block;
   width: 259px;
   height: 67px;
-  margin-top: 8px;
 }
 #page h4 a,
 #page h4 a:visited,
