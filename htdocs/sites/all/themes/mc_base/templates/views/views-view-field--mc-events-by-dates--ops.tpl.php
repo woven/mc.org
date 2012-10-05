@@ -1,7 +1,7 @@
 <?php
 	
  /**
-  * the flag link at event's landing page view
+  * the event flag link at event's landing page view
   * 
   * This template is used to print a single field in a view. It is not
   * actually used in default Views, as this is registered as a theme
