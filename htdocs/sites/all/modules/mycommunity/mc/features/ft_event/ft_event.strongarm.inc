@@ -201,10 +201,10 @@ function ft_event_strongarm() {
   $strongarm->name = 'event_range_next';
   $strongarm->value = array(
     'year' => 2013,
-    'month' => '03',
-    'day' => '09',
-    'hour' => '13',
-    'minute' => '30',
+    'month' => '04',
+    'day' => '02',
+    'hour' => '22',
+    'minute' => '00',
     'second' => '00',
   );
   $export['event_range_next'] = $strongarm;
