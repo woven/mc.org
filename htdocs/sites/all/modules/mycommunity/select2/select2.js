@@ -172,6 +172,7 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                                 }
                             },
                             results: function(data,page){
+                                /*
                                 if(data.is_nr){
 
                                     //add newnode field
@@ -184,6 +185,7 @@ Drupal.select2.nodecreate = function(ct,input_id,title){
                                         data.vals.push({id:'justuse:::'+data.term,"text":"Just use: " + data.term,custom: true});
                                     }
                                 }
+                                */
 
                                 return {results: data.vals };
                             }
