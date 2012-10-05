@@ -48,7 +48,7 @@ function load_about_page(){
     $_GET['q'] = 'node/' . $nid;
     return menu_execute_active_handler();
   }else{
-    return "What are you doing here";
+    return drupal_not_found();
   }
 }
 
