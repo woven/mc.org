@@ -37,10 +37,23 @@ function mc_event_ui_views_default_views() {
       ),
       'relationship' => 'none',
     ),
+    'flag_content_rel' => array(
+      'label' => 'flag',
+      'required' => 0,
+      'flag' => 'events_bookmarks',
+      'user_scope' => 'current',
+      'id' => 'flag_content_rel',
+      'table' => 'node',
+      'field' => 'flag_content_rel',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('fields', array(
-    'phpcode_5' => array(
-      'label' => 'flag/staring link',
+    'ops' => array(
+      'label' => 'Flag link',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -65,24 +78,15 @@ function mc_event_ui_views_default_views() {
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'value' => '<?php 
-global $user;
-if(function_exists(\'flag_create_link\')){
-if($user->uid){
-    print flag_create_link(\'events_bookmarks\', $data->nid);
-}else{
-    print \'<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Star</a></span>\';
-}
-}
-?>',
+      'link_type' => 'toggle',
       'exclude' => 0,
-      'id' => 'phpcode_5',
-      'table' => 'customfield',
-      'field' => 'phpcode',
+      'id' => 'ops',
+      'table' => 'flag_content',
+      'field' => 'ops',
+      'relationship' => 'flag_content_rel',
       'override' => array(
         'button' => 'Override',
       ),
-      'relationship' => 'none',
     ),
     'field_place_choice_value' => array(
       'label' => 'Place Choice',
@@ -1172,7 +1176,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
-      'phpcode_5' => array(
+      'ops' => array(
         'element_type' => 'div',
         'class' => 'event-staring',
         'label_element_type' => '',
@@ -1185,22 +1189,24 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'title_1' => array(
         'element_type' => 'div',
         'class' => 'field-author',
+        'label_element_type' => '',
+        'label_class' => '',
       ),
       'title' => array(
         'element_type' => 'h4',
         'class' => 'field-title',
+        'label_element_type' => '',
+        'label_class' => '',
       ),
       'nothing' => array(
         'element_type' => 'p',
         'class' => 'location-link',
+        'label_element_type' => '',
+        'label_class' => '',
       ),
       'body' => array(
         'element_type' => 'p',
         'class' => 'description  {itemprop=description}',
-      ),
-      'phpcode_4' => array(
-        'element_type' => 'div',
-        'class' => 'location-hidden',
       ),
     ),
     'skip_blank' => 0,

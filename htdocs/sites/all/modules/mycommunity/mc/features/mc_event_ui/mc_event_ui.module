@@ -5,3 +5,11 @@
  */
 
 include_once 'mc_event_ui.features.inc';
+
+function mc_event_ui_preprocess($vars,$hook){
+
+  if($hook == "views_view_field"){
+    //dsm($vars);
+    //var_dump($vars);
+  }
+}
