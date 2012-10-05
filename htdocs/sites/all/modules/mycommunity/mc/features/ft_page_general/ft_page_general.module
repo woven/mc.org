@@ -44,7 +44,7 @@ function load_about_page(){
   $nid = _page_get_first_nid();
 
   if($nid){
-    //change the url to become the real autocomplete path
+    //change the url to become the real node path
     $_GET['q'] = 'node/' . $nid;
     return menu_execute_active_handler();
   }else{
