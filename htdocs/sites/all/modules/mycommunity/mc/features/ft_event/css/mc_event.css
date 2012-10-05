@@ -15,6 +15,9 @@ div.default-location-wrapper.hidden {
     display: none;
 }
 
+.group-place .form-radios{
+    margin-top: 10px;
+}
 .group-place .form-radios .form-radio{
     display: none;
 }
