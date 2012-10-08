@@ -84,8 +84,7 @@ function _mc_event_section_next_two_weeks(&$content,$flag = null){
   if ($dayOfWeek == 0){
     $twoSundaysFromNow = $nextSunday + 7 * 24 * 3600;
     $result = db_query($query, $now, $tomorrow, $now, $tomorrow, $tomorrow, $afterTomorrow, $afterTomorrow, $nextSunday, $nextSunday, $twoSundaysFromNow, $now, $twoSundaysFromNow, $now, $twoSundaysFromNow);
-  }
-  else{
+  }else{
     $result = db_query($query, $now, $tomorrow, $now, $tomorrow, $tomorrow, $afterTomorrow, $afterTomorrow, $thisSunday, $thisSunday, $nextSunday, $now, $nextSunday, $now, $nextSunday);
   }
 
@@ -133,13 +132,6 @@ function _mc_event_section_next_two_weeks(&$content,$flag = null){
                 if($checked_event['title']!='Share and Learn'){
                   $total_percent += ($percent_title * 0.5);
                   $total_percent += ($percent_location * 0.2);
-//                  if($percent_title>=50){
-//                    $total_percent += 50;
-//                  }
-//
-//                  if($percent_location>=50){
-//                    $total_percent += 20;
-//                  }
                 }
                 else{
                   if($percent_location>=50){
@@ -253,6 +245,34 @@ function _mc_event_section_format_week($date){
     }
   }
 }
+
+/*
+   @todo cache this data?
+*/
+function _mc_events_tokens(){
+    $tokens = array();
+
+    $tokens['!today'] = mktime(0, 0, 0);
+    $tokens['!now'] = time();
+    $tokens['!tomorrow'] = $tokens['!today'] + 24 * 3600;
+    $tokens['!afterTomorrow'] = $tokens['!tomorrow'] + 24 * 3600;
+
+    $dayOfWeek = (int)date('w', $tokens['!today']);
+    $tokens['!dayOfWeek'] = $dayOfWeek;
+
+    if ($dayOfWeek == 0){
+        $tokens['!thisSunday'] = $tokens['!today'];
+    }else{
+        $tokens['!thisSunday'] = $tokens['!today'] + (7 - $dayOfWeek) * 24 * 3600;
+    }
+
+    $tokens['!nextSunday'] = $tokens['!thisSunday'] + 7 * 24 * 3600;
+    $tokens['!twoSundaysFromNow'] = $tokens['!nextSunday'] + 7 * 24 * 3600;
+    $tokens['!minsago'] = $tokens['!now'] - (60 * 30);
+
+    return $tokens;
+}
+
 
 function _mc_event_section_after_two_weeks(&$content,$flag){
   global $user;
@@ -409,7 +429,82 @@ function _mc_event_section_formatted_location($location, $online){
   return;
 }
 
+
+function mc_event_section_views_query_substitutions($view){
+    if($view->name == 'mc_events_sections'){
+
+    }
+}
+
 function mc_event_section_views_query_alter(&$view, &$query) {
+
+  if($view->name != 'mc_events_sections'){
+    return ;
+  }
+  //dsm($view);
+  //dsm('test');
+   $tokens = _mc_events_tokens();
+
+   //add day field
+   $query->add_field(null,"DAYOFYEAR(FROM_UNIXTIME(event.unix_event_start))","Day");
+
+   //add mysql queries
+
+  if($tokens['!dayOfWeek'] == 0){
+  $sql_case = t("
+   CASE
+	WHEN ((event.unix_event_start BETWEEN '!now' AND '!tomorrow') OR (event.unix_event_end BETWEEN '!now' AND '!tomorrow') OR (UNIX_TIMESTAMP(now()) BETWEEN event.unix_event_start AND event.unix_event_end))
+	THEN 'Today'
+	WHEN event.unix_event_start BETWEEN '!tomorrow' AND '!afterTomorrow'
+	THEN 'Tomorrow'
+	WHEN event.unix_event_start BETWEEN '!afterTomorrow' AND '!nextSunday'
+	THEN 'This week'
+	WHEN event.unix_event_start BETWEEN '!nextSunday' AND '!twoSundaysFromNow'
+	THEN 'Next week'
+    ELSE 'Upcoming'
+    END",$tokens);
+        $sql_where = t("(event.unix_event_start between '!now' and '!twoSundaysFromNow') OR (event.unix_event_end between '!now' and '!twoSundaysFromNow')",$tokens);
+  }else{
+      $sql_case = t("
+       CASE
+        WHEN ((event.unix_event_start BETWEEN '!now' AND '!tomorrow') OR (event.unix_event_end BETWEEN '!now' AND '!tomorrow') OR (UNIX_TIMESTAMP(now()) BETWEEN event.unix_event_start AND event.unix_event_end))
+        THEN 'Today'
+        WHEN event.unix_event_start BETWEEN '!tomorrow' AND '!afterTomorrow'
+        THEN 'Tomorrow'
+        WHEN event.unix_event_start BETWEEN '!afterTomorrow' AND '!thisSunday'
+        THEN 'This week'
+        WHEN event.unix_event_start BETWEEN '!thisSunday' AND '!nextSunday'
+        THEN 'Next week'
+        ELSE 'Upcoming'
+        END
+  ");
+      $sql_where = t("(event.unix_event_start between '!now' and '!nextSunday') OR (event.unix_event_end between '!now' and '!nextSunday')",$tokens);
+  }
+
+    if($sql_case && $sql_where){
+          //add fields as defined above
+          $query->add_field(null,$sql_case,'Section');
+          $query->add_where('event_section',$sql_where);
+
+        //adding sort, by section, abs and day,rand();
+        $query->orderby = array(
+            "(CASE WHEN Section='Today' then 0
+     WHEN Section='Tomorrow' then 1
+     WHEN Section='This week' then 2
+     WHEN Section='Next week' then 3
+     WHEN Section='Upcoming' then 4
+     ELSE Section
+     END) ASC",
+            "(CASE WHEN (UNIX_TIMESTAMP(now()) - event.unix_event_start)<=0 THEN 1
+        WHEN (UNIX_TIMESTAMP(now()) - event.unix_event_start) > 0
+        THEN 0 END) DESC",
+            "abs(UNIX_TIMESTAMP(now()) - event.unix_event_start)",
+            "Day",
+            "rand()"
+        );
+    }//end if sql_case and sql_where
+
+  /*
   if($view->current_display=='block_5' && $view->name=='mc_events_by_dates'){
     if(isset($view->day) && $view->day=='today'){
       $new_condition = '(CASE WHEN (UNIX_TIMESTAMP(now()) - event_unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - event_unix_event_start)>0 THEN 0 END) DESC';
@@ -418,6 +513,7 @@ function mc_event_section_views_query_alter(&$view, &$query) {
       $query->orderby['0'] = $another_condition;
     }
   }
+  */
 }
 
 function _mc_event_section_print_location($lid){
