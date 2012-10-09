@@ -602,17 +602,6 @@ function mc_event_section_views_query_alter(&$view, &$query) {
             "rand()"
         );
     }//end if sql_case and sql_where
-
-  /*
-  if($view->current_display=='block_5' && $view->name=='mc_events_by_dates'){
-    if(isset($view->day) && $view->day=='today'){
-      $new_condition = '(CASE WHEN (UNIX_TIMESTAMP(now()) - event_unix_event_start)<=0 THEN 1  WHEN (UNIX_TIMESTAMP(now()) - event_unix_event_start)>0 THEN 0 END) DESC';
-      $another_condition = 'abs(UNIX_TIMESTAMP(now()) - event_unix_event_start)';
-      array_unshift($query->orderby, $new_condition);
-      $query->orderby['0'] = $another_condition;
-    }
-  }
-  */
 }
 
 function theme_weekofyear_str($str){
