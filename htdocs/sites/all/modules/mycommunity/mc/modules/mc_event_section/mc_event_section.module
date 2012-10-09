@@ -448,8 +448,8 @@ function _mc_event_process_record_info($event){
 
 function _mc_event_is_duplicate($event1,$event2){
     if($event1->event_unix_event_start == $event2->event_unix_event_start && $event1->event_unix_event_end == $event2->event_unix_event_end){
-        similar_text($event1['info']['object_soundex']['title'], $event2['info']['object_soundex']['title'], $percent_title);
-        similar_text($event1['info']['object_soundex']['location'], $event2['info']['object_soundex']['location'], $percent_location);
+        similar_text($event1->info['object_soundex']['title'], $event2->info['object_soundex']['title'], $percent_title);
+        similar_text($event1->info['object_soundex']['location'], $event2->info['object_soundex']['location'], $percent_location);
 
         //percentage start at 30
         $total_percent = 30;
@@ -466,27 +466,49 @@ function _mc_event_is_duplicate($event1,$event2){
     return false;
 }
 
-function _mc_event_filter_dubs($day){
+function _mc_event_filter_day_dubs($day){
     $ignore_nids = array();
     $day_new = array();
 
-    foreach($day as $key => &$event){
-        $day_res = array_reverse($day);
+    foreach($day as $key => $event){
+        $day_res = array_reverse($day,true);
 
-        if(count($day)){ //if the day has more than one event, check for duplicates
+        //check for duplicates
+
+        //to store dups of the current loop/event being checked $event
+        $dups = array();
+
+        //if the day has more than one event & current event is not ignored
+        if(count($day) > 1 && !isset($ignore_nids[$event->nid])){
             foreach($day_res as $key_res => $event_res){
-                if($key_res == $key){ //then we reached the same current event, stop.
+
+                //break the loop if current key is the same as checked key
+                if($key_res == $key){
                     break 1;
                 }
 
-                //else continue to check if it's duplicate for existing event
-
-                //check if the event has the same times
-
+                //make sure that this node id should not be checked again.
+                if(!isset($ignore_nids[$key_res])){
+                    //check if it's duplicate with the current event
+                    if(_mc_event_is_duplicate($event,$event_res)){
+                        $dups[$event_res->nid] = $event_res; //add it to dups array
+                        $ignore_nids[$event_res->nid] = $key_res; //add it to the ignore array
+                    }
+                }
             }
         }
 
+        //if duplicates found, add the event to an array and merge it
+        if(!empty($dups)){
+            $dups_list = array($event->nid => $event);
+            $dups_list += $dups;
+            $day_new[$event->nid] = $dups_list; //add the current event and merge it with dups into a group
+        }elseif(!isset($ignore_nids[$event->nid])){ //if no duplicates found, return the event object.
+            $day_new[$event->nid] = $event;
+        }
     }
+
+    return $day_new;
 }
 
 function _mc_event_section_formatted_location($location, $online){
@@ -604,7 +626,16 @@ function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
         $week = _mc_date_calender_week($event->event_unix_event_start);
         $sets[$section][$week][$day][$event->nid] = $event;
     }
-    dsm($sets);
+
+    foreach($sets as $section_name => $section){
+        foreach($section as $week_num => $week){
+            foreach($week as $day_num => $day){
+                $sets[$section_name][$week_num][$day_num] = _mc_event_filter_day_dubs($day);
+            }
+        }
+    }
+    dsm($sets,'dups');
+
 
     if ($grouping_field && false) {
         foreach ($records as $index => $row) {
