@@ -634,9 +634,10 @@ function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
             }
         }
     }
-    dsm($sets,'dups');
 
-
+    //at this stage sets contains nested arrays or groups
+    // section->week->day->event (object)
+    // section->week->day->events{duplicates}->event (object)
     if ($grouping_field && false) {
         foreach ($records as $index => $row) {
             $grouping = '';
