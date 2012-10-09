@@ -68,6 +68,8 @@ class semanticviews_plugin_style_default extends views_plugin_style {
         if(!empty($this->options['group_function']['function_name']) && function_exists($this->options['group_function']['function_name']) ){
             $function = $this->options['group_function']['function_name'];
             $sets = $function($this,$this->view->result, $this->options['grouping']);
+            $function_render = $function."_render";
+            return $function_render($this,$sets);
         }else{
             // Group the rows according to the grouping field, if specified.
             $sets = $this->render_grouping($this->view->result, $this->options['grouping']);

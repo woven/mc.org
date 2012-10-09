@@ -327,7 +327,9 @@ function _mc_event_section_after_two_weeks(&$content,$flag){
   ELSE Section
   END),
   rand()";
-  
+
+
+
   if ($dayOfWeek == 0){
     $twoSundaysFromNow = $nextSunday + 7 * 24 * 3600;
     $result = db_query($query, $twoSundaysFromNow, $twoSundaysFromNow);
@@ -545,9 +547,9 @@ function mc_event_section_views_query_alter(&$view, &$query) {
    //add day field
    $query->add_field(null,"DAYOFYEAR(FROM_UNIXTIME(event.unix_event_start))","day");
 
-   //add mysql queries
 
   if($tokens['!dayOfWeek'] == 0){
+
   $sql_case = t("
    CASE
 	WHEN ((event.unix_event_start BETWEEN '!now' AND '!tomorrow') OR (event.unix_event_end BETWEEN '!now' AND '!tomorrow') OR (UNIX_TIMESTAMP(now()) BETWEEN event.unix_event_start AND event.unix_event_end))
@@ -613,6 +615,72 @@ function mc_event_section_views_query_alter(&$view, &$query) {
   */
 }
 
+function theme_weekofyear_str($str){
+    $parts = explode("-",$str);
+    return theme_weekofyear($parts[0],$parts[1]);
+}
+
+function theme_weekofyear($week,$year){
+        $firstdayts = _mc_date_week_firstday($week,$year);
+        if($year > date('Y')){
+            return "Week of ". date('F jS Y',$firstdayts);
+        }else{
+            return "Week of ". date('F jS',$firstdayts);
+        }
+}
+
+function mc_event_section_views_group_render($view,$sets){
+    $output = "";
+    $i = 0;
+
+    $path = drupal_get_path('module', 'mc_event_section');
+    drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
+
+    foreach($sets as $section_name => $section){
+        $output = '<div class="section-section '.$section_name.'">'; //start section.
+        $output .= '<div class="block-title"><h3>'.$section_name.'</h3><span class="arrow"></span></div>';
+        foreach($section as $week_num => $week){
+            $output .= '<div class="section-week">'; //start section-week
+            $output .= '<div class="event-separator week">'.theme_weekofyear_str($week_num).'</div>';
+            foreach($week as $day_num => $day){
+                $day_str = format_date(strtotime($day_num),'custom',"l");
+                $output .= '<div class="section-day">'; //start section-day
+                $output .= '<div class="event-separator day">'.$day_str.'</div>';
+
+                foreach($day as $event_num => $events){
+                    if(is_array($events)){
+                        $rows = array();
+                            //group duplicate events into one raw with duplicates as wrapper
+                            foreach ($events as $event_nid => $event) {
+                                if ($view->uses_row_plugin()) {
+                                    $view->view->row_index = $i++;
+                                    $rows[] = $view->row_plugin->render($event);
+                                }else{
+                                    $rows[] = $event;
+                                }
+                            }
+                        $output .= '<div class="duplicates">'.theme($view->theme_functions(), $view->view, $view->options, $rows, $event_num)."</div>";
+                    }elseif(is_object($events)){
+                        $rows = array();
+                        if ($view->uses_row_plugin()) {
+                            $view->view->row_index = $i++;
+                            $rows[] = $view->row_plugin->render($events);
+                        }else{
+                            $rows[] = $events;
+                        }
+                        $output .= theme($view->theme_functions(), $view->view, $view->options, $rows, '');
+                    }
+                }
+                $output .= '</div>'; //close section-day
+            }
+            $output .= '</div>'; //close section-week
+        }
+        $output .= "</div>"; //close sections div
+    }
+
+    return $output;
+}
+
 function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
     // Make sure fields are rendered
     $view->render_fields($view->view->result);
@@ -624,7 +692,10 @@ function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
         $section = $event->section;
         $day = $event->day;
         $week = _mc_date_calender_week($event->event_unix_event_start);
-        $sets[$section][$week][$day][$event->nid] = $event;
+        $year = date('Y',$event->event_unix_event_start);
+        $week_num = $week."-".$year;
+        $day = format_date($event->event_unix_event_start,"custom","m-d-Y");
+        $sets[$section][$week_num][$day][$event->nid] = $event;
     }
 
     foreach($sets as $section_name => $section){
@@ -635,28 +706,6 @@ function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
         }
     }
 
-    //at this stage sets contains nested arrays or groups
-    // section->week->day->event (object)
-    // section->week->day->events{duplicates}->event (object)
-    if ($grouping_field && false) {
-        foreach ($records as $index => $row) {
-            $grouping = '';
-            // Group on the rendered version of the field, not the raw.  That way,
-            // we can control any special formatting of the grouping field through
-            // the admin or theme layer or anywhere else we'd like.
-            if (isset($view->view->field[$grouping_field])) {
-                $grouping = $view->get_field($index, $grouping_field);
-                if ($view->view->field[$grouping_field]->options['label']) {
-                    $grouping = $view->view->field[$grouping_field]->options['label'] . ': ' . $grouping;
-                }
-            }
-            $sets[$grouping][$index] = $row;
-        }
-    }
-    else {
-        // Create a single group with an empty grouping field.
-        $sets[''] = $records;
-    }
     return $sets;
 }
 
@@ -672,7 +721,7 @@ function _mc_event_section_print_location($lid){
 function _mc_event_section_print_location_hidden($location){
 
   if(empty($location)){
-    return"";
+    return "";
   }
 
   $node = new stdClass();
