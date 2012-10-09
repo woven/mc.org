@@ -18,11 +18,95 @@ class semanticviews_plugin_style_default extends views_plugin_style {
     parent::options($options);
   }
 
-  /**
+
+    /**
+     * Group records as needed for rendering.
+     *
+     * @param $records
+     *   An array of records from the view to group.
+     * @param $grouping_field
+     *   The field id on which to group.  If empty, the result set will be given
+     *   a single group with an empty string as a label.
+     * @return
+     *   The grouped record set.
+     */
+    function render_grouping($records, $grouping_field = '') {
+        // Make sure fields are rendered
+        $this->render_fields($this->view->result);
+        $sets = array();
+        if ($grouping_field) {
+            foreach ($records as $index => $row) {
+                $grouping = '';
+                // Group on the rendered version of the field, not the raw.  That way,
+                // we can control any special formatting of the grouping field through
+                // the admin or theme layer or anywhere else we'd like.
+                if (isset($this->view->field[$grouping_field])) {
+                    $grouping = $this->get_field($index, $grouping_field);
+                    if ($this->view->field[$grouping_field]->options['label']) {
+                        $grouping = $this->view->field[$grouping_field]->options['label'] . ': ' . $grouping;
+                    }
+                }
+                $sets[$grouping][$index] = $row;
+            }
+        }
+        else {
+            // Create a single group with an empty grouping field.
+            $sets[''] = $records;
+        }
+        return $sets;
+    }
+
+    /**
+     * Render the display in this style.
+     */
+    function render() {
+        if ($this->uses_row_plugin() && empty($this->row_plugin)) {
+            vpr('views_plugin_style_default: Missing row plugin');
+            return;
+        }
+
+        if(!empty($this->options['group_function']['function_name']) && function_exists($this->options['group_function']['function_name']) ){
+            $function = $this->options['group_function']['function_name'];
+            $sets = $function($this,$this->view->result, $this->options['grouping']);
+        }else{
+            // Group the rows according to the grouping field, if specified.
+            $sets = $this->render_grouping($this->view->result, $this->options['grouping']);
+        }
+
+        // Render each group separately and concatenate.  Plugins may override this
+        // method if they wish some other way of handling grouping.
+        $output = '';
+        foreach ($sets as $title => $records) {
+            if ($this->uses_row_plugin()) {
+                $rows = array();
+                foreach ($records as $row_index => $row) {
+                    $this->view->row_index = $row_index;
+                    $rows[] = $this->row_plugin->render($row);
+                }
+            }
+            else {
+                $rows = $records;
+            }
+
+            $output .= theme($this->theme_functions(), $this->view, $this->options, $rows, $title);
+        }
+        unset($this->view->row_index);
+        return $output;
+    }
+
+
+    /**
    * Set default options
    */
   function option_definition() {
     $options = parent::option_definition();
+
+    //custom grouping function
+    $options['group_function'] = array(
+        'contains' => array(
+            'function_name' => array('default' => "")
+        )
+    );
 
     // Group option definition.
     $options['group'] = array(
@@ -61,6 +145,22 @@ class semanticviews_plugin_style_default extends views_plugin_style {
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
+    //group function
+    $form['group_function'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Grouping function'),
+        '#description' => t('custom grouping function to return themeable sets'),
+        '#attributes' => array(
+            'class' => 'clear-block',
+        ),
+    );
+
+    $form['group_function']['function_name'] = array(
+          '#title' => t('Function name'),
+          '#type' => 'textfield',
+          '#default_value' => $this->options['group_function']['function_name'],
+    );
+
     // Group options.
     $form['group'] = array(
       '#type' => 'fieldset',
@@ -78,6 +178,7 @@ class semanticviews_plugin_style_default extends views_plugin_style {
       '#size' => '10',
       '#default_value' => $this->options['group']['element_type'],
     );
+
     $form['group']['class'] = array(
       '#prefix' => '<div class="views-right-70">',
       '#suffix' => '</div>',

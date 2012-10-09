@@ -446,7 +446,7 @@ function mc_event_section_views_query_alter(&$view, &$query) {
    $tokens = _mc_events_tokens();
 
    //add day field
-   $query->add_field(null,"DAYOFYEAR(FROM_UNIXTIME(event.unix_event_start))","Day");
+   $query->add_field(null,"DAYOFYEAR(FROM_UNIXTIME(event.unix_event_start))","day");
 
    //add mysql queries
 
@@ -463,7 +463,7 @@ function mc_event_section_views_query_alter(&$view, &$query) {
 	THEN 'Next week'
     ELSE 'Upcoming'
     END",$tokens);
-        $sql_where = t("(event.unix_event_start between '!now' and '!twoSundaysFromNow') OR (event.unix_event_end between '!now' and '!twoSundaysFromNow')",$tokens);
+    $sql_where = t("(event.unix_event_start between '!now' and '!twoSundaysFromNow') OR (event.unix_event_end between '!now' and '!twoSundaysFromNow')",$tokens);
   }else{
       $sql_case = t("
        CASE
@@ -478,28 +478,28 @@ function mc_event_section_views_query_alter(&$view, &$query) {
         ELSE 'Upcoming'
         END
   ");
-      $sql_where = t("(event.unix_event_start between '!now' and '!nextSunday') OR (event.unix_event_end between '!now' and '!nextSunday')",$tokens);
+    $sql_where = t("(event.unix_event_start between '!now' and '!nextSunday') OR (event.unix_event_end between '!now' and '!nextSunday')",$tokens);
   }
 
     if($sql_case && $sql_where){
           //add fields as defined above
-          $query->add_field(null,$sql_case,'Section');
+          $query->add_field(null,$sql_case,'section');
           $query->add_where('event_section',$sql_where);
 
         //adding sort, by section, abs and day,rand();
         $query->orderby = array(
-            "(CASE WHEN Section='Today' then 0
-     WHEN Section='Tomorrow' then 1
-     WHEN Section='This week' then 2
-     WHEN Section='Next week' then 3
-     WHEN Section='Upcoming' then 4
-     ELSE Section
+            "(CASE WHEN section='Today' then 0
+     WHEN section='Tomorrow' then 1
+     WHEN section='This week' then 2
+     WHEN section='Next week' then 3
+     WHEN section='Upcoming' then 4
+     ELSE section
      END) ASC",
             "(CASE WHEN (UNIX_TIMESTAMP(now()) - event.unix_event_start)<=0 THEN 1
         WHEN (UNIX_TIMESTAMP(now()) - event.unix_event_start) > 0
         THEN 0 END) DESC",
             "abs(UNIX_TIMESTAMP(now()) - event.unix_event_start)",
-            "Day",
+            "day",
             "rand()"
         );
     }//end if sql_case and sql_where
@@ -514,6 +514,32 @@ function mc_event_section_views_query_alter(&$view, &$query) {
     }
   }
   */
+}
+
+function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
+    // Make sure fields are rendered
+    $view->render_fields($view->view->result);
+    $sets = array();
+    if ($grouping_field) {
+        foreach ($records as $index => $row) {
+            $grouping = '';
+            // Group on the rendered version of the field, not the raw.  That way,
+            // we can control any special formatting of the grouping field through
+            // the admin or theme layer or anywhere else we'd like.
+            if (isset($view->view->field[$grouping_field])) {
+                $grouping = $view->get_field($index, $grouping_field);
+                if ($view->view->field[$grouping_field]->options['label']) {
+                    $grouping = $view->view->field[$grouping_field]->options['label'] . ': ' . $grouping;
+                }
+            }
+            $sets[$grouping][$index] = $row;
+        }
+    }
+    else {
+        // Create a single group with an empty grouping field.
+        $sets[''] = $records;
+    }
+    return $sets;
 }
 
 function _mc_event_section_print_location($lid){

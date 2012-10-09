@@ -2230,100 +2230,6 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'relationship' => 'none',
     ),
   ));
-  $handler->override_option('sorts', array(
-    'unix_event_start' => array(
-      'order' => 'ASC',
-      'granularity' => 'second',
-      'id' => 'unix_event_start',
-      'table' => 'event',
-      'field' => 'unix_event_start',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
-    'random' => array(
-      'order' => 'ASC',
-      'id' => 'random',
-      'table' => 'views',
-      'field' => 'random',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('arguments', array(
-    'nid' => array(
-      'default_action' => 'not found',
-      'style_plugin' => 'default_summary',
-      'style_options' => array(),
-      'wildcard' => 'all',
-      'wildcard_substitution' => 'All',
-      'title' => '',
-      'breadcrumb' => '',
-      'default_argument_type' => 'fixed',
-      'default_argument' => '',
-      'validate_type' => 'none',
-      'validate_fail' => 'not found',
-      'break_phrase' => 1,
-      'not' => 0,
-      'id' => 'nid',
-      'table' => 'node',
-      'field' => 'nid',
-      'validate_user_argument_type' => 'uid',
-      'validate_user_roles' => array(
-        2 => 0,
-        4 => 0,
-        5 => 0,
-        3 => 0,
-      ),
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-      'default_options_div_prefix' => '',
-      'default_taxonomy_tid_term_page' => 0,
-      'default_taxonomy_tid_node' => 0,
-      'default_taxonomy_tid_limit' => 0,
-      'default_taxonomy_tid_vids' => array(
-        1 => 0,
-      ),
-      'default_argument_user' => 0,
-      'default_argument_fixed' => '',
-      'default_argument_php' => '',
-      'validate_argument_node_type' => array(
-        'article' => 0,
-        'audio' => 0,
-        'event' => 0,
-        'file' => 0,
-        'group' => 0,
-        'link' => 0,
-        'nnews' => 0,
-        'npage' => 0,
-        'place' => 0,
-        'video' => 0,
-        'gallery' => 0,
-        'gallery_image' => 0,
-        'event_feed' => 0,
-        'webform' => 0,
-        'forum' => 0,
-      ),
-      'validate_argument_node_access' => 0,
-      'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(
-        1 => 0,
-      ),
-      'validate_argument_type' => 'tid',
-      'validate_argument_transform' => 0,
-      'validate_user_restrict_roles' => 0,
-      'validate_argument_is_member' => '0',
-      'validate_argument_group_node_type' => array(
-        'group' => 0,
-      ),
-      'validate_argument_php' => '',
-    ),
-  ));
   $handler->override_option('filters', array(
     'type' => array(
       'operator' => 'in',
@@ -2379,7 +2285,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
     ),
     'list' => array(
       'element_type' => '',
-      'class' => 'duplicates',
+      'class' => '',
     ),
     'row' => array(
       'element_type' => 'div',
@@ -2437,6 +2343,22 @@ return "Week of ". date(\'F jS\',$firstdayts);
   $handler = $view->new_display('block', 'upcoming', 'block_2');
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', '2');
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->override_option('path', 'event-sections');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
 
   $views[$view->name] = $view;
 
