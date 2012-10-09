@@ -413,6 +413,82 @@ function _mc_event_section_after_two_weeks(&$content,$flag){
 
 }
 
+function _mc_event_process_record_info($event){
+    $info = array();
+
+    $info['event'] = array(
+        'nid' => $event->nid,
+        'title' => $event->node_title,
+        'place_name' => $event->location_name
+    );
+
+    $info['place'] = array(
+        'nid' => $event->node_node_data_field_place_nid,
+        'title' => $event->node_node_data_field_place__location_name
+    );
+
+    $info['object'] = array(
+        'title' => $info['event']['title']
+    );
+
+    if($info['place']['nid'] && $info['place']['title']){
+        $info['object']['location'] = $info['place']['title'];
+    }else{
+        $info['object']['location'] = $info['event']['place_name'];
+    }
+
+    //generate soundex for object
+    $info['object_soundex'] = array();
+    foreach($info['object'] as $key=>$val){
+        $info['object_soundex'][$key] = soundex($val);
+    }
+
+    return $info;
+}
+
+function _mc_event_is_duplicate($event1,$event2){
+    if($event1->event_unix_event_start == $event2->event_unix_event_start && $event1->event_unix_event_end == $event2->event_unix_event_end){
+        similar_text($event1['info']['object_soundex']['title'], $event2['info']['object_soundex']['title'], $percent_title);
+        similar_text($event1['info']['object_soundex']['location'], $event2['info']['object_soundex']['location'], $percent_location);
+
+        //percentage start at 30
+        $total_percent = 30;
+
+        //alter percentages
+        $total_percent += ($percent_title * 0.5);
+        $total_percent += ($percent_location * 0.2);
+
+        if($total_percent>=60){ //if it matchs more than 60 percentage
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function _mc_event_filter_dubs($day){
+    $ignore_nids = array();
+    $day_new = array();
+
+    foreach($day as $key => &$event){
+        $day_res = array_reverse($day);
+
+        if(count($day)){ //if the day has more than one event, check for duplicates
+            foreach($day_res as $key_res => $event_res){
+                if($key_res == $key){ //then we reached the same current event, stop.
+                    break 1;
+                }
+
+                //else continue to check if it's duplicate for existing event
+
+                //check if the event has the same times
+
+            }
+        }
+
+    }
+}
+
 function _mc_event_section_formatted_location($location, $online){
 
   if(preg_match("/webinar/i", $location['name'])){
@@ -441,8 +517,7 @@ function mc_event_section_views_query_alter(&$view, &$query) {
   if($view->name != 'mc_events_sections'){
     return ;
   }
-  //dsm($view);
-  //dsm('test');
+
    $tokens = _mc_events_tokens();
 
    //add day field
@@ -519,8 +594,19 @@ function mc_event_section_views_query_alter(&$view, &$query) {
 function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
     // Make sure fields are rendered
     $view->render_fields($view->view->result);
+
     $sets = array();
-    if ($grouping_field) {
+
+    foreach($records as $event){
+        $event->info = _mc_event_process_record_info($event);
+        $section = $event->section;
+        $day = $event->day;
+        $week = _mc_date_calender_week($event->event_unix_event_start);
+        $sets[$section][$week][$day][$event->nid] = $event;
+    }
+    dsm($sets);
+
+    if ($grouping_field && false) {
         foreach ($records as $index => $row) {
             $grouping = '';
             // Group on the rendered version of the field, not the raw.  That way,
