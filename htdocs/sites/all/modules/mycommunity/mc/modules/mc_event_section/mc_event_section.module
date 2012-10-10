@@ -58,7 +58,6 @@ function _mc_event_section_next_two_weeks(&$content,$flag = null){
           THEN 'This week'
           WHEN e.unix_event_start BETWEEN '%s' AND '%s'
           THEN 'Next week'
-
       ELSE 'Upcoming'
       END AS 'Section'
   FROM node as n 
@@ -465,7 +464,8 @@ function _mc_event_process_record_info($event){
     return $info;
 }
 
-/** check if two event records (objects) are duplicate (source is from views records or objects that has ->info array
+/** check if two event records (objects) are duplicate (source is from views records ANd objects that has ->info array
+ * ran through _mc_event_process_record_info
  * @param $event1
  * @param $event2
  * @return bool
@@ -566,6 +566,14 @@ function _mc_events_tokens(){
     $tokens['!twoSundaysFromNow'] = $tokens['!nextSunday'] + 7 * 24 * 3600;
     $tokens['!minsago'] = $tokens['!now'] - (60 * 30);
 
+    if($dayOfWeek == 0){
+        $tokens['!StartSunday'] = $tokens['!nextSunday'];
+        $tokens['!EndSunday'] = $tokens['!twoSundaysFromNow'];
+    }else{
+        $tokens['!StartSunday'] = $tokens['!thisSunday'];
+        $tokens['!EndSunday'] = $tokens['!nextSunday'];
+    }
+
     return $tokens;
 }
 
@@ -598,7 +606,7 @@ function mc_event_section_views_query_alter(&$view, &$query) {
    $tokens = _mc_events_tokens();
 
    //add day field
-   $query->add_field(null,"DAYOFYEAR(FROM_UNIXTIME(event.unix_event_start))","day");
+   //$query->add_field(null,"DAYOFYEAR(FROM_UNIXTIME(event.unix_event_start))","day");
 
   $sql_case = "
    CASE
@@ -606,13 +614,14 @@ function mc_event_section_views_query_alter(&$view, &$query) {
 	THEN 'Today'
 	WHEN event.unix_event_start BETWEEN '***MC_TOMORROW***' AND '***MC_AFTERTOMORROW***'
 	THEN 'Tomorrow'
-	WHEN event.unix_event_start BETWEEN '***MC_AFTERTOMORROW***' AND '***MC_NEXTSUNDAY***'
+	WHEN event.unix_event_start BETWEEN '***MC_AFTERTOMORROW***' AND '***MC_STARTSUNDAY***'
 	THEN 'This week'
-	WHEN event.unix_event_start BETWEEN '***MC_NEXTSUNDAY***' AND '***MC_TWOSUNDAYSFROMNOW***'
+	WHEN event.unix_event_start BETWEEN '***MC_STARTSUNDAY***' AND '***MC_ENDSUNDAY***'
 	THEN 'Next week'
     ELSE 'Upcoming'
     END";
-    $sql_where = "(event.unix_event_start between '***MC_NOW***' and '***MC_AFTERTOMORROW***') OR (event.unix_event_end between '***MC_NOW***' and '***MC_AFTERTOMORROW***')";
+    //$sql_where = "(event.unix_event_start between '***MC_NOW***' and '***MC_AFTERTOMORROW***') OR (event.unix_event_end between '***MC_NOW***' and '***MC_ENDSUNDAY***')"; //old range limiter
+    $sql_where = "(event.unix_event_start > '***MC_NOW***') OR (event.unix_event_end > '***MC_NOW***')";
 
     if($sql_case && $sql_where){
           //add fields as defined above
@@ -632,7 +641,6 @@ function mc_event_section_views_query_alter(&$view, &$query) {
         WHEN (UNIX_TIMESTAMP(now()) - event.unix_event_start) > 0
         THEN 0 END) DESC",
             "abs(UNIX_TIMESTAMP(now()) - event.unix_event_start)",
-            "day",
             "rand()"
         );
     }//end if sql_case and sql_where
@@ -740,13 +748,13 @@ function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
     foreach($records as $event){
         $event->info = _mc_event_process_record_info($event);
         $section = $event->section;
-        $day = $event->day;
         $week = _mc_date_calender_week($event->event_unix_event_start);
         $year = date('Y',$event->event_unix_event_start);
         $week_num = $week."-".$year;
         $day = format_date($event->event_unix_event_start,"custom","m-d-Y");
         $sets[$section][$week_num][$day][$event->nid] = $event;
     }
+    dsm($sets);
 
     foreach($sets as $section_name => $section){
         foreach($section as $week_num => $week){
