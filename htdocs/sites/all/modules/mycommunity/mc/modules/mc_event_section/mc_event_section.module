@@ -693,7 +693,7 @@ function mc_event_section_views_group_render($view,$sets){
             $output .= '<div class="section-week">'; //start section-week
             $output .= '<div class="event-separator week">'.theme_weekofyear_str($week_num).'</div>';
             foreach($week as $day_num => $day){
-                $day_str = format_date(strtotime($day_num),'custom',"l");
+                $day_str = format_date($day_num,'custom',"l");
                 $output .= '<div class="section-day">'; //start section-day
                 $output .= '<div class="event-separator day">'.$day_str.'</div>';
 
@@ -751,10 +751,12 @@ function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
         $week = _mc_date_calender_week($event->event_unix_event_start);
         $year = date('Y',$event->event_unix_event_start);
         $week_num = $week."-".$year;
-        $day = format_date($event->event_unix_event_start,"custom","m-d-Y");
+        $day_num = format_date($event->event_unix_event_start,"custom","d");
+        $day_month = format_date($event->event_unix_event_start,"custom","m");
+        $day_year = format_date($event->event_unix_event_start,"custom","y");
+        $day = mktime(0, 0, 0, $day_month, $day_num, $day_year);
         $sets[$section][$week_num][$day][$event->nid] = $event;
     }
-    dsm($sets);
 
     foreach($sets as $section_name => $section){
         foreach($section as $week_num => $week){
