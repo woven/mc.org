@@ -430,6 +430,24 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
     return;
   }
 
+  //adding new event, set default values for event start/end
+  if(arg(0) == "node" && arg(1) == "add" ){
+        $ctime = &$form['event']['start_exploded']['#default_value'];
+        if($ctime['minute'] > 30){
+            $ctime['hour']++;
+        }
+        $ctime['minute'] = 0;
+        $ctime['second'] = 0;
+
+        $form['event']['end_exploded'] = $form['event']['start_exploded'];
+  }
+
+    //remove file field
+    if($form['field_upload_file'] && $user->uid > 1){
+        $form['field_upload_file']['#access'] = false;
+    }
+
+  //add some js and css required for the event add form
   drupal_add_js((drupal_get_path('module', 'ft_event') .'/js/mc_event.js'));
   drupal_add_css((drupal_get_path('module', 'ft_event') .'/css/mc_event.css'));
 
@@ -462,20 +480,6 @@ function _event_location_item_process($element){
     $element['delete_location']['#access'] = false;
   }
   return $element;
-}
-
-function ft_event_form_alter(&$form, &$form_state, $form_id){
-	if($form_id == "event_node_form" && arg(0) == "node" && arg(1) == "add" ){
-
-		$ctime = &$form['event']['start_exploded']['#default_value'];
-		if($ctime['minute'] > 30){
-			$ctime['hour']++;
-		}
-		$ctime['minute'] = 0;
-		$ctime['second'] = 0;
-		
-		$form['event']['end_exploded'] = $form['event']['start_exploded'];
-	}
 }
 
 /**
