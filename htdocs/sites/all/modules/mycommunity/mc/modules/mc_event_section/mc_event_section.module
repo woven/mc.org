@@ -642,6 +642,7 @@ function mc_event_section_views_query_alter(&$view, &$query) {
  * accepts the str variable as string "WEEK-YEAR" format, ex: "41-2004"
  * @param $str
  * @return string
+ * @todo also see theme_weekofyear
  */
 function theme_weekofyear_str($str){
     $parts = explode("-",$str);
@@ -653,6 +654,7 @@ function theme_weekofyear_str($str){
  * @param $week
  * @param $year
  * @return string
+ * @todo should this be a real themeing function?
  */
 function theme_weekofyear($week,$year){
         $firstdayts = _mc_date_week_firstday($week,$year);
