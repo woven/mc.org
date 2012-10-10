@@ -3156,6 +3156,32 @@ body.page-user .view-my-groups ul {
 }
 
 .view-mc-events-by-dates,.event-section{
+    .section-section{
+      .block-title{
+        margin-bottom: 20px;
+      }
+    }
+    //remove event-seperator headers from today and tomorrow sections
+    .section-section.today,.section-section.tomorrow{
+      .event-separator{
+        display: none;
+      }
+    }
+
+    //remove week header from this event and next week
+    .section-section.this_week,.section-section.next_week{
+      .event-separator.week{
+        display: none;
+      }
+    }
+
+    //remove day seperator/header from upcoming section
+    .section-section.upcoming{
+      .event-separator.day{
+        display: none;
+      }
+    }
+
     .img-placeholder {
       height:85px;
       width:85px;
