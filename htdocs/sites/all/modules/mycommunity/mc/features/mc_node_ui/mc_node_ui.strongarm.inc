@@ -10,7 +10,7 @@ function mc_node_ui_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'allowed_html_1';
-  $strongarm->value = '<p> <a> <em> <strong> <cite> <code> <ul> <ol> <li> <dl> <dt> <dd> <b>';
+  $strongarm->value = '<p> <a> <em> <strong> <cite> <code> <ul> <ol> <li> <dl> <dt> <dd> <b> <h2> <h3> <h4> <h5>';
   $export['allowed_html_1'] = $strongarm;
 
   $strongarm = new stdClass;

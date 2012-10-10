@@ -414,7 +414,7 @@ print theme_ghh_node_categories($data->nid, 2);
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'exclude' => 1,
+      'exclude' => 0,
       'id' => 'nothing_1',
       'table' => 'views',
       'field' => 'nothing',
