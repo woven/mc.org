@@ -583,8 +583,10 @@ function ft_landing_slideshow_views_default_views() {
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -599,11 +601,13 @@ function ft_landing_slideshow_views_default_views() {
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'value' => '<?php
   // Using a PHP field because the member count doesn\'t work with a relationship node
   $sql = \'SELECT COUNT(*) FROM og_uid ou INNER JOIN users u ON ou.uid = u.uid WHERE ou.nid = %d AND u.status > 0 AND ou.is_active >= 1 AND ou.is_admin >= 0\';
   $count = db_result( db_query($sql, $data->node_node_data_field_featured_groups_nid) );
-   print  l($count, "og/users/$data->node_node_data_field_featured_groups_nid/faces") . \' followers\';
+   //print  l($count, "og/users/$data->node_node_data_field_featured_groups_nid/faces") . \' followers\';
+   print format_plural($count, \'1 follower\', \'@count followers\');
 ?>',
       'exclude' => 0,
       'id' => 'phpcode',
