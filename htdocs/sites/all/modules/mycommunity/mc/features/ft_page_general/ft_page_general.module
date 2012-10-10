@@ -14,8 +14,11 @@ function ft_page_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   switch($op){
     case 'insert':
       //now add the node to the bottom of the list
-      $weight = _page_get_highest_weight() + 1;
-      db_query("INSERT INTO {draggableviews_structure} ( view_name , nid, delta , args, value) VALUES ('mc_page_menu_admin',%d,0,'',%d)",$node->nid,$weight);
+        $weight = _page_get_highest_weight() + 1;
+        db_query("INSERT INTO {draggableviews_structure} ( view_name , nid, delta , args, value) VALUES ('mc_page_menu_admin',%d,0,'',%d)",$node->nid,$weight);
+      break;
+      case 'delete':
+        db_query("DELETE FROM {draggableviews_structure} WHERE view_name = '%s' AND nid = %d",'mc_page_menu_admin',$node->nid);
       break;
   }
 }
@@ -31,7 +34,7 @@ function ft_page_general_menu(){
   */
 
   $items['about'] = array(
-    'title' => 'About',
+    'title' => '',
     'page callback' => 'load_about_page',
     //'page arguments' => array('_mc_page_general_default_about'),
     'access arguments' => array('access content'),
@@ -45,8 +48,10 @@ function load_about_page(){
 
   if($nid){
     //change the url to become the real node path
-    $_GET['q'] = 'node/' . $nid;
-    return menu_execute_active_handler();
+    //$_GET['q'] = 'node/' . $nid;
+    //return menu_execute_active_handler();
+      $node = node_load($nid);
+      return node_show($node,null);
   }else{
     return drupal_not_found();
   }
@@ -68,17 +73,20 @@ function ft_page_general_late_form_alter(&$form, &$form_state, $form_id){
 }
 
 function _page_get_first_nid(){
-  return db_result(db_query("SELECT nid FROM draggableviews_structure WHERE draggableviews_structure.view_name = 'mc_page_menu_admin' ORDER BY `value` ASC"));
+  return db_result(db_query("SELECT nid FROM draggableviews_structure WHERE draggableviews_structure.view_name = 'mc_page_menu_admin' ORDER BY `value` ASC LIMIT 1"));
 }
 
 function _page_get_highest_weight(){
   return db_result(db_query("SELECT `value` FROM draggableviews_structure WHERE draggableviews_structure.view_name = 'mc_page_menu_admin' ORDER BY `value` DESC"));
 }
 
+function _page_node_howmany(){
+    return db_result(db_query("SELECT count(nid) FROM draggableviews_structure WHERE draggableviews_structure.view_name = 'mc_page_menu_admin'"));
+}
+
 /*
  * old code that might not be required at all for now
  * Samer: I replaced it with hook menu about.
- */
 
 function _ft_page_general_change_alias($nid ,$alias = 'about', $language = ''){
   $existing = db_fetch_array(db_query("SELECT src, language, pid FROM {url_alias} WHERE dst = '%s' AND language IN('%s', '') ORDER BY language DESC, pid DESC", $alias, $language));
@@ -119,3 +127,4 @@ function _mc_page_general_default_about_submit($form, &$form_state) {
   $nid = $form_state['values']['mc_default_about'];
   _ft_page_general_change_alias($nid);
 }
+ */

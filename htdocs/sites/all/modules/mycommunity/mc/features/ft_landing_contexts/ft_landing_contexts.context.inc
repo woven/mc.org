@@ -718,6 +718,11 @@ function ft_landing_contexts_context_default_contexts() {
         'node_form' => '0',
       ),
     ),
+    'path' => array(
+      'values' => array(
+        'about' => 'about',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -731,7 +736,7 @@ function ft_landing_contexts_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 1;
+  $context->condition_mode = 0;
 
   // Translatables
   // Included for use with string extractors like potx.
