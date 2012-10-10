@@ -702,14 +702,6 @@ function ft_landing_contexts_context_default_contexts() {
   $context->description = 'Page General';
   $context->tag = 'Node';
   $context->conditions = array(
-    'context_og_condition_group_type' => array(
-      'values' => array(
-        '_none_' => '_none_',
-      ),
-      'options' => array(
-        'node_form' => 0,
-      ),
-    ),
     'node' => array(
       'values' => array(
         'page' => 'page',

@@ -424,7 +424,7 @@ function ft_landing_contexts_views_default_views() {
       'wildcard_substitution' => 'All',
       'title' => '',
       'breadcrumb' => '',
-      'default_argument_type' => 'og_group_node',
+      'default_argument_type' => 'php',
       'default_argument' => '',
       'validate_type' => 'php',
       'validate_fail' => 'not found',
@@ -435,9 +435,9 @@ function ft_landing_contexts_views_default_views() {
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
         2 => 0,
+        3 => 0,
         4 => 0,
-        8 => 0,
-        9 => 0,
+        5 => 0,
       ),
       'override' => array(
         'button' => 'Override',
@@ -449,14 +449,15 @@ function ft_landing_contexts_views_default_views() {
       'default_taxonomy_tid_limit' => 0,
       'default_taxonomy_tid_vids' => array(
         1 => 0,
+        2 => 0,
+        3 => 0,
       ),
       'default_argument_user' => 0,
       'default_argument_fixed' => '',
-      'default_argument_php' => '',
+      'default_argument_php' => 'return _page_get_first_nid();',
       'validate_argument_node_type' => array(
         'article' => 0,
         'audio' => 0,
-        'event' => 0,
         'file' => 0,
         'group' => 0,
         'link' => 0,
@@ -465,16 +466,21 @@ function ft_landing_contexts_views_default_views() {
         'npage' => 0,
         'page' => 0,
         'place' => 0,
+        'taxonomy_feature' => 0,
+        'taxonomy_topic' => 0,
         'video' => 0,
         'event_feed' => 0,
         'gallery' => 0,
         'gallery_image' => 0,
         'forum' => 0,
+        'event' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
         1 => 0,
+        2 => 0,
+        3 => 0,
       ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
@@ -568,7 +574,8 @@ return false;',
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-if($_GET[\'q\'] == "node/" . $data->nid){
+$view = views_get_current_view();
+if(($_GET[\'q\'] == "node/" . $data->nid) OR ($view->args[0] == $data->nid AND $_GET[\'q\'] == \'about\')){
 echo "active";
 }else{
 echo "";
@@ -583,15 +590,58 @@ echo "";
       ),
       'relationship' => 'none',
     ),
+    'phpcode' => array(
+      'label' => 'PHP code: get current path',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php
+$view = views_get_current_view();
+if($view->args[0] == $data->nid){
+echo "about";
+}else{
+echo "node/".$data->nid;
+}
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
     'title' => array(
       'label' => 'empty, trimmed',
       'alter' => array(
         'alter_text' => 0,
         'text' => '<li class="leaf [phpcode_1]">[title]</li>',
-        'make_link' => 0,
-        'path' => '',
+        'make_link' => 1,
+        'path' => '[phpcode]',
         'absolute' => 0,
-        'link_class' => '',
+        'link_class' => '[phpcode_1]',
         'alt' => '',
         'rel' => '',
         'prefix' => '',
@@ -609,7 +659,7 @@ echo "";
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'link_to_node' => 1,
+      'link_to_node' => 0,
       'exclude' => 1,
       'spaces' => array(
         'type' => NULL,
