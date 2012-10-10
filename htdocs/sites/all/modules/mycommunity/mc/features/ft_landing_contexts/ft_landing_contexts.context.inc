@@ -228,9 +228,9 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 1,
         ),
-        'boxes-mc_event_sections_box' => array(
-          'module' => 'boxes',
-          'delta' => 'mc_event_sections_box',
+        'views-mc_events_sections-block_3' => array(
+          'module' => 'views',
+          'delta' => 'mc_events_sections-block_3',
           'region' => 'below_content',
           'weight' => 0,
         ),

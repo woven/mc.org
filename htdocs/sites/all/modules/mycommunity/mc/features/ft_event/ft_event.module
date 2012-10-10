@@ -12,9 +12,12 @@ function _mc_user_myevents(){
 
   print '<div class="two-cols"><div class="col-main">';
 
+    /*
     if(function_exists('_mc_event_section_all')){
       print  _mc_event_section_all('events_bookmarks');
     }
+    */
+ print views_embed_view("mc_events_sections","block_1");
 
   print '</div>';
 

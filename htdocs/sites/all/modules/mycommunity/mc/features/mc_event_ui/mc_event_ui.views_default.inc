@@ -1148,6 +1148,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
+  $handler->override_option('css_class', 'event-section');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
   $handler->override_option('items_per_page', 0);
@@ -2182,8 +2183,8 @@ echo _mc_event_section_print_location_hidden($location);
       ),
       'relationship' => 'none',
     ),
-    'phpcode_3' => array(
-      'label' => 'Calender Week/Group',
+    'name' => array(
+      'label' => 'Event: Name',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -2208,26 +2209,85 @@ echo _mc_event_section_print_location_hidden($location);
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'value' => '<?php
-if(function_exists(\'_mc_date_calender_week\')){
-$week = _mc_date_calender_week($data->event_unix_event_start);
-$year = date(\'Y\',$data->event_unix_event_start);
-$firstdayts = _mc_date_week_firstday($week,$year);
-if($year > date(\'Y\')){
-return "Week of ". date(\'F jS Y\',$firstdayts);
-}else{
-return "Week of ". date(\'F jS\',$firstdayts);
-}
-}
-?>',
       'exclude' => 1,
-      'id' => 'phpcode_3',
-      'table' => 'customfield',
-      'field' => 'phpcode',
+      'id' => 'name',
+      'table' => 'location',
+      'field' => 'name',
       'override' => array(
         'button' => 'Override',
       ),
       'relationship' => 'none',
+    ),
+    'name_1' => array(
+      'label' => 'Event Place: Name',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 1,
+      'id' => 'name_1',
+      'table' => 'location',
+      'field' => 'name',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'field_place_nid',
+    ),
+    'nid' => array(
+      'label' => 'Event Place: nid',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'exclude' => 1,
+      'id' => 'nid',
+      'table' => 'node',
+      'field' => 'nid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'field_place_nid',
     ),
   ));
   $handler->override_option('filters', array(
@@ -2271,14 +2331,21 @@ return "Week of ". date(\'F jS\',$firstdayts);
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
+  $handler->override_option('title', 'Upcoming Events');
+  $handler->override_option('css_class', 'event-section');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
+  $handler->override_option('empty', '<div class=\\"default-message\\">Wow, it\'s quiet around here.  Want to <a href=\'/node/add/event\'>add an event</a> or <a href=\'/node/add/event-feed\'>import an event feed</a>?</div>');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 0);
   $handler->override_option('use_pager', '0');
   $handler->override_option('distinct', 1);
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
-    'grouping' => '',
+    'grouping' => 'phpcode_3',
+    'group_function' => array(
+      'function_name' => 'mc_event_section_views_group',
+    ),
     'group' => array(
       'element_type' => 'h3',
       'class' => 'hash',
@@ -2334,16 +2401,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
     ),
     'skip_blank' => 0,
   ));
-  $handler = $view->new_display('block', 'today-tomorrow', 'block_5');
-  $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '2');
-  $handler = $view->new_display('block', 'this-next{week}', 'block_1');
-  $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '2');
-  $handler = $view->new_display('block', 'upcoming', 'block_2');
-  $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', '2');
-  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler = $view->new_display('page', 'Page: event-sections', 'page_1');
   $handler->override_option('path', 'event-sections');
   $handler->override_option('menu', array(
     'type' => 'none',
@@ -2359,6 +2417,50 @@ return "Week of ". date(\'F jS\',$firstdayts);
     'weight' => 0,
     'name' => 'navigation',
   ));
+  $handler = $view->new_display('block', 'Block: Event Sections', 'block_3');
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
+  $handler = $view->new_display('block', 'Block: My Events sections', 'block_1');
+  $handler->override_option('relationships', array(
+    'group_nid' => array(
+      'label' => 'Group node (post)',
+      'required' => 0,
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
+      'relationship' => 'none',
+    ),
+    'field_place_nid' => array(
+      'label' => 'Place',
+      'required' => 0,
+      'delta' => -1,
+      'id' => 'field_place_nid',
+      'table' => 'node_data_field_place',
+      'field' => 'field_place_nid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'flag_content_rel' => array(
+      'label' => 'flag',
+      'required' => 1,
+      'flag' => 'events_bookmarks',
+      'user_scope' => 'current',
+      'id' => 'flag_content_rel',
+      'table' => 'node',
+      'field' => 'flag_content_rel',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('title', '');
+  $handler->override_option('css_class', 'event-section my-events no-show-more');
+  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here. Star some upcoming events and they\'ll show here.</div>');
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
 
   $views[$view->name] = $view;
 
