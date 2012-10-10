@@ -1,5 +1,6 @@
 <?php
 
+/* OLD Code */
 function _mc_event_section_all($flag = null){
   $content = array();
 
@@ -246,34 +247,6 @@ function _mc_event_section_format_week($date){
   }
 }
 
-/*
-   @todo cache this data?
-*/
-function _mc_events_tokens(){
-    $tokens = array();
-
-    $tokens['!today'] = mktime(0, 0, 0);
-    $tokens['!now'] = time();
-    $tokens['!tomorrow'] = $tokens['!today'] + 24 * 3600;
-    $tokens['!afterTomorrow'] = $tokens['!tomorrow'] + 24 * 3600;
-
-    $dayOfWeek = (int)date('w', $tokens['!today']);
-    $tokens['!dayOfWeek'] = $dayOfWeek;
-
-    if ($dayOfWeek == 0){
-        $tokens['!thisSunday'] = $tokens['!today'];
-    }else{
-        $tokens['!thisSunday'] = $tokens['!today'] + (7 - $dayOfWeek) * 24 * 3600;
-    }
-
-    $tokens['!nextSunday'] = $tokens['!thisSunday'] + 7 * 24 * 3600;
-    $tokens['!twoSundaysFromNow'] = $tokens['!nextSunday'] + 7 * 24 * 3600;
-    $tokens['!minsago'] = $tokens['!now'] - (60 * 30);
-
-    return $tokens;
-}
-
-
 function _mc_event_section_after_two_weeks(&$content,$flag){
   global $user;
 
@@ -414,7 +387,51 @@ function _mc_event_section_after_two_weeks(&$content,$flag){
   }
 
 }
+/* Eend of Old Code */
 
+function _mc_event_section_formatted_location($location, $online){
+
+    if(preg_match("/webinar/i", $location['name'])){
+        return $location['name'];
+    }
+    elseif($online){
+        return '<span class="location">' . 'Online Event' .'</span>';
+    }
+    else {
+        if(!empty($location) && !empty($location['name'])){
+            return 'at <span class="location">' . $location['name'] .'</span>';
+        }
+    }
+    return;
+}
+
+function _mc_event_section_print_location($lid){
+    $location = location_load_location($lid);
+    $node = new stdClass();
+    $node->location = $location;
+    $node->type = 'place';
+    $field = array('object' => $node);
+    print theme('nd_location_address', $field);
+}
+
+function _mc_event_section_print_location_hidden($location){
+
+    if(empty($location)){
+        return "";
+    }
+
+    $node = new stdClass();
+    $node->location = $location;
+    $node->type = 'place';
+    $field = array('object' => $node);
+    print "<div class=\"display-none\">" . theme('mc_nd_location_address', $field) . "</div";
+}
+
+/**
+ * adds info array that has information about the current event record (object) that are used later on the misc code
+ * @param $event
+ * @return array
+ */
 function _mc_event_process_record_info($event){
     $info = array();
 
@@ -448,6 +465,13 @@ function _mc_event_process_record_info($event){
     return $info;
 }
 
+/** check if two event records (objects) are duplicate (source is from views records or objects that has ->info array
+ * @param $event1
+ * @param $event2
+ * @return bool
+ *
+ * @see _mc_event_process_record_info()
+ */
 function _mc_event_is_duplicate($event1,$event2){
     if($event1->event_unix_event_start == $event2->event_unix_event_start && $event1->event_unix_event_end == $event2->event_unix_event_end){
         similar_text($event1->info['object_soundex']['title'], $event2->info['object_soundex']['title'], $percent_title);
@@ -468,6 +492,11 @@ function _mc_event_is_duplicate($event1,$event2){
     return false;
 }
 
+/**
+ * process records/views rows per day and finds the duplicates based on special logic (soundex)
+ * @param $day
+ * @return array
+ */
 function _mc_event_filter_day_dubs($day){
     $ignore_nids = array();
     $day_new = array();
@@ -513,29 +542,53 @@ function _mc_event_filter_day_dubs($day){
     return $day_new;
 }
 
-function _mc_event_section_formatted_location($location, $online){
+/*
+   @todo cache this data?
+*/
+function _mc_events_tokens(){
+    $tokens = array();
 
-  if(preg_match("/webinar/i", $location['name'])){
-    return $location['name'];
-  }
-  elseif($online){
-    return '<span class="location">' . 'Online Event' .'</span>';
-  }
-  else {
-    if(!empty($location) && !empty($location['name'])){
-      return 'at <span class="location">' . $location['name'] .'</span>';
+    $tokens['!today'] = mktime(0, 0, 0);
+    $tokens['!now'] = time();
+    $tokens['!tomorrow'] = $tokens['!today'] + 24 * 3600;
+    $tokens['!afterTomorrow'] = $tokens['!tomorrow'] + 24 * 3600;
+
+    $dayOfWeek = (int)date('w', $tokens['!today']);
+    $tokens['!dayOfWeek'] = $dayOfWeek;
+
+    if ($dayOfWeek == 0){
+        $tokens['!thisSunday'] = $tokens['!today'];
+    }else{
+        $tokens['!thisSunday'] = $tokens['!today'] + (7 - $dayOfWeek) * 24 * 3600;
     }
-  }
-  return;
+
+    $tokens['!nextSunday'] = $tokens['!thisSunday'] + 7 * 24 * 3600;
+    $tokens['!twoSundaysFromNow'] = $tokens['!nextSunday'] + 7 * 24 * 3600;
+    $tokens['!minsago'] = $tokens['!now'] - (60 * 30);
+
+    return $tokens;
 }
 
-
+/*
+ * implanation of hook_views_query_substitutions()
+ */
 function mc_event_section_views_query_substitutions($view){
     if($view->name == 'mc_events_sections'){
-
+        $subs = array();
+        $tokens = _mc_events_tokens();
+        foreach($tokens as $key => $val){
+                $newkey = str_replace("!",'',$key);
+                $newkey = strtoupper("***MC_".$newkey."***");
+                $subs[$newkey] = strtoupper($val);
+        }
+        return $subs;
     }
+    return array();
 }
 
+/*
+ * implanation of hook_views_query_alter()
+ */
 function mc_event_section_views_query_alter(&$view, &$query) {
 
   if($view->name != 'mc_events_sections'){
@@ -547,38 +600,19 @@ function mc_event_section_views_query_alter(&$view, &$query) {
    //add day field
    $query->add_field(null,"DAYOFYEAR(FROM_UNIXTIME(event.unix_event_start))","day");
 
-
-  if($tokens['!dayOfWeek'] == 0){
-
-  $sql_case = t("
+  $sql_case = "
    CASE
-	WHEN ((event.unix_event_start BETWEEN '!now' AND '!tomorrow') OR (event.unix_event_end BETWEEN '!now' AND '!tomorrow') OR (UNIX_TIMESTAMP(now()) BETWEEN event.unix_event_start AND event.unix_event_end))
+	WHEN ((event.unix_event_start BETWEEN '***MC_NOW***' AND '***MC_TOMORROW***') OR (event.unix_event_end BETWEEN '***MC_NOW***' AND '***MC_TOMORROW***'))
 	THEN 'Today'
-	WHEN event.unix_event_start BETWEEN '!tomorrow' AND '!afterTomorrow'
+	WHEN event.unix_event_start BETWEEN '***MC_TOMORROW***' AND '***MC_AFTERTOMORROW***'
 	THEN 'Tomorrow'
-	WHEN event.unix_event_start BETWEEN '!afterTomorrow' AND '!nextSunday'
+	WHEN event.unix_event_start BETWEEN '***MC_AFTERTOMORROW***' AND '***MC_NEXTSUNDAY***'
 	THEN 'This week'
-	WHEN event.unix_event_start BETWEEN '!nextSunday' AND '!twoSundaysFromNow'
+	WHEN event.unix_event_start BETWEEN '***MC_NEXTSUNDAY***' AND '***MC_TWOSUNDAYSFROMNOW***'
 	THEN 'Next week'
     ELSE 'Upcoming'
-    END",$tokens);
-    $sql_where = t("(event.unix_event_start between '!now' and '!twoSundaysFromNow') OR (event.unix_event_end between '!now' and '!twoSundaysFromNow')",$tokens);
-  }else{
-      $sql_case = t("
-       CASE
-        WHEN ((event.unix_event_start BETWEEN '!now' AND '!tomorrow') OR (event.unix_event_end BETWEEN '!now' AND '!tomorrow') OR (UNIX_TIMESTAMP(now()) BETWEEN event.unix_event_start AND event.unix_event_end))
-        THEN 'Today'
-        WHEN event.unix_event_start BETWEEN '!tomorrow' AND '!afterTomorrow'
-        THEN 'Tomorrow'
-        WHEN event.unix_event_start BETWEEN '!afterTomorrow' AND '!thisSunday'
-        THEN 'This week'
-        WHEN event.unix_event_start BETWEEN '!thisSunday' AND '!nextSunday'
-        THEN 'Next week'
-        ELSE 'Upcoming'
-        END
-  ");
-    $sql_where = t("(event.unix_event_start between '!now' and '!nextSunday') OR (event.unix_event_end between '!now' and '!nextSunday')",$tokens);
-  }
+    END";
+    $sql_where = "(event.unix_event_start between '***MC_NOW***' and '***MC_AFTERTOMORROW***') OR (event.unix_event_end between '***MC_NOW***' and '***MC_AFTERTOMORROW***')";
 
     if($sql_case && $sql_where){
           //add fields as defined above
@@ -604,11 +638,22 @@ function mc_event_section_views_query_alter(&$view, &$query) {
     }//end if sql_case and sql_where
 }
 
+/**
+ * accepts the str variable as string "WEEK-YEAR" format, ex: "41-2004"
+ * @param $str
+ * @return string
+ */
 function theme_weekofyear_str($str){
     $parts = explode("-",$str);
     return theme_weekofyear($parts[0],$parts[1]);
 }
 
+/**
+ * return Week of FIRST DAY OF WEEK (based on the input day and year).
+ * @param $week
+ * @param $year
+ * @return string
+ */
 function theme_weekofyear($week,$year){
         $firstdayts = _mc_date_week_firstday($week,$year);
         if($year > date('Y')){
@@ -618,6 +663,12 @@ function theme_weekofyear($week,$year){
         }
 }
 
+/**
+ * renders the mc_sections view landing page in groups (sections/week/day/events (duplicate) or EVENT)
+ * @param $view
+ * @param $sets
+ * @return string.
+ */
 function mc_event_section_views_group_render($view,$sets){
     $output = "";
     $i = 0;
@@ -626,7 +677,7 @@ function mc_event_section_views_group_render($view,$sets){
     drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
 
     foreach($sets as $section_name => $section){
-        $output = '<div class="section-section '.$section_name.'">'; //start section.
+        $output .= '<div class="section-section '.$section_name.'">'; //start section.
         $output .= '<div class="block-title"><h3>'.$section_name.'</h3><span class="arrow"></span></div>';
         foreach($section as $week_num => $week){
             $output .= '<div class="section-week">'; //start section-week
@@ -670,6 +721,14 @@ function mc_event_section_views_group_render($view,$sets){
     return $output;
 }
 
+/**
+ * Logic to group the views records came from mc_event_sections view (grouping function).
+ * @see semanticviews_plugin_style_default.inc
+ * @param $view
+ * @param $records
+ * @param string $grouping_field
+ * @return array
+ */
 function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
     // Make sure fields are rendered
     $view->render_fields($view->view->result);
@@ -696,26 +755,4 @@ function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
     }
 
     return $sets;
-}
-
-function _mc_event_section_print_location($lid){
-  $location = location_load_location($lid);
-  $node = new stdClass();
-  $node->location = $location;
-  $node->type = 'place';
-  $field = array('object' => $node);
-  print theme('nd_location_address', $field);
-}
-
-function _mc_event_section_print_location_hidden($location){
-
-  if(empty($location)){
-    return "";
-  }
-
-  $node = new stdClass();
-  $node->location = $location;
-  $node->type = 'place';
-  $field = array('object' => $node);
-  print "<div class=\"display-none\">" . theme('mc_nd_location_address', $field) . "</div";
 }
