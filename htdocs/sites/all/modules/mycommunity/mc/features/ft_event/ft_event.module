@@ -82,6 +82,13 @@ function ft_event_latenodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
         $node->location = count($node->locations) ? $node->locations[0] : array();
       }
 
+     if(!empty($node->locations[0]) && isset($node->locations[0]['longitude']) && isset($node->locations[0]['latitude'])){
+         $node->locations[0]['locpick'] = array(
+             'user_latitude' => $node->locations[0]['latitude'],
+             'user_longitude' => $node->locations[0]['longitude']
+         );
+     }
+
     break;
     case 'prepare': //node about to be shown to the node add/edit forms
       if($choice == 'nr'){
@@ -141,9 +148,9 @@ function ft_event_latenodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
                     if((!empty($node_location['latitude']) && !empty($node_location['longitude'])) OR (!empty($node_location['locpick']) && !empty($node_location['locpick']['user_latitude']) && !empty($node_location['locpick']['user_longitude']))){
                         $lat = $node_location['latitude'] ? $node_location['latitude']  : $node_location['locpick']['user_latitude'];
                         $log = $node_location['longitude'] ? $node_location['longitude'] : $node_location['locpick']['user_longitude'];
-                        $location = coordinates_to_location($lat, $log);
-                        if(!empty($location)){
-                            $node->locations['0'] = $location;
+                        $new_location = coordinates_to_location($lat, $log);
+                        if(!empty($new_location)){
+                            $node->locations['0'] = $new_location;
                         }
                     }
                 }
