@@ -3,6 +3,63 @@
 define("VID_CATEGORY", 2);
 
 /**
+ * Implementation of hook_field_formatter_info().
+*/
+function mc_field_formatter_info() {
+    $formatters = array();
+
+    $formatters['node_date'] = array(
+        'label' => t('MC Node Date'),
+        'field types' => array('date', 'datestamp', 'datetime'),
+        'multiple values' => CONTENT_HANDLE_CORE
+    );
+
+    return $formatters;
+}
+
+function mc_theme($existing, $type, $theme, $path){
+    $themes = array();
+
+    $themes['mc_formatter_node_date'] = array(
+        'arguments' => array('element' => NULL),
+    );
+
+    return $themes;
+}
+
+function theme_mc_formatter_node_date($element){
+
+}
+
+function theme_mc_node_date($ts){
+    $year = date("Y");
+    $tomorrow = strtotime("tomorrow 00:00");
+    $today = strtotime("today 00:00");
+    $yesterday = strtotime("yesterday 00:00");
+
+    $day = $ts;
+    $day_year = date("Y",$ts);
+
+    if($day >= $today && $day < $tomorrow){
+        $prefix = "Today, ";
+    }elseif($day < $today && $day >= $yesterday){
+        $prefix = "Yesterday, ";
+    }
+
+    if($year > $day_year){
+        $formate_year = ", " . $day_year;
+    }
+
+    $format = format_date($ts,'custom','F jS');
+
+    return t("!prefix!format!year",array(
+        '!prefix' => $prefix,
+        '!format' => $format,
+        '!year' => $formate_year
+    ));
+}
+
+/**
  * get allowed content types, currently using a simple hook
  * @return array
  */

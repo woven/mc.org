@@ -392,13 +392,51 @@ print theme_ghh_node_categories($data->nid, 2);
       ),
       'relationship' => 'none',
     ),
+    'phpcode_1' => array(
+      'label' => 'Post Date formatted',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php
+return theme_mc_node_date($data->node_created);
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_1',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'nothing_1' => array(
       'label' => '',
       'alter' => array(
         'text' => '<div class="meta-picture">[picture]</div>
 <div class="meta-info">
 <span class="meta-name">[name]</span>
-<span class="meta-created">[created]</span>
+<span class="meta-created">[phpcode_1]</span>
 </div>',
         'make_link' => 0,
         'path' => '',
