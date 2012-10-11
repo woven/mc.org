@@ -266,6 +266,7 @@ function mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
             if($parts['name']=='webinar'){
               //it's webinar, or an online event
               $node->field_online_event['0']['value'] = 1;
+              $node->locations = array(0 => array());
             }
             //it's not webinar, continue with the rest of logic
             else {
@@ -281,7 +282,6 @@ function mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
             }
           }
           if($sub_field=='geo'){
-
               $parts = explode(';', $feed_element); //parts explode
               if(!is_array($node->locations[0])){
                 $node->locations[0] = array();
