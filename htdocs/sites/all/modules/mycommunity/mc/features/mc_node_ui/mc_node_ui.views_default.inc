@@ -327,8 +327,10 @@ print theme_ghh_node_categories($data->nid, 2);
         'text' => '[picture] [name]',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -343,6 +345,7 @@ print theme_ghh_node_categories($data->nid, 2);
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_user' => 1,
       'overwrite_anonymous' => 0,
       'anonymous_text' => '',
@@ -392,7 +395,11 @@ print theme_ghh_node_categories($data->nid, 2);
     'nothing_1' => array(
       'label' => '',
       'alter' => array(
-        'text' => '[picture] [name] | [created]',
+        'text' => '<div class="meta-picture">[picture]</div>
+<div class="meta-info">
+<span class="meta-name">[name]</span>
+<span class="meta-created">[created]</span>
+</div>',
         'make_link' => 0,
         'path' => '',
         'absolute' => 0,
@@ -552,7 +559,7 @@ else {
       ),
       'nothing_1' => array(
         'element_type' => 'div',
-        'class' => 'author-link',
+        'class' => 'node-meta',
       ),
     ),
     'skip_blank' => 0,
