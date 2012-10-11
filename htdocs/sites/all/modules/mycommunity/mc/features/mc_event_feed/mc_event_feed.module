@@ -288,6 +288,8 @@ function mc_event_feed_feedapi_mapper($op, $node, $feed_element = array(), $fiel
               };
 
               $node->locations[0] += array(
+                  'latitude' => $parts['0'],
+                  'longitude' => $parts['1'],
                   'lockpick' => array(
                       'user_latitude' => $parts['0'],
                       'user_longitude' => $parts['1']
