@@ -308,55 +308,63 @@ function _mc_event_feed_find_similar_place($name, $address){
 }
 
 function mc_event_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+    /**
+     * if it's event_feed
+     */
+    if($node->type == 'event_feed'){
+        switch($op){
+            case 'validate':
+                if(!isset($node->nid) || empty($node->nid)){
+                    //check if it it has feedapi url and if upload method is url
+                    if(isset($node->feedapi['feedapi_url']) && !empty($node->feedapi['feedapi_url']) && $node->feedapi['upload_method'] == "url"){
 
-  if($node->type=='event_feed' && $op=='validate' && (!isset($node->nid) || empty($node->nid))){
+                        $feed_url = $node->feedapi['feedapi_url'];
+                        _mc_event_feed_check_group_url_exists($feed_url);
 
-    //check if it it has feedapi url and if upload method is url
-    if(isset($node->feedapi['feedapi_url']) && !empty($node->feedapi['feedapi_url']) && $node->feedapi['upload_method'] == "url"){
-
-      $feed_url = $node->feedapi['feedapi_url'];
-      _mc_event_feed_check_group_url_exists($feed_url);
-
-      $result = db_query("select nid from feedapi where url='%s'", $node->feedapi['feedapi_url']);
-      while ($row = db_fetch_object($result)) {
-        $other_node = node_load($row->nid);
-        if(isset($other_node->og_groups)){
-          $gid = current($node->og_groups);
-          $other_gid = current($other_node->og_groups);
-          if($gid==$other_gid){
-            form_set_error('', t("Woops, we're already importing that very feed.  Try a different one?"));
-          }
+                        $result = db_query("select nid from feedapi where url='%s'", $node->feedapi['feedapi_url']);
+                        while ($row = db_fetch_object($result)) {
+                            $other_node = node_load($row->nid);
+                            if(isset($other_node->og_groups)){
+                                $gid = current($node->og_groups);
+                                $other_gid = current($other_node->og_groups);
+                                if($gid==$other_gid){
+                                    form_set_error('', t("Woops, we're already importing that very feed.  Try a different one?"));
+                                }
+                            }
+                        }
+                    }
+                }
+            break;
+            case 'insert':
+                $mapping = 'a:5:{s:91:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:5:"DTEND";i:4;s:8:"datetime";}";s:61:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:3:"end";}";s:93:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:8:"datetime";}";s:63:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:5:"start";}";s:87:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:2:"tz";}";s:66:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:8:"timezone";}";s:60:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:8:"LOCATION";}";s:66:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:8:"location";}";s:55:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:3:"GEO";}";s:61:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:3:"geo";}";}';
+                $record = new stdClass();
+                $record->nid = $node->nid;
+                $record->mapping = $mapping;
+                drupal_write_record('feedapi_mapper', $record);
+            break;
         }
-      }
     }
-  }
 
-  if($node->type=='event_feed' && $op=='insert'){
-    $mapping = 'a:5:{s:91:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:5:"DTEND";i:4;s:8:"datetime";}";s:61:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:3:"end";}";s:93:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:8:"datetime";}";s:63:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:5:"start";}";s:87:"a:5:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:4:"DATE";i:3;s:7:"DTSTART";i:4;s:2:"tz";}";s:66:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:8:"timezone";}";s:60:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:8:"LOCATION";}";s:66:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:8:"location";}";s:55:"a:3:{i:0;s:7:"options";i:1;s:6:"VEVENT";i:2;s:3:"GEO";}";s:61:"a:3:{i:0;s:13:"mc_event_feed";i:1;s:5:"event";i:2;s:3:"geo";}";}';
-    $record = new stdClass();
-    $record->nid = $node->nid;
-    $record->mapping = $mapping;
-    drupal_write_record('feedapi_mapper', $record);
-  }
-
-  if($node->type=='event' && ($op=='presave') && isset($node->feedapi_node->feed_nids) && isset($node->feedapi->feed_nid)){
-    $node->og_public = TRUE;
-    if((empty($node->event['dst_region']) || $node->event['dst_region']==NULL) && (empty($node->event['timezone']) || $node->event['timezone']==NULL)){
-      $timezone = event_zone_by_name(str_replace('_', ' ', 'America/New_York'));
-      $node->event['dst_region'] = $timezone['dst_region'];;
-      $node->event['offset'] = $timezone['offset'];
-      $node->event['offset_dst'] = $timezone['offset_dst'];
-      $node->event['timezone'] = $timezone['timezone'];
-    }
-//    if(isset($node->locations['0']) && is_array($node->locations['0']) && (empty($node->locations['0']['street']) && empty($node->locations['0']['city'])  && empty($node->locations['0']['province'])) && (!empty($node->locations['0']['latitude']) && !empty($node->locations['0']['longitude'])))  {
-//      $parts = mc_event_feed_reverse_getAddressParts($node->locations['0']['latitude'], $node->locations['0']['longitude']);
-//      $node->locations['0']['name'] = $parts['name'];
-//      $node->locations['0']['street'] = $parts['address'];
-//      $node->locations['0']['city'] = $parts['city'];
-//      $node->locations['0']['province'] = $parts['state'];
-//      $node->locations['0']['postal_code'] = $parts['zip'];
-//    }
-  }
+    /**
+     * if it's event being added by event_feed/feedapi
+     */
+   if($node->type == "event"){
+       switch($op){
+           case 'presave':
+               //if the event was added through feedapi, add default timezone
+               if(isset($node->feedapi_node->feed_nids) && isset($node->feedapi->feed_nid)){
+                   $node->og_public = TRUE;
+                   if((empty($node->event['dst_region']) || $node->event['dst_region']==NULL) && (empty($node->event['timezone']) || $node->event['timezone']==NULL)){
+                       $timezone = event_zone_by_name(str_replace('_', ' ', 'America/New_York'));
+                       $node->event['dst_region'] = $timezone['dst_region'];;
+                       $node->event['offset'] = $timezone['offset'];
+                       $node->event['offset_dst'] = $timezone['offset_dst'];
+                       $node->event['timezone'] = $timezone['timezone'];
+                   }
+               }
+               break;
+       }
+   }
 }
 
 function mc_event_feed_init(){
