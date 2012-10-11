@@ -2,6 +2,26 @@
 
 include_once('ft_location.features.inc');
 
+//include ft_location api methods (mostly google functions)
+include_once('ft_location.api.inc');
+
+
+function coordinates_to_location($lat,$long){
+    $parts = _mc_location_api_reverse_getAddressParts($lat, $long);
+    if(!empty($parts)){
+        $location = array();
+        $location['name'] = $parts['name'];
+        $location['street'] = $parts['address'];
+        $location['city'] = $parts['city'];
+        $location['province'] = $parts['state'];
+        $location['postal_code'] = $parts['zip'];
+        $location['latitude'] = $lat;
+        $location['longitude'] = $long;
+
+        return $location;
+    }
+    return array();
+}
 
 function ft_location_ds_fields($type_name, $build_mode, $extra) {
 
@@ -88,7 +108,7 @@ function theme_mc_location_gmap_default($field) {
       $longitude = $node->location['longitude'];
       if($latitude=='0.000000' && $longitude=='0.000000'){
         $address = $node->location['street'] . ' ' . $node->location['city'] . ' ' . $node->location['province'] . ' ' . $node->location['postal_code'];
-        $results = mc_event_feed_google_get_georeference($address);
+        $results = _mc_location_api_google_get_georeference($address);
         $longitude = $results['longitude'];
         $latitude = $results['latitude'];
       }
