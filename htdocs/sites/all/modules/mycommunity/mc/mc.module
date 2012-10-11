@@ -736,6 +736,18 @@ function mc_events_grouped_by_dates_view($view_name, $display_id, $time_key, $it
  */
 function mc_init(){
 
+    $settings = array('mc_overlays' => array(
+        'join' => array(
+            'width' => variable_get("overlay_join_width",720),
+            'height' => variable_get("overlay_join_height",445)
+        )
+    )
+    );
+
+    drupal_add_js(
+        $settings,'setting'
+    );
+
   //Avoid 404 page in user/register for authenticated users.
   if ($GLOBALS['user']->uid != 0){
     if ($_GET['q'] == 'user/register'){

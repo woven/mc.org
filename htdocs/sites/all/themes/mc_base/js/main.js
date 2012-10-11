@@ -196,6 +196,9 @@ var GHH = {
 	
 	lightbox: function(){
 
+        /*
+        see mc.module @ mc_init for Drupal.settings.mc_overlays.*
+        */
         if(!(/iPhone|iPod/i.test(navigator.userAgent))){
             $("#login-button").livequery(function(e){
                 $(this).colorbox({width:"410", height:"380", inline:true, href:"#login", opacity:0.6, onComplete:function () {
@@ -205,7 +208,7 @@ var GHH = {
             });
 
             $("#register-button").livequery(function(e){
-                $(this).colorbox({width:"720", height:"400", inline:true,href:"#register", opacity:0.6, onComplete:function () {
+                $(this).colorbox({width:Drupal.settings.mc_overlays.join.width, height:Drupal.settings.mc_overlays.join.height, inline:true,href:"#register", opacity:0.6, onComplete:function () {
                     $(".ui-tooltip").hide();
                     $('#register input[name=mail]').focus();
                 }});
@@ -230,7 +233,7 @@ var GHH = {
 		});
 		if(!(/iPhone|iPod/i.test(navigator.userAgent))){
 			$("#anonymous-follow").colorbox({width:"410", height:"380", inline:true, href:"#login", opacity: 0.6});
-		    $("#register-button").colorbox({width:"720", height:"445", inline:true, href:"#register", opacity: 0.6});
+		    $("#register-button").colorbox({width:Drupal.settings.mc_overlays.join.width, height:Drupal.settings.mc_overlays.join.height, inline:true, href:"#register", opacity: 0.6});
 			$("#view-pdf").colorbox({width:"830", height:"500", inline:true, href:".filefield-file", opacity: 0.6});
 			$('#block-boxes-join_mc a[href$="/user/register"]').colorbox({width:"720", height:"300", inline:true, href:"#register", opacity: 0.6, onComplete:function(){ $('#register [name=mail]').focus(); }});
 			$("#fb-friends").colorbox({

@@ -20,6 +20,7 @@ function mc_site_init(){
   $conf['menu-help-icon'] = false;
   $conf['hide-comment'] = true;
   $conf['mc_defaultimg_og'] = true;
+  $conf['overlay_join_height'] = '300';
   $conf['join-why'] = "<ul>
                 <li>Help others find your group</li>
                 <li>Add events or import from any iCal</li>
