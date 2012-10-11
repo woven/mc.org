@@ -98,3 +98,6 @@ body {
 body.mt-og-homepage .node .more-link {
 	display: none;
 }
+.node-meta{
+    display: none !important;
+}

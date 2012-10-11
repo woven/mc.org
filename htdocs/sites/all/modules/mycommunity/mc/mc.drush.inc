@@ -48,6 +48,13 @@ function mc_drush_command() {
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE, // No bootstrap at all.
   );
 
+    // The 'make-me-a-sandwich' command
+    $items['resave-events'] = array(
+        'description' => "fix existing events",
+        'aliases' => array(''),
+        'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL, // No bootstrap at all.
+    );
+
   $items['features-revert-all-smart'] = array(
     'description' => "Revert all enabled feature module on your site.",
     'arguments' => array(
@@ -72,7 +79,25 @@ function mc_drush_command() {
   return $items;
 }
 
+/*
+ * fix events by loading and resaving
+ */
+function drush_mc_resave_events(){
+    ini_set('max_execution_time',60 * 10);
+    ini_set("memory_limit","500M");
 
+    $select = "SELECT nid FROM {node} WHERE node.type = 'event'";
+    $result = db_query($select);
+
+    while($row = db_fetch_object($result)){
+        $nid = $row->nid;
+        $node = node_load($nid);
+        node_validate($node);
+        node_submit($node);
+        node_save($node);
+    }
+
+}
 
 /**
  * Revert all enabled features to their definitions in code. Optionally pass in

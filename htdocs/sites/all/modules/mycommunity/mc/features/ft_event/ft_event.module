@@ -151,6 +151,8 @@ function ft_event_latenodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
                         $new_location = coordinates_to_location($lat, $log);
                         if(!empty($new_location)){
                             $node->locations['0'] = $new_location;
+                        }else{
+                            $node->locations['0'] = array();
                         }
                     }
                 }
