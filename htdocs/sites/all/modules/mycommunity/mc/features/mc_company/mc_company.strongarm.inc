@@ -428,18 +428,25 @@ function mc_company_strongarm() {
       'title' => 'Private group',
       'hidden' => 0,
     ),
-    'field_short_desc' => array(
-      'region' => 'main',
-      'weight' => '1',
-      'has_required' => FALSE,
-      'title' => 'Short Description',
-      'hidden' => 0,
-    ),
     'field_industry' => array(
       'region' => 'main',
       'weight' => '2',
       'has_required' => TRUE,
       'title' => 'Industry',
+    ),
+    'body_field' => array(
+      'region' => 'main',
+      'weight' => '0.008',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'field_list_image' => array(
+      'region' => 'main',
+      'weight' => '20.9',
+      'has_required' => FALSE,
+      'title' => 'Images',
+      'hidden' => 0,
     ),
   );
   $export['nodeformscols_field_placements_company_default'] = $strongarm;

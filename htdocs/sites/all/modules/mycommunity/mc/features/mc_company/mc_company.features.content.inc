@@ -593,84 +593,6 @@ function mc_company_content_default_fields() {
     ),
   );
 
-  // Exported field: field_short_desc
-  $fields['company-field_short_desc'] = array(
-    'field_name' => 'field_short_desc',
-    'type_name' => 'company',
-    'display_settings' => array(
-      'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '4' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '2' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '3' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'bubble' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'secondary_page' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'block' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'search' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'text',
-    'required' => '1',
-    'multiple' => '0',
-    'module' => 'text',
-    'active' => '1',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
-    'widget' => array(
-      'rows' => '4',
-      'size' => 60,
-      'default_value' => array(
-        '0' => array(
-          'value' => '',
-          '_error_element' => 'default_value_widget][field_short_desc][0][value',
-        ),
-      ),
-      'default_value_php' => NULL,
-      'label' => 'Short Description',
-      'weight' => '-3',
-      'description' => '',
-      'type' => 'text_textarea',
-      'module' => 'text',
-    ),
-  );
-
   // Exported field: field_twitter
   $fields['company-field_twitter'] = array(
     'field_name' => 'field_twitter',
@@ -848,7 +770,6 @@ function mc_company_content_default_fields() {
   t('Industry');
   t('Looking for funding');
   t('Phone number');
-  t('Short Description');
   t('Twitter');
   t('Website');
 
