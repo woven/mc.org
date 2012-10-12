@@ -9,6 +9,39 @@ function ft_latest_ui_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'directory';
+  $context->description = '';
+  $context->tag = 'directory';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'directory' => 'directory',
+        'directory/*' => 'directory/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-directory_taxonomy-block_1' => array(
+          'module' => 'views',
+          'delta' => 'directory_taxonomy-block_1',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('directory');
+  $export['directory'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'landing_latest';
   $context->description = 'Context that holds all the elements for the latest pages, except latest/events';
   $context->tag = 'latest';
