@@ -13,6 +13,8 @@ function mc_company_late_form_alter(&$form, &$form_state, $form_id){
         return; //exit if not company node.
     }
 
+    $form['#after_build'][] = 'mc_company_node_form_after_build';
+
     //remove some fields from non admin users
     if($user->uid > 1){
         unset($form['og_selective']);
@@ -21,4 +23,17 @@ function mc_company_late_form_alter(&$form, &$form_state, $form_id){
         unset($form['og_menu']);
         unset($form['og_private']);
     }
+
+}
+
+function mc_company_node_form_after_build($form, &$form_state){
+
+    //modify some files default values
+    $form['field_industry']['value']['#options'][''] = "Choose...";
+    $form['field_company_size']['value']['#options'][''] = "Choose...";
+
+    unset($form['field_ishiring']['value']['']);
+    unset($form['field_islookingfund']['value']['']);
+
+    return $form;
 }
