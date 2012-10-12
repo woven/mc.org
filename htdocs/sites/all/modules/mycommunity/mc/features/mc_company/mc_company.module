@@ -5,3 +5,11 @@
  */
 
 include_once 'mc_company.features.inc';
+
+function mc_company_late_form_alter(&$form, &$form_state, $form_id){
+    if(!is_ct_form($form,"company")){
+        return; //exit if not company node.
+    }
+
+    dsm($form);
+}
