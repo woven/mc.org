@@ -7,9 +7,17 @@
 include_once 'mc_company.features.inc';
 
 function mc_company_late_form_alter(&$form, &$form_state, $form_id){
+    global $user;
+
     if(!is_ct_form($form,"company")){
         return; //exit if not company node.
     }
 
-    dsm($form);
+    if($user->uid > 1){
+        unset($form['og_selective']);
+        unset($form['og_register']);
+        unset($form['og_directory']);
+        unset($form['og_menu']);
+        unset($form['og_private']);
+    }
 }
