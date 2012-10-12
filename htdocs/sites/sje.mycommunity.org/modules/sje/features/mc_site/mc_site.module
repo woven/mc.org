@@ -8,6 +8,6 @@ include_once 'mc_site.features.inc';
 
 function mc_site_mc_ct(){
   return array(
-      'page','npage','article','event','event_feed','file','forum','video','audio'
+      'page','npage','article','event','event_feed','file','forum','video','audio','company'
   );
 }

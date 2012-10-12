@@ -216,3 +216,10 @@ function mc_update_6025(){
 function mc_update_6026(){
     module_disable(array('ft_search_cse'));
 }
+
+/**
+  * disable ft_search_cse
+*/
+function mc_update_6027(){
+    module_enable(array('mc_company'),true);
+}

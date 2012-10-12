@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Company feature.
+ */
+
+include_once 'mc_company.features.inc';

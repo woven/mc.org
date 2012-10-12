@@ -160,6 +160,7 @@ function ft_location_strongarm() {
     'npage' => 'drupal',
     'gallery' => 'drupal',
     'gallery_image' => 'drupal',
+    'company' => 'drupal',
   );
   $export['gmap_node_markers'] = $strongarm;
 
