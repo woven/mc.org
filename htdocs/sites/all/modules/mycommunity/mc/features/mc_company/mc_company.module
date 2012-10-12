@@ -13,6 +13,7 @@ function mc_company_late_form_alter(&$form, &$form_state, $form_id){
         return; //exit if not company node.
     }
 
+    //remove some fields from non admin users
     if($user->uid > 1){
         unset($form['og_selective']);
         unset($form['og_register']);

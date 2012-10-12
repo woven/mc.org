@@ -230,3 +230,10 @@ function mc_update_6027(){
 function mc_update_6028(){
     module_enable(array('cck_phone'),true);
 }
+
+/**
+  * enable cck_phone
+*/
+function mc_update_6029(){
+    module_enable(array('mc_company','cck_phone','mc_tax_industry'),true);
+}
