@@ -218,8 +218,15 @@ function mc_update_6026(){
 }
 
 /**
-  * disable ft_search_cse
+  * enable company
 */
 function mc_update_6027(){
     module_enable(array('mc_company'),true);
+}
+
+/**
+  * enable cck_phone
+*/
+function mc_update_6028(){
+    module_enable(array('cck_phone'),true);
 }
