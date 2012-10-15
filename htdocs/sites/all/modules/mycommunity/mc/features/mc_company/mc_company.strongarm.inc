@@ -237,8 +237,8 @@ function mc_company_strongarm() {
         'map_link' => 0,
         'coords' => 0,
       ),
-      'teaser' => 1,
-      'full' => 1,
+      'teaser' => 0,
+      'full' => 0,
     ),
     'rss' => array(
       'mode' => 'simple',

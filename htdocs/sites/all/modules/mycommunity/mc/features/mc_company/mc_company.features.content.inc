@@ -12,14 +12,27 @@ function mc_company_content_default_fields() {
     'type_name' => 'company',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_company_size',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -96,14 +109,27 @@ function mc_company_content_default_fields() {
     'type_name' => 'company',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'link',
+        'parent_id' => '',
+        'field_id' => 'field_facebook',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -186,14 +212,27 @@ function mc_company_content_default_fields() {
     'type_name' => 'company',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'content_taxonomy',
+        'parent_id' => '',
+        'field_id' => 'field_industry',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -264,14 +303,27 @@ function mc_company_content_default_fields() {
     'type_name' => 'company',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'number_integer',
+        'parent_id' => '',
+        'field_id' => 'field_ishiring',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -346,14 +398,27 @@ function mc_company_content_default_fields() {
     'type_name' => 'company',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'number_integer',
+        'parent_id' => '',
+        'field_id' => 'field_islookingfund',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -433,12 +498,12 @@ function mc_company_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-83',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'medium__colorbox',
+        'format' => 'node_image__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -446,7 +511,7 @@ function mc_company_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-83',
+        'weight' => '-19',
       ),
       'weight' => '7',
       'parent' => '',
@@ -533,7 +598,7 @@ function mc_company_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-66',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -546,7 +611,7 @@ function mc_company_content_default_fields() {
         'field_id' => 'field_phone_number',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-66',
+        'weight' => '-19',
       ),
       'teaser' => array(
         'format' => 'hidden',
@@ -599,14 +664,27 @@ function mc_company_content_default_fields() {
     'type_name' => 'company',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'link',
+        'parent_id' => '',
+        'field_id' => 'field_twitter',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -694,7 +772,7 @@ function mc_company_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-63',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -707,7 +785,7 @@ function mc_company_content_default_fields() {
         'field_id' => 'field_website',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-63',
+        'weight' => '-19',
       ),
       'teaser' => array(
         'format' => 'hidden',
