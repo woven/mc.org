@@ -5345,27 +5345,9 @@ echo "Seeking funding";
       ),
       'relationship' => 'none',
     ),
-    'field_company_size_value' => array(
-      'operator' => '=',
-      'value' => '1-3',
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-        'optional' => FALSE,
-      ),
-      'case' => 1,
-      'id' => 'field_company_size_value',
-      'table' => 'node_data_field_company_size',
-      'field' => 'field_company_size_value',
-      'override' => array(
-        'button' => 'Use default',
-      ),
-      'relationship' => 'none',
-    ),
   ));
   $handler->override_option('empty', 'Nothing to show here.');
+  $handler->override_option('items_per_page', 10);
   $handler->override_option('row_options', array(
     'semantic_html' => array(
       'field_list_image_fid' => array(
