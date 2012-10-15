@@ -76,7 +76,7 @@ function mc_company_views_query_alter(&$view, &$query) {
         case 'size':
             if(!empty($arg)){
                 $query->add_table('content_type_company');
-                $query->add_where('company_size',"field_company_size_value = '%s'",$arg);
+                $query->add_where(NULL,"field_company_size_value = '%s'",$arg);
                 $filter = true;
             }
         break;
@@ -84,12 +84,12 @@ function mc_company_views_query_alter(&$view, &$query) {
             switch($arg){
                 case 'hiring':
                     $query->add_table('content_type_company');
-                    $query->add_where('company_size',"field_ishiring_value = %d",1);
+                    $query->add_where(NULL,"field_ishiring_value = %d",1);
                     $filter = true;
                 break;
                 case 'funding':
                     $query->add_table('content_type_company');
-                    $query->add_where('company_size',"field_islookingfund_value = %d",1);
+                    $query->add_where(NULL,"field_islookingfund_value = %d",1);
                     $filter = true;
                 break;
             }
@@ -97,7 +97,7 @@ function mc_company_views_query_alter(&$view, &$query) {
         default;
     }
 
-    if($section & !$filter){
-        drupal_goto("directory");
+    if($section && !$filter){
+        //drupal_goto("directory");
     }
 }
