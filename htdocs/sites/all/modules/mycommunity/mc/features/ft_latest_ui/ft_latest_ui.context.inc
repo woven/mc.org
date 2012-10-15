@@ -29,6 +29,12 @@ function ft_latest_ui_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'menu-menu-directory-bysize' => array(
+          'module' => 'menu',
+          'delta' => 'menu-directory-bysize',
+          'region' => 'right',
+          'weight' => 1,
+        ),
       ),
     ),
   );

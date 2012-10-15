@@ -16,9 +16,8 @@ function mc_tax_industry_taxonomy_default_vocabularies() {
       'tags' => '0',
       'module' => 'features_industry',
       'weight' => '0',
-      'nodes' => array(
-        'company' => 'company',
-      ),
+      'type' => NULL,
+      'nodes' => array(),
     ),
   );
 }

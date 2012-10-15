@@ -49,3 +49,55 @@ function mc_company_preprocess($vars,$hook){
         }
     }
 }
+
+function mc_company_views_query_alter(&$view, &$query) {
+
+    if($view->name != 'latest_pages'){
+        return ;
+    }
+
+    if($view->current_display != 'page_8'){
+        return;
+    }
+
+    $section = arg(1);
+    $arg = arg(2);
+    $filter = false;
+
+    switch($section){
+        case 'industry':
+            if($arg > 0){
+                $tid = arg(2);
+                $query->add_table('term_node');
+                $query->add_where('term','term_node.tid = %d',$arg);
+                $filter = true;
+            }
+        break;
+        case 'size':
+            if(!empty($arg)){
+                $query->add_table('content_type_company');
+                $query->add_where('company_size',"field_company_size_value = '%s'",$arg);
+                $filter = true;
+            }
+        break;
+        case 'tag':
+            switch($arg){
+                case 'hiring':
+                    $query->add_table('content_type_company');
+                    $query->add_where('company_size',"field_ishiring_value = %d",1);
+                    $filter = true;
+                break;
+                case 'funding':
+                    $query->add_table('content_type_company');
+                    $query->add_where('company_size',"field_islookingfund_value = %d",1);
+                    $filter = true;
+                break;
+            }
+        break;
+        default;
+    }
+
+    if($section & !$filter){
+        drupal_goto("directory");
+    }
+}
