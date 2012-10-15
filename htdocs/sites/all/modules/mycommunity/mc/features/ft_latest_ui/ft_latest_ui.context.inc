@@ -37,6 +37,58 @@ function ft_latest_ui_context_default_contexts() {
         ),
       ),
     ),
+    'block_class' => array(
+      'header' => array(
+        'class' => '',
+      ),
+      'branding' => array(
+        'class' => '',
+      ),
+      'featured' => array(
+        'class' => '',
+      ),
+      'group_logo' => array(
+        'class' => '',
+      ),
+      'footer' => array(
+        'class' => '',
+      ),
+      'content' => array(
+        'class' => '',
+      ),
+      'left' => array(
+        'class' => '',
+      ),
+      'right' => array(
+        'class' => '',
+        'blocks' => array(
+          'views-directory_taxonomy-block_1' => array(
+            'class' => 'ghh-menu-items',
+          ),
+          'menu-menu-directory-bysize' => array(
+            'class' => 'ghh-menu-items',
+          ),
+        ),
+      ),
+      'below_content' => array(
+        'class' => '',
+      ),
+      'above_content' => array(
+        'class' => '',
+      ),
+      'content_top' => array(
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'class' => '',
+      ),
+      'footer_above' => array(
+        'class' => '',
+      ),
+      'overlay' => array(
+        'class' => '',
+      ),
+    ),
   );
   $context->condition_mode = 1;
 
