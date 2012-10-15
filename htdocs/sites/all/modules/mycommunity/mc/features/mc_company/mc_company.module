@@ -37,3 +37,15 @@ function mc_company_node_form_after_build($form, &$form_state){
 
     return $form;
 }
+
+function mc_company_preprocess($vars,$hook){
+    if($hook == 'block'){
+        $cblock = $vars['block'];
+        if($cblock->module == 'ds' && $cblock->bid == 'ds-f75e0974f5723f830348fb4d9444931b'){
+            $cblock->subject = t("Where it's at");
+        }
+        if($cblock->module == 'ds' && $cblock->bid == 'ds-3cc955558f2299879e4f9d02f84134bd'){
+            $cblock->subject = t("More Info");
+        }
+    }
+}
