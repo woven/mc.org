@@ -11,23 +11,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_company_size',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => '-1',
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-94',
+      'full' => array(
+        'label' => array(
+          'format' => 'inline',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'middle',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_company_size',
+        'label_value' => 'Company Size',
+        'exclude' => 0,
+        'weight' => '-94',
+      ),
+      'weight' => '-1',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'default',
         'exclude' => 0,
@@ -100,23 +110,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_facebook',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => '3',
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-96',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'left',
+        'type' => 'link',
+        'parent_id' => '',
+        'field_id' => 'field_facebook',
+        'label_value' => '',
+        'exclude' => 0,
+        'weight' => '-96',
+      ),
+      'weight' => '3',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'default',
         'exclude' => 0,
@@ -195,23 +215,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_industry',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => '-2',
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-95',
+      'full' => array(
+        'label' => array(
+          'format' => 'inline',
+        ),
+        'format' => 'link',
+        'css-class' => '',
+        'region' => 'middle',
+        'type' => 'content_taxonomy',
+        'parent_id' => '',
+        'field_id' => 'field_industry',
+        'label_value' => 'Industry',
+        'exclude' => 0,
+        'weight' => '-95',
+      ),
+      'weight' => '-2',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'default',
         'exclude' => 0,
@@ -278,23 +308,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_ishiring',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => '5',
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-93',
+      'full' => array(
+        'label' => array(
+          'format' => 'inline',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'middle',
+        'type' => 'number_integer',
+        'parent_id' => '',
+        'field_id' => 'field_ishiring',
+        'label_value' => 'Hiring',
+        'exclude' => 0,
+        'weight' => '-93',
+      ),
+      'weight' => '5',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'default',
         'exclude' => 0,
@@ -365,23 +405,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_islookingfund',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => '4',
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-92',
+      'full' => array(
+        'label' => array(
+          'format' => 'inline',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'middle',
+        'type' => 'number_integer',
+        'parent_id' => '',
+        'field_id' => 'field_islookingfund',
+        'label_value' => 'Looking for funding',
+        'exclude' => 0,
+        'weight' => '-92',
+      ),
+      'weight' => '4',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'default',
         'exclude' => 0,
@@ -452,23 +502,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_list_image',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => '21',
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'hidden',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'node_image__colorbox',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-19',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'node_image__colorbox',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'filefield',
+        'parent_id' => '',
+        'field_id' => 'field_list_image',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-19',
+      ),
+      'weight' => '21',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'hidden',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'image_plain',
         'exclude' => 0,
@@ -542,23 +602,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_phone_number',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => 0,
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'hidden',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-99',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'left',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_phone_number',
+        'label_value' => 'Phone',
+        'exclude' => 0,
+        'weight' => '-99',
+      ),
+      'weight' => 0,
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'hidden',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'default',
         'exclude' => 0,
@@ -605,23 +675,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_twitter',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => '2',
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-97',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'left',
+        'type' => 'link',
+        'parent_id' => '',
+        'field_id' => 'field_twitter',
+        'label_value' => '',
+        'exclude' => 0,
+        'weight' => '-97',
+      ),
+      'weight' => '2',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'default',
         'exclude' => 0,
@@ -700,23 +780,33 @@ function mc_company_content_default_fields() {
     'field_name' => 'field_website',
     'type_name' => 'company',
     'display_settings' => array(
-      'weight' => '1',
-      'parent' => '',
       'label' => array(
         'format' => 'hidden',
-      ),
-      'teaser' => array(
-        'format' => 'hidden',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 1,
       ),
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
       'ds_weight' => '-98',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'left',
+        'type' => 'link',
+        'parent_id' => '',
+        'field_id' => 'field_website',
+        'label_value' => '',
+        'exclude' => 0,
+        'weight' => '-98',
+      ),
+      'weight' => '1',
+      'parent' => '',
+      'teaser' => array(
+        'format' => 'hidden',
+        'exclude' => 0,
+      ),
       '4' => array(
         'format' => 'default',
         'exclude' => 0,

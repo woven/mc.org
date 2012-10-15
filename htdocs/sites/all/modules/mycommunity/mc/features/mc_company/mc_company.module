@@ -67,9 +67,10 @@ function mc_company_views_query_alter(&$view, &$query) {
     switch($section){
         case 'industry':
             if($arg > 0){
-                $tid = arg(2);
+                $term = taxonomy_get_term($arg);
                 $query->add_table('term_node');
                 $query->add_where('term','term_node.tid = %d',$arg);
+                $title = "Directory: By Industry: " . $term->name;
                 $filter = true;
             }
         break;
@@ -77,6 +78,7 @@ function mc_company_views_query_alter(&$view, &$query) {
             if(!empty($arg)){
                 $query->add_table('content_type_company');
                 $query->add_where(NULL,"field_company_size_value = '%s'",$arg);
+                $title = "Directory: By Size: " . $arg  ." employees";
                 $filter = true;
             }
         break;
@@ -85,19 +87,26 @@ function mc_company_views_query_alter(&$view, &$query) {
                 case 'hiring':
                     $query->add_table('content_type_company');
                     $query->add_where(NULL,"field_ishiring_value = %d",1);
+                    $title = "Directory: Hiring";
                     $filter = true;
                 break;
                 case 'funding':
                     $query->add_table('content_type_company');
                     $query->add_where(NULL,"field_islookingfund_value = %d",1);
+                    $title = "Directory: Seeking funding";
                     $filter = true;
                 break;
             }
         break;
-        default;
+    } //end switch section
+
+    if(!empty($title)){
+        $view->display[$view->current_display]->display_options["title"] = "";
+        $view->display[$view->current_display]->handler->options["title"] = $title;
     }
 
     if($section && !$filter){
         //drupal_goto("directory");
     }
+
 }

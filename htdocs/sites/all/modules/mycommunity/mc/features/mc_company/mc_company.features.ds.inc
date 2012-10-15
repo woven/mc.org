@@ -33,7 +33,7 @@ function mc_company_ds_default_settings() {
             'field_industry' => array(
               'region' => 'middle',
               'weight' => '-95',
-              'format' => 'default',
+              'format' => 'link',
               'css-class' => '',
               'label_value' => 'Industry',
               'labelformat' => 'inline',
