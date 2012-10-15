@@ -36,7 +36,7 @@ function mc_company_ds_default_settings() {
               'format' => 'default',
               'css-class' => '',
               'label_value' => 'Industry',
-              'labelformat' => 'hidden',
+              'labelformat' => 'inline',
             ),
             'field_company_size' => array(
               'region' => 'middle',

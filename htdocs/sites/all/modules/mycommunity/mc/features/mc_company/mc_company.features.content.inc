@@ -220,7 +220,7 @@ function mc_company_content_default_fields() {
       'ds_weight' => '-95',
       'full' => array(
         'label' => array(
-          'format' => 'hidden',
+          'format' => 'inline',
         ),
         'format' => 'default',
         'css-class' => '',
@@ -498,7 +498,7 @@ function mc_company_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-49',
+      'ds_weight' => '-19',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -511,7 +511,7 @@ function mc_company_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-49',
+        'weight' => '-19',
       ),
       'weight' => '7',
       'parent' => '',
