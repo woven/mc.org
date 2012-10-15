@@ -4790,7 +4790,8 @@ echo theme("mc_event_view_header",$view);
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-echo $data->node_data_field_company_size_field_industry_value;',
+echo $data->node_data_field_company_size_field_industry_value;
+?>',
       'exclude' => 1,
       'id' => 'phpcode_2',
       'table' => 'customfield',

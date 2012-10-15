@@ -98,6 +98,6 @@ function mc_company_views_query_alter(&$view, &$query) {
     }
 
     if($section && !$filter){
-        //drupal_goto("directory");
+        drupal_goto("directory");
     }
 }
