@@ -10,7 +10,7 @@ function mc_company_menu_default_menu_links() {
   $menu_links['menu-directory-bysize:directory/size/1-3'] = array(
     'menu_name' => 'menu-directory-bysize',
     'link_path' => 'directory/size/1-3',
-    'router_path' => 'directory',
+    'router_path' => 'directory/%',
     'link_title' => '1-3 employees',
     'options' => array(
       'attributes' => array(
@@ -28,7 +28,7 @@ function mc_company_menu_default_menu_links() {
   $menu_links['menu-directory-bysize:directory/size/11-20'] = array(
     'menu_name' => 'menu-directory-bysize',
     'link_path' => 'directory/size/11-20',
-    'router_path' => 'directory',
+    'router_path' => 'directory/%',
     'link_title' => '11-20 employees',
     'options' => array(
       'attributes' => array(
@@ -46,7 +46,7 @@ function mc_company_menu_default_menu_links() {
   $menu_links['menu-directory-bysize:directory/size/21-50'] = array(
     'menu_name' => 'menu-directory-bysize',
     'link_path' => 'directory/size/21-50',
-    'router_path' => 'directory',
+    'router_path' => 'directory/%',
     'link_title' => '21-50 employees',
     'options' => array(
       'attributes' => array(
@@ -64,7 +64,7 @@ function mc_company_menu_default_menu_links() {
   $menu_links['menu-directory-bysize:directory/size/4-6'] = array(
     'menu_name' => 'menu-directory-bysize',
     'link_path' => 'directory/size/4-6',
-    'router_path' => 'directory',
+    'router_path' => 'directory/%',
     'link_title' => '4-6 employees',
     'options' => array(
       'attributes' => array(
@@ -82,7 +82,7 @@ function mc_company_menu_default_menu_links() {
   $menu_links['menu-directory-bysize:directory/size/50+'] = array(
     'menu_name' => 'menu-directory-bysize',
     'link_path' => 'directory/size/50+',
-    'router_path' => 'directory',
+    'router_path' => 'directory/%',
     'link_title' => '50+ employees',
     'options' => array(
       'attributes' => array(
@@ -100,7 +100,7 @@ function mc_company_menu_default_menu_links() {
   $menu_links['menu-directory-bysize:directory/size/7-10'] = array(
     'menu_name' => 'menu-directory-bysize',
     'link_path' => 'directory/size/7-10',
-    'router_path' => 'directory',
+    'router_path' => 'directory/%',
     'link_title' => '7-10 employees',
     'options' => array(
       'attributes' => array(

@@ -50,13 +50,37 @@ function mc_company_preprocess($vars,$hook){
     }
 }
 
-function mc_company_views_query_alter(&$view, &$query) {
+function mc_company_menu(){
 
+    $items['directory'] = array(
+        'title' => 'Directory',
+        'description' => 'Directory page',
+        'access arguments' => array('access content'),
+        'page callback' => 'directory_page',
+    );
+
+    $items['directory/%'] = array(
+        'title' => 'Directory',
+        'description' => 'Directory page',
+        'access arguments' => array('access content'),
+        'page callback' => 'directory_page',
+    );
+
+    return $items;
+}
+
+function directory_page(){
+    return "";
+}
+
+function mc_company_views_query_alter(&$view, &$query) {
     if($view->name != 'latest_pages'){
-        return ;
+        return;
     }
 
-    if($view->current_display != 'page_8'){
+    $allowed = array('page_8','page_9');
+
+    if(!in_array($view->current_display,$allowed)){
         return;
     }
 
