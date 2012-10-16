@@ -32,15 +32,15 @@ function mc_company_ds_default_settings() {
             ),
             'field_industry' => array(
               'region' => 'middle',
-              'weight' => '-95',
-              'format' => 'link',
+              'weight' => '-94',
+              'format' => 'default',
               'css-class' => '',
               'label_value' => 'Industry',
               'labelformat' => 'inline',
             ),
             'field_company_size' => array(
               'region' => 'middle',
-              'weight' => '-94',
+              'weight' => '-93',
               'format' => 'default',
               'css-class' => '',
               'label_value' => 'Company Size',
@@ -77,7 +77,7 @@ function mc_company_ds_default_settings() {
             ),
             'field_islookingfund' => array(
               'region' => 'middle',
-              'weight' => '-92',
+              'weight' => '-91',
               'format' => 'default',
               'css-class' => '',
               'label_value' => 'Looking for funding',
@@ -85,7 +85,7 @@ function mc_company_ds_default_settings() {
             ),
             'field_ishiring' => array(
               'region' => 'middle',
-              'weight' => '-93',
+              'weight' => '-92',
               'format' => 'default',
               'css-class' => '',
               'label_value' => 'Hiring',
@@ -107,7 +107,7 @@ function mc_company_ds_default_settings() {
             ),
             'nodes_slideshow' => array(
               'region' => 'middle',
-              'weight' => '-91',
+              'weight' => '-95',
               'format' => 'ds_eval_code',
               'css-class' => '',
               'labelformat' => 'hidden',
