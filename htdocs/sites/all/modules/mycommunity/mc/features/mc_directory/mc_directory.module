@@ -1,0 +1,178 @@
+<?php
+/**
+ * @file
+ * Code for the MC Directory feature.
+ */
+
+define("MC_DIRECTORY_NODE_VIEW",'directory_node');
+
+include_once 'mc_directory.features.inc';
+
+function mc_directory_menu(){
+
+  $items['directory'] = array(
+    'title' => 'Directory',
+    'description' => 'Directory page',
+    'access arguments' => array('access content'),
+    'page callback' => 'directory_page',
+  );
+
+  $items['directory/%'] = array(
+    //'title' => 'Directory',
+    'description' => 'Directory page list/map views',
+    'access arguments' => array('access content'),
+    'page callback' => 'directory_page_sub',
+    'page arguments' => array(1)
+  );
+
+  return $items;
+}
+
+function _directory_active_view(){
+  $view = arg(1);
+  $allowed = _directory_allowed_views();
+
+  //check if it's valid view
+  if(isset($view) && !empty($view) && in_array($view,$allowed)){
+    return $view;
+  }else{
+    //return default value
+    return 'list';
+  }
+}
+
+function mc_directory_block($op = 'list', $delta = 0, $edit = array()){
+  switch($op){
+    case 'list':
+      $blocks[0] = array(
+        'info' => t('Directory: Filter by Size'),
+        'weight' => 1,
+        'status' => 1
+      );
+      return $blocks;
+    break;
+    case 'view':
+      $block = array();
+      switch ($delta) {
+        case 0:
+          $block = array(
+            'subject' => t('By Size'),
+            'content' => _directory_bysize_block_content(),
+          );
+        break;
+      }
+      return $block;
+    break;
+  }
+}
+
+function _directory_bysize_block_content(){
+  $content_field = content_fields('field_company_size');
+  $values = content_allowed_values($content_field);
+  $links = array();
+  $active_view = _directory_active_view();
+  foreach($values as $val => $title){
+    $path = "directory/" . $active_view . '/size/' . $val;
+    $links[] = l($title,$path);
+  }
+
+  return theme("item_list",$links);
+}
+
+/**
+ * Return the allowed views blocks for map & list
+ * @return array
+ */
+function _directory_allowed_blocks(){
+  return array(
+    'page_9','page_8'
+  );
+}
+
+/**
+ * Return the allowed views list/map
+ * @return array
+ */
+function _directory_allowed_views(){
+  return array(
+    'list','map'
+  );
+}
+
+function directory_page(){
+  drupal_goto("directory/list");
+  return "";
+}
+
+function directory_page_sub($type){
+  switch($type){
+    case 'list':
+      return views_embed_view(MC_DIRECTORY_NODE_VIEW,'page_8');
+      break;
+    case 'map':
+      return views_embed_view(MC_DIRECTORY_NODE_VIEW,'page_9');
+      break;
+  }
+
+  return drupal_not_found();
+}
+
+function mc_directory_views_query_alter(&$view, &$query) {
+  if($view->name != MC_DIRECTORY_NODE_VIEW){
+    return;
+  }
+
+  $allowed = _directory_allowed_blocks();
+
+  if(!in_array($view->current_display,$allowed)){
+    return;
+  }
+
+  $section = arg(2);
+  $arg = arg(3);
+  $filter = FALSE;
+
+  switch($section){
+    case 'industry':
+      if($arg > 0){
+        $term = taxonomy_get_term($arg);
+        $query->add_table('term_node');
+        $query->add_where('term','term_node.tid = %d',$arg);
+        $title = "Directory: By Industry: " . $term->name;
+        $filter = TRUE;
+      }
+      break;
+    case 'size':
+      if(!empty($arg)){
+        $query->add_table('content_type_company');
+        $query->add_where(NULL,"field_company_size_value = '%s'",$arg);
+        $title = "Directory: By Size: " . $arg  ." employees";
+        $filter = TRUE;
+      }
+      break;
+    case 'tag':
+      switch($arg){
+        case 'hiring':
+          $query->add_table('content_type_company');
+          $query->add_where(NULL,"field_ishiring_value = %d",1);
+          $title = "Directory: Hiring";
+          $filter = TRUE;
+          break;
+        case 'funding':
+          $query->add_table('content_type_company');
+          $query->add_where(NULL,"field_islookingfund_value = %d",1);
+          $title = "Directory: Seeking funding";
+          $filter = TRUE;
+          break;
+      }
+      break;
+  } //end switch section
+
+  if(!empty($title)){
+    drupal_set_title($title);
+    $view->display[$view->current_display]->display_options["title"] = "";
+    $view->display[$view->current_display]->handler->options["title"] = $title;
+  }else{
+    drupal_set_title("Directory");
+  }
+}
