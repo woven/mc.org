@@ -2434,7 +2434,7 @@ echo "Seeking funding";
   $handler->override_option('style_plugin', 'gmap');
   $handler->override_option('style_options', array(
     'grouping' => '',
-    'macro' => '[gmap id=directory-map | width=100% |height=600px |control=Small |type=Map | markermode=1| autozoom=1 |maxzoom=10 | zoom=10 | behavior=+autozoom]',
+    'macro' => '[gmap id=directory-map | width=100% |height=600px |control=Large |type=Map | markermode=1| autozoom=1 |maxzoom=10 | zoom=10 | behavior=+autozoom,-nodrag]',
     'datasource' => 'location',
     'latfield' => 'phpcode_2',
     'lonfield' => 'phpcode_2',
