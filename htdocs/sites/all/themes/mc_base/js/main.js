@@ -284,11 +284,3 @@ function openColorboxJoin(){
         $('#register input[name=mail]').focus();
     }});
 }
-
-Drupal.gmap.addHandler('gmap',function(elem) {
-    var obj = this;
-    obj.bind('checkresize',function() {
-        obj.map.checkResize();
-        obj.map.setCenter(new GLatLng(obj.vars.latitude,obj.vars.longitude), obj.vars.zoom);
-    });
-});
