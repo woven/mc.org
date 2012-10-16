@@ -18,7 +18,6 @@ function mc_directory_menu(){
   );
 
   $items['directory/%'] = array(
-    //'title' => 'Directory',
     'description' => 'Directory page list/map views',
     'access arguments' => array('access content'),
     'page callback' => 'directory_page_sub',

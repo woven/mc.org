@@ -232,8 +232,15 @@ function mc_update_6028(){
 }
 
 /**
-  * enable cck_phone
+  * enable mc_company, cck_phone, mc_tax_industry
 */
 function mc_update_6029(){
     module_enable(array('mc_company','cck_phone','mc_tax_industry'),true);
+}
+
+/**
+  * enable mc_directory
+*/
+function mc_update_6030(){
+    module_enable(array('mc_directory'),true);
 }
