@@ -103,7 +103,7 @@ function mc_directory_context_default_contexts() {
     'theme' => array(
       'title' => '',
       'subtitle' => '',
-      'class' => 'mc-directory',
+      'class' => 'mc-directory block-titled',
     ),
   );
   $context->condition_mode = 1;
