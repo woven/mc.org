@@ -43,8 +43,13 @@ function _directory_active_view(){
 function mc_directory_block($op = 'list', $delta = 0, $edit = array()){
   switch($op){
     case 'list':
-      $blocks[0] = array(
+      $blocks['bysize'] = array(
         'info' => t('Directory: Filter by Size'),
+        'weight' => 1,
+        'status' => 1
+      );
+      $blocks['switch'] = array(
+        'info' => t('Directory: Switch Filtering'),
         'weight' => 1,
         'status' => 1
       );
@@ -53,16 +58,35 @@ function mc_directory_block($op = 'list', $delta = 0, $edit = array()){
     case 'view':
       $block = array();
       switch ($delta) {
-        case 0:
+        case 'bysize':
           $block = array(
             'subject' => t('By Size'),
             'content' => _directory_bysize_block_content(),
           );
         break;
+        case 'switch':
+         $block = array(
+            'subject' => "",
+            'content' => _directory_switchview_block_content(),
+          );
+         break;
       }
       return $block;
     break;
   }
+}
+
+function _directory_switchview_block_content(){
+  $q = $_GET['q'];
+  $qs = explode("/",$q);
+
+  $qs['1'] = 'list';
+  $links[] = l("List",implode("/",$qs));
+
+  $qs['1'] = 'map';
+  $links[] = l("Map",implode("/",$qs));
+
+  return theme("item_list",$links);
 }
 
 function _directory_bysize_block_content(){

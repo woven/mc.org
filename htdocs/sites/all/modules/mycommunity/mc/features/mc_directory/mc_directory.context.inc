@@ -23,15 +23,21 @@ function mc_directory_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'mc_directory-switch' => array(
+          'module' => 'mc_directory',
+          'delta' => 'switch',
+          'region' => 'content',
+          'weight' => 0,
+        ),
         'views-directory_taxonomy-block_1' => array(
           'module' => 'views',
           'delta' => 'directory_taxonomy-block_1',
           'region' => 'right',
           'weight' => 0,
         ),
-        'mc_directory-0' => array(
+        'mc_directory-bysize' => array(
           'module' => 'mc_directory',
-          'delta' => 0,
+          'delta' => 'bysize',
           'region' => 'right',
           'weight' => 1,
         ),
@@ -55,6 +61,11 @@ function mc_directory_context_default_contexts() {
       ),
       'content' => array(
         'class' => '',
+        'blocks' => array(
+          'mc_directory-switch' => array(
+            'class' => '',
+          ),
+        ),
       ),
       'left' => array(
         'class' => '',
@@ -65,7 +76,7 @@ function mc_directory_context_default_contexts() {
           'views-directory_taxonomy-block_1' => array(
             'class' => 'ghh-menu-items',
           ),
-          'mc_directory-0' => array(
+          'mc_directory-bysize' => array(
             'class' => 'ghh-menu-items',
           ),
         ),
