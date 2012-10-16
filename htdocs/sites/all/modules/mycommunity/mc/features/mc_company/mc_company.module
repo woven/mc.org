@@ -63,14 +63,41 @@ function mc_company_menu(){
         'title' => 'Directory',
         'description' => 'Directory page',
         'access arguments' => array('access content'),
-        'page callback' => 'directory_page',
+        'page callback' => 'directory_page_sub',
+        'page arguments' => array(1)
     );
 
     return $items;
 }
 
+function _directory_active_view(){
+    $view = arg(1);
+    $allowed = array('list','map');
+
+    //check if it's valid view
+    if(isset($view) && !empty($view) && in_array($view,$allowed)){
+        return $view;
+    }else{
+        //return default value
+        return 'list';
+    }
+}
+
 function directory_page(){
-    return "";
+    drupal_goto("directory/list");
+}
+
+function directory_page_sub($type){
+    switch($type){
+        case 'list':
+            return views_embed_view('latest_pages','page_8');
+        break;
+        case 'map':
+            return views_embed_view('latest_pages','page_9');
+        break;
+    }
+
+    return drupal_not_found();
 }
 
 function mc_company_views_query_alter(&$view, &$query) {
@@ -84,8 +111,8 @@ function mc_company_views_query_alter(&$view, &$query) {
         return;
     }
 
-    $section = arg(1);
-    $arg = arg(2);
+    $section = arg(2);
+    $arg = arg(3);
     $filter = false;
 
     switch($section){

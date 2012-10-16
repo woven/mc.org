@@ -35,12 +35,6 @@ function ft_latest_ui_context_default_contexts() {
           'region' => 'right',
           'weight' => 1,
         ),
-        'quicktabs-directory_tabs' => array(
-          'module' => 'quicktabs',
-          'delta' => 'directory_tabs',
-          'region' => 'below_content',
-          'weight' => 0,
-        ),
       ),
     ),
     'block_class' => array(
@@ -79,7 +73,7 @@ function ft_latest_ui_context_default_contexts() {
       'below_content' => array(
         'class' => '',
         'blocks' => array(
-          'boxes-directory_content' => array(
+          'quicktabs-directory_tabs' => array(
             'class' => '',
           ),
         ),
