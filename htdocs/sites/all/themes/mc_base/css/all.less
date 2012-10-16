@@ -3581,8 +3581,10 @@ body.block-titled{
 }
 
 body.mc-directory{
-  a.active{
-    color: #333;
+  .field-nodeinfo.first{
+    a{
+      color: green;
+    }
   }
 
   #block-mc_directory-switch{
@@ -3603,5 +3605,8 @@ body.mc-directory{
         }
       }
     }
+  }
+  a.active{
+    color: #333 !important;
   }
 }
