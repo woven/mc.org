@@ -49,7 +49,7 @@ function ft_location_strongarm() {
       'nomousezoom' => 1,
       'nocontzoom' => 1,
       'autozoom' => 0,
-      'dynmarkers' => 0,
+      'dynmarkers' => 1,
       'overview' => 0,
       'collapsehack' => 0,
       'scale' => 0,
@@ -58,7 +58,7 @@ function ft_location_strongarm() {
       'googlebar' => 0,
       'highlight' => 0,
     ),
-    'markermode' => '0',
+    'markermode' => '1',
     'line_colors' => array(
       0 => '#00cc00',
       1 => '#ff0000',
@@ -81,7 +81,7 @@ function ft_location_strongarm() {
   $strongarm->value = array(
     'gmarkermanager' => array(
       'borderPadding' => '0',
-      'maxZoom' => '4',
+      'maxZoom' => '17',
       'trackMarkers' => 0,
       'markerMinZoom' => '4',
       'markerMaxZoom' => '0',
@@ -134,7 +134,7 @@ function ft_location_strongarm() {
     'macro' => '[gmap |id=nodemap|center=40,0|zoom=3|width=100%|height=400px]',
     'header' => 'This map illustrates the locations of the nodes on this website. Each marker indicates a node associated with a specific location.',
     'footer' => '',
-    'markermode' => '0',
+    'markermode' => '1',
   );
   $export['gmap_node_map'] = $strongarm;
 
@@ -143,24 +143,25 @@ function ft_location_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'gmap_node_markers';
   $strongarm->value = array(
-    'group' => 'drupal',
-    'image' => 'drupal',
     'article' => 'drupal',
     'audio' => 'drupal',
-    'event' => 'drupal',
-    'feedapi_node' => 'drupal',
     'file' => 'drupal',
+    'group' => 'drupal',
     'link' => 'drupal',
-    'news' => 'drupal',
-    'place' => 'yellow',
-    'simplenews' => 'drupal',
-    'video' => 'drupal',
+    'nnews' => 'drupal',
     'webform' => 'drupal',
-    'forum' => 'drupal',
     'npage' => 'drupal',
+    'page' => 'drupal',
+    'place' => 'yellow',
+    'taxonomy_feature' => 'drupal',
+    'taxonomy_topic' => 'drupal',
+    'video' => 'drupal',
+    'company' => 'blue',
+    'event_feed' => 'drupal',
     'gallery' => 'drupal',
     'gallery_image' => 'drupal',
-    'company' => 'drupal',
+    'forum' => 'drupal',
+    'event' => 'drupal',
   );
   $export['gmap_node_markers'] = $strongarm;
 
@@ -170,9 +171,9 @@ function ft_location_strongarm() {
   $strongarm->name = 'gmap_role_markers';
   $strongarm->value = array(
     2 => 'drupal',
+    3 => 'drupal',
     4 => 'drupal',
     5 => 'drupal',
-    3 => 'drupal',
   );
   $export['gmap_role_markers'] = $strongarm;
 
@@ -184,7 +185,7 @@ function ft_location_strongarm() {
     'macro' => '[gmap |id=usermap|center=40,0|zoom=3|width=100%|height=400px]',
     'header' => 'This map illustrates the extent of users of this website. Each marker indicates a user that has entered their locations.',
     'footer' => '',
-    'markermode' => '0',
+    'markermode' => '1',
   );
   $export['gmap_user_map'] = $strongarm;
 

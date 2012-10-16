@@ -5712,14 +5712,16 @@ echo $data->node_data_field_company_size_field_company_size_value;
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
         'help' => '',
         'trim' => 1,
-        'max_length' => '150',
+        'max_length' => '65',
         'word_boundary' => 1,
         'ellipsis' => 1,
         'html' => 0,
@@ -5728,13 +5730,14 @@ echo $data->node_data_field_company_size_field_company_size_value;
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'exclude' => 0,
       'id' => 'body',
       'table' => 'node_revisions',
       'field' => 'body',
       'relationship' => 'none',
       'override' => array(
-        'button' => 'Override',
+        'button' => 'Use default',
       ),
     ),
     'field_ishiring_value' => array(
@@ -5979,17 +5982,21 @@ echo "Seeking funding";
     ),
   ));
   $handler->override_option('empty', 'Nothing to show here.');
-  $handler->override_option('items_per_page', 10);
+  $handler->override_option('items_per_page', 0);
+  $handler->override_option('use_pager', '0');
   $handler->override_option('style_plugin', 'gmap');
   $handler->override_option('style_options', array(
     'grouping' => '',
-    'macro' => '[gmap zoom=10 |center=25.787526529117876,-80.21942138671875 |width=98%|height=600px |control=Large |type=Map]',
+    'macro' => '[gmap id=directory-map | zoom=10 |center=25.787526529117876,-80.21942138671875 |width=600px|height=600px |control=Large |type=Map | markermode=1]',
     'datasource' => 'location',
     'latfield' => 'phpcode_2',
     'lonfield' => 'phpcode_2',
-    'markers' => 'nodetype',
-    'markerfield' => 'phpcode_2',
-    'markertype' => 'big blue',
+    'markers' => 'static',
+    'markerfield' => 'title_1',
+    'enablermt' => 0,
+    'rmtfield' => 'phpcode_2',
+    'rmtcallback' => '',
+    'markertype' => 'blue',
     'center_on_nodearg' => 0,
     'center_on_nodearg_arg' => '',
     'highlight_nodearg' => 0,
@@ -6006,7 +6013,7 @@ echo "Seeking funding";
       ),
       'nothing_1' => array(
         'element_type' => 'div',
-        'class' => 'field-nodeinfo',
+        'class' => 'field-nodeinfo ',
         'label_element_type' => '',
         'label_class' => '',
       ),
