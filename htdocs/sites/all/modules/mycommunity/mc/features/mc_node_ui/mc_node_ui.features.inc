@@ -43,11 +43,12 @@ function mc_node_ui_imagecache_default_presets() {
       'actions' => array(
         '0' => array(
           'weight' => '0',
-          'module' => 'imagecache',
-          'action' => 'imagecache_scale_and_crop',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
           'data' => array(
             'width' => '190',
             'height' => '190',
+            'upscale' => 0,
           ),
         ),
       ),
