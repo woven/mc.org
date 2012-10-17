@@ -157,10 +157,17 @@ function mc_directory_views_query_alter(&$view, &$query) {
 
   switch($section){
     case 'industry':
-      if($arg > 0){
+      if(intval($arg) > 0){
         $term = taxonomy_get_term($arg);
+        $tid = $arg;
+      }else{
+        $term = taxonomy_get_term_by_name($arg);
+        $term = $term[0];
+      }
+
+      if(isset($term) && !empty($term)){
         $query->add_table('term_node');
-        $query->add_where('term','term_node.tid = %d',$arg);
+        $query->add_where('term','term_node.tid = %d',$term->tid);
         $title = "Directory: By Industry: " . $term->name;
         $filter = TRUE;
       }
