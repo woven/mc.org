@@ -2625,6 +2625,13 @@ echo "Seeking funding";
     ),
   ));
   $handler->override_option('sorts', array(
+    'weight' => array(
+      'order' => 'ASC',
+      'id' => 'weight',
+      'table' => 'term_data',
+      'field' => 'weight',
+      'relationship' => 'none',
+    ),
     'name' => array(
       'order' => 'ASC',
       'id' => 'name',
