@@ -3,7 +3,7 @@
 /**
 * Resolve vid issue on features_industry
 */
-function mc_tax_industry_update_6001(){
+function mc_tax_industry_update_6002(){
   module_load_include('module','mc_api','mc_api');
 
   if(_mc_taxonomy_fix_vid(4,'features_industry')){
