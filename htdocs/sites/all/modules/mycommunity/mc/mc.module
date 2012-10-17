@@ -210,21 +210,6 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
     if ($form['type']['#value'] != 'page') {
       $form['menu']['#type'] = 'hidden';
     }
-
-    // disable extraneous settings on File content type
-    if ($form['type']['#value'] == 'file') {
-      //TODO: How do we hide these but still have them work?
-      $form['comment_settings']['#type'] = 'hidden';
-    }
-
-    // Select some reasonable defaults for locations
-    if (isset($form['locations'][0]) && is_null($form['locations'][0]['#default_value'])) {
-      $form['locations'][0]['#default_value'] = array(
-        'city' => 'Harlem',
-        'province' => 'NY',
-        'country' => 'us'
-      );
-    }
   }
 
   // alter image form
@@ -237,13 +222,13 @@ function mc_form_alter(&$form, &$form_state, $form_id) {
   }
   
 
-/* Update the sign in form */
- if ($form['#id'] == 'user-login-form'){
-   $form['name']['#description'] = 'Enter your username or e-mail address.';
-   $form['name']['#title'] = 'Username';
-   $form['#validate'][]= "mc_validate_user_send_eror";
-   $form['submit']['#value']="Sign in";
- }
+  /* Update the sign in form */
+   if ($form['#id'] == 'user-login-form'){
+     $form['name']['#description'] = 'Enter your username or e-mail address.';
+     $form['name']['#title'] = 'Username';
+     $form['#validate'][]= "mc_validate_user_send_eror";
+     $form['submit']['#value']="Sign in";
+   }
 }
 
 function mc_validate_user_send_eror($form, &$form_state){
