@@ -58,12 +58,36 @@ function ft_landing_ui_imagecache_default_presets() {
       'presetname' => 'thumbnail',
       'actions' => array(
         '0' => array(
-          'weight' => '0',
+          'weight' => '-10',
           'module' => 'imagecache',
-          'action' => 'imagecache_scale_and_crop',
+          'action' => 'imagecache_scale',
           'data' => array(
             'width' => '83',
-            'height' => '83',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache_canvasactions',
+          'action' => 'canvasactions_definecanvas',
+          'data' => array(
+            'RGB' => array(
+              'HEX' => '',
+            ),
+            'under' => 1,
+            'exact' => array(
+              'width' => '83',
+              'height' => '83',
+              'xpos' => 'center',
+              'ypos' => 'center',
+            ),
+            'relative' => array(
+              'leftdiff' => '',
+              'rightdiff' => '',
+              'topdiff' => '',
+              'bottomdiff' => '',
+            ),
           ),
         ),
       ),

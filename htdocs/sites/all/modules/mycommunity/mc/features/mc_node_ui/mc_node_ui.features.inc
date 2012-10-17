@@ -42,13 +42,36 @@ function mc_node_ui_imagecache_default_presets() {
       'presetname' => 'node_image',
       'actions' => array(
         '0' => array(
-          'weight' => '0',
-          'module' => 'smartcrop',
-          'action' => 'smartcrop_scale_and_crop',
+          'weight' => '-10',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
           'data' => array(
             'width' => '190',
-            'height' => '190',
+            'height' => '',
             'upscale' => 0,
+          ),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecache_canvasactions',
+          'action' => 'canvasactions_definecanvas',
+          'data' => array(
+            'RGB' => array(
+              'HEX' => '',
+            ),
+            'under' => 1,
+            'exact' => array(
+              'width' => '190',
+              'height' => '190',
+              'xpos' => 'center',
+              'ypos' => 'center',
+            ),
+            'relative' => array(
+              'leftdiff' => '',
+              'rightdiff' => '',
+              'topdiff' => '',
+              'bottomdiff' => '',
+            ),
           ),
         ),
       ),
