@@ -72,7 +72,7 @@
             <?php endif; ?>
             
             <?php if($content){ ?>
-            <div class="clear-block">
+            <div id="content-body" class="clear-block">
                 <?php print $content ?>       
                 <?php print $feed_icons ?>
             </div>
