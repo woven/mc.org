@@ -878,7 +878,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'medium_imagelink_mcdefaultimg',
+      'format' => 'medium_linked_mcdefaultimg',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -1882,6 +1882,7 @@ if ($type == \'news\'){
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
+  $handler->override_option('title', 'Directory');
   $handler->override_option('header_format', '4');
   $handler->override_option('header_empty', 0);
   $handler->override_option('footer_format', '4');
@@ -1928,10 +1929,6 @@ Nothing to show here.
       'title_1' => array(
         'element_type' => 'h5',
         'class' => '',
-      ),
-      'nothing_2' => array(
-        'element_type' => 'div',
-        'class' => 'field-author',
       ),
       'nothing_1' => array(
         'element_type' => 'p',

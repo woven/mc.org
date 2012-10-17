@@ -37,8 +37,10 @@ function mc_node_ui_views_default_views() {
         'text' => '',
         'make_link' => 0,
         'path' => '',
+        'absolute' => 0,
         'link_class' => '',
         'alt' => '',
+        'rel' => '',
         'prefix' => '',
         'suffix' => '',
         'target' => '',
@@ -53,9 +55,10 @@ function mc_node_ui_views_default_views() {
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'machine_name' => 0,
-      'exclude' => 1,
+      'exclude' => 0,
       'id' => 'type',
       'table' => 'node',
       'field' => 'type',
@@ -237,7 +240,7 @@ print theme_ghh_node_categories($data->nid, 2);
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'exclude' => 0,
+      'exclude' => 1,
       'id' => 'nothing',
       'table' => 'views',
       'field' => 'nothing',
@@ -587,6 +590,10 @@ else {
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
+      'type' => array(
+        'element_type' => 'div',
+        'class' => 'node-meta-type',
+      ),
       'nothing' => array(
         'element_type' => 'div',
         'class' => 'category-link',

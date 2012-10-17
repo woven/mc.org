@@ -1,0 +1,51 @@
+<?php
+/**
+ * @file
+ * Code for the Company feature.
+ */
+
+include_once 'mc_company.features.inc';
+
+function mc_company_late_form_alter(&$form, &$form_state, $form_id){
+    global $user;
+
+    if(!is_ct_form($form,"company")){
+        return; //exit if not company node.
+    }
+
+    //remove some fields from non admin users
+    if($user->uid > 1){
+        $form['#after_build'][] = 'mc_company_node_form_after_build';
+        unset($form['og_selective']);
+        unset($form['og_register']);
+        unset($form['og_directory']);
+        unset($form['og_menu']);
+        unset($form['og_private']);
+    }
+
+}
+
+function mc_company_node_form_after_build($form, &$form_state){
+
+    $form['body_field']['format']['#access'] = false;
+    //modify some files default values
+    $form['field_industry']['value']['#options'][''] = "Choose...";
+    $form['field_company_size']['value']['#options'][''] = "Choose...";
+
+    unset($form['field_ishiring']['value']['']);
+    unset($form['field_islookingfund']['value']['']);
+
+    return $form;
+}
+
+function mc_company_preprocess($vars,$hook){
+    if($hook == 'block'){
+        $cblock = $vars['block'];
+        if($cblock->module == 'ds' && $cblock->bid == 'ds-f75e0974f5723f830348fb4d9444931b'){
+            $cblock->subject = t("Where it's at");
+        }
+        if($cblock->module == 'ds' && $cblock->bid == 'ds-3cc955558f2299879e4f9d02f84134bd'){
+            $cblock->subject = t("Get in touch");
+        }
+    }
+}

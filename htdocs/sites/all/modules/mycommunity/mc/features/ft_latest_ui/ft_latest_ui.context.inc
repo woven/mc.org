@@ -49,7 +49,7 @@ function ft_latest_ui_context_default_contexts() {
     'theme' => array(
       'title' => '',
       'subtitle' => '',
-      'class' => 'latest-page',
+      'class' => 'latest-page block-titled',
     ),
   );
   $context->condition_mode = 1;
@@ -64,7 +64,7 @@ function ft_latest_ui_context_default_contexts() {
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'landing_latest_events';
-  $context->description = 'Context that holds all the elements for the latest pages, except latest/events';
+  $context->description = 'latest/events/* blocks';
   $context->tag = 'latest';
   $context->conditions = array(
     'path' => array(
@@ -106,15 +106,15 @@ function ft_latest_ui_context_default_contexts() {
     'theme' => array(
       'title' => '',
       'subtitle' => '',
-      'class' => 'latest-page',
+      'class' => 'latest-page block-titled',
     ),
   );
   $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Context that holds all the elements for the latest pages, except latest/events');
   t('latest');
+  t('latest/events/* blocks');
   $export['landing_latest_events'] = $context;
 
   return $export;

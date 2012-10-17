@@ -74,6 +74,10 @@ function endsWith($haystack, $needle)
   return (substr($haystack, -$length) === $needle);
 }
 
+function _form_options_yes_no(){
+    return array("0" => 'No',"1" => "Yes");
+}
+
 function _schema_meta_date($ts,$itemprop = 'startDate'){
   $iso_start = date('c',$ts);
   return "<meta itemprop=\"$itemprop\" content=\"$iso_start\">";

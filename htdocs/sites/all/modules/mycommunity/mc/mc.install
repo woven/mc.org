@@ -216,3 +216,31 @@ function mc_update_6025(){
 function mc_update_6026(){
     module_disable(array('ft_search_cse'));
 }
+
+/**
+  * enable company
+*/
+function mc_update_6027(){
+    module_enable(array('mc_company'),true);
+}
+
+/**
+  * enable cck_phone
+*/
+function mc_update_6028(){
+    module_enable(array('cck_phone'),true);
+}
+
+/**
+  * enable mc_company, cck_phone, mc_tax_industry
+*/
+function mc_update_6029(){
+    module_enable(array('mc_company','cck_phone','mc_tax_industry'),true);
+}
+
+/**
+  * enable mc_directory
+*/
+function mc_update_6030(){
+    module_enable(array('mc_directory'),true);
+}
