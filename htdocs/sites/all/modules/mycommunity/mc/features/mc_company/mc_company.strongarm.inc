@@ -216,7 +216,7 @@ function mc_company_strongarm() {
           'weight' => '14',
         ),
         'locpick' => array(
-          'collect' => '1',
+          'collect' => '0',
           'weight' => '20',
         ),
       ),
