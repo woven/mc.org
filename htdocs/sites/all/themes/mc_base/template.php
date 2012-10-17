@@ -25,7 +25,44 @@ function mc_base_nd_location_gmap($field, $latitude, $longitude, $width, $height
     );
   }
 
-  return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
+  //return gmap_simple_map($latitude, $longitude, '', '', $zoom, $width, $height, $autoclick, $map);
+
+  $settings = array(
+    'id' => gmap_get_auto_mapid(),
+    'latitude' => $latitude,   // Center the map
+    'longitude' => $longitude, // on the marker.
+    'markeraction' => 2
+  );
+  if ($zoom != 'default') {
+    $settings['zoom'] = $zoom;
+  }
+  if ($width != 'default') {
+    $settings['width'] = $width;
+  }
+  if ($height != 'default') {
+    $settings['height'] = $height;
+  }
+
+  $settings['markers'] = array(array(
+    'latitude' => $latitude,
+    'longitude' => $longitude,
+    'markername' => $markername,
+    'offset' => 0,
+  ));
+
+  if (!empty($info)) {
+    $settings['markers'][0]['text'] = $info;
+  }
+
+  if ($autoshow) {
+    $settings['markers'][0]['autoclick'] = TRUE;
+  }
+
+  if (!empty($map)) {
+    $settings = array_merge($settings, $map);
+  }
+
+  return theme('gmap', array('#settings' => $settings));
 }
 
 
