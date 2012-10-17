@@ -14,13 +14,13 @@ function mc_base_nd_location_gmap($field, $latitude, $longitude, $width, $height
   );
 
   $map = array();
-  $bubble_content = _nd_location_theme_bubble($field);
+  //$bubble_content = _nd_location_theme_bubble($field);
   if (!empty($bubble_content)) {
     $map['markers'][] = array(
       'latitude' => $latitude,
       'longitude' => $longitude,
-      'text' => $bubble_content,
-      'autoclick' => $autoclick,
+      //'text' => $bubble_content,
+      //'autoclick' => $autoclick,
       'link' => $gurl
     );
   }
