@@ -1,0 +1,15 @@
+<?php
+
+/**
+* Resolve vid issue on features_industry
+*/
+function mc_tax_industry_update_6001(){
+  module_load_include('module','mc_api','mc_api');
+
+  if(_mc_taxonomy_fix_vid(4,'features_industry')){
+    watchdog('mc_tax_industry',"Succesfully changed features_industry vid");
+  }else{
+    watchdog('mc_tax_industry',"Unable to change features_industry vid",array(),WATCHDOG_ERROR);
+  }
+
+}
