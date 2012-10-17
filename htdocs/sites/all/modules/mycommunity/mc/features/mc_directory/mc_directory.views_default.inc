@@ -2460,7 +2460,7 @@ echo "Seeking funding";
       ),
       'nothing_1' => array(
         'element_type' => 'div',
-        'class' => 'field-nodeinfo ',
+        'class' => 'field-nodeinfo first',
         'label_element_type' => '',
         'label_class' => '',
       ),
