@@ -44,7 +44,7 @@ function ical_export($events, $calname = NULL) {
       $output .= "DTSTART;VALUE=DATE-TIME:" . event_format_date($event['start_utc'], 'custom', "Ymd\THis\Z") ."\r\n";
       //If allday event, set to day after allday start
       $end_date = event_date_later($event['start'], 1);
-      $output .= "DTEND;VALUE=DATE-TIME:" . event_format_date($end_date, 'custom', 'Ymd') ."\r\n";
+      $output .= "DTEND;VALUE=DATE-TIME:" . event_format_date($end_date, 'custom', 'Ymd\THis\Z') ."\r\n";
     }
     else if (!empty($event['start_utc']) && !empty($event['end_utc'])) {
       $output .= "DTSTART;VALUE=DATE-TIME:". event_format_date($event['start_utc'], 'custom', "Ymd\THis\Z") ."\r\n";
