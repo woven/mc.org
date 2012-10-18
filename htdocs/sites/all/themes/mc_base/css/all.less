@@ -386,6 +386,7 @@ a .ico-small {
   .view-items-list .location-link,
   .view-items-list .field-body,
   .view-items-list .field-author,
+  .view-items-list .show-more-events,
   .audio-list .field-nodeinfo,
   .audio-list h5,
   .audio-list .location-link,
@@ -395,8 +396,9 @@ a .ico-small {
   .video-list h5,
   .video-list .location-link,
   .video-list .field-body,
-  .video-list .field-author {
-    margin-left:105px;
+  .video-list .field-author,
+  .show-more-events{
+    margin-left:110px;
   }
   .ico-all, a.ico-all {
     background-position:0 0;
@@ -1084,12 +1086,6 @@ a .ico-small {
   }
   .view-latest .view-content > div {
     margin:5px 0;
-  }
-  .view-latest .field-view-image {
-    margin:0 12px 0 0;
-    img {
-      margin:0;
-    }
   }
   .view-latest .item-block .corner {
     right:-6px;
@@ -3160,9 +3156,10 @@ body.page-user .view-my-groups ul {
     z-index:100;
   }
 }
+
 .field-view-image {
   float:left;
-  margin:0px 12px 0 0;
+  margin:0px 16px 0 0;
   position:relative;
   img {
     border:1px solid #d0d0d0;
@@ -3204,10 +3201,6 @@ body.page-user .view-my-groups ul {
 }
 
 .view-mc-events-by-dates,.event-section{
-    .view-content p {
-      margin-left:104px;
-      margin-bottom:8px;
-    }
     .section-section{
       .block-title{
         margin-bottom: 20px;
@@ -3251,13 +3244,6 @@ body.page-user .view-my-groups ul {
           border:none;
         }
       }
-    }
-    .field-view-image .img {
-      height:83px;
-      width:83px;
-      margin:auto;
-      border:solid 1px #eeeeee;
-      background:#f7f7f7;
     }
     .hash {
       display:none;
@@ -3341,7 +3327,6 @@ body.page-user .view-my-groups ul {
   color:#cccccc;
 }
 .show-more-events {
-  margin-left:104px;
   a {
     font-size:11px;
     text-decoration:none;
@@ -3351,6 +3336,7 @@ body.page-user .view-my-groups ul {
     color:#0099ff;
   }
 }
+
 #edit-feedapi-feedapi-file-wrapper {
   display:none;
 }
