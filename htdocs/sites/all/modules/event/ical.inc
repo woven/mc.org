@@ -30,40 +30,43 @@
  *   Text of a iCalendar file
  */
 function ical_export($events, $calname = NULL) {
-  $output = "BEGIN:VCALENDAR\nVERSION:2.0\n";
-  $output .= "METHOD:PUBLISH\n";
-  $output .= 'X-WR-CALNAME:'. variable_get('site_name', '') .' | '. ical_escape_text($calname) ."\n";
-  $output .= "PRODID:-//strange bird labs//Drupal iCal API//EN\n";
+  //disable devel
+  $GLOBALS['devel_shutdown'] = FALSE;
+
+  $output = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\n";
+  $output .= "METHOD:PUBLISH\r\n";
+  $output .= 'X-WR-CALNAME:'. variable_get('site_name', '') .' | '. ical_escape_text($calname) ."\r\n";
+  $output .= "PRODID:-//strange bird labs//Drupal iCal API//EN\r\n";
   foreach ($events as $uid => $event) {
-    $output .= "BEGIN:VEVENT\n";
-    $output .= "DTSTAMP;VALUE=DATE-TIME:". gmdate("Ymd\THis\Z", time()) ."\n";
+    $output .= "BEGIN:VEVENT\r\n";
+    $output .= "DTSTAMP;VALUE=DATE-TIME:". gmdate("Ymd\THis\Z", time()) ."\r\n";
     if (!$event['has_time']) { // all day event
-      $output .= "DTSTART;VALUE=DATE-TIME:" . event_format_date($event['start_utc'], 'custom', "Ymd\THis\Z") ."\n";
+      $output .= "DTSTART;VALUE=DATE-TIME:" . event_format_date($event['start_utc'], 'custom', "Ymd\THis\Z") ."\r\n";
       //If allday event, set to day after allday start
       $end_date = event_date_later($event['start'], 1);
-      $output .= "DTEND;VALUE=DATE-TIME:" . event_format_date($end_date, 'custom', 'Ymd') ."\n";
+      $output .= "DTEND;VALUE=DATE-TIME:" . event_format_date($end_date, 'custom', 'Ymd\THis\Z') ."\r\n";
     }
     else if (!empty($event['start_utc']) && !empty($event['end_utc'])) {
-      $output .= "DTSTART;VALUE=DATE-TIME:". event_format_date($event['start_utc'], 'custom', "Ymd\THis\Z") ."\n";
-      $output .= "DTEND;VALUE=DATE-TIME:". event_format_date($event['end_utc'], 'custom', "Ymd\THis\Z") ."\n";
+      $output .= "DTSTART;VALUE=DATE-TIME:". event_format_date($event['start_utc'], 'custom', "Ymd\THis\Z") ."\r\n";
+      $output .= "DTEND;VALUE=DATE-TIME:". event_format_date($event['end_utc'], 'custom', "Ymd\THis\Z") ."\r\n";
     }
     else if (!empty($event['start_utc'])) {
-      $output .= "DTSTART;VALUE=DATE-TIME:". event_format_date($event['start_utc'], 'custom', "Ymd\THis\Z") ."\n";
+      $output .= "DTSTART;VALUE=DATE-TIME:". event_format_date($event['start_utc'], 'custom', "Ymd\THis\Z") ."\r\n";
     }
-    $output .= "UID:". ($event['uid'] ? $event['uid'] : $uid) ."\n";
+    $output .= "UID:". ($event['uid'] ? $event['uid'] : $uid) ."\r\n";
     if (!empty($event['url'])) {
-      $output .= "URL;VALUE=URI:" . $event['url'] ."\n";
+      $output .= "URL;VALUE=URI:" . $event['url'] ."\r\n";
     }
     if (!empty($event['location'])) {
-      $output .= "LOCATION:" . ical_escape_text($event['location']) ."\n";
+      $output .= "LOCATION:" . ical_escape_text($event['location']) ."\r\n";
     }
-    $output .= "SUMMARY:" . ical_escape_text($event['summary']) ."\n";
+    $output .= "SUMMARY:" . ical_escape_text($event['summary']) ."\r\n";
     if (!empty($event['description'])) {
-      $output .= "DESCRIPTION:" . ical_escape_text($event['description']) ."\n";
+      $output .= "DESCRIPTION:" . ical_escape_text($event['description']) ."\r\n";
     }
-    $output .= "END:VEVENT\n";
+    $output .= "END:VEVENT\r\n";
   }
-  $output .= "END:VCALENDAR\n";
+  $output .= "END:VCALENDAR\r\n";
   return $output;
 }
 
@@ -79,12 +82,12 @@ function ical_export($events, $calname = NULL) {
  */
 function ical_escape_text($text) {
   //$text = strip_tags($text);
-  $text = str_replace('"', '\"', $text);
+  $text = str_replace("\"", "DQUOTE", $text);
   $text = str_replace("\\", "\\\\", $text);
   $text = str_replace(",", "\,", $text);
-  $text = str_replace(":", "\:", $text);
   $text = str_replace(";", "\;", $text);
-  $text = str_replace("\n", "\n ", $text);
+  $text = str_replace(array("\r\n", "\n", "\r"), "\\n ", $text);
+  $text = implode("\n ", str_split($text, 50));
   return $text;
 }
 
