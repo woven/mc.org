@@ -39,7 +39,7 @@ CREATE TABLE `filter_formats` (
 LOCK TABLES `filter_formats` WRITE;
 /*!40000 ALTER TABLE `filter_formats` DISABLE KEYS */;
 set autocommit=0;
-INSERT INTO `filter_formats` VALUES (1,'Filtered HTML',',1,2,',1),(2,'Full HTML','',1),(3,'PHP code','',0),(4,'Femail mail message',',2,',0),(5,'Plain',',1,2,',1);
+INSERT INTO `filter_formats` VALUES (1,'Filtered HTML',',1,2,',1),(2,'Full HTML',',4,8,',1),(3,'PHP code',',4,',0),(4,'Femail mail message',',2,',0),(5,'Plain',',1,2,',1);
 /*!40000 ALTER TABLE `filter_formats` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -60,7 +60,7 @@ CREATE TABLE `filters` (
   PRIMARY KEY (`fid`),
   UNIQUE KEY `fmd` (`format`,`module`,`delta`),
   KEY `list` (`format`,`weight`,`module`,`delta`)
-) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `filters` (
 LOCK TABLES `filters` WRITE;
 /*!40000 ALTER TABLE `filters` DISABLE KEYS */;
 set autocommit=0;
-INSERT INTO `filters` VALUES (19,1,'filter',0,1),(20,1,'filter',1,2),(18,1,'filter',2,0),(23,2,'filter',1,1),(22,2,'filter',2,0),(70,3,'swftools',0,10),(24,2,'filter',3,10),(21,1,'filter',3,10),(66,4,'filter',2,-8),(65,4,'filter',1,-9),(71,5,'filter',1,2),(68,4,'femail',1,-6),(64,4,'filter',0,-10),(67,4,'femail',0,-7),(69,3,'php',0,0);
+INSERT INTO `filters` VALUES (19,1,'filter',0,1),(20,1,'filter',1,2),(18,1,'filter',2,0),(73,2,'filter',1,1),(75,3,'php',0,0),(72,2,'filter',3,10),(21,1,'filter',3,10),(66,4,'filter',2,-8),(65,4,'filter',1,-9),(71,5,'filter',1,2),(68,4,'femail',1,-6),(64,4,'filter',0,-10),(67,4,'femail',0,-7),(76,3,'swftools',0,10),(74,2,'filter',2,0);
 /*!40000 ALTER TABLE `filters` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -111,4 +111,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-10-05 13:14:43
+-- Dump completed on 2012-10-18 15:37:38
