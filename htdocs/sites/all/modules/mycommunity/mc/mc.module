@@ -137,6 +137,7 @@ function mc_late_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
+    dsm($form['buttons']);
     foreach($form['buttons'] as $key => &$btn){
       switch($key){
         case 'submit':
@@ -157,6 +158,9 @@ function mc_late_form_alter(&$form, &$form_state, $form_id) {
             ),
             '#weight' => -2,
           );
+          break;
+        case 'preview':
+          $btn['#access'] = FALSE;
           break;
       }; //end switch
     };  //end foreach
