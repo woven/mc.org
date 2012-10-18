@@ -216,7 +216,7 @@ function mc_company_strongarm() {
           'weight' => '14',
         ),
         'locpick' => array(
-          'collect' => '0',
+          'collect' => '1',
           'weight' => '20',
         ),
       ),
@@ -269,13 +269,6 @@ function mc_company_strongarm() {
       'weight' => '0',
       'hidden' => 0,
     ),
-    'revision_information' => array(
-      'region' => 'right',
-      'weight' => '0.028',
-      'has_required' => FALSE,
-      'title' => NULL,
-      'hidden' => 0,
-    ),
     'comment_settings' => array(
       'region' => 'right',
       'weight' => '30',
@@ -315,24 +308,18 @@ function mc_company_strongarm() {
       'title' => NULL,
       'hidden' => 0,
     ),
-    'field_industry' => array(
+    'taxonomy' => array(
       'region' => 'main',
       'weight' => '2',
-      'has_required' => TRUE,
-      'title' => 'Industry',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
     ),
     'field_company_size' => array(
       'region' => 'main',
       'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Company Size',
-      'hidden' => 0,
-    ),
-    'field_phone_number' => array(
-      'region' => 'main',
-      'weight' => '5',
-      'has_required' => FALSE,
-      'title' => 'Phone number',
       'hidden' => 0,
     ),
     'field_website' => array(
@@ -370,11 +357,11 @@ function mc_company_strongarm() {
       'title' => 'Hiring',
       'hidden' => 0,
     ),
-    'field_list_image' => array(
+    'field_phone' => array(
       'region' => 'main',
-      'weight' => '11',
+      'weight' => '5',
       'has_required' => FALSE,
-      'title' => 'Images',
+      'title' => 'Phone',
       'hidden' => 0,
     ),
     'locations' => array(
@@ -382,6 +369,14 @@ function mc_company_strongarm() {
       'weight' => '4',
       'has_required' => TRUE,
       'title' => 'Location',
+    ),
+    'print' => array(
+      'region' => 'main',
+      'weight' => '11',
+      'has_required' => FALSE,
+      'title' => 'Printer, email and PDF versions',
+      'collapsed' => 1,
+      'hidden' => 0,
     ),
     'xmlsitemap' => array(
       'region' => 'main',
@@ -417,14 +412,14 @@ function mc_company_strongarm() {
     'nfs_publishingoptions' => '0',
     'nfs_comments' => '0',
     'nfs_taxonomy' => '0',
-    'nfs_preview' => '0',
+    'nfs_preview' => '1',
     'nfs_cancel' => array(
-      'nfs_cancel_status' => '1',
+      'nfs_cancel_status' => '0',
       'nfs_cancel_behaviour' => '0',
     ),
-    'nfs_submit' => 'Submit',
+    'nfs_submit' => 'Save',
     'nfs_hide_node_title' => '0',
-    'nfs_title_create' => 'Create !node_type',
+    'nfs_title_create' => 'Add !node_type',
     'nfs_title_edit' => '!node_title',
   );
   $export['nodeformsettings_company'] = $strongarm;
@@ -484,7 +479,7 @@ function mc_company_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'og_content_type_usage_company';
-  $strongarm->value = 'omitted';
+  $strongarm->value = 'group';
   $export['og_content_type_usage_company'] = $strongarm;
 
   $strongarm = new stdClass;

@@ -17,7 +17,7 @@ function mc_company_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-93',
+      'ds_weight' => '-94',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -30,7 +30,7 @@ function mc_company_content_default_fields() {
         'field_id' => 'field_company_size',
         'label_value' => 'Company Size',
         'exclude' => 0,
-        'weight' => '-93',
+        'weight' => '-94',
       ),
       'weight' => '-1',
       'parent' => '',
@@ -221,12 +221,12 @@ function mc_company_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-94',
+      'ds_weight' => '-95',
       'full' => array(
         'label' => array(
           'format' => 'inline',
         ),
-        'format' => 'default',
+        'format' => 'link',
         'css-class' => '',
         'region' => 'middle',
         'type' => 'content_taxonomy',
@@ -234,7 +234,7 @@ function mc_company_content_default_fields() {
         'field_id' => 'field_industry',
         'label_value' => 'Industry',
         'exclude' => 0,
-        'weight' => '-94',
+        'weight' => '-95',
       ),
       'weight' => '-2',
       'parent' => '',
@@ -281,11 +281,6 @@ function mc_company_content_default_fields() {
     'multiple' => '0',
     'module' => 'content_taxonomy',
     'active' => '1',
-    'save_term_node' => 1,
-    'vid' => '4',
-    'parent' => '0',
-    'parent_php_code' => '',
-    'depth' => '',
     'widget' => array(
       'group_parent' => '0',
       'show_depth' => 1,
@@ -314,7 +309,7 @@ function mc_company_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-92',
+      'ds_weight' => '-93',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -327,7 +322,7 @@ function mc_company_content_default_fields() {
         'field_id' => 'field_ishiring',
         'label_value' => 'Hiring',
         'exclude' => 0,
-        'weight' => '-92',
+        'weight' => '-93',
       ),
       'weight' => '5',
       'parent' => '',
@@ -411,7 +406,7 @@ function mc_company_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-91',
+      'ds_weight' => '-92',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -424,7 +419,7 @@ function mc_company_content_default_fields() {
         'field_id' => 'field_islookingfund',
         'label_value' => 'Looking for funding',
         'exclude' => 0,
-        'weight' => '-91',
+        'weight' => '-92',
       ),
       'weight' => '4',
       'parent' => '',

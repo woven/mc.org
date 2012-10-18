@@ -110,8 +110,11 @@ function mc_perms_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      '0' => 'anonymous user',
-      '1' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+      '3' => 'community manager',
+      '4' => 'group manager',
     ),
   );
 
@@ -178,6 +181,7 @@ function mc_perms_user_default_permissions() {
     'name' => 'act as a member for any group',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'community manager',
     ),
   );
 
@@ -186,6 +190,7 @@ function mc_perms_user_default_permissions() {
     'name' => 'act as a visitor for any group',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'community manager',
     ),
   );
 
@@ -194,6 +199,7 @@ function mc_perms_user_default_permissions() {
     'name' => 'act as an admin for any group',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'community manager',
     ),
   );
 
@@ -202,6 +208,7 @@ function mc_perms_user_default_permissions() {
     'name' => 'act as the manager for any group',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'community manager',
     ),
   );
 
@@ -214,7 +221,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add members
   $permissions['add members'] = array(
     'name' => 'add members',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: add photos in any album
@@ -474,7 +483,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer group main page
   $permissions['administer group main page'] = array(
     'name' => 'administer group main page',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: administer groupadmin
@@ -660,13 +672,17 @@ function mc_perms_user_default_permissions() {
   // Exported permission: approve membership request
   $permissions['approve membership request'] = array(
     'name' => 'approve membership request',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: broadcast to group
   $permissions['broadcast to group'] = array(
     'name' => 'broadcast to group',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: bypass advanced aggregation
@@ -846,7 +862,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: create group administrator
   $permissions['create group administrator'] = array(
     'name' => 'create group administrator',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: create group content
@@ -1101,7 +1119,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete group administrator
   $permissions['delete group administrator'] = array(
     'name' => 'delete group administrator',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: delete heartbeat activity logs
@@ -1252,7 +1272,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: deny membership request
   $permissions['deny membership request'] = array(
     'name' => 'deny membership request',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: display drupal links
@@ -1673,7 +1695,9 @@ function mc_perms_user_default_permissions() {
   // Exported permission: remove members
   $permissions['remove members'] = array(
     'name' => 'remove members',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'community manager',
+    ),
   );
 
   // Exported permission: revert revisions
