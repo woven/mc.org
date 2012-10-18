@@ -1,5 +1,24 @@
 <?php
 
+function _mc_taxonomy_fix_vid($vid,$feature){
+  //get the vid of the current taxonomy term
+  $c_vid = db_result(db_query("SELECT vid FROM {vocabulary} WHERE module = '%s'",$feature));
+
+  //check if the target $vid exists already or not
+  $vid_exists = db_result(db_query("SELECT vid FROM {vocabulary} WHERE vid = %d",$vid));
+
+  if($c_vid != $vid){
+    if(!$vid_exists){ //if vid does not already exist
+      //change the vid to become to the target vid on vocabulary and term_date
+      db_query("UPDATE {vocabulary} SET vid = %d WHERE vid = %d",$vid,$c_vid);
+      db_query("UPDATE {term_data} SET vid = %d WHERE vid = %d",$vid,$c_vid);
+      return true;
+    }
+  }
+
+  return false;
+}
+
 function addhttp($url) {
   if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
     $url = "http://" . $url;

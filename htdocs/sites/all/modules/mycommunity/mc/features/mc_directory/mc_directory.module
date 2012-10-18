@@ -157,11 +157,29 @@ function mc_directory_views_query_alter(&$view, &$query) {
 
   switch($section){
     case 'industry':
-      if($arg > 0){
+      if(intval($arg) > 0){
         $term = taxonomy_get_term($arg);
+        $tid = $arg;
+      }else{
+        /*
+         * find term by machine name
+         * could use more logic for special characters, only space and / is handled correctly
+         */
+        $term = db_fetch_object(db_query("SELECT td.* FROM {term_data} td LEFT JOIN {term_synonym} ts ON ts.tid = td.tid WHERE (td.vid = 4) AND ((replace(td.name, ' ', '-') = '%s' OR replace(ts.name, ' ', '-') = '%s') OR (replace(td.name, '/', '') = '%s' OR replace(ts.name, '/', '') = '%s'))", $arg, $arg,$arg,$arg));
+
+        //$term = taxonomy_get_term_by_name($arg);
+        //$term = $term[0];
+      }
+
+      if(isset($term) && !empty($term)){
         $query->add_table('term_node');
-        $query->add_where('term','term_node.tid = %d',$arg);
+        $query->add_where('term','term_node.tid = %d',$term->tid);
         $title = "Directory: By Industry: " . $term->name;
+        $filter = TRUE;
+      }else{
+        $query->add_table('term_node');
+        $query->add_where('term','term_node.tid = %d',0);
+        $title = "Directory: By Industry: Not Found";
         $filter = TRUE;
       }
       break;

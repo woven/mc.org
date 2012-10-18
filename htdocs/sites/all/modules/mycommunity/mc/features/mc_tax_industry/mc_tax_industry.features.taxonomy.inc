@@ -10,14 +10,15 @@ function mc_tax_industry_taxonomy_default_vocabularies() {
       'description' => 'Industry taxonomies used at Company content type',
       'help' => '',
       'relations' => '1',
-      'hierarchy' => '0',
+      'hierarchy' => '1',
       'multiple' => '0',
       'required' => '0',
       'tags' => '0',
       'module' => 'features_industry',
       'weight' => '0',
-      'type' => NULL,
-      'nodes' => array(),
+      'nodes' => array(
+        'company' => 'company',
+      ),
     ),
   );
 }

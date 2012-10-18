@@ -504,7 +504,7 @@ a .ico-small {
     border-radius:6px 6px 0 0;
     behavior:url(/sites/default/themes/harlem2/PIE/PIE.htc);
     font-weight:bold;
-    font-size:1.25em;
+    font-size:15px;
     a, a:visited {
       text-decoration:none;
       color:#595959;
@@ -611,7 +611,7 @@ a .ico-small {
   }
   h5 {
     margin-bottom:5px;
-    font-size:1.1em;
+    font-size: 17px;
     color:#ff6600;
   }
   #comments .block-title h3 {
@@ -1062,6 +1062,7 @@ a .ico-small {
   }
   .field-body {
     margin:0 0 5px;
+    font-size: 11px;
   }
   .help-block .block-title span {
     float:right;
@@ -3152,6 +3153,7 @@ body.page-user .view-my-groups ul {
   position:relative;
   img {
     border:1px solid #d0d0d0;
+    padding: 4px;
   }
 }
 
@@ -3574,14 +3576,16 @@ body.block-titled{
     #content{
       padding: 0px !important;
       margin: 0px !important;
-      .view{
-        padding: 10px 20px;
+      #content-body{
+        position: relative;
+        padding: 10px;
+        margin: 10px 20px;
       }
       h1.page-title{
-        font-size: 16px !important;
+        font-size: 15px !important;
         position: relative;
         height: 18px;
-        padding: 10px 30px 10px 10px !important;
+        padding: 10px 30px !important;
         border-bottom: 1px solid #E5E5E5;
         background: white url(../images/common/bg-block-title.png) 0 0 repeat-x;
         color: #9B9B9B;
@@ -3608,7 +3612,7 @@ body.mc-directory{
     }
   }
 
-  .field-nodeinfo.first{
+  .field-nodeinfo.first
     a{
       color: green;
     }
@@ -3616,9 +3620,9 @@ body.mc-directory{
 
   #block-mc_directory-switch{
     position: absolute;
-    top: 0;
+    top: -51px;
     right: 0px;
-    background-color: transparent;
+    background-color: transparent !important;
     .block-title{
       display: none;
     }

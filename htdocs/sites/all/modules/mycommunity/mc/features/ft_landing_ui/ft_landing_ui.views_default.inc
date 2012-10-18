@@ -2965,6 +2965,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
         'npage' => 'npage',
         'link' => 'link',
         'page' => 'page',
+        'place' => 'place',
         'webform' => 'webform',
       ),
       'group' => '0',
@@ -3109,12 +3110,10 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
     'type' => array(
       'operator' => 'not in',
       'value' => array(
-        'image' => 'image',
-        'feature_spot' => 'feature_spot',
         'file' => 'file',
         'link' => 'link',
         'page' => 'page',
-        'simplenews' => 'simplenews',
+        'place' => 'place',
         'webform' => 'webform',
       ),
       'group' => '0',
@@ -3127,7 +3126,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'table' => 'node',
       'field' => 'type',
       'override' => array(
-        'button' => 'Override',
+        'button' => 'Use default',
       ),
       'relationship' => 'none',
     ),
