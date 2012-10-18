@@ -1136,8 +1136,95 @@ Nothing to show here.
   ));
   $handler->override_option('exposed_block', TRUE);
   $handler = $view->new_display('page', 'Directory', 'page_8');
-  $handler->override_option('relationships', array());
+  $handler->override_option('relationships', array(
+    'field_industry_value' => array(
+      'label' => 'Industry term',
+      'required' => 0,
+      'id' => 'field_industry_value',
+      'table' => 'node_data_field_industry',
+      'field' => 'field_industry_value',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
   $handler->override_option('fields', array(
+    'name' => array(
+      'label' => 'Industry Name',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_taxonomy' => 0,
+      'exclude' => 1,
+      'id' => 'name',
+      'table' => 'term_data',
+      'field' => 'name',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'field_industry_value',
+    ),
+    'phpcode_5' => array(
+      'label' => 'Industry Name Path-Auto-Clean',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php
+module_load_include("inc","pathauto","pathauto");
+echo pathauto_cleanstring($data->term_data_node_data_field_industry_name);
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_5',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
     'phpcode_4' => array(
       'label' => 'PHP: Active view',
       'alter' => array(
@@ -1201,7 +1288,7 @@ Nothing to show here.
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-echo $data->node_data_field_company_size_field_industry_value;
+echo $data->term_data_node_data_field_industry_tid;
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_2',
@@ -1239,7 +1326,7 @@ echo $data->node_data_field_company_size_field_industry_value;
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-echo $data->node_data_field_company_size_field_company_size_value;
+echo $data->node_data_field_industry_field_company_size_value;
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_3',
@@ -1344,7 +1431,7 @@ echo $data->node_data_field_company_size_field_company_size_value;
         'alter_text' => 0,
         'text' => '',
         'make_link' => 1,
-        'path' => 'directory/[phpcode_4]/industry/[field_industry_value]',
+        'path' => 'directory/[phpcode_4]/industry/[phpcode_5]',
         'absolute' => 0,
         'link_class' => '',
         'alt' => '',
@@ -1634,7 +1721,7 @@ echo $data->node_data_field_company_size_field_company_size_value;
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-if($data->node_data_field_company_size_field_ishiring_value){
+if($data->node_data_field_industry_field_ishiring_value){
 echo "Hiring";
 }
 ?>',
@@ -1674,7 +1761,7 @@ echo "Hiring";
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-if($data->node_data_field_company_size_field_islookingfund_value){
+if($data->node_data_field_industry_field_islookingfund_value){
 echo "Seeking funding";
 }',
       'exclude' => 1,
@@ -1807,8 +1894,95 @@ echo "Seeking funding";
     'name' => 'navigation',
   ));
   $handler = $view->new_display('page', 'Directory Map', 'page_9');
-  $handler->override_option('relationships', array());
+  $handler->override_option('relationships', array(
+    'field_industry_value' => array(
+      'label' => 'Industry term',
+      'required' => 0,
+      'id' => 'field_industry_value',
+      'table' => 'node_data_field_industry',
+      'field' => 'field_industry_value',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
   $handler->override_option('fields', array(
+    'phpcode_5' => array(
+      'label' => 'Industry Name Path-Auto-Clean',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php
+module_load_include("inc","pathauto","pathauto");
+echo pathauto_cleanstring($data->term_data_node_data_field_industry_name);
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_5',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+    'name' => array(
+      'label' => 'Industry Term',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_taxonomy' => 0,
+      'exclude' => 1,
+      'id' => 'name',
+      'table' => 'term_data',
+      'field' => 'name',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'field_industry_value',
+    ),
     'phpcode_4' => array(
       'label' => 'PHP Active list',
       'alter' => array(
@@ -1872,7 +2046,7 @@ echo "Seeking funding";
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-echo $data->node_data_field_company_size_field_industry_value;
+echo $data->term_data_node_data_field_industry_tid;
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_2',
@@ -1910,7 +2084,7 @@ echo $data->node_data_field_company_size_field_industry_value;
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-echo $data->node_data_field_company_size_field_company_size_value;
+echo $data->node_data_field_industry_field_company_size_value;
 ?>',
       'exclude' => 1,
       'id' => 'phpcode_3',
@@ -2015,7 +2189,7 @@ echo $data->node_data_field_company_size_field_company_size_value;
         'alter_text' => 0,
         'text' => '',
         'make_link' => 1,
-        'path' => 'directory/[phpcode_4]/industry/[field_industry_value]',
+        'path' => 'directory/[phpcode_4]/industry/[phpcode_5]',
         'absolute' => 0,
         'link_class' => '',
         'alt' => '',
@@ -2305,7 +2479,7 @@ echo $data->node_data_field_company_size_field_company_size_value;
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-if($data->node_data_field_company_size_field_ishiring_value){
+if($data->node_data_field_industry_field_ishiring_value){
 echo "Hiring";
 }
 ?>',
@@ -2345,7 +2519,7 @@ echo "Hiring";
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'value' => '<?php
-if($data->node_data_field_company_size_field_islookingfund_value){
+if($data->node_data_field_industry_field_islookingfund_value){
 echo "Seeking funding";
 }',
       'exclude' => 1,
@@ -2506,13 +2680,49 @@ echo "Seeking funding";
   $view = new view;
   $view->name = 'directory_taxonomy';
   $view->description = 'Directory (Biz/Company)';
-  $view->tag = '';
+  $view->tag = 'directory';
   $view->base_table = 'term_data';
   $view->core = 6;
   $view->api_version = '2';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
   $handler = $view->new_display('default', 'Defaults', 'default');
   $handler->override_option('fields', array(
+    'phpcode_1' => array(
+      'label' => 'Industry Name Path-Auto-Clean',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php
+module_load_include("inc","pathauto","pathauto");
+echo pathauto_cleanstring($data->term_data_name);
+?>',
+      'exclude' => 1,
+      'id' => 'phpcode_1',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'relationship' => 'none',
+    ),
     'phpcode' => array(
       'label' => 'PHP code: Active view',
       'alter' => array(
@@ -2596,7 +2806,7 @@ echo "Seeking funding";
         'alter_text' => 0,
         'text' => '',
         'make_link' => 1,
-        'path' => 'directory/[phpcode]/industry/[name]',
+        'path' => 'directory/[phpcode]/industry/[phpcode_1]',
         'absolute' => 0,
         'link_class' => '',
         'alt' => '',
