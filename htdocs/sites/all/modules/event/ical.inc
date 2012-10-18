@@ -30,6 +30,9 @@
  *   Text of a iCalendar file
  */
 function ical_export($events, $calname = NULL) {
+  //disable devel
+  $GLOBALS['devel_shutdown'] = FALSE;
+
   $output = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\n";
   $output .= "METHOD:PUBLISH\r\n";
   $output .= 'X-WR-CALNAME:'. variable_get('site_name', '') .' | '. ical_escape_text($calname) ."\r\n";
