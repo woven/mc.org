@@ -33,6 +33,9 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
       ));;
 
       $form['field_header_color']['#access'] = FALSE;
+      if($form['field_group_featured_items']){
+        $form['field_group_featured_items']['#access'] = FALSE;
+      }
     }
   }
 
