@@ -567,96 +567,6 @@ black',
     ),
   );
 
-  // Exported field: field_logo_standalone
-  $fields['group-field_logo_standalone'] = array(
-    'field_name' => 'field_logo_standalone',
-    'type_name' => 'group',
-    'display_settings' => array(
-      'weight' => '34',
-      'parent' => '',
-      'label' => array(
-        'format' => 'above',
-      ),
-      'teaser' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'image_plain',
-        'exclude' => 1,
-      ),
-      '4' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      '2' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      '3' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      'bubble' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      'secondary_page' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      '5' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      'block' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      'search' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'image_plain',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'filefield',
-    'required' => '0',
-    'multiple' => '1',
-    'module' => 'filefield',
-    'active' => '1',
-    'list_field' => '0',
-    'list_default' => 1,
-    'description_field' => '0',
-    'widget' => array(
-      'file_extensions' => 'png gif jpg jpeg',
-      'file_path' => '',
-      'progress_indicator' => 'bar',
-      'max_filesize_per_file' => '',
-      'max_filesize_per_node' => '',
-      'max_resolution' => '0',
-      'min_resolution' => '0',
-      'alt' => '',
-      'custom_alt' => 0,
-      'title' => '',
-      'custom_title' => 0,
-      'title_type' => 'textfield',
-      'default_image' => NULL,
-      'use_default_image' => 0,
-      'focus' => 0,
-      'focus_min_size' => '',
-      'focus_lock_ratio' => 0,
-      'label' => 'Logo Standalone',
-      'weight' => '34',
-      'description' => 'Standalone version of the logo, recommended is 500x500 where the logo is on half of the image and taking around half of the image space (300x300)',
-      'type' => 'imagefield_widget',
-      'module' => 'imagefield',
-    ),
-  );
-
   // Exported field: field_small_name
   $fields['group-field_small_name'] = array(
     'field_name' => 'field_small_name',
@@ -756,7 +666,6 @@ black',
   t('Header Title Color');
   t('Images');
   t('Logo');
-  t('Logo Standalone');
   t('Short Name');
   t('What’s the URL of your group’s homepage?');
 

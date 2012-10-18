@@ -49,3 +49,11 @@ function ft_group_update_6015(){
 function ft_group_update_6016(){
   module_enable(array('path_alias_xt'),true);
 }
+
+/**
+ * delete field_logo_standalone
+ */
+function ft_group_update_6017(){
+  module_load_include('inc', 'content', 'includes/content.crud');
+  content_field_instance_delete('field_logo_standalone', 'group',TRUE);
+}
