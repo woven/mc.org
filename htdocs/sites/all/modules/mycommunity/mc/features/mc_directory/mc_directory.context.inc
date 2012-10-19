@@ -122,5 +122,33 @@ function mc_directory_context_default_contexts() {
   t('directory');
   $export['directory'] = $context;
 
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'directory_map';
+  $context->description = '';
+  $context->tag = 'directory';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'directory/map' => 'directory/map',
+        'directory/map/*' => 'directory/map/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'theme' => array(
+      'title' => '',
+      'subtitle' => '',
+      'class' => 'mc-directory block-titled mc-directory-map',
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('directory');
+  $export['directory_map'] = $context;
+
   return $export;
 }
