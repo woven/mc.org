@@ -41,6 +41,12 @@ function mc_directory_context_default_contexts() {
           'region' => 'right',
           'weight' => 1,
         ),
+        'mc_directory-bytag' => array(
+          'module' => 'mc_directory',
+          'delta' => 'bytag',
+          'region' => 'right',
+          'weight' => 2,
+        ),
       ),
     ),
     'block_class' => array(
@@ -77,6 +83,9 @@ function mc_directory_context_default_contexts() {
             'class' => 'ghh-menu-items',
           ),
           'mc_directory-bysize' => array(
+            'class' => 'ghh-menu-items',
+          ),
+          'mc_directory-bytag' => array(
             'class' => 'ghh-menu-items',
           ),
         ),

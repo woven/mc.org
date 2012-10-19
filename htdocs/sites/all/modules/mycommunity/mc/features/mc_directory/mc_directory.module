@@ -53,6 +53,11 @@ function mc_directory_block($op = 'list', $delta = 0, $edit = array()){
         'weight' => 1,
         'status' => 1
       );
+      $blocks['bytag'] = array(
+        'info' => t('Directory: Filter By Tag'),
+        'weight' => 1,
+        'status' => 1
+      );
       return $blocks;
     break;
     case 'view':
@@ -70,10 +75,24 @@ function mc_directory_block($op = 'list', $delta = 0, $edit = array()){
             'content' => _directory_switchview_block_content(),
           );
          break;
+        case 'bytag':
+          $block = array(
+            'subject' => t('By Tag'),
+            'content' => _directory_bytag_block_content(),
+          );
+          break;
       }
       return $block;
     break;
   }
+}
+
+function _directory_bytag_block_content(){
+  $links = array();
+  $active_view = _directory_active_view();
+  $links[] = l("Seeking funding","directory/" . $active_view . '/tag/' . 'funding');
+  $links[] = l("Hiring","directory/" . $active_view . '/tag/' . 'hiring');
+  return theme("item_list",$links);
 }
 
 function _directory_switchview_block_content(){
