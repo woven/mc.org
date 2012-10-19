@@ -123,8 +123,7 @@ function _directory_allowed_views(){
 }
 
 function directory_page(){
-  drupal_goto("directory/list");
-  return "";
+  return views_embed_view(MC_DIRECTORY_NODE_VIEW,'page_8');
 }
 
 function directory_page_sub($type){

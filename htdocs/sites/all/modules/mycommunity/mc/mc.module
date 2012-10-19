@@ -137,7 +137,6 @@ function mc_late_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
-    dsm($form['buttons']);
     foreach($form['buttons'] as $key => &$btn){
       switch($key){
         case 'submit':
