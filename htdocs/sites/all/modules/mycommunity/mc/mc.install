@@ -244,3 +244,10 @@ function mc_update_6029(){
 function mc_update_6030(){
     module_enable(array('mc_directory'),true);
 }
+
+/**
+ * Delete all nodes without Types, that was created by event_feed bug see https://app.asana.com/0/591469761504/2223694469603
+*/
+function mc_update_6031(){
+  db_query("DELETE FROM node WHERE node.type = ''");
+}
