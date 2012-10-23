@@ -1,0 +1,12 @@
+name = Twitter actions
+description = Exposes Drupal actions to send Twitter messages.
+core = 6.x
+dependencies[] = twitter
+dependencies[] = oauth_common
+
+; Information added by drupal.org packaging script on 2012-10-18
+version = "6.x-3.0-beta9+19-dev"
+core = "6.x"
+project = "twitter"
+datestamp = "1350567346"
+
