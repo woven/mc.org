@@ -1,0 +1,7 @@
+name = "mc_twitter_schedule"
+description = "Mc Tweet Scheduler"
+core = "6.x"
+package = "Features"
+dependencies[] = "flag"
+dependencies[] = "mc_twitter"
+features[flag][] = "tweet_2hour"
