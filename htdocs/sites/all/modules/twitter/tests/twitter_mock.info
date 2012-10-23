@@ -1,0 +1,10 @@
+name = Twitter Mock
+description = Sets up a mock web server to simulate API calls on tests
+core = 6.x
+
+; Information added by drupal.org packaging script on 2012-10-18
+version = "6.x-3.0-beta9+19-dev"
+core = "6.x"
+project = "twitter"
+datestamp = "1350567346"
+
