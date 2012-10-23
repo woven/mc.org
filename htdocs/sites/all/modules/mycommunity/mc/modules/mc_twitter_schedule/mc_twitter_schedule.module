@@ -5,3 +5,105 @@
  */
 
 include_once 'mc_twitter_schedule.features.inc';
+
+define('MC_TWITTER_SCHEDULE_INTERVAL_FROM', "+1.5 hours");
+define('MC_TWITTER_SCHEDULE_INTERVAL_TO', "+2 hours");
+define('MC_TWITTER_SCHEDULE_INTERVAL_FLAG', "tweet_2hour");
+define('MC_TWITTER_SCHEDULE_DAILY_HOUR',9);
+define('MC_TWITTER_USER','sameronline');
+
+function mc_twitter_schedule_menu(){
+  $items = array();
+
+  $items['admin/mc/mc_twitter_schedule'] = array(
+    'title' => 'Twitter Schedule',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_twitter_schedule'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+
+  return $items;
+}
+
+function mc_twitter_schedule(){
+  $form = array();
+
+  $form['mc_twitter_interval'] = array(
+    'title' => "Twitter Post Interval",
+    '#tree' => true
+  );
+
+  return system_settings_form($form);
+}
+
+function mc_twitter_schedule_cronapi($op, $job = NULL) {
+  $items = array();
+
+  $items['events_2hours_tweets'] = array(
+    'description' => 'Send event tweets every two hours for upcoming events',
+    'rule' => '0 */2 * * *', // Every 2 hours
+  );
+
+  return $items;
+}
+
+
+function events_2hours_tweets(){
+  //adding dependencies on twitter account
+  module_load_include('inc', 'twitter');
+
+  //timestamp for to/from filters
+  $ts_from = strtotime("+1.5 hours");
+  $ts_to = strtotime("+2 hours");
+  $flag_name = 'tweet_2hour';
+  $twitter_user = "sameronline";
+  $twitter_interval_status = "";
+
+  $sql = "SELECT
+    `event`.nid,
+    node.title,
+    flag_content.fcid
+   FROM
+    node
+   INNER JOIN `event` ON `event`.nid = node.nid AND node.type = '%s'
+   LEFT JOIN flag_content ON flag_content.content_id = `event`.nid
+   LEFT JOIN flags ON flags.fid = flag_content.fid AND flags.name = '%s'
+   WHERE flag_content.fcid IS NULL AND `event`.unix_event_start > %d AND `event`.unix_event_start < %d
+   ORDER BY `event`.unix_event_start ASC";
+
+  $result = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
+
+  while($row = db_fetch_object($result)){
+    $nid = $row->nid;
+    $node = node_load($nid);
+
+    //part of this logic from twitter_post.module
+    $twitter_account = twitter_account_load($twitter_user);
+    $replacements = array('!title' => $node->title,
+      '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
+      '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
+      '!user' => $node->name);
+
+    // Only generate the shortened URL if it's going to be used. No sense
+    // burning through TinyURLs without a good reason.
+    if (strstr($twitter_interval_status, '!tinyurl') !== FALSE) {
+      $replacements['!tinyurl'] = twitter_shorten_url(url('node/'. $node->nid, array('absolute' => TRUE)));
+    }
+
+    $status = strtr($twitter_interval_status, $replacements);
+
+    // If token module is available, process status to do the token replacement
+    if (module_exists('token')) {
+      $status = token_replace($status, 'node', $node);
+    }
+
+    try {
+      $result = twitter_set_status($twitter_account, $status);
+    }
+    catch (TwitterException $e) {
+      //#todo conver to watchdog instead of drupal_set_message
+      drupal_set_message(t('An error occurred when posting to twitter: %code %error',
+        array('%code' => $result->code, '%error' => $result->error)), 'warning');
+    }
+  }
+}
