@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the mc_twitter feature.
+ */
+
+include_once 'mc_twitter.features.inc';
