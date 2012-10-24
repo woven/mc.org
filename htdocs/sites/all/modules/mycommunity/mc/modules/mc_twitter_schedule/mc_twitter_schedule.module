@@ -163,7 +163,7 @@ function tweet_events_count_between($from = null,$to = null,$tweet = true){
           FROM
             node
           INNER JOIN `event` ON `event`.nid = node.nid
-          WHERE `event`.unix_event_start > %d AND `event`.unix_event_start < %d";
+          WHERE (`event`.unix_event_start >= %d AND `event`.unix_event_start <= %d");
   
   $count = db_result(db_query($sql,$from,$to));
   if($count && $twitter_user){
