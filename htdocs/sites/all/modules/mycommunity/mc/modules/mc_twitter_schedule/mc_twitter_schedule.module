@@ -120,7 +120,7 @@ function events_daily_tweets(){
             count(`event`.nid)
           FROM
             node
-          INNER JOIN `event` ON `event`.nid = node.nid AND node.type = '%s'
+          INNER JOIN `event` ON `event`.nid = node.nid
           WHERE `event`.unix_event_start > %d AND `event`.unix_event_start < %d";
 
   $count = db_result(db_result($sql,$today,$tomorrow));
