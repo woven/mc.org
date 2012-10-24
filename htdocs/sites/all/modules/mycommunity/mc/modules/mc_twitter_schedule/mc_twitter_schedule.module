@@ -112,8 +112,11 @@ function events_2hours_tweets(){
 }
 
 function events_daily_tweets(){
-  $today = strtotime("now");
-  $tomorrow = strtotime("tomorrow");
+  //adding dependencies on twitter account
+  module_load_include('inc', 'twitter');
+
+  $from = strtotime("now");
+  $to = strtotime("tomorrow");
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
 
   $sql = "SELECT
@@ -122,9 +125,8 @@ function events_daily_tweets(){
             node
           INNER JOIN `event` ON `event`.nid = node.nid
           WHERE `event`.unix_event_start > %d AND `event`.unix_event_start < %d";
-
-  $count = db_result(db_result($sql,$today,$tomorrow));
-  dsm($count,"Count");
+  
+  $count = db_result(db_query($sql,$from,$to));
   if($count && $twitter_user){
     dsm($twitter_acount,"Twitter Account");
     $twitter_hash = "#".$twitter_user;
