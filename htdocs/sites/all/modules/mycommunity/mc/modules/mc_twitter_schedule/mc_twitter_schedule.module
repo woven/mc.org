@@ -124,8 +124,9 @@ function events_daily_tweets(){
           WHERE `event`.unix_event_start > %d AND `event`.unix_event_start < %d";
 
   $count = db_result(db_result($sql,$today,$tomorrow));
-
+  dsm($count,"Count");
   if($count && $twitter_user){
+    dsm($twitter_acount,"Twitter Account");
     $twitter_hash = "#".$twitter_user;
     $twitter_account = twitter_account_load($twitter_user);
     $status = t("!events: !event_today_url",array(
