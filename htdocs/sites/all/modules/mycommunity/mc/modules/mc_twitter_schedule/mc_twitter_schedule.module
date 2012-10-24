@@ -78,15 +78,20 @@ function events_2hours_tweets(){
    ORDER BY `event`.unix_event_start ASC";
 
   $rows = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
+
+  //load flag object
   $flagop = flag_get_flag($flag_name);
+  if(!$flagop){
+    return;
+  }
+
+  //load the twitter account
+  $twitter_account = twitter_account_load_byscreename($twitter_user);
+  if(!$twitter_account){
+    return;
+  }
 
   while($node = db_fetch_object($rows)){
-    //load the twitter account
-    $twitter_account = twitter_account_load_byscreename($twitter_user);
-
-    if(!$twitter_account){
-      return;
-    }
 
     $replacements = array(
       '!title' => $node->title,
@@ -111,6 +116,7 @@ function events_2hours_tweets(){
 
     try {
       twitter_set_status($twitter_account, $status);
+      //$flagop->flag('flag', $node->nid);
     }
     catch (TwitterException $e) {
       //#todo convert to watchdog instead of drupal_set_message
