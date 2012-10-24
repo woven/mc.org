@@ -7,7 +7,7 @@
 include_once 'mc_twitter.features.inc';
 
 function twitter_account_load_byscreename($screen_name){
-  $id = db_result(db_query("SELECT twitter_uid FROM screen_name = '%s'",$screen_name));
+  $id = db_result(db_query("SELECT twitter_uid FROM {twitter_account} WHERE screen_name = '%s'",$screen_name));
   if($id){
     return twitter_account_load($id);
   }else{

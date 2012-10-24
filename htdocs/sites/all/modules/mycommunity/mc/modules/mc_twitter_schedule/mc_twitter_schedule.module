@@ -130,7 +130,7 @@ function events_daily_tweets(){
   if($count && $twitter_user){
     $twitter_hash = "#".$twitter_user;
     $twitter_account = twitter_account_load_byscreename($twitter_user);
-    dsm($twitter_acount,"Twitter Account");
+
     $status = t("!events: !event_today_url",array(
       '!events' => format_plural($count,"1 !twitter_hash event today! Check it out","@count !twitter_hash events today! Check them out",array(
         '!twitter_hash' => $twitter_hash
@@ -147,5 +147,4 @@ function events_daily_tweets(){
         array('%code' => $e->code, '%error' => $e->error)), 'warning');
     }
   }
-
 }
