@@ -9,7 +9,7 @@ include_once 'mc_twitter_schedule.features.inc';
 define('MC_TWITTER_SCHEDULE_INTERVAL_FROM', "+1.5 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_TO', "+2 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_FLAG', "tweet_2hour");
-define('MC_TWITTER_SCHEDULE_DAILY_HOUR',9);
+define('MC_TWITTER_SCHEDULE_DAILY_HOUR','9am');
 define('MC_TWITTER_USER',"samerwoven");
 define('MC_TWITTER_HASHTAG',"#miamitech");
 
@@ -84,7 +84,7 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
    INNER JOIN `event` ON `event`.nid = node.nid AND node.type = '%s'
    LEFT JOIN flag_content ON flag_content.content_id = `event`.nid
    LEFT JOIN flags ON flags.fid = flag_content.fid AND flags.name = '%s'
-   WHERE flag_content.fcid IS NULL AND `event`.unix_event_start > %d AND `event`.unix_event_start < %d
+   WHERE flag_content.fcid IS NULL AND (`event`.unix_event_start >= %d AND `event`.unix_event_start <= %d)
    ORDER BY `event`.unix_event_start ASC";
 
   $rows = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
