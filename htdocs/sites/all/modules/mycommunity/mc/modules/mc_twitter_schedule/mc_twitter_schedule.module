@@ -143,7 +143,6 @@ function events_daily_tweets(){
   
   $count = db_result(db_query($sql,$from,$to));
   if($count && $twitter_user){
-    $twitter_hash = "#".$twitter_user;
     $twitter_account = twitter_account_load_byscreename($twitter_user);
 
     $status = t("!events: !event_today_url !hash",array(
