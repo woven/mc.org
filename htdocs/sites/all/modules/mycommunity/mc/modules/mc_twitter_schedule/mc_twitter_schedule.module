@@ -10,7 +10,7 @@ define('MC_TWITTER_SCHEDULE_INTERVAL_FROM', "+1.5 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_TO', "+2 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_FLAG', "tweet_2hour");
 define('MC_TWITTER_SCHEDULE_DAILY_HOUR',9);
-define('MC_TWITTER_USER','sameronline');
+define('MC_TWITTER_USER','samerwoven');
 
 function mc_twitter_schedule_menu(){
   $items = array();
@@ -30,13 +30,13 @@ function mc_twitter_schedule(){
 
   $form['mc_twitter_interval'] = array(
     'title' => "Twitter Post Interval",
-    '#tree' => true
+    '#tree' => TRUE
   );
 
   return system_settings_form($form);
 }
 
-function mc_twitter_schedule_cronapi($op, $job = NULL) {
+function _mc_twitter_schedule_cronapi($op, $job = NULL) {
   $items = array();
 
   $items['events_2hours_tweets'] = array(
@@ -47,7 +47,9 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
   return $items;
 }
 
-
+/**
+ * @todo make a function to allow you to patch send tweets based on list of nodes, with settings (like default msg);
+ */
 function events_2hours_tweets(){
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
@@ -56,7 +58,7 @@ function events_2hours_tweets(){
   $ts_from = strtotime("+1.5 hours");
   $ts_to = strtotime("+2 hours");
   $flag_name = 'tweet_2hour';
-  $twitter_user = "sameronline";
+  $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
   $twitter_interval_status = "";
 
   $sql = "SELECT
@@ -71,9 +73,10 @@ function events_2hours_tweets(){
    WHERE flag_content.fcid IS NULL AND `event`.unix_event_start > %d AND `event`.unix_event_start < %d
    ORDER BY `event`.unix_event_start ASC";
 
-  $result = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
+  $rows = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
+  $flagop = flag_get_flag('bookmarks');
 
-  while($row = db_fetch_object($result)){
+  while($row = db_fetch_object($rows)){
     $nid = $row->nid;
     $node = node_load($nid);
 
@@ -101,9 +104,38 @@ function events_2hours_tweets(){
       $result = twitter_set_status($twitter_account, $status);
     }
     catch (TwitterException $e) {
-      //#todo conver to watchdog instead of drupal_set_message
+      //#todo convert to watchdog instead of drupal_set_message
       drupal_set_message(t('An error occurred when posting to twitter: %code %error',
         array('%code' => $result->code, '%error' => $result->error)), 'warning');
     }
   }
+}
+
+function events_daily_tweets(){
+  $today = strtotime("now");
+  $tomorrow = strtotime("tomorrow");
+  $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
+
+  $sql = "SELECT
+            count(`event`.nid)
+          FROM
+            node
+          INNER JOIN `event` ON `event`.nid = node.nid AND node.type = '%s'
+          WHERE `event`.unix_event_start > %d AND `event`.unix_event_start < %d";
+
+  $count = db_result(db_result($sql,$today,$tomorrow));
+
+  if($count && $twitter_user){
+    $twitter_hash = "#".$twitter_user;
+    $twitter_account = twitter_account_load($twitter_user);
+    $status = t("!events: !event_today_url",array(
+      '!events' => format_plural($count,"1 !twitter_hash event today! Check it out","@count !twitter_hash events today! Check them out",array(
+        '!twitter_hash' => $twitter_hash
+      )),
+      '!event_today_url' => url("events",array('fragment' => 'today','absolute' => true))
+    ));
+
+    twitter_set_status($twitter_account,$status);
+  }
+
 }
