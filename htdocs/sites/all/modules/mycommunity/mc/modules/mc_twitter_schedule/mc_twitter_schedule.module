@@ -11,6 +11,7 @@ define('MC_TWITTER_SCHEDULE_INTERVAL_TO', "+2 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_FLAG', "tweet_2hour");
 define('MC_TWITTER_SCHEDULE_DAILY_HOUR',9);
 define('MC_TWITTER_USER',"samerwoven");
+define('MC_TWITTER_HASHTAG',"#miamitech");
 
 function mc_twitter_schedule_menu(){
   $items = array();
@@ -59,12 +60,15 @@ function events_2hours_tweets(){
   $ts_to = strtotime("+2 hours");
   $flag_name = 'tweet_2hour';
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
-  $twitter_interval_status = "";
+  $twitter_interval_status = "!event_time! !title !tinyurl !hash";
 
   $sql = "SELECT
-    `event`.nid,
-    node.title,
-    flag_content.fcid
+    `event`.nid as nid,
+    node.title as title,
+    `event`.unix_event_start as unix_start,
+    `event`.unix_event_end as unix_end,
+    `event`.has_end_date as has_end_date,
+    `event`.has_time as has_time
    FROM
     node
    INNER JOIN `event` ON `event`.nid = node.nid AND node.type = '%s'
@@ -74,18 +78,23 @@ function events_2hours_tweets(){
    ORDER BY `event`.unix_event_start ASC";
 
   $rows = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
-  $flagop = flag_get_flag('bookmarks');
+  $flagop = flag_get_flag($flag_name);
 
-  while($row = db_fetch_object($rows)){
-    $nid = $row->nid;
-    $node = node_load($nid);
-
-    //part of this logic from twitter_post.module
+  while($node = db_fetch_object($rows)){
+    //load the twitter account
     $twitter_account = twitter_account_load_byscreename($twitter_user);
-    $replacements = array('!title' => $node->title,
+
+    if(!$twitter_account){
+      return;
+    }
+
+    $replacements = array(
+      '!title' => $node->title,
       '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
       '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
-      '!user' => $node->name);
+      '!hash' => "#".variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
+      '!event_time' => theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)
+    );
 
     // Only generate the shortened URL if it's going to be used. No sense
     // burning through TinyURLs without a good reason.
@@ -101,12 +110,12 @@ function events_2hours_tweets(){
     }
 
     try {
-      $result = twitter_set_status($twitter_account, $status);
+      twitter_set_status($twitter_account, $status);
     }
     catch (TwitterException $e) {
       //#todo convert to watchdog instead of drupal_set_message
       drupal_set_message(t('An error occurred when posting to twitter: %code %error',
-        array('%code' => $result->code, '%error' => $result->error)), 'warning');
+        array('%code' => $e->code, '%error' => $e->error)), 'warning');
     }
   }
 }
@@ -131,12 +140,12 @@ function events_daily_tweets(){
     $twitter_hash = "#".$twitter_user;
     $twitter_account = twitter_account_load_byscreename($twitter_user);
 
-    $status = t("!events: !event_today_url",array(
-      '!events' => format_plural($count,"1 !twitter_hash event today! Check it out","@count !twitter_hash events today! Check them out",array(
-        '!twitter_hash' => $twitter_hash
-      )),
-      '!event_today_url' => url("events",array('fragment' => 'today','absolute' => true))
-    ));
+    $status = t("!events: !event_today_url !hash",array(
+      '!events' => format_plural($count,"1 event today! Check it out","@count events today! Check them out"),
+      '!event_today_url' => url("events",array('fragment' => 'today','absolute' => true)),
+      '!hash' => "#".variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG)
+      )
+    );
 
     try {
       twitter_set_status($twitter_account,$status);
