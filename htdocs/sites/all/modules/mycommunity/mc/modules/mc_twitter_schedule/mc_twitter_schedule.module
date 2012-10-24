@@ -70,7 +70,7 @@ function tweet_events_between($from = NULL,$to = NULL,$flag = true){
 
   $flag_name = 'tweet_2hour';
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
-  $twitter_interval_status = "!event_time! !title !tinyurl !hash";
+  $twitter_interval_status = "@event_time! !title !tinyurl !hash";
 
   $sql = "SELECT
     `event`.nid as nid,
@@ -110,7 +110,7 @@ function tweet_events_between($from = NULL,$to = NULL,$flag = true){
       '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
       '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
       '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
-      '!event_time' => theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)
+      '@event_time' => theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)
     );
 
     // Only generate the shortened URL if it's going to be used. No sense
