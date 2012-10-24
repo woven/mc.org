@@ -132,7 +132,7 @@ function tweet_events_between($from = NULL,$to = NULL,$flag = true){
         $flagop->flag('flag', $node->nid);
       }
     }catch (TwitterException $e) {
-      //#todo convert to watchdog instead of drupal_set_message
+      //@todo convert to watchdog instead of drupal_set_message
       drupal_set_message(t('An error occurred when posting to twitter: %code %error',
         array('%code' => $e->code, '%error' => $e->error)), 'warning');
     }
@@ -180,7 +180,7 @@ function tweet_events_count_between($from = null,$to = null){
       twitter_set_status($twitter_account,$status);
     }
     catch (TwitterException $e) {
-      //#todo convert to watchdog instead of drupal_set_message
+      //@todo convert to watchdog instead of drupal_set_message
       drupal_set_message(t('An error occurred when posting to twitter: %code %error',
         array('%code' => $e->code, '%error' => $e->error)), 'warning');
     }
