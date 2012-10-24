@@ -10,7 +10,7 @@ define('MC_TWITTER_SCHEDULE_INTERVAL_FROM', "+1.5 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_TO', "+2 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_FLAG', "tweet_2hour");
 define('MC_TWITTER_SCHEDULE_DAILY_HOUR',9);
-define('MC_TWITTER_USER',900458304);
+define('MC_TWITTER_USER',"samerwoven");
 
 function mc_twitter_schedule_menu(){
   $items = array();
@@ -81,7 +81,7 @@ function events_2hours_tweets(){
     $node = node_load($nid);
 
     //part of this logic from twitter_post.module
-    $twitter_account = twitter_account_load($twitter_user);
+    $twitter_account = twitter_account_load_byscreename($twitter_user);
     $replacements = array('!title' => $node->title,
       '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
       '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
@@ -128,9 +128,9 @@ function events_daily_tweets(){
   
   $count = db_result(db_query($sql,$from,$to));
   if($count && $twitter_user){
-    dsm($twitter_acount,"Twitter Account");
     $twitter_hash = "#".$twitter_user;
-    $twitter_account = twitter_account_load($twitter_user);
+    $twitter_account = twitter_account_load_byscreename($twitter_user);
+    dsm($twitter_acount,"Twitter Account");
     $status = t("!events: !event_today_url",array(
       '!events' => format_plural($count,"1 !twitter_hash event today! Check it out","@count !twitter_hash events today! Check them out",array(
         '!twitter_hash' => $twitter_hash

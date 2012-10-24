@@ -6,6 +6,11 @@
 
 include_once 'mc_twitter.features.inc';
 
-function twitter_mc(){
-
+function twitter_account_load_byscreename($screen_name){
+  $id = db_result(db_query("SELECT twitter_uid FROM screen_name = '%s'",$screen_name));
+  if($id){
+    return twitter_account_load($id);
+  }else{
+    return false;
+  }
 }
