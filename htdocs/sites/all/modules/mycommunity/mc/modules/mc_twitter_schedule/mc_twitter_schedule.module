@@ -45,13 +45,13 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
   if(!is_null($from)){
     $ts_from = strtotime($from);
   }else{
-    $ts_from = strtotime("+2 hour");
+    $ts_from = strtotime("+2hour");
   }
 
   if(!is_null($to)){
     $ts_to = strtotime($to);
   }else{
-    $ts_to = strtotime("+2 hour 30min");
+    $ts_to = strtotime("+2hour 30min");
   }
 
   $flag_name = 'tweet_2hour';
