@@ -12,30 +12,7 @@ define('MC_TWITTER_SCHEDULE_INTERVAL_FLAG', "tweet_2hour");
 define('MC_TWITTER_SCHEDULE_DAILY_HOUR','9am');
 define('MC_TWITTER_USER',"samerwoven");
 define('MC_TWITTER_HASHTAG',"#miamitech");
-
-function mc_twitter_schedule_menu(){
-  $items = array();
-
-  $items['admin/mc/mc_twitter_schedule'] = array(
-    'title' => 'Twitter Schedule',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('mc_twitter_schedule'),
-    'type' => MENU_SUGGESTED_ITEM,
-  );
-
-  return $items;
-}
-
-function mc_twitter_schedule(){
-  $form = array();
-
-  $form['mc_twitter_interval'] = array(
-    'title' => "Twitter Post Interval",
-    '#tree' => TRUE
-  );
-
-  return system_settings_form($form);
-}
+define('MC_TWITTER_ENABLE',0);
 
 function mc_twitter_schedule_cronapi($op, $job = NULL) {
   $items = array();
@@ -46,8 +23,8 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
   );
 
   $items['tweet_events_count_between'] = array(
-    'description' => 'Send tweets count at 9am everyday',
-    'rule' => '* 9 * * *', //run every 30mins
+    'description' => 'Send tweets count at 6am everyday',
+    'rule' => '* 6 * * *', //run every 6am
   );
 
   return $items;
@@ -57,6 +34,10 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
  * @todo make a function to allow you to patch send tweets based on list of nodes, with settings (like default msg);
  */
 function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true){
+  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE)){
+    return;
+  };
+
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
@@ -145,6 +126,10 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
 }
 
 function tweet_events_count_between($from = null,$to = null,$tweet = true){
+  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE)){
+    return;
+  };
+
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
@@ -152,13 +137,13 @@ function tweet_events_count_between($from = null,$to = null,$tweet = true){
   if(!is_null($from)){
     $from = strtotime($from);
   }else{
-    $from = strtotime("today 9am");
+    $from = strtotime("today");
   }
 
   if(!is_null($to)){
     $to = strtotime($to);
   }else{
-    $to = strtotime("tomorrow 9am");
+    $to = strtotime("tomorrow");
   }
 
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
