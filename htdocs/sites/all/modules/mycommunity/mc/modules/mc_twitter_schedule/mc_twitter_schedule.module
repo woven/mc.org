@@ -176,7 +176,7 @@ function tweet_events_count_between($from = null,$to = null,$tweet = true){
 
     if($tweet){
       $tweet_account = twitter_account_load_byscreename($twitter_user);
-      mc_tweet($twitter_user,$status);
+      mc_tweet($tweet_account,$status);
     }else{
       dsm($status);
     }
