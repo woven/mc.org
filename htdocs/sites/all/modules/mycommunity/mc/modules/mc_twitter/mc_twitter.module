@@ -5,3 +5,7 @@
  */
 
 include_once 'mc_twitter.features.inc';
+
+function twitter_mc(){
+
+}
