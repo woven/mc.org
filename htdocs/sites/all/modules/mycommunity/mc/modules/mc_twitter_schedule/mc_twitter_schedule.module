@@ -51,7 +51,7 @@ function _mc_twitter_schedule_cronapi($op, $job = NULL) {
 /**
  * @todo make a function to allow you to patch send tweets based on list of nodes, with settings (like default msg);
  */
-function events_2hours_tweets($from = NULL,$to = NULL,$flag = true){
+function tweet_events_between($from = NULL,$to = NULL,$flag = true){
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
@@ -139,12 +139,23 @@ function events_2hours_tweets($from = NULL,$to = NULL,$flag = true){
   }
 }
 
-function events_daily_tweets(){
+function tweet_events_count_between($from = null,$to = null){
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
-  $from = strtotime("now");
-  $to = strtotime("tomorrow");
+  //timestamp for to/from , either from function or defaults
+  if(!is_null($from)){
+    $from = strtotime($from);
+  }else{
+    $from = strtotime("now");
+  }
+
+  if(!is_null($to)){
+    $to = strtotime($to);
+  }else{
+    $to = strtotime("tomorrow");
+  }
+
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
 
   $sql = "SELECT
