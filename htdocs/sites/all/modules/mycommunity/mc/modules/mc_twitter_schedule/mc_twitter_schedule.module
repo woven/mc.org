@@ -97,7 +97,7 @@ function events_2hours_tweets(){
       '!title' => $node->title,
       '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
       '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
-      '!hash' => "#".variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
+      '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
       '!event_time' => theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)
     );
 
@@ -148,7 +148,7 @@ function events_daily_tweets(){
     $status = t("!events: !event_today_url !hash",array(
       '!events' => format_plural($count,"1 event today! Check it out","@count events today! Check them out"),
       '!event_today_url' => url("events",array('fragment' => 'today','absolute' => true)),
-      '!hash' => "#".variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG)
+      '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG)
       )
     );
 
