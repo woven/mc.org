@@ -689,7 +689,7 @@ function mc_event_section_views_group_render($view,$sets){
     foreach($sets as $section_name => $section){
         $section_cls = strtolower(str_replace(array(" "),"_",$section_name));
 
-        $output .= '<div class="section-section '.$section_cls.'">'; //start section.
+        $output .= '<div id="'.$section_cls.'" class="section-section '.$section_cls.'">'; //start section.
         $output .= '<div class="block-title"><h3>'.$section_name.'</h3><span class="arrow"></span></div>';
         foreach($section as $week_num => $week){
             $output .= '<div class="section-week">'; //start section-week
