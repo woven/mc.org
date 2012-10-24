@@ -51,7 +51,7 @@ function _mc_twitter_schedule_cronapi($op, $job = NULL) {
 /**
  * @todo make a function to allow you to patch send tweets based on list of nodes, with settings (like default msg);
  */
-function tweet_events_between($from = NULL,$to = NULL,$flag = true){
+function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true){
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
@@ -97,10 +97,12 @@ function tweet_events_between($from = NULL,$to = NULL,$flag = true){
     }
   }
 
-  //load the twitter account
-  $twitter_account = twitter_account_load_byscreename($twitter_user);
-  if(!$twitter_account){
-    return;
+  if($tweet){
+    //load the twitter account
+    $twitter_account = twitter_account_load_byscreename($twitter_user);
+    if(!$twitter_account){
+      return;
+    }
   }
 
   while($node = db_fetch_object($rows)){
@@ -110,7 +112,7 @@ function tweet_events_between($from = NULL,$to = NULL,$flag = true){
       '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
       '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
       '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
-      '@event_time' => theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)
+      '@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time))
     );
 
     // Only generate the shortened URL if it's going to be used. No sense
@@ -126,20 +128,18 @@ function tweet_events_between($from = NULL,$to = NULL,$flag = true){
       $status = token_replace($status, 'node', $node);
     }
 
-    try {
-      twitter_set_status($twitter_account, $status);
+    if($tweet){
+      mc_tweet($twitter_account,$status);
       if($flag){
         $flagop->flag('flag', $node->nid);
       }
-    }catch (TwitterException $e) {
-      //@todo convert to watchdog instead of drupal_set_message
-      drupal_set_message(t('An error occurred when posting to twitter: %code %error',
-        array('%code' => $e->code, '%error' => $e->error)), 'warning');
+    }else{
+      dsm($status);
     }
   }
 }
 
-function tweet_events_count_between($from = null,$to = null){
+function tweet_events_count_between($from = null,$to = null,$tweet = true){
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
@@ -167,8 +167,6 @@ function tweet_events_count_between($from = null,$to = null){
   
   $count = db_result(db_query($sql,$from,$to));
   if($count && $twitter_user){
-    $twitter_account = twitter_account_load_byscreename($twitter_user);
-
     $status = t("!events: !event_today_url !hash",array(
       '!events' => format_plural($count,"1 event today! Check it out","@count events today! Check them out"),
       '!event_today_url' => url("events",array('fragment' => 'today','absolute' => true)),
@@ -176,13 +174,11 @@ function tweet_events_count_between($from = null,$to = null){
       )
     );
 
-    try {
-      twitter_set_status($twitter_account,$status);
-    }
-    catch (TwitterException $e) {
-      //@todo convert to watchdog instead of drupal_set_message
-      drupal_set_message(t('An error occurred when posting to twitter: %code %error',
-        array('%code' => $e->code, '%error' => $e->error)), 'warning');
+    if($tweet){
+      $tweet_account = twitter_account_load_byscreename($twitter_user);
+      mc_tweet($twitter_user,$status);
+    }else{
+      dsm($status);
     }
   }
 }

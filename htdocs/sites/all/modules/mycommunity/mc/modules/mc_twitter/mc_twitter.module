@@ -14,3 +14,24 @@ function twitter_account_load_byscreename($screen_name){
 
   return false;
 }
+
+function mc_tweet($account,$status,$log = true){
+  if(!empty($acount) && !is_object($account)){ //if it's not object, then try to load the user and not empty
+    if(intval($account)){ //if it's valid intval, use it to load the account
+      $account = twitter_account_load($account);
+    }else{//load it by name
+      $account = twitter_account_load_byscreename($account);
+    }
+  }
+
+  try {
+    twitter_set_status($account,$status);
+    return true;
+  }
+  catch (TwitterException $e) {
+    //@todo convert to watchdog instead of drupal_set_message
+    drupal_set_message(t('An error occurred when posting to twitter: %code %error',
+      array('%code' => $e->code, '%error' => $e->error)), 'warning');
+    return false;
+  }
+}
