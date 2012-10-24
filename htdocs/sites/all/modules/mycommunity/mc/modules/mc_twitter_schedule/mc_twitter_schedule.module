@@ -37,12 +37,17 @@ function mc_twitter_schedule(){
   return system_settings_form($form);
 }
 
-function _mc_twitter_schedule_cronapi($op, $job = NULL) {
+function mc_twitter_schedule_cronapi($op, $job = NULL) {
   $items = array();
 
-  $items['events_2hours_tweets'] = array(
-    'description' => 'Send event tweets every two hours for upcoming events',
-    'rule' => '0 */2 * * *', // Every 2 hours
+  $items['tweet_events_between'] = array(
+    'description' => 'Send event tweets for events that is going to start in 2 and 2half hour from now',
+    'rule' => '0,30 * * * *', //run every 30mins
+  );
+
+  $items['tweet_events_count_between'] = array(
+    'description' => 'Send tweets count at 9am everyday',
+    'rule' => '* 9 * * *', //run every 30mins
   );
 
   return $items;
@@ -59,13 +64,13 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
   if(!is_null($from)){
     $ts_from = strtotime($from);
   }else{
-    $ts_from = strtotime("+1.5 hours");
+    $ts_from = strtotime("+2 hour");
   }
 
   if(!is_null($to)){
     $ts_to = strtotime($to);
   }else{
-    $ts_to = strtotime("+2 hours");
+    $ts_to = strtotime("+2 hour 30min");
   }
 
   $flag_name = 'tweet_2hour';
@@ -147,13 +152,13 @@ function tweet_events_count_between($from = null,$to = null,$tweet = true){
   if(!is_null($from)){
     $from = strtotime($from);
   }else{
-    $from = strtotime("now");
+    $from = strtotime("today 9am");
   }
 
   if(!is_null($to)){
     $to = strtotime($to);
   }else{
-    $to = strtotime("tomorrow");
+    $to = strtotime("tomorrow 9am");
   }
 
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
