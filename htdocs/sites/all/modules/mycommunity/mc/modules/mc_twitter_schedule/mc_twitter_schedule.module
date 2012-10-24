@@ -51,13 +51,23 @@ function _mc_twitter_schedule_cronapi($op, $job = NULL) {
 /**
  * @todo make a function to allow you to patch send tweets based on list of nodes, with settings (like default msg);
  */
-function events_2hours_tweets(){
+function events_2hours_tweets($from = NULL,$to = NULL,$flag = true){
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
-  //timestamp for to/from filters
-  $ts_from = strtotime("+1.5 hours");
-  $ts_to = strtotime("+2 hours");
+  //timestamp for to/from , either from function or defaults
+  if(!is_null($from)){
+    $ts_from = strtotime($from);
+  }else{
+    $ts_from = strtotime("+1.5 hours");
+  }
+
+  if(!is_null($to)){
+    $ts_to = strtotime($to);
+  }else{
+    $ts_to = strtotime("+2 hours");
+  }
+
   $flag_name = 'tweet_2hour';
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
   $twitter_interval_status = "!event_time! !title !tinyurl !hash";
@@ -79,10 +89,12 @@ function events_2hours_tweets(){
 
   $rows = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
 
-  //load flag object
-  $flagop = flag_get_flag($flag_name);
-  if(!$flagop){
-    return;
+  if($flag){
+    //load flag object
+    $flagop = flag_get_flag($flag_name);
+    if(!$flagop){
+      return;
+    }
   }
 
   //load the twitter account
@@ -116,9 +128,10 @@ function events_2hours_tweets(){
 
     try {
       twitter_set_status($twitter_account, $status);
-      //$flagop->flag('flag', $node->nid);
-    }
-    catch (TwitterException $e) {
+      if($flag){
+        $flagop->flag('flag', $node->nid);
+      }
+    }catch (TwitterException $e) {
       //#todo convert to watchdog instead of drupal_set_message
       drupal_set_message(t('An error occurred when posting to twitter: %code %error',
         array('%code' => $e->code, '%error' => $e->error)), 'warning');
