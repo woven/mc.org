@@ -57,11 +57,12 @@ function ft_group_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '10',
+      'rows' => '5',
       'size' => 60,
       'default_value' => array(
         '0' => array(
           'value' => '',
+          'format' => '1',
           '_error_element' => 'default_value_widget][field_about][0][value',
         ),
       ),

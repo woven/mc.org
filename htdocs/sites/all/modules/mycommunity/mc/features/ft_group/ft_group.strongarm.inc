@@ -380,6 +380,7 @@ function ft_group_strongarm() {
         ),
         'province' => array(
           'collect' => '0',
+          'widget' => 'autocomplete',
           'default' => '',
           'weight' => '10',
         ),
@@ -563,7 +564,7 @@ function ft_group_strongarm() {
     ),
     'buttons' => array(
       'region' => 'main',
-      'weight' => '15',
+      'weight' => '14',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -590,17 +591,10 @@ function ft_group_strongarm() {
     ),
     'themes' => array(
       'region' => 'main',
-      'weight' => '13',
+      'weight' => '12',
       'has_required' => FALSE,
       'title' => 'Theme configuration',
       'collapsed' => 0,
-      'hidden' => 0,
-    ),
-    'og_menu' => array(
-      'region' => 'right',
-      'weight' => '3',
-      'has_required' => FALSE,
-      'title' => 'Enable menu for this group',
       'hidden' => 0,
     ),
     'field_group_url' => array(
@@ -626,7 +620,7 @@ function ft_group_strongarm() {
     ),
     'body_field' => array(
       'region' => 'main',
-      'weight' => '2',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -640,7 +634,7 @@ function ft_group_strongarm() {
     ),
     'field_logo' => array(
       'region' => 'main',
-      'weight' => '3',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => 'Logo',
       'hidden' => 0,
@@ -660,14 +654,14 @@ function ft_group_strongarm() {
     ),
     'field_about' => array(
       'region' => 'main',
-      'weight' => '9',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => 'About',
       'hidden' => 0,
     ),
     'field_list_image' => array(
       'region' => 'main',
-      'weight' => '10',
+      'weight' => '9',
       'has_required' => FALSE,
       'title' => 'Images',
       'hidden' => 0,
@@ -679,16 +673,9 @@ function ft_group_strongarm() {
       'title' => 'Featured Items',
       'hidden' => 0,
     ),
-    'field_enable_discussions' => array(
-      'region' => 'right',
-      'weight' => '5',
-      'has_required' => FALSE,
-      'title' => 'Enable or Disable Discussions',
-      'hidden' => 0,
-    ),
     'xmlsitemap' => array(
       'region' => 'main',
-      'weight' => '12',
+      'weight' => '11',
       'has_required' => FALSE,
       'title' => 'XML sitemap',
       'collapsed' => 1,
@@ -696,22 +683,15 @@ function ft_group_strongarm() {
     ),
     'nodewords' => array(
       'region' => 'main',
-      'weight' => '11',
+      'weight' => '10',
       'has_required' => FALSE,
       'title' => 'Meta tags',
       'collapsed' => 1,
       'hidden' => 0,
     ),
-    'field_logo_standalone' => array(
-      'region' => 'main',
-      'weight' => '4',
-      'has_required' => FALSE,
-      'title' => 'Logo Standalone',
-      'hidden' => 0,
-    ),
     'print' => array(
       'region' => 'main',
-      'weight' => '14',
+      'weight' => '13',
       'has_required' => FALSE,
       'title' => 'Printer, email and PDF versions',
       'collapsed' => 1,
@@ -732,7 +712,7 @@ function ft_group_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'nodeformsettings_group';
   $strongarm->value = array(
-    'nfs_submission_body_rows' => '20',
+    'nfs_submission_body_rows' => '5',
     'nfs_splitsummary' => '1',
     'nfs_inputformat' => '1',
     'nfs_revisionlog' => '0',
