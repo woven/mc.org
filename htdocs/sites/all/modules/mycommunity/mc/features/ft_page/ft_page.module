@@ -9,7 +9,7 @@ function ft_page_late_form_alter(&$form, &$form_state, $form_id){
     return;
   }
 
-  //allow access
+  //disallow access to edit the help block only for administrators
   if(!$user->uid == 1 || !in_array("community manager",$user->roles)){
     $form['group_block']['#access'] = false;
   }

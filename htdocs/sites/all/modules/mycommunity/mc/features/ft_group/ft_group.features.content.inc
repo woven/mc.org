@@ -69,7 +69,7 @@ function ft_group_content_default_fields() {
       'default_value_php' => NULL,
       'label' => 'About',
       'weight' => '37',
-      'description' => '',
+      'description' => 'Extended information about your group, which will show on a dedicated About page.',
       'minimum_widgets' => '1',
       'type' => 'text_textarea',
       'module' => 'text',
