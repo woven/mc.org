@@ -281,6 +281,11 @@ function mc_company_content_default_fields() {
     'multiple' => '0',
     'module' => 'content_taxonomy',
     'active' => '1',
+    'save_term_node' => 1,
+    'vid' => '4',
+    'parent' => '0',
+    'parent_php_code' => '',
+    'depth' => '',
     'widget' => array(
       'group_parent' => '0',
       'show_depth' => 1,
