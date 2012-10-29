@@ -202,7 +202,7 @@ function ft_event_strongarm() {
   $strongarm->value = array(
     'year' => 2013,
     'month' => '04',
-    'day' => '02',
+    'day' => '22',
     'hour' => '22',
     'minute' => '00',
     'second' => '00',

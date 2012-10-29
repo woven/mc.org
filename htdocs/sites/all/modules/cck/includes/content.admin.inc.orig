@@ -1055,14 +1055,6 @@ function content_field_edit_form(&$form_state, $type_name, $field_name) {
     '#required' => FALSE,
   );
 
-  $form['widget']['minimum_widgets'] = array(
-    '#type' => 'select',
-    '#title' => t('Number of widgets'),
-    '#description' => t('The number of widgets showing on the input form when there\'s no value entered, if this field takes unlimited values.'),
-    '#options' => drupal_map_assoc(range(1,10)),
-    '#default_value' => $form['#field']['widget']['minimum_widgets'],
-  );
-
   // Add handling for default value if not provided by field.
   if (content_callback('widget', 'default value', $field) == CONTENT_CALLBACK_DEFAULT) {
 

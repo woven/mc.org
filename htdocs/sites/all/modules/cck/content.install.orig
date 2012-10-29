@@ -81,7 +81,7 @@ function content_types_install() {
  * Implementation of hook_install().
  */
 function content_install() {
-  variable_set('content_schema_version', 6011);
+  variable_set('content_schema_version', 6009);
   drupal_install_schema('content');
 }
 
@@ -154,7 +154,6 @@ function content_schema() {
       'widget_settings'  => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE, 'serialize' => TRUE),
       'display_settings' => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE, 'serialize' => TRUE),
       'description'      => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE),
-      'minimum_widgets'  => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 2),
       'widget_module'    => array('type' => 'varchar', 'length' => 127, 'not null' => TRUE, 'default' => ''),
       'widget_active'    => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0),
     ),
@@ -618,20 +617,5 @@ function content_update_6010(&$sandbox) {
   if ($sandbox['count']) {
     $ret['#finished'] = 1 - count($sandbox['tables']) / $sandbox['count'];
   }
-  return $ret;
-}
-
-/**
- * Add 'minimum_widgets' property for fields.
- */
-function content_update_6011() {
-  if ($abort = content_check_update()) {
-    return $abort;
-  }
-
-  $ret = array();
-  drupal_load('module', 'content');
-  db_add_field($ret, content_instance_tablename(), 'minimum_widgets', array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 2));
-  variable_set('content_schema_version', 6011);
   return $ret;
 }

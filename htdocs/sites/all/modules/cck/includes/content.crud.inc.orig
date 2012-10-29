@@ -74,7 +74,6 @@ function content_instance_default_values($field_name, $type_name, $widget_type) 
     'weight' => 0,
     'label' => $field_name,
     'description' => '',
-    'minimum_widgets' => 2,
     'widget_type' => $widget_type,
     'widget_module' => $module,
     'display_settings' => array(),
@@ -113,7 +112,6 @@ function content_field_instance_expand($field) {
   $field['widget']['label'] = !empty($field['label']) ? $field['label'] : $field['field_name'];
   $field['widget']['weight'] = !empty($field['weight']) ? $field['weight'] : 0;
   $field['widget']['description'] = !empty($field['description']) ? $field['description'] : '';
-  $field['widget']['minimum_widgets'] = !empty($field['minimum_widgets']) ? $field['minimum_widgets'] : 2;
 
   if (!empty($field['widget_type'])) {
     $field['widget']['type'] = $field['widget_type'];
@@ -128,7 +126,6 @@ function content_field_instance_expand($field) {
   unset($field['weight']);
   unset($field['label']);
   unset($field['description']);
-  unset($field['minmum_widgets']);
   unset($field['widget_module']);
   unset($field['widget_settings']);
 
@@ -156,7 +153,6 @@ function content_field_instance_collapse($field) {
   $field['weight'] = !empty($field['widget']['weight']) ? $field['widget']['weight'] : 0;
   $field['label'] = !empty($field['widget']['label']) ? $field['widget']['label'] : $field['field_name'];
   $field['description'] = !empty($field['widget']['description']) ? $field['widget']['description'] : '';
-  $field['minimum_widgets'] = !empty($field['widget']['minimum_widgets']) ? $field['widget']['minimum_widgets'] : 2;
   $field['type_name'] = !empty($field['type_name']) ? $field['type_name'] : '';
 
   if (!empty($field['widget']['module'])) {
@@ -174,7 +170,6 @@ function content_field_instance_collapse($field) {
   unset($field['widget_settings']['weight']);
   unset($field['widget_settings']['label']);
   unset($field['widget_settings']['description']);
-  unset($field['widget_settings']['minimum_widgets']);
   unset($field['widget_settings']['module']);
   unset($field['widget']);
   return $field;
