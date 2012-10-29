@@ -222,9 +222,9 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
-        'views-featured_blocks-block_1' => array(
-          'module' => 'views',
-          'delta' => 'featured_blocks-block_1',
+        'event-events-share' => array(
+          'module' => 'event',
+          'delta' => 'events-share',
           'region' => 'right',
           'weight' => 1,
         ),
@@ -277,7 +277,7 @@ function ft_landing_contexts_context_default_contexts() {
       'below_content' => array(
         'class' => '',
         'blocks' => array(
-          'boxes-mc_event_sections_box' => array(
+          'views-mc_events_sections-block_3' => array(
             'class' => '',
           ),
         ),

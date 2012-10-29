@@ -253,16 +253,14 @@ var GHH = {
 	
 };
 
-function follow_group(uid)
-{
+function follow_group(uid){
 	$.get('/follow/'+uid);
 	$('#follow').hide();
 	$('#unfollow').css('display', 'block');
 	$('#text-follow').html('You are now following this group');
 }
 
-function follow_group_comments(uid)
-{
+function follow_group_comments(uid){
   node = window.location;
   $.get( '/follow/'+uid, null,function(response){
     $('.subscribe').remove();
@@ -284,3 +282,9 @@ function openColorboxJoin(){
         $('#register input[name=mail]').focus();
     }});
 }
+
+Drupal.behaviors.directoryMapEqual = function (context) {
+    return;
+    height = $("body.mc-directory-map #page > .limiter #right").height();
+    $("body.mc-directory-map #page > .limiter #main").height(height);
+};

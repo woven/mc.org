@@ -1,4 +1,37 @@
 <?php
+function webcal_url($path = NULL, $options = array()){
+  $url = url($path,$options);
+  return str_replace("http://","webcal://",$url);
+}
+
+function webcal_l($text, $path, $options = array()) {
+  global $language;
+
+  // Merge in defaults.
+  $options += array(
+    'attributes' => array(),
+    'html' => FALSE,
+  );
+
+  // Append active class.
+  if (($path == $_GET['q'] || ($path == '<front>' && drupal_is_front_page())) &&
+    (empty($options['language']) || $options['language']->language == $language->language)) {
+    if (isset($options['attributes']['class'])) {
+      $options['attributes']['class'] .= ' active';
+    }
+    else {
+      $options['attributes']['class'] = 'active';
+    }
+  }
+
+  // Remove all HTML and PHP tags from a tooltip. For best performance, we act only
+  // if a quick strpos() pre-check gave a suspicion (because strip_tags() is expensive).
+  if (isset($options['attributes']['title']) && strpos($options['attributes']['title'], '<') !== FALSE) {
+    $options['attributes']['title'] = strip_tags($options['attributes']['title']);
+  }
+
+  return '<a href="' . check_url(webcal_url($path, $options)) . '"' . drupal_attributes($options['attributes']) . '>' . ($options['html'] ? $text : check_plain($text)) . '</a>';
+}
 
 function _mc_taxonomy_fix_vid($vid,$feature){
   //get the vid of the current taxonomy term

@@ -24,6 +24,7 @@ regions[overlay] = Overlay
 scripts[] = "js/jcarousel/lib/jquery.jcarousel.js"
 scripts[] = "js/jquery.livequery.js"
 scripts[] = "js/jquery.tools.min.js"
+scripts[] = "js/jQuery.equalHeights.js"
 scripts[] = "js/main.js"
 scripts[] = "js/custom.js"
 scripts[] = "js/jquery.elastic.source.js"

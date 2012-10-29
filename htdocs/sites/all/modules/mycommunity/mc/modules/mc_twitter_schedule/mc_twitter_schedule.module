@@ -10,7 +10,7 @@ define('MC_TWITTER_SCHEDULE_INTERVAL_FROM', "+1.5 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_TO', "+2 hours");
 define('MC_TWITTER_SCHEDULE_INTERVAL_FLAG', "tweet_2hour");
 define('MC_TWITTER_SCHEDULE_DAILY_HOUR','9am');
-define('MC_TWITTER_USER',"samerwoven");
+define('MC_TWITTER_USER',"");
 define('MC_TWITTER_HASHTAG',"#miamitech");
 define('MC_TWITTER_ENABLE',0);
 

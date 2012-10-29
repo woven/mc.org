@@ -1961,6 +1961,7 @@ function event_block($op = 'list', $delta = 0) {
     case 'list' :
       $blocks[0]['info'] = t('Calendar to browse events.');
       $blocks[1]['info'] = t('List of upcoming events.');
+      $blocks['events-share']['info'] = t('Events: Share & Follow');
       $types = event_get_types('all') + event_get_types('solo');
       foreach ($types as $type) {
         $blocks["event-upcoming-$type"]['info'] = t('List of upcoming events for node type @name.', array('@name' => $type));
@@ -1993,15 +1994,43 @@ function event_block($op = 'list', $delta = 0) {
             $result = event_block_upcoming(variable_get('event_upcoming_limit', '6'));
             $block['content'] = $result['content'];
             return $block;
+          case 'events-share':
+            $block['subject'] = "";
+            $block['content'] = _block_content_share_subscribe();
+            return $block;
+          break;
           case 'event-upcoming-'. $type:
             $result = event_block_upcoming(variable_get('event_upcoming_limit', '6'), array($type));
             $block['subject'] = format_plural($result['count'], 'Upcoming @name', 'Upcoming @count @names', array('@name' => $type));
             $block['content'] = $result['content'];
             return $block;
+          break;
         }
       }
       break;
   }
+}
+
+function _block_content_share_subscribe(){
+    $links = array();
+
+    //twitter link per site
+    $twitter = variable_get("MC_TWITTER_USER","");
+    if(!empty($twitter)){
+      //$links[] = url("https://twitter.com/MiamiTechOrg");
+      $links[] = l("Follow @$twitter","https://twitter.com/$twitter",array(
+        "attributes" => array(
+          "class" => "twitter-follow-button",
+          "data-show-count" => "false"
+        )
+      ));
+      $links[] = '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+    }
+
+    //ical link
+    $links[] = webcal_l('<span class="ical-group-ico inline"></span> Subscribe to all upcoming events (iCal)',"events/ical", array("html" => true));
+
+    return theme("item_list",$links);
 }
 
 /**

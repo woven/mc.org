@@ -119,11 +119,6 @@ function mc_event_feed_menu_alter(&$items){
   $items['node/%/ical']['page callback'] = 'mc_event_feed_event_node_ical';
 }
 
-function webcal_url($path = NULL, $options = array()){
-  $url = url($path,$options);
-  return str_replace("http://","webcal://",$url);
-}
-
 function _ical_feed_generate($title,$filename,$sql_result){
   module_load_include("inc","event","ical");
 
