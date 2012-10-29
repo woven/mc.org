@@ -64,9 +64,10 @@
     <?php print $content ?>
   </div>
 
+  <?php if(!empty($node->field_about['0']['value'])): ?>
   <div class="more-link">
 	 <?php print l('<span>' . t('Find out more') . '</span><span class="ico-small ico-more-link"></span>', $node->field_small_name[0]['value'] . '/about' , array('html' => true)); ?>
   </div>
-
+  <?php endif; ?>
 </div> 
 <?php } ?>
