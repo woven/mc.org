@@ -564,7 +564,7 @@ function mc_admin_bulk_views_default_views() {
       ),
     ),
   ));
-  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler = $view->new_display('page', 'Manage Content', 'page_1');
   $handler->override_option('title', 'Manage Content');
   $handler->override_option('empty', 'There is no content in this community. Add stuff using the button at the top of the page.');
   $handler->override_option('empty_format', '5');
@@ -800,7 +800,7 @@ function mc_admin_bulk_views_default_views() {
     'weight' => 0,
     'name' => 'navigation',
   ));
-  $handler = $view->new_display('page', 'Page', 'page_2');
+  $handler = $view->new_display('page', 'Manage Groups', 'page_2');
   $handler->override_option('filters', array(
     'type_1' => array(
       'operator' => 'in',
@@ -833,6 +833,8 @@ support@woven.org
   $handler->override_option('footer_empty', 0);
   $handler->override_option('empty', 'There are no groups in this community. Please contact <a href="http://woven.org/support" target="blank">Woven Support</a>.');
   $handler->override_option('empty_format', '5');
+  $handler->override_option('items_per_page', 0);
+  $handler->override_option('use_pager', '0');
   $handler->override_option('path', 'admin/content/group/bulk');
   $handler->override_option('menu', array(
     'type' => 'none',
