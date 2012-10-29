@@ -97,7 +97,8 @@ function theme_mc_location_gmap_default($field) {
   $field['format'] = 'nd_location_gmap';
   $field['formatter'] = 'nd_location_gmap_default';
   $node = $field['object'];
-  if(isset($node->location) && ((!empty($node->location['street']) || !empty($node->location['city']) || !empty($node->location['province']) || !empty($node->location['postal_code'])) || ($node->location['latitude']!='0.000000' && $node->location['longitude']!='0.000000' ) ) ){
+
+  if(isset($node->location) && ((!empty($node->location['street']) AND !empty($node->location['city']) AND !empty($node->location['province']))) ){
     if (!empty($node->location['latitude']) && !empty($node->location['longitude'])) {
 
       // Defaults.
