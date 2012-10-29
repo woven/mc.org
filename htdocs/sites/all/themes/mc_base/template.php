@@ -21,6 +21,7 @@ function mc_base_nd_location_gmap($field, $latitude, $longitude, $width, $height
       'longitude' => $longitude,
       'text' => 'empty',
       'autoclick' => $autoclick,
+
       'link' => $gurl
     );
   }
@@ -254,19 +255,8 @@ function mc_base_preprocess_page(&$variables){
     $node = $variables['node'];
     
     if ($node->type == 'npage'){
-      
       if ($node->field_page_type[0]['value'] == 'landing' ){
-        $page_mode = arg(2);
-        if ( $page_mode == 'view' || empty($page_mode) ){
-         $page_classes = 'two-columns-equal';
-        }
-      }else{
-        $page_classes .= ' secondary-page';
-      }
-
-      if ($node->field_page_subtype[0]['value'] == 'home'){
-        // featured items carousel
-        $variables['featured_items'] = _mc_base_get_featured_carousel_array($node->field_featured_items);
+        $page_classes = 'two-columns-equal';
       }
     }
     
