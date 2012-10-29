@@ -878,7 +878,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'medium_linked_mcdefaultimg',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -922,7 +922,7 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
       'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'medium_linked_mcdefaultimg',
+      'format' => 'thumbnail_linked_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -1923,23 +1923,23 @@ Nothing to show here.
       ),
       'nothing_3' => array(
         'element_type' => 'div',
-        'class' => 'field-nodeinfo',
+        'class' => 'field-nodeinfo to-right',
       ),
       'title_1' => array(
         'element_type' => 'h5',
-        'class' => '',
+        'class' => 'to-right',
       ),
       'nothing_1' => array(
         'element_type' => 'p',
-        'class' => 'location-link',
+        'class' => 'location-link to-right',
       ),
       'body' => array(
         'element_type' => 'div',
-        'class' => 'field-body',
+        'class' => 'field-body to-right',
       ),
       'phpcode_2' => array(
         'element_type' => 'div',
-        'class' => 'field-author',
+        'class' => 'field-author to-right',
       ),
     ),
     'skip_blank' => 0,
