@@ -255,9 +255,7 @@ function mc_base_preprocess_page(&$variables){
     $node = $variables['node'];
     
     if ($node->type == 'npage'){
-      if ($node->field_page_type[0]['value'] == 'landing' ){
         $page_classes = 'two-columns-equal';
-      }
     }
     
   }
