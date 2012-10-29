@@ -1,5 +1,7 @@
 <?php
 function webcal_url($path = NULL, $options = array()){
+  //force url to be absolute
+  $options['absolute'] = true;
   $url = url($path,$options);
   return str_replace("http://","webcal://",$url);
 }
