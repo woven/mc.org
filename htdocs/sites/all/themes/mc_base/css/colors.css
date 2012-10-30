@@ -88,11 +88,3 @@ body {
 	color: #fff;
 	text-decoration: none;
 }
-
-/* hiding icons from topics and browse by blocks */
-#page .ghh-menu-items a{
-    background-image: none;
-    padding-left: 0px;
-    height: auto;
-    line-height: normal;
-}

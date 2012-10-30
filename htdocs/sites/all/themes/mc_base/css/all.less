@@ -771,9 +771,7 @@ a .ico-small {
     float:right;
     margin:0 -15px 0 0;
   }
-  .block-browse .block-content ul.links {
-    margin:0;
-  }
+
   .node {
     margin:0px 0;
     .content {
@@ -914,46 +912,42 @@ a .ico-small {
       margin:0px;
     }
   }
-  .ghh-menu-items .views-admin-links a {
-    background:none;
-    line-height:0;
-    padding-left:0;
-    width:initial;
-  }
-  .ghh-menu-items .views-admin-links li {
-    padding:0;
-    width:initial;
-  }
-  .ghh-menu-items a {
-    font-size:1.25em;
-    display:inline-block;
-    width:40px;
-    width:100%;
-    height:32px;
-    margin-right:10px;
-    vertical-align:middle;
-    text-decoration:none;
-    background:url("../images/common/sprite-icons-big.png") no-repeat scroll 0 0 transparent;
-    line-height:200%;
-    padding-left:50px;
-  }
-  .ghh-menu-items li {
-    padding:5px 0;
-    width:40%;
-  }
-  #block-quicktabs-browse_by .ghh-menu-items .view-content {
-    .odd, .even {
-      margin:0 0 0;
+  .ghh-menu-items{
+    .views-admin-links{
+      padding:0;
+      width:initial;
+      a {
+        background:none;
+        line-height:0;
+        padding-left:0;
+        width:initial;
+      }
+      li{
+        padding:0;
+        width:initial;
+      }
+    }
+    ul{
+      li{
+        float: none;
+        margin: 0px !important;
+        margin-bottom: 6px !important;
+        a{
+          float: none;
+          color: #232323;
+          font-size:1.25em;
+        }
+        a.active{
+          color:#ff7f00 !important;
+          text-decoration:none !important;
+        }
+      }
+      li:last-child{
+        margin-bottom: 0px;
+      }
     }
   }
-  #block-quicktabs-browse_by .view-header {
-    margin:0;
-    clear:initial;
-  }
-  #block-boxes-latest_by_topic .block-browse .block-content {
-    margin:0px;
-    padding:0px;
-  }
+
   #block-views-mc_page_menu-block_1 .view-mc-page-menu .view-content {
     .odd, .even {
       margin:0;
@@ -1175,9 +1169,6 @@ a .ico-small {
     text-decoration:none;
     background:url("../images/common/sprite-icons-big.png") no-repeat scroll 0 0 transparent;
   }
-  #quicktabs-browse_by span.title {
-    display:block;
-  }
   .block-help .block-title span {
     float:right;
     margin:0 -15px 0 0;
@@ -1387,6 +1378,7 @@ a .ico-small {
     display:block;
   }
 }
+
 .node-gallery_image .custom-pager-top .browse, .node-type-gallery-image .custom-pager-top .browse {
   position:absolute;
   top:87px;
@@ -1531,12 +1523,6 @@ a .ico-small {
 .two-columns-equal {
   #main, #right {
     width:466px;
-  }
-  .ghh-menu-items ul.links, .browse-topic .block-content ul.links {
-    width:400px;
-  }
-  .block-browse .block-content li {
-    padding-left:20px;
   }
 }
 
@@ -1768,23 +1754,7 @@ form .description {
 #page .author-link a, #page .author-link a:visited, .item-block .views-field-name a, .item-block .views-field-name a:visited {
   color:#00c0ff;
 }
-.block-browse {
-  .block-content a, .block-content a:visited, a, a:visited {
-    color:#232323;
-    text-decoration:none;
-  }
-  .block-content ul {
-    float:left;
-    width:200px;
-  }
-  .block-content li {
-    padding:5px 0 5px 0;
-    font-size:1em;
-  }
-}
-.browse-topic .block-content ul.links {
-  width:200px;
-}
+
 .ico-big {
   display:inline-block;
   width:40px;
@@ -2147,18 +2117,6 @@ body.node-type-group #page .node {
   clear:both;
 }
 
-#block-menu-menu-browse-by-date li {
-  margin:10px 0;
-  a {
-    font-size:15px;
-    color:#000000;
-  }
-}
-#block-menu-menu-browse-by-date li .active, .by-date li a:hover {
-  color:#ff7f00 !important;
-  text-decoration:none !important;
-}
-
 .field-facebook-like {
   clear:both;
   margin:0 !important;
@@ -2456,9 +2414,7 @@ body.node-type-group #page .node {
 #overlay {
   display:none;
 }
-#boxes-box-latest_by_type .block-browse .view-id-list_tx_features .view-header {
-  margin:0 0 5px;
-}
+
 #block-views--exp-latest_pages-page_7 .submit-wrapper .form-submit {
   height:37px;
   line-height:37px;
@@ -2761,17 +2717,7 @@ div.two-columns-left #left {
   float:right;
   width:150px;
 }
-.front #page .block-browse ul {
-  padding-left:25px;
-}
-.front #page .block-split2 div.first {
-  width:49%;
-  float:left;
-}
-.front #page .block-split2 div.second {
-  width:49%;
-  float:right;
-}
+
 .page-latest #page #content-wrapper {
   -moz-border-radius:0 0 6px 6px;
   margin-top:-2px;
@@ -3678,10 +3624,35 @@ body.mc-directory-map{
   .block-content{
     margin: 10px 10px;
     ul{
-      li{
+      li,li.odd,li.even{
+        margin: 0px;
         margin-bottom: 6px;
       }
     }
+  }
+}
+
+#quicktabs-browse_by{
+  span.title {
+    display:block !important;
+  }
+}
+
+.block-browse.browse-topic{
+  .block-content{
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+}
+
+.block-split2{
+  div.first{
+    width:49%;
+    float:left;
+  }
+  div.second{
+    width:49%;
+    float:right;
   }
 }
 
