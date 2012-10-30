@@ -454,6 +454,8 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
     return;
   }
 
+  $form['#after_build'][] = "_event_node_form_afterbuild";
+
   //adding new event, set default values for event start/end
   if(arg(0) == "node" && arg(1) == "add" ){
         $ctime = &$form['event']['start_exploded']['#default_value'];
@@ -493,6 +495,14 @@ function ft_event_late_form_alter(&$form, &$form_state, $form_id){
       }
     }
   }
+}
+
+function _event_node_form_afterbuild($form, &$form_state){
+  //fix for weight of end date field, and title
+  $form['event']['end_exploded']['#title'] = "End date";
+  $form['event']['end_exploded']['#weight'] = 10;
+
+  return $form;
 }
 
 function _event_location_item_process($element){
