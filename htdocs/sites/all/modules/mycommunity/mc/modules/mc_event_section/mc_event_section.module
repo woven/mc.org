@@ -20,6 +20,11 @@ function _mc_event_section_all($flag = null){
   }
 }
 
+function mc_event_section_init(){
+  $path = drupal_get_path('module', 'mc_event_section');
+  drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
+}
+
 function _mc_event_section_next_two_weeks(&$content,$flag = null){
   global $user;
 
@@ -682,9 +687,6 @@ function theme_weekofyear($week,$year){
 function mc_event_section_views_group_render($view,$sets){
     $output = "";
     $i = 0;
-
-    $path = drupal_get_path('module', 'mc_event_section');
-    drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
 
     foreach($sets as $section_name => $section){
         $section_cls = strtolower(str_replace(array(" "),"_",$section_name));
