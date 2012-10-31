@@ -5,7 +5,7 @@
  */
 function mc_base_helper_jqmulti_libraries(){
   return array(
-    "qtip2"
+    "qtip2"//,'jquery.cookie.js'
   );
 }
 
@@ -15,6 +15,9 @@ function mc_base_helper_init(){
     drupal_add_js($lib."/".'jquery.qtip.min.js');
     drupal_add_css($lib."/".'jquery.qtip.min.css');
   }
+
+  $lib = libraries_get_path("jquery.cookies");
+  drupal_add_js($lib."/".'jquery.cookie.js');
 }
 
 function mc_base_helper_preprocess_page(){

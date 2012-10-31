@@ -30,53 +30,7 @@ var GHH = {
 		GHH.lightbox();
 		GHH.newsletterPlaceholder();
 		GHH.followButton();
-        GHH.starJoin();
 	},
-
-    starJoin: function(){
-
-        $(document).bind('flagGlobalAfterLinkUpdate', function(event, data) {
-            if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $(data.link).parents(".my-events").length){
-
-                if ($(data.link).parents('.event').size()){
-                    $(data.link).hide().parents('.event').fadeOut('fast', function () {
-                        if (!$(this).parents(".section-day").find(".event:visible").length) {
-                            $(this).parents(".section-day").fadeOut('fast', function () {
-                                if (!$(this).parents(".section-week").find(".event:visible").length) {
-                                    $(this).parents(".section-week").fadeOut('fast', function () {
-                                        if (!$(this).parents(".section-section").find(".event:visible").length) {
-                                            $(this).parents(".section-section").fadeOut('fast');
-                                        }
-                                    });
-                                }
-                            });
-                        };
-
-                        if (!$('.my-events .event:visible').size()) {
-                            $('.my-events .view-content').html("<p class='default-message'>Nothing to show here. Star some upcoming events and they'll show here.</p>");
-                        }
-                    });
-                }
-            }
-        });
-
-
-
-        $(".flag-events-bookmarks.unknown a.flag-action").click(function(e){
-            e.preventDefault();
-        });
-
-        /*
-         $(".flag-events-bookmarks.unknown a.flag-action").tooltip({
-         tip: '#event-staring-tooltip',
-         delay: 1250,
-         position: 'bottom center'
-         //offset: [-20,-2]
-         //layout: '<div><span class="b"></span></div>'
-         }).hover(GHH.tooltipOverStaring, function(){});
-         */
-    },
-
 
     likeButton: function(){
 		var nid=$("#nid").val();
