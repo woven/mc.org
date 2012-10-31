@@ -2,6 +2,39 @@
 
 include_once('ft_event.features.inc');
 
+function ft_event_block($op = 'list', $delta = 0, $edit = array()) {
+  switch($op){
+    case 'list':
+      $blocks['user-events-calender'] = array(
+        'info' => t('My Events: User Calender'),
+        'weight' => 0,
+        'status' => 1,
+      );
+      return $blocks;
+    break;
+    case 'view':
+      switch ($delta) {
+        case 'user-events-calender':
+          $block = array(
+            'subject' => '',
+            'content' => _user_events_calender(),
+          );
+          break;
+      }
+      return $block;
+    break;
+  }
+}
+
+function _user_events_calender(){
+  global $user;
+
+  $links = array();
+  $links[] = webcal_l("<span class=\"ical-ico ico-inline\"></span>Subscribe to my events (iCal)","user/$user->uid/myevents/ical",array("html"=>true));
+  $links[] = l("<span class=\"ical-ico ico-inline\"></span>Download my events (iCal)","user/$user->uid/myevents/ical",array("html"=>true));
+
+  return theme("item_list",$links,null,'ul',array('class'=>"mc-links-blue"));
+}
 
 function _mc_user_myevents(){
   global $user; $cuid = arg(1);
@@ -12,11 +45,11 @@ function _mc_user_myevents(){
 
   print '<div class="two-cols"><div class="col-main">';
 
-    /*
+  /*
     if(function_exists('_mc_event_section_all')){
       print  _mc_event_section_all('events_bookmarks');
     }
-    */
+  */
  print views_embed_view("mc_events_sections","block_1");
 
   print '</div>';
