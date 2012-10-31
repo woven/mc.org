@@ -1,14 +1,16 @@
 $(document).ready(function() {
-  $('.event-section .duplicates').each(function(){
-        var $duplicate = $(this);
-        var events = $duplicate.find('.event');
-        if($(events).length>1){
-            console.log("test");
-            var count = $(events).length - 1;
-            var firstEvent = $duplicate.find('.first');
-            var showMoreDiv = '<div class="show-more-events"><a href="#">Show ' + count + ' similar</a></div>';
-            firstEvent.append(showMoreDiv);
-        }
+  $('.section-day .duplicates').each(function(){
+      var $duplicate = $(this);
+      if(!$duplicate.parents(".my-events").length){
+          var events = $duplicate.find('.event');
+          if($(events).length>1){
+              var count = $(events).length - 1;
+              var firstEvent = $duplicate.find('.first');
+              $duplicate.find(".event").not('.first').hide();
+              var showMoreDiv = '<div class="show-more-events"><a href="#">Show ' + count + ' similar</a></div>';
+              firstEvent.append(showMoreDiv);
+          }
+      }
   });
 
   $('.show-more-events a').click(function(event){
