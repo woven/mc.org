@@ -2461,6 +2461,66 @@ echo _mc_event_section_print_location_hidden($location);
   $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here. Star some upcoming events and they\'ll show here.</div>');
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
+  $handler = $view->new_display('page', 'Page: My Events', 'page_2');
+  $handler->override_option('relationships', array(
+    'group_nid' => array(
+      'label' => 'Group node (post)',
+      'required' => 0,
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
+      'relationship' => 'none',
+    ),
+    'field_place_nid' => array(
+      'label' => 'Place',
+      'required' => 0,
+      'delta' => -1,
+      'id' => 'field_place_nid',
+      'table' => 'node_data_field_place',
+      'field' => 'field_place_nid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'flag_content_rel' => array(
+      'label' => 'flag',
+      'required' => 1,
+      'flag' => 'events_bookmarks',
+      'user_scope' => 'current',
+      'id' => 'flag_content_rel',
+      'table' => 'node',
+      'field' => 'flag_content_rel',
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('access', array(
+    'type' => 'role',
+    'role' => array(
+      2 => 2,
+    ),
+  ));
+  $handler->override_option('title', 'My Events');
+  $handler->override_option('css_class', 'event-section my-events no-show-more');
+  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here. Star some upcoming events and they\'ll show here.</div>');
+  $handler->override_option('path', 'events/my-events');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
 
   $views[$view->name] = $view;
 
