@@ -36,14 +36,24 @@ var GHH = {
     starJoin: function(){
 
         $(document).bind('flagGlobalAfterLinkUpdate', function(event, data) {
-            if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $('body').hasClass('page-user')){
+            if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $(data.link).parents(".my-events").length){
 
                 if ($(data.link).parents('.event').size()){
-                    $(data.link).hide().parents('.event').fadeOut('fast',function(){
-                        $(this).remove();
+                    $(data.link).hide().parents('.event').fadeOut('fast', function () {
+                        if (!$(this).parents(".section-day").find(".event:visible").length) {
+                            $(this).parents(".section-day").fadeOut('fast', function () {
+                                if (!$(this).parents(".section-week").find(".event:visible").length) {
+                                    $(this).parents(".section-week").fadeOut('fast', function () {
+                                        if (!$(this).parents(".section-section").find(".event:visible").length) {
+                                            $(this).parents(".section-section").fadeOut('fast');
+                                        }
+                                    });
+                                }
+                            });
+                        };
 
-                        if(!$('.col-main .event:visible').size()){
-                            $('.col-main').html("<p class='default-message'>Nothing to show here. Star some upcoming events and they'll show here.</p>");
+                        if (!$('.my-events .event:visible').size()) {
+                            $('.my-events .view-content').html("<p class='default-message'>Nothing to show here. Star some upcoming events and they'll show here.</p>");
                         }
                     });
                 }
