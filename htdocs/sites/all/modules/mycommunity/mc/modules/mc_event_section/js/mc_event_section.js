@@ -58,7 +58,7 @@ function ShowMyEventsTooltip() {
 }
 
 
-Drupal.behaviors.MyEventsUnStar = function(context){
+Drupal.behaviors.MyEventsStaring = function(context){
 
     $(".flag-events-bookmarks.unknown a.flag-action",context).click(function(e){
         e.preventDefault();
