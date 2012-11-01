@@ -1,5 +1,7 @@
 <?php
 
+include_once('mc_event_section.features.inc');
+
 /* OLD Code */
 function _mc_event_section_all($flag = null){
   $content = array();
@@ -21,8 +23,29 @@ function _mc_event_section_all($flag = null){
 }
 
 function mc_event_section_init(){
+  global $user;
+
+  //add javascript to all pages
   $path = drupal_get_path('module', 'mc_event_section');
   drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
+
+  //js settings
+  $settings = array();
+
+  //add mc_event_section settings to drupal settings objects, array.
+  if($user->uid > 0){
+    $user_flag_ob = flag_get_flag('events_starred');
+    $settings['has_stared'] = $user_flag_ob->is_flagged($user->uid);
+    if (!$settings['has_stared']){
+      $settings['has_stared_link'] = flag_create_link("events_starred",$user->uid);
+    }
+    $settings['msg_myevents_help'] = "Your starred events will appear here.<br/> <a href=\"#\" onclick=\"$('.ui-tooltip').hide();\">Ok, got it!</a>";
+    $settings['msg_myevents_empty'] = "<p class='default-message'>Nothing to show here. Star some upcoming events and they'll show here.</p>";
+  }else{
+    $settings['msg_anonymous'] =  l('Sign in','user', array('attributes' => array('class' => "login","onclick"=>"openColorboxLogin();return false;"))) ." or ". l('join now','user/register',array('attributes' => array('class' => "join","onclick"=>"openColorboxJoin();return false;"))) . " to save events.";
+  }
+
+  drupal_add_js(array('mc_event_section' => $settings), 'setting');
 }
 
 function _mc_event_section_next_two_weeks(&$content,$flag = null){

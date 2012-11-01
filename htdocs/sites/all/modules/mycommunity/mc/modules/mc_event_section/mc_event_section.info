@@ -1,4 +1,6 @@
 name = "MC Event Section"
 description = "Module with the logic to display events in different sections"
-dependencies[] = mc_event_ui
-core = 6.x
+core = "6.x"
+dependencies[] = "flag"
+dependencies[] = "mc_event_ui"
+features[flag][] = "events_starred"

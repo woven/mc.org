@@ -3,7 +3,7 @@ if(jq180){
     (function($){
         Drupal.behaviors.AnonymousStaring = function (context) {
             $(".flag-events-bookmarks.unknown a.flag-action",context).qtip({
-                content: {text: $("#event-staring-tooltip").html()},
+                content: {text: Drupal.settings.mc_event_section.msg_anonymous},
                 position: {my: "top center",at: "bottom center",
                     adjust:{x:-2,y:0},
                     viewport: $(window)
@@ -19,25 +19,42 @@ if(jq180){
 }
 
 function ShowMyEventsTooltip() {
-    (function($){
-        $("#navigation a[href*='events/my-events']").qtip({
-            content: {text: "Your starred events will appear here.<br/> <a href=\"#\" onclick=\"$('.ui-tooltip').hide();\">Ok, got it!</a>"},
+      //scroll up and show the tooltip msg
+      (function($){
+
+        //check if the user has not stared before
+        //mark user that he has stared
+        if(!Drupal.settings.mc_event_section.has_stared){
+          href = $(Drupal.settings.mc_event_section.has_stared_link).find('a').attr("href");
+
+          //star the user has_stared before
+          $.get(href);
+
+          //set current local value as stared
+          Drupal.settings.mc_event_section.has_stared = true;
+
+          //scroll to top
+          $(document).scrollTop(0);
+
+          //show the tooltip for first time
+          $("#navigation a[href*='events/my-events']").qtip({
+            content: {text: Drupal.settings.mc_event_section.msg_myevents_help},
             show: {solo: true},
             position: {my: "top center",at: "bottom center",
-                adjust:{x:-2,y:0},
-                viewport: $(window)
+              adjust:{x:-2,y:0},
+              viewport: $(window)
             },
             hide: false,
             show: {
-                event: false,
-                ready: true
+              event: false,
+              ready: true
             },
             style: {
-                classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+              classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
             }
-        });
-        $(document).scrollTop(0);
-    })(jq180);
+          });
+        }
+      })(jq180);
 }
 
 
@@ -50,8 +67,7 @@ Drupal.behaviors.MyEventsUnStar = function(context){
     if(context == document){
         $(document).bind('flagGlobalAfterLinkUpdate', function(event, data) {
 
-            if(data.flagStatus == "flagged" && data.flagName == "events_bookmarks" && !$.cookie("MC-EVENT-STARED")){
-                $.cookie('MC-EVENT-STARED', 1, { expires: 300 });
+            if(data.flagStatus == "flagged" && data.flagName == "events_bookmarks"){
                 ShowMyEventsTooltip();
             }
 
@@ -71,7 +87,7 @@ Drupal.behaviors.MyEventsUnStar = function(context){
                         };
 
                         if (!$('.my-events .event:visible').size()) {
-                            $('.my-events .view-content').html("<p class='default-message'>Nothing to show here. Star some upcoming events and they'll show here.</p>");
+                            $('.my-events .view-content').html(Drupal.settings.mc_event_section.msg_myevents_empty);
                         }
                     });
                 }
