@@ -57,13 +57,13 @@ Drupal.behaviors.MyEventsUnStar = function(context){
 
             if(data.flagStatus == "unflagged" && data.flagName == "events_bookmarks" && $(data.link).parents(".my-events").length){
                 if ($(data.link).parents('.event').size()){
-                    $(data.link).hide().parents('.event').fadeOut('fast', function () {
+                    $(data.link).hide().parents('.event').slideUp('fast', function () {
                         if (!$(this).parents(".section-day").find(".event:visible").length) {
-                            $(this).parents(".section-day").fadeOut('fast', function () {
+                            $(this).parents(".section-day").slideUp('fast', function () {
                                 if (!$(this).parents(".section-week").find(".event:visible").length) {
-                                    $(this).parents(".section-week").fadeOut('fast', function () {
+                                    $(this).parents(".section-week").slideUp('fast', function () {
                                         if (!$(this).parents(".section-section").find(".event:visible").length) {
-                                            $(this).parents(".section-section").fadeOut('fast');
+                                            $(this).parents(".section-section").slideUp('fast');
                                         }
                                     });
                                 }
