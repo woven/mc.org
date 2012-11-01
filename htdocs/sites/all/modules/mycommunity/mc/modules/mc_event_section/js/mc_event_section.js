@@ -21,7 +21,7 @@ if(jq180){
 function ShowMyEventsTooltip() {
     (function($){
         $("#navigation a[href*='events/my-events']").qtip({
-            content: {text: "Your starred events will appear here.<br/> <a href=\"#\" onclick=\"$('.ui-tooltip').hide();\">Ok, got it</a>"},
+            content: {text: "Your starred events will appear here.<br/> <a href=\"#\" onclick=\"$('.ui-tooltip').hide();\">Ok, got it!</a>"},
             show: {solo: true},
             position: {my: "top center",at: "bottom center",
                 adjust:{x:-2,y:0},
