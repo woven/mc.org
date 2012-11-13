@@ -43,6 +43,16 @@ function mc_news_feed_feeds_importer_default() {
             'target' => 'title',
             'unique' => FALSE,
           ),
+          2 => array(
+            'source' => 'parent:og_groups',
+            'target' => 'og_groups',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'parent:uid',
+            'target' => 'uid',
+            'unique' => FALSE,
+          ),
         ),
         'author' => 0,
         'authorize' => 0,
