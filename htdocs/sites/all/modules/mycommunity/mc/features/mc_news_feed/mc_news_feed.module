@@ -5,3 +5,23 @@
  */
 
 include_once 'mc_news_feed.features.inc';
+
+function mc_news_feed_late_form_alter(&$form, &$form_state, $form_id){
+  global $user;
+  if(!is_ct_form($form,"news_feed")){
+    return;
+  }
+
+  $form['title']['#access'] = false;
+}
+
+function mc_news_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+    if($node->type == 'news_feed'){
+      switch($op){
+        case 'validate':
+          if(isset($node->feeds['FeedsHTTPFetcher']['source']) && !empty($node->feeds['FeedsHTTPFetcher']['source']))
+          $node->title = "News feed from " . $node->feeds['FeedsHTTPFetcher']['source'];
+        break;
+      }
+    }
+}
