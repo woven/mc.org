@@ -11,7 +11,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_about',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '37',
+      'weight' => '35',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -81,7 +81,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_featured_items',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '39',
+      'weight' => '38',
       'parent' => '',
       'label' => array(
         'format' => 'above',
@@ -172,7 +172,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_group_url',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '40',
+      'weight' => '39',
       'parent' => '',
       'label' => array(
         'format' => 'above',
@@ -248,7 +248,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_header_color',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '35',
+      'weight' => '33',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -335,7 +335,7 @@ function ft_group_content_default_fields() {
     'field_name' => 'field_header_title_color',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '36',
+      'weight' => '34',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -426,7 +426,7 @@ black',
     'field_name' => 'field_list_image',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '38',
+      'weight' => '37',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -514,7 +514,7 @@ black',
     'field_name' => 'field_logo',
     'type_name' => 'group',
     'display_settings' => array(
-      'weight' => '33',
+      'weight' => '32',
       'parent' => '',
       'label' => array(
         'format' => 'hidden',
@@ -680,9 +680,10 @@ black',
     'field_name' => 'field_twitter_username',
     'type_name' => 'group',
     'display_settings' => array(
+      'weight' => '36',
+      'parent' => '',
       'label' => array(
         'format' => 'above',
-        'exclude' => 0,
       ),
       'teaser' => array(
         'format' => 'default',
@@ -690,7 +691,7 @@ black',
       ),
       'full' => array(
         'format' => 'default',
-        'exclude' => 0,
+        'exclude' => 1,
       ),
       '4' => array(
         'format' => 'default',
