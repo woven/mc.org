@@ -53,6 +53,11 @@ function mc_news_feed_feeds_importer_default() {
             'target' => 'uid',
             'unique' => FALSE,
           ),
+          4 => array(
+            'source' => 'timestamp',
+            'target' => 'created',
+            'unique' => FALSE,
+          ),
         ),
         'author' => 0,
         'authorize' => 0,
