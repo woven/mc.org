@@ -96,7 +96,6 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
   }
 
   while($node = db_fetch_object($rows)){
-    dsm($node);
     $replacements = array(
       '!title' => $node->title,
       '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
