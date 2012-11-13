@@ -38,6 +38,7 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
     return;
   };
 
+
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
@@ -56,7 +57,7 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
 
   $flag_name = 'tweet_2hour';
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
-  $twitter_interval_status = "@event_time! !title !tinyurl !hash";
+  $twitter_interval_status = "@event_time! !title !from!tinyurl !hash";
 
   $sql = "SELECT
     `event`.nid as nid,
@@ -64,10 +65,13 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
     `event`.unix_event_start as unix_start,
     `event`.unix_event_end as unix_end,
     `event`.has_end_date as has_end_date,
-    `event`.has_time as has_time
+    `event`.has_time as has_time,
+    content_type_group.field_twitter_username_value as twitter
    FROM
     node
    INNER JOIN `event` ON `event`.nid = node.nid AND node.type = '%s'
+   LEFT JOIN og_ancestry ON og_ancestry.nid = node.nid
+   LEFT JOIN content_type_group ON content_type_group.nid = og_ancestry.group_nid
    LEFT JOIN flag_content ON flag_content.content_id = `event`.nid
    LEFT JOIN flags ON flags.fid = flag_content.fid AND flags.name = '%s'
    WHERE flag_content.fcid IS NULL AND (`event`.unix_event_start >= %d AND `event`.unix_event_start <= %d)
@@ -92,13 +96,14 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
   }
 
   while($node = db_fetch_object($rows)){
-
+    dsm($node);
     $replacements = array(
       '!title' => $node->title,
       '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
       '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
       '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
-      '@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time))
+      '@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)),
+      '!from' => $node->twitter ? "from @" . $node->twitter . " ": ""
     );
 
     // Only generate the shortened URL if it's going to be used. No sense
@@ -108,11 +113,6 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
     }
 
     $status = strtr($twitter_interval_status, $replacements);
-
-    // If token module is available, process status to do the token replacement
-    if (module_exists('token')) {
-      $status = token_replace($status, 'node', $node);
-    }
 
     if($tweet){
       mc_tweet($twitter_account,$status);
