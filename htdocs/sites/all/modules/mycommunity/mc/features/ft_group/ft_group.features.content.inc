@@ -68,7 +68,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'About',
-      'weight' => '37',
+      'weight' => '35',
       'description' => 'Extended information about your group, which will show on a dedicated About page.',
       'minimum_widgets' => '1',
       'type' => 'text_textarea',
@@ -159,7 +159,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Featured Items',
-      'weight' => '39',
+      'weight' => '38',
       'description' => 'Start typing and the select the items you want to be featured in this group',
       'minimum_widgets' => '1',
       'type' => 'nodereference_autocomplete',
@@ -235,7 +235,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'What’s the URL of your group’s homepage?',
-      'weight' => '40',
+      'weight' => '39',
       'description' => 'The URL of your group’s homepage on a service like Meetup.com. Leave blank if you don’t have one.',
       'minimum_widgets' => '1',
       'type' => 'link',
@@ -322,7 +322,7 @@ function ft_group_content_default_fields() {
       ),
       'default_value_php' => NULL,
       'label' => 'Header Color',
-      'weight' => '35',
+      'weight' => '33',
       'description' => '',
       'minimum_widgets' => '1',
       'type' => 'colorpicker_cck',
@@ -413,7 +413,7 @@ black',
       ),
       'default_value_php' => NULL,
       'label' => 'Header Title Color',
-      'weight' => '36',
+      'weight' => '34',
       'description' => '',
       'minimum_widgets' => '1',
       'type' => 'optionwidgets_select',
@@ -501,7 +501,7 @@ black',
       ),
       'use_default_image' => 0,
       'label' => 'Images',
-      'weight' => '38',
+      'weight' => '37',
       'description' => 'You may upload an image to be associated with this post.',
       'minimum_widgets' => '1',
       'type' => 'imagefield_crop_widget',
@@ -574,7 +574,7 @@ black',
       'focus_min_size' => '',
       'focus_lock_ratio' => 0,
       'label' => 'Logo',
-      'weight' => '33',
+      'weight' => '32',
       'description' => '',
       'minimum_widgets' => '1',
       'type' => 'imagefield_crop_widget',
@@ -675,6 +675,90 @@ black',
     ),
   );
 
+  // Exported field: field_twitter_username
+  $fields['group-field_twitter_username'] = array(
+    'field_name' => 'field_twitter_username',
+    'type_name' => 'group',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'bubble' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'secondary_page' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'block' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'search' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'minimum_widgets' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => 5,
+      'size' => '60',
+      'default_value' => array(
+        '0' => array(
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_twitter_username][0][value',
+        ),
+      ),
+      'default_value_php' => NULL,
+      'label' => 'Twitter User Name',
+      'weight' => '36',
+      'description' => '',
+      'minimum_widgets' => '1',
+      'type' => 'text_textfield',
+      'module' => 'text',
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('About');
@@ -684,6 +768,7 @@ black',
   t('Images');
   t('Logo');
   t('Short Name');
+  t('Twitter User Name');
   t('What’s the URL of your group’s homepage?');
 
   return $fields;
