@@ -26,6 +26,8 @@ function mc_tweet($account,$status,$log = true){
 
   try {
     twitter_set_status($account,$status);
+    $msg = t("Sent Twitter Status: !status",array('!status'=>$status));
+    watchdog('mc_twitter',"",array(),WATCHDOG_INFO);
     return true;
   }
   catch (TwitterException $e) {
