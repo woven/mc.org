@@ -17,12 +17,12 @@ function ft_news_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-80',
+      'ds_weight' => '-70',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'default',
+        'format' => 'mt_home_event__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -30,7 +30,7 @@ function ft_news_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-80',
+        'weight' => '-70',
       ),
       'secondary_page' => array(
         'label' => array(

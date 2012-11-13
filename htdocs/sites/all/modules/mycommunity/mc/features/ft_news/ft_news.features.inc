@@ -18,11 +18,11 @@ function ft_news_node_info() {
     'nnews' => array(
       'name' => t('News'),
       'module' => 'features',
-      'description' => '',
+      'description' => t('News item that is being added by Feeds from feed_news mapper'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'has_body' => '1',
-      'body_label' => t('Body'),
+      'body_label' => t('Description'),
       'min_word_count' => '0',
       'help' => '',
     ),

@@ -162,6 +162,7 @@ function ft_location_strongarm() {
     'gallery_image' => 'drupal',
     'forum' => 'drupal',
     'event' => 'drupal',
+    'news_feed' => 'drupal',
   );
   $export['gmap_node_markers'] = $strongarm;
 

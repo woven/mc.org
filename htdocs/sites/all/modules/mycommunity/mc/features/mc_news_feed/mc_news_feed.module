@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MC News Feed feature.
+ */
+
+include_once 'mc_news_feed.features.inc';
