@@ -16,13 +16,13 @@ function mc_news_feed_feeds_importer_default() {
     'fetcher' => array(
       'plugin_key' => 'FeedsHTTPFetcher',
       'config' => array(
-        'auto_detect_feeds' => 1,
-        'use_pubsubhubbub' => 0,
+        'auto_detect_feeds' => FALSE,
+        'use_pubsubhubbub' => FALSE,
         'designated_hub' => '',
       ),
     ),
     'parser' => array(
-      'plugin_key' => 'FeedsSyndicationParser',
+      'plugin_key' => 'FeedsSimplePieParser',
       'config' => array(),
     ),
     'processor' => array(
@@ -56,6 +56,26 @@ function mc_news_feed_feeds_importer_default() {
           4 => array(
             'source' => 'timestamp',
             'target' => 'created',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'guid',
+            'target' => 'guid',
+            'unique' => 1,
+          ),
+          6 => array(
+            'source' => 'url',
+            'target' => 'url',
+            'unique' => 0,
+          ),
+          7 => array(
+            'source' => 'feed_images',
+            'target' => 'field_list_image',
+            'unique' => FALSE,
+          ),
+          8 => array(
+            'source' => 'url',
+            'target' => 'field_url:url',
             'unique' => FALSE,
           ),
         ),

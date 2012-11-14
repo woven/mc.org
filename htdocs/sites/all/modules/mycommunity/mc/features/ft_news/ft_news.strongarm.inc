@@ -95,10 +95,11 @@ function ft_news_strongarm() {
     'options' => '41',
     'comment_settings' => '44',
     'menu' => '38',
-    'taxonomy' => '34',
     'path' => '43',
-    'mollom' => '45',
+    'og_nodeapi' => '0',
     'print' => '42',
+    'xmlsitemap' => '30',
+    'nodewords' => '10',
   );
   $export['content_extra_weights_nnews'] = $strongarm;
 
@@ -279,6 +280,116 @@ function ft_news_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodeformscols_field_placements_nnews_default';
+  $strongarm->value = array(
+    'title' => array(
+      'region' => 'main',
+      'weight' => '1',
+      'has_required' => TRUE,
+      'title' => 'Title',
+    ),
+    'body_field' => array(
+      'region' => 'main',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'menu' => array(
+      'region' => 'right',
+      'weight' => '0',
+      'hidden' => 0,
+    ),
+    'comment_settings' => array(
+      'region' => 'right',
+      'weight' => '30',
+      'has_required' => FALSE,
+      'title' => 'Comment settings',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'path' => array(
+      'region' => 'right',
+      'weight' => '30',
+      'has_required' => FALSE,
+      'title' => 'URL path settings',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'options' => array(
+      'region' => 'right',
+      'weight' => '25',
+      'has_required' => FALSE,
+      'title' => 'Publishing options',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'author' => array(
+      'region' => 'right',
+      'weight' => '20',
+      'has_required' => FALSE,
+      'title' => 'Authoring information',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'buttons' => array(
+      'region' => 'main',
+      'weight' => '8',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'field_list_image' => array(
+      'region' => 'main',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => 'Images',
+      'hidden' => 0,
+    ),
+    'print' => array(
+      'region' => 'main',
+      'weight' => '7',
+      'has_required' => FALSE,
+      'title' => 'Printer, email and PDF versions',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'xmlsitemap' => array(
+      'region' => 'main',
+      'weight' => '6',
+      'has_required' => FALSE,
+      'title' => 'XML sitemap',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'nodewords' => array(
+      'region' => 'main',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Meta tags',
+      'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'og_nodeapi' => array(
+      'region' => 'main',
+      'weight' => '0',
+      'has_required' => TRUE,
+      'title' => 'Groups',
+      'collapsed' => 0,
+    ),
+    'field_url' => array(
+      'region' => 'main',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => 'URL',
+      'hidden' => 0,
+    ),
+  );
+  $export['nodeformscols_field_placements_nnews_default'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nodeformsettings_nnews';
   $strongarm->value = array(
     'nfs_submission_body_rows' => '10',
@@ -371,6 +482,20 @@ function ft_news_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_nnews';
+  $strongarm->value = '';
+  $export['page_title_type_nnews'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'page_title_type_nnews_showfield';
+  $strongarm->value = 0;
+  $export['page_title_type_nnews_showfield'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_nnews_pattern';
   $strongarm->value = '[group-short-name-raw]/news/[title-raw]';
   $export['pathauto_node_nnews_pattern'] = $strongarm;
@@ -440,6 +565,16 @@ function ft_news_strongarm() {
     1 => 'node_group',
   );
   $export['skinr_settings_nnews'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_nnews';
+  $strongarm->value = array(
+    'status' => '1',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_nnews'] = $strongarm;
 
   return $export;
 }

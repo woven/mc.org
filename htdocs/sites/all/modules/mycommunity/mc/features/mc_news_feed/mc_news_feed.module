@@ -26,3 +26,132 @@ function mc_news_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
       }
     }
 }
+
+function mc_news_feed_feeds_parser_sources_alter(&$sources, $content_type) {
+  $sources['feed_images'] = array(
+    'name' => t('Images in element'),
+    'description' => t('Images occurring in the enclosures & description field'),
+    'callback' => '_elementfeed_images',
+  );
+}
+
+//return unique enclosures
+function enclosures_get_unique($enclosures){
+  //find unique enslosures
+  $unique_enclosures = array();
+  foreach ($enclosures as $enclosure) {
+    $url = strtolower($enclosure->getValue());
+    if(!isset($unique_enclosures[$url])){
+      $unique_enclosures[$url] = $enclosure;
+    }
+  }
+
+  return $unique_enclosures;
+}
+
+//return only image enclosures based on the mime type OR extensions
+function enclosures_get_imgs($enclosures){
+  //store enclosures as unique values
+  $img_enclosures = array();
+  $img_exts = array('png','jpg','gif','jpeg');
+
+  $enclosure = enclosures_get_unique($enclosures);
+
+  //check if any of them has image as mime type or ext
+  foreach($enclosures as $enclosure){
+    $path = pathinfo($enclosure->getValue());
+    $ext = strtolower($path['extension']);
+    if(startsWith(strtolower($enclosure->getMIMEType()),"image") OR in_array($ext,$img_exts)){
+      $img_enclosures[] = $enclosure;
+    };
+  }
+
+  return $img_enclosures;
+}
+
+//return image enclosures from based on
+function enclosures_html_img($html){
+  $enclosures = array();
+
+  if(!empty($html)){
+    foreach(qp($html,'img')->get() as $img){
+      $src = qp($img)->attr("src");
+      $path = pathinfo($src);
+      $mime = $path['extension'] ? "image/".$path['extension'] : "image";
+      $enclosures[] = new FeedsEnclosure($src, $mime);
+    }
+  }
+
+  return enclosures_get_unique($enclosures);
+}
+
+function _elementfeed_images(FeedsImportBatch $batch, $key) {
+  $item = $batch->currentItem();
+  $enclosures = $item['enclosures'];
+  $desc = $item['description'];
+
+  $enclosures = enclosures_get_imgs($enclosures);
+  if(empty($enclosures)){
+    $enclosures = enclosures_html_img($desc);
+  }
+  
+  return array(array_shift($enclosures));
+}
+
+
+function mc_news_feed_feeds_node_processor_targets_alter(&$targets, $content_type) {
+  $targets['enclosure_images'] = array(
+    'name' => t('Enclosed Images'),
+    'description' => t('Import images to MC images field'),
+    'callback' => '_mc_filefield_feeds_set_target',
+    'real_target' => 'field_list_image'
+  );
+}
+
+function _mc_filefield_feeds_set_target($node, $field_name, $value) {
+  $field_name = "field_list_image";
+  // Normalize $value, create an array of FeedsEnclosures of it.
+  $enclosures = array();
+  if (!is_array($value)) {
+    $value = array($value);
+  }
+  foreach ($value as $k => $v) {
+    if ($v instanceof FeedsEnclosure) {
+      $enclosures[] = $v;
+    }
+    elseif (valid_url($v)) {
+      $enclosures[$k] = new FeedsEnclosure($v, 'application/octet-stream');
+    }
+  }
+
+  // Map enclosures.
+  $items = isset($node->$field_name) ? $node->$field_name : array();
+
+  //dsm($enclosures);
+
+  //store enlosures as unique values
+  $unique_enclosures = array();
+  foreach ($enclosures as $enclosure) {
+    if(!isset($unique_enclosures[$enclosure->getValue()])){
+      $unique_enclosures[$enclosure->getValue()] = $enclosure;
+    }
+  }
+
+  foreach ($unique_enclosures as $enclosure) {
+    if ($file = $enclosure->getFile()) {
+      $field = content_fields($field_name, $node->type);
+      $target_dir = filefield_widget_file_path($field, user_load($node->uid));
+      $info = field_file_save_file($enclosure->getFile(), array(), $target_dir);
+      if ($info) {
+        $info['list'] = array();
+        $info['data'] = array('description' => '');
+        if ($field['list_field']) {
+          $info['list'] = $field['list_default'];
+        }
+        $items[] = $info;
+        $error = FALSE;
+      }
+    }
+  }
+  $node->$field_name = $items;
+}
