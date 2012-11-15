@@ -17,7 +17,7 @@ function ft_news_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-70',
+      'ds_weight' => '-82',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -30,7 +30,7 @@ function ft_news_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-70',
+        'weight' => '-82',
       ),
       'secondary_page' => array(
         'label' => array(
@@ -128,14 +128,27 @@ function ft_news_content_default_fields() {
     'type_name' => 'nnews',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-72',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'link',
+        'parent_id' => '',
+        'field_id' => 'field_url',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-72',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
