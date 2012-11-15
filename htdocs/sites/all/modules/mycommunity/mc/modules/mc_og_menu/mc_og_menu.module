@@ -40,6 +40,14 @@ function _mc_og_menu_items(){
       'is_menu_item' => TRUE,
       'show_block' => TRUE,
     ),
+    'news' => array(
+      'title' => "News",
+      'view' => "mc_news_sections",
+      'display_id' => 'block_1',
+      'link' => 'node/!nid/news',
+      'is_menu_item' => TRUE,
+      'show_block' => TRUE,
+    ),
     'files' => array(
       'title' => "Files",
       'view' => MC_OG_MENU_DEFAULT,
