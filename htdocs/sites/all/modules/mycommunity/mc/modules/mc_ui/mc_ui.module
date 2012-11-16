@@ -5,20 +5,40 @@ function mc_ui_init(){
   drupal_add_js($path .'/js/mc_ui.js', 'module', 'header', FALSE, TRUE, FALSE);
 }
 
+function mc_ui_formatter_info() {
+  return array(
+    'post_date' => array(
+      'label' => t('MC: Post date'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+      'multiple values' => CONTENT_HANDLE_CORE
+    )
+  );
+
+  return $formatters;
+}
+
+function theme_mc_ui_formatter_post_date($element){
+  dsm($element);
+}
+
 /**
  * Implementation of hook_theme
  */
 function mc_ui_theme($existing, $type, $theme, $path){
 	  return array(
-	  	  'ghh_user_picture' => array('variables' => array('uid' => NULL,'imagecache' => null, 'imageComment' => TRUE)),
-	  	  'ghh_article_thumbnail' => array('variables' => array('img' => NULL,'imagecache' => null)),
+	  	'ghh_user_picture' => array('variables' => array('uid' => NULL,'imagecache' => null, 'imageComment' => TRUE)),
+	  	'ghh_article_thumbnail' => array('variables' => array('img' => NULL,'imagecache' => null)),
         'ghh_browse_menu' => array('variables' => array('mid' => NULL)),
         'ghh_see_all' => array('title' => null, 'url' => null,'icon' => null),
         'ghh_post_date' => array('variables' => array('date' => NULL)),
         'ghh_authoring_info' => array('variables' => array('uid' => NULL, 'uname' => NULL,'gnid' => NULL, 'gtitle' => NULL, 'picture' => NULL)),
         'ghh_node_categories' => array('variables' => array('nid' => NULL, 'vocabulary_id' => NULL)),
-    	);
-} 
+        'mc_post_date' => array('variables' => array('ts' => NULL)),
+        'mc_ui_formatter_post_date' => array(
+          'arguments' => array('element' => NULL),
+        )
+      );
+}
 
 function mc_ui_preprocess_block(&$vars){
   if($vars['block']->module=='menu' && (
@@ -100,11 +120,15 @@ function theme_ghh_browse_menu($mid){
     return '<div class="ghh-menu-items">'.theme('links', menu_navigation_links($mid)).'</div>';
 }
 
-
 /**
  * Implementation of theme_ghh_post_date
+ * theme_mc_post_date
  */
 function theme_ghh_post_date($date){
+  return theme_mc_post_date($date);
+}
+
+function theme_mc_post_date($date){
   $output = '';
   $today = mktime(0, 0, 0);
   $oneWeekAgo = $today - 24*3600*7;

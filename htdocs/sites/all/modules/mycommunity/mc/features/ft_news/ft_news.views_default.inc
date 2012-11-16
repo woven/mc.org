@@ -27,6 +27,43 @@ function ft_news_views_default_views() {
     ),
   ));
   $handler->override_option('fields', array(
+    'created' => array(
+      'label' => 'Post date',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '[created]',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'date_format' => 'medium',
+      'custom_date_format' => '',
+      'exclude' => 1,
+      'id' => 'created',
+      'table' => 'node',
+      'field' => 'created',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'field_url_url' => array(
       'label' => '',
       'alter' => array(
@@ -268,8 +305,8 @@ function ft_news_views_default_views() {
         'button' => 'Override',
       ),
     ),
-    'created' => array(
-      'label' => 'Post date',
+    'phpcode' => array(
+      'label' => 'MC: post date',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -294,12 +331,13 @@ function ft_news_views_default_views() {
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'date_format' => 'medium',
-      'custom_date_format' => '',
+      'value' => '<?php
+print theme("mc_post_date",$data->node_created);
+?>',
       'exclude' => 0,
-      'id' => 'created',
-      'table' => 'node',
-      'field' => 'created',
+      'id' => 'phpcode',
+      'table' => 'customfield',
+      'field' => 'phpcode',
       'override' => array(
         'button' => 'Override',
       ),
@@ -430,12 +468,6 @@ function ft_news_views_default_views() {
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
-      'ops' => array(
-        'element_type' => 'div',
-        'class' => 'event-staring',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
       'field_list_image_fid' => array(
         'element_type' => 'div',
         'class' => 'field-view-image',
@@ -452,7 +484,7 @@ function ft_news_views_default_views() {
         'label_element_type' => '',
         'label_class' => '',
       ),
-      'created' => array(
+      'phpcode' => array(
         'element_type' => 'p',
         'class' => 'location-link to-right',
         'label_element_type' => '',
