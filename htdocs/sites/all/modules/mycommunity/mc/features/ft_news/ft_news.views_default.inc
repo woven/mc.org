@@ -399,7 +399,7 @@ function ft_news_views_default_views() {
   $handler->override_option('css_class', 'news-section');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
-  $handler->override_option('empty', '<div class=\\"default-message\\">Wow, it\'s quiet around here.  Want to <a href=\'/node/add/event\'>add an event</a> or <a href=\'/node/add/event-feed\'>import an event feed</a>?</div>');
+  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here. Want to <a href=\'/node/add/news-feed\'>add a news feed</a>?</div>');
   $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 0);
   $handler->override_option('use_pager', '0');
