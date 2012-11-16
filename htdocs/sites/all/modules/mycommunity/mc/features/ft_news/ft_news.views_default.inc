@@ -27,6 +27,42 @@ function ft_news_views_default_views() {
     ),
   ));
   $handler->override_option('fields', array(
+    'title_3' => array(
+      'label' => 'Title: raw',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 1,
+      'exclude' => 1,
+      'id' => 'title_3',
+      'table' => 'node',
+      'field' => 'title',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'created' => array(
       'label' => 'Post date',
       'alter' => array(
@@ -602,6 +638,69 @@ print theme("mc_post_date",$data->node_created);
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
+  $handler = $view->new_display('feed', 'Feed: News All', 'feed_1');
+  $handler->override_option('style_plugin', 'rss_fields');
+  $handler->override_option('style_options', array(
+    'mission_description' => FALSE,
+    'description' => '',
+    'channel' => array(
+      'core' => array(
+        'views_rss_core' => array(
+          'description' => '',
+          'language' => '',
+          'category' => '',
+          'image' => '',
+          'copyright' => '',
+          'managingEditor' => '',
+          'webMaster' => '',
+          'generator' => '',
+          'docs' => '',
+          'cloud' => '',
+          'ttl' => '',
+          'skipHours' => '',
+          'skipDays' => '',
+        ),
+      ),
+    ),
+    'item' => array(
+      'core' => array(
+        'views_rss_core' => array(
+          'title' => 'title_3',
+          'link' => 'field_url_url',
+          'description' => 'body',
+          'author' => 'title_1',
+          'category' => '',
+          'comments' => '',
+          'enclosure' => 'field_list_image_fid',
+          'guid' => '',
+          'pubDate' => 'created',
+        ),
+      ),
+    ),
+    'feed_settings' => array(
+      'absolute_paths' => 1,
+      'feed_in_links' => 0,
+    ),
+  ));
+  $handler->override_option('row_plugin', '');
+  $handler->override_option('row_options', array());
+  $handler->override_option('path', 'news/feed');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('displays', array());
+  $handler->override_option('sitename_title', FALSE);
 
   $views[$view->name] = $view;
 

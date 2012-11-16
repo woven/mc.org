@@ -14,3 +14,31 @@ function ft_news_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     }
   }
 }
+
+function ft_news_block($op = 'list', $delta = 0, $edit = array()) {
+  switch($op){
+    case 'list':
+      $blocks['news-sideblock'] = array(
+        'info' => t('News: Sideblock'),
+        'weight' => 0,
+        'status' => 1,
+      );
+      return $blocks;
+      break;
+    case 'view':
+      switch ($delta) {
+        case 'news-sideblock':
+          $block = array(
+            'subject' => '',
+            'content' => _news_sidebock(),
+          );
+          break;
+      }
+      return $block;
+      break;
+  }
+}
+
+function _news_sidebock(){
+  return "test";
+}
