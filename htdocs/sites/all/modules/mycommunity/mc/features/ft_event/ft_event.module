@@ -26,7 +26,7 @@ function ft_event_block($op = 'list', $delta = 0, $edit = array()) {
   }
 }
 
-function _news_sidebock_user_events_calender(){
+function _user_events_calender(){
   global $user;
 
   $links = array();
