@@ -31,6 +31,12 @@ function ft_news_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'ft_news-news-sideblock' => array(
+          'module' => 'ft_news',
+          'delta' => 'news-sideblock',
+          'region' => 'right',
+          'weight' => 1,
+        ),
         'views-mc_news_sections-block_3' => array(
           'module' => 'views',
           'delta' => 'mc_news_sections-block_3',
@@ -72,7 +78,7 @@ function ft_news_context_default_contexts() {
       'below_content' => array(
         'class' => '',
         'blocks' => array(
-          'views-mc_events_sections-block_3' => array(
+          'views-mc_news_sections-block_3' => array(
             'class' => '',
           ),
         ),
