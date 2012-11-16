@@ -12,8 +12,27 @@ function mc_news_feed_late_form_alter(&$form, &$form_state, $form_id){
     return;
   }
 
+
+  if($submit = &$form['buttons']['submit']){
+    unset($form['#redirect']);
+    $submit['#submit'][] = '_mc_news_feed_submit';
+  }
+
   $form['title']['#access'] = false;
 }
+
+function _mc_news_feed_submit($form, &$form_state){
+  if(!empty($form_state['values']['og_groups'])){
+    $gid = array_shift(array_values($form_state['values']['og_groups']));
+
+    if($gid){
+      $form_state['redirect'] = "node/$gid/news";
+    }else{
+      $form_state['redirect'] = "news";
+    }
+  }
+}
+
 
 function mc_news_feed_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
     if($node->type == 'news_feed'){
