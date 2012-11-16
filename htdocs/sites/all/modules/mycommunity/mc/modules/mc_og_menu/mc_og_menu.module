@@ -136,12 +136,15 @@ function _mc_og_menu_block(){
   if(!empty($og)){
     $nid = $og->nid;
     $og_menu = _mc_og_menu_items();
+    $allowed = variable_get('og-menu-allowed',array());
 
-    foreach($og_menu as $og_item){
+    foreach($og_menu as $key => $og_item){
       if($og_item['show_block']){
-        $link = &$links[];
-        $link['title'] = $og_item['title'];
-        $link['href'] = t($og_item['link'],array('!nid' => $nid));
+        if(empty($allowed) OR (!empty($allowed) && in_array($key,$allowed))){
+          $link = &$links[];
+          $link['title'] = $og_item['title'];
+          $link['href'] = t($og_item['link'],array('!nid' => $nid));
+        }
       }
     }
 
@@ -158,7 +161,6 @@ function _mc_og_menu_block(){
  */
 function mc_og_menu_menu(){
   $items = array();
-
   $menu_list = _mc_og_menu_items();
   foreach($menu_list as $key => $item){
     if($item['is_menu_item']){
