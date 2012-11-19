@@ -539,6 +539,30 @@ function _mc_date_calender_week($ts){
 }
 
 /*
+   return the current week-year from timestamp
+*/
+function _mc_date_calender_weekyear($ts){
+  if($ts){
+    $day = format_date($ts,'custom','Y-m-d');
+    $year = format_date($ts,'custom','Y');
+
+    //check if date_api function exists
+    if(function_exists("date_week")){
+      //return calender week Sunday-Saturday
+      return intval(date_week($day))."-".$year;
+    }else{
+      //use default date format at php
+      //monday to sunday week
+      $date = date_create($day);
+      return intval(date_format($date, 'W'))."-".$year;
+    }
+  }
+
+  return "";
+}
+
+
+/*
  * return the first day of the weeok
  */
 function _mc_date_week_firstday($week,$year){
@@ -547,6 +571,20 @@ function _mc_date_week_firstday($week,$year){
     return date_timestamp_get($days[0]);
   }
   return ;
+}
+
+/*
+ * return the first day of the weekyear, input in format of week-year
+ */
+function _mc_date_weekyear_firstday($week_year){
+  $nums = explode("-",$week_year);
+  $week = $nums[0];
+  $year = $nums[1];
+  $days = date_week_range($week,$year);
+  if(!empty($days)){
+    return date_timestamp_get($days[0]);
+  }
+  return 0;
 }
 
 /**

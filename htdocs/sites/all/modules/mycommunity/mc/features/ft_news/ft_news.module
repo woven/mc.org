@@ -47,3 +47,147 @@ function _news_sidebock(){
 
   return theme("item_list",$links,null,'ul',array('class'=>"mc-links-blue"));
 }
+
+function debug_ts($ts){
+  $tss = array();
+  foreach($ts as $key => $val){
+    $tss[$key] = format_date($val,"custom","r");
+  }
+
+  return $tss;
+}
+
+function build_querys($asking = array(),$field = "node.created"){
+  if(empty($asking)){
+    $asking = array('today','thisweek','nextweek','2weekago','earlier');
+  }
+  $sections = dated_sections_info("now");
+  $cases = array();
+
+  dsm($sections);
+
+  foreach($asking as $asking_key){
+    if(isset($sections[$asking_key])){
+          $section = $sections[$asking_key];
+          if(count($section['range'])){
+              $case = &$cases[];
+              $case = t("WHEN (!field BETWEEN '!range1' AND '!range2')", array("!field"=> $field,"!range1" => $section['range'][0],"!range2" => $section['range'][1],'!section' => $section['name']));
+            if(isset($section['exclude']) OR !empty($section['exclude'])){
+              $sql_ops = array();
+              foreach($section['exclude'] as $excluded){
+                $section_exclude = $sections[$excluded];
+                $sql_op = array();
+                $sql_op[] = "(";
+                $sql_op[] = $field;
+                $sql_op[] = "NOT BETWEEN";
+                $sql_op[] = "'".$section_exclude['range'][0]."'";
+                $sql_op[] = "AND";
+                $sql_op[] = "'".$section_exclude['range'][1]."'";
+                $sql_op[] = ")";
+                $sql_ops[] = implode(" ",$sql_op);
+              }
+
+              $filter = implode(" AND ",$sql_ops);
+              $case .= " AND ($filter)";
+            }
+              $case .= " THEN '".$section['name']."'";
+          }
+    }
+  }
+
+  dsm($cases);
+  dsm(implode($cases,"\n"));
+}
+
+function dated_sections_info($now = "now",$future_limit = '',$past_limit = ''){
+  $sections = array();
+
+  //fill in the required information
+  $ts = new stdClass();
+  $ts->now = strtotime($now);
+  $ts->today = strtotime("today 12am",$ts->now);
+  $ts->yesterday = strtotime('yesterday 12am',$ts->now);
+  $ts->tomorrow = strtotime('tomorrow 12am',$ts->now);
+  $ts->lastweek = strtotime('tomorrow 12am',$ts->now);
+  $ts->aftertomorrow = strtotime('+2 days 12am',$ts->now);
+
+  $weeks = new stdClass();
+  $weeks->aftertomorrow = _mc_date_calender_weekyear($ts->tomorrow);
+  $weeks->tomorrow = _mc_date_calender_weekyear($ts->tomorrow);
+  $weeks->now = _mc_date_calender_weekyear($ts->now);
+  $weeks->today = _mc_date_calender_weekyear($ts->today);
+  $weeks->yesterday = _mc_date_calender_weekyear($ts->yesterday);
+
+  $weeks->oneweekago = _mc_date_calender_weekyear(strtotime("1 week ago 12am",$ts->now));
+  $weeks->twoweekago = _mc_date_calender_weekyear(strtotime("2 week ago 12am",$ts->now));
+  $weeks->oneweek = _mc_date_calender_weekyear(strtotime("1 week 12am",$ts->now));
+  $weeks->twoweek = _mc_date_calender_weekyear(strtotime("2 week 12am",$ts->now));
+  
+  //fill in the rest of ts for start of weeks timestamp
+  $ts->oneweekago = _mc_date_weekyear_firstday($weeks->oneweekago);
+  $ts->twoweekago = _mc_date_weekyear_firstday($weeks->twoweekago);
+
+  $ts->oneweek = _mc_date_weekyear_firstday($weeks->oneweek);
+  $ts->twoweek = _mc_date_weekyear_firstday($weeks->twoweek);
+
+  dsm($weeks);
+  dsm(debug_ts($ts));
+
+  $sections['1week'] = array(
+    'name' => "Next Week",
+    'range' => array('***MC_SECTIONS_TOMORROW***','***MC_SECTIONS_AFTERTOMORROW***')
+  );
+
+  $sections['tomorrow'] = array(
+    'name' => 'Tomorrow',
+    'range' => array('***MC_SECTIONS_TOMORROW***','***MC_SECTIONS_AFTERTOMORROW***')
+  );
+
+  $sections['now'] = array(
+    'name' => 'Today',
+    'range' => array('***MC_SECTIONS_NOW***','***MC_SECTIONS_TOMORROW***')
+  );
+
+  $sections['today'] = array(
+    'name' => 'Today',
+    'range' => array('***MC_SECTIONS_TODAY***','***MC_SECTIONS_TOMORROW***')
+  );
+
+  $sections['yesterday'] = array(
+    'name' => "Yesterday",
+    'range' => array('***MC_SECTIONS_YESTERDAY***','***MC_SECTIONS_TODAY***')
+  );
+
+  $sections['thisweek'] = array(
+    'name' => 'This Week',
+    'range' => array('***MC_SECTIONS_THISWEEK***','***MC_SECTIONS_TODAY***')
+  );
+
+  $sections['lastweek'] = array(
+    'name' => 'Last Week',
+    'range' => array('***MC_SECTIONS_LASTWEEK***','***MC_SECTIONS_THISWEEK***')
+  );
+
+  $sections['2weekago'] = array(
+    'name' => '2 Weeks ago',
+    'range' => array('***MC_SECTIONS_LASTWEEK***','***MC_SECTIONS_LASTWEEK***')
+  );
+
+  $sections['earlier'] = array(
+    'range' => array('***MC_SECTIONS_LASTWEEK***','***MC_SECTIONS_LASTWEEK***')
+  );
+
+  //if today and yesterday exists on the same week
+  if($weeks->today == $weeks->yesterday){
+    //exclude today and yesterday from thisweek section
+    $sections['thisweek']['exclude'] = array('today','yesterday');
+  }else{
+    //exclude today from this week
+    $sections['thisweek']['exclude'] = array('today');
+
+    //exclude yesterday from last week
+    $sections['lastweek']['exclude'] = array('yesterday');
+  }
+
+  return $sections;
+}
