@@ -63,8 +63,8 @@ function ft_news_views_query_alter(&$view, &$query) {
     return ;
   }
 
-  //$sections = array('today','thisweek','nextweek','2weekago','earlier');
-  $sqls = dated_sections_sql();
+  $sections = array('today','yesterday','thisweek','lastweek','earlier');
+  $sqls = dated_sections_sql($sections);
 
   if(!empty($sqls)){
     //add fields as defined above
@@ -206,14 +206,17 @@ function dated_sections_sql($asking = array(),$field = "node.created"){
               $case = t("WHEN (".dated_section_range_sql($field,$section['max'],$section['min']).")");
               $orders[] = "WHEN section='".$section['name']."' THEN " . $key;
             if(isset($section['exclude']) OR !empty($section['exclude'])){
+              //don't exclude if it's not at the asking array
               $sql_ops = array();
               foreach($section['exclude'] as $excluded){
-                $section_exclude = $sections[$excluded];
-                $sql_op = array();
-                $sql_op[] = "(";
-                $sql_op[] = dated_section_range_sql($field,$section_exclude['max'],$section_exclude['min'],true);
-                $sql_op[] = ")";
-                $sql_ops[] = implode(" ",$sql_op);
+                if(isset($asking[$excluded])){ //only exclude if the request region is part of the logic
+                  $section_exclude = $sections[$excluded];
+                  $sql_op = array();
+                  $sql_op[] = "(";
+                  $sql_op[] = dated_section_range_sql($field,$section_exclude['max'],$section_exclude['min'],true);
+                  $sql_op[] = ")";
+                  $sql_ops[] = implode(" ",$sql_op);
+                }
               }
 
               if(!empty($sql_ops)){
