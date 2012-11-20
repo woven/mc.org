@@ -162,13 +162,14 @@ function dated_sections_views_group(&$view,$records,$grouping_field = ''){
   $view->render_fields($view->view->result);
 
   $sets = array();
-
+  $field = "node_created";
   foreach($records as $row){
-    $ts = $row->node_created;
+    $ts = $row->{$field};
     $section = $row->section;
     $week = _mc_date_calender_week($ts);
     $year = date('Y',$ts);
     $week_num = $week."-".$year;
+    $week_num = _mc_date_calender_weekyear($ts);
     $day_num = format_date($ts,"custom","d");
     $day_month = format_date($ts,"custom","m");
     $day_year = format_date($ts,"custom","y");
@@ -184,12 +185,12 @@ function dated_sections_views_group(&$view,$records,$grouping_field = ''){
     }
   }
 
-  dsm($sets,"Raw Sets");
+  //dsm($sets,"Raw Sets");
   return $sets;
 }
 
 function dated_sections_sql($asking = array(),$field = "node.created"){
-  $sections = dated_sections_info("now");
+  $sections = dated_sections_info("-2 days");
   if(empty($asking)){
     $asking = array_keys($sections);
   }
@@ -298,12 +299,14 @@ function dated_sections_info($now = "now",$future_limit = 0,$past_limit = 0){
     'max' => $ts->aftertomorrow
   );
 
+  /*
   $sections['now'] = array(
     'name' => 'Now',
     'week#' => $weeks->today,
     'min' => $ts->now,
     'max' => $ts->tomorrow
   );
+  */
 
   $sections['today'] = array(
     'name' => 'Today',
@@ -323,18 +326,16 @@ function dated_sections_info($now = "now",$future_limit = 0,$past_limit = 0){
     'week' => true,
     'week#' => $weeks->oneweekago,
     'name' => 'Last Week',
-    'min' => $ts->last2week,
+    'min' => $ts->thisweek,
     'max' => $ts->lastweek
   );
 
   $sections['earlier'] = array(
     'name' => 'Earlier',
-    'max' => $ts->last2week,
+    'max' => $ts->lastweek,
     'min' => $past_limit ? $past_limit : 0
   );
 
-  dsm($weeks);
-  dsm(debug_ts($ts));
 
   foreach($sections as $key => &$val){
     if($val['week'] && $val['week#']){
@@ -347,7 +348,9 @@ function dated_sections_info($now = "now",$future_limit = 0,$past_limit = 0){
     }
   }
 
-  dsm($sections);
+  //dsm($weeks);
+  //dsm(debug_ts($ts));
+  //dsm($sections);
 
   return $sections;
 }
