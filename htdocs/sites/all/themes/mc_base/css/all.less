@@ -3161,6 +3161,42 @@ body.page-user .view-my-groups ul {
   }
 }
 
+.view-mc-news-sections{
+  .section-section{
+    .block-title{
+      margin-bottom: 20px;
+    }
+    h3{
+      font-size: 1.1em !important;
+    }
+  }
+  
+  .section-section.today,.section-section.tomorrow,.section-section.yesterday{
+    .event-separator{
+      display: none;
+    }
+  }
+
+  .section-section.this_week,.section-section.next_week{
+    .event-separator.week{
+      display: none;
+    }
+  }
+
+  .section-section.upcoming{
+    .event-separator.day{
+      display: none;
+    }
+  }
+  .section-section{
+    .event{
+      .to-right{
+        margin-left: 109px;
+      }
+    }
+  }
+}
+
 .view-mc-events-by-dates,.event-section{
     .section-section{
       .block-title{
