@@ -597,7 +597,7 @@ print theme("mc_post_date",$data->node_created);
   $handler->override_option('style_options', array(
     'grouping' => '',
     'group_function' => array(
-      'function_name' => '',
+      'function_name' => 'dated_sections_views_group',
     ),
     'group' => array(
       'element_type' => 'h3',

@@ -792,6 +792,6 @@ function mc_event_section_views_group(&$view,$records,$grouping_field = ''){
             }
         }
     }
-
+    dsm($sets);
     return $sets;
 }

@@ -587,6 +587,22 @@ function _mc_date_weekyear_firstday($week_year){
   return 0;
 }
 
+
+
+/*
+ * return the first day of the weekyear, input in format of week-year
+ */
+function _mc_date_weekyear_lastday($week_year){
+  $nums = explode("-",$week_year);
+  $week = $nums[0];
+  $year = $nums[1];
+  $days = date_week_range($week,$year);
+  if(!empty($days)){
+    return date_timestamp_get(end($days));
+  }
+  return 0;
+}
+
 /**
  * Return a date with a specific format time.
  */
