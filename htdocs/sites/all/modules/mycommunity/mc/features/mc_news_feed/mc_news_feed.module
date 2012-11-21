@@ -87,30 +87,59 @@ function enclosures_get_imgs($enclosures){
   return $img_enclosures;
 }
 
+function image_enclosure_from_url($url){
+  $path = pathinfo($url);
+  $mime = !empty($path['extension']) ? "image/".$path['extension'] : "image";
+  return new FeedsEnclosure($url, $mime);
+}
+
 //return image enclosures from based on
-function enclosures_html_img($html){
+function enclosures_html_img($html,$url = ''){
   $enclosures = array();
 
   if(!empty($html)){
-    foreach(qp($html,'img')->get() as $img){
+    foreach(htmlqp($html,'img')->get() as $img){
       $src = qp($img)->attr("src");
-      $path = pathinfo($src);
-      $mime = $path['extension'] ? "image/".$path['extension'] : "image";
-      $enclosures[] = new FeedsEnclosure($src, $mime);
+      if(!empty($src)){
+        $enclosures[] = image_enclosure_from_url($src);
+      }
     }
   }
 
-  return enclosures_get_unique($enclosures);
+  //no images were found at the body of the image
+  if(!empty($url)){
+    //check the actual page for images
+    $qb = htmlqp($url);
+
+    //check if image
+    $ogimage = $qb->find("meta[property='og:image']")->attr("content");
+    if(!empty($ogimage)){
+      $enclosures[] = image_enclosure_from_url($ogimage);
+    }
+  }
+
+  //@todo improve image detection and size
+  if(!empty($enclosures)){
+    $unique_enclosures = enclosures_get_unique($enclosures);
+    foreach($unique_enclosures as $file){
+      //$imgurl = $file->getValue();
+      //$file = $file->getFile();
+      //$img_info = image_get_info($file);
+    }
+  }
+
+  return enclosures_get_unique($enclosures);;
 }
 
 function _elementfeed_images(FeedsImportBatch $batch, $key) {
   $item = $batch->currentItem();
   $enclosures = $item['enclosures'];
   $desc = $item['description'];
-
   $enclosures = enclosures_get_imgs($enclosures);
+
+  //if empty enclosures, no images found, find more images through other ways
   if(empty($enclosures)){
-    $enclosures = enclosures_html_img($desc);
+    $enclosures = enclosures_html_img($desc,$item['url']);
   }
   
   return array(array_shift($enclosures));
