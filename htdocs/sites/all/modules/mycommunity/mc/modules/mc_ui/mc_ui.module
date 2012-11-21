@@ -178,9 +178,9 @@ function theme_mc_post_date($ts){
       $output = format_date($ts,'custom','l');
     }
   }elseif ($tsyear != $nowyear){ //if now is not the same year of input ts, include year
-    $output = format_date($ts,'custom','F jS, Y');
+    $output = format_date($ts,'custom','l, F jS, Y');
   }else{
-    $output = format_date($ts,'custom','F jS');
+    $output = format_date($ts,'custom','l, F jS');
   }
   return ($output);
 }
