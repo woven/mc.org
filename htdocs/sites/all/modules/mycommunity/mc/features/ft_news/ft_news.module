@@ -62,7 +62,7 @@ function ft_news_views_query_alter(&$view, &$query) {
   if($view->name != 'mc_news_sections'){
     return ;
   }
-
+  $field = "node.created";
   $sections = array('today','yesterday','thisweek','lastweek','earlier');
   $sqls = dated_sections_sql($sections);
 
@@ -73,7 +73,7 @@ function ft_news_views_query_alter(&$view, &$query) {
     //adding sort, by section, abs and day,rand();
     $query->orderby = array(
       $sqls['order'],
-      "rand()"
+      "$field DESC"
     );
   }//end if sql_case and sql_where
 }
