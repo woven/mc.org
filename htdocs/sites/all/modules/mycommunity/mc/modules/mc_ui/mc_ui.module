@@ -128,13 +128,25 @@ function theme_ghh_post_date($date){
   return theme_mc_post_date($date);
 }
 
-function theme_mc_post_date($date){
+function theme_mc_post_date($ts){
   $output = '';
-  $today = mktime(0, 0, 0);
+  $today = strtotime("today 12am");
+  $now = time();
   $oneWeekAgo = $today - 24*3600*7;
-  $difference = time() - $date;
-  $firstDayOfYear = mktime(0,0,0,1,1);
-  
+  $twoWeekAgo = $today - 24*3600*7*2;
+  $difference = $now - $ts;
+
+  $thisweek = _mc_date_weekyear_firstday(_mc_date_calender_weekyear(strtotime("today 12am",$today)));
+  $lastweek = _mc_date_weekyear_firstday(_mc_date_calender_weekyear(strtotime("-1 week 12am",$today)));
+
+  $tsday = format_date($ts,'custom','l');
+  $nowday = format_date($today,'custom','l');
+  $tsdaynum = format_date($ts,'custom','w');
+  $todaydaynum = format_date($today,'custom','w');
+
+  $tsyear = intval(format_date($ts,'custom',"Y"));
+  $nowyear = intval(format_date($today,'custom',"Y"));
+
   if ($difference < 600){
     $output = t("moments ago");
   }elseif ($difference < 3600){
@@ -147,17 +159,20 @@ function theme_mc_post_date($date){
     }else{
       $output = "$hours hours ago";
     }
-  }elseif ($date > $oneWeekAgo){
+    //if it in last week
+  }elseif($ts > $thisweek){
+    $output = format_date($ts,'custom','l');
+  }elseif($ts >= $lastweek AND $ts < $thisweek){
     $days = intval(floor($difference / 86400));
-    if ($days == 1){
-      $output = "$days day ago";
+    if($todaydaynum >= $tsdaynum){
+      $output = format_date($ts,'custom','l jS');
     }else{
-      $output = "$days days ago";
+      $output = format_date($ts,'custom','l');
     }
-  }elseif ($date > $firstDayOfYear){
-    $output = date('F jS', $date);
+  }elseif ($tsyear != $nowyear){ //if now is not the same year of input ts, include year
+    $output = format_date($ts,'custom','F jS, Y');
   }else{
-    $output = date('F jS, Y', $date);
+    $output = format_date($ts,'custom','F jS');
   }
   return ($output);
 }
