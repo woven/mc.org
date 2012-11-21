@@ -43,7 +43,7 @@ function _news_sidebock(){
   global $user;
 
   $links = array();
-  $links[] = l("<span class=\"rss-group-ico ico-inline\"></span>News RSS feed","news/feed",array("html"=>true));
+  $links[] = l("<span class=\"rss-group-ico ico-inline\"></span>Subscribe to news feed (RSS)","news/feed",array("html"=>true));
 
   return theme("item_list",$links,null,'ul',array('class'=>"mc-links-blue"));
 }
