@@ -59,16 +59,16 @@ function ft_landing_ui_imagecache_default_presets() {
       'actions' => array(
         '0' => array(
           'weight' => '-10',
-          'module' => 'imagecache',
-          'action' => 'imagecache_scale',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
           'data' => array(
             'width' => '83',
-            'height' => '',
+            'height' => '83',
             'upscale' => 0,
           ),
         ),
         '1' => array(
-          'weight' => '0',
+          'weight' => '-9',
           'module' => 'imagecache_canvasactions',
           'action' => 'canvasactions_definecanvas',
           'data' => array(
