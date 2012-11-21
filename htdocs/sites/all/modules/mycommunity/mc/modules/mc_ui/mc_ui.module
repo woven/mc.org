@@ -144,22 +144,30 @@ function theme_mc_post_date($ts){
   $tsdaynum = format_date($ts,'custom','w');
   $todaydaynum = format_date($today,'custom','w');
 
+  $yesterday = strtotime("yesterday 12am");
+  $tomorrow = strtotime("tomorrow 12am");
+  $tsyesterday = strtotime("today",$ts);
+
   $tsyear = intval(format_date($ts,'custom',"Y"));
   $nowyear = intval(format_date($today,'custom',"Y"));
 
+  /*
   if ($difference < 600){
     $output = t("moments ago");
-  }elseif ($difference < 3600){
+  }elseif($difference < 3600){
     $mins = intval(floor($difference / 60)); 
     $output = "$mins minutes ago";
-  }elseif ($difference < 3600*24){
+  }elseif($difference < 3600*24){
     $hours = intval(floor($difference / 3600));
     if ($hours == 1){
       $output = "$hours hour ago";
     }else{
       $output = "$hours hours ago";
-    }
-    //if it in last week
+    }*/
+  if(strtotime("today 12am",$ts) == $today){
+    $output = "Today";
+  }elseif(strtotime("today 12am",$ts) == $yesterday){
+    $output = "Yesterday";
   }elseif($ts > $thisweek){
     $output = format_date($ts,'custom','l');
   }elseif($ts >= $lastweek AND $ts < $thisweek){
