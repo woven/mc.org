@@ -265,15 +265,15 @@ function ft_news_views_default_views() {
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'absolute' => 0,
+        'make_link' => 1,
+        'path' => '[field_url_url]',
+        'absolute' => 1,
         'link_class' => '',
         'alt' => '',
         'rel' => '',
         'prefix' => '',
         'suffix' => '',
-        'target' => '',
+        'target' => '_blank',
         'help' => '',
         'trim' => 0,
         'max_length' => '',
@@ -288,7 +288,7 @@ function ft_news_views_default_views() {
       'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked_mcdefaultimg',
+      'format' => 'thumbnail_default_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -300,6 +300,9 @@ function ft_news_views_default_views() {
       'table' => 'node_data_field_list_image',
       'field' => 'field_list_image_fid',
       'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
     ),
     'title_1' => array(
       'label' => 'Group Title/link',
