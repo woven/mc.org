@@ -160,6 +160,88 @@ function image_is_valid($url){
   return false;
 }
 
+function GetSizeTest(){
+  $path = libraries_get_path('fastimage');
+  require_once($path."/Fastimage.php");
+
+  $files = array(
+    'http://www.google.com.eg/images/srpr/logo3w.png',
+    'http://pcdn.500px.net/8123858/7051e2440a869a3fec74406a3aa200618452c390/4.jpg',
+    'http://farm3.staticflickr.com/2019/2354671896_8216677d61_o.jpg',
+    'http://farm1.staticflickr.com/100/306618144_c2810214ee_b.jpg'
+  );
+
+  foreach($files as $file){
+    $uri = $file;
+    echo "=======> $uri <======\n";
+    $time = microtime(true);
+    $image = new FastImage($uri);
+    echo ">FastImage: \n";
+    $size = $image->getSize();
+    dsm($size);
+    list($width, $height) = $size;
+    echo "Width: ". $width . "px Height: ". $height . "px in " . (microtime(true)-$time) . " seconds \n";
+
+    $time = microtime(true);
+    list($width, $height) = getimagesize($uri);
+    echo ">Getimagesize: \n";
+    echo "Width: ". $width . "px Height: ". $height . "px in " . (microtime(true)-$time) . " seconds \n";
+  }
+}
+
+function get_image_dim($sURL) {
+  // note that for jpeg you may need to change 300 to a larger value,
+  // as some height/width info is farther out in the header
+  try {
+    $hSock = @ fopen($sURL, 'rb');
+    if ($hSock) {
+      while(!feof($hSock)) {
+        $vData = fread($hSock, 10240);
+        break;
+      }
+      fclose($hSock);
+      if (strpos(' ' . $vData, 'JFIF')>0) {
+        $vData = substr($vData, 0, 10240);
+        $asResult = unpack('H*',$vData);
+        $sBytes = $asResult[1];
+        $width = 0;
+        $height = 0;
+        $hex_width = '';
+        $hex_height = '';
+        if (strstr($sBytes, 'ffc2')) {
+          $hex_height = substr($sBytes, strpos($sBytes, 'ffc2') + 10, 4);
+          $hex_width = substr($sBytes, strpos($sBytes, 'ffc2') + 14, 4);
+        } else {
+          $hex_height = substr($sBytes, strpos($sBytes, 'ffc0') + 10, 4);
+          $hex_width = substr($sBytes, strpos($sBytes, 'ffc0') + 14, 4);
+        }
+        $width = hexdec($hex_width);
+        $height = hexdec($hex_height);
+        return array('width' => $width, 'height' => $height);
+      } elseif (strpos(' ' . $vData, 'GIF')>0) {
+        $vData = substr($vData, 0, 300);
+        $asResult = unpack('h*',$vData);
+        $sBytes = $asResult[1];
+        $sBytesH = substr($sBytes, 16, 4);
+        $height = hexdec(strrev($sBytesH));
+        $sBytesW = substr($sBytes, 12, 4);
+        $width = hexdec(strrev($sBytesW));
+        return array('width' => $width, 'height' => $height);
+      } elseif (strpos(' ' . $vData, 'PNG')>0) {
+        $vDataH = substr($vData, 22, 4);
+        $asResult = unpack('n',$vDataH);
+        $height = $asResult[1];
+        $vDataW = substr($vData, 18, 4);
+        $asResult = unpack('n',$vDataW);
+        $width = $asResult[1];
+        return array('width' => $width, 'height' => $height);
+      }
+    }
+  } catch (Exception $e) {}
+  return FALSE;
+}
+
+
 //return image enclosures from based on
 function enclosures_html_img($html,$url = ''){
   $enclosures = array();
