@@ -176,7 +176,7 @@ function enclosures_html_img($html,$url = ''){
   }
 
   //no images were found at the body of the image
-  if(!empty($url)){
+  if(!empty($url) && empty($enclosures)){
     //check the actual page for images
     $qb = htmlqp($url);
 
