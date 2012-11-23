@@ -1,0 +1,7 @@
+name = ImageFeedEnclosure
+description = "Special version of FeedEcnlosure class that deals with Images instance of FeedEnclosure class"
+package = MC.org
+version = VERSION
+core = 6.x
+
+dependencies[] = mc_api
