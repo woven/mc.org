@@ -176,10 +176,9 @@ function GetSizeTest(){
     echo "=======> $uri <======\n";
     $time = microtime(true);
     $image = new FastImage($uri);
-    $image->load($uri);
+    //$image->load($uri);
     echo ">FastImage: \n";
     $size = $image->getSize();
-    dsm($size);
     list($width, $height) = $size;
     echo "Width: ". $width . "px Height: ". $height . "px in " . (microtime(true)-$time) . " seconds \n";
 
