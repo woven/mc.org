@@ -206,12 +206,11 @@ function get_image_info_test($getimagesize = false){
     $uri = $file;
 
     echo "=======> $uri <======\n";
-    $time = microtime(true);
     echo ">get_image_info: \n";
     $info = get_image_info($uri);
-    echo "Width: ". $info['width'] . "px Height: ". $info['height'] . "px in " . (microtime(true)-$time) . " seconds \n";
+    echo "Filesize: " . intval($info['size'] / 1024) ."kb Width: ". $info['width'] . "px Height: ". $info['height'] . "px in " . $info['time'] . " seconds \n";
 
-    if($getimagesize = true){
+    if($getimagesize == true){
       $time = microtime(true);
       list($width, $height) = getimagesize($uri);
       echo ">Getimagesize: \n";
@@ -250,6 +249,7 @@ function get_image_info($sURL) {
       }
       
       if (strpos(' ' . $vData, 'JFIF')>0) {
+        $return['type'] = "jpg";
         $vData = substr($vData, 0, $length);
         $asResult = unpack('H*',$vData);
         $sBytes = $asResult[1];
@@ -268,6 +268,7 @@ function get_image_info($sURL) {
         $height = hexdec($hex_height);
         $return += array('width' => $width, 'height' => $height);
       } elseif (strpos(' ' . $vData, 'GIF')>0) {
+        $return['type'] = "gif";
         $vData = substr($vData, 0, $length);
         $asResult = unpack('h*',$vData);
         $sBytes = $asResult[1];
@@ -277,6 +278,7 @@ function get_image_info($sURL) {
         $width = hexdec(strrev($sBytesW));
         $return += array('width' => $width, 'height' => $height);
       } elseif (strpos(' ' . $vData, 'PNG')>0) {
+        $return['type'] = "png";
         $vData = substr($vData, 0, $length);
         $vDataH = substr($vData, 22, 4);
         $asResult = unpack('n',$vDataH);
