@@ -189,19 +189,68 @@ function GetSizeTest(){
   }
 }
 
-function get_image_dim($sURL) {
-  // note that for jpeg you may need to change 300 to a larger value,
-  // as some height/width info is farther out in the header
+function get_image_info_test($getimagesize = false){
+  $files = array(
+    'http://www.google.com.eg/images/srpr/logo3w.png',
+    'http://pcdn.500px.net/8123858/7051e2440a869a3fec74406a3aa200618452c390/4.jpg',
+    'http://farm3.staticflickr.com/2019/2354671896_8216677d61_o.jpg',
+    'http://farm1.staticflickr.com/100/306618144_c2810214ee_b.jpg',
+    'http://blaberize.com/wp-content/uploads/2009/10/Audio_Jungle_Wallpaper-forest-nature-wallpaper.png',
+    'http://spelb.com/wp-content/uploads/2011/10/Nature-Wallpaper.png',
+    'http://1.bp.blogspot.com/-OPiIc3qr7fg/T-dFayuobrI/AAAAAAAABg0/0igmpKLJ594/s1600/usfdgv.png',
+    'http://2.bp.blogspot.com/_4JfkBwKa0RE/THUyynBYKgI/AAAAAAAAAHg/gNaWW2FNIkc/s1600/1268985622_470x353_natural-green-wallpaper.jpg',
+    'http://freeinfonature.files.wordpress.com/2012/07/freewalls.jpg'
+  );
+
+  foreach($files as $file){
+    $uri = $file;
+
+    echo "=======> $uri <======\n";
+    $time = microtime(true);
+    echo ">get_image_info: \n";
+    $info = get_image_info($uri);
+    echo "Width: ". $info['width'] . "px Height: ". $info['height'] . "px in " . (microtime(true)-$time) . " seconds \n";
+
+    if($getimagesize = true){
+      $time = microtime(true);
+      list($width, $height) = getimagesize($uri);
+      echo ">Getimagesize: \n";
+      echo "Width: ". $width . "px Height: ". $height . "px in " . (microtime(true)-$time) . " seconds \n";
+    }
+  }
+
+}
+
+function get_image_info($sURL) {
   try {
-    $hSock = @ fopen($sURL, 'rb');
+    $return = array();
+    $vData = "";
+    $timer = microtime(true);
+    $hSock = fopen($sURL, 'rb');
+    $length = 10240;
     if ($hSock) {
       while(!feof($hSock)) {
-        $vData = fread($hSock, 10240);
+        $vData = fread($hSock, $length);
         break;
       }
       fclose($hSock);
+
+      //get headers
+      if(!empty($http_response_header)){
+        $headers = array();
+        foreach($http_response_header as $line){
+          if(($pos = strpos($line, ':')) !== false){
+            $headers[strtolower(trim(substr($line, 0, $pos)))] = trim(substr($line, $pos+1));
+          }
+        }
+      }
+
+      if(isset($headers['content-length']) && $headers['content-length']){
+          $return['size'] = $headers['content-length'];
+      }
+      
       if (strpos(' ' . $vData, 'JFIF')>0) {
-        $vData = substr($vData, 0, 10240);
+        $vData = substr($vData, 0, $length);
         $asResult = unpack('H*',$vData);
         $sBytes = $asResult[1];
         $width = 0;
@@ -217,25 +266,36 @@ function get_image_dim($sURL) {
         }
         $width = hexdec($hex_width);
         $height = hexdec($hex_height);
-        return array('width' => $width, 'height' => $height);
+        $return += array('width' => $width, 'height' => $height);
       } elseif (strpos(' ' . $vData, 'GIF')>0) {
-        $vData = substr($vData, 0, 300);
+        $vData = substr($vData, 0, $length);
         $asResult = unpack('h*',$vData);
         $sBytes = $asResult[1];
         $sBytesH = substr($sBytes, 16, 4);
         $height = hexdec(strrev($sBytesH));
         $sBytesW = substr($sBytes, 12, 4);
         $width = hexdec(strrev($sBytesW));
-        return array('width' => $width, 'height' => $height);
+        $return += array('width' => $width, 'height' => $height);
       } elseif (strpos(' ' . $vData, 'PNG')>0) {
+        $vData = substr($vData, 0, $length);
         $vDataH = substr($vData, 22, 4);
         $asResult = unpack('n',$vDataH);
         $height = $asResult[1];
         $vDataW = substr($vData, 18, 4);
         $asResult = unpack('n',$vDataW);
         $width = $asResult[1];
-        return array('width' => $width, 'height' => $height);
+        $return += array('width' => $width, 'height' => $height);
       }
+
+      if(!empty($return)){
+        if($return['width'] > 0 && $return['height'] > 0){
+          $return['space'] = $return['width'] * $return['height'];
+        }
+        $return['time'] = microtime(true)-$timer;
+        $return['url'] = $sURL;
+        return $return;
+      }
+
     }
   } catch (Exception $e) {}
   return FALSE;
