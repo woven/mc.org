@@ -171,7 +171,7 @@ function image_is_valid($url){
   
   // if image is 5kb or more, return true;
   //if(($info['size'] / 1024) >= 5 ){
-  if(($size / 1024) >= 5 ){
+  if(($size / 1024) >= 10 ){
     return true;
   }
 
