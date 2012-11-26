@@ -6,6 +6,19 @@
 
 include_once 'mc_news_feed.features.inc';
 
+function mc_news_feed_menu(){
+  $items = array();
+
+  $items['news_feed/test'] = array(
+    'title' => 'Test Parser',
+    'page callback' => 'test_parser',
+    'access callback' => 'user_access',
+    'access arguments' => array('access content')
+  );
+
+  return $items;
+}
+
 function mc_news_feed_late_form_alter(&$form, &$form_state, $form_id){
   global $user;
   if(!is_ct_form($form,"news_feed")){
@@ -153,10 +166,15 @@ function image_enclosure_from_url($url){
 
 function image_is_valid($url){
   $size = remote_file_size($url);
+
+  //$info = _image_get_info($url);
+  
   // if image is 5kb or more, return true;
+  //if(($info['size'] / 1024) >= 5 ){
   if(($size / 1024) >= 5 ){
     return true;
   }
+
   return false;
 }
 
@@ -190,7 +208,12 @@ function GetSizeTest(){
 }
 
 function get_image_info_test($getimagesize = false){
+  $path = libraries_get_path('fastimage');
+  require_once($path."/Fastimage.php");
+  error_reporting(E_ALL);
+
   $files = array(
+    'http://www.blogcdn.com/www.autoblog.com/media/2012/11/audicity-car235mpg.jpg',
     'http://www.google.com.eg/images/srpr/logo3w.png',
     'http://pcdn.500px.net/8123858/7051e2440a869a3fec74406a3aa200618452c390/4.jpg',
     'http://farm3.staticflickr.com/2019/2354671896_8216677d61_o.jpg',
@@ -202,12 +225,18 @@ function get_image_info_test($getimagesize = false){
     'http://freeinfonature.files.wordpress.com/2012/07/freewalls.jpg'
   );
 
+
   foreach($files as $file){
     $uri = $file;
 
     echo "=======> $uri <======\n";
+    echo ">fastimage: \n";
+    $image = new FastImage($uri);
+    list($width, $height) = $image->getSize();
+    echo "Fastimage: dimensions: " . $width . "x" . $height . "\n";
+    
     echo ">get_image_info: \n";
-    $info = get_image_info($uri);
+    $info = _image_get_info($uri);
     echo "Filesize: " . intval($info['size'] / 1024) ."kb Width: ". $info['width'] . "px Height: ". $info['height'] . "px in " . $info['time'] . " seconds \n";
 
     if($getimagesize == true){
@@ -220,7 +249,7 @@ function get_image_info_test($getimagesize = false){
 
 }
 
-function get_image_info($sURL) {
+function _image_get_info($sURL) {
   try {
     $return = array();
     $vData = "";
@@ -242,10 +271,6 @@ function get_image_info($sURL) {
             $headers[strtolower(trim(substr($line, 0, $pos)))] = trim(substr($line, $pos+1));
           }
         }
-      }
-
-      if(isset($headers['content-length']) && $headers['content-length']){
-          $return['size'] = $headers['content-length'];
       }
       
       if (strpos(' ' . $vData, 'JFIF')>0) {
@@ -290,9 +315,15 @@ function get_image_info($sURL) {
       }
 
       if(!empty($return)){
+        //check if file size exist at headers
+        if(isset($headers['content-length']) && $headers['content-length']){
+          $return['size'] = $headers['content-length'];
+        }
+
         if($return['width'] > 0 && $return['height'] > 0){
           $return['space'] = $return['width'] * $return['height'];
         }
+
         $return['time'] = microtime(true)-$timer;
         $return['url'] = $sURL;
         return $return;
@@ -303,11 +334,27 @@ function get_image_info($sURL) {
   return FALSE;
 }
 
+function test_parser(){
+  $item = array();
+  $item['url'] = "http://www.autoblog.com/2012/11/25/audi-plotting-a-235-mpg-affordable-four-seat-city-car/";
+  $item['title'] = "Audi plotting a 235-mpg";
+
+  $item['url'] = "http://blog.hemmings.com/index.php/2012/11/26/hemmings-find-of-the-day-1969-ford-torino-cobra/";
+  $item['title'] = "Audi plotting a 235-mpg";
+
+  enclosures_html_img($item);
+  return "==";
+}
+
 
 //return image enclosures from based on
-function enclosures_html_img($html,$url = ''){
+function enclosures_html_img($item){
   $enclosures = array();
+  $html = $item['description'];
+  $url = $item['url'];
+  $title = $item['title'];
 
+  /*
   if(!empty($html)){
     foreach(htmlqp($html,'img')->get() as $img){
       $src = qp($img)->attr("src");
@@ -318,11 +365,17 @@ function enclosures_html_img($html,$url = ''){
       }
     }
   }
+  */
 
   //no images were found at the body of the image
   if(!empty($url) && empty($enclosures)){
+    //get the item url
+    $html = drupal_http_request($url);
+    $html = $html->data;
+
+    /*
     //check the actual page for images
-    $qb = htmlqp($url);
+    $qb = htmlqp($html);
 
     //check if image
     $ogimage = $qb->find("meta[property='og:image']")->attr("content");
@@ -331,20 +384,47 @@ function enclosures_html_img($html,$url = ''){
         $enclosures[] = image_enclosure_from_url($ogimage);
       }
     }
+    */
+
+
+
+    //return array();
+
+    $headers = array('h1','h2','h3');
+    foreach($headers as $head){
+        $header_pos = strpos($html,"<$head");
+        if($header_pos !== false && empty($enclosures)){
+          $part = substr($html,$header_pos,1024 * 5);
+          $qppart = htmlqp($part);
+
+          foreach($qppart->find('img') as $img){
+            $qp_img = qp($img);
+            $src = $qp_img->attr("src");
+            if(!empty($src)){
+              if(image_is_valid($src)){
+                $enclosures[] = image_enclosure_from_url($src);
+                break 1;
+              }
+            }
+          };
+        }
+    }
+
+    return $enclosures;
   }
 
   return enclosures_get_unique($enclosures);
 }
 
-function _elementfeed_images(FeedsImportBatch $batch, $key) {
+function _elementfeed_images(FeedsImportBatch &$batch, $key) {
   $item = $batch->currentItem();
-  $enclosures = $item['enclosures'];
-  $desc = $item['description'];
-  $enclosures = enclosures_get_imgs($enclosures);
+  //$enclosures = $item['enclosures'];
+  //$enclosures = enclosures_get_imgs($enclosures);
+  $enclosures = array();
 
   //if empty enclosures, no images found, find more images through other ways
   if(empty($enclosures)){
-    $enclosures = enclosures_html_img($desc,$item['url']);
+    $enclosures = enclosures_html_img($item);
   }
   
   return array(array_shift($enclosures));
