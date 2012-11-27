@@ -173,7 +173,7 @@ function theme_mc_post_date($ts){
   }elseif($ts >= $lastweek AND $ts < $thisweek){
     $days = intval(floor($difference / 86400));
     if($todaydaynum >= $tsdaynum){
-      $output = format_date($ts,'custom','l jS');
+      $output = format_date($ts,'custom','l, F jS');
     }else{
       $output = format_date($ts,'custom','l');
     }
