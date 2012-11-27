@@ -29,7 +29,7 @@ function ft_news_block($op = 'list', $delta = 0, $edit = array()) {
       switch ($delta) {
         case 'news-sideblock':
           $block = array(
-            'subject' => '',
+            'subject' => 'Subscribe',
             'content' => _news_sidebock(),
           );
           break;
