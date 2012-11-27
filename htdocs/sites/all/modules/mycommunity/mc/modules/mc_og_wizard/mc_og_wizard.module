@@ -50,7 +50,7 @@ function _mc_og_wizard_validate_alter($form, &$form_state){
             drupal_goto('node/add/group');
           break;
           case 2:
-            drupal_set_message($e->getMessage());
+            //drupal_set_message($e->getMessage());
             $query = array('url' => $group_url);
             drupal_goto('node/add/group/full', $query);
           break;
