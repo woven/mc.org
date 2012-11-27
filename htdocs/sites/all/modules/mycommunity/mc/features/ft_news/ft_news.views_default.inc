@@ -532,6 +532,40 @@ print theme("mc_post_date",$data->node_created);
       ),
       'relationship' => 'none',
     ),
+    'nothing' => array(
+      'label' => 'Body: Feed',
+      'alter' => array(
+        'text' => '[body] Brought to you by MiamiTech.org',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 1,
+      'id' => 'nothing',
+      'table' => 'views',
+      'field' => 'nothing',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('sorts', array(
     'created' => array(
@@ -757,6 +791,7 @@ print theme("mc_post_date",$data->node_created);
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
   $handler = $view->new_display('feed', 'Feed: News All', 'feed_1');
+  $handler->override_option('title', 'News from MiamiTech.org');
   $handler->override_option('style_plugin', 'rss_fields');
   $handler->override_option('style_options', array(
     'mission_description' => FALSE,
@@ -785,7 +820,7 @@ print theme("mc_post_date",$data->node_created);
         'views_rss_core' => array(
           'title' => 'title_3',
           'link' => 'field_url_url',
-          'description' => 'body',
+          'description' => 'nothing',
           'author' => '',
           'category' => '',
           'comments' => '',
@@ -823,7 +858,7 @@ print theme("mc_post_date",$data->node_created);
     'default' => 0,
     'block_1' => 0,
   ));
-  $handler->override_option('sitename_title', FALSE);
+  $handler->override_option('sitename_title', 0);
   $handler = $view->new_display('feed', 'Feed: Per Group', 'feed_2');
   $handler->override_option('arguments', array(
     'group_nid' => array(
@@ -908,6 +943,7 @@ print theme("mc_post_date",$data->node_created);
       'validate_argument_php' => '',
     ),
   ));
+  $handler->override_option('title', 'News from MiamiTech.org');
   $handler->override_option('style_plugin', 'rss_fields');
   $handler->override_option('style_options', array(
     'mission_description' => FALSE,
@@ -936,7 +972,7 @@ print theme("mc_post_date",$data->node_created);
         'views_rss_core' => array(
           'title' => 'title_3',
           'link' => 'field_url_url',
-          'description' => 'body',
+          'description' => 'nothing',
           'author' => '',
           'category' => '',
           'comments' => '',
@@ -974,7 +1010,7 @@ print theme("mc_post_date",$data->node_created);
     'page_1' => 0,
     'block_3' => 0,
   ));
-  $handler->override_option('sitename_title', FALSE);
+  $handler->override_option('sitename_title', 0);
 
   $views[$view->name] = $view;
 
