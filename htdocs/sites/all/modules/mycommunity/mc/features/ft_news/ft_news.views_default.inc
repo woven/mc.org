@@ -621,7 +621,7 @@ print theme("mc_post_date",$data->node_created);
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
-  $handler->override_option('title', 'News');
+  $handler->override_option('title', 'Recent News');
   $handler->override_option('css_class', 'news-section');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
