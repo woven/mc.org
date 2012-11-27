@@ -43,6 +43,12 @@ function ft_group_ui_context_default_contexts() {
           'region' => 'below_content',
           'weight' => 0,
         ),
+        'views-mc_news_sections-block_2' => array(
+          'module' => 'views',
+          'delta' => 'mc_news_sections-block_2',
+          'region' => 'below_content',
+          'weight' => 1,
+        ),
       ),
     ),
     'theme' => array(

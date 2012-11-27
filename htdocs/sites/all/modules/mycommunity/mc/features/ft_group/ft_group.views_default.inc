@@ -2439,7 +2439,6 @@ print theme_ghh_authoring_info($data->users_uid, $data->users_name, $data->node_
   ));
   $handler->override_option('title', 'Events');
   $handler->override_option('empty', 'There are no upcoming events.');
-  $handler->override_option('items_per_page', 0);
   $handler->override_option('style_options', array(
     'grouping' => '',
     'group' => array(
