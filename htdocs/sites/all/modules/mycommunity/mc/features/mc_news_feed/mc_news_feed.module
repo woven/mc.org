@@ -68,8 +68,8 @@ function remote_file_size($url){
   } else {
     fputs($fp, "HEAD "  . $url  . " HTTP/1.1\r\n");
     fputs($fp, "HOST: " . $host . "\r\n");
-    fputs($fp, "User-Agent: http://www.example.com/my_application\r\n");
-    fputs($fp, "Connection: close\r\n\r\n");
+    fputs($fp, "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64)\r\n");
+    //fputs($fp, "Connection: close\r\n\r\n");
     $headers = "";
     while (!feof($fp)) {
       $headers .= fgets ($fp, 128);
@@ -129,7 +129,12 @@ function enclosures_get_unique($enclosures){
   //find unique enslosures
   $unique_enclosures = array();
   foreach ($enclosures as $enclosure) {
-    $url = strtolower($enclosure->getValue());
+
+    if ($enclosure instanceof FeedsEnclosure) {
+      $url = strtolower($enclosure->getValue());
+    }else{
+      $url = strtolower($enclosure);
+    }
     if(!isset($unique_enclosures[$url])){
       $unique_enclosures[$url] = $enclosure;
     }
@@ -165,14 +170,17 @@ function image_enclosure_from_url($url){
 }
 
 function image_is_valid($url){
-  $size = remote_file_size($url);
+  //$size = _image_get_info($url);
+  //dsm($url);
+  //dsm($size);
 
-  //$info = _image_get_info($url);
-  
-  // if image is 5kb or more, return true;
-  //if(($info['size'] / 1024) >= 5 ){
-  if(($size / 1024) >= 10 ){
-    return true;
+  $info = _image_get_info($url);
+
+  if($info !== false){
+    // if image is 5kb or more, return true;
+    if(($info['size'] / 1024) >= 5 ){
+      return true;
+    }
   }
 
   return false;
@@ -330,11 +338,15 @@ function _image_get_info($sURL) {
       }
 
     }
-  } catch (Exception $e) {}
+  } catch (Exception $e) {
+    //print($e->getMessage());
+  }
   return FALSE;
 }
 
 function test_parser(){
+  $field_name = "field_list_image";
+
   $item = array();
   $item['url'] = "http://www.autoblog.com/2012/11/25/audi-plotting-a-235-mpg-affordable-four-seat-city-car/";
   $item['title'] = "Audi plotting a 235-mpg";
@@ -342,7 +354,51 @@ function test_parser(){
   $item['url'] = "http://blog.hemmings.com/index.php/2012/11/26/hemmings-find-of-the-day-1969-ford-torino-cobra/";
   $item['title'] = "Audi plotting a 235-mpg";
 
-  enclosures_html_img($item);
+  $item['url'] = "http://miamiherald.typepad.com/the-starting-gate/2012/11/the-emerging-technology-business-showcase-is-the-enterprise-development-corporation-of-south-floridas-floridas-premier-pitc.html";
+  $item['title'] = "18 South Florida startups presenting at ETBS on Friday";
+
+  $item['url'] = "http://www.bloggerbuster.com/2012/06/blogger-custom-permalink.html";
+  $item['title'] = "Create Custom Permalinks for Blogger Posts";
+  $item['description'] = '<div class="itemcontent" name="decodeable"><div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-YK6I4dleXYY/T-rJMf1ZqqI/AAAAAAAADRM/kxfKAg97ZCY/s1600/Blogger:+Blogger+Buster+-+Create+post-permalink.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="200" src="http://1.bp.blogspot.com/-YK6I4dleXYY/T-rJMf1ZqqI/AAAAAAAADRM/kxfKAg97ZCY/s200/Blogger:+Blogger+Buster+-+Create+post-permalink.png" width="132"></a></div>
+I discovered a lovely surprise when logging into Blogger to create a post this morning: <b>the ability to create custom permalinks for posts!</b><br>
+<br>
+Usually when we create a post, the URL generated for the item page is based on the post title. By creating a custom URL we can use a different structure which can help posts rank higher in search engines, as well as being more user-friendly.<br>
+<br>
+<a href="http://www.bloggerbuster.com/2012/06/blogger-custom-permalink.html#more">Read more »</a><div class="blogger-post-footer"><p><a href="http://docs.google.com/fileview?id=0B4qfKCEK9vP6NDRmMDlkYTctYjAzNi00M2NiLTk5MmQtMGJhNzc5MTQyM2E1&amp;hl=en">Download your copy of The Blogger Template Book</a></p><p>Your complete guide to choosing, installing and optimizing Blogger templates (PDF 114 pages)</p>
+<p style="background: #cd0000; padding: 3px; color: #fff;"><a href="http://themeforest.net/user/Amanda/portfolio?ref=Amanda">Exclusive Blogger Templates designed by Blogger Buster from only $10!</a></p><img width="1" height="1" src="https://blogger.googleusercontent.com/tracker/724793682641096478-4443029513065360663?l=www.bloggerbuster.com" alt=""></div><div class="feedflare">
+<a href="http://feeds.feedburner.com/~ff/BloggerBuster?a=5FiLHDd-3PA:-1bw2LIgLVM:5t9Vr3LFKlY"><img src="http://feeds.feedburner.com/~ff/BloggerBuster?i=5FiLHDd-3PA:-1bw2LIgLVM:5t9Vr3LFKlY" border="0"></a> <a href="http://feeds.feedburner.com/~ff/BloggerBuster?a=5FiLHDd-3PA:-1bw2LIgLVM:4cEx4HpKnUU"><img src="http://feeds.feedburner.com/~ff/BloggerBuster?i=5FiLHDd-3PA:-1bw2LIgLVM:4cEx4HpKnUU" border="0"></a> <a href="http://feeds.feedburner.com/~ff/BloggerBuster?a=5FiLHDd-3PA:-1bw2LIgLVM:gIN9vFwOqvQ"><img src="http://feeds.feedburner.com/~ff/BloggerBuster?i=5FiLHDd-3PA:-1bw2LIgLVM:gIN9vFwOqvQ" border="0"></a> <a href="http://feeds.feedburner.com/~ff/BloggerBuster?a=5FiLHDd-3PA:-1bw2LIgLVM:V_sGLiPBpWU"><img src="http://feeds.feedburner.com/~ff/BloggerBuster?i=5FiLHDd-3PA:-1bw2LIgLVM:V_sGLiPBpWU" border="0"></a> <a href="http://feeds.feedburner.com/~ff/BloggerBuster?a=5FiLHDd-3PA:-1bw2LIgLVM:yIl2AUoC8zA"><img src="http://feeds.feedburner.com/~ff/BloggerBuster?d=yIl2AUoC8zA" border="0"></a> <a href="http://feeds.feedburner.com/~ff/BloggerBuster?a=5FiLHDd-3PA:-1bw2LIgLVM:F7zBnMyn0Lo"><img src="http://feeds.feedburner.com/~ff/BloggerBuster?i=5FiLHDd-3PA:-1bw2LIgLVM:F7zBnMyn0Lo" border="0"></a>
+</div></div>';
+
+
+  module_load_include("inc","feeds","includes/FeedsConfigurable");
+  module_load_include("inc","feeds","includes/FeedsSource");
+  module_load_include("inc","feeds","plugins/FeedsPlugin");
+  module_load_include("inc","feeds","plugins/FeedsParser");
+
+  $files = enclosures_html_img($item);
+
+  foreach ($files as $enclosure) {
+    try{
+      if ($file = $enclosure->getFile()){
+
+        $field = content_fields($field_name, 'nnews');
+        $target_dir = filefield_widget_file_path($field, user_load($node->uid));
+        $info = field_file_save_file($enclosure->getFile(), array(), $target_dir);
+        if ($info) {
+          $info['list'] = array();
+          $info['data'] = array('description' => '');
+          if ($field['list_field']) {
+            $info['list'] = $field['list_default'];
+          }
+          $items[] = $info;
+          $error = FALSE;
+        }
+      }
+    } catch (Exception $e) {
+      echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
+  }
   return "==";
 }
 
@@ -356,7 +412,7 @@ function enclosures_html_img($item){
 
   if(!empty($desc)){
     foreach(htmlqp($desc,'img')->get() as $img){
-      $src = qp($img)->attr("src");
+      $src = htmlqp($img)->attr("src");
       if(!empty($src)){
         if(image_is_valid($src)){
           $enclosures[] = image_enclosure_from_url($src);
@@ -365,27 +421,53 @@ function enclosures_html_img($item){
     }
   }
 
-  //no images were found at the body of the image
+  //Find images at the page itself
   if(!empty($url) && empty($enclosures)){
     //get the item url
     $html = drupal_http_request($url);
     $html = $html->data;
+    $qp = htmlqp($html);
 
-
-    //check the actual page for images
-    $qb = htmlqp($html);
-
-    //check if image
-    $og_image = $qb->find("meta[property='og:image']")->attr("content");
-    if(!empty($og_image)){
-      if(image_is_valid($og_image)){
-        $enclosures[] = image_enclosure_from_url($og_image);
+    //Find Images through og:image tag
+    if(empty($enclosures)){
+      $og_image = $qp->top()->find("meta[property='og:image']")->attr("content"); //find og tag and get content attr
+      $og_image = trim($og_image);
+      if(!empty($og_image)){
+        if(image_is_valid($og_image)){
+          $enclosures[] = image_enclosure_from_url($og_image);
+        }
       }
     }
 
-    //find images around the headers, skip if you found a valid image
-    $headers = array('h1','h2','h3');
-    foreach($headers as $head){
+    //find images through title/header and header
+    if(empty($enclosures)){
+      $selector = sprintf('h1:contains("%s"),h2:contains("%s"),h3:contains("%s")',$title,$title,$title);
+      $headers = $qp->top()->find($selector)->get();
+
+      foreach($headers as $header){
+        $head_html = htmlqp($header)->html();
+        $header_pos = strpos($html,$head_html);
+        if($header_pos !== FALSE && empty($enclosures)){
+          $part = substr($html,$header_pos,1024 * 5);
+          $qppart = htmlqp($part);
+          foreach($qppart->find('img') as $img){
+            $qp_img = qp($img);
+            $src = $qp_img->attr("src");
+            if(!empty($src)){
+              if(image_is_valid($src)){
+                $enclosures[] = image_enclosure_from_url($src);
+                break 1; //exit loop once you find an image
+              }
+            }
+          }
+        }
+      }
+    }
+
+    //find images around the headers without using the title
+    if(empty($enclosures)){
+      $headers = array('h1','h2','h3');
+      foreach($headers as $head){
         $header_pos = strpos($html,"<$head");
         if($header_pos !== FALSE && empty($enclosures)){
           $part = substr($html,$header_pos,1024 * 5);
@@ -397,11 +479,12 @@ function enclosures_html_img($item){
             if(!empty($src)){
               if(image_is_valid($src)){
                 $enclosures[] = image_enclosure_from_url($src);
-                break 1;
+                break 1;  //exit loop once you find an image
               }
             }
-          };
+          }
         }
+      }
     }
   }
 
