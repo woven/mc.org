@@ -348,7 +348,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add stuff nnews
   $permissions['add stuff nnews'] = array(
     'name' => 'add stuff nnews',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: add stuff npage
@@ -724,12 +727,6 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: bypass advanced aggregation
-  $permissions['bypass advanced aggregation'] = array(
-    'name' => 'bypass advanced aggregation',
-    'roles' => array(),
-  );
-
   // Exported permission: change own username
   $permissions['change own username'] = array(
     'name' => 'change own username',
@@ -959,7 +956,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: create nnews content
   $permissions['create nnews content'] = array(
     'name' => 'create nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: create nnews sitewide
@@ -1145,7 +1145,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete any nnews content
   $permissions['delete any nnews content'] = array(
     'name' => 'delete any nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any npage content
@@ -1298,7 +1301,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: delete own nnews content
   $permissions['delete own nnews content'] = array(
     'name' => 'delete own nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete own npage content
@@ -1463,7 +1469,10 @@ function mc_perms_user_default_permissions() {
   // Exported permission: edit any nnews content
   $permissions['edit any nnews content'] = array(
     'name' => 'edit any nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any npage content
@@ -1658,7 +1667,9 @@ function mc_perms_user_default_permissions() {
   $permissions['edit own nnews content'] = array(
     'name' => 'edit own nnews content',
     'roles' => array(
-      '0' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'community manager',
     ),
   );
 
@@ -1918,6 +1929,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: use PHP for link visibility
   $permissions['use PHP for link visibility'] = array(
     'name' => 'use PHP for link visibility',
+    'roles' => array(),
+  );
+
+  // Exported permission: use PHP for title patterns
+  $permissions['use PHP for title patterns'] = array(
+    'name' => 'use PHP for title patterns',
     'roles' => array(),
   );
 
