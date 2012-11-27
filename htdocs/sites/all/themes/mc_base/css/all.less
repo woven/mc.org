@@ -2450,13 +2450,6 @@ span.ical-group-ico {
   width:15px;
 }
 
-span.ical-group-ico.inline,
-span.ico-inline{
-  position: relative;
-  float: left;
-  margin-right: 7px;
-}
-
 span.rss-group-ico {
   background:url(/sites/miamitech.org/themes/miamitech/images/mt/rss.png);
   position:absolute;
@@ -2467,6 +2460,14 @@ span.rss-group-ico {
 a.ical-link {
   padding-left:20px;
 }
+
+span.ical-group-ico.inline,
+span.ico-inline{
+  position: relative;
+  float: left;
+  margin-right: 7px;
+}
+
 #views-exposed-form-latest-pages-page-7 {
   .views-exposed-widget, .form-item {
     padding:0px;
@@ -3160,6 +3161,42 @@ body.page-user .view-my-groups ul {
   }
 }
 
+.view-mc-news-sections{
+  .section-section{
+    .block-title{
+      margin-bottom: 20px;
+    }
+    h3{
+      font-size: 1.1em !important;
+    }
+  }
+
+  .section-section.today,.section-section.tomorrow,.section-section.yesterday{
+    .event-separator{
+      display: none;
+    }
+  }
+
+  .section-section.this_week,.section-section.next_week,.section-section.last_week{
+    .event-separator.week{
+      display: none;
+    }
+  }
+
+  .section-section.upcoming,.section-section.earlier{
+    .event-separator.day{
+      display: none;
+    }
+  }
+  .section-section{
+    .event{
+      .to-right{
+        margin-left: 109px;
+      }
+    }
+  }
+}
+
 .view-mc-events-by-dates,.event-section{
     .section-section{
       .block-title{
@@ -3176,8 +3213,8 @@ body.page-user .view-my-groups ul {
       }
     }
 
-    //remove week header from this event and next week
-    .section-section.this_week,.section-section.next_week{
+    //remove week header from weeks periods
+    .section-section.this_week,.section-section.next_week,.section-section.last_week{
       .event-separator.week{
         display: none;
       }
@@ -3667,5 +3704,11 @@ ul.mc-links-blue {
   }
   li:last-child {
     margin-bottom:0px;
+  }
+}
+
+.view-mc-news-sections{
+  .feed-icon{
+    display: none;
   }
 }

@@ -1,3 +1,359 @@
 <?php
 
 include_once('ft_news.features.inc');
+
+function ft_news_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+  if($node->type == "nnews"){
+    switch($op){
+      case 'presave':
+        //strip tags from news item title
+        if(!empty($node->title)){
+            $node->title = strip_tags($node->title);
+        }
+        break;
+    }
+  }
+}
+
+function ft_news_block($op = 'list', $delta = 0, $edit = array()) {
+  switch($op){
+    case 'list':
+      $blocks['news-sideblock'] = array(
+        'info' => t('News: Sideblock'),
+        'weight' => 0,
+        'status' => 1,
+      );
+      return $blocks;
+      break;
+    case 'view':
+      switch ($delta) {
+        case 'news-sideblock':
+          $block = array(
+            'subject' => 'Subscribe',
+            'content' => _news_sidebock(),
+          );
+          break;
+      }
+      return $block;
+      break;
+  }
+}
+
+function _news_sidebock(){
+  global $user;
+
+  $links = array();
+  $links[] = l("<span class=\"rss-group-ico ico-inline\"></span>Subscribe to news feed (RSS)","news/feed",array("html"=>true));
+
+  return theme("item_list",$links,null,'ul',array('class'=>"mc-links-blue"));
+}
+
+function debug_ts($ts){
+  $tss = array();
+  foreach($ts as $key => $val){
+    $tss[$key] = format_date($val,"custom","r");
+  }
+
+  return $tss;
+}
+
+
+function ft_news_views_query_alter(&$view, &$query) {
+  if($view->name != 'mc_news_sections'){
+    return ;
+  }
+  $field = "node.created";
+  $sections = array('today','yesterday','thisweek','lastweek','earlier');
+  $sqls = dated_sections_sql($sections);
+
+  if(!empty($sqls)){
+    //add fields as defined above
+    $query->add_field(null,$sqls['case'],'section');
+
+    //adding sort, by section, abs and day,rand();
+    $query->orderby = array(
+      $sqls['order'],
+      "$field DESC"
+    );
+  }//end if sql_case and sql_where
+}
+
+function dated_section_range_sql($field,$max,$min,$negate = false){
+  if($max > 0 && $min > 0){ //use between
+    $range = array($max,$min);
+    sort($range,SORT_NUMERIC);
+    $between_sql = $negate ? 'NOT BETWEEN' : "BETWEEN";
+    return "$field $between_sql $range[0] AND $range[1]";
+  }elseif($min > 0){ //on min exists
+    return "$field >= $min";
+  }elseif($max > 0){ //on max exists
+    return "$field <= $max";
+  }
+}
+
+/**
+ * renders the mc_sections view landing page in groups (sections/week/day/events (duplicate) or EVENT)
+ * @param $view
+ * @param $sets
+ * @return string.
+ */
+function dated_sections_views_group_render($view,$sets){
+  $output = "";
+  $i = 0;
+
+  foreach($sets as $section_name => $section){
+    $section_cls = strtolower(str_replace(array(" "),"_",$section_name));
+
+    $output .= '<div id="'.$section_cls.'" class="section-section '.$section_cls.'">'; //start section.
+    $output .= '<div class="block-title"><h3>'.$section_name.'</h3><span class="arrow"></span></div>';
+    foreach($section as $week_num => $week){
+      $output .= '<div class="section-week">'; //start section-week
+      $output .= '<div class="event-separator week">'.theme_weekofyear_str($week_num).'</div>';
+      foreach($week as $day_num => $day){
+        $day_str = format_date($day_num,'custom',"l");
+        $output .= '<div class="section-day">'; //start section-day
+        $output .= '<div class="event-separator day">'.$day_str.'</div>';
+
+        foreach($day as $event_num => $events){
+          if(is_array($events)){
+            $rows = array();
+            //group duplicate events into one raw with duplicates as wrapper
+            foreach ($events as $event_nid => $event) {
+              if ($view->uses_row_plugin()) {
+                $view->view->row_index = $i++;
+                $rows[] = $view->row_plugin->render($event);
+              }else{
+                $rows[] = $event;
+              }
+            }
+            //$output .= '<div class="duplicates">'.theme($view->theme_functions(), $view->view, $view->options, $rows, $event_num)."</div>";
+            $output .= theme($view->theme_functions(), $view->view, $view->options, $rows, $event_num);
+          }elseif(is_object($events)){
+            $rows = array();
+            if ($view->uses_row_plugin()) {
+              $view->view->row_index = $i++;
+              $rows[] = $view->row_plugin->render($events);
+            }else{
+              $rows[] = $events;
+            }
+            $output .= theme($view->theme_functions(), $view->view, $view->options, $rows, '');
+          }
+        }
+        $output .= '</div>'; //close section-day
+      }
+      $output .= '</div>'; //close section-week
+    }
+    $output .= "</div>"; //close sections div
+  }
+
+  return $output;
+}
+
+/**
+ * Logic to group the views records came from mc_event_sections view (grouping function).
+ * @see semanticviews_plugin_style_default.inc
+ * @param $view
+ * @param $records
+ * @param string $grouping_field
+ * @return array
+ */
+function dated_sections_views_group(&$view,$records,$grouping_field = ''){
+  // Make sure fields are rendered
+  $view->render_fields($view->view->result);
+
+  $sets = array();
+  $field = "node_created";
+  foreach($records as $row){
+    $ts = $row->{$field};
+    $section = $row->section;
+    $week = _mc_date_calender_week($ts);
+    $year = date('Y',$ts);
+    $week_num = $week."-".$year;
+    $week_num = _mc_date_calender_weekyear($ts);
+    $day_num = format_date($ts,"custom","d");
+    $day_month = format_date($ts,"custom","m");
+    $day_year = format_date($ts,"custom","y");
+    $day = mktime(0, 0, 0, $day_month, $day_num, $day_year);
+    $sets[$section][$week_num][$day][$row->nid] = $row;
+  }
+
+  foreach($sets as $section_name => $section){
+    foreach($section as $week_num => $week){
+      foreach($week as $day_num => $day){
+        $sets[$section_name][$week_num][$day_num] = _mc_event_filter_day_dubs($day);
+      }
+    }
+  }
+
+  //dsm($sets,"Raw Sets");
+  return $sets;
+}
+
+function dated_sections_sql($asking = array(),$field = "node.created"){
+  $sections = dated_sections_info();
+  if(empty($asking)){
+    $asking = array_keys($sections);
+  }
+  
+  $cases = array();
+  $orders = array();
+
+  foreach($asking as $key => $asking_key){
+    if(isset($sections[$asking_key])){
+          $section = $sections[$asking_key];
+          if($section['max'] OR $section['min']){
+              $case = &$cases[];
+              $case = t("WHEN (".dated_section_range_sql($field,$section['max'],$section['min']).")");
+              $orders[] = "WHEN section='".$section['name']."' THEN " . $key;
+            if(isset($section['exclude']) OR !empty($section['exclude'])){
+              //don't exclude if it's not at the asking array
+              $sql_ops = array();
+              foreach($section['exclude'] as $excluded){
+                if(isset($asking[$excluded])){ //only exclude if the request region is part of the logic
+                  $section_exclude = $sections[$excluded];
+                  $sql_op = array();
+                  $sql_op[] = "(";
+                  $sql_op[] = dated_section_range_sql($field,$section_exclude['max'],$section_exclude['min'],true);
+                  $sql_op[] = ")";
+                  $sql_ops[] = implode(" ",$sql_op);
+                }
+              }
+
+              if(!empty($sql_ops)){
+                $filter = implode(" AND ",$sql_ops);
+                $case .= " AND ($filter)";
+              }
+            }
+              $case .= " THEN '".$section['name']."'";
+          }
+    }
+  }
+
+  $sql_case = "CASE \n" . implode($cases,"\n") . "\nEND";
+  $sql_order = "(CASE \n" . implode($orders,"\n") . "\nEND) ASC";
+
+  return array('case'=>$sql_case,'order' => $sql_order);
+}
+
+function dated_sections_info($now = "now",$future_limit = 0,$past_limit = 0){
+
+  //fill in the required information
+  $ts = new stdClass();
+  $ts->now = strtotime($now);
+  $ts->today = strtotime("today 12am",$ts->now);
+  $ts->yesterday = strtotime('yesterday 12am',$ts->now);
+  $ts->tomorrow = strtotime('tomorrow 12am',$ts->now);
+  $ts->aftertomorrow = strtotime('+2 days 12am',$ts->now);
+
+  $weeks = new stdClass();
+  $weeks->aftertomorrow = _mc_date_calender_weekyear($ts->tomorrow);
+  $weeks->tomorrow = _mc_date_calender_weekyear($ts->tomorrow);
+  $weeks->now = _mc_date_calender_weekyear($ts->now);
+  $weeks->today = _mc_date_calender_weekyear($ts->today);
+  $weeks->yesterday = _mc_date_calender_weekyear($ts->yesterday);
+
+
+  //next and last weeks logic/weeks
+  $weeks->oneweekago = _mc_date_calender_weekyear(strtotime("-1 week 12am",$ts->now));
+  $weeks->twoweekago = _mc_date_calender_weekyear(strtotime("-2 week 12am",$ts->now));
+  $weeks->oneweek = _mc_date_calender_weekyear(strtotime("1 week 12am",$ts->now));
+  $weeks->twoweek = _mc_date_calender_weekyear(strtotime("2 week 12am",$ts->now));
+
+  $ts->thisweek = _mc_date_weekyear_firstday($weeks->today);
+  //* Time Stamps: Last Weeks *//
+  //fill in the rest of ts for start of last weeks
+  $ts->lastweek = _mc_date_weekyear_firstday($weeks->oneweekago);
+  $ts->last2week = _mc_date_weekyear_firstday($weeks->twoweekago);
+
+  //* Time Stamps: Next Weeks *//
+  //fill in the ts for future weeks, one/two weeks forward
+  $ts->nextweek = _mc_date_weekyear_firstday($weeks->oneweek);
+  $ts->next2week = _mc_date_weekyear_firstday($weeks->twoweek);
+
+  //sections info
+  $sections = array();
+
+  $sections['upcoming'] = array(
+    'name' => 'Upcoming',
+    'min' => $ts->next2week,
+    'max' => $future_limit ? $future_limit : 0
+  );
+
+  $sections['nextweek'] = array(
+    'name' => 'Next Week',
+    'week' => true,
+    'week#' => $weeks->oneweek,
+    'min' => $ts->nextweek,
+    'max' => $ts->next2week,
+  );
+
+  $sections['thisweek'] = array(
+    'name' => 'This Week',
+    'week' => true,
+    'week#' => $weeks->today,
+    'min' => $ts->thisweek,
+    'max' => $ts->nextweek,
+  );
+
+  $sections['tomorrow'] = array(
+    'name' => 'Tomorrow',
+    'week#' => $weeks->tomorrow,
+    'min' => $ts->tomorrow,
+    'max' => $ts->aftertomorrow
+  );
+
+  /*
+  $sections['now'] = array(
+    'name' => 'Now',
+    'week#' => $weeks->today,
+    'min' => $ts->now,
+    'max' => $ts->tomorrow
+  );
+  */
+
+  $sections['today'] = array(
+    'name' => 'Today',
+    'week#' => $weeks->today,
+    'min' => $ts->today,
+    'max' => $ts->tomorrow
+  );
+
+  $sections['yesterday'] = array(
+    'name' => "Yesterday",
+    'week#' => $weeks->yesterday,
+    'min' => $ts->yesterday,
+    'max' => $ts->today
+  );
+
+  $sections['lastweek'] = array(
+    'week' => true,
+    'week#' => $weeks->oneweekago,
+    'name' => 'Last Week',
+    'min' => $ts->thisweek,
+    'max' => $ts->lastweek
+  );
+
+  $sections['earlier'] = array(
+    'name' => 'Earlier',
+    'max' => $ts->lastweek,
+    'min' => $past_limit ? $past_limit : 0
+  );
+
+
+  foreach($sections as $key => &$val){
+    if($val['week'] && $val['week#']){
+      $val['exclude'] = array();
+      foreach($sections as $skey => &$sval){
+        if($sval['week#'] == $val['week#'] && $key != $skey){
+          $val['exclude'][] = $skey;
+        }
+      }
+    }
+  }
+
+  //dsm($weeks);
+  //dsm(debug_ts($ts));
+  //dsm($sections);
+
+  return $sections;
+}

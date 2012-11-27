@@ -253,6 +253,21 @@ class FeedsEnclosure extends FeedsElement {
    * @todo Get file extension from mime_type.
    * @todo This is not concurrency safe.
    */
+
+  function sanitize($string, $force_lowercase = true, $anal = false) {
+    $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+      "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
+      "â€”", "â€“", ",", "<", ".", ">", "/", "?");
+    $clean = trim(str_replace($strip, "", strip_tags($string)));
+    $clean = preg_replace('/\s+/', "-", $clean);
+    $clean = ($anal) ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean ;
+    return ($force_lowercase) ?
+      (function_exists('mb_strtolower')) ?
+        mb_strtolower($clean, 'UTF-8') :
+        strtolower($clean) :
+      $clean;
+  }
+
   public function getFile() {
     if (empty($this->file) && $this->getValue()) {
       // Check if this enclosure contains a local file.
@@ -266,6 +281,8 @@ class FeedsEnclosure extends FeedsElement {
         throw new Exception(t('Invalid enclosure %enclosure', array('%enclosure' => $this->getValue())));
       }
       $filename = basename($this->getValue());
+      $filename = $this->sanitize($filename);
+
       if (module_exists('transliteration')) {
         require_once drupal_get_path('module', 'transliteration') . '/transliteration.inc';
         $filename = transliteration_clean_filename($filename);

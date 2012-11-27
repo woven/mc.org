@@ -331,6 +331,13 @@ function mc_news_feed_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_news_feed_pattern';
+  $strongarm->value = '[group-short-name-raw]/news/feed/[title-raw]';
+  $export['pathauto_node_news_feed_pattern'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'print_display_comment_news_feed';
   $strongarm->value = 0;
   $export['print_display_comment_news_feed'] = $strongarm;

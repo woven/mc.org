@@ -9,17 +9,52 @@ function ft_news_ds_default_settings() {
       'nnews' => array(
         'full' => array(
           'fields' => array(
-            'title' => array(
-              'region' => 'header',
-              'weight' => '-100',
-              'format' => 'nd_title_h1_nolink',
+            'body' => array(
+              'region' => 'middle',
+              'weight' => '-98',
+              'format' => 'nd_bodyfield',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),
-            'body' => array(
+            'nodes_header' => array(
+              'region' => 'header',
+              'weight' => '-100',
+              'format' => 'ds_eval_code',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'nodes_slideshow' => array(
               'region' => 'middle',
-              'weight' => '-78',
-              'format' => 'nd_bodyfield',
+              'weight' => '-99',
+              'format' => 'ds_eval_code',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'nodes_print_email' => array(
+              'region' => 'footer',
+              'weight' => '-97',
+              'format' => 'ds_eval_code',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'facebook_like' => array(
+              'region' => 'footer',
+              'weight' => '-96',
+              'format' => '',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'google_plus' => array(
+              'region' => 'footer',
+              'weight' => '-94',
+              'format' => '',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
+            'tweet_button' => array(
+              'region' => 'footer',
+              'weight' => '-95',
+              'format' => '',
               'css-class' => '',
               'labelformat' => 'hidden',
             ),

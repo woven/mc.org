@@ -1453,6 +1453,7 @@ groups|Groups
 places|Places
 audio-video|Audio and Video
 community|Community
+news|News
 blank|Blank',
     'allowed_values_php' => '',
     'widget' => array(

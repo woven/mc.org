@@ -336,10 +336,22 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: add stuff news_feed
+  $permissions['add stuff news_feed'] = array(
+    'name' => 'add stuff news_feed',
+    'roles' => array(
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: add stuff nnews
   $permissions['add stuff nnews'] = array(
     'name' => 'add stuff nnews',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: add stuff npage
@@ -372,6 +384,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: add stuff webform
   $permissions['add stuff webform'] = array(
     'name' => 'add stuff webform',
+    'roles' => array(),
+  );
+
+  // Exported permission: add twitter accounts
+  $permissions['add twitter accounts'] = array(
+    'name' => 'add twitter accounts',
     'roles' => array(),
   );
 
@@ -408,6 +426,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: administer consumers
+  $permissions['administer consumers'] = array(
+    'name' => 'administer consumers',
+    'roles' => array(),
+  );
+
   // Exported permission: administer content types
   $permissions['administer content types'] = array(
     'name' => 'administer content types',
@@ -417,6 +441,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer custom pagers
   $permissions['administer custom pagers'] = array(
     'name' => 'administer custom pagers',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer elysia_cron
+  $permissions['administer elysia_cron'] = array(
+    'name' => 'administer elysia_cron',
     'roles' => array(),
   );
 
@@ -435,6 +465,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: administer feedbackify
   $permissions['administer feedbackify'] = array(
     'name' => 'administer feedbackify',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer feeds
+  $permissions['administer feeds'] = array(
+    'name' => 'administer feeds',
     'roles' => array(),
   );
 
@@ -553,6 +589,12 @@ function mc_perms_user_default_permissions() {
       '0' => 'administrator',
       '1' => 'community manager',
     ),
+  );
+
+  // Exported permission: administer oauth
+  $permissions['administer oauth'] = array(
+    'name' => 'administer oauth',
+    'roles' => array(),
   );
 
   // Exported permission: administer organic groups
@@ -685,18 +727,18 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
-  // Exported permission: bypass advanced aggregation
-  $permissions['bypass advanced aggregation'] = array(
-    'name' => 'bypass advanced aggregation',
-    'roles' => array(),
-  );
-
   // Exported permission: change own username
   $permissions['change own username'] = array(
     'name' => 'change own username',
     'roles' => array(
       '0' => 'authenticated user',
     ),
+  );
+
+  // Exported permission: clear feed_news feeds
+  $permissions['clear feed_news feeds'] = array(
+    'name' => 'clear feed_news feeds',
+    'roles' => array(),
   );
 
   // Exported permission: collapse format fieldset by default
@@ -897,10 +939,27 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: create news_feed content
+  $permissions['create news_feed content'] = array(
+    'name' => 'create news_feed content',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: create news_feed sitewide
+  $permissions['create news_feed sitewide'] = array(
+    'name' => 'create news_feed sitewide',
+    'roles' => array(),
+  );
+
   // Exported permission: create nnews content
   $permissions['create nnews content'] = array(
     'name' => 'create nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: create nnews sitewide
@@ -1074,10 +1133,22 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: delete any news_feed content
+  $permissions['delete any news_feed content'] = array(
+    'name' => 'delete any news_feed content',
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
+  );
+
   // Exported permission: delete any nnews content
   $permissions['delete any nnews content'] = array(
     'name' => 'delete any nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete any npage content
@@ -1219,10 +1290,21 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: delete own news_feed content
+  $permissions['delete own news_feed content'] = array(
+    'name' => 'delete own news_feed content',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: delete own nnews content
   $permissions['delete own nnews content'] = array(
     'name' => 'delete own nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: delete own npage content
@@ -1376,10 +1458,21 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: edit any news_feed content
+  $permissions['edit any news_feed content'] = array(
+    'name' => 'edit any news_feed content',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: edit any nnews content
   $permissions['edit any nnews content'] = array(
     'name' => 'edit any nnews content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'community manager',
+    ),
   );
 
   // Exported permission: edit any npage content
@@ -1562,11 +1655,21 @@ function mc_perms_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit own news_feed content
+  $permissions['edit own news_feed content'] = array(
+    'name' => 'edit own news_feed content',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: edit own nnews content
   $permissions['edit own nnews content'] = array(
     'name' => 'edit own nnews content',
     'roles' => array(
-      '0' => 'authenticated user',
+      '0' => 'administrator',
+      '1' => 'authenticated user',
+      '2' => 'community manager',
     ),
   );
 
@@ -1632,15 +1735,35 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: import feed_news feeds
+  $permissions['import feed_news feeds'] = array(
+    'name' => 'import feed_news feeds',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: import input formats
   $permissions['import input formats'] = array(
     'name' => 'import input formats',
     'roles' => array(),
   );
 
+  // Exported permission: import own tweets
+  $permissions['import own tweets'] = array(
+    'name' => 'import own tweets',
+    'roles' => array(),
+  );
+
   // Exported permission: maintain own activity
   $permissions['maintain own activity'] = array(
     'name' => 'maintain own activity',
+    'roles' => array(),
+  );
+
+  // Exported permission: make twitter accounts global
+  $permissions['make twitter accounts global'] = array(
+    'name' => 'make twitter accounts global',
     'roles' => array(),
   );
 
@@ -1659,6 +1782,18 @@ function mc_perms_user_default_permissions() {
   // Exported permission: notify of path changes
   $permissions['notify of path changes'] = array(
     'name' => 'notify of path changes',
+    'roles' => array(),
+  );
+
+  // Exported permission: oauth authorize any consumers
+  $permissions['oauth authorize any consumers'] = array(
+    'name' => 'oauth authorize any consumers',
+    'roles' => array(),
+  );
+
+  // Exported permission: oauth register any consumers
+  $permissions['oauth register any consumers'] = array(
+    'name' => 'oauth register any consumers',
     'roles' => array(),
   );
 
@@ -1690,6 +1825,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(
       '0' => 'community manager',
     ),
+  );
+
+  // Exported permission: post to twitter
+  $permissions['post to twitter'] = array(
+    'name' => 'post to twitter',
+    'roles' => array(),
   );
 
   // Exported permission: remove members
@@ -1791,6 +1932,12 @@ function mc_perms_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: use PHP for title patterns
+  $permissions['use PHP for title patterns'] = array(
+    'name' => 'use PHP for title patterns',
+    'roles' => array(),
+  );
+
   // Exported permission: use PHP for tracking visibility
   $permissions['use PHP for tracking visibility'] = array(
     'name' => 'use PHP for tracking visibility',
@@ -1815,6 +1962,12 @@ function mc_perms_user_default_permissions() {
   // Exported permission: use flag import
   $permissions['use flag import'] = array(
     'name' => 'use flag import',
+    'roles' => array(),
+  );
+
+  // Exported permission: use global twitter account
+  $permissions['use global twitter account'] = array(
+    'name' => 'use global twitter account',
     'roles' => array(),
   );
 

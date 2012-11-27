@@ -5,20 +5,40 @@ function mc_ui_init(){
   drupal_add_js($path .'/js/mc_ui.js', 'module', 'header', FALSE, TRUE, FALSE);
 }
 
+function mc_ui_formatter_info() {
+  return array(
+    'post_date' => array(
+      'label' => t('MC: Post date'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+      'multiple values' => CONTENT_HANDLE_CORE
+    )
+  );
+
+  return $formatters;
+}
+
+function theme_mc_ui_formatter_post_date($element){
+  dsm($element);
+}
+
 /**
  * Implementation of hook_theme
  */
 function mc_ui_theme($existing, $type, $theme, $path){
 	  return array(
-	  	  'ghh_user_picture' => array('variables' => array('uid' => NULL,'imagecache' => null, 'imageComment' => TRUE)),
-	  	  'ghh_article_thumbnail' => array('variables' => array('img' => NULL,'imagecache' => null)),
+	  	'ghh_user_picture' => array('variables' => array('uid' => NULL,'imagecache' => null, 'imageComment' => TRUE)),
+	  	'ghh_article_thumbnail' => array('variables' => array('img' => NULL,'imagecache' => null)),
         'ghh_browse_menu' => array('variables' => array('mid' => NULL)),
         'ghh_see_all' => array('title' => null, 'url' => null,'icon' => null),
         'ghh_post_date' => array('variables' => array('date' => NULL)),
         'ghh_authoring_info' => array('variables' => array('uid' => NULL, 'uname' => NULL,'gnid' => NULL, 'gtitle' => NULL, 'picture' => NULL)),
         'ghh_node_categories' => array('variables' => array('nid' => NULL, 'vocabulary_id' => NULL)),
-    	);
-} 
+        'mc_post_date' => array('variables' => array('ts' => NULL)),
+        'mc_ui_formatter_post_date' => array(
+          'arguments' => array('element' => NULL),
+        )
+      );
+}
 
 function mc_ui_preprocess_block(&$vars){
   if($vars['block']->module=='menu' && (
@@ -100,40 +120,67 @@ function theme_ghh_browse_menu($mid){
     return '<div class="ghh-menu-items">'.theme('links', menu_navigation_links($mid)).'</div>';
 }
 
-
 /**
  * Implementation of theme_ghh_post_date
+ * theme_mc_post_date
  */
 function theme_ghh_post_date($date){
+  return theme_mc_post_date($date);
+}
+
+function theme_mc_post_date($ts){
   $output = '';
-  $today = mktime(0, 0, 0);
+  $today = strtotime("today 12am");
+  $now = time();
   $oneWeekAgo = $today - 24*3600*7;
-  $difference = time() - $date;
-  $firstDayOfYear = mktime(0,0,0,1,1);
-  
+  $twoWeekAgo = $today - 24*3600*7*2;
+  $difference = $now - $ts;
+
+  $thisweek = _mc_date_weekyear_firstday(_mc_date_calender_weekyear(strtotime("today 12am",$today)));
+  $lastweek = _mc_date_weekyear_firstday(_mc_date_calender_weekyear(strtotime("-1 week 12am",$today)));
+
+  $tsday = format_date($ts,'custom','l');
+  $nowday = format_date($today,'custom','l');
+  $tsdaynum = format_date($ts,'custom','w');
+  $todaydaynum = format_date($today,'custom','w');
+
+  $yesterday = strtotime("yesterday 12am");
+  $tomorrow = strtotime("tomorrow 12am");
+  $tsyesterday = strtotime("today",$ts);
+
+  $tsyear = intval(format_date($ts,'custom',"Y"));
+  $nowyear = intval(format_date($today,'custom',"Y"));
+
+  /*
   if ($difference < 600){
     $output = t("moments ago");
-  }elseif ($difference < 3600){
+  }elseif($difference < 3600){
     $mins = intval(floor($difference / 60)); 
     $output = "$mins minutes ago";
-  }elseif ($difference < 3600*24){
+  }elseif($difference < 3600*24){
     $hours = intval(floor($difference / 3600));
     if ($hours == 1){
       $output = "$hours hour ago";
     }else{
       $output = "$hours hours ago";
-    }
-  }elseif ($date > $oneWeekAgo){
+    }*/
+  if(strtotime("today 12am",$ts) == $today){
+    $output = "Today";
+  }elseif(strtotime("today 12am",$ts) == $yesterday){
+    $output = "Yesterday";
+  }elseif($ts > $thisweek){
+    $output = format_date($ts,'custom','l');
+  }elseif($ts >= $lastweek AND $ts < $thisweek){
     $days = intval(floor($difference / 86400));
-    if ($days == 1){
-      $output = "$days day ago";
+    if($todaydaynum >= $tsdaynum){
+      $output = format_date($ts,'custom','l, F jS');
     }else{
-      $output = "$days days ago";
+      $output = format_date($ts,'custom','l');
     }
-  }elseif ($date > $firstDayOfYear){
-    $output = date('F jS', $date);
+  }elseif ($tsyear != $nowyear){ //if now is not the same year of input ts, include year
+    $output = format_date($ts,'custom','l, F jS, Y');
   }else{
-    $output = date('F jS, Y', $date);
+    $output = format_date($ts,'custom','l, F jS');
   }
   return ($output);
 }

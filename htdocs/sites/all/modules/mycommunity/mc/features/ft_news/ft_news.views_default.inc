@@ -25,35 +25,10 @@ function ft_news_views_default_views() {
       'field' => 'group_nid',
       'relationship' => 'none',
     ),
-    'field_place_nid' => array(
-      'label' => 'Place',
-      'required' => 0,
-      'delta' => -1,
-      'id' => 'field_place_nid',
-      'table' => 'node_data_field_place',
-      'field' => 'field_place_nid',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
-    'flag_content_rel' => array(
-      'label' => 'flag',
-      'required' => 0,
-      'flag' => 'events_bookmarks',
-      'user_scope' => 'current',
-      'id' => 'flag_content_rel',
-      'table' => 'node',
-      'field' => 'flag_content_rel',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
   ));
   $handler->override_option('fields', array(
-    'ops' => array(
-      'label' => 'Flag link',
+    'title_3' => array(
+      'label' => 'Title: raw',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -78,17 +53,17 @@ function ft_news_views_default_views() {
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'link_type' => 'toggle',
-      'exclude' => 0,
-      'id' => 'ops',
-      'table' => 'flag_content',
-      'field' => 'ops',
-      'relationship' => 'flag_content_rel',
+      'link_to_node' => 0,
+      'exclude' => 1,
+      'id' => 'title_3',
+      'table' => 'node',
+      'field' => 'title',
       'override' => array(
         'button' => 'Override',
       ),
+      'relationship' => 'none',
     ),
-    'field_list_image_fid' => array(
+    'field_list_image_fid_1' => array(
       'label' => '',
       'alter' => array(
         'alter_text' => 0,
@@ -116,7 +91,204 @@ function ft_news_views_default_views() {
       'hide_alter_empty' => 1,
       'link_to_node' => 0,
       'label_type' => 'none',
-      'format' => 'thumbnail_linked_mcdefaultimg',
+      'format' => 'url_plain',
+      'multiple' => array(
+        'group' => 1,
+        'multiple_number' => '0',
+        'multiple_from' => '',
+        'multiple_reversed' => 0,
+      ),
+      'exclude' => 1,
+      'id' => 'field_list_image_fid_1',
+      'table' => 'node_data_field_list_image',
+      'field' => 'field_list_image_fid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'title_4' => array(
+      'label' => 'Group Title: Raw',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 1,
+      'exclude' => 1,
+      'id' => 'title_4',
+      'table' => 'node',
+      'field' => 'title',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'group_nid',
+    ),
+    'created' => array(
+      'label' => 'Post date',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '[created]',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 1,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'date_format' => 'custom',
+      'custom_date_format' => 'r',
+      'exclude' => 1,
+      'id' => 'created',
+      'table' => 'node',
+      'field' => 'created',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'field_url_url' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'label_type' => 'none',
+      'format' => 'plain',
+      'multiple' => array(
+        'group' => TRUE,
+        'multiple_number' => '',
+        'multiple_from' => '',
+        'multiple_reversed' => FALSE,
+      ),
+      'exclude' => 1,
+      'id' => 'field_url_url',
+      'table' => 'node_data_field_url',
+      'field' => 'field_url_url',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'path' => array(
+      'label' => 'Node Path',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'absolute' => 0,
+      'exclude' => 1,
+      'id' => 'path',
+      'table' => 'node',
+      'field' => 'path',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'field_list_image_fid' => array(
+      'label' => '',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 1,
+        'path' => '[field_url_url]',
+        'absolute' => 1,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '_blank',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_to_node' => 0,
+      'label_type' => 'none',
+      'format' => 'thumbnail_default_mcdefaultimg',
       'multiple' => array(
         'group' => 1,
         'multiple_number' => '1',
@@ -128,6 +300,9 @@ function ft_news_views_default_views() {
       'table' => 'node_data_field_list_image',
       'field' => 'field_list_image_fid',
       'relationship' => 'none',
+      'override' => array(
+        'button' => 'Override',
+      ),
     ),
     'title_1' => array(
       'label' => 'Group Title/link',
@@ -213,7 +388,7 @@ function ft_news_views_default_views() {
       'label' => 'Event Title: Rewritten Rich Snappit',
       'alter' => array(
         'alter_text' => 1,
-        'text' => '<a href="[path]" itemprop="url"><span itemprop="name">[title_2]</span></a>',
+        'text' => '<a href="[field_url_url]" rel="nofollow" itemprop="url" target="_blank"><span itemprop="name">[title_2]</span></a>',
         'make_link' => 0,
         'path' => '',
         'absolute' => 0,
@@ -249,8 +424,8 @@ function ft_news_views_default_views() {
         'button' => 'Override',
       ),
     ),
-    'created' => array(
-      'label' => 'Post date',
+    'phpcode' => array(
+      'label' => 'MC: post date',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -275,12 +450,13 @@ function ft_news_views_default_views() {
       'hide_empty' => 0,
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
-      'date_format' => 'medium',
-      'custom_date_format' => '',
+      'value' => '<?php
+print theme("mc_post_date",$data->node_created);
+?>',
       'exclude' => 0,
-      'id' => 'created',
-      'table' => 'node',
-      'field' => 'created',
+      'id' => 'phpcode',
+      'table' => 'customfield',
+      'field' => 'phpcode',
       'override' => array(
         'button' => 'Override',
       ),
@@ -320,6 +496,75 @@ function ft_news_views_default_views() {
       'override' => array(
         'button' => 'Override',
       ),
+    ),
+    'guid' => array(
+      'label' => 'Item GUID',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 1,
+      'id' => 'guid',
+      'table' => 'feeds_node_item',
+      'field' => 'guid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'nothing' => array(
+      'label' => 'Body: Feed',
+      'alter' => array(
+        'text' => '[body] Brought to you by MiamiTech.org',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 1,
+      'id' => 'nothing',
+      'table' => 'views',
+      'field' => 'nothing',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
     ),
   ));
   $handler->override_option('sorts', array(
@@ -380,7 +625,7 @@ function ft_news_views_default_views() {
   $handler->override_option('css_class', 'news-section');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
-  $handler->override_option('empty', '<div class=\\"default-message\\">Wow, it\'s quiet around here.  Want to <a href=\'/node/add/event\'>add an event</a> or <a href=\'/node/add/event-feed\'>import an event feed</a>?</div>');
+  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here. Want to <a href=\'/node/add/news-feed\'>add a news feed</a>?</div>');
   $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 0);
   $handler->override_option('use_pager', '0');
@@ -389,7 +634,7 @@ function ft_news_views_default_views() {
   $handler->override_option('style_options', array(
     'grouping' => '',
     'group_function' => array(
-      'function_name' => '',
+      'function_name' => 'dated_sections_views_group',
     ),
     'group' => array(
       'element_type' => 'h3',
@@ -411,12 +656,6 @@ function ft_news_views_default_views() {
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
-      'ops' => array(
-        'element_type' => 'div',
-        'class' => 'event-staring',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
       'field_list_image_fid' => array(
         'element_type' => 'div',
         'class' => 'field-view-image',
@@ -433,7 +672,7 @@ function ft_news_views_default_views() {
         'label_element_type' => '',
         'label_class' => '',
       ),
-      'created' => array(
+      'phpcode' => array(
         'element_type' => 'p',
         'class' => 'location-link to-right',
         'label_element_type' => '',
@@ -465,6 +704,313 @@ function ft_news_views_default_views() {
   $handler = $view->new_display('block', 'Block: Event Sections', 'block_3');
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
+  $handler = $view->new_display('block', 'Block: News Section per Group', 'block_1');
+  $handler->override_option('arguments', array(
+    'group_nid' => array(
+      'default_action' => 'default',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '',
+      'breadcrumb' => '',
+      'default_argument_type' => 'og_group_node',
+      'default_argument' => '',
+      'validate_type' => 'none',
+      'validate_fail' => 'empty',
+      'break_phrase' => 0,
+      'not' => 0,
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        2 => 0,
+        4 => 0,
+        8 => 0,
+        9 => 0,
+      ),
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        4 => 0,
+      ),
+      'default_argument_user' => 0,
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'webform' => 0,
+        'npage' => 0,
+        'page' => 0,
+        'place' => 0,
+        'video' => 0,
+        'company' => 0,
+        'event_feed' => 0,
+        'news_feed' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        1 => 0,
+        4 => 0,
+      ),
+      'validate_argument_type' => 'tid',
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'validate_argument_node_flag_name' => '*relationship*',
+      'validate_argument_node_flag_test' => 'flaggable',
+      'validate_argument_node_flag_id_type' => 'id',
+      'validate_argument_user_flag_name' => '*relationship*',
+      'validate_argument_user_flag_test' => 'flaggable',
+      'validate_argument_user_flag_id_type' => 'id',
+      'validate_argument_is_member' => '0',
+      'validate_argument_group_node_type' => array(
+        'group' => 0,
+        'company' => 0,
+      ),
+      'validate_argument_php' => '',
+    ),
+  ));
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
+  $handler = $view->new_display('feed', 'Feed: News All', 'feed_1');
+  $handler->override_option('title', 'News from MiamiTech.org');
+  $handler->override_option('style_plugin', 'rss_fields');
+  $handler->override_option('style_options', array(
+    'mission_description' => FALSE,
+    'description' => '',
+    'channel' => array(
+      'core' => array(
+        'views_rss_core' => array(
+          'description' => '',
+          'language' => '',
+          'category' => '',
+          'image' => '',
+          'copyright' => '',
+          'managingEditor' => '',
+          'webMaster' => '',
+          'generator' => '',
+          'docs' => '',
+          'cloud' => '',
+          'ttl' => '',
+          'skipHours' => '',
+          'skipDays' => '',
+        ),
+      ),
+    ),
+    'item' => array(
+      'core' => array(
+        'views_rss_core' => array(
+          'title' => 'title_3',
+          'link' => 'field_url_url',
+          'description' => 'nothing',
+          'author' => '',
+          'category' => '',
+          'comments' => '',
+          'enclosure' => 'field_list_image_fid_1',
+          'guid' => '',
+          'pubDate' => 'created',
+        ),
+      ),
+    ),
+    'feed_settings' => array(
+      'absolute_paths' => 1,
+      'feed_in_links' => 0,
+    ),
+  ));
+  $handler->override_option('row_plugin', '');
+  $handler->override_option('row_options', array());
+  $handler->override_option('path', 'news/feed');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('displays', array(
+    'page_1' => 'page_1',
+    'block_3' => 'block_3',
+    'default' => 0,
+    'block_1' => 0,
+  ));
+  $handler->override_option('sitename_title', 0);
+  $handler = $view->new_display('feed', 'Feed: Per Group', 'feed_2');
+  $handler->override_option('arguments', array(
+    'group_nid' => array(
+      'default_action' => 'default',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '',
+      'breadcrumb' => '',
+      'default_argument_type' => 'node',
+      'default_argument' => '',
+      'validate_type' => 'none',
+      'validate_fail' => 'not found',
+      'break_phrase' => 0,
+      'not' => 0,
+      'id' => 'group_nid',
+      'table' => 'og_ancestry',
+      'field' => 'group_nid',
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        2 => 0,
+        4 => 0,
+        8 => 0,
+        9 => 0,
+      ),
+      'override' => array(
+        'button' => 'Use default',
+      ),
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_taxonomy_tid_term_page' => 0,
+      'default_taxonomy_tid_node' => 0,
+      'default_taxonomy_tid_limit' => 0,
+      'default_taxonomy_tid_vids' => array(
+        1 => 0,
+        4 => 0,
+      ),
+      'default_argument_user' => 0,
+      'default_argument_fixed' => '',
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'article' => 0,
+        'audio' => 0,
+        'event' => 0,
+        'file' => 0,
+        'group' => 0,
+        'link' => 0,
+        'nnews' => 0,
+        'webform' => 0,
+        'npage' => 0,
+        'page' => 0,
+        'place' => 0,
+        'video' => 0,
+        'company' => 0,
+        'event_feed' => 0,
+        'news_feed' => 0,
+        'gallery' => 0,
+        'gallery_image' => 0,
+        'forum' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        1 => 0,
+        4 => 0,
+      ),
+      'validate_argument_type' => 'tid',
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'validate_argument_node_flag_name' => '*relationship*',
+      'validate_argument_node_flag_test' => 'flaggable',
+      'validate_argument_node_flag_id_type' => 'id',
+      'validate_argument_user_flag_name' => '*relationship*',
+      'validate_argument_user_flag_test' => 'flaggable',
+      'validate_argument_user_flag_id_type' => 'id',
+      'validate_argument_is_member' => '0',
+      'validate_argument_group_node_type' => array(
+        'group' => 0,
+        'company' => 0,
+      ),
+      'validate_argument_php' => '',
+    ),
+  ));
+  $handler->override_option('title', 'News from MiamiTech.org');
+  $handler->override_option('style_plugin', 'rss_fields');
+  $handler->override_option('style_options', array(
+    'mission_description' => FALSE,
+    'description' => '',
+    'channel' => array(
+      'core' => array(
+        'views_rss_core' => array(
+          'description' => '',
+          'language' => '',
+          'category' => '',
+          'image' => '',
+          'copyright' => '',
+          'managingEditor' => '',
+          'webMaster' => '',
+          'generator' => '',
+          'docs' => '',
+          'cloud' => '',
+          'ttl' => '',
+          'skipHours' => '',
+          'skipDays' => '',
+        ),
+      ),
+    ),
+    'item' => array(
+      'core' => array(
+        'views_rss_core' => array(
+          'title' => 'title_3',
+          'link' => 'field_url_url',
+          'description' => 'nothing',
+          'author' => '',
+          'category' => '',
+          'comments' => '',
+          'enclosure' => 'field_list_image_fid_1',
+          'guid' => '',
+          'pubDate' => 'created',
+        ),
+      ),
+    ),
+    'feed_settings' => array(
+      'absolute_paths' => 1,
+      'feed_in_links' => 0,
+    ),
+  ));
+  $handler->override_option('row_plugin', '');
+  $handler->override_option('row_options', array());
+  $handler->override_option('path', 'node/%/news/feed');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('displays', array(
+    'block_1' => 'block_1',
+    'default' => 0,
+    'page_1' => 0,
+    'block_3' => 0,
+  ));
+  $handler->override_option('sitename_title', 0);
 
   $views[$view->name] = $view;
 

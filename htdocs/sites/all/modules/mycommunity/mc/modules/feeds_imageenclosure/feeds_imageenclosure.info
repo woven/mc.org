@@ -1,0 +1,7 @@
+name = Image Enclosure (Feeds)
+description = "Special version of FeedEcnlosure class that deals with Images instance of FeedEnclosure class"
+package = Feeds
+version = VERSION
+core = 6.x
+
+dependencies[] = feeds

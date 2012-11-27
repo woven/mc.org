@@ -30,7 +30,7 @@ function mc_news_feed_feeds_importer_default() {
       'config' => array(
         'content_type' => 'nnews',
         'input_format' => '1',
-        'update_existing' => '2',
+        'update_existing' => '0',
         'expire' => '-1',
         'mappings' => array(
           0 => array(

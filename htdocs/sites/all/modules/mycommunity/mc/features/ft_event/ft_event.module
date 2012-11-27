@@ -16,7 +16,7 @@ function ft_event_block($op = 'list', $delta = 0, $edit = array()) {
       switch ($delta) {
         case 'user-events-calender':
           $block = array(
-            'subject' => '',
+            'subject' => 'Subscribe',
             'content' => _user_events_calender(),
           );
           break;
