@@ -359,7 +359,7 @@ function ft_news_views_default_views() {
         'suffix' => '',
         'target' => '',
         'help' => '',
-        'trim' => 1,
+        'trim' => 0,
         'max_length' => '50',
         'word_boundary' => 1,
         'ellipsis' => 1,
