@@ -740,7 +740,7 @@ print theme("mc_post_date",$data->node_created);
   $handler = $view->new_display('block', 'Block: Event Sections', 'block_3');
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
-  $handler = $view->new_display('block', 'Block: News Section per Group', 'block_1');
+  $handler = $view->new_display('block', 'Block: OG - News', 'block_1');
   $handler->override_option('arguments', array(
     'group_nid' => array(
       'default_action' => 'default',
@@ -1047,7 +1047,7 @@ print theme("mc_post_date",$data->node_created);
     'block_3' => 0,
   ));
   $handler->override_option('sitename_title', 0);
-  $handler = $view->new_display('block', 'Block: Group Latest News', 'block_2');
+  $handler = $view->new_display('block', 'Block: OG Home - News', 'block_2');
   $handler->override_option('arguments', array(
     'group_nid' => array(
       'default_action' => 'default',
@@ -1131,6 +1131,7 @@ print theme("mc_post_date",$data->node_created);
       'validate_argument_php' => '',
     ),
   ));
+  $handler->override_option('title', 'News');
   $handler->override_option('items_per_page', 4);
   $handler->override_option('style_options', array(
     'grouping' => '',
