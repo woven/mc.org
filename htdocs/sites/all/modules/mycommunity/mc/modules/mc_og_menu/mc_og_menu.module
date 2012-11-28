@@ -32,6 +32,7 @@ function _mc_og_menu_items(){
       'link' => 'node/!nid/events',
       'is_menu_item' => TRUE,
       'show_block' => TRUE,
+      'page_title' => 'Upcoming Events'
     ),
     'articles' => array(
       'title' => "Articles",
@@ -39,7 +40,7 @@ function _mc_og_menu_items(){
       'display_id' => 'page_5',
       'link' => 'node/!nid/articles',
       'is_menu_item' => TRUE,
-      'show_block' => TRUE,
+      'show_block' => TRUE
     ),
     'news' => array(
       'title' => "News",
@@ -48,6 +49,7 @@ function _mc_og_menu_items(){
       'link' => 'node/!nid/news',
       'is_menu_item' => TRUE,
       'show_block' => TRUE,
+      'page_title' => 'Recent News'
     ),
     'files' => array(
       'title' => "Files",
@@ -190,6 +192,10 @@ function mc_og_menu_menu(){
 function _mc_load_view_page($node,$item){
   $view = $item['view'];
   $display = $item['display_id'];
+
+  if(!empty($item['page_title'])){
+    drupal_set_title($item['page_title']);
+  }
 
   if(og_is_group_type($node->type)){
     return views_embed_view($view,$display);
