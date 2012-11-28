@@ -751,7 +751,7 @@ black',
         ),
       ),
       'default_value_php' => NULL,
-      'label' => 'Twitter User Name',
+      'label' => 'Twitter Username',
       'weight' => '36',
       'description' => '',
       'minimum_widgets' => '1',
@@ -769,7 +769,7 @@ black',
   t('Images');
   t('Logo');
   t('Short Name');
-  t('Twitter User Name');
+  t('Twitter Username');
   t('What’s the URL of your group’s homepage?');
 
   return $fields;
