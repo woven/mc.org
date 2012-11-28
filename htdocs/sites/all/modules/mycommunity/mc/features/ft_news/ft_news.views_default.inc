@@ -625,7 +625,7 @@ print theme("mc_post_date",$data->node_created);
   $handler->override_option('css_class', 'news-section');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
-  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here. Want to <a href=\'/node/add/news-feed\'>add a news feed</a>?</div>');
+  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here.<span class="hide-anonymous"> Want to <a href=\'/node/add/news-feed\'>add a news feed</a>?</span></div>');
   $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 0);
   $handler->override_option('use_pager', '0');
@@ -1095,7 +1095,6 @@ print theme("mc_post_date",$data->node_created);
       'validate_argument_php' => '',
     ),
   ));
-  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here.</div>');
   $handler->override_option('items_per_page', 4);
   $handler->override_option('style_options', array(
     'grouping' => '',
