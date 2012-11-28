@@ -34,7 +34,7 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
  * @todo make a function to allow you to patch send tweets based on list of nodes, with settings (like default msg);
  */
 function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true){
-  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE) AND $tweet == true){
+  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE)){
     return;
   };
 
