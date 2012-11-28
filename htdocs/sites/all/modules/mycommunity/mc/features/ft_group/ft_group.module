@@ -17,10 +17,33 @@ function ft_group_og_home_blocks_alter(&$blocks,$node){
 }
 
 /*
+ * validate twitter username
+ */
+function twitter_username_validate($element, &$form_state){
+  $username = &$element['#value']['value'];
+  $field_id = 'field_twitter_username][0';
+  if(!empty($username)){ //field is not required, check on it only if it has some value
+    if(preg_match('/^[A-Za-z0-9_]+$/', $username)){ //user name without @
+      //do nothing
+    }elseif(preg_match('/^@[A-Za-z0-9_]+$/', $username)){ //username with @ infront of it, remove it
+      $new_val = str_replace("@","",$username);
+      form_set_value($element, $new_val, &$form_state);
+    }else{
+      form_error($element, t("That doesn't look like a valid Twitter username."));
+    }
+  }
+}
+
+/*
  *
  */
 function ft_group_late_form_alter(&$form, &$form_state, $form_id){
   global $user;
+
+  if($form['field_twitter_username']){
+    $field_twitter  = &$form['field_twitter_username'];
+    $field_twitter[0]['#element_validate'][] = "twitter_username_validate";
+  }
   
   /**
    * hide color fields from non admin users
