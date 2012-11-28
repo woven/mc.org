@@ -134,6 +134,42 @@ function ft_group_ui_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'groups_menu';
+  $context->description = '';
+  $context->tag = 'groups';
+  $context->conditions = array(
+    'context_og_condition_group_type' => array(
+      'values' => array(
+        'group' => 'group',
+      ),
+      'options' => array(
+        'node_form' => 0,
+      ),
+    ),
+    'path' => array(
+      'values' => array(
+        'node/*/news' => 'node/*/news',
+        'node/*/events' => 'node/*/events',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'theme' => array(
+      'title' => '',
+      'subtitle' => '',
+      'class' => 'block-titled',
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('groups');
+  $export['groups_menu'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'page_ingroup';
   $context->description = 'Any page inside a group, except the group node page';
   $context->tag = 'groups';
@@ -169,11 +205,6 @@ function ft_group_ui_context_default_contexts() {
           'weight' => 0,
         ),
       ),
-    ),
-    'theme' => array(
-      'title' => '',
-      'subtitle' => '',
-      'class' => 'block-titled',
     ),
   );
   $context->condition_mode = 1;
