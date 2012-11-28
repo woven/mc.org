@@ -27,6 +27,42 @@ function ft_news_views_default_views() {
     ),
   ));
   $handler->override_option('fields', array(
+    'phpcode_1' => array(
+      'label' => 'Site Name: Linked',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 1,
+        'path' => '/',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '[phpcode_1]',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'value' => '<?php echo variable_get("site_name",""); ?>',
+      'exclude' => 1,
+      'id' => 'phpcode_1',
+      'table' => 'customfield',
+      'field' => 'phpcode',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'title_3' => array(
       'label' => 'Title: raw',
       'alter' => array(
@@ -535,7 +571,7 @@ print theme("mc_post_date",$data->node_created);
     'nothing' => array(
       'label' => 'Body: Feed',
       'alter' => array(
-        'text' => '[body] Brought to you by MiamiTech.org',
+        'text' => '[body] Brought to you by [phpcode_1]',
         'make_link' => 0,
         'path' => '',
         'absolute' => 0,
