@@ -34,7 +34,7 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
  * @todo make a function to allow you to patch send tweets based on list of nodes, with settings (like default msg);
  */
 function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true){
-  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE)){
+  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE) AND $tweet == true){
     return;
   };
 
@@ -97,7 +97,7 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
 
   while($node = db_fetch_object($rows)){
     $replacements = array(
-      '!title' => $node->title,
+      '!title' => trim($node->title),
       '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
       '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
       '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
@@ -112,6 +112,24 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
     }
 
     $status = strtr($twitter_interval_status, $replacements);
+    $status = trim($status);
+
+    //check if status is more than target len and trim title to fit in status
+    $target_len = 140;
+    if(strlen($status) > $target_len){
+      $key = "!title";
+      $status_len = strlen($status);
+      $title_len = strlen($replacements['!title']);
+
+      $new_title_trim = ($status_len - $target_len) + 3;
+
+      $title_len_new = $title_len - $new_title_trim;
+
+      $replacements['!title'] = substr($replacements['!title'],0,$title_len_new) . "...";
+
+      $status = strtr($twitter_interval_status, $replacements);
+      $status = trim($status);
+    }
 
     if($tweet){
       mc_tweet($twitter_account,$status);
