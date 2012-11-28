@@ -564,7 +564,7 @@ function ft_group_strongarm() {
     ),
     'buttons' => array(
       'region' => 'main',
-      'weight' => '14',
+      'weight' => '15',
       'has_required' => FALSE,
       'title' => NULL,
       'hidden' => 0,
@@ -591,7 +591,7 @@ function ft_group_strongarm() {
     ),
     'themes' => array(
       'region' => 'main',
-      'weight' => '12',
+      'weight' => '13',
       'has_required' => FALSE,
       'title' => 'Theme configuration',
       'collapsed' => 0,
@@ -641,14 +641,14 @@ function ft_group_strongarm() {
     ),
     'field_header_color' => array(
       'region' => 'main',
-      'weight' => '6',
+      'weight' => '7',
       'has_required' => FALSE,
       'title' => 'Header Color',
       'hidden' => 0,
     ),
     'field_header_title_color' => array(
       'region' => 'main',
-      'weight' => '7',
+      'weight' => '8',
       'has_required' => TRUE,
       'title' => 'Header Title Color',
     ),
@@ -661,21 +661,21 @@ function ft_group_strongarm() {
     ),
     'field_list_image' => array(
       'region' => 'main',
-      'weight' => '9',
+      'weight' => '10',
       'has_required' => FALSE,
       'title' => 'Images',
       'hidden' => 0,
     ),
     'field_group_featured_items' => array(
       'region' => 'main',
-      'weight' => '8',
+      'weight' => '9',
       'has_required' => FALSE,
       'title' => 'Featured Items',
       'hidden' => 0,
     ),
     'xmlsitemap' => array(
       'region' => 'main',
-      'weight' => '11',
+      'weight' => '12',
       'has_required' => FALSE,
       'title' => 'XML sitemap',
       'collapsed' => 1,
@@ -683,7 +683,7 @@ function ft_group_strongarm() {
     ),
     'nodewords' => array(
       'region' => 'main',
-      'weight' => '10',
+      'weight' => '11',
       'has_required' => FALSE,
       'title' => 'Meta tags',
       'collapsed' => 1,
@@ -691,10 +691,17 @@ function ft_group_strongarm() {
     ),
     'print' => array(
       'region' => 'main',
-      'weight' => '13',
+      'weight' => '14',
       'has_required' => FALSE,
       'title' => 'Printer, email and PDF versions',
       'collapsed' => 1,
+      'hidden' => 0,
+    ),
+    'field_twitter_username' => array(
+      'region' => 'main',
+      'weight' => '6',
+      'has_required' => FALSE,
+      'title' => 'Twitter Username',
       'hidden' => 0,
     ),
   );
