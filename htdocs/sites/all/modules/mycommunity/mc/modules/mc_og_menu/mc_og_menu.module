@@ -27,8 +27,8 @@ function _mc_og_menu_items(){
     ),
     'events' => array(
       'title' => "Events",
-      'view' => MC_OG_MENU_DEFAULT,
-      'display_id' => 'page_4',
+      'view' => "mc_events_sections",
+      'display_id' => 'block_4',
       'link' => 'node/!nid/events',
       'is_menu_item' => TRUE,
       'show_block' => TRUE,

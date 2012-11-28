@@ -37,9 +37,9 @@ function ft_group_ui_context_default_contexts() {
           'region' => 'left',
           'weight' => 0,
         ),
-        'views-og_homepage-block_5' => array(
+        'views-mc_events_sections-block_2' => array(
           'module' => 'views',
-          'delta' => 'og_homepage-block_5',
+          'delta' => 'mc_events_sections-block_2',
           'region' => 'below_content',
           'weight' => 0,
         ),
