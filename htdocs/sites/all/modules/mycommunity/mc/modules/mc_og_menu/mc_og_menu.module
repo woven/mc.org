@@ -6,7 +6,8 @@ function _mc_og_menu_items(){
   return array(
     'home' => array(
       'title' => 'Home',
-      'link' => 'node/!nid'
+      'link' => 'node/!nid',
+      'show_block' => TRUE
     ),
     'about' => array(
       'title' => 'About',

@@ -17,7 +17,7 @@ function mc_site_init(){
   $conf['hide-search-bar'] = true;
   //$conf['hide-og-menu'] = true;
   $conf['og-menu-allowed'] = array(
-    'events','news'
+    'home','events','news'
   );
   $conf['menu-home-icon'] = false;
   $conf['menu-help-icon'] = false;
