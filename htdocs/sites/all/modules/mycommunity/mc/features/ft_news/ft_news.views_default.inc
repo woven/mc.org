@@ -1132,6 +1132,19 @@ print theme("mc_post_date",$data->node_created);
     ),
   ));
   $handler->override_option('title', 'News');
+  $handler->override_option('footer', '<?php 
+$view = views_get_current_view();
+$og_nid = $view->args[0];
+$news_link = url("node/$og_nid/news");
+?>
+<div class="see-all">
+   <a href="<?php echo $news_link ?>">
+     <span>More</span>
+     <span class="ico-small ico-see-all"></span>
+  </a>
+</div>');
+  $handler->override_option('footer_format', '3');
+  $handler->override_option('footer_empty', 0);
   $handler->override_option('items_per_page', 4);
   $handler->override_option('style_options', array(
     'grouping' => '',
