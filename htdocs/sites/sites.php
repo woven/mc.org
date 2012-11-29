@@ -71,3 +71,14 @@ $sites += array(
    //production urls
   'ghp.mycommunity.org' => 'ghp.mycommunity.org'
 );
+
+//pw - projectwarehouse.mc.org
+$sites += array(
+  //local/dev and staging
+  'pw.staging.mycommunity.org' => 'pw.mycommunity.org',
+  'pw.dev.mycommunity.org' => 'pw.mycommunity.org',
+  'local.pw.mycommunity.org' => 'pw.mycommunity.org',
+
+   //production urls
+  'pw.mycommunity.org' => 'pw.mycommunity.org'
+);
