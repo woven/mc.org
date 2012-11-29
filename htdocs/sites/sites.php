@@ -60,3 +60,14 @@ $sites += array(
   'mt.dev.mycommunity.org' => 'miamitech.org',
   'local.mt.mycommunity.org' => 'miamitech.org'
 );
+
+//ghp - globalhealingproject.mycommunity.org
+$sites += array(
+  //local/dev and staging
+  'ghp.staging.mycommunity.org' => 'ghp.mycommunity.org',
+  'ghp.dev.mycommunity.org' => 'ghp.mycommunity.org',
+  'local.ghp.mycommunity.org' => 'ghp.mycommunity.org',
+
+   //production urls
+  'ghp.mycommunity.org' => 'ghp.mycommunity.org'
+);
