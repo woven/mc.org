@@ -33,9 +33,9 @@ function mc_tweet($account,$status,$log = true){
   catch (TwitterException $e) {
     //drupal_set_message(t('An error occurred when posting to twitter: %code %error',
     //  array('%code' => $e->code, '%error' => $e->error)), 'warning');
-
-    $msg = t('Status: !status , Code: !code, Error: !error',array("!status" => $status,"!code",$e->code,'!error' => $e->error));
-    watchdog('mc_twitter',$msg,array(),WATCHDOG_ERROR);
+    watchdog('twitter', '!message', array('!message' => $e->__toString()), WATCHDOG_ERROR);
+    //$msg = t('Status: !status , Code: !code, Error: !error',array("!status" => $status,"!code",$e->getCode(),'!error' => $e->getMessage()));
+    //watchdog('mc_twitter',$msg,array(),WATCHDOG_ERROR);
 
     return false;
   }

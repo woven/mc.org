@@ -620,7 +620,7 @@ function _mc_api_get_formatted_time($time, $printAMPM = TRUE){
       $timeFormat = "g";
     }
   }
-  return date($timeFormat, $time);
+  return format_date($time,"custom",$timeFormat);
 }
 
 
