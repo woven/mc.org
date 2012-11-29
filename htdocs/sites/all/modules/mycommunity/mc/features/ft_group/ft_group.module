@@ -60,6 +60,10 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
       if($form['field_group_featured_items']){
         $form['field_group_featured_items']['#access'] = FALSE;
       }
+
+      if($form['field_list_image']){
+        $form['field_list_image']['#access'] = FALSE;
+      }
     }
   }
 

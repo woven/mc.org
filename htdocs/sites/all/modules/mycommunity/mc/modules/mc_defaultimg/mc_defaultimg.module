@@ -63,7 +63,7 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
 
   $node = $element['#node'];
 
-  //if($node->nid == 1061){
+  //if($node->nid == 1073){ //debug specific node
 
     $newfid = null;
 
@@ -144,7 +144,6 @@ function theme_imagecache_mc_defaultimg($element,$imagecache_formatter = 'defaul
   if(function_exists($calllback)){
      return $calllback($element);
   }
-
 
   //}//end debug
 }
