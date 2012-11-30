@@ -69,7 +69,8 @@ $sites += array(
   'local.ghp.mycommunity.org' => 'ghp.mycommunity.org',
 
    //production urls
-  'ghp.mycommunity.org' => 'ghp.mycommunity.org'
+  'ghp.mycommunity.org' => 'ghp.mycommunity.org',
+  'globalhealingproject.mycommunity.org' => 'ghp.mycommunity.org'
 );
 
 //pw - projectwarehouse.mc.org
@@ -80,5 +81,6 @@ $sites += array(
   'local.pw.mycommunity.org' => 'pw.mycommunity.org',
 
    //production urls
-  'pw.mycommunity.org' => 'pw.mycommunity.org'
+  'pw.mycommunity.org' => 'pw.mycommunity.org',
+  'projectwarehouse.mycommunity.org' => 'pw.mycommunity.org'
 );
