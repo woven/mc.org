@@ -3197,6 +3197,22 @@ body.page-user .view-my-groups ul {
   }
 }
 
+/**
+  this was created to in response to this case https://app.asana.com/0/591469761504/2624091557909
+   since background was not looking good with the event border touchs left and right side.
+*/
+
+#block-views-mc_events_sections-block_3, //block_3 for og events landing page
+#block-views-mc_events_sections-block_4{ //block_4 for og events page
+  .block-content{
+    padding: 0px !important; //overide the default #page .block-content padding
+    .event{
+      padding: 10px 10px 0 10px !important; //add back the padding to the event section
+      margin-bottom: 0px !important;
+    }
+  }
+}
+
 .view-mc-events-by-dates,.event-section{
     .section-section{
       .block-title{
@@ -3236,6 +3252,14 @@ body.page-user .view-my-groups ul {
     .hash {
       display:none;
     }
+
+    .duplicates{
+      background-color: #f4f4f4;
+      .event.first{
+        background-color: #ffffff;
+      }
+    }
+
     .event-staring {
       float:right;
       height:80px;
@@ -3303,6 +3327,7 @@ body.page-user .view-my-groups ul {
   color:#cccccc;
 }
 .show-more-events {
+  margin-bottom: 5px;
   a {
     font-size:11px;
     text-decoration:none;
