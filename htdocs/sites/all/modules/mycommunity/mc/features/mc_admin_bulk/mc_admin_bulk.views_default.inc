@@ -1056,27 +1056,20 @@ support@woven.org
       'relationship' => 'none',
     ),
   ));
-  $handler->override_option('filters', array(
-    'uid' => array(
-      'operator' => 'not in',
-      'value' => array(
-        0 => 0,
-        1 => '1',
-      ),
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'id' => 'uid',
+  $handler->override_option('sorts', array(
+    'access' => array(
+      'order' => 'DESC',
+      'granularity' => 'second',
+      'id' => 'access',
       'table' => 'users',
-      'field' => 'uid',
+      'field' => 'access',
       'override' => array(
         'button' => 'Override',
       ),
       'relationship' => 'none',
     ),
+  ));
+  $handler->override_option('filters', array(
     'status' => array(
       'operator' => '=',
       'value' => 'All',
@@ -1097,6 +1090,79 @@ support@woven.org
       ),
       'relationship' => 'none',
     ),
+    'uid' => array(
+      'operator' => 'not in',
+      'value' => array(
+        0 => 0,
+      ),
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'uid',
+      'table' => 'users',
+      'field' => 'uid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'name' => array(
+      'operator' => '!=',
+      'value' => 'admin',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+        'optional' => FALSE,
+      ),
+      'case' => 0,
+      'id' => 'name',
+      'table' => 'users',
+      'field' => 'name',
+      'relationship' => 'none',
+    ),
+    'name_1' => array(
+      'operator' => '!=',
+      'value' => 'manager',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+        'optional' => FALSE,
+      ),
+      'case' => 0,
+      'id' => 'name_1',
+      'table' => 'users',
+      'field' => 'name',
+      'relationship' => 'none',
+    ),
+    'uid_1' => array(
+      'operator' => 'in',
+      'value' => '',
+      'group' => '0',
+      'exposed' => TRUE,
+      'expose' => array(
+        'use_operator' => 0,
+        'operator' => 'uid_1_op',
+        'identifier' => 'uid',
+        'label' => 'User: Name',
+        'optional' => 1,
+        'remember' => 0,
+        'reduce' => 0,
+      ),
+      'id' => 'uid_1',
+      'table' => 'users',
+      'field' => 'uid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('access', array(
     'type' => 'perm',
@@ -1106,6 +1172,13 @@ support@woven.org
     'type' => 'none',
   ));
   $handler->override_option('title', 'User operations');
+  $handler->override_option('header', '<a href="/admin/user/user/create">Add new user</a>');
+  $handler->override_option('header_format', '1');
+  $handler->override_option('header_empty', 1);
+  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here.</div>');
+  $handler->override_option('empty_format', '1');
+  $handler->override_option('items_per_page', 50);
+  $handler->override_option('use_pager', '1');
   $handler->override_option('style_plugin', 'bulk');
   $handler->override_option('style_options', array(
     'grouping' => '',

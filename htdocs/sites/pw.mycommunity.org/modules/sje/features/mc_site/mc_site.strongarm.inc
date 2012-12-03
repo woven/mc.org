@@ -42,9 +42,7 @@ function mc_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_footer';
-  $strongarm->value = '<p>globalhealingproject.mycommunity.org</p>
-
-<p>Powered by <a href="http://www.mycommunity.org">MyCommunity.org</a></p>';
+  $strongarm->value = '<p>Powered by <a href="http://www.mycommunity.org">MyCommunity.org</a></p>';
   $export['site_footer'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -72,7 +70,7 @@ function mc_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_name';
-  $strongarm->value = 'globalhealingproject.mycommunity.org ';
+  $strongarm->value = 'Project Warehouse';
   $export['site_name'] = $strongarm;
 
   $strongarm = new stdClass;
