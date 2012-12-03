@@ -22,12 +22,12 @@ nbproject/
 htdocs/nbproject/
 
 #drupal specific files
-#TO REVIEW: exclude all files?
 htdocs/sites/default/files/
 htdocs/sites/miamitech.org/files/
 htdocs/sites/sje.mycommunity.org/files/
 htdocs/backup/
 *.thumb.jpg
+htdocs/sites/*/files/
 
 #temp files
 *~
