@@ -9,6 +9,13 @@ function ft_news_ds_default_settings() {
       'nnews' => array(
         'full' => array(
           'fields' => array(
+            'nd_vud' => array(
+              'region' => 'middle',
+              'weight' => '-19',
+              'format' => '_nd_vud_widget',
+              'css-class' => '',
+              'labelformat' => 'hidden',
+            ),
             'body' => array(
               'region' => 'middle',
               'weight' => '-98',

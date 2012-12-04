@@ -25,8 +25,69 @@ function ft_news_views_default_views() {
       'field' => 'group_nid',
       'relationship' => 'none',
     ),
+    'votingapi_vote' => array(
+      'label' => 'Votes',
+      'required' => 0,
+      'votingapi' => array(
+        'value_type' => 'points',
+        'tag' => 'vote_updown',
+      ),
+      'current_user' => 0,
+      'id' => 'votingapi_vote',
+      'table' => 'node',
+      'field' => 'votingapi_vote',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('fields', array(
+    'value' => array(
+      'label' => 'Value',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'set_precision' => 0,
+      'precision' => '0',
+      'decimal' => '.',
+      'separator' => ',',
+      'format_plural' => 0,
+      'format_plural_singular' => '1',
+      'format_plural_plural' => '@count',
+      'prefix' => '',
+      'suffix' => '',
+      'appearance' => 'rate_views_widget',
+      'exclude' => 0,
+      'id' => 'value',
+      'table' => 'votingapi_vote',
+      'field' => 'value',
+      'relationship' => 'votingapi_vote',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
     'phpcode_1' => array(
       'label' => 'Site Name: Linked',
       'alter' => array(
@@ -682,7 +743,7 @@ print theme("mc_post_date",$data->node_created);
     ),
     'row' => array(
       'element_type' => 'div',
-      'class' => 'event {itemscope&itemtype=http://schema.org/Event}',
+      'class' => 'row',
       'last_every_nth' => '0',
       'first_class' => 'first',
       'last_class' => 'last',
@@ -692,6 +753,12 @@ print theme("mc_post_date",$data->node_created);
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
+      'value' => array(
+        'element_type' => 'div',
+        'class' => 'row-tools-sidebar',
+        'label_element_type' => '',
+        'label_class' => '',
+      ),
       'field_list_image_fid' => array(
         'element_type' => 'div',
         'class' => 'field-view-image',
@@ -1167,6 +1234,37 @@ $news_link = url("node/$og_nid/news");
       'last_class' => 'last',
       'striping_classes' => 'odd even',
     ),
+  ));
+  $handler->override_option('row_options', array(
+    'semantic_html' => array(
+      'field_list_image_fid' => array(
+        'element_type' => 'div',
+        'class' => 'field-view-image',
+      ),
+      'title_1' => array(
+        'element_type' => 'div',
+        'class' => 'field-author to-right',
+        'label_element_type' => '',
+        'label_class' => '',
+      ),
+      'title' => array(
+        'element_type' => 'h4',
+        'class' => 'field-title to-right',
+        'label_element_type' => '',
+        'label_class' => '',
+      ),
+      'phpcode' => array(
+        'element_type' => 'p',
+        'class' => 'location-link to-right',
+        'label_element_type' => '',
+        'label_class' => '',
+      ),
+      'body' => array(
+        'element_type' => 'p',
+        'class' => 'description to-right {itemprop=description}',
+      ),
+    ),
+    'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);

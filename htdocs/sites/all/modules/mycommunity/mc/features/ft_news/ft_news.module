@@ -15,6 +15,30 @@ function ft_news_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
   }
 }
 
+function ft_news_preprocess_rate_widget(&$variables) {
+  $buttons = $variables['links'];
+  $rate = $variables['results']['rating'];
+
+  foreach($buttons as $key => &$btn){
+    $btn['active_class'] = $btn['value'] == $rate ? " btn-active" : "";
+    $btn[''] = "";
+  }
+
+  $variables['buttons_updown'] = array(
+    0 => theme('rate_button', $buttons[0]['text'], $buttons[0]['href'], 'rate-btn rate-up' . $buttons[0]['active_class']),
+    1 => theme('rate_button', $buttons[1]['text'], $buttons[1]['href'], 'rate-btn rate-down' . $buttons[1]['active_class'])
+  );
+
+}
+
+function ft_news_rate_vote_alter($vote, $context) {
+  if($_GET['current_rating'] == $vote['value']){
+    $vote['value'] = 0;
+    dsm("test",$_GET['current_rating']);
+  }
+  //dsm($vote,'vote');
+}
+
 function ft_news_block($op = 'list', $delta = 0, $edit = array()) {
   switch($op){
     case 'list':
