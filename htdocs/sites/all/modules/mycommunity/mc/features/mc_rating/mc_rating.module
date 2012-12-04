@@ -6,7 +6,39 @@
 
 include_once 'mc_rating.features.inc';
 
-function mc_rating_preprocess_rate_widget(&$variables) {
+function mc_rating_theme(){
+  return array(
+    'rate_template_mc_up_down' => array(
+      'arguments' => array('links' => NULL, 'results' => NULL, 'mode' => NULL, 'just_voted' => FALSE, 'content_type' => NULL, 'content_id' => NULL),
+      'template' => 'mc-up-down',
+      'path' => drupal_get_path('module', 'mc_rating') . '/widgets/mc-up-down',
+    ),
+  );
+}
+
+/**
+ * Implements hook_rate_templates().
+*/
+function mc_rating_rate_templates() {
+  $templates = array();
+  $templates['mc_up_down'] = new stdClass();
+  $templates['mc_up_down']->value_type = 'points';
+  $templates['mc_up_down']->options = array(
+    array(1, 'up'),
+    array(0, 'reset'),
+    array(-1, 'down'),
+  );
+  $templates['mc_up_down']->theme = 'rate_template_mc_up_down';
+  $templates['mc_up_down']->css = drupal_get_path('module', 'mc_rating') . '/widgets/mc-up-down/mc-up-down.css';
+  $templates['mc_up_down']->js = drupal_get_path('module', 'mc_rating') . '/widgets/mc-up-down/mc-up-down.js';
+  $templates['mc_up_down']->customizable = FALSE;
+  $templates['mc_up_down']->translate = TRUE;
+  $templates['mc_up_down']->template_title = t('MC: Thumbs up / down');
+
+  return $templates;
+}
+
+function mc_rating_preprocess_rate_template_mc_up_down(&$variables) {
   $buttons = $variables['links'];
   $rate = $variables['results']['rating'];
 
