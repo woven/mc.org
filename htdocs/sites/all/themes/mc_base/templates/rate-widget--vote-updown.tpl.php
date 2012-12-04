@@ -17,5 +17,4 @@ if ($info) {
 }
 
 ?>
-
-<?php //print "Rating: " . $results['rating'] ." - " . time(); ?>
+<?php// print "Rating: " . $results['rating'] ." - " . time(); ?>

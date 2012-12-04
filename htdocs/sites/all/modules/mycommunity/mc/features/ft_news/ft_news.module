@@ -20,23 +20,32 @@ function ft_news_preprocess_rate_widget(&$variables) {
   $rate = $variables['results']['rating'];
 
   foreach($buttons as $key => &$btn){
-    $btn['active_class'] = $btn['value'] == $rate ? " btn-active" : "";
-    $btn[''] = "";
+    $btn['active'] = $btn['value'] == $rate ? 1 : 0;
+    $btn['class'] = $btn['value'] == $rate ? " btn-active" : "";
+
+    //if $key == 1 and active (no rating, then hide the button)
+    if($btn['active']){
+      //means no values exists.. hide this button
+      $btn['class'] .= " btn-hide";
+    }
+  }
+
+  //change icon or rest depends on the current value btn[1] = reset button
+  switch($rate){
+    case '-1':
+      $buttons[1]['class'] = " rate-down btn-active";
+    break;
+    case '1':
+      $buttons[1]['class'] = " rate-up btn-active";
+    break;
   }
 
   $variables['buttons_updown'] = array(
-    0 => theme('rate_button', $buttons[0]['text'], $buttons[0]['href'], 'rate-btn rate-up' . $buttons[0]['active_class']),
-    1 => theme('rate_button', $buttons[1]['text'], $buttons[1]['href'], 'rate-btn rate-down' . $buttons[1]['active_class'])
+    '0' => theme('rate_button', $buttons[0]['text'], $buttons[0]['href'], 'rate-btn rate-up' . $buttons[0]['class']),
+    '1' => theme('rate_button', $buttons[1]['text'], $buttons[1]['href'], 'rate-btn' . $buttons[1]['class']),
+    '2' => theme('rate_button', $buttons[2]['text'], $buttons[2]['href'], 'rate-btn rate-down' . $buttons[2]['class'])
   );
 
-}
-
-function ft_news_rate_vote_alter($vote, $context) {
-  if($_GET['current_rating'] == $vote['value']){
-    $vote['value'] = 0;
-    dsm("test",$_GET['current_rating']);
-  }
-  //dsm($vote,'vote');
 }
 
 function ft_news_block($op = 'list', $delta = 0, $edit = array()) {
