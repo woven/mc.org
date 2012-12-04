@@ -15,3 +15,22 @@ Drupal.behaviors.rate_mc_up_down = function (context) {
     $(this).removeClass('btn-active');
   });
 };
+
+if(jq180){
+  (function($){
+    Drupal.behaviors.rate_mc_up_down_anonymous = function (context) {
+      $("span.rate-button",context).qtip({
+        content: {text: Drupal.settings.mc_event_section.msg_anonymous},
+        position: {my: "top center",at: "bottom center",
+          adjust:{x:-2,y:0},
+          viewport: $(window)
+        },
+        show: {solo: true},
+        hide: {delay: 1000,fixed:true},
+        style: {
+          classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+        }
+      });
+    }; //end of staringtooltips
+  })(jq180);
+}
