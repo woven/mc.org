@@ -9,7 +9,6 @@ include_once 'mc_event_feed.features.inc';
 function mc_event_feed_late_form_alter(&$form, &$form_state, $form_id){
   global $user;
   if(!is_ct_form($form,"event_feed")){
-    return;
   }
 
   if($user->uid > 1){
@@ -39,6 +38,12 @@ function _mc_event_feed_form_submit($form, &$form_state){
     }
   }
 
+}
+
+function mc_event_feed_feeds_after_parse(FeedsImporter $importer, FeedsSource $source) {
+  // For example, set title of imported content:
+  //dsm($source->batch);
+  //$source->batch->title = 'Import number '. my_module_import_id();
 }
 
 function mc_event_feed_form_alter(&$form, &$form_state, $form_id){
