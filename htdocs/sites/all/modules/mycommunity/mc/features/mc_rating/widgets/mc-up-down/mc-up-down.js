@@ -16,13 +16,56 @@ Drupal.behaviors.rate_mc_up_down = function (context) {
   });
 };
 
+
+
 if(jq180){
   (function($){
+    Drupal.behaviors.rate_mc_up_down_help = function (context) {
+      $("a.rate-button.rate-up",context).not(".rate-reset").qtip({
+        content: {text: "Promote this"},
+        position: {my: "bottom center",at: "top center",
+          adjust:{x:0,y:0},
+          viewport: $(window)
+        },
+        show: {solo: true},
+        hide: {delay: 400,fixed:true,inactive:1000},
+        style: {
+          classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+        }
+      });
+
+      $("a.rate-button.rate-down",context).not(".rate-reset").qtip({
+        content: {text: "Demote this"},
+        position: {my: "top center",at: "bottom center",
+          adjust:{x:0,y:0},
+          viewport: $(window)
+        },
+        show: {solo: true},
+        hide: {delay: 400,fixed:true,inactive:1000},
+        style: {
+          classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+        }
+      });
+    };
+
     Drupal.behaviors.rate_mc_up_down_anonymous = function (context) {
-      $("span.rate-button",context).qtip({
+      $("span.rate-button.rate-up",context).qtip({
+        content: {text: Drupal.settings.mc_event_section.msg_anonymous},
+        position: {my: "bottom center",at: "top center",
+          adjust:{x:0,y:0},
+          viewport: $(window)
+        },
+        show: {solo: true},
+        hide: {delay: 1000,fixed:true},
+        style: {
+          classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+        }
+      });
+
+      $("span.rate-button.rate-down",context).qtip({
         content: {text: Drupal.settings.mc_event_section.msg_anonymous},
         position: {my: "top center",at: "bottom center",
-          adjust:{x:-2,y:0},
+          adjust:{x:0,y:0},
           viewport: $(window)
         },
         show: {solo: true},

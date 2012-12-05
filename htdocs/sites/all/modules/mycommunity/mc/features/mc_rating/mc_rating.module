@@ -56,10 +56,10 @@ function mc_rating_preprocess_rate_template_mc_up_down(&$variables) {
   //change icon or rest depends on the current value btn[1] = reset button
   switch($rate){
     case '-1':
-      $buttons[1]['class'] = " rate-down btn-active";
+      $buttons[1]['class'] = " rate-reset rate-down btn-active";
       break;
     case '1':
-      $buttons[1]['class'] = " rate-up btn-active";
+      $buttons[1]['class'] = " rate-reset rate-up btn-active";
       break;
   }
 
