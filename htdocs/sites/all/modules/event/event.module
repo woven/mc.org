@@ -1995,7 +1995,7 @@ function event_block($op = 'list', $delta = 0) {
             $block['content'] = $result['content'];
             return $block;
           case 'events-share':
-            $block['subject'] = "";
+            $block['subject'] = "Subscribe";
             $block['content'] = _block_content_share_subscribe();
             return $block;
           break;
