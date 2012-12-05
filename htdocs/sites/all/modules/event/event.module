@@ -2018,7 +2018,7 @@ function _block_content_share_subscribe(){
     $twitter = variable_get("MC_TWITTER_USER","");
     if(!empty($twitter)){
       //$links[] = url("https://twitter.com/MiamiTechOrg");
-      $links[] = l("Follow @$twitter","https://twitter.com/$twitter",array(
+      $links[] = l("Follow @$twitter on Twitter","https://twitter.com/$twitter",array(
         "attributes" => array(
           "class" => "twitter-follow-button",
           "data-show-count" => "false"

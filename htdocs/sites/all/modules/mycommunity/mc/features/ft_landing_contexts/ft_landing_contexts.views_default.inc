@@ -257,6 +257,9 @@ function ft_landing_contexts_views_default_views() {
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
         2 => 0,
+        4 => 0,
+        8 => 0,
+        9 => 0,
       ),
       'relationship' => 'none',
       'default_options_div_prefix' => '',
@@ -265,12 +268,12 @@ function ft_landing_contexts_views_default_views() {
       'default_taxonomy_tid_limit' => 0,
       'default_taxonomy_tid_vids' => array(
         1 => 0,
-        2 => 0,
-        3 => 0,
+        4 => 0,
       ),
       'default_argument_user' => 0,
       'default_argument_fixed' => '',
-      'default_argument_php' => 'if(arg(0)==\'node\'){
+      'default_argument_php' => 'global $user;
+if(arg(0)==\'node\' AND $user->uid == 0){
   $nid = arg(1);
   $node = node_load($nid);
   if(!empty($node->field_block_body[\'0\'][\'value\']) || !empty($node->field_block_title[\'0\'][\'value\'])){
@@ -287,10 +290,12 @@ function ft_landing_contexts_views_default_views() {
         'nnews' => 0,
         'webform' => 0,
         'npage' => 0,
+        'page' => 0,
         'place' => 0,
-        'taxonomy_feature' => 0,
-        'taxonomy_topic' => 0,
         'video' => 0,
+        'company' => 0,
+        'event_feed' => 0,
+        'news_feed' => 0,
         'gallery' => 0,
         'gallery_image' => 0,
         'forum' => 0,
@@ -299,8 +304,7 @@ function ft_landing_contexts_views_default_views() {
       'validate_argument_nid_type' => 'nid',
       'validate_argument_vocabulary' => array(
         1 => 0,
-        2 => 0,
-        3 => 0,
+        4 => 0,
       ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
@@ -308,8 +312,18 @@ function ft_landing_contexts_views_default_views() {
       'validate_argument_is_member' => '0',
       'validate_argument_group_node_type' => array(
         'group' => 0,
+        'company' => 0,
       ),
       'validate_argument_php' => '',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'validate_argument_node_flag_name' => '*relationship*',
+      'validate_argument_node_flag_test' => 'flaggable',
+      'validate_argument_node_flag_id_type' => 'id',
+      'validate_argument_user_flag_name' => '*relationship*',
+      'validate_argument_user_flag_test' => 'flaggable',
+      'validate_argument_user_flag_id_type' => 'id',
     ),
   ));
   $handler->override_option('access', array(

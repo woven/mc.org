@@ -28,6 +28,7 @@ function ft_event_ui_flag_default_flags() {
     'global' => '0',
     'types' => array(
       '0' => 'event',
+      '1' => 'nnews',
     ),
     'flag_short' => 'Save to my events',
     'flag_long' => '',
