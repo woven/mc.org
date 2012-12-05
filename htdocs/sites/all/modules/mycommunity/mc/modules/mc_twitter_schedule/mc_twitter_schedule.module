@@ -19,7 +19,7 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
 
   $items['tweet_events_between'] = array(
     'description' => 'Send event tweets for events that is going to start in 2 and 2half hour from now',
-    'rule' => '0,15,30,45 * * * *', //run every 15mins
+    'rule' => '*/15 * * * *', //run every 15mins
   );
 /*
   $items['tweet_events_count_between'] = array(
