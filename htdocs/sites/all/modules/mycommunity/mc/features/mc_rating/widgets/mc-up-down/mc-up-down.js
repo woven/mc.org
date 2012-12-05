@@ -23,7 +23,7 @@ if(jq180){
     Drupal.behaviors.rate_mc_up_down_help = function (context) {
       $("a.rate-button.rate-up",context).not(".rate-reset").qtip({
         content: {text: "Promote this"},
-        position: {my: "bottom center",at: "top center",
+        position: {my: "right center",at: "left center",
           adjust:{x:0,y:0},
           viewport: $(window)
         },
