@@ -41,8 +41,57 @@ function ft_news_views_default_views() {
       ),
       'relationship' => 'none',
     ),
+    'flag_content_rel' => array(
+      'label' => 'flag',
+      'required' => 0,
+      'flag' => 'events_bookmarks',
+      'user_scope' => 'current',
+      'id' => 'flag_content_rel',
+      'table' => 'node',
+      'field' => 'flag_content_rel',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('fields', array(
+    'ops' => array(
+      'label' => 'Flag link',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'link_type' => 'toggle',
+      'exclude' => 1,
+      'id' => 'ops',
+      'table' => 'flag_content',
+      'field' => 'ops',
+      'relationship' => 'flag_content_rel',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
     'value' => array(
       'label' => 'Value',
       'alter' => array(
@@ -79,7 +128,7 @@ function ft_news_views_default_views() {
       'prefix' => '',
       'suffix' => '',
       'appearance' => 'rate_views_widget',
-      'exclude' => 0,
+      'exclude' => 1,
       'id' => 'value',
       'table' => 'votingapi_vote',
       'field' => 'value',
@@ -87,6 +136,40 @@ function ft_news_views_default_views() {
       'override' => array(
         'button' => 'Override',
       ),
+    ),
+    'nothing_1' => array(
+      'label' => 'row-tools-sidebar',
+      'alter' => array(
+        'text' => '[ops] [value]',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 0,
+      'id' => 'nothing_1',
+      'table' => 'views',
+      'field' => 'nothing',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
     ),
     'phpcode_1' => array(
       'label' => 'Site Name: Linked',
@@ -753,7 +836,7 @@ print theme("mc_post_date",$data->node_created);
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
-      'value' => array(
+      'nothing_1' => array(
         'element_type' => 'div',
         'class' => 'row-tools-sidebar',
         'label_element_type' => '',
