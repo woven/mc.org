@@ -46,9 +46,4 @@ function ft_landing_contexts_context_load_alter(&$context){
   if(variable_get("hide-og-menu",false) && isset($context->reactions['block']['blocks']['mc_og_menu-0'])){
     unset($context->reactions['block']['blocks']['mc_og_menu-0']);
   }
-
-  /*
-  if($user->uid > 0 && isset($context->reactions['block']['blocks']['views-help_block-block_1'])){
-    unset($context->reactions['block']['blocks']['views-help_block-block_1']);
-  }*/
 }
