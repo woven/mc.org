@@ -2017,6 +2017,8 @@ function _block_content_share_subscribe(){
     //twitter link per site
     $twitter = variable_get("MC_TWITTER_USER","");
     if(!empty($twitter)){
+      $twitter_url = url("http://twitter.com/".$twitter,array("absolute" => true));
+      /*
       //$links[] = url("https://twitter.com/MiamiTechOrg");
       $links[] = l("Follow @$twitter on Twitter","https://twitter.com/$twitter",array(
         "attributes" => array(
@@ -2025,10 +2027,12 @@ function _block_content_share_subscribe(){
         )
       ));
       $links[] = '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+      */
+      $links[] = l('<span class="twitter-ico ico-inline"></span> Follow @'.$twitter.' on Twitter',"$twitter_url", array("html" => true,'attributes' => array('target' => '_blank')));
     }
 
     //ical link
-    $links[] = webcal_l('<span class="ical-group-ico inline"></span> Subscribe to all upcoming events (iCal)',"events/ical", array("html" => true));
+    $links[] = webcal_l('<span class="ical-group-ico inline"></span> Subscribe to all upcoming events (iCal)',"events/ical", array("html" => true,'attributes' => array('target' => '_blank')));
 
     return theme("item_list",$links);
 }
