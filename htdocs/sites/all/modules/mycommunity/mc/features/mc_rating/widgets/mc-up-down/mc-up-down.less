@@ -10,19 +10,24 @@
         opacity: 0.5;
         cursor: pointer;
       }
-      .rate-button:hover,
-      .rate-button:active,
-      .rate-button.btn-active{
-        opacity: 1;
+      .rate-up.rate-button:hover,
+      .rate-up.rate-button:active,
+      .rate-up.rate-button.btn-active{
+        background-image: url("icons/ico_arrow_up_on.png");
+      }
+      .rate-down.rate-button:hover,
+      .rate-down.rate-button:active,
+      .rate-down.rate-button.btn-active{
+        background-image: url("icons/ico_arrow_down_on.png");
       }
       .rate-button.btn-hide{
         display: none;
       }
       .rate-button.rate-up{
-          background-image: url("icons/ico-thumb-up.png");
+          background-image: url("icons/ico_arrow_up_off_2.png");
       }
       .rate-button.rate-down{
-          background-image: url("icons/ico-thumb-down.png");
+          background-image: url("icons/ico_arrow_down_off_2.png");
       }
     }
   }

@@ -33,9 +33,33 @@ if(jq180){
           classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
         }
       });
+      $("a.rate-button.rate-up.rate-reset",context).qtip({
+        content: {text: "Undo this"},
+        position: {my: "right center",at: "left center",
+          adjust:{x:0,y:0},
+          viewport: $(window)
+        },
+        show: {solo: true},
+        hide: {delay: 400,fixed:true,inactive:1000},
+        style: {
+          classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+        }
+      });
 
       $("a.rate-button.rate-down",context).not(".rate-reset").qtip({
         content: {text: "Demote this"},
+        position: {my: "top center",at: "bottom center",
+          adjust:{x:0,y:0},
+          viewport: $(window)
+        },
+        show: {solo: true},
+        hide: {delay: 400,fixed:true,inactive:1000},
+        style: {
+          classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+        }
+      });
+      $("a.rate-button.rate-down.rate-reset",context).qtip({
+        content: {text: "Undo this"},
         position: {my: "top center",at: "bottom center",
           adjust:{x:0,y:0},
           viewport: $(window)
