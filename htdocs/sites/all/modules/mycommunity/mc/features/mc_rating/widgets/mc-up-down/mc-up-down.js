@@ -74,7 +74,7 @@ if(jq180){
 
     Drupal.behaviors.rate_mc_up_down_anonymous = function (context) {
       $("span.rate-button.rate-up",context).qtip({
-        content: {text: Drupal.settings.mc_event_section.msg_anonymous_rating},
+        content: {text: Drupal.settings.mc_event_section.msg_anonymous_stuff},
         position: {my: "right center",at: "left center",
           adjust:{x:0,y:0},
           viewport: $(window)
@@ -87,7 +87,7 @@ if(jq180){
       });
 
       $("span.rate-button.rate-down",context).qtip({
-        content: {text: Drupal.settings.mc_event_section.msg_anonymous_rating},
+        content: {text: Drupal.settings.mc_event_section.msg_anonymous_stuff},
         position: {my: "top center",at: "bottom center",
           adjust:{x:0,y:0},
           viewport: $(window)
