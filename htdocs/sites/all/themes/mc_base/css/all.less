@@ -3241,6 +3241,23 @@ body.page-user .view-my-groups ul {
    since background was not looking good with the event border touchs left and right side.
 */
 
+.view{
+  .row{
+    .row-tools-sidebar{
+      .rate-widget-mc_up_down{
+        display: none;
+      }
+    }
+  }
+  .row:hover{
+    .row-tools-sidebar{
+      .rate-widget-mc_up_down{
+        display: block;
+      }
+    }
+  }
+}
+
 #block-views-mc_events_sections-block_3, //block_3 for og events landing page
 #block-views-mc_events_sections-block_4{ //block_4 for og events page
   .block-content{
@@ -3309,10 +3326,6 @@ body.page-user .view-my-groups ul {
       height:80px;
       padding-top:22px;
     }
-}
-
-.event-section.my-events{
-
 }
 
 #quicktabs_container_mt_userprofile {

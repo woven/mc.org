@@ -43,6 +43,7 @@ function mc_event_section_init(){
     $settings['msg_myevents_empty'] = "<p class='default-message'>Nothing to show here. Star some upcoming events and they'll show here.</p>";
   }else{
     $settings['msg_anonymous'] =  l('Sign in','user', array('attributes' => array('class' => "login","onclick"=>"openColorboxLogin();return false;"))) ." or ". l('join now','user/register',array('attributes' => array('class' => "join","onclick"=>"openColorboxJoin();return false;"))) . " to save events.";
+    $settings['msg_anonymous_rating'] =  l('Sign in','user', array('attributes' => array('class' => "login","onclick"=>"openColorboxLogin();return false;"))) ." or ". l('join now','user/register',array('attributes' => array('class' => "join","onclick"=>"openColorboxJoin();return false;"))) . " to promote or demote stuff.";
   }
 
   drupal_add_js(array('mc_event_section' => $settings), 'setting');
