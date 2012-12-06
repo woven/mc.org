@@ -16,7 +16,8 @@ function mc_rating_strongarm() {
       'tag' => 'vote_updown',
       'title' => 'Node Up/Down',
       'node_types' => array(
-        0 => 'nnews',
+        0 => 'event',
+        1 => 'nnews',
       ),
       'comment_types' => array(),
       'options' => array(

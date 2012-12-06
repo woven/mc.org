@@ -32,7 +32,7 @@ function ft_news_views_default_views() {
         'value_type' => 'points',
         'tag' => 'vote_updown',
       ),
-      'current_user' => 0,
+      'current_user' => TRUE,
       'id' => 'votingapi_vote',
       'table' => 'node',
       'field' => 'votingapi_vote',
@@ -93,7 +93,7 @@ function ft_news_views_default_views() {
       ),
     ),
     'value' => array(
-      'label' => 'Value',
+      'label' => 'Rate up/down',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',

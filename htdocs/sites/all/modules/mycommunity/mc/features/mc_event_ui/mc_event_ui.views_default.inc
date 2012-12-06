@@ -1268,6 +1268,22 @@ return "Week of ". date(\'F jS\',$firstdayts);
       ),
       'relationship' => 'none',
     ),
+    'votingapi_vote' => array(
+      'label' => 'Votes',
+      'required' => 0,
+      'votingapi' => array(
+        'value_type' => 'points',
+        'tag' => 'vote_updown',
+      ),
+      'current_user' => TRUE,
+      'id' => 'votingapi_vote',
+      'table' => 'node',
+      'field' => 'votingapi_vote',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('fields', array(
     'ops' => array(
@@ -1297,7 +1313,7 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'empty_zero' => 0,
       'hide_alter_empty' => 1,
       'link_type' => 'toggle',
-      'exclude' => 0,
+      'exclude' => 1,
       'id' => 'ops',
       'table' => 'flag_content',
       'field' => 'ops',
@@ -1305,6 +1321,85 @@ return "Week of ". date(\'F jS\',$firstdayts);
       'override' => array(
         'button' => 'Override',
       ),
+    ),
+    'value' => array(
+      'label' => 'Rate up/down',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'set_precision' => 0,
+      'precision' => '0',
+      'decimal' => '.',
+      'separator' => ',',
+      'format_plural' => 0,
+      'format_plural_singular' => '1',
+      'format_plural_plural' => '@count',
+      'prefix' => '',
+      'suffix' => '',
+      'appearance' => 'rate_views_widget',
+      'exclude' => 1,
+      'id' => 'value',
+      'table' => 'votingapi_vote',
+      'field' => 'value',
+      'relationship' => 'votingapi_vote',
+      'override' => array(
+        'button' => 'Override',
+      ),
+    ),
+    'nothing_2' => array(
+      'label' => 'row-tools-sidebar',
+      'alter' => array(
+        'text' => '[ops] [value]',
+        'make_link' => 0,
+        'path' => '',
+        'absolute' => 0,
+        'link_class' => '',
+        'alt' => '',
+        'rel' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'hide_alter_empty' => 1,
+      'exclude' => 0,
+      'id' => 'nothing_2',
+      'table' => 'views',
+      'field' => 'nothing',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
     ),
     'field_place_choice_value' => array(
       'label' => 'Place Choice',
@@ -2342,7 +2437,7 @@ echo _mc_event_section_print_location_hidden($location);
   $handler->override_option('distinct', 1);
   $handler->override_option('style_plugin', 'semanticviews_default');
   $handler->override_option('style_options', array(
-    'grouping' => 'phpcode_3',
+    'grouping' => '',
     'group_function' => array(
       'function_name' => 'mc_event_section_views_group',
     ),
@@ -2356,7 +2451,7 @@ echo _mc_event_section_print_location_hidden($location);
     ),
     'row' => array(
       'element_type' => 'div',
-      'class' => 'event {itemscope&itemtype=http://schema.org/Event}',
+      'class' => 'row event {itemscope&itemtype=http://schema.org/Event}',
       'last_every_nth' => '0',
       'first_class' => 'first',
       'last_class' => 'last',
@@ -2366,9 +2461,9 @@ echo _mc_event_section_print_location_hidden($location);
   $handler->override_option('row_plugin', 'semanticviews_fields');
   $handler->override_option('row_options', array(
     'semantic_html' => array(
-      'ops' => array(
+      'nothing_2' => array(
         'element_type' => 'div',
-        'class' => 'event-staring row-tools-sidebar',
+        'class' => 'row-tools-sidebar',
         'label_element_type' => '',
         'label_class' => '',
       ),
