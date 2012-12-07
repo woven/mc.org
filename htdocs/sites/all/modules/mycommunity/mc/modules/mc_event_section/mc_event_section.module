@@ -49,6 +49,21 @@ function mc_event_section_init(){
   drupal_add_js(array('mc_event_section' => $settings), 'setting');
 }
 
+/*
+ * allow star to appear everywhere
+ * Implantion of hook_flag_access_multiple
+ * */
+function mc_event_section_flag_access_multiple($flag, $content_ids, $account) {
+  $access = array();
+  if($flag->name == "events_bookmarks"){
+    foreach($content_ids as $id => $op){
+      $access[$id] = true;
+    }
+  }
+
+  return $access;
+}
+
 function _mc_event_section_next_two_weeks(&$content,$flag = null){
   global $user;
 

@@ -2,10 +2,10 @@
 if(jq180){
     (function($){
         Drupal.behaviors.AnonymousStaring = function (context) {
-            $(".flag-events-bookmarks.unknown a.flag-action",context).qtip({
+            $("span.flag-action",context).qtip({
                 content: {text: Drupal.settings.mc_event_section.msg_anonymous},
-                position: {my: "top center",at: "bottom center",
-                    adjust:{x:-2,y:0},
+                position: {my: "bottom center",at: "top center",
+                    adjust:{x:-2,y:-3},
                     viewport: $(window)
                 },
                 show: {solo: true},
