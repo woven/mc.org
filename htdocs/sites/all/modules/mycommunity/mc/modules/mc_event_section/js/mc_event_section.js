@@ -15,6 +15,35 @@ if(jq180){
                 }
             });
         }; //end of staringtooltips
+      
+      Drupal.behaviors.logged_in_tooltips = function (context) {
+        $("a.flag-action",context).qtip({
+          content: {text: "Save this"},
+          position: {my: "bottom center",at: "top center",
+            adjust:{x:-2,y:-3},
+            viewport: $(window)
+          },
+          show: {solo: true},
+          hide: {delay: 1000,fixed:true},
+          style: {
+            classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+          }
+        });
+
+        $("a.unflag-action",context).qtip({
+          content: {text: "Undo save"},
+          position: {my: "bottom center",at: "top center",
+            adjust:{x:-2,y:-3},
+            viewport: $(window)
+          },
+          show: {solo: true},
+          hide: {delay: 1000,fixed:true},
+          style: {
+            classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
+          }
+        });
+      }; //end of staringtooltips
+
     })(jq180);
 }
 
