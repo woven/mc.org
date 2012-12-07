@@ -3,7 +3,6 @@
 /**
 * delete field_test from event
 */
-*/
 function ft_news_update_6014(){
   module_load_include('inc', 'content', 'includes/content.crud');
   content_field_instance_delete('field_test', 'nnews',TRUE);
