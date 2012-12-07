@@ -259,7 +259,7 @@ function theme_myevents_flag_link($field){
   if($user->uid){
     return flag_create_link('events_bookmarks', $node->nid);
   }else{
-    return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
+    //return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
   }
 }
 

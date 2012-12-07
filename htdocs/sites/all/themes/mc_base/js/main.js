@@ -256,12 +256,12 @@ Drupal.behaviors.directoryMapEqual = function (context) {
 Drupal.behaviors.row_tools_slider = function (context) {
   $(".view .row",context).hover(
     function(e){
-      $(this).find(".row-tools-sidebar").find(".rate-widget").show(0,function(){
+      $(this).find(".row-tools-sidebar").find(".rate-widget").show(1,function(){
         $(this).parents(".row").addClass('hover-in');
       });
     },
     function(e){
-      $(this).find(".row-tools-sidebar").find(".rate-widget").animate({top: 0}, 1000).hide(1000,function(){
+      $(this).find(".row-tools-sidebar").find(".rate-widget").animate({top: 0}, 1000).hide(1,function(){
         $(this).parents(".row").removeClass('hover-in');
       });
     }
