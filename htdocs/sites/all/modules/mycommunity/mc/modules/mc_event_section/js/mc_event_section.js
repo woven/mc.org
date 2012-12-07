@@ -103,7 +103,7 @@ Drupal.behaviors.EventDuplicates = function (context) {
           var events = $duplicate.find('.event');
           if($(events).length>1){
               var count = $(events).length - 1;
-              var firstEvent = $duplicate.find('.first');
+              var firstEvent = $duplicate.find('.row.first');
               $duplicate.find(".event").not('.first').hide();
               var showMoreDiv = '<div class="show-more-events"><a href="#">Show ' + count + ' similar</a></div>';
               firstEvent.append(showMoreDiv);

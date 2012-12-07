@@ -2591,6 +2591,22 @@ echo _mc_event_section_print_location_hidden($location);
       ),
       'relationship' => 'none',
     ),
+    'votingapi_vote' => array(
+      'label' => 'Votes',
+      'required' => 0,
+      'votingapi' => array(
+        'value_type' => 'points',
+        'tag' => 'vote_updown',
+      ),
+      'current_user' => TRUE,
+      'id' => 'votingapi_vote',
+      'table' => 'node',
+      'field' => 'votingapi_vote',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('access', array(
     'type' => 'role',
@@ -2730,49 +2746,12 @@ $events_link = url("node/$og_nid/events");
     ),
     'row' => array(
       'element_type' => 'div',
-      'class' => 'event {itemscope&itemtype=http://schema.org/Event}',
+      'class' => 'row event {itemscope&itemtype=http://schema.org/Event}',
       'last_every_nth' => '0',
       'first_class' => 'first',
       'last_class' => 'last',
       'striping_classes' => 'odd even',
     ),
-  ));
-  $handler->override_option('row_options', array(
-    'semantic_html' => array(
-      'ops' => array(
-        'element_type' => 'div',
-        'class' => 'event-staring',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
-      'field_list_image_fid' => array(
-        'element_type' => 'div',
-        'class' => 'field-view-image',
-      ),
-      'title_1' => array(
-        'element_type' => 'div',
-        'class' => 'field-author to-right',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
-      'title' => array(
-        'element_type' => 'h4',
-        'class' => 'field-title to-right',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
-      'nothing' => array(
-        'element_type' => 'p',
-        'class' => 'location-link to-right',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
-      'body' => array(
-        'element_type' => 'p',
-        'class' => 'description to-right {itemprop=description}',
-      ),
-    ),
-    'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);

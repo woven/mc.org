@@ -1311,43 +1311,12 @@ $news_link = url("node/$og_nid/news");
     ),
     'row' => array(
       'element_type' => 'div',
-      'class' => 'event {itemscope&itemtype=http://schema.org/Event}',
+      'class' => 'row',
       'last_every_nth' => '0',
       'first_class' => 'first',
       'last_class' => 'last',
       'striping_classes' => 'odd even',
     ),
-  ));
-  $handler->override_option('row_options', array(
-    'semantic_html' => array(
-      'field_list_image_fid' => array(
-        'element_type' => 'div',
-        'class' => 'field-view-image',
-      ),
-      'title_1' => array(
-        'element_type' => 'div',
-        'class' => 'field-author to-right',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
-      'title' => array(
-        'element_type' => 'h4',
-        'class' => 'field-title to-right',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
-      'phpcode' => array(
-        'element_type' => 'p',
-        'class' => 'location-link to-right',
-        'label_element_type' => '',
-        'label_class' => '',
-      ),
-      'body' => array(
-        'element_type' => 'p',
-        'class' => 'description to-right {itemprop=description}',
-      ),
-    ),
-    'skip_blank' => 0,
   ));
   $handler->override_option('block_description', '');
   $handler->override_option('block_caching', -1);
