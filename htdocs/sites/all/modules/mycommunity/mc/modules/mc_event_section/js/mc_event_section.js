@@ -15,7 +15,7 @@ if(jq180){
                 }
             });
         }; //end of staringtooltips
-      
+
       Drupal.behaviors.logged_in_tooltips = function (context) {
         $("a.flag-action",context).qtip({
           content: {text: "Save this"},
