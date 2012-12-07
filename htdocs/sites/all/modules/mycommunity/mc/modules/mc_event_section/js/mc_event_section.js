@@ -10,8 +10,8 @@ if(jq180){
                     adjust:{x:-2,y:-3},
                     viewport: $(window)
                 },
-              show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
-              hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
+              show: {solo: true},
+              hide: {fixed:true, delay: 600},
                 style: {
                     classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
                 }
