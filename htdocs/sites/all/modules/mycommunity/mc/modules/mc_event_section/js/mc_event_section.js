@@ -2,14 +2,16 @@
 if(jq180){
     (function($){
         Drupal.behaviors.AnonymousStaring = function (context) {
+          var delay = 1.5 * 1000;
+          var inactive = 1 * 1000;
             $("span.flag-action",context).qtip({
                 content: {text: Drupal.settings.mc_event_section.msg_anonymous},
                 position: {my: "bottom center",at: "top center",
                     adjust:{x:-2,y:-3},
                     viewport: $(window)
                 },
-                show: {solo: true},
-                hide: {delay: 1000,fixed:true},
+              show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+              hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
                 style: {
                     classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
                 }
@@ -17,14 +19,17 @@ if(jq180){
         }; //end of staringtooltips
 
       Drupal.behaviors.logged_in_tooltips = function (context) {
+        var delay = 1.5 * 1000;
+        var inactive = 1 * 1000;
+
         $("a.flag-action",context).qtip({
           content: {text: "Save this"},
           position: {my: "bottom center",at: "top center",
             adjust:{x:-2,y:-3},
             viewport: $(window)
           },
-          show: {solo: true},
-          hide: {delay: 1000,fixed:true},
+          show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+          hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
           style: {
             classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
           }
@@ -36,8 +41,8 @@ if(jq180){
             adjust:{x:-2,y:-3},
             viewport: $(window)
           },
-          show: {solo: true},
-          hide: {delay: 1000,fixed:true},
+          show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+          hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
           style: {
             classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
           }

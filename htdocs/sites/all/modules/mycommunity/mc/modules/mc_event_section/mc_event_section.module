@@ -46,6 +46,9 @@ function mc_event_section_init(){
     $settings['msg_anonymous_stuff'] =  l('Sign in','user', array('attributes' => array('class' => "login","onclick"=>"openColorboxLogin();return false;"))) ." or ". l('join now','user/register',array('attributes' => array('class' => "join","onclick"=>"openColorboxJoin();return false;"))) . " to promote or demote stuff.";
   }
 
+  $settings['tooltip_show_deplay'] = 1250;
+  $settings['tooltip_hide_inactive'] = 2000;
+
   drupal_add_js(array('mc_event_section' => $settings), 'setting');
 }
 

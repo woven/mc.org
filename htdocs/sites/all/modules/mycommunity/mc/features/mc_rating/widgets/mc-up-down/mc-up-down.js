@@ -20,8 +20,6 @@ Drupal.behaviors.rate_mc_up_down = function (context) {
 
 if(jq180){
   (function($){
-    var delay = 4 * 1000;
-    var inactive = 1 * 1000;
     Drupal.behaviors.rate_mc_up_down_help = function (context) {
       $("a.rate-button.rate-up",context).not(".rate-reset").qtip({
         content: {text: "Promote this"},
@@ -29,8 +27,8 @@ if(jq180){
           adjust:{x:0,y:0},
           viewport: $(window)
         },
-        show: {solo: true},
-        hide: {delay: delay,fixed:true,inactive:inactive},
+        show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+        hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
         style: {
           classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
         }
@@ -41,8 +39,8 @@ if(jq180){
           adjust:{x:0,y:0},
           viewport: $(window)
         },
-        show: {solo: true},
-        hide: {delay: delay,fixed:true,inactive:inactive},
+        show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+        hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
         style: {
           classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
         }
@@ -54,8 +52,8 @@ if(jq180){
           adjust:{x:0,y:0},
           viewport: $(window)
         },
-        show: {solo: true},
-        hide: {delay: delay,fixed:true,inactive:inactive},
+        show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+        hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
         style: {
           classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
         }
@@ -66,8 +64,8 @@ if(jq180){
           adjust:{x:0,y:0},
           viewport: $(window)
         },
-        show: {solo: true},
-        hide: {delay: delay,fixed:true,inactive:inactive},
+        show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+        hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
         style: {
           classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
         }
@@ -81,8 +79,8 @@ if(jq180){
           adjust:{x:0,y:0},
           viewport: $(window)
         },
-        show: {solo: true},
-        hide: {delay: 1000,fixed:true},
+        show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+        hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
         style: {
           classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
         }
@@ -94,8 +92,8 @@ if(jq180){
           adjust:{x:0,y:0},
           viewport: $(window)
         },
-        show: {solo: true},
-        hide: {delay: 1000,fixed:true},
+        show: {solo: true,delay: Drupal.settings.mc_event_section.tooltip_show_deplay},
+        hide: {fixed:true,event: 'click mouseleave',inactive: Drupal.settings.mc_event_section.tooltip_hide_inactive},
         style: {
           classes: 'ui-tooltip ui-tooltip-shadow ui-tooltip-rounded ui-tooltip-mc'
         }

@@ -252,3 +252,17 @@ Drupal.behaviors.directoryMapEqual = function (context) {
     height = $("body.mc-directory-map #page > .limiter #right").height();
     $("body.mc-directory-map #page > .limiter #main").height(height);
 };
+
+Drupal.behaviors.row_tools_slider = function (context) {
+
+  $(".view .row",context).hover(
+    function(e){
+      console.log("hover-in");
+      $(this).find(".row-tools-sidebar").find(".rate-widget").slideDown();
+    },
+    function(e){
+      console.log("hover-out");
+      $(this).find(".row-tools-sidebar").find(".rate-widget").slideUp();
+    }
+  );
+}; //end of staringtooltips
