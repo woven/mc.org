@@ -122,103 +122,6 @@ function ft_news_content_default_fields() {
     ),
   );
 
-  // Exported field: field_test
-  $fields['nnews-field_test'] = array(
-    'field_name' => 'field_test',
-    'type_name' => 'nnews',
-    'display_settings' => array(
-      'label' => array(
-        'format' => 'hidden',
-      ),
-      'format' => 'default',
-      'css-class' => array(),
-      'region' => 'disabled',
-      'ds_weight' => '-77',
-      'full' => array(
-        'label' => array(
-          'format' => 'hidden',
-        ),
-        'format' => 'default',
-        'css-class' => '',
-        'region' => 'disabled',
-        'type' => 'fivestar',
-        'parent_id' => '',
-        'field_id' => 'field_test',
-        'label_value' => '',
-        'exclude' => 1,
-        'weight' => '-77',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '4' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '2' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '3' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'bubble' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'secondary_page' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '5' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'block' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'search' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'minimum_widgets' => '1',
-    'type' => 'fivestar',
-    'required' => '0',
-    'multiple' => '0',
-    'module' => 'fivestar',
-    'active' => '1',
-    'stars' => '2',
-    'dynamic_target' => '',
-    'php_target' => '',
-    'axis' => '',
-    'widget' => array(
-      'allow_clear' => 1,
-      'default_value' => array(
-        '0' => array(
-          'rating' => '-',
-          'target' => NULL,
-          'axis' => '',
-        ),
-      ),
-      'default_value_php' => NULL,
-      'label' => 'test',
-      'weight' => '46',
-      'description' => '',
-      'minimum_widgets' => '1',
-      'type' => 'radios',
-      'module' => 'fivestar',
-    ),
-  );
-
   // Exported field: field_url
   $fields['nnews-field_url'] = array(
     'field_name' => 'field_url',
@@ -328,7 +231,6 @@ function ft_news_content_default_fields() {
   // Included for use with string extractors like potx.
   t('Images');
   t('URL');
-  t('test');
 
   return $fields;
 }
