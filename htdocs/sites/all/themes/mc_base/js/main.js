@@ -254,15 +254,16 @@ Drupal.behaviors.directoryMapEqual = function (context) {
 };
 
 Drupal.behaviors.row_tools_slider = function (context) {
-
   $(".view .row",context).hover(
     function(e){
-      console.log("hover-in");
-      $(this).find(".row-tools-sidebar").find(".rate-widget").slideDown();
+      $(this).find(".row-tools-sidebar").find(".rate-widget").slideDown(function(){
+        $(this).parents(".row").addClass('hover-in');
+      });
     },
     function(e){
-      console.log("hover-out");
-      $(this).find(".row-tools-sidebar").find(".rate-widget").slideUp();
+      $(this).find(".row-tools-sidebar").find(".rate-widget").animate({top: 0}, 500).slideUp(function(){
+        $(this).parents(".row").removeClass('hover-in');
+      });
     }
   );
 }; //end of staringtooltips
