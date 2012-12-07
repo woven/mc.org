@@ -254,6 +254,7 @@ Drupal.behaviors.directoryMapEqual = function (context) {
 };
 
 Drupal.behaviors.row_tools_slider = function (context) {
+  return;
   $(".view .row",context).hover(
     function(e){
       $(this).find(".row-tools-sidebar").find(".rate-widget").show(1,function(){

@@ -260,6 +260,9 @@ function theme_myevents_flag_link($field){
     return flag_create_link('events_bookmarks', $node->nid);
   }else{
     //return '<span class="flag-events-bookmarks unknown" ><a href="#" class="flag-action">Save to my events</a></span>';
+    return '<span class="flag-wrapper flag-events-bookmarks not-logged-in">
+      <a title="" class="flag flag-action flag-link-toggle not-logged-in">Save to my events</a>
+  </span>';
   }
 }
 
