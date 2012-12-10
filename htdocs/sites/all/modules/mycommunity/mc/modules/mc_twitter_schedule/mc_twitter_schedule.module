@@ -30,34 +30,62 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
   return $items;
 }
 
+function debug_mc_tweet_events_between($day = "today"){
+  $ampm = array("am","pm");
+  $hours = array(12,1,2,3,4,5,6,7,8,9,10,11);
+
+  foreach($ampm as $val){
+    foreach($hours as $h){
+      //:00
+      tweet_events_between("$day $h$val",null,null,true);
+
+      //:30 mins
+      tweet_events_between("$day $h:30$val",null,null,true);
+    }
+  }
+}
+
 /**
  * @todo make a function to allow you to patch send tweets based on list of nodes, with settings (like default msg);
  */
-function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true){
-  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE)){
+function tweet_events_between($now = null,$from = NULL,$to = NULL,$debug = false,$tweet = true,$flag = true){
+  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE) && !$debug){
     return;
   };
 
+  if(!$debug){
+    watchdog('mc_twitter_schedule',"Twitter Schedule started");
+  }
+
+  if(!is_null($now)){
+    $now = strtotime($now);
+  }else{
+    $now = time();
+  }
 
   //adding dependencies on twitter account
   module_load_include('inc', 'twitter');
 
   //timestamp for to/from , either from function or defaults
   if(!is_null($from)){
-    $ts_from = strtotime($from);
+    $ts_from = strtotime($from,$now);
   }else{
-    $ts_from = strtotime("+2hour");
+    $ts_from = strtotime("+2 hour",$now);
   }
 
   if(!is_null($to)){
-    $ts_to = strtotime($to);
+    $ts_to = strtotime($to,$now);
   }else{
-    $ts_to = strtotime("+2hour 30min");
+    $ts_to = strtotime("+2hour 30min",$now);
   }
 
   $flag_name = 'tweet_2hour';
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
   $twitter_interval_status = "@event_time! !title !from!tinyurl !hash";
+
+  //dsm($now);
+  //dsm($ts_from,"ts_from");
+  //dsm($ts_to,"ts_to");
 
   $sql = "SELECT
     `event`.nid as nid,
@@ -79,7 +107,7 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
 
   $rows = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
 
-  if($flag){
+  if($flag && !$debug){
     //load flag object
     $flagop = flag_get_flag($flag_name);
     if(!$flagop){
@@ -87,7 +115,8 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
     }
   }
 
-  if($tweet){
+
+  if($tweet && !$debug){
     //load the twitter account
     $twitter_account = twitter_account_load_byscreename($twitter_user);
     if(!$twitter_account){
@@ -131,14 +160,20 @@ function tweet_events_between($from = NULL,$to = NULL,$tweet = true,$flag = true
       $status = trim($status);
     }
 
-    if($tweet){
+    if($tweet && !$debug){
       mc_tweet($twitter_account,$status);
       if($flag){
         $flagop->flag('flag', $node->nid);
       }
-    }else{
-      dsm($status);
     }
+
+    if($debug){
+        dsm($status);
+    }
+  }
+
+  if(!$debug){
+    watchdog('mc_twitter_schedule',"Twitter Schedule done");
   }
 }
 
