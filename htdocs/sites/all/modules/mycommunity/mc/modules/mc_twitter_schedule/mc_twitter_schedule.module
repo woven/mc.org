@@ -54,7 +54,7 @@ function tweet_events_between($now = null,$from = NULL,$to = NULL,$debug = false
   };
 
   if(!$debug){
-    watchdog('mc_twitter_schedule',"Twitter Schedule started");
+    //watchdog('mc_twitter_schedule',"Twitter Schedule started");
   }
 
   if(!is_null($now)){
