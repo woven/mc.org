@@ -192,6 +192,131 @@ function tweet_events_between($now = null,$from = NULL,$to = NULL,$debug = false
   }
 }
 
+function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$debug = false,$tweet = true,$flag = true){
+  if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE) && !$debug){
+    return;
+  };
+
+  if(!$debug){
+    //watchdog('mc_twitter_schedule',"Twitter Schedule started");
+  }
+
+  if(!is_null($now)){
+    $now = strtotime($now);
+  }else{
+    $now = time();
+  }
+
+  //adding dependencies on twitter account
+  module_load_include('inc', 'twitter');
+
+  //timestamp for to/from , either from function or defaults
+  if(!is_null($from)){
+    $ts_from = strtotime($from,$now);
+  }else{
+    $ts_from = strtotime("-2hour",$now);
+  }
+
+  if(!is_null($to)){
+    $ts_to = strtotime($to,$now);
+  }else{
+    $ts_to = strtotime("-2hour 30min",$now);
+  }
+
+  $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
+  $twitter_interval_status = "@event_time! !title !from!tinyurl !hash";
+
+  //initiate flaging object
+  $flag_name = 'tweet_2hour';
+  $flagop = flag_get_flag($flag_name);
+
+  $sql = "SELECT
+    node.nid as nid,
+    node.title as title,
+    node.created as created,
+    content_type_group.field_twitter_username_value as twitter
+   FROM
+    node
+   LEFT JOIN og_ancestry ON og_ancestry.nid = node.nid
+   LEFT JOIN content_type_group ON content_type_group.nid = og_ancestry.group_nid
+   WHERE (node.created >= %d AND node.created <= %d) AND node.type = '%s'
+   ORDER BY `event`.unix_event_start ASC";
+
+  $rows = db_query($sql,'event',$ts_from,$ts_to);
+
+  if($tweet && !$debug){
+    //load the twitter account
+    $twitter_account = twitter_account_load_byscreename($twitter_user);
+    if(!$twitter_account){
+      return;
+    }
+  }
+
+  while($node = db_fetch_object($rows)){
+    //check if this node is flagged already
+    $node->is_flagged = false;
+    if(!$debug){ //if debugging mode is off (loop through all)
+      if($flag && $flagop){ //if flagging enabled
+        $node->is_flagged = $flagop->is_flagged($node->nid);
+      }
+    }
+
+    if(!$node->is_flagged){
+
+      $replacements = array(
+        '!title' => trim($node->title),
+        '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
+        '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
+        '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
+        '@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)),
+        '!from' => $node->twitter ? "from @" . $node->twitter . " ": ""
+      );
+
+      // Only generate the shortened URL if it's going to be used. No sense
+      // burning through TinyURLs without a good reason.
+      if (strstr($twitter_interval_status, '!tinyurl') !== FALSE) {
+        $replacements['!tinyurl'] = twitter_shorten_url(url('node/'. $node->nid, array('absolute' => TRUE)));
+      }
+
+      $status = strtr($twitter_interval_status, $replacements);
+      $status = trim($status);
+
+      //check if status is more than target len and trim title to fit in status
+      $target_len = 140;
+      if(strlen($status) > $target_len){
+        $key = "!title";
+        $status_len = strlen($status);
+        $title_len = strlen($replacements['!title']);
+
+        $new_title_trim = ($status_len - $target_len) + 3;
+
+        $title_len_new = $title_len - $new_title_trim;
+
+        $replacements['!title'] = substr($replacements['!title'],0,$title_len_new) . "...";
+
+        $status = strtr($twitter_interval_status, $replacements);
+        $status = trim($status);
+      }
+
+      if($tweet && !$debug){
+        mc_tweet($twitter_account,$status);
+        if($flag){
+          $flagop->flag('flag', $node->nid);
+        }
+      }
+
+      if($debug){
+        dsm($status);
+      }
+    }
+  }
+
+  if(!$debug){
+    watchdog('mc_twitter_schedule',"Twitter ContentTypes Schedule done");
+  }
+}
+
+
 function tweet_events_count_between($from = null,$to = null,$tweet = true){
   if(!variable_get("MC_TWITTER_ENABLE",MC_TWITTER_ENABLE)){
     return;
