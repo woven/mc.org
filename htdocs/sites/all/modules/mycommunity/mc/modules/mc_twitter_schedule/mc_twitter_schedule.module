@@ -214,7 +214,7 @@ function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$deb
   if(!is_null($from)){
     $ts_from = strtotime($from,$now);
   }else{
-    $ts_from = strtotime("-2hour",$now);
+    $ts_from = strtotime("-1hour",$now);
   }
 
   if(!is_null($to)){
@@ -224,7 +224,7 @@ function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$deb
   }
 
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
-  $twitter_interval_status = "@event_time! !title !from!tinyurl !hash";
+  $twitter_interval_status = "!title !from!tinyurl !hash";
 
   //initiate flaging object
   $flag_name = 'tweet_2hour';
@@ -239,10 +239,10 @@ function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$deb
     node
    LEFT JOIN og_ancestry ON og_ancestry.nid = node.nid
    LEFT JOIN content_type_group ON content_type_group.nid = og_ancestry.group_nid
-   WHERE (node.created >= %d AND node.created <= %d) AND node.type = '%s'
-   ORDER BY `event`.unix_event_start ASC";
+   WHERE (node.created >= %d) AND node.type = 'nnews'
+   ORDER BY node.created ASC";
 
-  $rows = db_query($sql,'event',$ts_from,$ts_to);
+  $rows = db_query($sql,$ts_from);
 
   if($tweet && !$debug){
     //load the twitter account
@@ -268,7 +268,7 @@ function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$deb
         '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
         '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
         '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
-        '@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)),
+        //'@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)),
         '!from' => $node->twitter ? "from @" . $node->twitter . " ": ""
       );
 
