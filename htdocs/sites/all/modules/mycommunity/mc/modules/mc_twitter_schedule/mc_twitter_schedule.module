@@ -30,17 +30,27 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
   return $items;
 }
 
-function debug_mc_tweet_events_between($day = "today"){
+function debug_mc_tweet_events_between($day = "yesterday"){
   $ampm = array("am","pm");
   $hours = array(12,1,2,3,4,5,6,7,8,9,10,11);
 
   foreach($ampm as $val){
     foreach($hours as $h){
       //:00
+      dsm("$day $h$val");
       tweet_events_between("$day $h$val",null,null,true);
 
+      //:15 mins
+      dsm("$day $h:15$val");
+      tweet_events_between("$day $h:15$val",null,null,true);
+
       //:30 mins
+      dsm("$day $h:20$val");
       tweet_events_between("$day $h:30$val",null,null,true);
+
+      //:45 mins
+      dsm("$day $h:45$val");
+      tweet_events_between("$day $h:45$val",null,null,true);
     }
   }
 }
@@ -70,7 +80,7 @@ function tweet_events_between($now = null,$from = NULL,$to = NULL,$debug = false
   if(!is_null($from)){
     $ts_from = strtotime($from,$now);
   }else{
-    $ts_from = strtotime("+2 hour",$now);
+    $ts_from = strtotime("+2hour",$now);
   }
 
   if(!is_null($to)){
@@ -79,13 +89,17 @@ function tweet_events_between($now = null,$from = NULL,$to = NULL,$debug = false
     $ts_to = strtotime("+2hour 30min",$now);
   }
 
-  $flag_name = 'tweet_2hour';
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
   $twitter_interval_status = "@event_time! !title !from!tinyurl !hash";
+
+  //initiate flaging object
+  $flag_name = 'tweet_2hour';
+  $flagop = flag_get_flag($flag_name);
 
   //dsm($now);
   //dsm($ts_from,"ts_from");
   //dsm($ts_to,"ts_to");
+
 
   $sql = "SELECT
     `event`.nid as nid,
@@ -100,20 +114,10 @@ function tweet_events_between($now = null,$from = NULL,$to = NULL,$debug = false
    INNER JOIN `event` ON `event`.nid = node.nid AND node.type = '%s'
    LEFT JOIN og_ancestry ON og_ancestry.nid = node.nid
    LEFT JOIN content_type_group ON content_type_group.nid = og_ancestry.group_nid
-   LEFT JOIN flag_content ON flag_content.content_id = `event`.nid
-   LEFT JOIN flags ON flags.fid = flag_content.fid AND flags.name = '%s'
-   WHERE flag_content.fcid IS NULL AND (`event`.unix_event_start >= %d AND `event`.unix_event_start <= %d)
+   WHERE (`event`.unix_event_start >= %d AND `event`.unix_event_start <= %d)
    ORDER BY `event`.unix_event_start ASC";
 
-  $rows = db_query($sql,'event',$flag_name,$ts_from,$ts_to);
-
-  if($flag && !$debug){
-    //load flag object
-    $flagop = flag_get_flag($flag_name);
-    if(!$flagop){
-      return;
-    }
-  }
+  $rows = db_query($sql,'event',$ts_from,$ts_to);
 
 
   if($tweet && !$debug){
@@ -125,50 +129,61 @@ function tweet_events_between($now = null,$from = NULL,$to = NULL,$debug = false
   }
 
   while($node = db_fetch_object($rows)){
-    $replacements = array(
-      '!title' => trim($node->title),
-      '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
-      '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
-      '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
-      '@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)),
-      '!from' => $node->twitter ? "from @" . $node->twitter . " ": ""
-    );
+      //check if this node is flagged already
+      $node->is_flagged = false;
+      if(!$debug){ //if debugging mode is off (loop through all)
+        if($flag && $flagop){ //if flagging enabled
+          $node->is_flagged = $flagop->is_flagged($node->nid);
+        }
+      }
 
-    // Only generate the shortened URL if it's going to be used. No sense
-    // burning through TinyURLs without a good reason.
-    if (strstr($twitter_interval_status, '!tinyurl') !== FALSE) {
-      $replacements['!tinyurl'] = twitter_shorten_url(url('node/'. $node->nid, array('absolute' => TRUE)));
-    }
+      if(!$node->is_flagged){
 
-    $status = strtr($twitter_interval_status, $replacements);
-    $status = trim($status);
+      $replacements = array(
+        '!title' => trim($node->title),
+        '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
+        '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
+        '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
+        '@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)),
+        '!from' => $node->twitter ? "from @" . $node->twitter . " ": ""
+      );
 
-    //check if status is more than target len and trim title to fit in status
-    $target_len = 140;
-    if(strlen($status) > $target_len){
-      $key = "!title";
-      $status_len = strlen($status);
-      $title_len = strlen($replacements['!title']);
-
-      $new_title_trim = ($status_len - $target_len) + 3;
-
-      $title_len_new = $title_len - $new_title_trim;
-
-      $replacements['!title'] = substr($replacements['!title'],0,$title_len_new) . "...";
+      // Only generate the shortened URL if it's going to be used. No sense
+      // burning through TinyURLs without a good reason.
+      if (strstr($twitter_interval_status, '!tinyurl') !== FALSE) {
+        $replacements['!tinyurl'] = twitter_shorten_url(url('node/'. $node->nid, array('absolute' => TRUE)));
+      }
 
       $status = strtr($twitter_interval_status, $replacements);
       $status = trim($status);
-    }
 
-    if($tweet && !$debug){
-      mc_tweet($twitter_account,$status);
-      if($flag){
-        $flagop->flag('flag', $node->nid);
+      //check if status is more than target len and trim title to fit in status
+      $target_len = 140;
+      if(strlen($status) > $target_len){
+        $key = "!title";
+        $status_len = strlen($status);
+        $title_len = strlen($replacements['!title']);
+
+        $new_title_trim = ($status_len - $target_len) + 3;
+
+        $title_len_new = $title_len - $new_title_trim;
+
+        $replacements['!title'] = substr($replacements['!title'],0,$title_len_new) . "...";
+
+        $status = strtr($twitter_interval_status, $replacements);
+        $status = trim($status);
       }
-    }
 
-    if($debug){
-        dsm($status);
+      if($tweet && !$debug){
+        mc_tweet($twitter_account,$status);
+        if($flag){
+          $flagop->flag('flag', $node->nid);
+        }
+      }
+
+      if($debug){
+         dsm($status);
+      }
     }
   }
 
