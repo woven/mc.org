@@ -21,6 +21,12 @@ function mc_twitter_schedule_cronapi($op, $job = NULL) {
     'description' => 'Send event tweets for events that is going to start in 2 and 2half hour from now',
     'rule' => '*/15 * * * *', //run every 15mins
   );
+
+  $items['tweet_ct_between'] = array(
+    'description' => 'Send event tweets for nnews appeared or added one hour ago',
+    'rule' => '*/15 * * * *', //run every 15mins
+  );
+
 /*
   $items['tweet_events_count_between'] = array(
     'description' => 'Send tweets count at 6am everyday',
@@ -224,7 +230,7 @@ function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$deb
   }
 
   $twitter_user = variable_get("MC_TWITTER_USER",MC_TWITTER_USER);
-  $twitter_interval_status = "!title !from!tinyurl !hash";
+  $twitter_interval_status = "!title !from!tinyurlext !hash";
 
   //initiate flaging object
   $flag_name = 'tweet_2hour';
@@ -234,11 +240,13 @@ function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$deb
     node.nid as nid,
     node.title as title,
     node.created as created,
-    content_type_group.field_twitter_username_value as twitter
+    content_type_group.field_twitter_username_value as twitter,
+    feeds_node_item.url as url
    FROM
     node
    LEFT JOIN og_ancestry ON og_ancestry.nid = node.nid
    LEFT JOIN content_type_group ON content_type_group.nid = og_ancestry.group_nid
+   LEFT JOIN feeds_node_item ON node.nid = feeds_node_item.nid
    WHERE (node.created >= %d) AND node.type = 'nnews'
    ORDER BY node.created ASC";
 
@@ -267,6 +275,7 @@ function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$deb
         '!title' => trim($node->title),
         '!url' => url('node/'. $node->nid, array('absolute' => TRUE, 'alias' => TRUE)),
         '!url-alias' => url('node/'. $node->nid, array('absolute' => TRUE)),
+        '!url-ext' => !empty($node->url) ? $node->url : "",
         '!hash' => variable_get("mc_twitter_hastag",MC_TWITTER_HASHTAG),
         //'@event_time' => strip_tags(theme_mc_event_date($node->unix_start, $node->unix_end, $node->has_end_date, $node->has_time)),
         '!from' => $node->twitter ? "from @" . $node->twitter . " ": ""
@@ -276,6 +285,14 @@ function tweet_ct_between($ct = array(),$now = null,$from = NULL,$to = NULL,$deb
       // burning through TinyURLs without a good reason.
       if (strstr($twitter_interval_status, '!tinyurl') !== FALSE) {
         $replacements['!tinyurl'] = twitter_shorten_url(url('node/'. $node->nid, array('absolute' => TRUE)));
+      }
+
+      if (strstr($twitter_interval_status, '!tinyurlext') !== FALSE) {
+        if(empty($replacements['!url-ext'])){
+          $replacements['!tinyurlext'] = "";
+        }else{
+          $replacements['!tinyurlext'] = twitter_shorten_url($replacements['!url-ext']);
+        }
       }
 
       $status = strtr($twitter_interval_status, $replacements);
