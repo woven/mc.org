@@ -3,6 +3,7 @@
         <div class="block-content">
           <?php if (!$user->uid){ ?>
               <ul>
+                <li><div class="fb-login-button" scope="!perms" data-show-faces="false"></div></li>
                 <li><a href="/user/register" id="register-button">Join</a></li>
                 <li><a href="/user" id="login-button">Sign in</a></li>
               </ul>
