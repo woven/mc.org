@@ -84,3 +84,15 @@ $sites += array(
   'pw.mycommunity.org' => 'pw.mycommunity.org',
   'projectwarehouse.mycommunity.org' => 'pw.mycommunity.org'
 );
+
+//id2 - projectwarehouse.mc.org
+$sites += array(
+  //local/dev and staging
+  'id2.staging.mycommunity.org' => 'id2.mycommunity.org',
+  'id2.dev.mycommunity.org' => 'id2.mycommunity.org',
+  'local.id2.mycommunity.org' => 'id2.mycommunity.org',
+
+   //production urls
+  'id2.mycommunity.org' => 'id2.mycommunity.org'
+  //'projectwarehouse.mycommunity.org' => 'pw.mycommunity.org'
+);
