@@ -203,16 +203,22 @@ function _mc_og_wizard_save_file($url){
   
   $field_logo = _mc_og_wizard_nodefield_widget_settings('field_logo');
   $file_temp = file_get_contents($url);
-  $file_temp = file_save_data($file_temp, file_directory_path() . '/' . $field_logo['file_path'] . '/' . basename($url), FILE_EXISTS_RENAME);
+  $dir = file_directory_path() . '/' . $field_logo['file_path'];
+
   $file = new stdClass();
-  $file->filename = basename($file_temp);
-  $file->filepath = $file_temp;
-  $file->filemime = mime_content_type($file_temp);
-  $file->filesize = filesize($file_temp);
-  $file->uid = $user->uid;
-  $file->timestamp = time();
-  $file->status = FILE_STATUS_PERMANENT;
-  drupal_write_record('files', $file);
+
+  if(file_check_directory($dir,FILE_CREATE_DIRECTORY & FILE_MODIFY_PERMISSIONS)){
+    $file_temp = file_save_data($file_temp, $dir . '/' . basename($url), FILE_EXISTS_RENAME);
+    $file->filename = basename($file_temp);
+    $file->filepath = $file_temp;
+    $file->filemime = mime_content_type($file_temp);
+    $file->filesize = filesize($file_temp);
+    $file->uid = $user->uid;
+    $file->timestamp = time();
+    $file->status = FILE_STATUS_PERMANENT;
+    drupal_write_record('files', $file);
+  }
+
   return $file;
 }
 
