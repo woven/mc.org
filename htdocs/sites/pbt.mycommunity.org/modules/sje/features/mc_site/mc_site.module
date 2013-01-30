@@ -7,10 +7,7 @@
 include_once 'mc_site.features.inc';
 
 function mc_site_mc_ct(){
-  global $conf;
-  //$conf['mc_defaultimg_og'] = true;
-
   return array(
-      'page','npage','article','event','event_feed','news_feed','file','forum','video','audio','company'
+    'event','event_feed','news_feed','group','npage','company'
   );
 }
