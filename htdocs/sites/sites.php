@@ -84,3 +84,27 @@ $sites += array(
   'pw.mycommunity.org' => 'pw.mycommunity.org',
   'projectwarehouse.mycommunity.org' => 'pw.mycommunity.org'
 );
+
+//id2 id2.mc.org
+$sites += array(
+  //local/dev and staging
+  'id2.staging.mycommunity.org' => 'id2.mycommunity.org',
+  'id2.dev.mycommunity.org' => 'id2.mycommunity.org',
+  'local.id2.mycommunity.org' => 'id2.mycommunity.org',
+
+   //production urls
+  'id2.mycommunity.org' => 'id2.mycommunity.org'
+  //'projectwarehouse.mycommunity.org' => 'pw.mycommunity.org'
+);
+
+//pbt palmbeachtech.mc.org
+$sites += array(
+  //local/dev and staging
+  'pbt.staging.mycommunity.org' => 'pbt.mycommunity.org',
+  'pbt.dev.mycommunity.org' => 'pbt.mycommunity.org',
+  'local.pbt.mycommunity.org' => 'pbt.mycommunity.org',
+
+   //production urls
+  'pbt.mycommunity.org' => 'pbt.mycommunity.org',
+  'palmbeachtech.mycommunity.org' => 'pbt.mycommunity.org'
+);

@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Code for the MC Site feature.
+ */
+
+include_once 'mc_site.features.inc';
+
+function mc_site_mc_ct(){
+  global $conf;
+  //$conf['mc_defaultimg_og'] = true;
+
+  return array(
+      'page','npage','article','event','event_feed','news_feed','file','forum','video','audio','company'
+  );
+}
