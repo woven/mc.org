@@ -75,8 +75,8 @@ function _parser_ical_feedapi_parse($feed, $cache = FALSE) {
   }
 
   //* fix incorrect url encoding for upload files only, this is more possible to happen on files rather than urls **/
-  if($feed->settings['upload_method']!='url'){
-    $url = encode_basename($url);
+  if(strpos($url, 'http') !== 0){
+    $url = url("<front>",array("absolute"=>true)) . encode_basename($url);
   }
 
   $downloaded_string = _parser_ical_download($url);
