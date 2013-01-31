@@ -679,7 +679,7 @@ function mc_base_preprocess_og_mission(&$variables) {
   $format = $variables['form']['#node']->format;
 
   //pass the missing statement through the input format from body field
-  $variables['mission'] = check_markup($variables['mission'],$format);
+  $variables['mission'] = check_markup($variables['mission']);
 
   //expose the group url to the templates
   $url = $node->field_group_url[0]['url'];
