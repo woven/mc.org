@@ -6,6 +6,7 @@ local.backup.sh
 local.restore.sh
 local.credentials.sh
 local.deploy.sh
+local.sites.php
 
 #phpstorm
 .idea/*
