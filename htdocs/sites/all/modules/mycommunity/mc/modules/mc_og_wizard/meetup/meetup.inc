@@ -9,7 +9,7 @@ class MeetupParser{
   public $status;
 
   public function get_content($url){
-    $html = file_get_contents($url);
+    $html = @file_get_contents($url);
     if($html === false){
       throw new Exception("Sorry, we can't find that page. Please try again.",1);
     }else{
