@@ -13,7 +13,8 @@ function mc_site_strongarm() {
   $strongarm->value = array(
     'group_page_view' => TRUE,
     'node_ingroup' => TRUE,
-    'events_group_homepage' => TRUE,
+    'events_group_homepage' => FALSE,
+    'group_homepage' => TRUE,
   );
   $export['context_status'] = $strongarm;
 
@@ -49,7 +50,7 @@ function mc_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_frontpage';
-  $strongarm->value = 'node/348';
+  $strongarm->value = 'node/588';
   $export['site_frontpage'] = $strongarm;
 
   $strongarm = new stdClass;

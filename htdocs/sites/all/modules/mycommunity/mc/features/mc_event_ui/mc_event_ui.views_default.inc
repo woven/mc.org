@@ -2430,7 +2430,7 @@ echo _mc_event_section_print_location_hidden($location);
   $handler->override_option('css_class', 'event-section');
   $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 0);
-  $handler->override_option('empty', '<div class=\\"default-message\\">Wow, it\'s quiet around here.<span class="hide-anonymous"> Want to <a href=\'/node/add/event\'>add an event</a> or <a href=\'/node/add/event-feed\'>import an event feed</a>?</div></div>');
+  $handler->override_option('empty', '<div class="default-message">Wow, it\'s quiet around here.<span class="hide-anonymous"> Want to <a href=\'/node/add/event\'>add an event</a> or <a href=\'/node/add/event-feed\'>import an event feed</a>?</div></div>');
   $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', 0);
   $handler->override_option('use_pager', '0');
@@ -2616,7 +2616,7 @@ echo _mc_event_section_print_location_hidden($location);
   ));
   $handler->override_option('title', 'My Events');
   $handler->override_option('css_class', 'event-section my-events no-show-more');
-  $handler->override_option('empty', '<div class=\\"default-message\\">Nothing to show here. Star some upcoming events and they\'ll show here.</div>');
+  $handler->override_option('empty', '<div class="default-message">Nothing to show here. Star some upcoming events and they\'ll show here.</div>');
   $handler->override_option('path', 'events/my-events');
   $handler->override_option('menu', array(
     'type' => 'none',
