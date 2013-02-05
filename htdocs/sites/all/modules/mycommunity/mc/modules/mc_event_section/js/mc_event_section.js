@@ -4,7 +4,7 @@ if(jq180){
         Drupal.behaviors.AnonymousStaring = function (context) {
           var delay = 1.5 * 1000;
           var inactive = 1 * 1000;
-            $(".flag-link-toggle.not-logged-in",context).qtip({
+          jq180(".flag-link-toggle.not-logged-in",context).qtip({
                 content: {text: Drupal.settings.mc_event_section.msg_anonymous},
                 position: {my: "bottom center",at: "top center",
                     adjust:{x:-2,y:-3},
@@ -22,7 +22,7 @@ if(jq180){
         var delay = 1.5 * 1000;
         var inactive = 1 * 1000;
 
-        $("a.flag-action",context).not(".not-logged-in").qtip({
+        jq180("a.flag-action",context).not(".not-logged-in").qtip({
           content: {text: "Save this"},
           position: {my: "bottom center",at: "top center",
             adjust:{x:-2,y:-3},
@@ -35,7 +35,7 @@ if(jq180){
           }
         });
 
-        $("a.unflag-action",context).not(".not-logged-in").qtip({
+        jq180("a.unflag-action",context).not(".not-logged-in").qtip({
           content: {text: "Undo save"},
           position: {my: "bottom center",at: "top center",
             adjust:{x:-2,y:-3},
@@ -71,7 +71,7 @@ function ShowMyEventsTooltip() {
           $(document).scrollTop(0);
 
           //show the tooltip for first time
-          $("#navigation a[href*='events/my-events']").qtip({
+          jq180("#navigation a[href*='events/my-events']").qtip({
             content: {text: Drupal.settings.mc_event_section.msg_myevents_help},
             show: {solo: true},
             position: {my: "top center",at: "bottom center",
