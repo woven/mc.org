@@ -29,7 +29,6 @@ scripts[] = "js/main.js"
 scripts[] = "js/custom.js"
 scripts[] = "js/jquery.elastic.source.js"
 scripts[] = "js/elastic.js"
-scripts[] = "js/qtip.js"
 
 ;========= START: Stylesheets & CSS =========
 ;disable core styles
