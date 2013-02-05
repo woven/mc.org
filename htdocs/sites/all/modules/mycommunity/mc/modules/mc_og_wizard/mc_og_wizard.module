@@ -1,6 +1,6 @@
 <?php
 
-define("MEETUP_FORMAT", '2');
+define("MEETUP_FORMAT", variable_get("filter_default_format",1));
 
 function mc_og_wizard_late_form_alter(&$form, &$form_state, $form_id){
 
