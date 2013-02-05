@@ -25,9 +25,11 @@ function _mc_event_section_all($flag = null){
 function mc_event_section_init(){
   global $user;
 
-  //add javascript to all pages
-  $path = drupal_get_path('module', 'mc_event_section');
-  drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
+  if(arg(0) !== 'admin' AND !(arg(0) == "node" && arg(1) == "add")){
+    //add javascript to all pages
+    $path = drupal_get_path('module', 'mc_event_section');
+    drupal_add_js($path .'/js/mc_event_section.js', 'module', 'header', FALSE, TRUE, FALSE);
+  }
 
   //js settings
   $settings = array();
