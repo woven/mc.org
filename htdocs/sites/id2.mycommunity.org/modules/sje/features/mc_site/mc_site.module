@@ -7,10 +7,27 @@
 include_once 'mc_site.features.inc';
 
 function mc_site_mc_ct(){
-  global $conf;
-  //$conf['mc_defaultimg_og'] = true;
-
   return array(
-      'page','npage','article','event','event_feed','news_feed','file','forum','video','audio','company'
+    'event','event_feed','news_feed','group','npage','company'
   );
+}
+
+function mc_site_init(){
+  global $conf;
+  $conf['hide-search-bar'] = true;
+  //$conf['hide-og-menu'] = true;
+  $conf['og-menu-allowed'] = array(
+    'home','events','news'
+  );
+  $conf['menu-home-icon'] = false;
+  $conf['menu-help-icon'] = false;
+  $conf['hide-comment'] = true;
+  $conf['mc_defaultimg_og'] = true;
+  $conf['overlay_join_height'] = '300';
+  $conf['join-why'] = "<ul>
+                <li>Help others find your group</li>
+                <li>Add events or import from any iCal</li>
+                <li>We're just getting started!</li>
+              </ul>";
+  $conf['join-subheader'] = "<p></p>";
 }
