@@ -108,3 +108,15 @@ $sites += array(
   'pbt.mycommunity.org' => 'pbt.mycommunity.org',
   'palmbeachtech.mycommunity.org' => 'pbt.mycommunity.org'
 );
+
+//ghh ghh.mc.org
+$sites += array(
+  //local/dev and staging
+  'ghh.staging.mycommunity.org' => 'ghh.mycommunity.org',
+  'ghh.dev.mycommunity.org' => 'ghh.mycommunity.org',
+  'local.ghh.mycommunity.org' => 'ghh.mycommunity.org',
+
+   //production urls
+  'ghh.mycommunity.org' => 'ghh.mycommunity.org',
+  'gethealthyharlem.mycommunity.org' => 'ghh.mycommunity.org'
+);

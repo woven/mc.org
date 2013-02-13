@@ -1,2 +1,2 @@
 drush en wysiwyg -y
-drush sql-cli < ../default/scripts/input_formats/if.sql
+drush sql-query --file=sites/default/scripts/input_formats/if.sql
