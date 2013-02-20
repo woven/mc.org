@@ -55,9 +55,10 @@ function mc_profile_ui_late_form_alter(&$form, &$form_state, $form_id){
     $form['Personal Information']['profile_birthday']['#after_build'][] = '_mc_profile_ui_alter_date_element';
   }
   if($form_id=='user_profile_form'){
-    formfilter_filter_form($form,array(
+      // What's this?
+    /*formfilter_filter_form($form,array(
       array('timezone')
-    ));;
+    ));;*/
   }
 }
 
