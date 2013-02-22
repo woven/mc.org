@@ -71,3 +71,31 @@ foreach ($stmt->fetchAll() as $row) {
     $updateStmt = $connection->prepare("INSERT INTO profile_values (fid, uid, value) VALUES ($lastNameId, $uid, :value)");
     $updateStmt->execute(array(':value' => $parts[1]));
 }
+
+// Copying
+$organizationNameId = 2;
+$occupationId = 18;
+
+$employerId = 23;
+$positionId = 29;
+
+$copyValueTo = function($fromId, $toId) use (&$connection) {
+    $stmt = $connection->prepare("SELECT * FROM profile_values WHERE fid=$fromId");
+    $stmt->execute();
+
+    foreach ($stmt->fetchAll() as $row) {
+        $stmt = $connection->prepare("SELECT * FROM profile_values WHERE fid=$toId");
+        $stmt->execute();
+        $result2 = $stmt->fetch();
+
+        $uid = $row['uid'];
+
+        if (!$result2) {
+            $updateStmt = $connection->prepare("INSERT INTO profile_values (fid, uid, value) VALUES ($toId, $uid, :value)");
+            $updateStmt->execute(array(':value' => $row['value']));
+        }
+    }
+};
+
+$copyValueTo($organizationNameId, $employerId);
+$copyValueTo($occupationId, $positionId);
