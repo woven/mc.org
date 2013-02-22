@@ -73,11 +73,13 @@ foreach ($stmt->fetchAll() as $row) {
 }
 
 // Copying
+$aboutMeId = 11;
 $organizationNameId = 2;
 $occupationId = 18;
 
 $employerId = 23;
 $positionId = 29;
+$oneLineIntroId = 31;
 
 $copyValueTo = function($fromId, $toId) use (&$connection) {
     $stmt = $connection->prepare("SELECT * FROM profile_values WHERE fid=$fromId");
@@ -99,3 +101,4 @@ $copyValueTo = function($fromId, $toId) use (&$connection) {
 
 $copyValueTo($organizationNameId, $employerId);
 $copyValueTo($occupationId, $positionId);
+$copyValueTo($aboutMeId, $oneLineIntroId);
