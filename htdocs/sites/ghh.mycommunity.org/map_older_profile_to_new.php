@@ -3,8 +3,14 @@
 $conf = array();
 require('local.settings.php');
 
-$connection = new PDO($db_url['default'], 'root', 'hotmail');
-$connection->query('USE mc');
+$connectionString = $db_url['default'];
+$connectionString = str_replace('mysql://', '', $connectionString);
+preg_match('/(.*?):(.*?)\@/', $connectionString, $matches);
+$username = $matches[1];
+$password = $matches[2];
+
+$connection = new PDO($db_url['default'], $username, $password);
+$connection->query('USE mc_ghh');
 
 // Append "mission statement" and "contact information" to "about".
 $aboutId = 3;
@@ -76,12 +82,16 @@ foreach ($stmt->fetchAll() as $row) {
 $aboutMeId = 11;
 $organizationNameId = 2;
 $occupationId = 18;
+$homeTownId = 16;
+
 
 $employerId = 23;
 $positionId = 29;
 $oneLineIntroId = 31;
+$cityTownId = 22;
 
 $copyValueTo = function($fromId, $toId) use (&$connection) {
+    echo "Mapping $fromId to $toId\n";
     $stmt = $connection->prepare("SELECT * FROM profile_values WHERE fid=$fromId");
     $stmt->execute();
 
@@ -92,7 +102,7 @@ $copyValueTo = function($fromId, $toId) use (&$connection) {
 
         $uid = $row['uid'];
 
-        if (!$result2) {
+        if (!empty($result2['value']) && !empty($row['value'])) {
             $updateStmt = $connection->prepare("INSERT INTO profile_values (fid, uid, value) VALUES ($toId, $uid, :value)");
             $updateStmt->execute(array(':value' => $row['value']));
         }
@@ -102,3 +112,4 @@ $copyValueTo = function($fromId, $toId) use (&$connection) {
 $copyValueTo($organizationNameId, $employerId);
 $copyValueTo($occupationId, $positionId);
 $copyValueTo($aboutMeId, $oneLineIntroId);
+$copyValueTo($homeTownId, $cityTownId);
