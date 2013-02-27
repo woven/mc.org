@@ -139,7 +139,7 @@ function mc_og_late_form_alter(&$form, &$form_state, $form_id) {
     $og_groups = $og_visible['og_groups'];
 
     if(!(isset($og_groups['#options']) && !empty($og_groups['#options']))){
-      drupal_set_message(t("Please follow some groups below before adding stuff."));
+      drupal_set_message(t("Please follow some groups below, or add your own, before adding stuff."));
       drupal_goto("groups");
     }
 
