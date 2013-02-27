@@ -69,7 +69,7 @@ function _mc_og_menu_items(){
       'show_block' => TRUE,
     ),
     */
-    'discussions' => array(
+    /*'discussions' => array(
       'title' => "Discussions",
       'view' => 'discussions',
       'display_id' => 'page_1',
@@ -84,7 +84,7 @@ function _mc_og_menu_items(){
       'link' => 'node/!nid/discussions/top',
       'is_menu_item' => TRUE,
       'show_block' => FALSE,
-    ),
+    ),*/
     'videos' => array(
       'title' => "Videos",
       'view' => MC_OG_MENU_DEFAULT,
