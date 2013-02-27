@@ -38,6 +38,13 @@ function mc_account_quicktabs_default_quicktabs() {
       'weight' => '-98',
       'type' => 'view',
     ),
+      3 => array(
+          'bid' => 'boxes_delta_profile_myevents',
+          'hide_title' => 1,
+          'title' => 'My Events',
+          'weight' => '-99',
+          'type' => 'block',
+      ),
   );
   $quicktabs->style = 'default';
   $export['mt_userprofile'] = $quicktabs;
