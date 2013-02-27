@@ -52,9 +52,9 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
    */
   if(is_ct_form($form,'group')){
     if($user->uid > 1){
-      formfilter_filter_form($form,array(
+      /*formfilter_filter_form($form,array(
         array('field_header_title_color')
-      ));;
+      ));;*/
 
       $form['field_header_color']['#access'] = FALSE;
       if($form['field_group_featured_items']){
