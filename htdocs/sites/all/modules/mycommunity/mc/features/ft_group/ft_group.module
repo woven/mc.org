@@ -45,6 +45,8 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
     $field_twitter  = &$form['field_twitter_username'];
     $field_twitter[0]['#element_validate'][] = "twitter_username_validate";
   }
+
+  unset($form['og_selective'], $form['og_private']);
   
   /**
    * hide color fields from non admin users
