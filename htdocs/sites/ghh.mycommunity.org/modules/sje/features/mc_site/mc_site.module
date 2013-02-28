@@ -8,7 +8,7 @@ include_once 'mc_site.features.inc';
 
 function mc_site_mc_ct(){
   return array(
-    'event','event_feed','news_feed','group','npage','company'
+    'event','event_feed','news_feed','group','npage','company','article', 'audio','video','file','place'
   );
 }
 
