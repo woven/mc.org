@@ -46,8 +46,6 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
     $field_twitter[0]['#element_validate'][] = "twitter_username_validate";
   }
 
-  unset($form['og_selective'], $form['og_private']);
-  
   /**
    * hide color fields from non admin users
    * @tags temp
@@ -57,6 +55,8 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
       /*formfilter_filter_form($form,array(
         array('field_header_title_color')
       ));;*/
+
+      unset($form['og_selective'], $form['og_private'], $form['og_directory'], $form['options'], $form['author']);
 
       $form['field_header_color']['#access'] = FALSE;
       if($form['field_group_featured_items']){
