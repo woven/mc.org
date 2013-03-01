@@ -56,7 +56,7 @@ function ft_group_late_form_alter(&$form, &$form_state, $form_id){
         array('field_header_title_color')
       ));;*/
 
-      unset($form['og_selective'], $form['og_private'], $form['og_directory'], $form['options'], $form['author']);
+      unset($form['og_selective'], $form['og_private'], $form['og_directory'], $form['options'], $form['author'], $form['og_register']);
 
       $form['field_header_color']['#access'] = FALSE;
       if($form['field_group_featured_items']){
