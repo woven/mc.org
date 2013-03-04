@@ -131,11 +131,11 @@ function mc_late_form_alter(&$form, &$form_state, $form_id) {
      * @todo clean this up or use another method
      */
 
-    if($user->uid != 1){
+    /*if($user->uid != 1){
       if(isset($form['field_related'])){
         $form['field_related']['#access'] = FALSE;
       }
-    }
+    }*/
 
     foreach($form['buttons'] as $key => &$btn){
       switch($key){
