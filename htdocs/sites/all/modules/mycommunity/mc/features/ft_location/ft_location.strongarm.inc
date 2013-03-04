@@ -430,6 +430,7 @@ function ft_location_strongarm() {
         ),
         'province' => array(
           'collect' => '0',
+          'widget' => 'autocomplete',
           'default' => '',
           'weight' => '10',
         ),

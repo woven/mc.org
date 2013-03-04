@@ -452,9 +452,9 @@ function ft_landing_contexts_context_default_contexts() {
           'region' => 'featured',
           'weight' => 0,
         ),
-        'views-help_block-block_1' => array(
-          'module' => 'views',
-          'delta' => 'help_block-block_1',
+        'block-22' => array(
+          'module' => 'block',
+          'delta' => 22,
           'region' => 'right',
           'weight' => 0,
         ),
@@ -469,12 +469,6 @@ function ft_landing_contexts_context_default_contexts() {
           'delta' => 'featured_blocks-block_4',
           'region' => 'right',
           'weight' => 2,
-        ),
-        'views-og_community-block_2' => array(
-          'module' => 'views',
-          'delta' => 'og_community-block_2',
-          'region' => 'right',
-          'weight' => 3,
         ),
         'quicktabs-home_tabs' => array(
           'module' => 'quicktabs',
@@ -520,8 +514,8 @@ function ft_landing_contexts_context_default_contexts() {
       'right' => array(
         'class' => '',
         'blocks' => array(
-          'views-help_block-block_1' => array(
-            'class' => 'block-help important about-block',
+          'block-22' => array(
+            'class' => '',
           ),
           'quicktabs-browse_by' => array(
             'class' => 'block-split2',
