@@ -118,5 +118,7 @@ $sites += array(
 
    //production urls
   'ghh.mycommunity.org' => 'ghh.mycommunity.org',
-  'gethealthyharlem.mycommunity.org' => 'ghh.mycommunity.org'
+  'gethealthyharlem.mycommunity.org' => 'ghh.mycommunity.org',
+  'www.gethealthyharlem.org' => 'ghh.mycommunity.org'
+
 );

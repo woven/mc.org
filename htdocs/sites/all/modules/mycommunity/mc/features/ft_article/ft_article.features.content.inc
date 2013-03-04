@@ -17,12 +17,12 @@ function ft_article_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-87',
+      'ds_weight' => '-74',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'medium__colorbox',
+        'format' => 'comment_image__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -30,7 +30,7 @@ function ft_article_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-87',
+        'weight' => '-74',
       ),
       'weight' => '7',
       'parent' => '',
@@ -119,7 +119,7 @@ function ft_article_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-83',
+      'ds_weight' => '-90',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -132,7 +132,7 @@ function ft_article_content_default_fields() {
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-83',
+        'weight' => '-90',
       ),
       'weight' => '12',
       'parent' => '',

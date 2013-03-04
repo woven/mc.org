@@ -201,9 +201,9 @@ function ft_event_strongarm() {
   $strongarm->name = 'event_range_next';
   $strongarm->value = array(
     'year' => 2013,
-    'month' => '04',
-    'day' => '22',
-    'hour' => '22',
+    'month' => '09',
+    'day' => '19',
+    'hour' => '12',
     'minute' => '00',
     'second' => '00',
   );
@@ -214,9 +214,9 @@ function ft_event_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'event_range_prev';
   $strongarm->value = array(
-    'year' => 1999,
-    'month' => '11',
-    'day' => '30',
+    'year' => 0,
+    'month' => '00',
+    'day' => '00',
     'hour' => '00',
     'minute' => '00',
     'second' => '00',

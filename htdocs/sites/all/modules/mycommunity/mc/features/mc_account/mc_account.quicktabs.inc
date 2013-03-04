@@ -25,7 +25,7 @@ function mc_account_quicktabs_default_quicktabs() {
     1 => array(
       'bid' => 'views_delta_mc_user_information-block_1',
       'hide_title' => 1,
-      'title' => 'Work and Education',
+      'title' => 'Professional Information',
       'weight' => '-99',
       'type' => 'block',
     ),
@@ -38,13 +38,6 @@ function mc_account_quicktabs_default_quicktabs() {
       'weight' => '-98',
       'type' => 'view',
     ),
-      3 => array(
-          'bid' => 'boxes_delta_profile_myevents',
-          'hide_title' => 1,
-          'title' => 'My Events',
-          'weight' => '-99',
-          'type' => 'block',
-      ),
   );
   $quicktabs->style = 'default';
   $export['mt_userprofile'] = $quicktabs;

@@ -17,7 +17,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-92',
+      'ds_weight' => '-91',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -30,7 +30,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_event_url',
         'label_value' => '',
         'exclude' => 0,
-        'weight' => '-92',
+        'weight' => '-91',
       ),
       'teaser' => array(
         'format' => 'default',
@@ -106,12 +106,12 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-64',
+      'ds_weight' => '-61',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
         ),
-        'format' => 'medium__colorbox',
+        'format' => 'comment_image__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -119,7 +119,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_list_image',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-64',
+        'weight' => '-61',
       ),
       '5' => array(
         'label' => array(
@@ -169,10 +169,6 @@ function ft_event_content_default_fields() {
     'list_default' => 1,
     'description_field' => '0',
     'widget' => array(
-      'resolution' => '0',
-      'enforce_ratio' => 0,
-      'croparea' => '400x400',
-      'enforce_minimum' => 0,
       'file_extensions' => 'png gif jpg jpeg',
       'file_path' => '',
       'progress_indicator' => 'bar',
@@ -198,6 +194,10 @@ function ft_event_content_default_fields() {
         'fid' => '51253',
       ),
       'use_default_image' => 0,
+      'resolution' => '0',
+      'enforce_ratio' => 0,
+      'croparea' => '400x400',
+      'enforce_minimum' => 0,
       'label' => 'Images',
       'weight' => '9',
       'description' => 'You may upload an image to be associated with this post.',
@@ -218,7 +218,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-54',
+      'ds_weight' => '-53',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -231,7 +231,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_online_event',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-54',
+        'weight' => '-53',
       ),
       'teaser' => array(
         'format' => 'default',
@@ -299,7 +299,7 @@ function ft_event_content_default_fields() {
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-63',
+      'ds_weight' => '-54',
       'full' => array(
         'label' => array(
           'format' => 'inline',
@@ -312,7 +312,7 @@ function ft_event_content_default_fields() {
         'field_id' => 'field_place',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-63',
+        'weight' => '-54',
       ),
       '5' => array(
         'label' => array(
@@ -425,14 +425,27 @@ function ft_event_content_default_fields() {
     'type_name' => 'event',
     'display_settings' => array(
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
+      ),
+      'format' => 'default',
+      'css-class' => array(),
+      'region' => 'disabled',
+      'ds_weight' => '-51',
+      'full' => array(
+        'label' => array(
+          'format' => 'hidden',
+        ),
+        'format' => 'default',
+        'css-class' => '',
+        'region' => 'disabled',
+        'type' => 'text',
+        'parent_id' => '',
+        'field_id' => 'field_place_choice',
+        'label_value' => '',
+        'exclude' => 1,
+        'weight' => '-51',
       ),
       'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
         'format' => 'default',
         'exclude' => 0,
       ),
@@ -512,7 +525,7 @@ new|Create new...',
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-56',
+      'ds_weight' => '-60',
       'full' => array(
         'label' => array(
           'format' => 'hidden',
@@ -525,7 +538,7 @@ new|Create new...',
         'field_id' => 'field_related',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-56',
+        'weight' => '-60',
       ),
       '5' => array(
         'label' => array(
@@ -588,8 +601,6 @@ new|Create new...',
     'advanced_view' => '--',
     'advanced_view_args' => '',
     'widget' => array(
-      'autocomplete_match' => 'contains',
-      'size' => '60',
       'default_value' => array(
         '0' => array(
           'nid' => NULL,
@@ -597,6 +608,8 @@ new|Create new...',
         ),
       ),
       'default_value_php' => NULL,
+      'autocomplete_match' => 'contains',
+      'size' => '60',
       'label' => 'Reference Related Content',
       'weight' => '11',
       'description' => '',
@@ -617,12 +630,12 @@ new|Create new...',
       'format' => 'default',
       'css-class' => array(),
       'region' => 'disabled',
-      'ds_weight' => '-55',
+      'ds_weight' => '-52',
       'full' => array(
         'label' => array(
           'format' => 'inline',
         ),
-        'format' => 'medium__colorbox',
+        'format' => 'comment_image__colorbox',
         'css-class' => '',
         'region' => 'disabled',
         'type' => 'filefield',
@@ -630,7 +643,7 @@ new|Create new...',
         'field_id' => 'field_upload_file',
         'label_value' => '',
         'exclude' => 1,
-        'weight' => '-55',
+        'weight' => '-52',
       ),
       'teaser' => array(
         'format' => 'default',
