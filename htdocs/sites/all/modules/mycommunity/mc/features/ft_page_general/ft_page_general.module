@@ -51,7 +51,7 @@ function load_about_page(){
     //$_GET['q'] = 'node/' . $nid;
     //return menu_execute_active_handler();
       $node = node_load($nid);
-      drupal_set_title($node->title);
+      drupal_set_title('');
       return node_show($node,null);
   }else{
     return drupal_not_found();
