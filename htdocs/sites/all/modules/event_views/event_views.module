@@ -56,7 +56,7 @@ function event_views_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL)
          $start_hour.':'.
          $node->event['start_exploded']['minute'].':00 ' .
          preg_replace('/00$/', '',str_replace(':', '', $timezone_offset_start));
-         $date = preg_replace(' \d{4}$', '', $date);
+         $date = preg_replace('/ \d{4}$/', '', $date);
          $timestamp = strtotime($date);
          $query = "UPDATE {event} SET unix_event_start = '%d' WHERE nid = '%d'";
          db_query($query, $timestamp, $node->nid);
@@ -74,7 +74,7 @@ function event_views_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL)
          $end_hour.':'.
          $node->event['end_exploded']['minute'].':00'.
          preg_replace('/00$/', '',str_replace(':', '', $timezone_offset_end));
-         $date = preg_replace(' \d{4}$', '', $date);
+         $date = preg_replace('/ \d{4}$/', '', $date);
          $timestamp = strtotime($date);
          $query = "UPDATE {event} SET unix_event_end = '%d' WHERE nid = '%d'";
          db_query($query, $timestamp, $node->nid);
