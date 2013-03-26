@@ -13,3 +13,10 @@ function mc_og_install() {
 function mc_og_update_6002() {
   db_query("UPDATE {system} SET weight = %d WHERE name = '%s'",50,'mc_og');
 }
+
+/**
+ * Increase mc_og module weight
+ */
+function mc_og_update_6003() {
+  db_query("UPDATE {system} SET weight = %d WHERE name = '%s'",50,'mc_og');
+}
