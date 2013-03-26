@@ -14,7 +14,7 @@ function mc_site_mc_ct(){
 
 function mc_site_init(){
   global $conf;
-  $conf['hide-search-bar'] = true;
+  $conf['hide-search-bar'] = false;
   //$conf['hide-og-menu'] = true;
   /*$conf['og-menu-allowed'] = array(
     'home','events','news'
